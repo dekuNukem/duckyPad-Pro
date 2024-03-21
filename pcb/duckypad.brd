@@ -220,8 +220,8 @@
 <circle x="157" y="103" radius="2" width="0" layer="42"/>
 <circle x="61.5" y="84.5" radius="2" width="0" layer="41"/>
 <circle x="61.5" y="84.5" radius="2" width="0" layer="42"/>
-<circle x="141" y="51" radius="2" width="0" layer="42"/>
-<circle x="141" y="51" radius="2" width="0" layer="41"/>
+<circle x="167" y="65" radius="2" width="0" layer="42"/>
+<circle x="160" y="61" radius="2" width="0" layer="41"/>
 <circle x="19.5" y="76.5" radius="2" width="0" layer="41"/>
 <circle x="19.5" y="76.5" radius="2" width="0" layer="42"/>
 <circle x="19.5" y="57.5" radius="2" width="0" layer="42"/>
@@ -243,12 +243,17 @@
 <circle x="19.5" y="76.5" radius="2" width="0.16" layer="22"/>
 <circle x="19.5" y="19.5" radius="2" width="0.16" layer="22"/>
 <circle x="157" y="103" radius="2" width="0.16" layer="22"/>
-<circle x="141" y="51" radius="2" width="0.16" layer="22"/>
+<circle x="189" y="72" radius="2" width="0.16" layer="22"/>
 <circle x="96.5" y="9" radius="2" width="0.16" layer="22"/>
 <text x="62.4332" y="71.8566" size="0.8128" layer="26" rot="MR0">PB12</text>
-<text x="135" y="33" size="5.08" layer="51">bluetooth keyboard?
+<text x="135" y="33" size="2.54" layer="51">bluetooth keyboard?
 battery charging facility?
-rotary encoder RC filter</text>
+rotary encoder RC filter
+free up JTAG pins, leave to last
+ADC2 can not be used while wifi is on
+
+watch out for strapping pins, maybe wire them up to one of the keys?
+GPIO3 must have pull resistor, pull to high to  free up JTAG pins?</text>
 </plain>
 <libraries>
 <library name="clock">
@@ -1143,7 +1148,7 @@ These rules have been curated by SparkFuns DFM commitee. After doing much resear
 <element name="U$12" library="3pos_slide_switch_centered" package="M2_SCREW_FOOT" value="M2_SCREW_DEV" x="19.5" y="38.5" smashed="yes"/>
 <element name="U$13" library="3pos_slide_switch_centered" package="M2_SCREW_FOOT" value="M2_SCREW_DEV" x="38.5" y="19.5" smashed="yes"/>
 <element name="U$17" library="3pos_slide_switch_centered" package="M2_SCREW_FOOT" value="M2_SCREW_DEV" x="61.5" y="84.5" smashed="yes"/>
-<element name="U$23" library="3pos_slide_switch_centered" package="M2_SCREW_FOOT" value="M2_SCREW_DEV" x="141" y="51" smashed="yes"/>
+<element name="U$23" library="3pos_slide_switch_centered" package="M2_SCREW_FOOT" value="M2_SCREW_DEV" x="152" y="63" smashed="yes"/>
 <element name="U$14" library="3pos_slide_switch_centered" package="M2_SCREW_FOOT" value="M2_SCREW_DEV" x="101.5" y="12" smashed="yes"/>
 <element name="TP6" library="testpad" library_urn="urn:adsk.eagle:library:385" package="TP15R" package3d_urn="urn:adsk.eagle:package:27968/1" value="TPTP15R" x="19.939" y="88.138" smashed="yes" rot="MR0">
 <attribute name="POPULARITY" value="0" x="19.939" y="88.138" size="1.778" layer="28" rot="MR0" display="off"/>
