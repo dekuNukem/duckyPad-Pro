@@ -247,7 +247,8 @@
 <circle x="96.5" y="9" radius="2" width="0.16" layer="22"/>
 <text x="62.4332" y="71.8566" size="0.8128" layer="26" rot="MR0">PB12</text>
 <text x="135" y="33" size="5.08" layer="51">bluetooth keyboard?
-battery charging facility?</text>
+battery charging facility?
+rotary encoder RC filter</text>
 </plain>
 <libraries>
 <library name="clock">
@@ -1248,17 +1249,17 @@ These rules have been curated by SparkFuns DFM commitee. After doing much resear
 <attribute name="POPULARITY" value="3" x="82" y="88" size="1.778" layer="27" display="off"/>
 <attribute name="VALUE" x="85.5" y="79" size="1.27" layer="27" rot="R180"/>
 </element>
-<element name="U3" library="ESP32-S3FN8" package="QFN40P700X700X90-57N" value="ESP32-S3FN8" x="-33" y="-12" smashed="yes">
-<attribute name="AVAILABILITY" value="In Stock" x="-33" y="-12" size="1.778" layer="27" display="off"/>
-<attribute name="CHECK_PRICES" value="https://www.snapeda.com/parts/ESP32-S3FN8/Espressif+Systems/view-part/?ref=eda" x="-33" y="-12" size="1.778" layer="27" display="off"/>
-<attribute name="DESCRIPTION" value=" Espressif Systems [ENGINEERING SAMPLES]SMD IC , Dual-Core MCU, Wi-Fi 2.4G &amp; BLE 5.0 combo, 8 MB Octal SPI PSRAM, QFN 56-pin, 7*7 mm " x="-33" y="-12" size="1.778" layer="27" display="off"/>
-<attribute name="MF" value="Espressif Systems" x="-33" y="-12" size="1.778" layer="27" display="off"/>
-<attribute name="MP" value="ESP32-S3FN8" x="-33" y="-12" size="1.778" layer="27" display="off"/>
-<attribute name="NAME" x="-37.1" y="-7" size="1.27" layer="25"/>
-<attribute name="PACKAGE" value="None" x="-33" y="-12" size="1.778" layer="27" display="off"/>
-<attribute name="PRICE" value="None" x="-33" y="-12" size="1.778" layer="27" display="off"/>
-<attribute name="SNAPEDA_LINK" value="https://www.snapeda.com/parts/ESP32-S3FN8/Espressif+Systems/view-part/?ref=snap" x="-33" y="-12" size="1.778" layer="27" display="off"/>
-<attribute name="VALUE" x="-37.1" y="-17" size="1.27" layer="27" align="top-left"/>
+<element name="U3" library="ESP32-S3FN8" package="QFN40P700X700X90-57N" value="ESP32-S3FN8" x="64" y="29" smashed="yes">
+<attribute name="AVAILABILITY" value="In Stock" x="64" y="29" size="1.778" layer="27" display="off"/>
+<attribute name="CHECK_PRICES" value="https://www.snapeda.com/parts/ESP32-S3FN8/Espressif+Systems/view-part/?ref=eda" x="64" y="29" size="1.778" layer="27" display="off"/>
+<attribute name="DESCRIPTION" value=" Espressif Systems [ENGINEERING SAMPLES]SMD IC , Dual-Core MCU, Wi-Fi 2.4G &amp; BLE 5.0 combo, 8 MB Octal SPI PSRAM, QFN 56-pin, 7*7 mm " x="64" y="29" size="1.778" layer="27" display="off"/>
+<attribute name="MF" value="Espressif Systems" x="64" y="29" size="1.778" layer="27" display="off"/>
+<attribute name="MP" value="ESP32-S3FN8" x="64" y="29" size="1.778" layer="27" display="off"/>
+<attribute name="NAME" x="59.9" y="34" size="1.27" layer="25"/>
+<attribute name="PACKAGE" value="None" x="64" y="29" size="1.778" layer="27" display="off"/>
+<attribute name="PRICE" value="None" x="64" y="29" size="1.778" layer="27" display="off"/>
+<attribute name="SNAPEDA_LINK" value="https://www.snapeda.com/parts/ESP32-S3FN8/Espressif+Systems/view-part/?ref=snap" x="64" y="29" size="1.778" layer="27" display="off"/>
+<attribute name="VALUE" x="59.9" y="24" size="1.27" layer="27" align="top-left"/>
 </element>
 </elements>
 <signals>
@@ -1451,7 +1452,7 @@ These rules have been curated by SparkFuns DFM commitee. After doing much resear
 <wire x1="78.3778" y1="14.5026" x2="68.0528" y2="15.3726" width="0" layer="19" extent="1-1"/>
 <wire x1="79.2528" y1="4.9026" x2="78.3778" y2="14.5026" width="0" layer="19" extent="1-1"/>
 <wire x1="3.645" y1="4.92" x2="12.6" y2="14.25" width="0" layer="19" extent="16-16"/>
-<wire x1="-33" y1="-12" x2="3.645" y2="4.92" width="0" layer="19" extent="1-16"/>
+<wire x1="64" y1="29" x2="3.645" y2="4.92" width="0" layer="19" extent="1-16"/>
 </signal>
 <signal name="+3V3">
 <contactref element="IC2" pad="2"/>
@@ -1756,7 +1757,7 @@ These rules have been curated by SparkFuns DFM commitee. After doing much resear
 <signal name="VDD3P3">
 <contactref element="U3" pad="2"/>
 <contactref element="U3" pad="3"/>
-<wire x1="-36.445" y1="-9.8" x2="-36.445" y2="-10.2" width="0" layer="19" extent="1-1"/>
+<wire x1="60.555" y1="31.2" x2="60.555" y2="30.8" width="0" layer="19" extent="1-1"/>
 </signal>
 <signal name="VDD3P3_CPU">
 <contactref element="U3" pad="46"/>
