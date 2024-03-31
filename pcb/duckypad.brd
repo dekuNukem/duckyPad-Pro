@@ -7,7 +7,7 @@
 <setting keepoldvectorfont="yes"/>
 <setting verticaltext="up"/>
 </settings>
-<grid distance="5" unitdist="mil" unit="mil" style="lines" multiple="1" display="yes" altdistance="5" altunitdist="mil" altunit="mil"/>
+<grid distance="5" unitdist="mil" unit="mm" style="lines" multiple="1" display="yes" altdistance="5" altunitdist="mil" altunit="mil"/>
 <layers>
 <layer number="1" name="Top" color="4" fill="1" visible="yes" active="yes"/>
 <layer number="2" name="Route2" color="1" fill="3" visible="no" active="no"/>
@@ -100,7 +100,7 @@
 <layer number="116" name="Patch_BOT" color="9" fill="4" visible="no" active="yes"/>
 <layer number="117" name="secv21" color="7" fill="1" visible="no" active="yes"/>
 <layer number="118" name="Rect_Pads" color="7" fill="1" visible="no" active="yes"/>
-<layer number="119" name="KAP_TEKEN" color="7" fill="1" visible="yes" active="yes"/>
+<layer number="119" name="KAP_TEKEN" color="7" fill="1" visible="no" active="yes"/>
 <layer number="120" name="120" color="7" fill="1" visible="no" active="yes"/>
 <layer number="121" name="_tsilk" color="7" fill="1" visible="no" active="yes"/>
 <layer number="122" name="_bsilk" color="7" fill="1" visible="no" active="yes"/>
@@ -114,17 +114,17 @@
 <layer number="130" name="bLogo" color="7" fill="1" visible="no" active="yes"/>
 <layer number="131" name="tAdjust" color="7" fill="1" visible="no" active="yes"/>
 <layer number="132" name="bAdjust" color="7" fill="1" visible="no" active="yes"/>
-<layer number="133" name="mtFinish" color="7" fill="1" visible="yes" active="yes"/>
-<layer number="134" name="mbFinish" color="7" fill="1" visible="yes" active="yes"/>
-<layer number="135" name="mtGlue" color="7" fill="1" visible="yes" active="yes"/>
-<layer number="136" name="mbGlue" color="7" fill="1" visible="yes" active="yes"/>
-<layer number="137" name="mtTest" color="7" fill="1" visible="yes" active="yes"/>
-<layer number="138" name="mbTest" color="7" fill="1" visible="yes" active="yes"/>
-<layer number="139" name="mtKeepout" color="7" fill="1" visible="yes" active="yes"/>
-<layer number="140" name="mbKeepout" color="7" fill="1" visible="yes" active="yes"/>
-<layer number="141" name="mtRestrict" color="7" fill="1" visible="yes" active="yes"/>
-<layer number="142" name="mbRestrict" color="7" fill="1" visible="yes" active="yes"/>
-<layer number="143" name="mvRestrict" color="7" fill="1" visible="yes" active="yes"/>
+<layer number="133" name="mtFinish" color="7" fill="1" visible="no" active="yes"/>
+<layer number="134" name="mbFinish" color="7" fill="1" visible="no" active="yes"/>
+<layer number="135" name="mtGlue" color="7" fill="1" visible="no" active="yes"/>
+<layer number="136" name="mbGlue" color="7" fill="1" visible="no" active="yes"/>
+<layer number="137" name="mtTest" color="7" fill="1" visible="no" active="yes"/>
+<layer number="138" name="mbTest" color="7" fill="1" visible="no" active="yes"/>
+<layer number="139" name="mtKeepout" color="7" fill="1" visible="no" active="yes"/>
+<layer number="140" name="mbKeepout" color="7" fill="1" visible="no" active="yes"/>
+<layer number="141" name="mtRestrict" color="7" fill="1" visible="no" active="yes"/>
+<layer number="142" name="mbRestrict" color="7" fill="1" visible="no" active="yes"/>
+<layer number="143" name="mvRestrict" color="7" fill="1" visible="no" active="yes"/>
 <layer number="144" name="Drill_legend" color="7" fill="1" visible="no" active="yes"/>
 <layer number="145" name="DrillLegend_01-02" color="7" fill="1" visible="no" active="yes"/>
 <layer number="146" name="DrillLegend_01-15" color="7" fill="1" visible="no" active="yes"/>
@@ -141,16 +141,16 @@
 <layer number="157" name="FaceMchng" color="7" fill="1" visible="no" active="yes"/>
 <layer number="158" name="FaceMMeas" color="7" fill="1" visible="no" active="yes"/>
 <layer number="159" name="Geh-Bear2" color="7" fill="1" visible="no" active="yes"/>
-<layer number="160" name="O_Dim" color="7" fill="1" visible="yes" active="yes"/>
+<layer number="160" name="O_Dim" color="7" fill="1" visible="no" active="yes"/>
 <layer number="161" name="tomplace2" color="7" fill="1" visible="no" active="yes"/>
-<layer number="166" name="AntennaArea" color="7" fill="1" visible="yes" active="yes"/>
-<layer number="168" name="4mmHeightArea" color="7" fill="1" visible="yes" active="yes"/>
-<layer number="191" name="mNets" color="7" fill="1" visible="yes" active="yes"/>
-<layer number="192" name="mBusses" color="7" fill="1" visible="yes" active="yes"/>
-<layer number="193" name="mPins" color="7" fill="1" visible="yes" active="yes"/>
-<layer number="194" name="mSymbols" color="7" fill="1" visible="yes" active="yes"/>
-<layer number="195" name="mNames" color="7" fill="1" visible="yes" active="yes"/>
-<layer number="196" name="mValues" color="7" fill="1" visible="yes" active="yes"/>
+<layer number="166" name="AntennaArea" color="7" fill="1" visible="no" active="yes"/>
+<layer number="168" name="4mmHeightArea" color="7" fill="1" visible="no" active="yes"/>
+<layer number="191" name="mNets" color="7" fill="1" visible="no" active="yes"/>
+<layer number="192" name="mBusses" color="7" fill="1" visible="no" active="yes"/>
+<layer number="193" name="mPins" color="7" fill="1" visible="no" active="yes"/>
+<layer number="194" name="mSymbols" color="7" fill="1" visible="no" active="yes"/>
+<layer number="195" name="mNames" color="7" fill="1" visible="no" active="yes"/>
+<layer number="196" name="mValues" color="7" fill="1" visible="no" active="yes"/>
 <layer number="199" name="Contour" color="7" fill="1" visible="no" active="yes"/>
 <layer number="200" name="200bmp" color="1" fill="10" visible="no" active="yes"/>
 <layer number="201" name="201bmp" color="2" fill="10" visible="no" active="yes"/>
@@ -532,29 +532,6 @@ by exp-lbrs.ulp</description>
 </package>
 </packages>
 </library>
-<library name="testpad" urn="urn:adsk.eagle:library:385">
-<description>&lt;b&gt;Test Pins/Pads&lt;/b&gt;&lt;p&gt;
-Cream on SMD OFF.&lt;br&gt;
-new: Attribute TP_SIGNAL_NAME&lt;br&gt;
-&lt;author&gt;Created by librarian@cadsoft.de&lt;/author&gt;</description>
-<packages>
-<package name="TP15R" urn="urn:adsk.eagle:footprint:27924/1" library_version="3">
-<description>&lt;b&gt;TEST PAD&lt;/b&gt;</description>
-<smd name="TP" x="0" y="0" dx="1.5" dy="1.5" layer="1" roundness="100" cream="no"/>
-<text x="-0.7501" y="0.8001" size="1.27" layer="25">&gt;NAME</text>
-<text x="-0.635" y="-0.762" size="0.0254" layer="27">&gt;VALUE</text>
-<text x="0" y="-2.54" size="1" layer="37">&gt;TP_SIGNAL_NAME</text>
-</package>
-</packages>
-<packages3d>
-<package3d name="TP15R" urn="urn:adsk.eagle:package:27968/1" type="box" library_version="3">
-<description>TEST PAD</description>
-<packageinstances>
-<packageinstance name="TP15R"/>
-</packageinstances>
-</package3d>
-</packages3d>
-</library>
 <library name="switch-alps" urn="urn:adsk.eagle:library:373">
 <description>ALPS Switch from Markus Faust &amp;lt;mfaust@htwm.de&amp;gt;&lt;p&gt;
 Source: EC12E.scr from eagle.support.ger on news.cadsoft.de at 08.10.2007</description>
@@ -925,21 +902,21 @@ These rules have been curated by SparkFuns DFM commitee. After doing much resear
 <element name="C10" library="clock" package="0805@1" value="100nF" x="59.944" y="72.39" smashed="yes" rot="R270">
 <attribute name="NAME" x="60.8965" y="74.041" size="0.8128" layer="25" rot="R270"/>
 </element>
-<element name="LED1" library="lul" package="REVERSE_MNT" value="WS2812B" x="10" y="91" smashed="yes" rot="R180"/>
-<element name="LED2" library="lul" package="REVERSE_MNT" value="WS2812B" x="29" y="91" smashed="yes" rot="R180"/>
-<element name="LED3" library="lul" package="REVERSE_MNT" value="WS2812B" x="48" y="91" smashed="yes" rot="R180"/>
-<element name="LED4" library="lul" package="REVERSE_MNT" value="WS2812B" x="10" y="72" smashed="yes"/>
-<element name="LED5" library="lul" package="REVERSE_MNT" value="WS2812B" x="29" y="72" smashed="yes"/>
-<element name="LED6" library="lul" package="REVERSE_MNT" value="WS2812B" x="48" y="72" smashed="yes"/>
-<element name="LED7" library="lul" package="REVERSE_MNT" value="WS2812B" x="10" y="53" smashed="yes" rot="R180"/>
-<element name="LED8" library="lul" package="REVERSE_MNT" value="WS2812B" x="29" y="53" smashed="yes" rot="R180"/>
-<element name="LED9" library="lul" package="REVERSE_MNT" value="WS2812B" x="48" y="53" smashed="yes" rot="R180"/>
-<element name="LED10" library="lul" package="REVERSE_MNT" value="WS2812B" x="10" y="34" smashed="yes"/>
-<element name="LED11" library="lul" package="REVERSE_MNT" value="WS2812B" x="29" y="34" smashed="yes"/>
-<element name="LED12" library="lul" package="REVERSE_MNT" value="WS2812B" x="48" y="34" smashed="yes"/>
-<element name="LED13" library="lul" package="REVERSE_MNT" value="WS2812B" x="10" y="15" smashed="yes" rot="R180"/>
-<element name="LED14" library="lul" package="REVERSE_MNT" value="WS2812B" x="29" y="15" smashed="yes" rot="R180"/>
-<element name="LED15" library="lul" package="REVERSE_MNT" value="WS2812B" x="48" y="15" smashed="yes" rot="R180"/>
+<element name="LED_R1C2" library="lul" package="REVERSE_MNT" value="WS2812B" x="10" y="91" smashed="yes" rot="R180"/>
+<element name="LED_R1C3" library="lul" package="REVERSE_MNT" value="WS2812B" x="29" y="91" smashed="yes" rot="R180"/>
+<element name="LED_R1C4" library="lul" package="REVERSE_MNT" value="WS2812B" x="48" y="91" smashed="yes" rot="R180"/>
+<element name="LED_R2C2" library="lul" package="REVERSE_MNT" value="WS2812B" x="10" y="72" smashed="yes"/>
+<element name="LED_R2C3" library="lul" package="REVERSE_MNT" value="WS2812B" x="29" y="72" smashed="yes"/>
+<element name="LED_R2C4" library="lul" package="REVERSE_MNT" value="WS2812B" x="48" y="72" smashed="yes"/>
+<element name="LED_R3C2" library="lul" package="REVERSE_MNT" value="WS2812B" x="10" y="53" smashed="yes" rot="R180"/>
+<element name="LED_R3C3" library="lul" package="REVERSE_MNT" value="WS2812B" x="29" y="53" smashed="yes" rot="R180"/>
+<element name="LED_R3C4" library="lul" package="REVERSE_MNT" value="WS2812B" x="48" y="53" smashed="yes" rot="R180"/>
+<element name="LED_R4C2" library="lul" package="REVERSE_MNT" value="WS2812B" x="10" y="34" smashed="yes"/>
+<element name="LED_R4C3" library="lul" package="REVERSE_MNT" value="WS2812B" x="29" y="34" smashed="yes"/>
+<element name="LED_R4C4" library="lul" package="REVERSE_MNT" value="WS2812B" x="48" y="34" smashed="yes"/>
+<element name="LED_R5C2" library="lul" package="REVERSE_MNT" value="WS2812B" x="10" y="15" smashed="yes" rot="R180"/>
+<element name="LED_R5C3" library="lul" package="REVERSE_MNT" value="WS2812B" x="29" y="15" smashed="yes" rot="R180"/>
+<element name="LED_R5C4" library="lul" package="REVERSE_MNT" value="WS2812B" x="48" y="15" smashed="yes" rot="R180"/>
 <element name="C11" library="clock" package="0805@1" value="100nF" x="34.881" y="33.223" smashed="yes" rot="MR0">
 <attribute name="NAME" x="36.024" y="31.3815" size="0.8128" layer="26" rot="MR0"/>
 </element>
@@ -1007,102 +984,32 @@ These rules have been curated by SparkFuns DFM commitee. After doing much resear
 <element name="C29" library="clock" package="0805@1" value="100nF" x="72.517" y="85.0138" smashed="yes" rot="R90">
 <attribute name="NAME" x="71.5645" y="83.3628" size="0.8128" layer="25" rot="R90"/>
 </element>
-<element name="SW5" library="lul" package="KAILH_SWITCH_SOCKET_SWITCH_SOCKET" value="KAILH_SWITCH_SOCKET_KAILH_SWITCH_SOCKET" x="10" y="86" smashed="yes" rot="R180"/>
-<element name="SW6" library="lul" package="KAILH_SWITCH_SOCKET_SWITCH_SOCKET" value="KAILH_SWITCH_SOCKET_KAILH_SWITCH_SOCKET" x="29" y="86" smashed="yes" rot="R180"/>
-<element name="SW7" library="lul" package="KAILH_SWITCH_SOCKET_SWITCH_SOCKET" value="KAILH_SWITCH_SOCKET_KAILH_SWITCH_SOCKET" x="48" y="86" smashed="yes" rot="R180"/>
-<element name="SW8" library="lul" package="KAILH_SWITCH_SOCKET_SWITCH_SOCKET" value="KAILH_SWITCH_SOCKET_KAILH_SWITCH_SOCKET" x="10" y="67" smashed="yes" rot="R180"/>
-<element name="SW9" library="lul" package="KAILH_SWITCH_SOCKET_SWITCH_SOCKET" value="KAILH_SWITCH_SOCKET_KAILH_SWITCH_SOCKET" x="29" y="67" smashed="yes" rot="R180"/>
-<element name="SW10" library="lul" package="KAILH_SWITCH_SOCKET_SWITCH_SOCKET" value="KAILH_SWITCH_SOCKET_KAILH_SWITCH_SOCKET" x="48" y="67" smashed="yes" rot="R180"/>
-<element name="SW11" library="lul" package="KAILH_SWITCH_SOCKET_SWITCH_SOCKET" value="KAILH_SWITCH_SOCKET_KAILH_SWITCH_SOCKET" x="10" y="48" smashed="yes" rot="R180"/>
-<element name="SW12" library="lul" package="KAILH_SWITCH_SOCKET_SWITCH_SOCKET" value="KAILH_SWITCH_SOCKET_KAILH_SWITCH_SOCKET" x="29" y="48" smashed="yes" rot="R180"/>
-<element name="SW13" library="lul" package="KAILH_SWITCH_SOCKET_SWITCH_SOCKET" value="KAILH_SWITCH_SOCKET_KAILH_SWITCH_SOCKET" x="48" y="48" smashed="yes" rot="R180"/>
-<element name="SW14" library="lul" package="KAILH_SWITCH_SOCKET_SWITCH_SOCKET" value="KAILH_SWITCH_SOCKET_KAILH_SWITCH_SOCKET" x="10" y="29" smashed="yes" rot="R180"/>
-<element name="SW15" library="lul" package="KAILH_SWITCH_SOCKET_SWITCH_SOCKET" value="KAILH_SWITCH_SOCKET_KAILH_SWITCH_SOCKET" x="29" y="29" smashed="yes" rot="R180"/>
-<element name="SW16" library="lul" package="KAILH_SWITCH_SOCKET_SWITCH_SOCKET" value="KAILH_SWITCH_SOCKET_KAILH_SWITCH_SOCKET" x="48" y="29" smashed="yes" rot="R180"/>
-<element name="SW17" library="lul" package="KAILH_SWITCH_SOCKET_SWITCH_SOCKET" value="KAILH_SWITCH_SOCKET_KAILH_SWITCH_SOCKET" x="10" y="10" smashed="yes" rot="R180"/>
-<element name="SW18" library="lul" package="KAILH_SWITCH_SOCKET_SWITCH_SOCKET" value="KAILH_SWITCH_SOCKET_KAILH_SWITCH_SOCKET" x="29" y="10" smashed="yes" rot="R180"/>
-<element name="SW19" library="lul" package="KAILH_SWITCH_SOCKET_SWITCH_SOCKET" value="KAILH_SWITCH_SOCKET_KAILH_SWITCH_SOCKET" x="48" y="10" smashed="yes" rot="R180"/>
+<element name="SWR1C2" library="lul" package="KAILH_SWITCH_SOCKET_SWITCH_SOCKET" value="KAILH_SWITCH_SOCKET_KAILH_SWITCH_SOCKET" x="10" y="86" smashed="yes" rot="R180"/>
+<element name="SWR1C3" library="lul" package="KAILH_SWITCH_SOCKET_SWITCH_SOCKET" value="KAILH_SWITCH_SOCKET_KAILH_SWITCH_SOCKET" x="29" y="86" smashed="yes" rot="R180"/>
+<element name="SWR1C4" library="lul" package="KAILH_SWITCH_SOCKET_SWITCH_SOCKET" value="KAILH_SWITCH_SOCKET_KAILH_SWITCH_SOCKET" x="48" y="86" smashed="yes" rot="R180"/>
+<element name="SWR2C2" library="lul" package="KAILH_SWITCH_SOCKET_SWITCH_SOCKET" value="KAILH_SWITCH_SOCKET_KAILH_SWITCH_SOCKET" x="10" y="67" smashed="yes" rot="R180"/>
+<element name="SWR2C3" library="lul" package="KAILH_SWITCH_SOCKET_SWITCH_SOCKET" value="KAILH_SWITCH_SOCKET_KAILH_SWITCH_SOCKET" x="29" y="67" smashed="yes" rot="R180"/>
+<element name="SWR2C4" library="lul" package="KAILH_SWITCH_SOCKET_SWITCH_SOCKET" value="KAILH_SWITCH_SOCKET_KAILH_SWITCH_SOCKET" x="48" y="67" smashed="yes" rot="R180"/>
+<element name="SWR3C2" library="lul" package="KAILH_SWITCH_SOCKET_SWITCH_SOCKET" value="KAILH_SWITCH_SOCKET_KAILH_SWITCH_SOCKET" x="10" y="48" smashed="yes" rot="R180"/>
+<element name="SWR3C3" library="lul" package="KAILH_SWITCH_SOCKET_SWITCH_SOCKET" value="KAILH_SWITCH_SOCKET_KAILH_SWITCH_SOCKET" x="29" y="48" smashed="yes" rot="R180"/>
+<element name="SWR3C4" library="lul" package="KAILH_SWITCH_SOCKET_SWITCH_SOCKET" value="KAILH_SWITCH_SOCKET_KAILH_SWITCH_SOCKET" x="48" y="48" smashed="yes" rot="R180"/>
+<element name="SWR4C2" library="lul" package="KAILH_SWITCH_SOCKET_SWITCH_SOCKET" value="KAILH_SWITCH_SOCKET_KAILH_SWITCH_SOCKET" x="10" y="29" smashed="yes" rot="R180"/>
+<element name="SWR4C3" library="lul" package="KAILH_SWITCH_SOCKET_SWITCH_SOCKET" value="KAILH_SWITCH_SOCKET_KAILH_SWITCH_SOCKET" x="29" y="29" smashed="yes" rot="R180"/>
+<element name="SWR4C4" library="lul" package="KAILH_SWITCH_SOCKET_SWITCH_SOCKET" value="KAILH_SWITCH_SOCKET_KAILH_SWITCH_SOCKET" x="48" y="29" smashed="yes" rot="R180"/>
+<element name="SWR5C2" library="lul" package="KAILH_SWITCH_SOCKET_SWITCH_SOCKET" value="KAILH_SWITCH_SOCKET_KAILH_SWITCH_SOCKET" x="10" y="10" smashed="yes" rot="R180"/>
+<element name="SWR5C3" library="lul" package="KAILH_SWITCH_SOCKET_SWITCH_SOCKET" value="KAILH_SWITCH_SOCKET_KAILH_SWITCH_SOCKET" x="29" y="10" smashed="yes" rot="R180"/>
+<element name="SWR5C4" library="lul" package="KAILH_SWITCH_SOCKET_SWITCH_SOCKET" value="KAILH_SWITCH_SOCKET_KAILH_SWITCH_SOCKET" x="48" y="10" smashed="yes" rot="R180"/>
 <element name="U$8" library="3pos_slide_switch_centered" package="M2_SCREW_FOOT" value="M2_SCREW_DEV" x="19.5" y="57.5" smashed="yes"/>
 <element name="U$12" library="3pos_slide_switch_centered" package="M2_SCREW_FOOT" value="M2_SCREW_DEV" x="19.5" y="38.5" smashed="yes"/>
 <element name="U$13" library="3pos_slide_switch_centered" package="M2_SCREW_FOOT" value="M2_SCREW_DEV" x="38.5" y="19.5" smashed="yes"/>
 <element name="U$17" library="3pos_slide_switch_centered" package="M2_SCREW_FOOT" value="M2_SCREW_DEV" x="61.5" y="84.5" smashed="yes"/>
 <element name="U$23" library="3pos_slide_switch_centered" package="M2_SCREW_FOOT" value="M2_SCREW_DEV" x="152" y="63" smashed="yes"/>
 <element name="U$14" library="3pos_slide_switch_centered" package="M2_SCREW_FOOT" value="M2_SCREW_DEV" x="101.5" y="12" smashed="yes"/>
-<element name="TP6" library="testpad" library_urn="urn:adsk.eagle:library:385" package="TP15R" package3d_urn="urn:adsk.eagle:package:27968/1" value="TPTP15R" x="19.939" y="88.138" smashed="yes" rot="MR0">
-<attribute name="POPULARITY" value="0" x="19.939" y="88.138" size="1.778" layer="28" rot="MR0" display="off"/>
-<attribute name="TP_SIGNAL_NAME" value="" x="19.939" y="88.138" size="1.778" layer="28" rot="MR0" display="off"/>
-</element>
-<element name="TP7" library="testpad" library_urn="urn:adsk.eagle:library:385" package="TP15R" package3d_urn="urn:adsk.eagle:package:27968/1" value="TPTP15R" x="38.1" y="87.376" smashed="yes" rot="MR0">
-<attribute name="POPULARITY" value="0" x="38.1" y="87.376" size="1.778" layer="28" rot="MR0" display="off"/>
-<attribute name="TP_SIGNAL_NAME" value="" x="38.1" y="87.376" size="1.778" layer="28" rot="MR0" display="off"/>
-</element>
-<element name="TP8" library="testpad" library_urn="urn:adsk.eagle:library:385" package="TP15R" package3d_urn="urn:adsk.eagle:package:27968/1" value="TPTP15R" x="57.277" y="79.502" smashed="yes" rot="MR0">
-<attribute name="POPULARITY" value="0" x="57.277" y="79.502" size="1.778" layer="28" rot="MR0" display="off"/>
-<attribute name="TP_SIGNAL_NAME" value="" x="57.277" y="79.502" size="1.778" layer="28" rot="MR0" display="off"/>
-</element>
-<element name="TP9" library="testpad" library_urn="urn:adsk.eagle:library:385" package="TP15R" package3d_urn="urn:adsk.eagle:package:27968/1" value="TPTP15R" x="20.32" y="68.58" smashed="yes" rot="MR0">
-<attribute name="POPULARITY" value="0" x="20.32" y="68.58" size="1.778" layer="28" rot="MR0" display="off"/>
-<attribute name="TP_SIGNAL_NAME" value="" x="20.32" y="68.58" size="1.778" layer="28" rot="MR0" display="off"/>
-</element>
-<element name="TP10" library="testpad" library_urn="urn:adsk.eagle:library:385" package="TP15R" package3d_urn="urn:adsk.eagle:package:27968/1" value="TPTP15R" x="37.846" y="68.58" smashed="yes" rot="MR0">
-<attribute name="POPULARITY" value="0" x="37.846" y="68.58" size="1.778" layer="28" rot="MR0" display="off"/>
-<attribute name="TP_SIGNAL_NAME" value="" x="37.846" y="68.58" size="1.778" layer="28" rot="MR0" display="off"/>
-</element>
-<element name="TP11" library="testpad" library_urn="urn:adsk.eagle:library:385" package="TP15R" package3d_urn="urn:adsk.eagle:package:27968/1" value="TPTP15R" x="57.0484" y="67.0814" smashed="yes" rot="MR0">
-<attribute name="POPULARITY" value="0" x="57.0484" y="67.0814" size="1.778" layer="28" rot="MR0" display="off"/>
-<attribute name="TP_SIGNAL_NAME" value="" x="57.0484" y="67.0814" size="1.778" layer="28" rot="MR0" display="off"/>
-</element>
-<element name="TP12" library="testpad" library_urn="urn:adsk.eagle:library:385" package="TP15R" package3d_urn="urn:adsk.eagle:package:27968/1" value="TPTP15R" x="18.796" y="49.784" smashed="yes" rot="MR0">
-<attribute name="POPULARITY" value="0" x="18.796" y="49.784" size="1.778" layer="28" rot="MR0" display="off"/>
-<attribute name="TP_SIGNAL_NAME" value="" x="18.796" y="49.784" size="1.778" layer="28" rot="MR0" display="off"/>
-</element>
-<element name="TP13" library="testpad" library_urn="urn:adsk.eagle:library:385" package="TP15R" package3d_urn="urn:adsk.eagle:package:27968/1" value="TPTP15R" x="37.084" y="49.784" smashed="yes" rot="MR0">
-<attribute name="POPULARITY" value="0" x="37.084" y="49.784" size="1.778" layer="28" rot="MR0" display="off"/>
-<attribute name="TP_SIGNAL_NAME" value="" x="37.084" y="49.784" size="1.778" layer="28" rot="MR0" display="off"/>
-</element>
-<element name="TP14" library="testpad" library_urn="urn:adsk.eagle:library:385" package="TP15R" package3d_urn="urn:adsk.eagle:package:27968/1" value="TPTP15R" x="55.372" y="49.784" smashed="yes" rot="MR0">
-<attribute name="POPULARITY" value="0" x="55.372" y="49.784" size="1.778" layer="28" rot="MR0" display="off"/>
-<attribute name="TP_SIGNAL_NAME" value="" x="55.372" y="49.784" size="1.778" layer="28" rot="MR0" display="off"/>
-</element>
-<element name="TP15" library="testpad" library_urn="urn:adsk.eagle:library:385" package="TP15R" package3d_urn="urn:adsk.eagle:package:27968/1" value="TPTP15R" x="18.923" y="29.972" smashed="yes" rot="MR0">
-<attribute name="POPULARITY" value="0" x="18.923" y="29.972" size="1.778" layer="28" rot="MR0" display="off"/>
-<attribute name="TP_SIGNAL_NAME" value="" x="18.923" y="29.972" size="1.778" layer="28" rot="MR0" display="off"/>
-</element>
-<element name="TP16" library="testpad" library_urn="urn:adsk.eagle:library:385" package="TP15R" package3d_urn="urn:adsk.eagle:package:27968/1" value="TPTP15R" x="37.084" y="29.972" smashed="yes" rot="MR0">
-<attribute name="POPULARITY" value="0" x="37.084" y="29.972" size="1.778" layer="28" rot="MR0" display="off"/>
-<attribute name="TP_SIGNAL_NAME" value="" x="37.084" y="29.972" size="1.778" layer="28" rot="MR0" display="off"/>
-</element>
-<element name="TP17" library="testpad" library_urn="urn:adsk.eagle:library:385" package="TP15R" package3d_urn="urn:adsk.eagle:package:27968/1" value="TPTP15R" x="55.6514" y="29.972" smashed="yes" rot="MR0">
-<attribute name="POPULARITY" value="0" x="55.6514" y="29.972" size="1.778" layer="28" rot="MR0" display="off"/>
-<attribute name="TP_SIGNAL_NAME" value="" x="55.6514" y="29.972" size="1.778" layer="28" rot="MR0" display="off"/>
-</element>
-<element name="TP18" library="testpad" library_urn="urn:adsk.eagle:library:385" package="TP15R" package3d_urn="urn:adsk.eagle:package:27968/1" value="TPTP15R" x="17.78" y="11.43" smashed="yes" rot="MR0">
-<attribute name="POPULARITY" value="0" x="17.78" y="11.43" size="1.778" layer="28" rot="MR0" display="off"/>
-<attribute name="TP_SIGNAL_NAME" value="" x="17.78" y="11.43" size="1.778" layer="28" rot="MR0" display="off"/>
-</element>
-<element name="TP19" library="testpad" library_urn="urn:adsk.eagle:library:385" package="TP15R" package3d_urn="urn:adsk.eagle:package:27968/1" value="TPTP15R" x="36.83" y="11.43" smashed="yes" rot="MR0">
-<attribute name="POPULARITY" value="0" x="36.83" y="11.43" size="1.778" layer="28" rot="MR0" display="off"/>
-<attribute name="TP_SIGNAL_NAME" value="" x="36.83" y="11.43" size="1.778" layer="28" rot="MR0" display="off"/>
-</element>
-<element name="TP20" library="testpad" library_urn="urn:adsk.eagle:library:385" package="TP15R" package3d_urn="urn:adsk.eagle:package:27968/1" value="TPTP15R" x="55.88" y="11.43" smashed="yes" rot="MR0">
-<attribute name="POPULARITY" value="0" x="55.88" y="11.43" size="1.778" layer="28" rot="MR0" display="off"/>
-<attribute name="TP_SIGNAL_NAME" value="" x="55.88" y="11.43" size="1.778" layer="28" rot="MR0" display="off"/>
-</element>
-<element name="SW1" library="lul" package="KAILH_SWITCH_SOCKET_SWITCH_SOCKET" value="KAILH_SWITCH_SOCKET_KAILH_SWITCH_SOCKET" x="-9" y="86" smashed="yes" rot="R180">
-<attribute name="NAME" x="-9" y="78.38" size="1.27" layer="26" ratio="12" rot="MR180" align="bottom-center"/>
-</element>
-<element name="SW2" library="lul" package="KAILH_SWITCH_SOCKET_SWITCH_SOCKET" value="KAILH_SWITCH_SOCKET_KAILH_SWITCH_SOCKET" x="-9" y="67" smashed="yes" rot="R180">
-<attribute name="NAME" x="-9" y="59.38" size="1.27" layer="26" ratio="12" rot="MR180" align="bottom-center"/>
-</element>
-<element name="SW3" library="lul" package="KAILH_SWITCH_SOCKET_SWITCH_SOCKET" value="KAILH_SWITCH_SOCKET_KAILH_SWITCH_SOCKET" x="-9" y="48" smashed="yes" rot="R180">
-<attribute name="NAME" x="-9" y="40.38" size="1.27" layer="26" ratio="12" rot="MR180" align="bottom-center"/>
-</element>
-<element name="SW4" library="lul" package="KAILH_SWITCH_SOCKET_SWITCH_SOCKET" value="KAILH_SWITCH_SOCKET_KAILH_SWITCH_SOCKET" x="-9" y="29" smashed="yes" rot="R180">
-<attribute name="NAME" x="-9" y="21.38" size="1.27" layer="26" ratio="12" rot="MR180" align="bottom-center"/>
-</element>
-<element name="SW20" library="lul" package="KAILH_SWITCH_SOCKET_SWITCH_SOCKET" value="KAILH_SWITCH_SOCKET_KAILH_SWITCH_SOCKET" x="-9" y="10" smashed="yes" rot="R180">
-<attribute name="NAME" x="-9" y="2.38" size="1.27" layer="26" ratio="12" rot="MR180" align="bottom-center"/>
-</element>
+<element name="SWR1C1" library="lul" package="KAILH_SWITCH_SOCKET_SWITCH_SOCKET" value="KAILH_SWITCH_SOCKET_KAILH_SWITCH_SOCKET" x="-9" y="86" smashed="yes" rot="R180"/>
+<element name="SWR2C1" library="lul" package="KAILH_SWITCH_SOCKET_SWITCH_SOCKET" value="KAILH_SWITCH_SOCKET_KAILH_SWITCH_SOCKET" x="-9" y="67" smashed="yes" rot="R180"/>
+<element name="SWR3C1" library="lul" package="KAILH_SWITCH_SOCKET_SWITCH_SOCKET" value="KAILH_SWITCH_SOCKET_KAILH_SWITCH_SOCKET" x="-9" y="48" smashed="yes" rot="R180"/>
+<element name="SWR4C1" library="lul" package="KAILH_SWITCH_SOCKET_SWITCH_SOCKET" value="KAILH_SWITCH_SOCKET_KAILH_SWITCH_SOCKET" x="-9" y="29" smashed="yes" rot="R180"/>
+<element name="SWR5C1" library="lul" package="KAILH_SWITCH_SOCKET_SWITCH_SOCKET" value="KAILH_SWITCH_SOCKET_KAILH_SWITCH_SOCKET" x="-9" y="10" smashed="yes" rot="R180"/>
 <element name="SW21" library="switch-alps" library_urn="urn:adsk.eagle:library:373" package="ALPS_EC12E_SW" package3d_urn="urn:adsk.eagle:package:27083/1" value="EC12E_SW" x="82" y="64" smashed="yes">
 <attribute name="MF" value="" x="82" y="64" size="1.778" layer="27" display="off"/>
 <attribute name="MPN" value="EC12E2424407" x="82" y="64" size="1.778" layer="27" display="off"/>
@@ -1134,6 +1041,11 @@ These rules have been curated by SparkFuns DFM commitee. After doing much resear
 <attribute name="VALUE" x="73.536" y="76.482" size="1.27" layer="28" rot="MR270" align="top-left"/>
 </element>
 <element name="U$2" library="oled" package="LUL_UG-2864HSWEG01_1.3_WRAPAROUND" value="OLED128" x="72.746" y="30.73" smashed="yes"/>
+<element name="LED_R1C1" library="lul" package="REVERSE_MNT" value="WS2812B" x="-9" y="91" smashed="yes" rot="R180"/>
+<element name="LED_R2C1" library="lul" package="REVERSE_MNT" value="WS2812B" x="-9" y="72" smashed="yes"/>
+<element name="LED_R3C1" library="lul" package="REVERSE_MNT" value="WS2812B" x="-9" y="53" smashed="yes" rot="R180"/>
+<element name="LED_R4C1" library="lul" package="REVERSE_MNT" value="WS2812B" x="-9" y="34" smashed="yes"/>
+<element name="LED_R5C1" library="lul" package="REVERSE_MNT" value="WS2812B" x="-9" y="15" smashed="yes" rot="R180"/>
 </elements>
 <signals>
 <signal name="GND">
@@ -1154,21 +1066,21 @@ These rules have been curated by SparkFuns DFM commitee. After doing much resear
 <contactref element="C9" pad="1"/>
 <contactref element="C2" pad="1"/>
 <contactref element="C1" pad="1"/>
-<contactref element="LED1" pad="GND"/>
-<contactref element="LED2" pad="GND"/>
-<contactref element="LED3" pad="GND"/>
-<contactref element="LED4" pad="GND"/>
-<contactref element="LED5" pad="GND"/>
-<contactref element="LED6" pad="GND"/>
-<contactref element="LED7" pad="GND"/>
-<contactref element="LED8" pad="GND"/>
-<contactref element="LED9" pad="GND"/>
-<contactref element="LED10" pad="GND"/>
-<contactref element="LED11" pad="GND"/>
-<contactref element="LED12" pad="GND"/>
-<contactref element="LED13" pad="GND"/>
-<contactref element="LED14" pad="GND"/>
-<contactref element="LED15" pad="GND"/>
+<contactref element="LED_R1C2" pad="GND"/>
+<contactref element="LED_R1C3" pad="GND"/>
+<contactref element="LED_R1C4" pad="GND"/>
+<contactref element="LED_R2C2" pad="GND"/>
+<contactref element="LED_R2C3" pad="GND"/>
+<contactref element="LED_R2C4" pad="GND"/>
+<contactref element="LED_R3C2" pad="GND"/>
+<contactref element="LED_R3C3" pad="GND"/>
+<contactref element="LED_R3C4" pad="GND"/>
+<contactref element="LED_R4C2" pad="GND"/>
+<contactref element="LED_R4C3" pad="GND"/>
+<contactref element="LED_R4C4" pad="GND"/>
+<contactref element="LED_R5C2" pad="GND"/>
+<contactref element="LED_R5C3" pad="GND"/>
+<contactref element="LED_R5C4" pad="GND"/>
 <contactref element="C14" pad="1"/>
 <contactref element="C13" pad="1"/>
 <contactref element="C12" pad="1"/>
@@ -1195,22 +1107,32 @@ These rules have been curated by SparkFuns DFM commitee. After doing much resear
 <contactref element="U2" pad="P$13"/>
 <contactref element="U2" pad="B11A12"/>
 <contactref element="C29" pad="1"/>
-<contactref element="SW5" pad="1"/>
-<contactref element="SW6" pad="1"/>
-<contactref element="SW7" pad="1"/>
-<contactref element="SW8" pad="1"/>
-<contactref element="SW9" pad="1"/>
-<contactref element="SW10" pad="1"/>
-<contactref element="SW11" pad="1"/>
-<contactref element="SW12" pad="1"/>
-<contactref element="SW13" pad="1"/>
-<contactref element="SW14" pad="1"/>
-<contactref element="SW15" pad="1"/>
-<contactref element="SW16" pad="1"/>
-<contactref element="SW17" pad="1"/>
-<contactref element="SW18" pad="1"/>
-<contactref element="SW19" pad="1"/>
+<contactref element="SWR1C2" pad="1"/>
+<contactref element="SWR1C3" pad="1"/>
+<contactref element="SWR1C4" pad="1"/>
+<contactref element="SWR2C2" pad="1"/>
+<contactref element="SWR2C3" pad="1"/>
+<contactref element="SWR2C4" pad="1"/>
+<contactref element="SWR3C2" pad="1"/>
+<contactref element="SWR3C3" pad="1"/>
+<contactref element="SWR3C4" pad="1"/>
+<contactref element="SWR4C2" pad="1"/>
+<contactref element="SWR4C3" pad="1"/>
+<contactref element="SWR4C4" pad="1"/>
+<contactref element="SWR5C2" pad="1"/>
+<contactref element="SWR5C3" pad="1"/>
+<contactref element="SWR5C4" pad="1"/>
 <contactref element="U3" pad="57"/>
+<contactref element="SWR1C1" pad="1"/>
+<contactref element="SWR2C1" pad="1"/>
+<contactref element="SWR3C1" pad="1"/>
+<contactref element="SWR4C1" pad="1"/>
+<contactref element="SWR5C1" pad="1"/>
+<contactref element="LED_R1C1" pad="GND"/>
+<contactref element="LED_R2C1" pad="GND"/>
+<contactref element="LED_R3C1" pad="GND"/>
+<contactref element="LED_R4C1" pad="GND"/>
+<contactref element="LED_R5C1" pad="GND"/>
 <wire x1="123.931" y1="74.712" x2="151.6332" y2="74.6944" width="0" layer="19" extent="1-1"/>
 <wire x1="99.2" y1="99.467" x2="123.931" y2="74.712" width="0" layer="19" extent="1-1"/>
 <wire x1="94.168" y1="99.467" x2="99.2" y2="99.467" width="0" layer="19" extent="1-1"/>
@@ -1223,14 +1145,9 @@ These rules have been curated by SparkFuns DFM commitee. After doing much resear
 <wire x1="63.5488" y1="89.2187" x2="64.6438" y2="88.3037" width="0" layer="19" extent="1-1"/>
 <wire x1="63.5488" y1="93.3987" x2="63.5488" y2="89.2187" width="0" layer="19" extent="1-1"/>
 <wire x1="60.8186" y1="93.4212" x2="63.5488" y2="93.3987" width="0" layer="19" extent="16-16"/>
-<wire x1="70.3182" y1="70.0024" x2="69.5666" y2="79.1046" width="0" layer="19" extent="1-1"/>
-<wire x1="50.6" y1="90.25" x2="60.8186" y2="93.4212" width="0" layer="19" extent="16-16"/>
-<wire x1="40.889" y1="91.793" x2="50.6" y2="90.25" width="0" layer="19" extent="16-16"/>
-<wire x1="31.6" y1="90.25" x2="40.889" y2="91.793" width="0" layer="19" extent="16-16"/>
-<wire x1="21.916" y1="91.793" x2="31.6" y2="90.25" width="0" layer="19" extent="16-16"/>
-<wire x1="12.6" y1="90.25" x2="21.916" y2="91.793" width="0" layer="19" extent="16-16"/>
-<wire x1="9.1982" y1="93.881" x2="12.6" y2="90.25" width="0" layer="19" extent="16-16"/>
-<wire x1="59.944" y1="73.29" x2="70.3182" y2="70.0024" width="0" layer="19" extent="1-1"/>
+<wire x1="68.536" y1="72.382" x2="69.5666" y2="79.1046" width="0" layer="19" extent="1-16"/>
+<wire x1="70.3182" y1="70.0024" x2="68.536" y2="72.382" width="0" layer="19" extent="1-16"/>
+<wire x1="59.944" y1="73.29" x2="68.536" y2="72.382" width="0" layer="19" extent="1-16"/>
 <wire x1="54.881" y1="71.169" x2="59.944" y2="73.29" width="0" layer="19" extent="1-16"/>
 <wire x1="45.4" y1="72.75" x2="54.881" y2="71.169" width="0" layer="19" extent="16-16"/>
 <wire x1="41.645" y1="80.92" x2="45.4" y2="72.75" width="0" layer="19" extent="16-16"/>
@@ -1240,6 +1157,12 @@ These rules have been curated by SparkFuns DFM commitee. After doing much resear
 <wire x1="16.808" y1="71.296" x2="26.4" y2="72.75" width="0" layer="19" extent="16-16"/>
 <wire x1="7.4" y1="72.75" x2="16.808" y2="71.296" width="0" layer="19" extent="16-16"/>
 <wire x1="3.645" y1="80.92" x2="7.4" y2="72.75" width="0" layer="19" extent="16-16"/>
+<wire x1="50.6" y1="90.25" x2="60.8186" y2="93.4212" width="0" layer="19" extent="16-16"/>
+<wire x1="40.889" y1="91.793" x2="50.6" y2="90.25" width="0" layer="19" extent="16-16"/>
+<wire x1="31.6" y1="90.25" x2="40.889" y2="91.793" width="0" layer="19" extent="16-16"/>
+<wire x1="21.916" y1="91.793" x2="31.6" y2="90.25" width="0" layer="19" extent="16-16"/>
+<wire x1="12.6" y1="90.25" x2="21.916" y2="91.793" width="0" layer="19" extent="16-16"/>
+<wire x1="9.1982" y1="93.881" x2="12.6" y2="90.25" width="0" layer="19" extent="16-16"/>
 <wire x1="41.645" y1="61.92" x2="35.654" y2="71.169" width="0" layer="19" extent="16-16"/>
 <wire x1="41.016" y1="53.847" x2="41.645" y2="61.92" width="0" layer="19" extent="16-16"/>
 <wire x1="31.6" y1="52.25" x2="41.016" y2="53.847" width="0" layer="19" extent="16-16"/>
@@ -1249,6 +1172,7 @@ These rules have been curated by SparkFuns DFM commitee. After doing much resear
 <wire x1="12.6" y1="52.25" x2="21.916" y2="53.72" width="0" layer="19" extent="16-16"/>
 <wire x1="2.943" y1="53.72" x2="12.6" y2="52.25" width="0" layer="19" extent="16-16"/>
 <wire x1="3.645" y1="61.92" x2="2.943" y2="53.72" width="0" layer="19" extent="16-16"/>
+<wire x1="-6.4" y1="52.25" x2="2.943" y2="53.72" width="0" layer="19" extent="16-16"/>
 <wire x1="22.645" y1="42.92" x2="21.916" y2="53.72" width="0" layer="19" extent="16-16"/>
 <wire x1="26.4" y1="34.75" x2="22.645" y2="42.92" width="0" layer="19" extent="16-16"/>
 <wire x1="35.781" y1="33.223" x2="26.4" y2="34.75" width="0" layer="19" extent="16-16"/>
@@ -1271,13 +1195,21 @@ These rules have been curated by SparkFuns DFM commitee. After doing much resear
 <wire x1="22.645" y1="4.92" x2="21.916" y2="15.774" width="0" layer="19" extent="16-16"/>
 <wire x1="59.2328" y1="60.441" x2="54.881" y2="71.169" width="0" layer="19" extent="1-16"/>
 <wire x1="65.2526" y1="57.266" x2="59.2328" y2="60.441" width="0" layer="19" extent="1-1"/>
-<wire x1="85.0246" y1="36.4442" x2="65.2526" y2="57.266" width="0" layer="19" extent="1-16"/>
-<wire x1="75.4246" y1="37.3192" x2="85.0246" y2="36.4442" width="0" layer="19" extent="16-16"/>
-<wire x1="74.5546" y1="47.6442" x2="75.4246" y2="37.3192" width="0" layer="19" extent="16-16"/>
-<wire x1="75.4246" y1="52.3042" x2="74.5546" y2="47.6442" width="0" layer="19" extent="16-16"/>
+<wire x1="75.4246" y1="52.3042" x2="65.2526" y2="57.266" width="0" layer="19" extent="1-16"/>
+<wire x1="74.5546" y1="47.6442" x2="75.4246" y2="52.3042" width="0" layer="19" extent="16-16"/>
 <wire x1="85.0246" y1="52.2442" x2="75.4246" y2="52.3042" width="0" layer="19" extent="16-16"/>
-<wire x1="68.536" y1="72.382" x2="54.627" y2="33.223" width="0" layer="19" extent="16-16"/>
+<wire x1="75.4246" y1="37.3192" x2="74.5546" y2="47.6442" width="0" layer="19" extent="16-16"/>
+<wire x1="85.0246" y1="36.4442" x2="75.4246" y2="37.3192" width="0" layer="19" extent="16-16"/>
+<wire x1="-15.355" y1="42.92" x2="-6.4" y2="52.25" width="0" layer="19" extent="16-16"/>
+<wire x1="-11.6" y1="34.75" x2="-15.355" y2="42.92" width="0" layer="19" extent="16-16"/>
+<wire x1="-15.355" y1="23.92" x2="-11.6" y2="34.75" width="0" layer="19" extent="16-16"/>
 <wire x1="3.645" y1="4.92" x2="12.6" y2="14.25" width="0" layer="19" extent="16-16"/>
+<wire x1="-15.355" y1="61.92" x2="-6.4" y2="52.25" width="0" layer="19" extent="16-16"/>
+<wire x1="-11.6" y1="72.75" x2="-15.355" y2="61.92" width="0" layer="19" extent="16-16"/>
+<wire x1="-15.355" y1="80.92" x2="-11.6" y2="72.75" width="0" layer="19" extent="16-16"/>
+<wire x1="-6.4" y1="90.25" x2="-15.355" y2="80.92" width="0" layer="19" extent="16-16"/>
+<wire x1="-6.4" y1="14.25" x2="-15.355" y2="23.92" width="0" layer="19" extent="16-16"/>
+<wire x1="-15.355" y1="4.92" x2="-6.4" y2="14.25" width="0" layer="19" extent="16-16"/>
 </signal>
 <signal name="+3V3">
 <contactref element="IC2" pad="2"/>
@@ -1294,21 +1226,21 @@ These rules have been curated by SparkFuns DFM commitee. After doing much resear
 <contactref element="C2" pad="2"/>
 <contactref element="C9" pad="2"/>
 <contactref element="C10" pad="2"/>
-<contactref element="LED1" pad="VDD"/>
-<contactref element="LED2" pad="VDD"/>
-<contactref element="LED3" pad="VDD"/>
-<contactref element="LED6" pad="VDD"/>
-<contactref element="LED5" pad="VDD"/>
-<contactref element="LED4" pad="VDD"/>
-<contactref element="LED7" pad="VDD"/>
-<contactref element="LED8" pad="VDD"/>
-<contactref element="LED9" pad="VDD"/>
-<contactref element="LED12" pad="VDD"/>
-<contactref element="LED11" pad="VDD"/>
-<contactref element="LED10" pad="VDD"/>
-<contactref element="LED13" pad="VDD"/>
-<contactref element="LED14" pad="VDD"/>
-<contactref element="LED15" pad="VDD"/>
+<contactref element="LED_R1C2" pad="VDD"/>
+<contactref element="LED_R1C3" pad="VDD"/>
+<contactref element="LED_R1C4" pad="VDD"/>
+<contactref element="LED_R2C4" pad="VDD"/>
+<contactref element="LED_R2C3" pad="VDD"/>
+<contactref element="LED_R2C2" pad="VDD"/>
+<contactref element="LED_R3C2" pad="VDD"/>
+<contactref element="LED_R3C3" pad="VDD"/>
+<contactref element="LED_R3C4" pad="VDD"/>
+<contactref element="LED_R4C4" pad="VDD"/>
+<contactref element="LED_R4C3" pad="VDD"/>
+<contactref element="LED_R4C2" pad="VDD"/>
+<contactref element="LED_R5C2" pad="VDD"/>
+<contactref element="LED_R5C3" pad="VDD"/>
+<contactref element="LED_R5C4" pad="VDD"/>
 <contactref element="C11" pad="2"/>
 <contactref element="C12" pad="2"/>
 <contactref element="C13" pad="2"/>
@@ -1331,50 +1263,39 @@ These rules have been curated by SparkFuns DFM commitee. After doing much resear
 <contactref element="U3" pad="3"/>
 <contactref element="U3" pad="46"/>
 <contactref element="U3" pad="20"/>
+<contactref element="LED_R1C1" pad="VDD"/>
+<contactref element="LED_R2C1" pad="VDD"/>
+<contactref element="LED_R3C1" pad="VDD"/>
+<contactref element="LED_R4C1" pad="VDD"/>
+<contactref element="LED_R5C1" pad="VDD"/>
 <wire x1="123.931" y1="71.912" x2="151.6332" y2="77.2344" width="0" layer="19" extent="1-1"/>
-<wire x1="74.5546" y1="45.4442" x2="123.931" y2="71.912" width="0" layer="19" extent="1-16"/>
-<wire x1="66.736" y1="75.827" x2="74.5546" y2="45.4442" width="0" layer="19" extent="16-16"/>
-<wire x1="66.336" y1="75.827" x2="66.736" y2="75.827" width="0" layer="19" extent="16-16"/>
-<wire x1="65.091" y1="74.982" x2="66.336" y2="75.827" width="0" layer="19" extent="16-16"/>
-<wire x1="65.091" y1="74.582" x2="65.091" y2="74.982" width="0" layer="19" extent="16-16"/>
-<wire x1="65.091" y1="70.982" x2="65.091" y2="74.582" width="0" layer="19" extent="16-16"/>
-<wire x1="71.981" y1="72.982" x2="66.736" y2="75.827" width="0" layer="19" extent="16-16"/>
-<wire x1="52.827" y1="33.223" x2="71.981" y2="72.982" width="0" layer="19" extent="16-16"/>
+<wire x1="71.981" y1="72.982" x2="123.931" y2="71.912" width="0" layer="19" extent="1-16"/>
+<wire x1="68.5182" y1="70.0024" x2="71.981" y2="72.982" width="0" layer="19" extent="1-16"/>
+<wire x1="67.306" y1="72.8054" x2="68.5182" y2="70.0024" width="0" layer="19" extent="1-1"/>
+<wire x1="65.091" y1="74.582" x2="67.306" y2="72.8054" width="0" layer="19" extent="1-16"/>
+<wire x1="65.091" y1="74.982" x2="65.091" y2="74.582" width="0" layer="19" extent="16-16"/>
+<wire x1="66.336" y1="75.827" x2="65.091" y2="74.982" width="0" layer="19" extent="16-16"/>
+<wire x1="66.736" y1="75.827" x2="66.336" y2="75.827" width="0" layer="19" extent="16-16"/>
+<wire x1="7.4" y1="91.75" x2="7.3982" y2="93.881" width="0" layer="19" extent="16-16"/>
 <wire x1="50.6" y1="33.25" x2="52.827" y2="33.223" width="0" layer="19" extent="16-16"/>
-<wire x1="65.2526" y1="59.066" x2="65.091" y2="74.982" width="0" layer="19" extent="1-16"/>
-<wire x1="59.2328" y1="62.241" x2="65.2526" y2="59.066" width="0" layer="19" extent="1-1"/>
-<wire x1="59.944" y1="71.49" x2="59.2328" y2="62.241" width="0" layer="19" extent="1-1"/>
-<wire x1="53.081" y1="71.169" x2="59.944" y2="71.49" width="0" layer="19" extent="1-16"/>
-<wire x1="50.6" y1="71.25" x2="53.081" y2="71.169" width="0" layer="19" extent="16-16"/>
-<wire x1="67.306" y1="72.8054" x2="59.944" y2="71.49" width="0" layer="19" extent="1-1"/>
-<wire x1="68.5182" y1="70.0024" x2="67.306" y2="72.8054" width="0" layer="19" extent="1-1"/>
-<wire x1="67.2806" y1="79.1046" x2="67.306" y2="72.8054" width="0" layer="19" extent="1-1"/>
-<wire x1="45.4" y1="53.75" x2="59.2328" y2="62.241" width="0" layer="19" extent="1-16"/>
-<wire x1="42.816" y1="53.847" x2="45.4" y2="53.75" width="0" layer="19" extent="16-16"/>
-<wire x1="26.4" y1="53.75" x2="42.816" y2="53.847" width="0" layer="19" extent="16-16"/>
-<wire x1="23.716" y1="53.72" x2="26.4" y2="53.75" width="0" layer="19" extent="16-16"/>
-<wire x1="7.4" y1="53.75" x2="23.716" y2="53.72" width="0" layer="19" extent="16-16"/>
-<wire x1="4.743" y1="53.72" x2="7.4" y2="53.75" width="0" layer="19" extent="16-16"/>
-<wire x1="33.981" y1="33.223" x2="50.6" y2="33.25" width="0" layer="19" extent="16-16"/>
-<wire x1="31.6" y1="33.25" x2="33.981" y2="33.223" width="0" layer="19" extent="16-16"/>
-<wire x1="14.881" y1="33.223" x2="31.6" y2="33.25" width="0" layer="19" extent="16-16"/>
-<wire x1="12.6" y1="33.25" x2="14.881" y2="33.223" width="0" layer="19" extent="16-16"/>
-<wire x1="7.449" y1="18.008" x2="12.6" y2="33.25" width="0" layer="19" extent="16-16"/>
-<wire x1="7.4" y1="15.75" x2="7.449" y2="18.008" width="0" layer="19" extent="16-16"/>
-<wire x1="23.716" y1="15.774" x2="7.4" y2="15.75" width="0" layer="19" extent="16-16"/>
-<wire x1="26.4" y1="15.75" x2="23.716" y2="15.774" width="0" layer="19" extent="16-16"/>
-<wire x1="42.816" y1="15.774" x2="26.4" y2="15.75" width="0" layer="19" extent="16-16"/>
-<wire x1="45.4" y1="15.75" x2="42.816" y2="15.774" width="0" layer="19" extent="16-16"/>
-<wire x1="33.854" y1="71.169" x2="50.6" y2="71.25" width="0" layer="19" extent="16-16"/>
 <wire x1="31.6" y1="71.25" x2="33.854" y2="71.169" width="0" layer="19" extent="16-16"/>
-<wire x1="15.008" y1="71.296" x2="31.6" y2="71.25" width="0" layer="19" extent="16-16"/>
+<wire x1="7.4" y1="15.75" x2="7.449" y2="18.008" width="0" layer="19" extent="16-16"/>
+<wire x1="12.6" y1="33.25" x2="14.881" y2="33.223" width="0" layer="19" extent="16-16"/>
+<wire x1="31.6" y1="33.25" x2="33.981" y2="33.223" width="0" layer="19" extent="16-16"/>
 <wire x1="12.6" y1="71.25" x2="15.008" y2="71.296" width="0" layer="19" extent="16-16"/>
-<wire x1="45.4" y1="91.75" x2="50.6" y2="71.25" width="0" layer="19" extent="16-16"/>
-<wire x1="42.689" y1="91.793" x2="45.4" y2="91.75" width="0" layer="19" extent="16-16"/>
-<wire x1="26.4" y1="91.75" x2="42.689" y2="91.793" width="0" layer="19" extent="16-16"/>
-<wire x1="23.716" y1="91.793" x2="26.4" y2="91.75" width="0" layer="19" extent="16-16"/>
-<wire x1="7.4" y1="91.75" x2="23.716" y2="91.793" width="0" layer="19" extent="16-16"/>
-<wire x1="7.3982" y1="93.881" x2="7.4" y2="91.75" width="0" layer="19" extent="16-16"/>
+<wire x1="50.6" y1="71.25" x2="53.081" y2="71.169" width="0" layer="19" extent="16-16"/>
+<wire x1="45.4" y1="15.75" x2="42.816" y2="15.774" width="0" layer="19" extent="16-16"/>
+<wire x1="45.4" y1="53.75" x2="42.816" y2="53.847" width="0" layer="19" extent="16-16"/>
+<wire x1="7.4" y1="53.75" x2="4.743" y2="53.72" width="0" layer="19" extent="16-16"/>
+<wire x1="26.4" y1="91.75" x2="23.716" y2="91.793" width="0" layer="19" extent="16-16"/>
+<wire x1="26.4" y1="53.75" x2="23.716" y2="53.72" width="0" layer="19" extent="16-16"/>
+<wire x1="26.4" y1="15.75" x2="23.716" y2="15.774" width="0" layer="19" extent="16-16"/>
+<wire x1="45.4" y1="91.75" x2="42.689" y2="91.793" width="0" layer="19" extent="16-16"/>
+<wire x1="65.091" y1="70.982" x2="67.306" y2="72.8054" width="0" layer="19" extent="1-16"/>
+<wire x1="67.2806" y1="79.1046" x2="66.736" y2="75.827" width="0" layer="19" extent="1-16"/>
+<wire x1="59.944" y1="71.49" x2="65.091" y2="70.982" width="0" layer="19" extent="1-16"/>
+<wire x1="59.2328" y1="62.241" x2="59.944" y2="71.49" width="0" layer="19" extent="1-1"/>
+<wire x1="65.2526" y1="59.066" x2="59.2328" y2="62.241" width="0" layer="19" extent="1-1"/>
 </signal>
 <signal name="USB_DP">
 <contactref element="U2" pad="A6"/>
@@ -1393,156 +1314,11 @@ These rules have been curated by SparkFuns DFM commitee. After doing much resear
 <signal name="N$14">
 <contactref element="SD1" pad="9"/>
 </signal>
-<signal name="SW15">
-<contactref element="SW19" pad="2"/>
-<contactref element="TP20" pad="TP"/>
-<wire x1="55.625" y1="7.46" x2="55.88" y2="11.43" width="0" layer="19" extent="16-16"/>
-</signal>
-<signal name="SW14">
-<contactref element="SW18" pad="2"/>
-<contactref element="TP19" pad="TP"/>
-<wire x1="36.625" y1="7.46" x2="36.83" y2="11.43" width="0" layer="19" extent="16-16"/>
-</signal>
-<signal name="SW13">
-<contactref element="SW17" pad="2"/>
-<contactref element="TP18" pad="TP"/>
-<wire x1="17.625" y1="7.46" x2="17.78" y2="11.43" width="0" layer="19" extent="16-16"/>
-</signal>
-<signal name="SW11">
-<contactref element="SW15" pad="2"/>
-<contactref element="TP16" pad="TP"/>
-<wire x1="36.625" y1="26.46" x2="37.084" y2="29.972" width="0" layer="19" extent="16-16"/>
-</signal>
-<signal name="SW12">
-<contactref element="SW16" pad="2"/>
-<contactref element="TP17" pad="TP"/>
-<wire x1="55.625" y1="26.46" x2="55.6514" y2="29.972" width="0" layer="19" extent="16-16"/>
-</signal>
-<signal name="SW10">
-<contactref element="SW14" pad="2"/>
-<contactref element="TP15" pad="TP"/>
-<wire x1="17.625" y1="26.46" x2="18.923" y2="29.972" width="0" layer="19" extent="16-16"/>
-</signal>
-<signal name="SW9">
-<contactref element="SW13" pad="2"/>
-<contactref element="TP14" pad="TP"/>
-<wire x1="55.625" y1="45.46" x2="55.372" y2="49.784" width="0" layer="19" extent="16-16"/>
-</signal>
-<signal name="SW8">
-<contactref element="SW12" pad="2"/>
-<contactref element="TP13" pad="TP"/>
-<wire x1="36.625" y1="45.46" x2="37.084" y2="49.784" width="0" layer="19" extent="16-16"/>
-</signal>
-<signal name="SW7">
-<contactref element="SW11" pad="2"/>
-<contactref element="TP12" pad="TP"/>
-<wire x1="17.625" y1="45.46" x2="18.796" y2="49.784" width="0" layer="19" extent="16-16"/>
-</signal>
-<signal name="SW6">
-<contactref element="SW10" pad="2"/>
-<contactref element="TP11" pad="TP"/>
-<wire x1="55.625" y1="64.46" x2="57.0484" y2="67.0814" width="0" layer="19" extent="16-16"/>
-</signal>
-<signal name="SW5">
-<contactref element="SW9" pad="2"/>
-<contactref element="TP10" pad="TP"/>
-<wire x1="36.625" y1="64.46" x2="37.846" y2="68.58" width="0" layer="19" extent="16-16"/>
-</signal>
-<signal name="SW4">
-<contactref element="SW8" pad="2"/>
-<contactref element="TP9" pad="TP"/>
-<wire x1="17.625" y1="64.46" x2="20.32" y2="68.58" width="0" layer="19" extent="16-16"/>
-</signal>
 <signal name="UART1_TX">
 <contactref element="JP1" pad="3"/>
 </signal>
-<signal name="SW1">
-<contactref element="SW5" pad="2"/>
-<contactref element="TP6" pad="TP"/>
-<wire x1="17.625" y1="83.46" x2="19.939" y2="88.138" width="0" layer="19" extent="16-16"/>
-</signal>
-<signal name="SW2">
-<contactref element="SW6" pad="2"/>
-<contactref element="TP7" pad="TP"/>
-<wire x1="36.625" y1="83.46" x2="38.1" y2="87.376" width="0" layer="19" extent="16-16"/>
-</signal>
-<signal name="SW3">
-<contactref element="SW7" pad="2"/>
-<contactref element="TP8" pad="TP"/>
-<wire x1="57.277" y1="79.502" x2="55.625" y2="83.46" width="0" layer="19" extent="16-16"/>
-</signal>
-<signal name="N$9">
-<contactref element="LED3" pad="DOUT"/>
-<contactref element="LED2" pad="DIN"/>
-<wire x1="31.6" y1="91.75" x2="45.4" y2="90.25" width="0" layer="19" extent="16-16"/>
-</signal>
-<signal name="N$15">
-<contactref element="LED2" pad="DOUT"/>
-<contactref element="LED1" pad="DIN"/>
-<wire x1="12.6" y1="91.75" x2="26.4" y2="90.25" width="0" layer="19" extent="16-16"/>
-</signal>
-<signal name="N$17">
-<contactref element="LED1" pad="DOUT"/>
-<contactref element="LED4" pad="DIN"/>
-<wire x1="7.4" y1="71.25" x2="7.4" y2="90.25" width="0" layer="19" extent="16-16"/>
-</signal>
-<signal name="N$18">
-<contactref element="LED4" pad="DOUT"/>
-<contactref element="LED5" pad="DIN"/>
-<wire x1="12.6" y1="72.75" x2="26.4" y2="71.25" width="0" layer="19" extent="16-16"/>
-</signal>
-<signal name="N$19">
-<contactref element="LED5" pad="DOUT"/>
-<contactref element="LED6" pad="DIN"/>
-<wire x1="31.6" y1="72.75" x2="45.4" y2="71.25" width="0" layer="19" extent="16-16"/>
-</signal>
-<signal name="N$20">
-<contactref element="LED6" pad="DOUT"/>
-<contactref element="LED9" pad="DIN"/>
-<wire x1="50.6" y1="53.75" x2="50.6" y2="72.75" width="0" layer="19" extent="16-16"/>
-</signal>
-<signal name="N$21">
-<contactref element="LED9" pad="DOUT"/>
-<contactref element="LED8" pad="DIN"/>
-<wire x1="31.6" y1="53.75" x2="45.4" y2="52.25" width="0" layer="19" extent="16-16"/>
-</signal>
-<signal name="N$22">
-<contactref element="LED8" pad="DOUT"/>
-<contactref element="LED7" pad="DIN"/>
-<wire x1="12.6" y1="53.75" x2="26.4" y2="52.25" width="0" layer="19" extent="16-16"/>
-</signal>
-<signal name="N$23">
-<contactref element="LED7" pad="DOUT"/>
-<contactref element="LED10" pad="DIN"/>
-<wire x1="7.4" y1="33.25" x2="7.4" y2="52.25" width="0" layer="19" extent="16-16"/>
-</signal>
-<signal name="N$24">
-<contactref element="LED10" pad="DOUT"/>
-<contactref element="LED11" pad="DIN"/>
-<wire x1="12.6" y1="34.75" x2="26.4" y2="33.25" width="0" layer="19" extent="16-16"/>
-</signal>
-<signal name="N$25">
-<contactref element="LED11" pad="DOUT"/>
-<contactref element="LED12" pad="DIN"/>
-<wire x1="31.6" y1="34.75" x2="45.4" y2="33.25" width="0" layer="19" extent="16-16"/>
-</signal>
-<signal name="N$26">
-<contactref element="LED12" pad="DOUT"/>
-<contactref element="LED15" pad="DIN"/>
-<wire x1="50.6" y1="15.75" x2="50.6" y2="34.75" width="0" layer="19" extent="16-16"/>
-</signal>
-<signal name="N$27">
-<contactref element="LED14" pad="DIN"/>
-<contactref element="LED15" pad="DOUT"/>
-<wire x1="31.6" y1="15.75" x2="45.4" y2="14.25" width="0" layer="19" extent="16-16"/>
-</signal>
-<signal name="N$28">
-<contactref element="LED14" pad="DOUT"/>
-<contactref element="LED13" pad="DIN"/>
-<wire x1="12.6" y1="15.75" x2="26.4" y2="14.25" width="0" layer="19" extent="16-16"/>
-</signal>
 <signal name="N$29">
-<contactref element="LED3" pad="DIN"/>
+<contactref element="LED_R1C4" pad="DIN"/>
 <contactref element="R5" pad="2"/>
 <wire x1="50.6" y1="91.75" x2="59.0186" y2="93.4212" width="0" layer="19" extent="16-16"/>
 </signal>
@@ -1575,6 +1351,101 @@ These rules have been curated by SparkFuns DFM commitee. After doing much resear
 </signal>
 <signal name="VDD_SPI">
 <contactref element="U3" pad="29"/>
+</signal>
+<signal name="N$2">
+<contactref element="LED_R1C4" pad="DOUT"/>
+<contactref element="LED_R1C3" pad="DIN"/>
+<wire x1="31.6" y1="91.75" x2="45.4" y2="90.25" width="0" layer="19" extent="16-16"/>
+</signal>
+<signal name="N$3">
+<contactref element="LED_R1C3" pad="DOUT"/>
+<contactref element="LED_R1C2" pad="DIN"/>
+<wire x1="12.6" y1="91.75" x2="26.4" y2="90.25" width="0" layer="19" extent="16-16"/>
+</signal>
+<signal name="N$4">
+<contactref element="LED_R1C2" pad="DOUT"/>
+<contactref element="LED_R1C1" pad="DIN"/>
+<wire x1="-6.4" y1="91.75" x2="7.4" y2="90.25" width="0" layer="19" extent="16-16"/>
+</signal>
+<signal name="N$5">
+<contactref element="LED_R1C1" pad="DOUT"/>
+<contactref element="LED_R2C1" pad="DIN"/>
+<wire x1="-11.6" y1="71.25" x2="-11.6" y2="90.25" width="0" layer="19" extent="16-16"/>
+</signal>
+<signal name="N$6">
+<contactref element="LED_R2C1" pad="DOUT"/>
+<contactref element="LED_R2C2" pad="DIN"/>
+<wire x1="-6.4" y1="72.75" x2="7.4" y2="71.25" width="0" layer="19" extent="16-16"/>
+</signal>
+<signal name="N$7">
+<contactref element="LED_R2C2" pad="DOUT"/>
+<contactref element="LED_R2C3" pad="DIN"/>
+<wire x1="12.6" y1="72.75" x2="26.4" y2="71.25" width="0" layer="19" extent="16-16"/>
+</signal>
+<signal name="N$9">
+<contactref element="LED_R2C3" pad="DOUT"/>
+<contactref element="LED_R2C4" pad="DIN"/>
+<wire x1="31.6" y1="72.75" x2="45.4" y2="71.25" width="0" layer="19" extent="16-16"/>
+</signal>
+<signal name="N$11">
+<contactref element="LED_R2C4" pad="DOUT"/>
+<contactref element="LED_R3C4" pad="DIN"/>
+<wire x1="50.6" y1="53.75" x2="50.6" y2="72.75" width="0" layer="19" extent="16-16"/>
+</signal>
+<signal name="N$12">
+<contactref element="LED_R3C4" pad="DOUT"/>
+<contactref element="LED_R3C3" pad="DIN"/>
+<wire x1="31.6" y1="53.75" x2="45.4" y2="52.25" width="0" layer="19" extent="16-16"/>
+</signal>
+<signal name="N$13">
+<contactref element="LED_R3C3" pad="DOUT"/>
+<contactref element="LED_R3C2" pad="DIN"/>
+<wire x1="12.6" y1="53.75" x2="26.4" y2="52.25" width="0" layer="19" extent="16-16"/>
+</signal>
+<signal name="N$15">
+<contactref element="LED_R3C2" pad="DOUT"/>
+<contactref element="LED_R3C1" pad="DIN"/>
+<wire x1="-6.4" y1="53.75" x2="7.4" y2="52.25" width="0" layer="19" extent="16-16"/>
+</signal>
+<signal name="N$16">
+<contactref element="LED_R3C1" pad="DOUT"/>
+<contactref element="LED_R4C1" pad="DIN"/>
+<wire x1="-11.6" y1="33.25" x2="-11.6" y2="52.25" width="0" layer="19" extent="16-16"/>
+</signal>
+<signal name="N$17">
+<contactref element="LED_R4C1" pad="DOUT"/>
+<contactref element="LED_R4C2" pad="DIN"/>
+<wire x1="-6.4" y1="34.75" x2="7.4" y2="33.25" width="0" layer="19" extent="16-16"/>
+</signal>
+<signal name="N$18">
+<contactref element="LED_R4C2" pad="DOUT"/>
+<contactref element="LED_R4C3" pad="DIN"/>
+<wire x1="12.6" y1="34.75" x2="26.4" y2="33.25" width="0" layer="19" extent="16-16"/>
+</signal>
+<signal name="N$19">
+<contactref element="LED_R4C3" pad="DOUT"/>
+<contactref element="LED_R4C4" pad="DIN"/>
+<wire x1="31.6" y1="34.75" x2="45.4" y2="33.25" width="0" layer="19" extent="16-16"/>
+</signal>
+<signal name="N$20">
+<contactref element="LED_R4C4" pad="DOUT"/>
+<contactref element="LED_R5C4" pad="DIN"/>
+<wire x1="50.6" y1="15.75" x2="50.6" y2="34.75" width="0" layer="19" extent="16-16"/>
+</signal>
+<signal name="N$21">
+<contactref element="LED_R5C4" pad="DOUT"/>
+<contactref element="LED_R5C3" pad="DIN"/>
+<wire x1="31.6" y1="15.75" x2="45.4" y2="14.25" width="0" layer="19" extent="16-16"/>
+</signal>
+<signal name="N$22">
+<contactref element="LED_R5C3" pad="DOUT"/>
+<contactref element="LED_R5C2" pad="DIN"/>
+<wire x1="12.6" y1="15.75" x2="26.4" y2="14.25" width="0" layer="19" extent="16-16"/>
+</signal>
+<signal name="N$23">
+<contactref element="LED_R5C2" pad="DOUT"/>
+<contactref element="LED_R5C1" pad="DIN"/>
+<wire x1="-6.4" y1="15.75" x2="7.4" y2="14.25" width="0" layer="19" extent="16-16"/>
 </signal>
 </signals>
 <mfgpreviewcolors>
