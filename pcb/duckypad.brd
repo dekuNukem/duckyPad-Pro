@@ -7,7 +7,7 @@
 <setting keepoldvectorfont="yes"/>
 <setting verticaltext="up"/>
 </settings>
-<grid distance="5" unitdist="mil" unit="mm" style="lines" multiple="1" display="yes" altdistance="5" altunitdist="mil" altunit="mil"/>
+<grid distance="1" unitdist="mm" unit="mm" style="lines" multiple="1" display="yes" altdistance="5" altunitdist="mil" altunit="mil"/>
 <layers>
 <layer number="1" name="Top" color="4" fill="1" visible="yes" active="yes"/>
 <layer number="2" name="Route2" color="1" fill="3" visible="no" active="no"/>
@@ -52,8 +52,8 @@
 <layer number="41" name="tRestrict" color="4" fill="10" visible="yes" active="yes"/>
 <layer number="42" name="bRestrict" color="1" fill="10" visible="yes" active="yes"/>
 <layer number="43" name="vRestrict" color="2" fill="10" visible="no" active="yes"/>
-<layer number="44" name="Drills" color="7" fill="1" visible="no" active="yes"/>
-<layer number="45" name="Holes" color="7" fill="1" visible="no" active="yes"/>
+<layer number="44" name="Drills" color="7" fill="1" visible="yes" active="yes"/>
+<layer number="45" name="Holes" color="7" fill="1" visible="yes" active="yes"/>
 <layer number="46" name="Milling" color="3" fill="1" visible="yes" active="yes"/>
 <layer number="47" name="Measures" color="7" fill="1" visible="no" active="yes"/>
 <layer number="48" name="Document" color="7" fill="1" visible="no" active="yes"/>
@@ -198,9 +198,9 @@
 <board>
 <plain>
 <wire x1="90" y1="0" x2="90" y2="96" width="0" layer="20"/>
-<wire x1="90" y1="96" x2="-21" y2="96" width="0" layer="20"/>
-<wire x1="-21" y1="96" x2="-21" y2="0" width="0" layer="20"/>
-<wire x1="-21" y1="0" x2="90" y2="0" width="0" layer="20"/>
+<wire x1="90" y1="96" x2="-20" y2="96" width="0" layer="20"/>
+<wire x1="-20" y1="96" x2="-20" y2="0" width="0" layer="20"/>
+<wire x1="-20" y1="0" x2="90" y2="0" width="0" layer="20"/>
 <text x="87.7316" y="56.5404" size="1.27" layer="26" rot="MR0" align="center">DFU</text>
 <text x="87.757" y="49.784" size="1.27" layer="26" rot="MR180" align="center">RST</text>
 <text x="80.3656" y="3.508" size="3.048" layer="25" align="center">+</text>
@@ -251,7 +251,6 @@
 <circle x="157" y="103" radius="2" width="0.16" layer="22"/>
 <circle x="189" y="72" radius="2" width="0.16" layer="22"/>
 <circle x="96.5" y="9" radius="2" width="0.16" layer="22"/>
-<text x="62.4332" y="71.8566" size="0.8128" layer="26" rot="MR0">PB12</text>
 <text x="135" y="33" size="2.54" layer="51">bluetooth keyboard?
 battery charging facility?
 rotary encoder RC filter
@@ -690,6 +689,140 @@ by exp-lbrs.ulp</description>
 </package>
 </packages>
 </library>
+<library name="esp32-thing-temp">
+<packages>
+<package name="TRACE_ANTENNA_2.4GHZ_25.7MM_TUNED">
+<wire x1="-0.68" y1="0" x2="-11" y2="0" width="0.1" layer="51"/>
+<wire x1="-0.68" y1="-2" x2="-0.68" y2="0" width="0.1" layer="51"/>
+<wire x1="0.68" y1="0" x2="0.68" y2="-2" width="0.1" layer="51"/>
+<wire x1="0.68" y1="0" x2="13.843" y2="0" width="0.1" layer="51"/>
+<wire x1="-11" y1="7.52" x2="13.861" y2="7.52" width="0.1" layer="51"/>
+<wire x1="13.843" y1="0.2032" x2="-11" y2="0.2032" width="0" layer="41"/>
+<wire x1="13.843" y1="0.2032" x2="-11" y2="0.2032" width="0" layer="42"/>
+<smd name="ANT" x="0" y="0.23" dx="0.46" dy="0.46" layer="1" stop="no" thermals="no" cream="no"/>
+<smd name="GND" x="-1.18" y="0.23" dx="1" dy="0.46" layer="1" stop="no" thermals="no" cream="no"/>
+<smd name="GND2" x="-3.38" y="0.23" dx="1" dy="0.46" layer="1" stop="no" thermals="no" cream="no"/>
+<text x="-6.35" y="-0.127" size="0.6096" layer="51" font="vector" ratio="20" align="top-center">Ground Plane</text>
+<text x="7.62" y="-0.127" size="0.6096" layer="51" font="vector" ratio="20" align="top-center">Ground Plane</text>
+<text x="0" y="7.62" size="0.6096" layer="51" font="vector" ratio="20" align="bottom-center">Board edge</text>
+<polygon width="0.002540625" layer="1">
+<vertex x="-0.23" y="0"/>
+<vertex x="-0.23" y="2.28"/>
+<vertex x="-0.73" y="2.69"/>
+<vertex x="-3.88" y="2.69"/>
+<vertex x="-3.88" y="3.9"/>
+<vertex x="-2.88" y="3.9"/>
+<vertex x="-2.88" y="4.7"/>
+<vertex x="-8.68" y="4.7"/>
+<vertex x="-8.68" y="2.03"/>
+<vertex x="-0.68" y="2.03"/>
+<vertex x="-0.68" y="0"/>
+<vertex x="-1.68" y="0"/>
+<vertex x="-1.68" y="0.7"/>
+<vertex x="-2.88" y="0.7"/>
+<vertex x="-2.88" y="0"/>
+<vertex x="-3.88" y="0"/>
+<vertex x="-3.88" y="0.74"/>
+<vertex x="-10.86" y="0.74"/>
+<vertex x="-10.86" y="6.91"/>
+<vertex x="13.831" y="6.91"/>
+<vertex x="13.831" y="5.7"/>
+<vertex x="-1.68" y="5.7"/>
+<vertex x="-1.68" y="3.9"/>
+<vertex x="-0.68" y="3.9"/>
+<vertex x="-0.68" y="3.29"/>
+<vertex x="0.23" y="2.53"/>
+<vertex x="0.23" y="0"/>
+</polygon>
+</package>
+</packages>
+</library>
+<library name="SparkFun-RF">
+<description>&lt;h3&gt;SparkFun RF, WiFi, Cellular, and Bluetooth&lt;/h3&gt;
+In this library you'll find things that send or receive RF-- cellular modules, Bluetooth, WiFi, etc.
+&lt;br&gt;
+&lt;br&gt;
+We've spent an enormous amount of time creating and checking these footprints and parts, but it is &lt;b&gt; the end user's responsibility&lt;/b&gt; to ensure correctness and suitablity for a given componet or application. 
+&lt;br&gt;
+&lt;br&gt;If you enjoy using this library, please buy one of our products at &lt;a href=" www.sparkfun.com"&gt;SparkFun.com&lt;/a&gt;.
+&lt;br&gt;
+&lt;br&gt;
+&lt;b&gt;Licensing:&lt;/b&gt; Creative Commons ShareAlike 4.0 International - https://creativecommons.org/licenses/by-sa/4.0/ 
+&lt;br&gt;
+&lt;br&gt;
+You are welcome to use this library for commercial purposes. For attribution, we ask that when you begin to sell your device using our footprint, you email us with a link to the product being sold. We want bragging rights that we helped (in a very small part) to create your 8th world wonder. We would like the opportunity to feature your device on our homepage.</description>
+<packages>
+<package name="TRACE_ANTENNA_2.4GHZ_15.2MM">
+<description>&lt;h3&gt;2.4GHz Meander PCB Trace Antenna&lt;/h3&gt;
+&lt;p&gt;PCB trace antenna with a 15.2 x 5.7mm footprint.&lt;/p&gt;
+&lt;p&gt;Based on layout from &lt;a href="http://www.ti.com/lit/an/swra117d/swra117d.pdf"&gt;TI app note AN043&lt;/a&gt;.&lt;/p&gt;</description>
+<polygon width="0.002540625" layer="1">
+<vertex x="-0.25" y="-0.5"/>
+<vertex x="-0.25" y="4.4"/>
+<vertex x="-1.65" y="4.4"/>
+<vertex x="-1.65" y="-0.5"/>
+<vertex x="-2.55" y="-0.5"/>
+<vertex x="-2.55" y="4.9"/>
+<vertex x="2.45" y="4.9"/>
+<vertex x="2.45" y="2.26"/>
+<vertex x="4.45" y="2.26"/>
+<vertex x="4.45" y="4.9"/>
+<vertex x="7.15" y="4.9"/>
+<vertex x="7.15" y="2.26"/>
+<vertex x="9.15" y="2.26"/>
+<vertex x="9.15" y="4.9"/>
+<vertex x="11.85" y="4.9"/>
+<vertex x="11.85" y="0.46"/>
+<vertex x="11.35" y="0.46"/>
+<vertex x="11.35" y="4.4"/>
+<vertex x="9.65" y="4.4"/>
+<vertex x="9.65" y="1.76"/>
+<vertex x="6.65" y="1.76"/>
+<vertex x="6.65" y="4.4"/>
+<vertex x="4.95" y="4.4"/>
+<vertex x="4.95" y="1.76"/>
+<vertex x="1.95" y="1.76"/>
+<vertex x="1.95" y="4.4"/>
+<vertex x="0.25" y="4.4"/>
+<vertex x="0.25" y="-0.5"/>
+</polygon>
+<wire x1="-3" y1="0" x2="12" y2="0" width="0.05" layer="51"/>
+<smd name="GND" x="-2.1" y="-0.25" dx="0.9" dy="0.5" layer="1" stop="no" thermals="no" cream="no"/>
+<smd name="ANT" x="0" y="-0.25" dx="0.5" dy="0.5" layer="1" stop="no" thermals="no" cream="no"/>
+<wire x1="-3" y1="5.2" x2="12" y2="5.2" width="0.05" layer="51"/>
+<text x="1" y="-0.8" size="0.64" layer="51" font="vector">Ground Plane</text>
+<text x="1.5" y="5.5" size="0.64" layer="51" font="vector">Board Edge</text>
+<text x="0" y="1.27" size="0.6096" layer="25" font="vector" ratio="20" align="bottom-center">&gt;NAME</text>
+<text x="0" y="1.016" size="0.6096" layer="27" font="vector" ratio="20" align="top-center">&gt;VALUE</text>
+</package>
+</packages>
+</library>
+<library name="adafruit_changed">
+<packages>
+<package name="U.FL">
+<wire x1="1.3" y1="0.7" x2="1.3" y2="2.1" width="0.2032" layer="21"/>
+<wire x1="1.3" y1="2.1" x2="-1.3" y2="2.1" width="0.2032" layer="21"/>
+<wire x1="-1.3" y1="-2.1" x2="1.3" y2="-2.1" width="0.2032" layer="21"/>
+<wire x1="1.3" y1="-2.1" x2="1.3" y2="-0.7" width="0.2032" layer="21"/>
+<wire x1="-1.3" y1="0.7" x2="-1.3" y2="2.1" width="0.2032" layer="21"/>
+<wire x1="-1.3" y1="-2.1" x2="-1.3" y2="-0.7" width="0.2032" layer="21"/>
+<wire x1="1.4" y1="0.7" x2="1.4" y2="2" width="0.2032" layer="21"/>
+<wire x1="1.4" y1="-2" x2="1.4" y2="-0.7" width="0.2032" layer="21"/>
+<wire x1="1.5" y1="0.7" x2="1.5" y2="2.1" width="0.2032" layer="21"/>
+<wire x1="1.5" y1="-2.1" x2="1.5" y2="-0.7" width="0.2032" layer="21"/>
+<wire x1="1.5" y1="2.1" x2="1.3" y2="2.1" width="0.2032" layer="21"/>
+<wire x1="1.5" y1="0.7" x2="1.3" y2="0.7" width="0.2032" layer="21"/>
+<wire x1="1.5" y1="-0.7" x2="1.3" y2="-0.7" width="0.2032" layer="21"/>
+<wire x1="1.5" y1="-2.1" x2="1.3" y2="-2.1" width="0.2032" layer="21"/>
+<smd name="1" x="0" y="1.375" dx="2.2" dy="1.05" layer="1"/>
+<smd name="2" x="0" y="-1.375" dx="2.2" dy="1.05" layer="1"/>
+<smd name="3" x="1.525" y="0" dx="0.8" dy="1" layer="1"/>
+<rectangle x1="-0.889" y1="-0.8255" x2="0.889" y2="0.8255" layer="41"/>
+<text x="-1.27" y="2.54" size="1.016" layer="25" ratio="18">&gt;NAME</text>
+<text x="-1.27" y="-3.175" size="0.8128" layer="27" ratio="10">&gt;VALUE</text>
+</package>
+</packages>
+</library>
 </libraries>
 <attributes>
 </attributes>
@@ -962,8 +1095,8 @@ These rules have been curated by SparkFuns DFM commitee. After doing much resear
 <element name="C25" library="clock" package="0805@1" value="100nF" x="15.781" y="33.223" smashed="yes" rot="MR0">
 <attribute name="NAME" x="16.9494" y="31.3815" size="0.8128" layer="26" rot="MR0"/>
 </element>
-<element name="R5" library="clock" package="0805" value="5.1K" x="59.9186" y="93.4212" smashed="yes" rot="MR0">
-<attribute name="NAME" x="60.6044" y="91.5035" size="0.8128" layer="26" rot="MR0"/>
+<element name="R5" library="clock" package="0805" value="5.1K" x="46.9186" y="94.4212" smashed="yes" rot="MR0">
+<attribute name="NAME" x="47.6044" y="92.5035" size="0.8128" layer="26" rot="MR0"/>
 </element>
 <element name="C27" library="clock" package="C1210" value="47uF" x="123.931" y="73.312" smashed="yes" rot="R90">
 <attribute name="NAME" x="125.0994" y="76.8934" size="0.8128" layer="25" rot="R180"/>
@@ -1028,17 +1161,17 @@ These rules have been curated by SparkFuns DFM commitee. After doing much resear
 <attribute name="POPULARITY" value="3" x="82" y="88" size="1.778" layer="27" display="off"/>
 <attribute name="VALUE" x="85.5" y="79" size="1.27" layer="27" rot="R180"/>
 </element>
-<element name="U3" library="ESP32-S3FN8" package="QFN40P700X700X90-57N" value="ESP32-S3FN8" x="68.536" y="72.382" smashed="yes" rot="MR270">
-<attribute name="AVAILABILITY" value="In Stock" x="68.536" y="72.382" size="1.778" layer="28" rot="MR270" display="off"/>
-<attribute name="CHECK_PRICES" value="https://www.snapeda.com/parts/ESP32-S3FN8/Espressif+Systems/view-part/?ref=eda" x="68.536" y="72.382" size="1.778" layer="28" rot="MR270" display="off"/>
-<attribute name="DESCRIPTION" value=" Espressif Systems [ENGINEERING SAMPLES]SMD IC , Dual-Core MCU, Wi-Fi 2.4G &amp; BLE 5.0 combo, 8 MB Octal SPI PSRAM, QFN 56-pin, 7*7 mm " x="68.536" y="72.382" size="1.778" layer="28" rot="MR270" display="off"/>
-<attribute name="MF" value="Espressif Systems" x="68.536" y="72.382" size="1.778" layer="28" rot="MR270" display="off"/>
-<attribute name="MP" value="ESP32-S3FN8" x="68.536" y="72.382" size="1.778" layer="28" rot="MR270" display="off"/>
-<attribute name="NAME" x="63.536" y="76.482" size="1.27" layer="26" rot="MR270"/>
-<attribute name="PACKAGE" value="None" x="68.536" y="72.382" size="1.778" layer="28" rot="MR270" display="off"/>
-<attribute name="PRICE" value="None" x="68.536" y="72.382" size="1.778" layer="28" rot="MR270" display="off"/>
-<attribute name="SNAPEDA_LINK" value="https://www.snapeda.com/parts/ESP32-S3FN8/Espressif+Systems/view-part/?ref=snap" x="68.536" y="72.382" size="1.778" layer="28" rot="MR270" display="off"/>
-<attribute name="VALUE" x="73.536" y="76.482" size="1.27" layer="28" rot="MR270" align="top-left"/>
+<element name="U3" library="ESP32-S3FN8" package="QFN40P700X700X90-57N" value="ESP32-S3FN8" x="62.536" y="50.382" smashed="yes" rot="MR270">
+<attribute name="AVAILABILITY" value="In Stock" x="62.536" y="50.382" size="1.778" layer="28" rot="MR270" display="off"/>
+<attribute name="CHECK_PRICES" value="https://www.snapeda.com/parts/ESP32-S3FN8/Espressif+Systems/view-part/?ref=eda" x="62.536" y="50.382" size="1.778" layer="28" rot="MR270" display="off"/>
+<attribute name="DESCRIPTION" value=" Espressif Systems [ENGINEERING SAMPLES]SMD IC , Dual-Core MCU, Wi-Fi 2.4G &amp; BLE 5.0 combo, 8 MB Octal SPI PSRAM, QFN 56-pin, 7*7 mm " x="62.536" y="50.382" size="1.778" layer="28" rot="MR270" display="off"/>
+<attribute name="MF" value="Espressif Systems" x="62.536" y="50.382" size="1.778" layer="28" rot="MR270" display="off"/>
+<attribute name="MP" value="ESP32-S3FN8" x="62.536" y="50.382" size="1.778" layer="28" rot="MR270" display="off"/>
+<attribute name="NAME" x="57.536" y="54.482" size="1.27" layer="26" rot="MR270"/>
+<attribute name="PACKAGE" value="None" x="62.536" y="50.382" size="1.778" layer="28" rot="MR270" display="off"/>
+<attribute name="PRICE" value="None" x="62.536" y="50.382" size="1.778" layer="28" rot="MR270" display="off"/>
+<attribute name="SNAPEDA_LINK" value="https://www.snapeda.com/parts/ESP32-S3FN8/Espressif+Systems/view-part/?ref=snap" x="62.536" y="50.382" size="1.778" layer="28" rot="MR270" display="off"/>
+<attribute name="VALUE" x="67.536" y="54.482" size="1.27" layer="28" rot="MR270" align="top-left"/>
 </element>
 <element name="U$2" library="oled" package="LUL_UG-2864HSWEG01_1.3_WRAPAROUND" value="OLED128" x="72.746" y="30.73" smashed="yes"/>
 <element name="LED_R1C1" library="lul" package="REVERSE_MNT" value="WS2812B" x="-9" y="91" smashed="yes" rot="R180"/>
@@ -1046,6 +1179,15 @@ These rules have been curated by SparkFuns DFM commitee. After doing much resear
 <element name="LED_R3C1" library="lul" package="REVERSE_MNT" value="WS2812B" x="-9" y="53" smashed="yes" rot="R180"/>
 <element name="LED_R4C1" library="lul" package="REVERSE_MNT" value="WS2812B" x="-9" y="34" smashed="yes"/>
 <element name="LED_R5C1" library="lul" package="REVERSE_MNT" value="WS2812B" x="-9" y="15" smashed="yes" rot="R180"/>
+<element name="E1" library="esp32-thing-temp" package="TRACE_ANTENNA_2.4GHZ_25.7MM_TUNED" value="ANTENNA" x="-17" y="-28" smashed="yes"/>
+<element name="E2" library="SparkFun-RF" package="TRACE_ANTENNA_2.4GHZ_15.2MM" value="ANTENNA-GROUNDEDTRACE-15.2MM" x="122" y="2" smashed="yes" rot="R270">
+<attribute name="NAME" x="123.27" y="2" size="0.6096" layer="25" font="vector" ratio="20" rot="R270" align="bottom-center"/>
+<attribute name="VALUE" x="123.016" y="2" size="0.6096" layer="27" font="vector" ratio="20" rot="R270" align="top-center"/>
+</element>
+<element name="X1" library="adafruit_changed" package="U.FL" value="" x="65" y="64" smashed="yes">
+<attribute name="NAME" x="63.73" y="66.54" size="1.016" layer="25" ratio="18"/>
+<attribute name="VALUE" x="63.73" y="60.825" size="0.8128" layer="27" ratio="10"/>
+</element>
 </elements>
 <signals>
 <signal name="GND">
@@ -1144,10 +1286,10 @@ These rules have been curated by SparkFuns DFM commitee. After doing much resear
 <wire x1="64.6438" y1="88.3037" x2="71.0938" y2="88.3037" width="0" layer="19" extent="1-1"/>
 <wire x1="63.5488" y1="89.2187" x2="64.6438" y2="88.3037" width="0" layer="19" extent="1-1"/>
 <wire x1="63.5488" y1="93.3987" x2="63.5488" y2="89.2187" width="0" layer="19" extent="1-1"/>
-<wire x1="60.8186" y1="93.4212" x2="63.5488" y2="93.3987" width="0" layer="19" extent="16-16"/>
-<wire x1="68.536" y1="72.382" x2="69.5666" y2="79.1046" width="0" layer="19" extent="1-16"/>
-<wire x1="70.3182" y1="70.0024" x2="68.536" y2="72.382" width="0" layer="19" extent="1-16"/>
-<wire x1="59.944" y1="73.29" x2="68.536" y2="72.382" width="0" layer="19" extent="1-16"/>
+<wire x1="47.8186" y1="94.4212" x2="63.5488" y2="93.3987" width="0" layer="19" extent="16-16"/>
+<wire x1="62.536" y1="50.382" x2="69.5666" y2="79.1046" width="0" layer="19" extent="1-16"/>
+<wire x1="70.3182" y1="70.0024" x2="62.536" y2="50.382" width="0" layer="19" extent="1-16"/>
+<wire x1="59.944" y1="73.29" x2="62.536" y2="50.382" width="0" layer="19" extent="1-16"/>
 <wire x1="54.881" y1="71.169" x2="59.944" y2="73.29" width="0" layer="19" extent="1-16"/>
 <wire x1="45.4" y1="72.75" x2="54.881" y2="71.169" width="0" layer="19" extent="16-16"/>
 <wire x1="41.645" y1="80.92" x2="45.4" y2="72.75" width="0" layer="19" extent="16-16"/>
@@ -1157,7 +1299,7 @@ These rules have been curated by SparkFuns DFM commitee. After doing much resear
 <wire x1="16.808" y1="71.296" x2="26.4" y2="72.75" width="0" layer="19" extent="16-16"/>
 <wire x1="7.4" y1="72.75" x2="16.808" y2="71.296" width="0" layer="19" extent="16-16"/>
 <wire x1="3.645" y1="80.92" x2="7.4" y2="72.75" width="0" layer="19" extent="16-16"/>
-<wire x1="50.6" y1="90.25" x2="60.8186" y2="93.4212" width="0" layer="19" extent="16-16"/>
+<wire x1="50.6" y1="90.25" x2="47.8186" y2="94.4212" width="0" layer="19" extent="16-16"/>
 <wire x1="40.889" y1="91.793" x2="50.6" y2="90.25" width="0" layer="19" extent="16-16"/>
 <wire x1="31.6" y1="90.25" x2="40.889" y2="91.793" width="0" layer="19" extent="16-16"/>
 <wire x1="21.916" y1="91.793" x2="31.6" y2="90.25" width="0" layer="19" extent="16-16"/>
@@ -1269,13 +1411,13 @@ These rules have been curated by SparkFuns DFM commitee. After doing much resear
 <contactref element="LED_R4C1" pad="VDD"/>
 <contactref element="LED_R5C1" pad="VDD"/>
 <wire x1="123.931" y1="71.912" x2="151.6332" y2="77.2344" width="0" layer="19" extent="1-1"/>
-<wire x1="71.981" y1="72.982" x2="123.931" y2="71.912" width="0" layer="19" extent="1-16"/>
-<wire x1="68.5182" y1="70.0024" x2="71.981" y2="72.982" width="0" layer="19" extent="1-16"/>
+<wire x1="65.981" y1="50.982" x2="123.931" y2="71.912" width="0" layer="19" extent="1-16"/>
+<wire x1="68.5182" y1="70.0024" x2="65.981" y2="50.982" width="0" layer="19" extent="1-16"/>
 <wire x1="67.306" y1="72.8054" x2="68.5182" y2="70.0024" width="0" layer="19" extent="1-1"/>
-<wire x1="65.091" y1="74.582" x2="67.306" y2="72.8054" width="0" layer="19" extent="1-16"/>
-<wire x1="65.091" y1="74.982" x2="65.091" y2="74.582" width="0" layer="19" extent="16-16"/>
-<wire x1="66.336" y1="75.827" x2="65.091" y2="74.982" width="0" layer="19" extent="16-16"/>
-<wire x1="66.736" y1="75.827" x2="66.336" y2="75.827" width="0" layer="19" extent="16-16"/>
+<wire x1="59.091" y1="52.582" x2="67.306" y2="72.8054" width="0" layer="19" extent="1-16"/>
+<wire x1="59.091" y1="52.982" x2="59.091" y2="52.582" width="0" layer="19" extent="16-16"/>
+<wire x1="60.336" y1="53.827" x2="59.091" y2="52.982" width="0" layer="19" extent="16-16"/>
+<wire x1="60.736" y1="53.827" x2="60.336" y2="53.827" width="0" layer="19" extent="16-16"/>
 <wire x1="7.4" y1="91.75" x2="7.3982" y2="93.881" width="0" layer="19" extent="16-16"/>
 <wire x1="50.6" y1="33.25" x2="52.827" y2="33.223" width="0" layer="19" extent="16-16"/>
 <wire x1="31.6" y1="71.25" x2="33.854" y2="71.169" width="0" layer="19" extent="16-16"/>
@@ -1291,9 +1433,9 @@ These rules have been curated by SparkFuns DFM commitee. After doing much resear
 <wire x1="26.4" y1="53.75" x2="23.716" y2="53.72" width="0" layer="19" extent="16-16"/>
 <wire x1="26.4" y1="15.75" x2="23.716" y2="15.774" width="0" layer="19" extent="16-16"/>
 <wire x1="45.4" y1="91.75" x2="42.689" y2="91.793" width="0" layer="19" extent="16-16"/>
-<wire x1="65.091" y1="70.982" x2="67.306" y2="72.8054" width="0" layer="19" extent="1-16"/>
-<wire x1="67.2806" y1="79.1046" x2="66.736" y2="75.827" width="0" layer="19" extent="1-16"/>
-<wire x1="59.944" y1="71.49" x2="65.091" y2="70.982" width="0" layer="19" extent="1-16"/>
+<wire x1="59.091" y1="48.982" x2="67.306" y2="72.8054" width="0" layer="19" extent="1-16"/>
+<wire x1="67.2806" y1="79.1046" x2="60.736" y2="53.827" width="0" layer="19" extent="1-16"/>
+<wire x1="59.944" y1="71.49" x2="59.091" y2="48.982" width="0" layer="19" extent="1-16"/>
 <wire x1="59.2328" y1="62.241" x2="59.944" y2="71.49" width="0" layer="19" extent="1-1"/>
 <wire x1="65.2526" y1="59.066" x2="59.2328" y2="62.241" width="0" layer="19" extent="1-1"/>
 </signal>
@@ -1320,7 +1462,7 @@ These rules have been curated by SparkFuns DFM commitee. After doing much resear
 <signal name="N$29">
 <contactref element="LED_R1C4" pad="DIN"/>
 <contactref element="R5" pad="2"/>
-<wire x1="50.6" y1="91.75" x2="59.0186" y2="93.4212" width="0" layer="19" extent="16-16"/>
+<wire x1="50.6" y1="91.75" x2="46.0186" y2="94.4212" width="0" layer="19" extent="16-16"/>
 </signal>
 <signal name="SPI_MOSI">
 <contactref element="SD1" pad="3"/>
