@@ -1447,6 +1447,66 @@ These rules have been curated by SparkFuns DFM commitee. After doing much resear
 <contactref element="LED_R5C1" pad="DIN"/>
 <wire x1="-6.4" y1="15.75" x2="7.4" y2="14.25" width="0" layer="19" extent="16-16"/>
 </signal>
+<signal name="SW_R1C1">
+<contactref element="SWR1C1" pad="2"/>
+</signal>
+<signal name="SW_R2C1">
+<contactref element="SWR2C1" pad="2"/>
+</signal>
+<signal name="SW_R3C1">
+<contactref element="SWR3C1" pad="2"/>
+</signal>
+<signal name="SW_R4C1">
+<contactref element="SWR4C1" pad="2"/>
+</signal>
+<signal name="SW_R5C1">
+<contactref element="SWR5C1" pad="2"/>
+</signal>
+<signal name="SW_R1C2">
+<contactref element="SWR1C2" pad="2"/>
+</signal>
+<signal name="SW_R2C2">
+<contactref element="SWR2C2" pad="2"/>
+</signal>
+<signal name="SW_R3C2">
+<contactref element="SWR3C2" pad="2"/>
+</signal>
+<signal name="SW_R4C2">
+<contactref element="SWR4C2" pad="2"/>
+</signal>
+<signal name="SW_R5C2">
+<contactref element="SWR5C2" pad="2"/>
+</signal>
+<signal name="SW_R1C3">
+<contactref element="SWR1C3" pad="2"/>
+</signal>
+<signal name="SW_R2C3">
+<contactref element="SWR2C3" pad="2"/>
+</signal>
+<signal name="SW_R3C3">
+<contactref element="SWR3C3" pad="2"/>
+</signal>
+<signal name="SW_R4C3">
+<contactref element="SWR4C3" pad="2"/>
+</signal>
+<signal name="SW_R5C3">
+<contactref element="SWR5C3" pad="2"/>
+</signal>
+<signal name="SW_R1C4">
+<contactref element="SWR1C4" pad="2"/>
+</signal>
+<signal name="SW_R2C4">
+<contactref element="SWR2C4" pad="2"/>
+</signal>
+<signal name="SW_R3C4">
+<contactref element="SWR3C4" pad="2"/>
+</signal>
+<signal name="SW_R4C4">
+<contactref element="SWR4C4" pad="2"/>
+</signal>
+<signal name="SW_R5C4">
+<contactref element="SWR5C4" pad="2"/>
+</signal>
 </signals>
 <mfgpreviewcolors>
 <mfgpreviewcolor name="soldermaskcolor" color="0xC8008000"/>
