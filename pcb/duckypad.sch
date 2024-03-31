@@ -4940,6 +4940,14 @@ by exp-lbrs.ulp</description>
 <rectangle x1="-2.794" y1="-0.254" x2="-2.286" y2="0.254" layer="51"/>
 <rectangle x1="2.286" y1="-0.254" x2="2.794" y2="0.254" layer="51"/>
 </package>
+<package name="1X02">
+<pad name="1" x="-1.27" y="0" drill="1.016" diameter="1.6764" rot="R90"/>
+<pad name="2" x="1.27" y="0" drill="1.016" diameter="1.6764" rot="R90"/>
+<text x="-2.6162" y="1.8288" size="1.27" layer="25" ratio="10">&gt;NAME</text>
+<text x="-3.81" y="-3.175" size="1.27" layer="27">&gt;VALUE</text>
+<rectangle x1="1.016" y1="-0.254" x2="1.524" y2="0.254" layer="51"/>
+<rectangle x1="-1.524" y1="-0.254" x2="-1.016" y2="0.254" layer="51"/>
+</package>
 </packages>
 <symbols>
 <symbol name="U.FL">
@@ -4983,6 +4991,16 @@ by exp-lbrs.ulp</description>
 <pin name="1" x="-2.54" y="2.54" visible="pad" length="short" direction="pas" function="dot"/>
 <pin name="2" x="-2.54" y="0" visible="pad" length="short" direction="pas" function="dot"/>
 <pin name="3" x="-2.54" y="-2.54" visible="pad" length="short" direction="pas" function="dot"/>
+</symbol>
+<symbol name="PINHD2">
+<wire x1="-6.35" y1="-2.54" x2="1.27" y2="-2.54" width="0.4064" layer="94"/>
+<wire x1="1.27" y1="-2.54" x2="1.27" y2="5.08" width="0.4064" layer="94"/>
+<wire x1="1.27" y1="5.08" x2="-6.35" y2="5.08" width="0.4064" layer="94"/>
+<wire x1="-6.35" y1="5.08" x2="-6.35" y2="-2.54" width="0.4064" layer="94"/>
+<text x="-6.35" y="5.715" size="1.778" layer="95">&gt;NAME</text>
+<text x="-6.35" y="-5.08" size="1.778" layer="96">&gt;VALUE</text>
+<pin name="1" x="-2.54" y="2.54" visible="pad" length="short" direction="pas" function="dot"/>
+<pin name="2" x="-2.54" y="0" visible="pad" length="short" direction="pas" function="dot"/>
 </symbol>
 </symbols>
 <devicesets>
@@ -5056,6 +5074,22 @@ by exp-lbrs.ulp</description>
 <connect gate="A" pin="1" pad="1"/>
 <connect gate="A" pin="2" pad="2"/>
 <connect gate="A" pin="3" pad="3"/>
+</connects>
+<technologies>
+<technology name=""/>
+</technologies>
+</device>
+</devices>
+</deviceset>
+<deviceset name="PINHD1X2">
+<gates>
+<gate name="1" symbol="PINHD2" x="5.08" y="0"/>
+</gates>
+<devices>
+<device name="" package="1X02">
+<connects>
+<connect gate="1" pin="1" pad="1"/>
+<connect gate="1" pin="2" pad="2"/>
 </connects>
 <technologies>
 <technology name=""/>
@@ -5396,6 +5430,7 @@ You are welcome to use this library for commercial purposes. For attribution, we
 <part name="GND35" library="supply1" deviceset="GND" device=""/>
 <part name="R3" library="joyAnalog" deviceset="RESISTOR" device="0805-RES" value="5.1K"/>
 <part name="R4" library="joyAnalog" deviceset="RESISTOR" device="0805-RES" value="5.1K"/>
+<part name="U$18" library="adafruit_changed" deviceset="PINHD1X2" device=""/>
 </parts>
 <sheets>
 <sheet>
@@ -5889,6 +5924,10 @@ You are welcome to use this library for commercial purposes. For attribution, we
 <attribute name="VALUE" x="-1.27" y="-186.182" size="1.778" layer="96" rot="MR0"/>
 <attribute name="NAME" x="-1.27" y="-181.3814" size="1.778" layer="95" rot="MR0"/>
 <attribute name="VALUE" x="-1.27" y="-186.182" size="1.778" layer="96" rot="MR0"/>
+</instance>
+<instance part="U$18" gate="1" x="337.82" y="-68.58" smashed="yes" rot="R180">
+<attribute name="NAME" x="344.17" y="-74.295" size="1.778" layer="95" rot="R180"/>
+<attribute name="VALUE" x="344.17" y="-63.5" size="1.778" layer="96" rot="R180"/>
 </instance>
 </instances>
 <busses>
@@ -6455,6 +6494,11 @@ You are welcome to use this library for commercial purposes. For attribution, we
 <pinref part="U1" gate="G$1" pin="DP1"/>
 <pinref part="U1" gate="G$1" pin="DP2"/>
 </segment>
+<segment>
+<wire x1="411.48" y1="-76.2" x2="398.78" y2="-76.2" width="0.1524" layer="91"/>
+<pinref part="U3" gate="G$1" pin="GPIO20"/>
+<label x="403.86" y="-76.2" size="1.778" layer="95"/>
+</segment>
 </net>
 <net name="N$8" class="0">
 <segment>
@@ -6553,6 +6597,11 @@ You are welcome to use this library for commercial purposes. For attribution, we
 <junction x="45.72" y="-190.5"/>
 <pinref part="U1" gate="G$1" pin="DN1"/>
 <pinref part="U1" gate="G$1" pin="DN2"/>
+</segment>
+<segment>
+<wire x1="411.48" y1="-73.66" x2="398.78" y2="-73.66" width="0.1524" layer="91"/>
+<pinref part="U3" gate="G$1" pin="GPIO19"/>
+<label x="403.86" y="-73.66" size="1.778" layer="95"/>
 </segment>
 </net>
 <net name="N$2" class="0">
@@ -6900,6 +6949,20 @@ You are welcome to use this library for commercial purposes. For attribution, we
 <junction x="119.38" y="-144.78"/>
 <pinref part="JP2" gate="A" pin="2"/>
 <wire x1="96.52" y1="-144.78" x2="96.52" y2="-154.94" width="0.1524" layer="91"/>
+</segment>
+</net>
+<net name="N$34" class="0">
+<segment>
+<pinref part="U3" gate="G$1" pin="U0RXD"/>
+<pinref part="U$18" gate="1" pin="2"/>
+<wire x1="347.98" y1="-68.58" x2="340.36" y2="-68.58" width="0.1524" layer="91"/>
+</segment>
+</net>
+<net name="N$35" class="0">
+<segment>
+<pinref part="U3" gate="G$1" pin="U0TXD"/>
+<pinref part="U$18" gate="1" pin="1"/>
+<wire x1="347.98" y1="-71.12" x2="340.36" y2="-71.12" width="0.1524" layer="91"/>
 </segment>
 </net>
 </nets>
