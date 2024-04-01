@@ -6235,11 +6235,14 @@ You are welcome to use this library for commercial purposes. For attribution, we
 <part name="C37" library="clock" deviceset="CAP" device="0805" value="100nF"/>
 <part name="GND47" library="supply1" deviceset="GND" device=""/>
 <part name="GND48" library="supply1" deviceset="GND" device=""/>
+<part name="R8" library="joyAnalog" deviceset="RESISTOR" device="0805-RES" value="5.1K"/>
 </parts>
 <sheets>
 <sheet>
 <plain>
 <text x="297.18" y="-63.5" size="1.778" layer="94">40MHz!!!</text>
+<text x="353.06" y="-284.48" size="1.778" layer="94">D0 = SCL = SCLK
+D1 = SDA = MOSI</text>
 </plain>
 <instances>
 <instance part="SD1" gate="G$1" x="320.04" y="-162.56" smashed="yes" rot="MR0">
@@ -6862,6 +6865,12 @@ You are welcome to use this library for commercial purposes. For attribution, we
 <instance part="GND48" gate="1" x="266.7" y="-284.48" smashed="yes" rot="MR0">
 <attribute name="VALUE" x="269.24" y="-287.02" size="1.778" layer="96" rot="MR0"/>
 </instance>
+<instance part="R8" gate="G$1" x="325.12" y="-294.64" smashed="yes" rot="MR270">
+<attribute name="NAME" x="323.6214" y="-290.83" size="1.778" layer="95" rot="MR270"/>
+<attribute name="VALUE" x="328.422" y="-290.83" size="1.778" layer="96" rot="MR270"/>
+<attribute name="NAME" x="323.6214" y="-290.83" size="1.778" layer="95" rot="MR270"/>
+<attribute name="VALUE" x="328.422" y="-290.83" size="1.778" layer="96" rot="MR270"/>
+</instance>
 </instances>
 <busses>
 </busses>
@@ -7258,8 +7267,11 @@ You are welcome to use this library for commercial purposes. For attribution, we
 <pinref part="U$2" gate="G$1" pin="GND"/>
 <wire x1="297.18" y1="-266.7" x2="332.74" y2="-266.7" width="0.1524" layer="91"/>
 <wire x1="332.74" y1="-266.7" x2="332.74" y2="-299.72" width="0.1524" layer="91"/>
-<wire x1="332.74" y1="-299.72" x2="297.18" y2="-299.72" width="0.1524" layer="91"/>
+<wire x1="332.74" y1="-299.72" x2="325.12" y2="-299.72" width="0.1524" layer="91"/>
 <junction x="297.18" y="-299.72"/>
+<pinref part="R8" gate="G$1" pin="2"/>
+<wire x1="325.12" y1="-299.72" x2="297.18" y2="-299.72" width="0.1524" layer="91"/>
+<junction x="325.12" y="-299.72"/>
 </segment>
 <segment>
 <pinref part="C34" gate="G$1" pin="1"/>
@@ -8038,12 +8050,25 @@ You are welcome to use this library for commercial purposes. For attribution, we
 <pinref part="R6" gate="G$1" pin="2"/>
 </segment>
 </net>
+<net name="N$14" class="0">
+<segment>
+<pinref part="U$2" gate="G$1" pin="RES"/>
+<wire x1="297.18" y1="-281.94" x2="320.04" y2="-281.94" width="0.1524" layer="91"/>
+<wire x1="320.04" y1="-281.94" x2="320.04" y2="-289.56" width="0.1524" layer="91"/>
+<pinref part="R8" gate="G$1" pin="1"/>
+<wire x1="320.04" y1="-289.56" x2="325.12" y2="-289.56" width="0.1524" layer="91"/>
+</segment>
+</net>
 </nets>
 </sheet>
 </sheets>
 </schematic>
 </drawing>
 <compatibility>
+<note version="6.3" minversion="6.2.2" severity="warning">
+Since Version 6.2.2 text objects can contain more than one line,
+which will not be processed correctly with this version.
+</note>
 <note version="8.2" severity="warning">
 Since Version 8.2, EAGLE supports online libraries. The ids
 of those online libraries will not be understood (or retained)
