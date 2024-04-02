@@ -203,12 +203,10 @@
 <wire x1="-20" y1="0" x2="90" y2="0" width="0" layer="20"/>
 <text x="80.3656" y="2.008" size="3.048" layer="25" align="center">+</text>
 <text x="65.278" y="2.008" size="3.048" layer="25" align="center">-</text>
-<text x="135" y="33" size="2.54" layer="51">rotary encoder RC filter
+<text x="135" y="33" size="2.54" layer="51">rotary encoder RC filter?
 
 watch out for strapping pins
 GPIO3 must have pull resistor, pull to high to  free up JTAG pins?
-
-SPI2, look at table 5e
 
 fill in thermals on buttons and UFL connector
 
