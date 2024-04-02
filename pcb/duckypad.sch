@@ -4169,36 +4169,6 @@ Basic schematic elements and footprints for 0603, 1206, and PTH resistors.</desc
 </deviceset>
 </devicesets>
 </library>
-<library name="3pos_slide_switch_centered">
-<packages>
-<package name="M2_SCREW_FOOT">
-<hole x="0" y="0" drill="2.2"/>
-</package>
-</packages>
-<symbols>
-<symbol name="M2_SCREW_SYM">
-<wire x1="-10.16" y1="5.08" x2="12.7" y2="5.08" width="0.254" layer="94"/>
-<wire x1="12.7" y1="5.08" x2="12.7" y2="-5.08" width="0.254" layer="94"/>
-<wire x1="12.7" y1="-5.08" x2="-10.16" y2="-5.08" width="0.254" layer="94"/>
-<wire x1="-10.16" y1="-5.08" x2="-10.16" y2="5.08" width="0.254" layer="94"/>
-<text x="-5.08" y="0" size="1.778" layer="94">M2 SCREW</text>
-</symbol>
-</symbols>
-<devicesets>
-<deviceset name="M2_SCREW_DEV">
-<gates>
-<gate name="G$1" symbol="M2_SCREW_SYM" x="0" y="0"/>
-</gates>
-<devices>
-<device name="" package="M2_SCREW_FOOT">
-<technologies>
-<technology name=""/>
-</technologies>
-</device>
-</devices>
-</deviceset>
-</devicesets>
-</library>
 <library name="switch-alps" urn="urn:adsk.eagle:library:373">
 <description>ALPS Switch from Markus Faust &amp;lt;mfaust@htwm.de&amp;gt;&lt;p&gt;
 Source: EC12E.scr from eagle.support.ger on news.cadsoft.de at 08.10.2007</description>
@@ -7096,6 +7066,42 @@ new: Attribute TP_SIGNAL_NAME&lt;br&gt;
 </deviceset>
 </devicesets>
 </library>
+<library name="duckypad">
+<description>Generated from &lt;b&gt;duckypad.sch&lt;/b&gt;&lt;p&gt;
+by exp-lbrs.ulp</description>
+<packages>
+<package name="M2_SCREW_FOOT">
+<hole x="0" y="0" drill="2.2"/>
+<circle x="0" y="0" radius="2" width="0" layer="42"/>
+<circle x="0" y="0" radius="2" width="0" layer="41"/>
+<circle x="0" y="0" radius="2" width="0.1524" layer="21"/>
+<circle x="0" y="0" radius="2" width="0.1524" layer="22"/>
+</package>
+</packages>
+<symbols>
+<symbol name="M2_SCREW_SYM">
+<wire x1="-10.16" y1="5.08" x2="12.7" y2="5.08" width="0.254" layer="94"/>
+<wire x1="12.7" y1="5.08" x2="12.7" y2="-5.08" width="0.254" layer="94"/>
+<wire x1="12.7" y1="-5.08" x2="-10.16" y2="-5.08" width="0.254" layer="94"/>
+<wire x1="-10.16" y1="-5.08" x2="-10.16" y2="5.08" width="0.254" layer="94"/>
+<text x="-5.08" y="0" size="1.778" layer="94">M2 SCREW</text>
+</symbol>
+</symbols>
+<devicesets>
+<deviceset name="M2_SCREW_DEV">
+<gates>
+<gate name="G$1" symbol="M2_SCREW_SYM" x="0" y="0"/>
+</gates>
+<devices>
+<device name="" package="M2_SCREW_FOOT">
+<technologies>
+<technology name=""/>
+</technologies>
+</device>
+</devices>
+</deviceset>
+</devicesets>
+</library>
 </libraries>
 <attributes>
 </attributes>
@@ -7190,12 +7196,12 @@ new: Attribute TP_SIGNAL_NAME&lt;br&gt;
 <part name="+3V30" library="supply1" library_urn="urn:adsk.eagle:library:371" deviceset="+3V3" device=""/>
 <part name="R5" library="clock" deviceset="RESISTOR" device="0805-RES" value="5.1K"/>
 <part name="C27" library="clock" deviceset="C-US" device="C1210" value="47uF"/>
-<part name="U$7" library="3pos_slide_switch_centered" deviceset="M2_SCREW_DEV" device=""/>
-<part name="U$9" library="3pos_slide_switch_centered" deviceset="M2_SCREW_DEV" device=""/>
-<part name="U$10" library="3pos_slide_switch_centered" deviceset="M2_SCREW_DEV" device=""/>
-<part name="U$11" library="3pos_slide_switch_centered" deviceset="M2_SCREW_DEV" device=""/>
-<part name="U$15" library="3pos_slide_switch_centered" deviceset="M2_SCREW_DEV" device=""/>
-<part name="U$16" library="3pos_slide_switch_centered" deviceset="M2_SCREW_DEV" device=""/>
+<part name="U$7" library="duckypad" deviceset="M2_SCREW_DEV" device=""/>
+<part name="U$9" library="duckypad" deviceset="M2_SCREW_DEV" device=""/>
+<part name="U$10" library="duckypad" deviceset="M2_SCREW_DEV" device=""/>
+<part name="U$11" library="duckypad" deviceset="M2_SCREW_DEV" device=""/>
+<part name="U$15" library="duckypad" deviceset="M2_SCREW_DEV" device=""/>
+<part name="U$16" library="duckypad" deviceset="M2_SCREW_DEV" device=""/>
 <part name="GND31" library="supply1" library_urn="urn:adsk.eagle:library:371" deviceset="GND" device=""/>
 <part name="U2" library="my_usbc_16p" deviceset="USBC_16P" device=""/>
 <part name="GND6" library="supply1" deviceset="GND" device=""/>
@@ -7218,10 +7224,10 @@ new: Attribute TP_SIGNAL_NAME&lt;br&gt;
 <part name="SWR5C2" library="lul" deviceset="KAILH_SWITCH_SOCKET_KAILH_SWITCH_SOCKET" device=""/>
 <part name="SWR5C3" library="lul" deviceset="KAILH_SWITCH_SOCKET_KAILH_SWITCH_SOCKET" device=""/>
 <part name="SWR5C4" library="lul" deviceset="KAILH_SWITCH_SOCKET_KAILH_SWITCH_SOCKET" device=""/>
-<part name="U$8" library="3pos_slide_switch_centered" deviceset="M2_SCREW_DEV" device=""/>
-<part name="U$12" library="3pos_slide_switch_centered" deviceset="M2_SCREW_DEV" device=""/>
-<part name="U$13" library="3pos_slide_switch_centered" deviceset="M2_SCREW_DEV" device=""/>
-<part name="U$17" library="3pos_slide_switch_centered" deviceset="M2_SCREW_DEV" device=""/>
+<part name="U$8" library="duckypad" deviceset="M2_SCREW_DEV" device=""/>
+<part name="U$12" library="duckypad" deviceset="M2_SCREW_DEV" device=""/>
+<part name="U$13" library="duckypad" deviceset="M2_SCREW_DEV" device=""/>
+<part name="U$17" library="duckypad" deviceset="M2_SCREW_DEV" device=""/>
 <part name="SWR1C1" library="lul" deviceset="KAILH_SWITCH_SOCKET_KAILH_SWITCH_SOCKET" device=""/>
 <part name="SWR2C1" library="lul" deviceset="KAILH_SWITCH_SOCKET_KAILH_SWITCH_SOCKET" device=""/>
 <part name="SWR3C1" library="lul" deviceset="KAILH_SWITCH_SOCKET_KAILH_SWITCH_SOCKET" device=""/>
@@ -7322,6 +7328,10 @@ new: Attribute TP_SIGNAL_NAME&lt;br&gt;
 <part name="GND54" library="supply1" library_urn="urn:adsk.eagle:library:371" deviceset="GND" device=""/>
 <part name="C40" library="clock" deviceset="CAP" device="0805" value="100nF"/>
 <part name="TP1" library="testpad" library_urn="urn:adsk.eagle:library:385" deviceset="TP" device="TP12R" package3d_urn="urn:adsk.eagle:package:27963/1"/>
+<part name="U$14" library="duckypad" deviceset="M2_SCREW_DEV" device=""/>
+<part name="U$20" library="duckypad" deviceset="M2_SCREW_DEV" device=""/>
+<part name="U$21" library="duckypad" deviceset="M2_SCREW_DEV" device=""/>
+<part name="U$22" library="duckypad" deviceset="M2_SCREW_DEV" device=""/>
 </parts>
 <sheets>
 <sheet>
@@ -8005,6 +8015,10 @@ D1 = SDA = MOSI</text>
 <attribute name="NAME" x="344.17" y="-92.71" size="1.778" layer="95" rot="R90"/>
 <attribute name="TP_SIGNAL_NAME" x="346.71" y="-90.17" size="1.778" layer="97" rot="R90"/>
 </instance>
+<instance part="U$14" gate="G$1" x="548.64" y="33.02" smashed="yes"/>
+<instance part="U$20" gate="G$1" x="548.64" y="48.26" smashed="yes"/>
+<instance part="U$21" gate="G$1" x="548.64" y="2.54" smashed="yes"/>
+<instance part="U$22" gate="G$1" x="548.64" y="17.78" smashed="yes"/>
 </instances>
 <busses>
 </busses>
