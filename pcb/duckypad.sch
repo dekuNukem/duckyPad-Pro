@@ -3414,32 +3414,6 @@ Standard 0603 ceramic capacitor, and 0.1" leaded capacitor.</description>
 <description>Generated from &lt;b&gt;lul.sch&lt;/b&gt;&lt;p&gt;
 by exp-lbrs.ulp</description>
 <packages>
-<package name="LED3535">
-<circle x="0" y="0" radius="1.4" width="0.127" layer="51"/>
-<wire x1="-1.75" y1="1.75" x2="1.75" y2="1.75" width="0.127" layer="21"/>
-<wire x1="1.75" y1="1.75" x2="1.75" y2="-1.75" width="0.127" layer="21"/>
-<wire x1="1.75" y1="-1.75" x2="-1.75" y2="-1.75" width="0.127" layer="21"/>
-<wire x1="-1.75" y1="-1.75" x2="-1.75" y2="1.75" width="0.127" layer="21"/>
-<smd name="1" x="-1.75" y="0.875" dx="0.85" dy="1" layer="1" rot="R90"/>
-<smd name="2" x="-1.75" y="-0.875" dx="0.85" dy="1" layer="1" rot="R90"/>
-<smd name="3" x="1.75" y="-0.875" dx="0.85" dy="1" layer="1" rot="R90"/>
-<smd name="4" x="1.75" y="0.875" dx="0.85" dy="1" layer="1" rot="R90"/>
-<text x="2.794" y="0.254" size="1.27" layer="21">-</text>
-<text x="-3.302" y="0.127" size="1.27" layer="21">i</text>
-<text x="-3.556" y="-1.524" size="1.27" layer="21">+</text>
-<text x="2.794" y="-1.397" size="1.27" layer="21">o</text>
-</package>
-<package name="REVERSE_MNT">
-<smd name="VDD" x="2.6" y="-0.75" dx="0.82" dy="2" layer="16" rot="R270"/>
-<smd name="DOUT" x="2.6" y="0.75" dx="0.82" dy="2" layer="16" rot="R270"/>
-<smd name="GND" x="-2.6" y="0.75" dx="0.82" dy="2" layer="16" rot="R270"/>
-<smd name="DIN" x="-2.6" y="-0.75" dx="0.82" dy="2" layer="16" rot="R270"/>
-<text x="4.2" y="0.75" size="1.27" layer="22" rot="R180" align="center">o</text>
-<text x="4.2" y="-0.75" size="1.27" layer="22" rot="R180" align="center">+</text>
-<text x="-4.2" y="-0.75" size="1.27" layer="22" rot="R180" align="center">i</text>
-<text x="-4.2" y="0.75" size="1.27" layer="22" rot="R180" align="center">-</text>
-<rectangle x1="-1.8" y1="-1.6" x2="1.8" y2="1.6" layer="46"/>
-</package>
 <package name="KAILH_SWITCH_SOCKET_SWITCH_SOCKET">
 <wire x1="0.04" y1="3.08" x2="4.93" y2="3.08" width="0.15" layer="22"/>
 <wire x1="-6.2" y1="2.16" x2="-6.2" y2="2.11" width="0.15" layer="22"/>
@@ -3461,49 +3435,6 @@ by exp-lbrs.ulp</description>
 </package>
 </packages>
 <symbols>
-<symbol name="WS2812BLED">
-<wire x1="-7.62" y1="10.16" x2="-7.62" y2="-5.08" width="0.254" layer="94"/>
-<wire x1="-7.62" y1="-5.08" x2="0" y2="-5.08" width="0.254" layer="94"/>
-<wire x1="0" y1="-5.08" x2="7.62" y2="-5.08" width="0.254" layer="94"/>
-<wire x1="7.62" y1="-5.08" x2="7.62" y2="10.16" width="0.254" layer="94"/>
-<wire x1="7.62" y1="10.16" x2="5.08" y2="10.16" width="0.254" layer="94"/>
-<wire x1="5.08" y1="10.16" x2="-7.62" y2="10.16" width="0.254" layer="94"/>
-<wire x1="-6.35" y1="5.08" x2="-5.08" y2="5.08" width="0.254" layer="94"/>
-<wire x1="-5.08" y1="2.54" x2="-6.35" y2="5.08" width="0.254" layer="94"/>
-<wire x1="2.54" y1="2.54" x2="3.81" y2="5.08" width="0.254" layer="94"/>
-<wire x1="3.81" y1="5.08" x2="2.54" y2="5.08" width="0.254" layer="94"/>
-<wire x1="-6.35" y1="2.54" x2="-5.08" y2="2.54" width="0.254" layer="94"/>
-<wire x1="2.54" y1="2.54" x2="3.81" y2="2.54" width="0.254" layer="94"/>
-<wire x1="-1.27" y1="2.54" x2="-1.27" y2="1.27" width="0.254" layer="94"/>
-<wire x1="-1.27" y1="7.62" x2="-5.08" y2="7.62" width="0.254" layer="94"/>
-<wire x1="-5.08" y1="7.62" x2="-5.08" y2="5.08" width="0.254" layer="94"/>
-<wire x1="-1.27" y1="5.08" x2="-1.27" y2="7.62" width="0.254" layer="94"/>
-<wire x1="2.54" y1="5.08" x2="2.54" y2="7.62" width="0.254" layer="94"/>
-<wire x1="2.54" y1="7.62" x2="-1.27" y2="7.62" width="0.254" layer="94"/>
-<wire x1="-5.08" y1="5.08" x2="-3.81" y2="5.08" width="0.254" layer="94"/>
-<wire x1="-5.08" y1="2.54" x2="-3.81" y2="5.08" width="0.254" layer="94"/>
-<wire x1="1.27" y1="5.08" x2="2.54" y2="2.54" width="0.254" layer="94"/>
-<wire x1="1.27" y1="5.08" x2="2.54" y2="5.08" width="0.254" layer="94"/>
-<wire x1="-5.08" y1="2.54" x2="-5.08" y2="1.27" width="0.254" layer="94"/>
-<wire x1="2.54" y1="1.27" x2="-1.27" y2="1.27" width="0.254" layer="94"/>
-<wire x1="-1.27" y1="1.27" x2="-5.08" y2="1.27" width="0.254" layer="94"/>
-<wire x1="0" y1="-4.064" x2="0" y2="-5.08" width="0.254" layer="94"/>
-<wire x1="-3.81" y1="2.54" x2="-5.08" y2="2.54" width="0.254" layer="94"/>
-<wire x1="-2.54" y1="2.54" x2="-1.27" y2="2.54" width="0.254" layer="94"/>
-<wire x1="-1.27" y1="2.54" x2="0" y2="2.54" width="0.254" layer="94"/>
-<wire x1="-1.27" y1="2.54" x2="-2.54" y2="5.08" width="0.254" layer="94"/>
-<wire x1="-2.54" y1="5.08" x2="0" y2="5.08" width="0.254" layer="94"/>
-<wire x1="0" y1="5.08" x2="-1.27" y2="2.54" width="0.254" layer="94"/>
-<wire x1="2.54" y1="2.54" x2="1.27" y2="2.54" width="0.254" layer="94"/>
-<wire x1="2.54" y1="2.54" x2="2.54" y2="1.27" width="0.254" layer="94"/>
-<wire x1="5.08" y1="10.16" x2="5.08" y2="7.62" width="0.254" layer="94"/>
-<wire x1="2.54" y1="7.62" x2="5.08" y2="7.62" width="0.254" layer="94"/>
-<pin name="DI" x="-12.7" y="-2.54" visible="pin" length="middle" direction="in"/>
-<pin name="DO" x="12.7" y="-2.54" visible="pin" length="middle" direction="out" rot="R180"/>
-<pin name="GND" x="0" y="-10.16" visible="pin" length="middle" direction="pwr" rot="R90"/>
-<pin name="VDD" x="5.08" y="15.24" visible="pin" length="middle" direction="pwr" rot="R270"/>
-<text x="-4.064" y="8.382" size="1.27" layer="94">WS2812B</text>
-</symbol>
 <symbol name="KAILH_SWITCH_SOCKET_SPST">
 <wire x1="-5.08" y1="0" x2="-2.54" y2="2.54" width="0.1524" layer="94"/>
 <wire x1="-2.54" y1="2.54" x2="0" y2="2.54" width="0.1524" layer="94"/>
@@ -3515,35 +3446,6 @@ by exp-lbrs.ulp</description>
 </symbol>
 </symbols>
 <devicesets>
-<deviceset name="WS2812B" prefix="LED">
-<gates>
-<gate name="G$1" symbol="WS2812BLED" x="0" y="-2.54"/>
-</gates>
-<devices>
-<device name="3535" package="LED3535">
-<connects>
-<connect gate="G$1" pin="DI" pad="1"/>
-<connect gate="G$1" pin="DO" pad="3"/>
-<connect gate="G$1" pin="GND" pad="4"/>
-<connect gate="G$1" pin="VDD" pad="2"/>
-</connects>
-<technologies>
-<technology name=""/>
-</technologies>
-</device>
-<device name="" package="REVERSE_MNT">
-<connects>
-<connect gate="G$1" pin="DI" pad="DIN"/>
-<connect gate="G$1" pin="DO" pad="DOUT"/>
-<connect gate="G$1" pin="GND" pad="GND"/>
-<connect gate="G$1" pin="VDD" pad="VDD"/>
-</connects>
-<technologies>
-<technology name=""/>
-</technologies>
-</device>
-</devices>
-</deviceset>
 <deviceset name="KAILH_SWITCH_SOCKET_KAILH_SWITCH_SOCKET" prefix="SW">
 <gates>
 <gate name="G$1" symbol="KAILH_SWITCH_SOCKET_SPST" x="0" y="0"/>
@@ -7077,6 +6979,19 @@ by exp-lbrs.ulp</description>
 <circle x="0" y="0" radius="2" width="0.1524" layer="21"/>
 <circle x="0" y="0" radius="2" width="0.1524" layer="22"/>
 </package>
+<package name="REVERSE_MNT">
+<rectangle x1="-1.8" y1="-1.6" x2="1.8" y2="1.6" layer="46"/>
+<smd name="DIN" x="-2.6" y="-0.75" dx="0.82" dy="2" layer="16" rot="R270"/>
+<smd name="DOUT" x="2.6" y="0.75" dx="0.82" dy="2" layer="16" rot="R270"/>
+<smd name="GND" x="-2.6" y="0.75" dx="0.82" dy="2" layer="16" rot="R270"/>
+<smd name="VDD" x="2.6" y="-0.75" dx="0.82" dy="2" layer="16" rot="R270"/>
+<text x="4.2" y="0.75" size="1.27" layer="22" rot="R180" align="center">o</text>
+<text x="4.2" y="-0.75" size="1.27" layer="22" rot="R180" align="center">+</text>
+<text x="-4.2" y="-0.75" size="1.27" layer="22" rot="R180" align="center">i</text>
+<text x="-4.2" y="0.75" size="1.27" layer="22" rot="R180" align="center">-</text>
+<rectangle x1="-1.905" y1="-1.651" x2="1.905" y2="1.651" layer="41"/>
+<rectangle x1="-1.905" y1="-1.651" x2="1.905" y2="1.651" layer="42"/>
+</package>
 </packages>
 <symbols>
 <symbol name="M2_SCREW_SYM">
@@ -7086,6 +7001,49 @@ by exp-lbrs.ulp</description>
 <wire x1="-10.16" y1="-5.08" x2="-10.16" y2="5.08" width="0.254" layer="94"/>
 <text x="-5.08" y="0" size="1.778" layer="94">M2 SCREW</text>
 </symbol>
+<symbol name="WS2812BLED">
+<wire x1="-7.62" y1="10.16" x2="-7.62" y2="-5.08" width="0.254" layer="94"/>
+<wire x1="-7.62" y1="-5.08" x2="0" y2="-5.08" width="0.254" layer="94"/>
+<wire x1="0" y1="-5.08" x2="7.62" y2="-5.08" width="0.254" layer="94"/>
+<wire x1="7.62" y1="-5.08" x2="7.62" y2="10.16" width="0.254" layer="94"/>
+<wire x1="7.62" y1="10.16" x2="5.08" y2="10.16" width="0.254" layer="94"/>
+<wire x1="5.08" y1="10.16" x2="-7.62" y2="10.16" width="0.254" layer="94"/>
+<wire x1="-6.35" y1="5.08" x2="-5.08" y2="5.08" width="0.254" layer="94"/>
+<wire x1="-5.08" y1="2.54" x2="-6.35" y2="5.08" width="0.254" layer="94"/>
+<wire x1="2.54" y1="2.54" x2="3.81" y2="5.08" width="0.254" layer="94"/>
+<wire x1="3.81" y1="5.08" x2="2.54" y2="5.08" width="0.254" layer="94"/>
+<wire x1="-6.35" y1="2.54" x2="-5.08" y2="2.54" width="0.254" layer="94"/>
+<wire x1="2.54" y1="2.54" x2="3.81" y2="2.54" width="0.254" layer="94"/>
+<wire x1="-1.27" y1="2.54" x2="-1.27" y2="1.27" width="0.254" layer="94"/>
+<wire x1="-1.27" y1="7.62" x2="-5.08" y2="7.62" width="0.254" layer="94"/>
+<wire x1="-5.08" y1="7.62" x2="-5.08" y2="5.08" width="0.254" layer="94"/>
+<wire x1="-1.27" y1="5.08" x2="-1.27" y2="7.62" width="0.254" layer="94"/>
+<wire x1="2.54" y1="5.08" x2="2.54" y2="7.62" width="0.254" layer="94"/>
+<wire x1="2.54" y1="7.62" x2="-1.27" y2="7.62" width="0.254" layer="94"/>
+<wire x1="-5.08" y1="5.08" x2="-3.81" y2="5.08" width="0.254" layer="94"/>
+<wire x1="-5.08" y1="2.54" x2="-3.81" y2="5.08" width="0.254" layer="94"/>
+<wire x1="1.27" y1="5.08" x2="2.54" y2="2.54" width="0.254" layer="94"/>
+<wire x1="1.27" y1="5.08" x2="2.54" y2="5.08" width="0.254" layer="94"/>
+<wire x1="-5.08" y1="2.54" x2="-5.08" y2="1.27" width="0.254" layer="94"/>
+<wire x1="2.54" y1="1.27" x2="-1.27" y2="1.27" width="0.254" layer="94"/>
+<wire x1="-1.27" y1="1.27" x2="-5.08" y2="1.27" width="0.254" layer="94"/>
+<wire x1="0" y1="-4.064" x2="0" y2="-5.08" width="0.254" layer="94"/>
+<wire x1="-3.81" y1="2.54" x2="-5.08" y2="2.54" width="0.254" layer="94"/>
+<wire x1="-2.54" y1="2.54" x2="-1.27" y2="2.54" width="0.254" layer="94"/>
+<wire x1="-1.27" y1="2.54" x2="0" y2="2.54" width="0.254" layer="94"/>
+<wire x1="-1.27" y1="2.54" x2="-2.54" y2="5.08" width="0.254" layer="94"/>
+<wire x1="-2.54" y1="5.08" x2="0" y2="5.08" width="0.254" layer="94"/>
+<wire x1="0" y1="5.08" x2="-1.27" y2="2.54" width="0.254" layer="94"/>
+<wire x1="2.54" y1="2.54" x2="1.27" y2="2.54" width="0.254" layer="94"/>
+<wire x1="2.54" y1="2.54" x2="2.54" y2="1.27" width="0.254" layer="94"/>
+<wire x1="5.08" y1="10.16" x2="5.08" y2="7.62" width="0.254" layer="94"/>
+<wire x1="2.54" y1="7.62" x2="5.08" y2="7.62" width="0.254" layer="94"/>
+<pin name="DI" x="-12.7" y="-2.54" visible="pin" length="middle" direction="in"/>
+<pin name="DO" x="12.7" y="-2.54" visible="pin" length="middle" direction="out" rot="R180"/>
+<pin name="GND" x="0" y="-10.16" visible="pin" length="middle" direction="pwr" rot="R90"/>
+<pin name="VDD" x="5.08" y="15.24" visible="pin" length="middle" direction="pwr" rot="R270"/>
+<text x="-4.064" y="8.382" size="1.27" layer="94">WS2812B</text>
+</symbol>
 </symbols>
 <devicesets>
 <deviceset name="M2_SCREW_DEV">
@@ -7094,6 +7052,24 @@ by exp-lbrs.ulp</description>
 </gates>
 <devices>
 <device name="" package="M2_SCREW_FOOT">
+<technologies>
+<technology name=""/>
+</technologies>
+</device>
+</devices>
+</deviceset>
+<deviceset name="WS2812B" prefix="LED">
+<gates>
+<gate name="G$1" symbol="WS2812BLED" x="0" y="-2.54"/>
+</gates>
+<devices>
+<device name="" package="REVERSE_MNT">
+<connects>
+<connect gate="G$1" pin="DI" pad="DIN"/>
+<connect gate="G$1" pin="DO" pad="DOUT"/>
+<connect gate="G$1" pin="GND" pad="GND"/>
+<connect gate="G$1" pin="VDD" pad="VDD"/>
+</connects>
 <technologies>
 <technology name=""/>
 </technologies>
@@ -7125,22 +7101,22 @@ by exp-lbrs.ulp</description>
 <part name="C10" library="clock" deviceset="CAP" device="0805" value="100nF"/>
 <part name="U$3" library="supply1" library_urn="urn:adsk.eagle:library:371" deviceset="GND" device=""/>
 <part name="+3V2" library="supply1" library_urn="urn:adsk.eagle:library:371" deviceset="+3V3" device=""/>
-<part name="LED_R1C2" library="lul" deviceset="WS2812B" device="" value="WS2812B"/>
+<part name="LED_R1C2" library="duckypad" deviceset="WS2812B" device="" value="WS2812B"/>
 <part name="GND1" library="supply1" library_urn="urn:adsk.eagle:library:371" deviceset="GND" device=""/>
-<part name="LED_R1C3" library="lul" deviceset="WS2812B" device="" value="WS2812B"/>
-<part name="LED_R1C4" library="lul" deviceset="WS2812B" device="" value="WS2812B"/>
-<part name="LED_R2C2" library="lul" deviceset="WS2812B" device="" value="WS2812B"/>
-<part name="LED_R2C3" library="lul" deviceset="WS2812B" device="" value="WS2812B"/>
-<part name="LED_R2C4" library="lul" deviceset="WS2812B" device="" value="WS2812B"/>
-<part name="LED_R3C2" library="lul" deviceset="WS2812B" device="" value="WS2812B"/>
-<part name="LED_R3C3" library="lul" deviceset="WS2812B" device="" value="WS2812B"/>
-<part name="LED_R3C4" library="lul" deviceset="WS2812B" device="" value="WS2812B"/>
-<part name="LED_R4C2" library="lul" deviceset="WS2812B" device="" value="WS2812B"/>
-<part name="LED_R4C3" library="lul" deviceset="WS2812B" device="" value="WS2812B"/>
-<part name="LED_R4C4" library="lul" deviceset="WS2812B" device="" value="WS2812B"/>
-<part name="LED_R5C2" library="lul" deviceset="WS2812B" device="" value="WS2812B"/>
-<part name="LED_R5C3" library="lul" deviceset="WS2812B" device="" value="WS2812B"/>
-<part name="LED_R5C4" library="lul" deviceset="WS2812B" device="" value="WS2812B"/>
+<part name="LED_R1C3" library="duckypad" deviceset="WS2812B" device="" value="WS2812B"/>
+<part name="LED_R1C4" library="duckypad" deviceset="WS2812B" device="" value="WS2812B"/>
+<part name="LED_R2C2" library="duckypad" deviceset="WS2812B" device="" value="WS2812B"/>
+<part name="LED_R2C3" library="duckypad" deviceset="WS2812B" device="" value="WS2812B"/>
+<part name="LED_R2C4" library="duckypad" deviceset="WS2812B" device="" value="WS2812B"/>
+<part name="LED_R3C2" library="duckypad" deviceset="WS2812B" device="" value="WS2812B"/>
+<part name="LED_R3C3" library="duckypad" deviceset="WS2812B" device="" value="WS2812B"/>
+<part name="LED_R3C4" library="duckypad" deviceset="WS2812B" device="" value="WS2812B"/>
+<part name="LED_R4C2" library="duckypad" deviceset="WS2812B" device="" value="WS2812B"/>
+<part name="LED_R4C3" library="duckypad" deviceset="WS2812B" device="" value="WS2812B"/>
+<part name="LED_R4C4" library="duckypad" deviceset="WS2812B" device="" value="WS2812B"/>
+<part name="LED_R5C2" library="duckypad" deviceset="WS2812B" device="" value="WS2812B"/>
+<part name="LED_R5C3" library="duckypad" deviceset="WS2812B" device="" value="WS2812B"/>
+<part name="LED_R5C4" library="duckypad" deviceset="WS2812B" device="" value="WS2812B"/>
 <part name="+3V11" library="supply1" library_urn="urn:adsk.eagle:library:371" deviceset="+3V3" device=""/>
 <part name="+3V12" library="supply1" library_urn="urn:adsk.eagle:library:371" deviceset="+3V3" device=""/>
 <part name="+3V13" library="supply1" library_urn="urn:adsk.eagle:library:371" deviceset="+3V3" device=""/>
@@ -7238,11 +7214,11 @@ by exp-lbrs.ulp</description>
 <part name="U3" library="ESP32-S3FN8" deviceset="ESP32-S3FN8" device=""/>
 <part name="GND5" library="supply1" library_urn="urn:adsk.eagle:library:371" deviceset="GND" device=""/>
 <part name="U$2" library="oled" deviceset="OLED128" device=""/>
-<part name="LED_R1C1" library="lul" deviceset="WS2812B" device="" value="WS2812B"/>
-<part name="LED_R2C1" library="lul" deviceset="WS2812B" device="" value="WS2812B"/>
-<part name="LED_R3C1" library="lul" deviceset="WS2812B" device="" value="WS2812B"/>
-<part name="LED_R4C1" library="lul" deviceset="WS2812B" device="" value="WS2812B"/>
-<part name="LED_R5C1" library="lul" deviceset="WS2812B" device="" value="WS2812B"/>
+<part name="LED_R1C1" library="duckypad" deviceset="WS2812B" device="" value="WS2812B"/>
+<part name="LED_R2C1" library="duckypad" deviceset="WS2812B" device="" value="WS2812B"/>
+<part name="LED_R3C1" library="duckypad" deviceset="WS2812B" device="" value="WS2812B"/>
+<part name="LED_R4C1" library="duckypad" deviceset="WS2812B" device="" value="WS2812B"/>
+<part name="LED_R5C1" library="duckypad" deviceset="WS2812B" device="" value="WS2812B"/>
 <part name="+3V3" library="supply1" library_urn="urn:adsk.eagle:library:371" deviceset="+3V3" device=""/>
 <part name="+3V4" library="supply1" library_urn="urn:adsk.eagle:library:371" deviceset="+3V3" device=""/>
 <part name="+3V6" library="supply1" library_urn="urn:adsk.eagle:library:371" deviceset="+3V3" device=""/>
