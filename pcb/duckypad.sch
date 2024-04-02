@@ -7207,7 +7207,7 @@ by exp-lbrs.ulp</description>
 <part name="GND6" library="supply1" deviceset="GND" device=""/>
 <part name="R1" library="joyAnalog" deviceset="RESISTOR" device="0805-RES" value="5.1K"/>
 <part name="R9" library="joyAnalog" deviceset="RESISTOR" device="0805-RES" value="5.1K"/>
-<part name="C29" library="clock" deviceset="CAP" device="0805" value="100nF"/>
+<part name="C29" library="clock" deviceset="CAP" device="0805" value="10uF"/>
 <part name="GND16" library="supply1" library_urn="urn:adsk.eagle:library:371" deviceset="GND" device=""/>
 <part name="SWR1C2" library="lul" deviceset="KAILH_SWITCH_SOCKET_KAILH_SWITCH_SOCKET" device=""/>
 <part name="SWR1C3" library="lul" deviceset="KAILH_SWITCH_SOCKET_KAILH_SWITCH_SOCKET" device=""/>
@@ -7313,7 +7313,6 @@ by exp-lbrs.ulp</description>
 <part name="C37" library="clock" deviceset="CAP" device="0805" value="100nF"/>
 <part name="GND47" library="supply1" deviceset="GND" device=""/>
 <part name="GND48" library="supply1" deviceset="GND" device=""/>
-<part name="R8" library="joyAnalog" deviceset="RESISTOR" device="0805-RES" value="5.1K"/>
 <part name="GND49" library="supply1" library_urn="urn:adsk.eagle:library:371" deviceset="GND" device=""/>
 <part name="GND50" library="supply1" library_urn="urn:adsk.eagle:library:371" deviceset="GND" device=""/>
 <part name="GND51" library="supply1" library_urn="urn:adsk.eagle:library:371" deviceset="GND" device=""/>
@@ -7957,12 +7956,6 @@ D1 = SDA = MOSI</text>
 <instance part="GND48" gate="1" x="266.7" y="-284.48" smashed="yes" rot="MR0">
 <attribute name="VALUE" x="269.24" y="-287.02" size="1.778" layer="96" rot="MR0"/>
 </instance>
-<instance part="R8" gate="G$1" x="325.12" y="-294.64" smashed="yes" rot="MR270">
-<attribute name="NAME" x="323.6214" y="-290.83" size="1.778" layer="95" rot="MR270"/>
-<attribute name="VALUE" x="328.422" y="-290.83" size="1.778" layer="96" rot="MR270"/>
-<attribute name="NAME" x="323.6214" y="-290.83" size="1.778" layer="95" rot="MR270"/>
-<attribute name="VALUE" x="328.422" y="-290.83" size="1.778" layer="96" rot="MR270"/>
-</instance>
 <instance part="GND49" gate="1" x="480.06" y="-33.02" smashed="yes">
 <attribute name="VALUE" x="477.52" y="-35.56" size="1.778" layer="96"/>
 </instance>
@@ -8419,11 +8412,8 @@ D1 = SDA = MOSI</text>
 <pinref part="U$2" gate="G$1" pin="GND"/>
 <wire x1="297.18" y1="-266.7" x2="332.74" y2="-266.7" width="0.1524" layer="91"/>
 <wire x1="332.74" y1="-266.7" x2="332.74" y2="-299.72" width="0.1524" layer="91"/>
-<wire x1="332.74" y1="-299.72" x2="325.12" y2="-299.72" width="0.1524" layer="91"/>
 <junction x="297.18" y="-299.72"/>
-<pinref part="R8" gate="G$1" pin="2"/>
-<wire x1="325.12" y1="-299.72" x2="297.18" y2="-299.72" width="0.1524" layer="91"/>
-<junction x="325.12" y="-299.72"/>
+<wire x1="332.74" y1="-299.72" x2="297.18" y2="-299.72" width="0.1524" layer="91"/>
 </segment>
 <segment>
 <pinref part="C34" gate="G$1" pin="1"/>
@@ -9338,15 +9328,10 @@ D1 = SDA = MOSI</text>
 <pinref part="R6" gate="G$1" pin="2"/>
 </segment>
 </net>
-<net name="N$14" class="0">
+<net name="RESET" class="0">
 <segment>
 <pinref part="U$2" gate="G$1" pin="RES"/>
-<wire x1="297.18" y1="-281.94" x2="320.04" y2="-281.94" width="0.1524" layer="91"/>
-<wire x1="320.04" y1="-281.94" x2="320.04" y2="-289.56" width="0.1524" layer="91"/>
-<pinref part="R8" gate="G$1" pin="1"/>
-<wire x1="320.04" y1="-289.56" x2="325.12" y2="-289.56" width="0.1524" layer="91"/>
 <wire x1="297.18" y1="-281.94" x2="271.78" y2="-281.94" width="0.1524" layer="91"/>
-<junction x="297.18" y="-281.94"/>
 <wire x1="271.78" y1="-281.94" x2="271.78" y2="-254" width="0.1524" layer="91"/>
 <pinref part="SW3" gate="G$1" pin="2"/>
 <pinref part="SW3" gate="G$1" pin="3"/>
