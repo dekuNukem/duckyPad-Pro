@@ -7095,12 +7095,6 @@ by exp-lbrs.ulp</description>
 <part name="+3V7" library="supply1" library_urn="urn:adsk.eagle:library:371" deviceset="+3V3" device=""/>
 <part name="GND14" library="supply1" library_urn="urn:adsk.eagle:library:371" deviceset="GND" device=""/>
 <part name="+3V10" library="supply1" library_urn="urn:adsk.eagle:library:371" deviceset="+3V3" device=""/>
-<part name="C1" library="clock" deviceset="CAP" device="0805" value="100nF"/>
-<part name="C2" library="clock" deviceset="CAP" device="0805" value="100nF"/>
-<part name="C9" library="clock" deviceset="CAP" device="0805" value="100nF"/>
-<part name="C10" library="clock" deviceset="CAP" device="0805" value="100nF"/>
-<part name="U$3" library="supply1" library_urn="urn:adsk.eagle:library:371" deviceset="GND" device=""/>
-<part name="+3V2" library="supply1" library_urn="urn:adsk.eagle:library:371" deviceset="+3V3" device=""/>
 <part name="LED_R1C2" library="duckypad" deviceset="WS2812B" device="" value="WS2812B"/>
 <part name="GND1" library="supply1" library_urn="urn:adsk.eagle:library:371" deviceset="GND" device=""/>
 <part name="LED_R1C3" library="duckypad" deviceset="WS2812B" device="" value="WS2812B"/>
@@ -7345,28 +7339,6 @@ D1 = SDA = MOSI</text>
 </instance>
 <instance part="+3V10" gate="G$1" x="464.82" y="-127" smashed="yes" rot="R90">
 <attribute name="VALUE" x="469.9" y="-129.54" size="1.778" layer="96" rot="R180"/>
-</instance>
-<instance part="C1" gate="G$1" x="-383.54" y="43.18" smashed="yes" rot="R180">
-<attribute name="NAME" x="-385.064" y="40.259" size="1.778" layer="95" rot="R180"/>
-<attribute name="VALUE" x="-385.064" y="45.339" size="1.778" layer="96" rot="R180"/>
-</instance>
-<instance part="C2" gate="G$1" x="-365.76" y="43.18" smashed="yes" rot="R180">
-<attribute name="NAME" x="-367.284" y="40.259" size="1.778" layer="95" rot="R180"/>
-<attribute name="VALUE" x="-367.284" y="45.339" size="1.778" layer="96" rot="R180"/>
-</instance>
-<instance part="C9" gate="G$1" x="-332.74" y="43.18" smashed="yes" rot="R180">
-<attribute name="NAME" x="-334.264" y="40.259" size="1.778" layer="95" rot="R180"/>
-<attribute name="VALUE" x="-334.264" y="45.339" size="1.778" layer="96" rot="R180"/>
-</instance>
-<instance part="C10" gate="G$1" x="-309.88" y="43.18" smashed="yes" rot="R180">
-<attribute name="NAME" x="-311.404" y="40.259" size="1.778" layer="95" rot="R180"/>
-<attribute name="VALUE" x="-311.404" y="45.339" size="1.778" layer="96" rot="R180"/>
-</instance>
-<instance part="U$3" gate="1" x="-350.52" y="35.56" smashed="yes">
-<attribute name="VALUE" x="-353.06" y="33.02" size="1.778" layer="96"/>
-</instance>
-<instance part="+3V2" gate="G$1" x="-350.52" y="48.26" smashed="yes">
-<attribute name="VALUE" x="-353.06" y="43.18" size="1.778" layer="96" rot="R90"/>
 </instance>
 <instance part="LED_R1C2" gate="G$1" x="-185.42" y="25.4" smashed="yes" rot="MR0"/>
 <instance part="GND1" gate="1" x="139.7" y="-68.58" smashed="yes">
@@ -8048,20 +8020,6 @@ D1 = SDA = MOSI</text>
 <junction x="487.68" y="-93.98"/>
 </segment>
 <segment>
-<pinref part="C10" gate="G$1" pin="1"/>
-<pinref part="C9" gate="G$1" pin="1"/>
-<wire x1="-309.88" y1="38.1" x2="-332.74" y2="38.1" width="0.1524" layer="91"/>
-<pinref part="C2" gate="G$1" pin="1"/>
-<wire x1="-332.74" y1="38.1" x2="-350.52" y2="38.1" width="0.1524" layer="91"/>
-<junction x="-332.74" y="38.1"/>
-<pinref part="C1" gate="G$1" pin="1"/>
-<wire x1="-350.52" y1="38.1" x2="-365.76" y2="38.1" width="0.1524" layer="91"/>
-<wire x1="-365.76" y1="38.1" x2="-383.54" y2="38.1" width="0.1524" layer="91"/>
-<junction x="-365.76" y="38.1"/>
-<pinref part="U$3" gate="1" pin="GND"/>
-<junction x="-350.52" y="38.1"/>
-</segment>
-<segment>
 <wire x1="63.5" y1="27.94" x2="76.2" y2="27.94" width="0.1524" layer="91"/>
 <wire x1="76.2" y1="27.94" x2="76.2" y2="7.62" width="0.1524" layer="91"/>
 <wire x1="76.2" y1="7.62" x2="76.2" y2="-12.7" width="0.1524" layer="91"/>
@@ -8513,20 +8471,6 @@ D1 = SDA = MOSI</text>
 <pinref part="C39" gate="G$1" pin="2"/>
 <wire x1="474.98" y1="-116.84" x2="487.68" y2="-116.84" width="0.1524" layer="91"/>
 <junction x="474.98" y="-116.84"/>
-</segment>
-<segment>
-<pinref part="C1" gate="G$1" pin="2"/>
-<pinref part="C2" gate="G$1" pin="2"/>
-<wire x1="-383.54" y1="45.72" x2="-365.76" y2="45.72" width="0.1524" layer="91"/>
-<pinref part="C9" gate="G$1" pin="2"/>
-<wire x1="-365.76" y1="45.72" x2="-350.52" y2="45.72" width="0.1524" layer="91"/>
-<junction x="-365.76" y="45.72"/>
-<pinref part="C10" gate="G$1" pin="2"/>
-<wire x1="-350.52" y1="45.72" x2="-332.74" y2="45.72" width="0.1524" layer="91"/>
-<wire x1="-332.74" y1="45.72" x2="-309.88" y2="45.72" width="0.1524" layer="91"/>
-<junction x="-332.74" y="45.72"/>
-<pinref part="+3V2" gate="G$1" pin="+3V3"/>
-<junction x="-350.52" y="45.72"/>
 </segment>
 <segment>
 <pinref part="LED_R1C2" gate="G$1" pin="VDD"/>
