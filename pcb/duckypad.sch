@@ -7331,6 +7331,13 @@ by exp-lbrs.ulp</description>
 <part name="U$20" library="duckypad" deviceset="M2_SCREW_DEV" device=""/>
 <part name="U$21" library="duckypad" deviceset="M2_SCREW_DEV" device=""/>
 <part name="U$22" library="duckypad" deviceset="M2_SCREW_DEV" device=""/>
+<part name="C41" library="clock" deviceset="CAP" device="0805" value="100nF"/>
+<part name="C42" library="clock" deviceset="CAP" device="0805" value="100nF"/>
+<part name="C43" library="clock" deviceset="CAP" device="0805" value="100nF"/>
+<part name="C44" library="clock" deviceset="CAP" device="0805" value="100nF"/>
+<part name="U$23" library="supply1" library_urn="urn:adsk.eagle:library:371" deviceset="GND" device=""/>
+<part name="+3V34" library="supply1" library_urn="urn:adsk.eagle:library:371" deviceset="+3V3" device=""/>
+<part name="C45" library="clock" deviceset="CAP" device="0805" value="100nF"/>
 </parts>
 <sheets>
 <sheet>
@@ -8012,6 +8019,32 @@ D1 = SDA = MOSI</text>
 <instance part="U$20" gate="G$1" x="548.64" y="48.26" smashed="yes"/>
 <instance part="U$21" gate="G$1" x="548.64" y="2.54" smashed="yes"/>
 <instance part="U$22" gate="G$1" x="548.64" y="17.78" smashed="yes"/>
+<instance part="C41" gate="G$1" x="-386.08" y="-55.88" smashed="yes" rot="R180">
+<attribute name="NAME" x="-387.604" y="-58.801" size="1.778" layer="95" rot="R180"/>
+<attribute name="VALUE" x="-387.604" y="-53.721" size="1.778" layer="96" rot="R180"/>
+</instance>
+<instance part="C42" gate="G$1" x="-370.84" y="-55.88" smashed="yes" rot="R180">
+<attribute name="NAME" x="-372.364" y="-58.801" size="1.778" layer="95" rot="R180"/>
+<attribute name="VALUE" x="-372.364" y="-53.721" size="1.778" layer="96" rot="R180"/>
+</instance>
+<instance part="C43" gate="G$1" x="-337.82" y="-55.88" smashed="yes" rot="R180">
+<attribute name="NAME" x="-339.344" y="-58.801" size="1.778" layer="95" rot="R180"/>
+<attribute name="VALUE" x="-339.344" y="-53.721" size="1.778" layer="96" rot="R180"/>
+</instance>
+<instance part="C44" gate="G$1" x="-317.5" y="-55.88" smashed="yes" rot="R180">
+<attribute name="NAME" x="-319.024" y="-58.801" size="1.778" layer="95" rot="R180"/>
+<attribute name="VALUE" x="-319.024" y="-53.721" size="1.778" layer="96" rot="R180"/>
+</instance>
+<instance part="U$23" gate="1" x="-353.06" y="-63.5" smashed="yes">
+<attribute name="VALUE" x="-355.6" y="-66.04" size="1.778" layer="96"/>
+</instance>
+<instance part="+3V34" gate="G$1" x="-353.06" y="-50.8" smashed="yes">
+<attribute name="VALUE" x="-355.6" y="-55.88" size="1.778" layer="96" rot="R90"/>
+</instance>
+<instance part="C45" gate="G$1" x="-307.34" y="-55.88" smashed="yes" rot="R180">
+<attribute name="NAME" x="-308.864" y="-58.801" size="1.778" layer="95" rot="R180"/>
+<attribute name="VALUE" x="-308.864" y="-53.721" size="1.778" layer="96" rot="R180"/>
+</instance>
 </instances>
 <busses>
 </busses>
@@ -8469,6 +8502,23 @@ D1 = SDA = MOSI</text>
 <wire x1="436.88" y1="-154.94" x2="436.88" y2="-157.48" width="0.1524" layer="91"/>
 <junction x="436.88" y="-154.94"/>
 </segment>
+<segment>
+<pinref part="C44" gate="G$1" pin="1"/>
+<pinref part="C43" gate="G$1" pin="1"/>
+<wire x1="-317.5" y1="-60.96" x2="-337.82" y2="-60.96" width="0.1524" layer="91"/>
+<pinref part="C42" gate="G$1" pin="1"/>
+<wire x1="-337.82" y1="-60.96" x2="-353.06" y2="-60.96" width="0.1524" layer="91"/>
+<junction x="-337.82" y="-60.96"/>
+<pinref part="C41" gate="G$1" pin="1"/>
+<wire x1="-353.06" y1="-60.96" x2="-370.84" y2="-60.96" width="0.1524" layer="91"/>
+<wire x1="-370.84" y1="-60.96" x2="-386.08" y2="-60.96" width="0.1524" layer="91"/>
+<junction x="-370.84" y="-60.96"/>
+<pinref part="U$23" gate="1" pin="GND"/>
+<junction x="-353.06" y="-60.96"/>
+<pinref part="C45" gate="G$1" pin="1"/>
+<wire x1="-307.34" y1="-60.96" x2="-317.5" y2="-60.96" width="0.1524" layer="91"/>
+<junction x="-317.5" y="-60.96"/>
+</segment>
 </net>
 <net name="+3V3" class="0">
 <segment>
@@ -8717,6 +8767,23 @@ D1 = SDA = MOSI</text>
 <segment>
 <pinref part="R12" gate="G$1" pin="2"/>
 <pinref part="+3V33" gate="G$1" pin="+3V3"/>
+</segment>
+<segment>
+<pinref part="C41" gate="G$1" pin="2"/>
+<pinref part="C42" gate="G$1" pin="2"/>
+<wire x1="-386.08" y1="-53.34" x2="-370.84" y2="-53.34" width="0.1524" layer="91"/>
+<pinref part="C43" gate="G$1" pin="2"/>
+<wire x1="-370.84" y1="-53.34" x2="-353.06" y2="-53.34" width="0.1524" layer="91"/>
+<junction x="-370.84" y="-53.34"/>
+<pinref part="C44" gate="G$1" pin="2"/>
+<wire x1="-353.06" y1="-53.34" x2="-337.82" y2="-53.34" width="0.1524" layer="91"/>
+<wire x1="-337.82" y1="-53.34" x2="-317.5" y2="-53.34" width="0.1524" layer="91"/>
+<junction x="-337.82" y="-53.34"/>
+<pinref part="+3V34" gate="G$1" pin="+3V3"/>
+<junction x="-353.06" y="-53.34"/>
+<pinref part="C45" gate="G$1" pin="2"/>
+<wire x1="-317.5" y1="-53.34" x2="-307.34" y2="-53.34" width="0.1524" layer="91"/>
+<junction x="-317.5" y="-53.34"/>
 </segment>
 </net>
 <net name="USB_DP" class="0">
