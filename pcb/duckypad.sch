@@ -7222,8 +7222,6 @@ new: Attribute TP_SIGNAL_NAME&lt;br&gt;
 <part name="U$12" library="3pos_slide_switch_centered" deviceset="M2_SCREW_DEV" device=""/>
 <part name="U$13" library="3pos_slide_switch_centered" deviceset="M2_SCREW_DEV" device=""/>
 <part name="U$17" library="3pos_slide_switch_centered" deviceset="M2_SCREW_DEV" device=""/>
-<part name="U$23" library="3pos_slide_switch_centered" deviceset="M2_SCREW_DEV" device=""/>
-<part name="U$14" library="3pos_slide_switch_centered" deviceset="M2_SCREW_DEV" device=""/>
 <part name="SWR1C1" library="lul" deviceset="KAILH_SWITCH_SOCKET_KAILH_SWITCH_SOCKET" device=""/>
 <part name="SWR2C1" library="lul" deviceset="KAILH_SWITCH_SOCKET_KAILH_SWITCH_SOCKET" device=""/>
 <part name="SWR3C1" library="lul" deviceset="KAILH_SWITCH_SOCKET_KAILH_SWITCH_SOCKET" device=""/>
@@ -7659,8 +7657,6 @@ D1 = SDA = MOSI</text>
 <instance part="U$12" gate="G$1" x="467.36" y="2.54" smashed="yes"/>
 <instance part="U$13" gate="G$1" x="495.3" y="2.54" smashed="yes"/>
 <instance part="U$17" gate="G$1" x="523.24" y="17.78" smashed="yes"/>
-<instance part="U$23" gate="G$1" x="467.36" y="17.78" smashed="yes"/>
-<instance part="U$14" gate="G$1" x="495.3" y="17.78" smashed="yes"/>
 <instance part="SWR1C1" gate="G$1" x="12.7" y="27.94" smashed="yes">
 <attribute name="NAME" x="7.62" y="30.48" size="1.778" layer="95"/>
 </instance>
