@@ -6300,6 +6300,7 @@ by exp-lbrs.ulp</description>
 <part name="+3V34" library="supply1" library_urn="urn:adsk.eagle:library:371" deviceset="+3V3" device=""/>
 <part name="C45" library="clock" deviceset="CAP" device="0805" value="100nF"/>
 <part name="JP1" library="adafruit_changed" deviceset="PINHD-1X1" device="CB"/>
+<part name="JP3" library="adafruit_changed" deviceset="PINHD-1X1" device="CB"/>
 </parts>
 <sheets>
 <sheet>
@@ -6984,6 +6985,10 @@ D1 = SDA = MOSI</text>
 <instance part="JP1" gate="G$1" x="325.12" y="-91.44" smashed="yes" rot="R180">
 <attribute name="NAME" x="331.47" y="-94.615" size="1.778" layer="95" rot="R180"/>
 <attribute name="VALUE" x="331.47" y="-86.36" size="1.778" layer="96" rot="R180"/>
+</instance>
+<instance part="JP3" gate="G$1" x="248.92" y="-241.3" smashed="yes" rot="R180">
+<attribute name="NAME" x="255.27" y="-244.475" size="1.778" layer="95" rot="R180"/>
+<attribute name="VALUE" x="255.27" y="-236.22" size="1.778" layer="96" rot="R180"/>
 </instance>
 </instances>
 <busses>
@@ -8328,8 +8333,12 @@ D1 = SDA = MOSI</text>
 <junction x="314.96" y="-10.16"/>
 <wire x1="284.48" y1="-10.16" x2="261.62" y2="-10.16" width="0.1524" layer="91"/>
 <junction x="284.48" y="-10.16"/>
-<wire x1="261.62" y1="-10.16" x2="261.62" y2="-254" width="0.1524" layer="91"/>
+<wire x1="261.62" y1="-10.16" x2="261.62" y2="-241.3" width="0.1524" layer="91"/>
+<wire x1="261.62" y1="-241.3" x2="261.62" y2="-254" width="0.1524" layer="91"/>
 <wire x1="271.78" y1="-254" x2="261.62" y2="-254" width="0.1524" layer="91"/>
+<pinref part="JP3" gate="G$1" pin="1"/>
+<wire x1="251.46" y1="-241.3" x2="261.62" y2="-241.3" width="0.1524" layer="91"/>
+<junction x="261.62" y="-241.3"/>
 </segment>
 </net>
 <net name="N$37" class="0">
