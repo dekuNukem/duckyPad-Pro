@@ -7885,10 +7885,10 @@ D1 = SDA = MOSI</text>
 <pinref part="U1" gate="G$1" pin="VBUS"/>
 <wire x1="43.18" y1="-177.8" x2="78.74" y2="-177.8" width="0.1524" layer="91"/>
 <wire x1="78.74" y1="-177.8" x2="78.74" y2="-144.78" width="0.1524" layer="91"/>
-<wire x1="78.74" y1="-144.78" x2="96.52" y2="-144.78" width="0.1524" layer="91"/>
+<wire x1="78.74" y1="-144.78" x2="93.98" y2="-144.78" width="0.1524" layer="91"/>
 <junction x="78.74" y="-144.78"/>
-<pinref part="JP2" gate="A" pin="2"/>
-<wire x1="96.52" y1="-144.78" x2="96.52" y2="-154.94" width="0.1524" layer="91"/>
+<pinref part="JP2" gate="A" pin="1"/>
+<wire x1="93.98" y1="-144.78" x2="93.98" y2="-154.94" width="0.1524" layer="91"/>
 </segment>
 </net>
 <net name="USB_DN" class="0">
@@ -8346,10 +8346,10 @@ D1 = SDA = MOSI</text>
 <pinref part="IC2" gate="G$1" pin="VIN"/>
 <pinref part="C29" gate="G$1" pin="2"/>
 <wire x1="119.38" y1="-144.78" x2="124.46" y2="-144.78" width="0.1524" layer="91"/>
-<wire x1="119.38" y1="-144.78" x2="99.06" y2="-144.78" width="0.1524" layer="91"/>
+<wire x1="119.38" y1="-144.78" x2="96.52" y2="-144.78" width="0.1524" layer="91"/>
 <junction x="119.38" y="-144.78"/>
-<pinref part="JP2" gate="A" pin="3"/>
-<wire x1="99.06" y1="-154.94" x2="99.06" y2="-144.78" width="0.1524" layer="91"/>
+<pinref part="JP2" gate="A" pin="2"/>
+<wire x1="96.52" y1="-144.78" x2="96.52" y2="-154.94" width="0.1524" layer="91"/>
 </segment>
 </net>
 <net name="12V" class="0">
