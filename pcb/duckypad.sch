@@ -6975,6 +6975,7 @@ type 0309, grid 2.5 mm</description>
 <part name="+3V35" library="supply1" library_urn="urn:adsk.eagle:library:371" deviceset="+3V3" device=""/>
 <part name="L2" library="Discrete" deviceset="L*" device="-4030" value="PRS4018-4R7MT"/>
 <part name="D2" library="Discrete_NOA" library_urn="urn:adsk.eagle:library:2000212" deviceset="D*" device="214AA" package3d_urn="urn:adsk.eagle:package:2068475/4" value="SS14"/>
+<part name="C46" library="clock" deviceset="CAP" device="0805" value="100nF"/>
 </parts>
 <sheets>
 <sheet>
@@ -7741,6 +7742,10 @@ D1 = SDA = MOSI</text>
 <attribute name="NAME" x="208.28" y="-255.27" size="1.778" layer="95" ratio="10"/>
 <attribute name="VALUE" x="208.28" y="-257.81" size="1.778" layer="96" ratio="10"/>
 </instance>
+<instance part="C46" gate="G$1" x="233.68" y="-281.94" smashed="yes" rot="R180">
+<attribute name="NAME" x="232.156" y="-284.861" size="1.778" layer="95" rot="R180"/>
+<attribute name="VALUE" x="232.156" y="-279.781" size="1.778" layer="96" rot="R180"/>
+</instance>
 </instances>
 <busses>
 </busses>
@@ -8104,7 +8109,8 @@ D1 = SDA = MOSI</text>
 <pinref part="GND46" gate="1" pin="GND"/>
 <wire x1="228.6" y1="-297.18" x2="228.6" y2="-302.26" width="0.1524" layer="91"/>
 <pinref part="C31" gate="G$1" pin="1"/>
-<wire x1="228.6" y1="-302.26" x2="238.76" y2="-302.26" width="0.1524" layer="91"/>
+<wire x1="228.6" y1="-302.26" x2="233.68" y2="-302.26" width="0.1524" layer="91"/>
+<wire x1="233.68" y1="-302.26" x2="238.76" y2="-302.26" width="0.1524" layer="91"/>
 <wire x1="238.76" y1="-302.26" x2="238.76" y2="-287.02" width="0.1524" layer="91"/>
 <junction x="228.6" y="-302.26"/>
 <pinref part="C32" gate="G$1" pin="1"/>
@@ -8115,6 +8121,9 @@ D1 = SDA = MOSI</text>
 <wire x1="246.38" y1="-302.26" x2="238.76" y2="-302.26" width="0.1524" layer="91"/>
 <wire x1="246.38" y1="-287.02" x2="246.38" y2="-302.26" width="0.1524" layer="91"/>
 <junction x="246.38" y="-302.26"/>
+<pinref part="C46" gate="G$1" pin="1"/>
+<wire x1="233.68" y1="-287.02" x2="233.68" y2="-302.26" width="0.1524" layer="91"/>
+<junction x="233.68" y="-302.26"/>
 </segment>
 <segment>
 <pinref part="U$2" gate="G$1" pin="SHIELD"/>
@@ -9046,7 +9055,8 @@ D1 = SDA = MOSI</text>
 <wire x1="220.98" y1="-271.78" x2="220.98" y2="-266.7" width="0.1524" layer="91"/>
 <junction x="220.98" y="-266.7"/>
 <pinref part="C31" gate="G$1" pin="2"/>
-<wire x1="228.6" y1="-266.7" x2="238.76" y2="-266.7" width="0.1524" layer="91"/>
+<wire x1="228.6" y1="-266.7" x2="233.68" y2="-266.7" width="0.1524" layer="91"/>
+<wire x1="233.68" y1="-266.7" x2="238.76" y2="-266.7" width="0.1524" layer="91"/>
 <wire x1="238.76" y1="-266.7" x2="238.76" y2="-279.4" width="0.1524" layer="91"/>
 <pinref part="C32" gate="G$1" pin="2"/>
 <wire x1="254" y1="-279.4" x2="254" y2="-266.7" width="0.1524" layer="91"/>
@@ -9059,6 +9069,9 @@ D1 = SDA = MOSI</text>
 <pinref part="D2" gate="D" pin="-"/>
 <wire x1="215.9" y1="-256.54" x2="220.98" y2="-256.54" width="0.1524" layer="91"/>
 <wire x1="220.98" y1="-256.54" x2="220.98" y2="-266.7" width="0.1524" layer="91"/>
+<pinref part="C46" gate="G$1" pin="2"/>
+<wire x1="233.68" y1="-266.7" x2="233.68" y2="-279.4" width="0.1524" layer="91"/>
+<junction x="233.68" y="-266.7"/>
 </segment>
 <segment>
 <pinref part="U$2" gate="G$1" pin="VCC2"/>
