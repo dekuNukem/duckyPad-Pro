@@ -87,87 +87,24 @@ void tud_hid_set_report_cb(uint8_t instance, uint8_t report_id, hid_report_type_
 {
 }
 
-#define SW_1 GPIO_NUM_15
-#define SW_2 GPIO_NUM_16
-#define SW_3 GPIO_NUM_17
-#define SW_4 GPIO_NUM_18
-#define SW_5 GPIO_NUM_21
-#define SW_6 GPIO_NUM_48
-#define SW_7 GPIO_NUM_47
-#define SW_8 GPIO_NUM_33
-#define SW_9 GPIO_NUM_34
-#define SW_10 GPIO_NUM_35
-#define SW_11 GPIO_NUM_36
-#define SW_12 GPIO_NUM_37
-#define SW_13 GPIO_NUM_38
-#define SW_14 GPIO_NUM_39
-#define SW_15 GPIO_NUM_40
-#define SW_16 GPIO_NUM_41
-#define SW_17 GPIO_NUM_42
-#define SW_18_U0TX GPIO_NUM_43
-#define SW_19_U0RX GPIO_NUM_44
-#define SW_20 GPIO_NUM_45
 
-#define SW_PLUS GPIO_NUM_13
-#define SW_MINUS GPIO_NUM_14
-#define RE1_SW GPIO_NUM_0
-#define RE1_A GPIO_NUM_1
-#define RE1_B GPIO_NUM_2
-#define RE2_SW GPIO_NUM_3
-#define RE2_A GPIO_NUM_4
-#define RE2_B GPIO_NUM_5
 
 void app_main(void)
 {
-    const gpio_config_t boot_button_config = {
-        .pin_bit_mask = BIT64(SW_1) | \
-				BIT64(SW_2) | \
-				BIT64(SW_3) | \
-				BIT64(SW_4) | \
-				BIT64(SW_5) | \
-				BIT64(SW_6) | \
-				BIT64(SW_7) | \
-				BIT64(SW_8) | \
-				BIT64(SW_9) | \
-				BIT64(SW_10) | \
-				BIT64(SW_11) | \
-				BIT64(SW_12) | \
-				BIT64(SW_13) | \
-				BIT64(SW_14) | \
-				BIT64(SW_15) | \
-				BIT64(SW_16) | \
-				BIT64(SW_17) | \
-				/* BIT64(SW_18_U0TX) | */ \
-			    BIT64(SW_19_U0RX) | \
-				BIT64(SW_20) | \
-                BIT64(SW_PLUS) | \
-                BIT64(SW_MINUS) | \
-                BIT64(RE1_SW) | \
-                BIT64(RE1_A) | \
-                BIT64(RE1_B) | \
-                BIT64(RE2_SW) | \
-                BIT64(RE2_A) | \
-                BIT64(RE2_B),
-        .mode = GPIO_MODE_INPUT,
-        .intr_type = GPIO_INTR_DISABLE,
-        .pull_up_en = true,
-        .pull_down_en = false,
-    };
-    ESP_ERROR_CHECK(gpio_config(&boot_button_config));
-    
+    gpio_init();
     sd_init();
 
     while(1)
     {
-        // printf("GPIO%d: %d\n", SW_PLUS, gpio_get_level(SW_PLUS));
-        // printf("GPIO%d: %d\n", SW_MINUS, gpio_get_level(SW_MINUS));
-        // printf("GPIO%d: %d\n", RE1_SW, gpio_get_level(RE1_SW));
-        // printf("GPIO%d: %d\n", RE1_A, gpio_get_level(RE1_A));
-        // printf("GPIO%d: %d\n", RE1_B, gpio_get_level(RE1_B));
-        // printf("GPIO%d: %d\n", RE2_SW, gpio_get_level(RE2_SW));
-        // printf("GPIO%d: %d\n", RE2_A, gpio_get_level(RE2_A));
-        // printf("GPIO%d: %d\n", RE2_B, gpio_get_level(RE2_B));
-        // printf("------------\n\n");
+        printf("GPIO%d: %d\n", SW_PLUS, gpio_get_level(SW_PLUS));
+        printf("GPIO%d: %d\n", SW_MINUS, gpio_get_level(SW_MINUS));
+        printf("GPIO%d: %d\n", RE1_SW, gpio_get_level(RE1_SW));
+        printf("GPIO%d: %d\n", RE1_A, gpio_get_level(RE1_A));
+        printf("GPIO%d: %d\n", RE1_B, gpio_get_level(RE1_B));
+        printf("GPIO%d: %d\n", RE2_SW, gpio_get_level(RE2_SW));
+        printf("GPIO%d: %d\n", RE2_A, gpio_get_level(RE2_A));
+        printf("GPIO%d: %d\n", RE2_B, gpio_get_level(RE2_B));
+        printf("------------\n\n");
         vTaskDelay(pdMS_TO_TICKS(250));
     }
 }
