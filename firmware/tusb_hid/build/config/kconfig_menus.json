@@ -17885,7 +17885,10 @@
                         "help": "Maximum long filename length. Can be reduced to save RAM.",
                         "id": "FATFS_MAX_LFN",
                         "name": "FATFS_MAX_LFN",
-                        "range": null,
+                        "range": [
+                            12,
+                            255
+                        ],
                         "title": "Max long filename length",
                         "type": "int"
                     },
