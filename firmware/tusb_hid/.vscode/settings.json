@@ -8,6 +8,7 @@
   "idf.portWin": "COM34",
   "files.associations": {
     "gpio.h": "c",
-    "string.h": "c"
+    "string.h": "c",
+    "spi_master.h": "c"
   }
 }

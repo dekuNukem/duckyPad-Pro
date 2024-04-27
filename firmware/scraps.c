@@ -1,3 +1,17 @@
+
+while(1)
+    {
+        printf("GPIO%d: %d\n", SW_PLUS, gpio_get_level(SW_PLUS));
+        printf("GPIO%d: %d\n", SW_MINUS, gpio_get_level(SW_MINUS));
+        printf("GPIO%d: %d\n", RE1_SW, gpio_get_level(RE1_SW));
+        printf("GPIO%d: %d\n", RE1_A, gpio_get_level(RE1_A));
+        printf("GPIO%d: %d\n", RE1_B, gpio_get_level(RE1_B));
+        printf("GPIO%d: %d\n", RE2_SW, gpio_get_level(RE2_SW));
+        printf("GPIO%d: %d\n", RE2_A, gpio_get_level(RE2_A));
+        printf("GPIO%d: %d\n", RE2_B, gpio_get_level(RE2_B));
+        printf("------------\n\n");
+        vTaskDelay(pdMS_TO_TICKS(250));
+    }
 switches
 while(1)
     {
