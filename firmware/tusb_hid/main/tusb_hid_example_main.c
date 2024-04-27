@@ -12,8 +12,9 @@
 #include "class/hid/hid_device.h"
 #include "driver/gpio.h"
 
-#define APP_BUTTON (GPIO_NUM_0) // Use BOOT signal by default
-static const char *TAG = "example";
+#include "input_task.h"
+
+static const char *TAG = "MAIN";
 
 /************* TinyUSB descriptors ****************/
 
@@ -85,104 +86,85 @@ void tud_hid_set_report_cb(uint8_t instance, uint8_t report_id, hid_report_type_
 {
 }
 
-/********* Application ***************/
+#define SW_1 GPIO_NUM_15
+#define SW_2 GPIO_NUM_16
+#define SW_3 GPIO_NUM_17
+#define SW_4 GPIO_NUM_18
+#define SW_5 GPIO_NUM_21
+#define SW_6 GPIO_NUM_48
+#define SW_7 GPIO_NUM_47
+#define SW_8 GPIO_NUM_33
+#define SW_9 GPIO_NUM_34
+#define SW_10 GPIO_NUM_35
+#define SW_11 GPIO_NUM_36
+#define SW_12 GPIO_NUM_37
+#define SW_13 GPIO_NUM_38
+#define SW_14 GPIO_NUM_39
+#define SW_15 GPIO_NUM_40
+#define SW_16 GPIO_NUM_41
+#define SW_17 GPIO_NUM_42
+#define SW_18_U0TX GPIO_NUM_43
+#define SW_19_U0RX GPIO_NUM_44
+#define SW_20 GPIO_NUM_45
 
-typedef enum {
-    MOUSE_DIR_RIGHT,
-    MOUSE_DIR_DOWN,
-    MOUSE_DIR_LEFT,
-    MOUSE_DIR_UP,
-    MOUSE_DIR_MAX,
-} mouse_dir_t;
-
-#define DISTANCE_MAX        125
-#define DELTA_SCALAR        5
-
-static void mouse_draw_square_next_delta(int8_t *delta_x_ret, int8_t *delta_y_ret)
-{
-    static mouse_dir_t cur_dir = MOUSE_DIR_RIGHT;
-    static uint32_t distance = 0;
-
-    // Calculate next delta
-    if (cur_dir == MOUSE_DIR_RIGHT) {
-        *delta_x_ret = DELTA_SCALAR;
-        *delta_y_ret = 0;
-    } else if (cur_dir == MOUSE_DIR_DOWN) {
-        *delta_x_ret = 0;
-        *delta_y_ret = DELTA_SCALAR;
-    } else if (cur_dir == MOUSE_DIR_LEFT) {
-        *delta_x_ret = -DELTA_SCALAR;
-        *delta_y_ret = 0;
-    } else if (cur_dir == MOUSE_DIR_UP) {
-        *delta_x_ret = 0;
-        *delta_y_ret = -DELTA_SCALAR;
-    }
-
-    // Update cumulative distance for current direction
-    distance += DELTA_SCALAR;
-    // Check if we need to change direction
-    if (distance >= DISTANCE_MAX) {
-        distance = 0;
-        cur_dir++;
-        if (cur_dir == MOUSE_DIR_MAX) {
-            cur_dir = 0;
-        }
-    }
-}
-
-static void app_send_hid_demo(void)
-{
-    // Keyboard output: Send key 'a/A' pressed and released
-    ESP_LOGI(TAG, "Sending Keyboard report");
-    uint8_t keycode[6] = {HID_KEY_A};
-    tud_hid_keyboard_report(HID_ITF_PROTOCOL_KEYBOARD, 0, keycode);
-    vTaskDelay(pdMS_TO_TICKS(50));
-    tud_hid_keyboard_report(HID_ITF_PROTOCOL_KEYBOARD, 0, NULL);
-
-    // Mouse output: Move mouse cursor in square trajectory
-    ESP_LOGI(TAG, "Sending Mouse report");
-    int8_t delta_x;
-    int8_t delta_y;
-    for (int i = 0; i < (DISTANCE_MAX / DELTA_SCALAR) * 4; i++) {
-        // Get the next x and y delta in the draw square pattern
-        mouse_draw_square_next_delta(&delta_x, &delta_y);
-        tud_hid_mouse_report(HID_ITF_PROTOCOL_MOUSE, 0x00, delta_x, delta_y, 0, 0);
-        vTaskDelay(pdMS_TO_TICKS(20));
-    }
-}
+#define SW_PLUS GPIO_NUM_13
+#define SW_MINUS GPIO_NUM_14
+#define RE1_SW GPIO_NUM_0
+#define RE1_A GPIO_NUM_1
+#define RE1_B GPIO_NUM_2
+#define RE2_SW GPIO_NUM_3
+#define RE2_A GPIO_NUM_4
+#define RE2_B GPIO_NUM_5
 
 void app_main(void)
 {
-    // Initialize button that will trigger HID reports
     const gpio_config_t boot_button_config = {
-        .pin_bit_mask = BIT64(APP_BUTTON),
+        .pin_bit_mask = BIT64(SW_1) | \
+				BIT64(SW_2) | \
+				BIT64(SW_3) | \
+				BIT64(SW_4) | \
+				BIT64(SW_5) | \
+				BIT64(SW_6) | \
+				BIT64(SW_7) | \
+				BIT64(SW_8) | \
+				BIT64(SW_9) | \
+				BIT64(SW_10) | \
+				BIT64(SW_11) | \
+				BIT64(SW_12) | \
+				BIT64(SW_13) | \
+				BIT64(SW_14) | \
+				BIT64(SW_15) | \
+				BIT64(SW_16) | \
+				BIT64(SW_17) | \
+				/* BIT64(SW_18_U0TX) | */ \
+			    BIT64(SW_19_U0RX) | \
+				BIT64(SW_20) | \
+                BIT64(SW_PLUS) | \
+                BIT64(SW_MINUS) | \
+                BIT64(RE1_SW) | \
+                BIT64(RE1_A) | \
+                BIT64(RE1_B) | \
+                BIT64(RE2_SW) | \
+                BIT64(RE2_A) | \
+                BIT64(RE2_B),
         .mode = GPIO_MODE_INPUT,
         .intr_type = GPIO_INTR_DISABLE,
         .pull_up_en = true,
         .pull_down_en = false,
     };
     ESP_ERROR_CHECK(gpio_config(&boot_button_config));
-
-    ESP_LOGI(TAG, "USB initialization");
-    const tinyusb_config_t tusb_cfg = {
-        .device_descriptor = NULL,
-        .string_descriptor = hid_string_descriptor,
-        .string_descriptor_count = sizeof(hid_string_descriptor) / sizeof(hid_string_descriptor[0]),
-        .external_phy = false,
-        .configuration_descriptor = hid_configuration_descriptor,
-    };
-
-    ESP_ERROR_CHECK(tinyusb_driver_install(&tusb_cfg));
-    ESP_LOGI(TAG, "USB initialization DONE");
-
-    while (1) {
-        if (tud_mounted()) {
-            static bool send_hid_data = true;
-            if (send_hid_data) {
-                app_send_hid_demo();
-            }
-            send_hid_data = !gpio_get_level(APP_BUTTON);
-        }
-        vTaskDelay(pdMS_TO_TICKS(100));
+    
+    while(1)
+    {
+        printf("GPIO%d: %d\n", SW_PLUS, gpio_get_level(SW_PLUS));
+        printf("GPIO%d: %d\n", SW_MINUS, gpio_get_level(SW_MINUS));
+        printf("GPIO%d: %d\n", RE1_SW, gpio_get_level(RE1_SW));
+        printf("GPIO%d: %d\n", RE1_A, gpio_get_level(RE1_A));
+        printf("GPIO%d: %d\n", RE1_B, gpio_get_level(RE1_B));
+        printf("GPIO%d: %d\n", RE2_SW, gpio_get_level(RE2_SW));
+        printf("GPIO%d: %d\n", RE2_A, gpio_get_level(RE2_A));
+        printf("GPIO%d: %d\n", RE2_B, gpio_get_level(RE2_B));
+        printf("------------\n\n");
+        vTaskDelay(pdMS_TO_TICKS(250));
     }
 }

@@ -5,5 +5,8 @@
     "board/esp32s3-builtin.cfg"
   ],
   "idf.flashType": "UART",
-  "idf.portWin": "COM26"
+  "idf.portWin": "COM34",
+  "files.associations": {
+    "gpio.h": "c"
+  }
 }
