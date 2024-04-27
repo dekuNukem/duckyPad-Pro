@@ -82,13 +82,13 @@ static const dwc2_controller_t _dwc2_controller[] =
 #endif
 };
 
-static dwc_ep_config_t dwc_ep_config[] = 
+static dwc2_ep_counters_t dwc2_ep_counters[] =
 {
 #ifdef DWC2_FS_PERIPH_BASE
-  { .out_ep = 0, .in_ep = 0, .ep_max_count = DWC2_FS_EP_MAX },
+  { .active_out = 0, .active_in = 0, .max_total = DWC2_FS_EP_MAX },
 #endif
 #ifdef DWC2_HS_PERIPH_BASE
-  { .out_ep = 0, .in_ep = 0, .ep_max_count = DWC2_HS_EP_MAX },
+  { .active_out = 0, .active_in = 0, .max_total = DWC2_HS_EP_MAX },
 #endif
 };
 

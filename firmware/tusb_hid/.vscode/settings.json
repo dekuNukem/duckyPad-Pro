@@ -22,6 +22,7 @@
     "ssd1306_conf.h": "c",
     "task.h": "c",
     "esp_log.h": "c",
-    "stddef.h": "c"
+    "stddef.h": "c",
+    "led_strip.h": "c"
   }
 }

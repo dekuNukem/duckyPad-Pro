@@ -34,10 +34,10 @@ typedef struct
 
 #if TU_CHECK_MCU(OPT_MCU_ESP32S2, OPT_MCU_ESP32S3, OPT_MCU_ESP32P4)
 typedef struct {
-    uint8_t out_ep;
-    uint8_t in_ep;
-    const uint8_t ep_max_count;
-}dwc_ep_config_t;
+    uint8_t active_out;
+    uint8_t active_in;
+    const uint8_t max_total;
+}dwc2_ep_counters_t;
 #endif
 
 /* DWC OTG HW Release versions */

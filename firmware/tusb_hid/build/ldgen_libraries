@@ -64,4 +64,5 @@ C:/Users/allen/Desktop/repos/duckyPad2/firmware/tusb_hid/build/esp-idf/usb/libus
 C:/Users/allen/Desktop/repos/duckyPad2/firmware/tusb_hid/build/esp-idf/wifi_provisioning/libwifi_provisioning.a
 C:/Users/allen/Desktop/repos/duckyPad2/firmware/tusb_hid/build/esp-idf/espressif__tinyusb/libespressif__tinyusb.a
 C:/Users/allen/Desktop/repos/duckyPad2/firmware/tusb_hid/build/esp-idf/espressif__esp_tinyusb/libespressif__esp_tinyusb.a
+C:/Users/allen/Desktop/repos/duckyPad2/firmware/tusb_hid/build/esp-idf/espressif__led_strip/libespressif__led_strip.a
 C:/Users/allen/Desktop/repos/duckyPad2/firmware/tusb_hid/build/esp-idf/main/libmain.a
