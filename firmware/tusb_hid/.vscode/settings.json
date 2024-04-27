@@ -23,6 +23,10 @@
     "task.h": "c",
     "esp_log.h": "c",
     "stddef.h": "c",
-    "led_strip.h": "c"
+    "led_strip.h": "c",
+    "neopixel_task.h": "c",
+    "stdint.h": "c",
+    "sd_task.h": "c",
+    "tinyusb.h": "c"
   }
 }
