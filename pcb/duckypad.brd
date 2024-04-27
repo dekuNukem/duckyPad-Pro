@@ -229,9 +229,9 @@ CARD_DET
 OLED_RESET (new)</text>
 <text x="76.642" y="21.336" size="1.016" layer="25">SPICS1</text>
 <text x="87.818" y="81.026" size="1.778" layer="26" rot="MR180" align="center">duckyPad Pro
-PT1
+PT2
 dekuNukem
-APR2024</text>
+MAY2024</text>
 <text x="86.294" y="23.495" size="1.016" layer="25">CS</text>
 <text x="86.294" y="20.955" size="1.016" layer="25">RST</text>
 <text x="92.136" y="25.654" size="1.016" layer="25">DC</text>
@@ -2899,10 +2899,10 @@ These rules have been curated by SparkFuns DFM commitee. After doing much resear
 <wire x1="93" y1="26.325" x2="91.694" y2="25.019" width="0.2032" layer="16"/>
 <wire x1="91.694" y1="25.019" x2="91.694" y2="22.733" width="0.2032" layer="16"/>
 <wire x1="85.421" y1="50.924" x2="96.396" y2="50.924" width="0.2032" layer="16"/>
-<wire x1="96.396" y1="50.924" x2="98.044" y2="49.276" width="0.2032" layer="16"/>
-<wire x1="98.044" y1="49.276" x2="98.044" y2="37.973" width="0.2032" layer="16"/>
+<wire x1="96.396" y1="50.924" x2="98.679" y2="48.641" width="0.2032" layer="16"/>
+<wire x1="98.679" y1="48.641" x2="98.679" y2="37.338" width="0.2032" layer="16"/>
 <wire x1="100.446" y1="35.571" x2="100.446" y2="28.575" width="0.2032" layer="16"/>
-<wire x1="98.044" y1="37.973" x2="100.446" y2="35.571" width="0.2032" layer="16"/>
+<wire x1="98.679" y1="37.338" x2="100.446" y2="35.571" width="0.2032" layer="16"/>
 <wire x1="100.446" y1="28.575" x2="100.446" y2="27.167" width="0.2032" layer="16"/>
 <wire x1="96.139" y1="19.812" x2="91.313" y2="19.812" width="0.2032" layer="16"/>
 <wire x1="91.313" y1="19.812" x2="90.424" y2="20.701" width="0.2032" layer="16"/>
