@@ -27,7 +27,7 @@ void oled_init(void)
         .miso_io_num = -1,
         .quadwp_io_num = -1,
         .quadhd_io_num = -1,
-        .max_transfer_sz = SSD1306_BUFFER_SIZE,
+        .max_transfer_sz = 128,
     };
     ESP_ERROR_CHECK(spi_bus_initialize(SPI2_HOST, &buscfg, SPI_DMA_CH_AUTO));
 
@@ -40,6 +40,6 @@ void oled_init(void)
     ESP_ERROR_CHECK(spi_bus_add_device(SPI2_HOST, &devcfg, &my_spi_handle));
 
     ssd1306_init();
-    ssd1306_WriteString("hello", Font_7x10, White);
+    ssd1306_WriteString("hello world!", Font_7x10, White);
     ssd1306_UpdateScreen();
 }

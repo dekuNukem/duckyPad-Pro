@@ -55,33 +55,55 @@ SSD1306_Error_t ssd1306_FillBuffer(uint8_t* buf, uint32_t len) {
 
 /* Initialize the oled screen */
 void ssd1306_init(void) {
-    ssd1306_write_cmd_byte(0x0ae),		                /* display off */
-ssd1306_write_cmd_byte(0x0dc);
-ssd1306_write_cmd_byte(0x000),		/* start line */
-ssd1306_write_cmd_byte(0x081);
-ssd1306_write_cmd_byte(0x02f), 		/* [2] set contrast control */
-ssd1306_write_cmd_byte(0x020),		                /* use page addressing mode */
-ssd1306_write_cmd_byte(0x0a0),				/* segment remap a0/a1*/
-ssd1306_write_cmd_byte(0x0c0),				/* c0: scan dir normal, c8: reverse */
+ssd1306_write_cmd_byte(0xAE);  // (p33) 11. display OFF
 
-ssd1306_write_cmd_byte(0x0a8);
-ssd1306_write_cmd_byte(0x7f),		/* 0x03f multiplex ratio */
-ssd1306_write_cmd_byte(0x0d5);
-ssd1306_write_cmd_byte(0x050),		/* clock divide ratio (0x00=1) and oscillator frequency (0x8), changed to 0x051, issue 501 */
-ssd1306_write_cmd_byte(0x0d9);
-ssd1306_write_cmd_byte(0x022), 		/* [2] pre-charge period 0x022/f1*/
-ssd1306_write_cmd_byte(0x0db);
-ssd1306_write_cmd_byte(0x035), 		/* vcomh deselect level */  
+// set in display function
+ssd1306_write_cmd_byte(0x00);  // (p23) 1. set lower column address
+ssd1306_write_cmd_byte(0x10);  // (p23) 2. set higher column address
 
-ssd1306_write_cmd_byte(0x0b0), /* set page address */
-ssd1306_write_cmd_byte(0x0da);
-ssd1306_write_cmd_byte(0x012), /* set com pins */
-ssd1306_write_cmd_byte(0x0a4),				/* output ram to display */
-ssd1306_write_cmd_byte(0x0a6),				/* none inverted normal display mode */
-  
-    ssd1306_write_cmd_byte(0xAF);
-// Clear screen
-    ssd1306_Fill(Black);
+// For SSD1306 - This is Horizontal mode
+// For SH1107 - This is page mode (Does not increment rows)
+ssd1306_write_cmd_byte(0x20);  // (p24) 3. Set Memory addressing mode
+
+ssd1306_write_cmd_byte(0x81);  // (p28) 4. contrast control
+ssd1306_write_cmd_byte(0x2F);  // 0x2F, 0x4F, 0x8F - depending on source
+
+ssd1306_write_cmd_byte(0xA0);  // (p29) 5. set segment remap (L->R | T->B)
+
+ssd1306_write_cmd_byte(0xA8);            // (p30) 6. multiplex ratio
+ssd1306_write_cmd_byte(127);  // duty = 1/64 = 0x3F
+
+ssd1306_write_cmd_byte(0xA4);  // (p30) 7. set entire display off/on (0xA4/0xA5)
+
+ssd1306_write_cmd_byte(0xA6);  // (p31) 8. 0xA6/0xA7 = normal (W on Bk) / inverted (Bk on W) display
+
+ssd1306_write_cmd_byte(0xD3);  // (p32) 9. set display offset
+ssd1306_write_cmd_byte(0);
+
+ssd1306_write_cmd_byte(0xB0);  // (p33) 12. set page address
+
+ssd1306_write_cmd_byte(0xC0);  // (p34) 13. common output scan direction normal/vertically flipped (0xC0/0xC8)
+
+
+ssd1306_write_cmd_byte(0xDA);  // set com pins
+ssd1306_write_cmd_byte(0x12);
+
+ssd1306_write_cmd_byte(0xD5);  // (p35) 14. set clock divide ratio/OSC frequency
+ssd1306_write_cmd_byte(0x50);  // fosc (POR) = 0x50 = 100Hz
+
+ssd1306_write_cmd_byte(0xD9);  // (p36) 15. set discharge/pre-charge period
+ssd1306_write_cmd_byte(0x22);  // 0x2* : pre-charge = 2 DCLKs, 0x*2 : discharge = 2 DCLKs
+
+ssd1306_write_cmd_byte(0xDB);  // (p37) 16. set VCOM deselect level
+ssd1306_write_cmd_byte(0x40);  // //0x40 | 0x35; Vcomh = 0.43 + 0x35 * 0.006415 * Vref
+
+ssd1306_write_cmd_byte(0xDC);  // (p38) 17. set display start line
+ssd1306_write_cmd_byte(0x00);
+
+ssd1306_write_cmd_byte(0xAD);  // (p31) 10. DC-DC control mode
+ssd1306_write_cmd_byte(0x8A);  // 0x8A //Set DC-DC enable 1.0SF, DC-DC disabled (external Vpp)
+ssd1306_write_cmd_byte(0xAF);  // (p33) 11. display ON
+
 }
 
 /* Fill the whole screen with the given color */
@@ -94,17 +116,13 @@ void ssd1306_Fill(SSD1306_COLOR color) {
 }
 
 /* Write the screenbuffer with changed to the screen */
-void ssd1306_UpdateScreen(void) {
-    // ssd1306_write_cmd_byte(0xB0);
-    // ssd1306_write_cmd_byte(0x00);
-    // ssd1306_write_cmd_byte(0x10);
-    // ssd1306_write_data(&SSD1306_Buffer, SSD1306_BUFFER_SIZE);
-
+void ssd1306_UpdateScreen(void)
+{
     for(uint8_t i = 0; i < SSD1306_HEIGHT/8; i++)
     {
         ssd1306_write_cmd_byte(0xB0 + i);
-        ssd1306_write_cmd_byte(0x00 + SSD1306_X_OFFSET_LOWER);
-        ssd1306_write_cmd_byte(0x10 + SSD1306_X_OFFSET_UPPER);
+        ssd1306_write_cmd_byte(0x10);
+        ssd1306_write_cmd_byte(0x00);
         ssd1306_write_data(&SSD1306_Buffer[SSD1306_WIDTH*i], SSD1306_WIDTH);
     }
 
