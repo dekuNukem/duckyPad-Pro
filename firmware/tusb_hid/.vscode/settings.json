@@ -17,6 +17,11 @@
     "array": "c",
     "string": "c",
     "string_view": "c",
-    "bitset": "c"
+    "bitset": "c",
+    "ssd1306.h": "c",
+    "ssd1306_conf.h": "c",
+    "task.h": "c",
+    "esp_log.h": "c",
+    "stddef.h": "c"
   }
 }

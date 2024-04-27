@@ -1,3 +1,111 @@
+
+/* Initialize the oled screen */
+void ssd1306_init(void) {
+    // Init OLED
+    ssd1306_write_cmd_byte(0xAE); //display off
+    ssd1306_write_cmd_byte(0x20); //Set Memory Addressing Mode
+    ssd1306_write_cmd_byte(0x00); // 00b,Horizontal Addressing Mode; 01b,Vertical Addressing Mode;
+                                // 10b,Page Addressing Mode (RESET); 11b,Invalid
+
+    ssd1306_write_cmd_byte(0xB0); //Set Page Start Address for Page Addressing Mode,0-7
+
+#ifdef SSD1306_MIRROR_VERT
+    ssd1306_write_cmd_byte(0xC0); // Mirror vertically
+#else
+    ssd1306_write_cmd_byte(0xC8); //Set COM Output Scan Direction
+#endif
+
+    ssd1306_write_cmd_byte(0x00); //---set low column address
+    ssd1306_write_cmd_byte(0x10); //---set high column address
+
+    ssd1306_write_cmd_byte(0x40); //--set start line address - CHECK
+
+    // ssd1306_SetContrast(0xFF);
+
+#ifdef SSD1306_MIRROR_HORIZ
+    ssd1306_write_cmd_byte(0xA0); // Mirror horizontally
+#else
+    ssd1306_write_cmd_byte(0xA1); //--set segment re-map 0 to 127 - CHECK
+#endif
+
+
+// Set multiplex ratio.
+#if (SSD1306_HEIGHT == 128)
+    // Found in the Luma Python lib for SH1106.
+    ssd1306_write_cmd_byte(0xFF);
+#else
+    ssd1306_write_cmd_byte(0xA8); //--set multiplex ratio(1 to 64) - CHECK
+#endif
+
+#if (SSD1306_HEIGHT == 32)
+    ssd1306_write_cmd_byte(0x1F); //
+#elif (SSD1306_HEIGHT == 64)
+    ssd1306_write_cmd_byte(0x3F); //
+#elif (SSD1306_HEIGHT == 128)
+    ssd1306_write_cmd_byte(0x3F); // Seems to work for 128px high displays too.
+#else
+#error "Only 32, 64, or 128 lines of height are supported!"
+#endif
+
+    ssd1306_write_cmd_byte(0xA4); //0xa4,Output follows RAM content;0xa5,Output ignores RAM content
+
+    ssd1306_write_cmd_byte(0xD3); //-set display offset - CHECK
+    ssd1306_write_cmd_byte(0x00); //-not offset
+
+    ssd1306_write_cmd_byte(0xD5); //--set display clock divide ratio/oscillator frequency
+    ssd1306_write_cmd_byte(0xF0); //--set divide ratio
+
+    ssd1306_write_cmd_byte(0xD9); //--set pre-charge period
+    ssd1306_write_cmd_byte(0x22); //
+
+    ssd1306_write_cmd_byte(0xDA); //--set com pins hardware configuration - CHECK
+#if (SSD1306_HEIGHT == 32)
+    ssd1306_write_cmd_byte(0x02);
+#elif (SSD1306_HEIGHT == 64)
+    ssd1306_write_cmd_byte(0x12);
+#elif (SSD1306_HEIGHT == 128)
+    ssd1306_write_cmd_byte(0x12);
+#else
+#error "Only 32, 64, or 128 lines of height are supported!"
+#endif
+
+    ssd1306_write_cmd_byte(0xDB); //--set vcomh
+    ssd1306_write_cmd_byte(0x20); //0x20,0.77xVcc
+
+    ssd1306_write_cmd_byte(0x8D); //--set DC-DC enable
+    ssd1306_write_cmd_byte(0x14); //
+    ssd1306_write_cmd_byte(0xAF); //display on
+
+    // Clear screen
+    ssd1306_Fill(Black);
+
+    // Set default values for screen object
+    SSD1306.CurrentX = 0;
+    SSD1306.CurrentY = 0;
+}
+
+    
+    spi_device_acquire_bus(my_spi_handle, portMAX_DELAY);
+    ssd1306_init();
+    // ssd1306_WriteString("hello", Font_7x10, White);
+    ssd1306_UpdateScreen();
+    spi_device_release_bus(my_spi_handle);
+
+char* my_data = "hello";
+spi_transaction_t my_transaction;
+
+void write_test(void)
+{
+    ESP_ERROR_CHECK(spi_device_acquire_bus(my_spi_handle, portMAX_DELAY));
+    uint8_t tx_size_bytes = strlen(my_data);
+
+    memset(&my_transaction, 0, sizeof(my_transaction));
+    my_transaction.length = tx_size_bytes * 8;
+    my_transaction.tx_buffer = my_data;
+    ESP_ERROR_CHECK(spi_device_polling_transmit(my_spi_handle, &my_transaction));
+    spi_device_release_bus(my_spi_handle);
+}
+
     spi_transaction_t t = {
         .length = 5,
         .flags = SPI_TRANS_USE_TXDATA,
