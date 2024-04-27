@@ -1,6 +1,10 @@
 #include "driver/gpio.h"
-
 #include "input_task.h"
+
+#include "esp_log.h"
+
+static const char *TAG = "INPUT";
+
 
 void gpio_init(void)
 {

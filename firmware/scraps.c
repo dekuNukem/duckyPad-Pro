@@ -1,4 +1,8 @@
-
+    spi_transaction_t t = {
+        .length = 5,
+        .flags = SPI_TRANS_USE_TXDATA,
+        .tx_data = test,
+    };
 while(1)
     {
         printf("GPIO%d: %d\n", SW_PLUS, gpio_get_level(SW_PLUS));

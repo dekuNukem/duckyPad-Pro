@@ -9,6 +9,14 @@
   "files.associations": {
     "gpio.h": "c",
     "string.h": "c",
-    "spi_master.h": "c"
+    "spi_master.h": "c",
+    "input_task.h": "c",
+    "ui_task.h": "c",
+    "freertos.h": "c",
+    "hid_device.h": "c",
+    "array": "c",
+    "string": "c",
+    "string_view": "c",
+    "bitset": "c"
   }
 }
