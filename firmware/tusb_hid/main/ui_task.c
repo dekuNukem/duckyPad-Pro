@@ -40,6 +40,7 @@ void oled_init(void)
     ESP_ERROR_CHECK(spi_bus_add_device(SPI2_HOST, &devcfg, &my_spi_handle));
 
     ssd1306_init();
+    ssd1306_SetCursor(20, 20);
     ssd1306_WriteString("hello world!", Font_7x10, White);
     ssd1306_UpdateScreen();
 }

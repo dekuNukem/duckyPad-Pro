@@ -55,55 +55,89 @@ SSD1306_Error_t ssd1306_FillBuffer(uint8_t* buf, uint32_t len) {
 
 /* Initialize the oled screen */
 void ssd1306_init(void) {
-ssd1306_write_cmd_byte(0xAE);  // (p33) 11. display OFF
+    // Init OLED
+    ssd1306_write_cmd_byte(0xAE); //display off
+    ssd1306_write_cmd_byte(0x20); //Set Memory Addressing Mode
+    ssd1306_write_cmd_byte(0x00); // 00b,Horizontal Addressing Mode; 01b,Vertical Addressing Mode;
+                                // 10b,Page Addressing Mode (RESET); 11b,Invalid
 
-// set in display function
-ssd1306_write_cmd_byte(0x00);  // (p23) 1. set lower column address
-ssd1306_write_cmd_byte(0x10);  // (p23) 2. set higher column address
+    ssd1306_write_cmd_byte(0xB0); //Set Page Start Address for Page Addressing Mode,0-7
 
-// For SSD1306 - This is Horizontal mode
-// For SH1107 - This is page mode (Does not increment rows)
-ssd1306_write_cmd_byte(0x20);  // (p24) 3. Set Memory addressing mode
+#ifdef SSD1306_MIRROR_VERT
+    ssd1306_write_cmd_byte(0xC0); // Mirror vertically
+#else
+    ssd1306_write_cmd_byte(0xC8); //Set COM Output Scan Direction
+#endif
 
-ssd1306_write_cmd_byte(0x81);  // (p28) 4. contrast control
-ssd1306_write_cmd_byte(0x2F);  // 0x2F, 0x4F, 0x8F - depending on source
+    ssd1306_write_cmd_byte(0x00); //---set low column address
+    ssd1306_write_cmd_byte(0x10); //---set high column address
 
-ssd1306_write_cmd_byte(0xA0);  // (p29) 5. set segment remap (L->R | T->B)
+    ssd1306_write_cmd_byte(0x40); //--set start line address - CHECK
 
-ssd1306_write_cmd_byte(0xA8);            // (p30) 6. multiplex ratio
-ssd1306_write_cmd_byte(127);  // duty = 1/64 = 0x3F
+    // ssd1306_SetContrast(0xFF);
 
-ssd1306_write_cmd_byte(0xA4);  // (p30) 7. set entire display off/on (0xA4/0xA5)
-
-ssd1306_write_cmd_byte(0xA6);  // (p31) 8. 0xA6/0xA7 = normal (W on Bk) / inverted (Bk on W) display
-
-ssd1306_write_cmd_byte(0xD3);  // (p32) 9. set display offset
-ssd1306_write_cmd_byte(0);
-
-ssd1306_write_cmd_byte(0xB0);  // (p33) 12. set page address
-
-ssd1306_write_cmd_byte(0xC0);  // (p34) 13. common output scan direction normal/vertically flipped (0xC0/0xC8)
+#ifdef SSD1306_MIRROR_HORIZ
+    ssd1306_write_cmd_byte(0xA0); // Mirror horizontally
+#else
+    ssd1306_write_cmd_byte(0xA1); //--set segment re-map 0 to 127 - CHECK
+#endif
 
 
-ssd1306_write_cmd_byte(0xDA);  // set com pins
-ssd1306_write_cmd_byte(0x12);
+// Set multiplex ratio.
+#if (SSD1306_HEIGHT == 128)
+    // Found in the Luma Python lib for SH1106.
+    ssd1306_write_cmd_byte(0xFF);
+#else
+    ssd1306_write_cmd_byte(0xA8); //--set multiplex ratio(1 to 64) - CHECK
+#endif
 
-ssd1306_write_cmd_byte(0xD5);  // (p35) 14. set clock divide ratio/OSC frequency
-ssd1306_write_cmd_byte(0x50);  // fosc (POR) = 0x50 = 100Hz
+#if (SSD1306_HEIGHT == 32)
+    ssd1306_write_cmd_byte(0x1F); //
+#elif (SSD1306_HEIGHT == 64)
+    ssd1306_write_cmd_byte(0x3F); //
+#elif (SSD1306_HEIGHT == 128)
+    ssd1306_write_cmd_byte(0x3F); // Seems to work for 128px high displays too.
+#else
+#error "Only 32, 64, or 128 lines of height are supported!"
+#endif
 
-ssd1306_write_cmd_byte(0xD9);  // (p36) 15. set discharge/pre-charge period
-ssd1306_write_cmd_byte(0x22);  // 0x2* : pre-charge = 2 DCLKs, 0x*2 : discharge = 2 DCLKs
+    ssd1306_write_cmd_byte(0xA4); //0xa4,Output follows RAM content;0xa5,Output ignores RAM content
 
-ssd1306_write_cmd_byte(0xDB);  // (p37) 16. set VCOM deselect level
-ssd1306_write_cmd_byte(0x40);  // //0x40 | 0x35; Vcomh = 0.43 + 0x35 * 0.006415 * Vref
+    ssd1306_write_cmd_byte(0xD3); //-set display offset - CHECK
+    ssd1306_write_cmd_byte(0x00); //-not offset
 
-ssd1306_write_cmd_byte(0xDC);  // (p38) 17. set display start line
-ssd1306_write_cmd_byte(0x00);
+    ssd1306_write_cmd_byte(0xD5); //--set display clock divide ratio/oscillator frequency
+    ssd1306_write_cmd_byte(0xF0); //--set divide ratio
 
-ssd1306_write_cmd_byte(0xAD);  // (p31) 10. DC-DC control mode
-ssd1306_write_cmd_byte(0x8A);  // 0x8A //Set DC-DC enable 1.0SF, DC-DC disabled (external Vpp)
-ssd1306_write_cmd_byte(0xAF);  // (p33) 11. display ON
+    ssd1306_write_cmd_byte(0xD9); //--set pre-charge period
+    ssd1306_write_cmd_byte(0x22); //
 
+    ssd1306_write_cmd_byte(0xDA); //--set com pins hardware configuration - CHECK
+#if (SSD1306_HEIGHT == 32)
+    ssd1306_write_cmd_byte(0x02);
+#elif (SSD1306_HEIGHT == 64)
+    ssd1306_write_cmd_byte(0x12);
+#elif (SSD1306_HEIGHT == 128)
+    ssd1306_write_cmd_byte(0x12);
+#else
+#error "Only 32, 64, or 128 lines of height are supported!"
+#endif
+
+    ssd1306_write_cmd_byte(0xDB); //--set vcomh
+    ssd1306_write_cmd_byte(0x20); //0x20,0.77xVcc
+
+    ssd1306_write_cmd_byte(0x8D); //--set DC-DC enable
+    ssd1306_write_cmd_byte(0x14); //
+
+    ssd1306_SetContrast(0x8F);
+    ssd1306_write_cmd_byte(0xAF); //display on
+
+    // Clear screen
+    ssd1306_Fill(Black);
+
+    // Set default values for screen object
+    SSD1306.CurrentX = 0;
+    SSD1306.CurrentY = 0;
 }
 
 /* Fill the whole screen with the given color */
@@ -125,7 +159,6 @@ void ssd1306_UpdateScreen(void)
         ssd1306_write_cmd_byte(0x00);
         ssd1306_write_data(&SSD1306_Buffer[SSD1306_WIDTH*i], SSD1306_WIDTH);
     }
-
 }
 
 /*
@@ -474,8 +507,8 @@ void ssd1306_DrawBitmap(uint8_t x, uint8_t y, const unsigned char* bitmap, uint8
     return;
 }
 
-// void ssd1306_SetContrast(const uint8_t value) {
-//     const uint8_t kSetContrastControlRegister = 0x81;
-//     ssd1306_WriteCommand(kSetContrastControlRegister);
-//     ssd1306_WriteCommand(value);
-// }
+void ssd1306_SetContrast(const uint8_t value)
+{
+    ssd1306_write_cmd_byte(0x81);
+    ssd1306_write_cmd_byte(value);
+}
