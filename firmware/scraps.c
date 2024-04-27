@@ -84,7 +84,59 @@ void ssd1306_init(void) {
     SSD1306.CurrentY = 0;
 }
 
-    
+
+/* Initialize the oled screen */
+void ssd1306_init(void) {
+ssd1306_write_cmd_byte(0xAE);  // (p33) 11. display OFF
+
+// set in display function
+ssd1306_write_cmd_byte(0x00);  // (p23) 1. set lower column address
+ssd1306_write_cmd_byte(0x10);  // (p23) 2. set higher column address
+
+// For SSD1306 - This is Horizontal mode
+// For SH1107 - This is page mode (Does not increment rows)
+ssd1306_write_cmd_byte(0x20);  // (p24) 3. Set Memory addressing mode
+
+ssd1306_write_cmd_byte(0x81);  // (p28) 4. contrast control
+ssd1306_write_cmd_byte(0x2F);  // 0x2F, 0x4F, 0x8F - depending on source
+
+ssd1306_write_cmd_byte(0xA0);  // (p29) 5. set segment remap (L->R | T->B)
+
+ssd1306_write_cmd_byte(0xA8);            // (p30) 6. multiplex ratio
+ssd1306_write_cmd_byte(127);  // duty = 1/64 = 0x3F
+
+ssd1306_write_cmd_byte(0xA4);  // (p30) 7. set entire display off/on (0xA4/0xA5)
+
+ssd1306_write_cmd_byte(0xA6);  // (p31) 8. 0xA6/0xA7 = normal (W on Bk) / inverted (Bk on W) display
+
+ssd1306_write_cmd_byte(0xD3);  // (p32) 9. set display offset
+ssd1306_write_cmd_byte(0);
+
+ssd1306_write_cmd_byte(0xB0);  // (p33) 12. set page address
+
+ssd1306_write_cmd_byte(0xC0);  // (p34) 13. common output scan direction normal/vertically flipped (0xC0/0xC8)
+
+
+ssd1306_write_cmd_byte(0xDA);  // set com pins
+ssd1306_write_cmd_byte(0x12);
+
+ssd1306_write_cmd_byte(0xD5);  // (p35) 14. set clock divide ratio/OSC frequency
+ssd1306_write_cmd_byte(0x50);  // fosc (POR) = 0x50 = 100Hz
+
+ssd1306_write_cmd_byte(0xD9);  // (p36) 15. set discharge/pre-charge period
+ssd1306_write_cmd_byte(0x22);  // 0x2* : pre-charge = 2 DCLKs, 0x*2 : discharge = 2 DCLKs
+
+ssd1306_write_cmd_byte(0xDB);  // (p37) 16. set VCOM deselect level
+ssd1306_write_cmd_byte(0x40);  // //0x40 | 0x35; Vcomh = 0.43 + 0x35 * 0.006415 * Vref
+
+ssd1306_write_cmd_byte(0xDC);  // (p38) 17. set display start line
+ssd1306_write_cmd_byte(0x00);
+
+ssd1306_write_cmd_byte(0xAD);  // (p31) 10. DC-DC control mode
+ssd1306_write_cmd_byte(0x8A);  // 0x8A //Set DC-DC enable 1.0SF, DC-DC disabled (external Vpp)
+ssd1306_write_cmd_byte(0xAF);  // (p33) 11. display ON
+
+}
     spi_device_acquire_bus(my_spi_handle, portMAX_DELAY);
     ssd1306_init();
     // ssd1306_WriteString("hello", Font_7x10, White);
