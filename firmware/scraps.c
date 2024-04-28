@@ -1,4 +1,11 @@
 
+    ESP_LOGI(TAG, "Sending Keyboard report");
+    uint8_t keycode[6] = {HID_KEY_A, 0, 0, 0, 0, 0};
+    // the first argument is HID ID?
+    tud_hid_keyboard_report(1, 0, keycode);
+    vTaskDelay(pdMS_TO_TICKS(100));
+    tud_hid_keyboard_report(1, 0, NULL);
+
 /* Initialize the oled screen */
 void ssd1306_init(void) {
     // Init OLED
