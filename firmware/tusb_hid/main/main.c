@@ -222,56 +222,75 @@ static void app_send_hid_demo(void)
 
 // ---------------- USB MSC --------------------
 
-enum {
-    ITF_NUM_MSC = 0,
-    ITF_NUM_TOTAL
-};
-
-enum {
-    EDPT_CTRL_OUT = 0x00,
-    EDPT_CTRL_IN  = 0x80,
-
-    EDPT_MSC_OUT  = 0x01,
-    EDPT_MSC_IN   = 0x81,
-};
+#define USB_PID   0xdf11
+#define USB_VID   0xcafe
+#define USB_BCD   0x0200
 
 
-static tusb_desc_device_t descriptor_config = {
-    .bLength = sizeof(descriptor_config),
-    .bDescriptorType = TUSB_DESC_DEVICE,
-    .bcdUSB = 0x0200,
-    .bDeviceClass = TUSB_CLASS_MISC,
-    .bDeviceSubClass = MISC_SUBCLASS_COMMON,
-    .bDeviceProtocol = MISC_PROTOCOL_IAD,
-    .bMaxPacketSize0 = CFG_TUD_ENDPOINT0_SIZE,
-    .idVendor = 0x303A, // This is Espressif VID. This needs to be changed according to Users / Customers
-    .idProduct = 0x4002,
-    .bcdDevice = 0x100,
-    .iManufacturer = 0x01,
-    .iProduct = 0x02,
-    .iSerialNumber = 0x03,
+static tusb_desc_device_t desc_device =
+{
+    .bLength            = sizeof(tusb_desc_device_t),
+    .bDescriptorType    = TUSB_DESC_DEVICE,
+    .bcdUSB             = USB_BCD,
+
+    // Use Interface Association Descriptor (IAD) for CDC
+    // As required by USB Specs IAD's subclass must be common class (2) and protocol must be IAD (1)
+    .bDeviceClass       = TUSB_CLASS_MISC,
+    .bDeviceSubClass    = MISC_SUBCLASS_COMMON,
+    .bDeviceProtocol    = MISC_PROTOCOL_IAD,
+
+    .bMaxPacketSize0    = CFG_TUD_ENDPOINT0_SIZE,
+
+    .idVendor           = USB_VID,
+    .idProduct          = USB_PID,
+    .bcdDevice          = 0x0100,
+
+    .iManufacturer      = 0x01,
+    .iProduct           = 0x02,
+    .iSerialNumber      = 0x03,
+
     .bNumConfigurations = 0x01
 };
 
-static uint8_t const msc_fs_configuration_desc[] = {
-    // Config number, interface count, string index, total length, attribute, power in mA
-    TUD_CONFIG_DESCRIPTOR(0, ITF_NUM_TOTAL, 0, TUSB_DESC_TOTAL_LEN, TUSB_DESC_CONFIG_ATT_REMOTE_WAKEUP, 100),
-
-    // something wrong with this:
-    // Interface number, string index, EP Out & EP In address, EP size
-    TUD_MSC_DESCRIPTOR(ITF_NUM_MSC, 0, EDPT_MSC_OUT, EDPT_MSC_IN, 64),
+enum
+{
+  ITF_NUM_MSC = 0,
+  ITF_NUM_TOTAL
 };
 
-static char const *string_desc_arr[] = {
-    (const char[]) { 0x09, 0x04 },  // 0: is supported language is English (0x0409)
-    "TinyUSB",                      // 1: Manufacturer
-    "TinyUSB Device",               // 2: Product
-    "123456",                       // 3: Serials
-    "Example MSC",                  // 4. MSC
+#define EPNUM_MSC_OUT     0x03
+#define EPNUM_MSC_IN      0x83
+
+#define CONFIG_TOTAL_LEN    (TUD_CONFIG_DESC_LEN + TUD_MSC_DESC_LEN)
+
+
+uint8_t const desc_fs_configuration[] =
+{
+  // Config number, interface count, string index, total length, attribute, power in mA
+  TUD_CONFIG_DESCRIPTOR(1, ITF_NUM_TOTAL, 0, CONFIG_TOTAL_LEN, 0x00, 100),
+
+  // Interface number, string index, EP Out & EP In address, EP size
+  TUD_MSC_DESCRIPTOR(ITF_NUM_MSC, 5, EPNUM_MSC_OUT, EPNUM_MSC_IN, 64),
+};
+
+enum {
+  STRID_LANGID = 0,
+  STRID_MANUFACTURER,
+  STRID_PRODUCT,
+  STRID_SERIAL,
+};
+
+// array of pointer to string descriptors
+char const *string_desc_arr[] =
+{
+  (const char[]) { 0x09, 0x04 }, // 0: is supported language is English (0x0409)
+  "TinyUSB",                     // 1: Manufacturer
+  "TinyUSB Device",              // 2: Product
+  NULL,                          // 3: Serials will use unique ID if possible
+  "TinyUSB MSC",                 // 5: MSC Interface
 };
 
 #define BASE_PATH "/data" // base path to mount the partition
-
 
 static void storage_mount_changed_cb(tinyusb_msc_event_t *event)
 {
@@ -295,11 +314,11 @@ void app_main(void)
 
     ESP_LOGI(TAG, "USB MSC initialization");
     const tinyusb_config_t tusb_cfg = {
-        .device_descriptor = &descriptor_config,
+        .device_descriptor = &desc_device,
         .string_descriptor = string_desc_arr,
         .string_descriptor_count = sizeof(string_desc_arr) / sizeof(string_desc_arr[0]),
         .external_phy = false,
-        .configuration_descriptor = msc_fs_configuration_desc,
+        .configuration_descriptor = desc_fs_configuration,
     };
     ESP_ERROR_CHECK(tinyusb_driver_install(&tusb_cfg));
     ESP_LOGI(TAG, "USB MSC initialization DONE");
