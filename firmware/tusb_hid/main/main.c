@@ -15,7 +15,6 @@ static const char *TAG = "example";
 
 /************* TinyUSB descriptors ****************/
 
-#define TUSB_DESC_TOTAL_LEN      (TUD_CONFIG_DESC_LEN + CFG_TUD_HID * TUD_HID_DESC_LEN)
 #define CUSTOM_HID_EPIN_SIZE 63
 #define USBD_CUSTOMHID_OUTREPORT_BUF_SIZE CUSTOM_HID_EPIN_SIZE
 /**
@@ -140,19 +139,6 @@ const char* my_usb_string_descriptor[5] = {
     "duckyPad_HID",  // 4: HID
 };
 
-/**
- * @brief Configuration descriptor
- *
- * This is a simple configuration descriptor that defines 1 configuration and 1 HID interface
- */
-static const uint8_t hid_configuration_descriptor[] = {
-    // Configuration number, interface count, string index, total length, attribute, power in mA
-    TUD_CONFIG_DESCRIPTOR(1, 1, 0, TUSB_DESC_TOTAL_LEN, TUSB_DESC_CONFIG_ATT_REMOTE_WAKEUP, 100),
-
-    // Interface number, string index, boot protocol, report descriptor len, EP In address, size & polling interval
-    TUD_HID_DESCRIPTOR(0, 4, false, sizeof(hid_report_descriptor), 0x81, 16, 10),
-};
-
 /********* TinyUSB HID callbacks ***************/
 
 // Invoked when received GET HID REPORT DESCRIPTOR request
@@ -226,14 +212,12 @@ static void app_send_hid_demo(void)
 #define USB_VID   0xcafe
 #define USB_BCD   0x0200
 
-
-static tusb_desc_device_t desc_device =
+static tusb_desc_device_t msc_desc_device =
 {
     .bLength            = sizeof(tusb_desc_device_t),
     .bDescriptorType    = TUSB_DESC_DEVICE,
     .bcdUSB             = USB_BCD,
 
-    // Use Interface Association Descriptor (IAD) for CDC
     // As required by USB Specs IAD's subclass must be common class (2) and protocol must be IAD (1)
     .bDeviceClass       = TUSB_CLASS_MISC,
     .bDeviceSubClass    = MISC_SUBCLASS_COMMON,
@@ -255,22 +239,27 @@ static tusb_desc_device_t desc_device =
 enum
 {
   ITF_NUM_MSC = 0,
+  ITF_NUM_HID,
   ITF_NUM_TOTAL
 };
 
 #define EPNUM_MSC_OUT     0x03
 #define EPNUM_MSC_IN      0x83
 
-#define CONFIG_TOTAL_LEN    (TUD_CONFIG_DESC_LEN + TUD_MSC_DESC_LEN)
+#define CONFIG_TOTAL_LEN    (TUD_CONFIG_DESC_LEN + TUD_MSC_DESC_LEN + CFG_TUD_HID * TUD_HID_DESC_LEN)
 
 
 uint8_t const desc_fs_configuration[] =
 {
-  // Config number, interface count, string index, total length, attribute, power in mA
-  TUD_CONFIG_DESCRIPTOR(1, ITF_NUM_TOTAL, 0, CONFIG_TOTAL_LEN, 0x00, 100),
+    //CONFIG_TOTAL_LEN or TUSB_DESC_TOTAL_LEN???
+    // Config number, interface count, string index, total length, attribute, power in mA
+    TUD_CONFIG_DESCRIPTOR(1, ITF_NUM_TOTAL, 0, CONFIG_TOTAL_LEN, 0x00, 100),
 
-  // Interface number, string index, EP Out & EP In address, EP size
-  TUD_MSC_DESCRIPTOR(ITF_NUM_MSC, 5, EPNUM_MSC_OUT, EPNUM_MSC_IN, 64),
+    // Interface number, string index, EP Out & EP In address, EP size
+    TUD_MSC_DESCRIPTOR(ITF_NUM_MSC, 5, EPNUM_MSC_OUT, EPNUM_MSC_IN, 64),
+
+    // Interface number, string index, boot protocol, report descriptor len, EP In address, size & polling interval
+    TUD_HID_DESCRIPTOR(ITF_NUM_HID, 4, false, sizeof(hid_report_descriptor), 0x81, 16, 10),
 };
 
 enum {
@@ -283,11 +272,13 @@ enum {
 // array of pointer to string descriptors
 char const *string_desc_arr[] =
 {
-  (const char[]) { 0x09, 0x04 }, // 0: is supported language is English (0x0409)
-  "TinyUSB",                     // 1: Manufacturer
-  "TinyUSB Device",              // 2: Product
-  NULL,                          // 3: Serials will use unique ID if possible
-  "TinyUSB MSC",                 // 5: MSC Interface
+    // array of pointer to string descriptors
+    (char[]){0x09, 0x04},  // 0: is supported language is English (0x0409)
+    "dekuNukem",             // 1: Manufacturer
+    "duckyPad2",      // 2: Product
+    "80085",              // 3: Serials, should use chip ID
+    "duckyPad_HID",  // 4: HID
+    "duckyPad_MSC",  // 5: MSC
 };
 
 #define BASE_PATH "/data" // base path to mount the partition
@@ -314,7 +305,7 @@ void app_main(void)
 
     ESP_LOGI(TAG, "USB MSC initialization");
     const tinyusb_config_t tusb_cfg = {
-        .device_descriptor = &desc_device,
+        .device_descriptor = &msc_desc_device,
         .string_descriptor = string_desc_arr,
         .string_descriptor_count = sizeof(string_desc_arr) / sizeof(string_desc_arr[0]),
         .external_phy = false,
