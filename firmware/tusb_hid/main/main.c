@@ -175,6 +175,10 @@ uint16_t tud_hid_get_report_cb(uint8_t instance, uint8_t report_id, hid_report_t
   return 0;
 }
 
+#define HID_OUT_SIZE 63
+uint8_t hid_out_buf[HID_OUT_SIZE];
+uint8_t needs_respond;
+
 // Invoked when received SET_REPORT control request or
 // received data on OUT endpoint ( Report ID = 0, Type = 0 )
 void tud_hid_set_report_cb(uint8_t instance, uint8_t report_id, hid_report_type_t report_type, uint8_t const* buffer, uint16_t bufsize)
@@ -182,17 +186,23 @@ void tud_hid_set_report_cb(uint8_t instance, uint8_t report_id, hid_report_type_
     printf("\n\ngot data!\n");
     printf("%d %d %d %d\n", instance, report_id, report_type, bufsize);
     for (size_t i = 0; i < bufsize; i++)
-    {
         printf("%d ", buffer[i]);
-    }
     printf("\n\n");
-    
+
+    needs_respond = 1;
 }
 
 /********* Application ***************/
 
 static void app_send_hid_demo(void)
 {
+
+    /*
+    tud_hid_report, first argument is usage ID, see HID descriptor, keyboard is 1, media
+    key is 2, mouse is 3, etc
+
+    can also use tud_hid_keyboard_report, but probably easier to use tud_hid_report
+    */
     // Keyboard output: Send key 'a/A' pressed and released
     ESP_LOGI(TAG, "Sending Keyboard report");
     uint8_t keycode[6] = {0x40, 0, 0, 0, 0, 0};
@@ -234,14 +244,24 @@ void app_main(void)
     ESP_ERROR_CHECK(tinyusb_driver_install(&tusb_cfg));
     ESP_LOGI(TAG, "USB initialization DONE");
 
-    while (1) {
-        if (tud_mounted()) {
-            static bool send_hid_data = false;
-            if (send_hid_data) {
-                app_send_hid_demo();
-            }
-            send_hid_data = !gpio_get_level(APP_BUTTON);
+    while (1)
+    {
+        // if (tud_mounted()) 
+        // {
+        //     // static bool send_hid_data = false;
+        //     // if (send_hid_data)
+        //     //     app_send_hid_demo();
+        //     // send_hid_data = !gpio_get_level(APP_BUTTON);
+
+            
+        // }
+
+        if(needs_respond)
+        {
+            printf("responding!\n");
+            tud_hid_report(4, hid_out_buf, HID_OUT_SIZE);
+            needs_respond = 0;
         }
-        vTaskDelay(pdMS_TO_TICKS(100));
+        vTaskDelay(pdMS_TO_TICKS(10));
     }
 }

@@ -24,10 +24,14 @@ def get_duckypad_path():
         return path_dict[58]
     return list(path_dict.values())[0]
 
-pc_to_duckypad_buf = [0] * PC_TO_DUCKYPAD_HID_BUF_SIZE
+pc_to_duckypad_buf = []
+for x in range(PC_TO_DUCKYPAD_HID_BUF_SIZE):
+    pc_to_duckypad_buf.append(x)
+
+# pc_to_duckypad_buf = [0] * PC_TO_DUCKYPAD_HID_BUF_SIZE
 pc_to_duckypad_buf[0] = 5   # HID Usage ID, always 5
-pc_to_duckypad_buf[1] = 0   # Sequence Number
-pc_to_duckypad_buf[2] = 3   # Command type
+# pc_to_duckypad_buf[1] = 0   # Sequence Number
+# pc_to_duckypad_buf[2] = 3   # Command type
 
 # print("----\nsudo is needed on Linux!\n----")
 
