@@ -1,4 +1,12 @@
 
+// media keys, working
+uint8_t keycode[6] = {0x40, 0, 0, 0, 0, 0};
+    tud_hid_report(2, keycode, 6);
+    vTaskDelay(pdMS_TO_TICKS(100));
+    memset(keycode, 0, 6);
+    tud_hid_report(2, keycode, 6);
+
+// keyboard keys, working
     ESP_LOGI(TAG, "Sending Keyboard report");
     uint8_t keycode[6] = {HID_KEY_A, 0, 0, 0, 0, 0};
     // the first argument is HID ID?

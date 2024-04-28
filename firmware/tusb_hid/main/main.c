@@ -185,10 +185,11 @@ static void app_send_hid_demo(void)
 {
     // Keyboard output: Send key 'a/A' pressed and released
     ESP_LOGI(TAG, "Sending Keyboard report");
-    uint8_t keycode[6] = {HID_KEY_A, 0, 0, 0, 0, 0};
-    tud_hid_keyboard_report(1, 0, keycode);
+    uint8_t keycode[6] = {0x40, 0, 0, 0, 0, 0};
+    tud_hid_report(2, keycode, 6);
     vTaskDelay(pdMS_TO_TICKS(100));
-    tud_hid_keyboard_report(1, 0, NULL);
+    memset(keycode, 0, 6);
+    tud_hid_report(2, keycode, 6);
 
     // Mouse output: Move mouse cursor in square trajectory
     // ESP_LOGI(TAG, "Sending Mouse report");
