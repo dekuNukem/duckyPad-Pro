@@ -27,6 +27,11 @@
     "neopixel_task.h": "c",
     "stdint.h": "c",
     "sd_task.h": "c",
-    "tinyusb.h": "c"
+    "tinyusb.h": "c",
+    "sdmmc_cmd.h": "c",
+    "esp_vfs_fat.h": "c",
+    "sdmmc_host.h": "c",
+    "tusb_msc_storage.h": "c",
+    "msc.h": "c"
   }
 }

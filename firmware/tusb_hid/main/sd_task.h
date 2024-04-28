@@ -8,6 +8,10 @@
 #include <stdint.h>
 #include <string.h>
 
+#include "sdmmc_cmd.h"
+#include "driver/sdmmc_host.h"
+#include "esp_vfs_fat.h"
+
 #define SD_MOUNT_POINT "/sdcard"
 
 #define SD_PIN_CLK 8
@@ -16,6 +20,8 @@
 #define SD_DETECT 6
 
 uint8_t sd_init(void);
+
+extern sdmmc_card_t *my_sd_card;
 
 #ifdef __cplusplus
 }

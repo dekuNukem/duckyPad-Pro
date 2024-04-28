@@ -5,6 +5,10 @@
 #include "tinyusb.h"
 #include "class/hid/hid_device.h"
 #include "driver/gpio.h"
+#include "tusb_msc_storage.h"
+#include "diskio_impl.h"
+#include "diskio_sdmmc.h"
+#include "sd_task.h"
 
 #define APP_BUTTON (GPIO_NUM_13) // Use BOOT signal by default
 static const char *TAG = "example";
@@ -216,46 +220,134 @@ static void app_send_hid_demo(void)
     // }
 }
 
+// ---------------- USB MSC --------------------
+
+enum {
+    ITF_NUM_MSC = 0,
+    ITF_NUM_TOTAL
+};
+
+enum {
+    EDPT_CTRL_OUT = 0x00,
+    EDPT_CTRL_IN  = 0x80,
+
+    EDPT_MSC_OUT  = 0x01,
+    EDPT_MSC_IN   = 0x81,
+};
+
+
+static tusb_desc_device_t descriptor_config = {
+    .bLength = sizeof(descriptor_config),
+    .bDescriptorType = TUSB_DESC_DEVICE,
+    .bcdUSB = 0x0200,
+    .bDeviceClass = TUSB_CLASS_MISC,
+    .bDeviceSubClass = MISC_SUBCLASS_COMMON,
+    .bDeviceProtocol = MISC_PROTOCOL_IAD,
+    .bMaxPacketSize0 = CFG_TUD_ENDPOINT0_SIZE,
+    .idVendor = 0x303A, // This is Espressif VID. This needs to be changed according to Users / Customers
+    .idProduct = 0x4002,
+    .bcdDevice = 0x100,
+    .iManufacturer = 0x01,
+    .iProduct = 0x02,
+    .iSerialNumber = 0x03,
+    .bNumConfigurations = 0x01
+};
+
+#include "..\managed_components\espressif__tinyusb\src\class\msc\msc.h"
+
+static uint8_t const msc_fs_configuration_desc[] = {
+    // Config number, interface count, string index, total length, attribute, power in mA
+    TUD_CONFIG_DESCRIPTOR(1, ITF_NUM_TOTAL, 0, TUSB_DESC_TOTAL_LEN, TUSB_DESC_CONFIG_ATT_REMOTE_WAKEUP, 100),
+
+    // Interface number, string index, EP Out & EP In address, EP size
+    TUD_MSC_DESCRIPTOR(ITF_NUM_MSC, 0, EDPT_MSC_OUT, EDPT_MSC_IN, 64),
+};
+
+#define BASE_PATH "/data" // base path to mount the partition
+
+
+static void storage_mount_changed_cb(tinyusb_msc_event_t *event)
+{
+    ESP_LOGI(TAG, "Storage mounted to application: %s", event->mount_changed_data.is_mounted ? "Yes" : "No");
+}
+// ---------------------- USB MSC END -----------------
+
+#include "..\managed_components\espressif__esp_tinyusb\include\tusb_msc_storage.h"
+
 void app_main(void)
 {
-    // Initialize button that will trigger HID reports
-    const gpio_config_t boot_button_config = {
-        .pin_bit_mask = BIT64(APP_BUTTON),
-        .mode = GPIO_MODE_INPUT,
-        .intr_type = GPIO_INTR_DISABLE,
-        .pull_up_en = true,
-        .pull_down_en = false,
+    ESP_LOGI(TAG, "Initializing storage...");
+    if(sd_init())
+        goto main_loop;
+
+    const tinyusb_msc_sdmmc_config_t config_sdmmc = {
+        .card = my_sd_card,
+        .callback_mount_changed = storage_mount_changed_cb,
+        .mount_config.max_files = 5,
     };
-    ESP_ERROR_CHECK(gpio_config(&boot_button_config));
+    ESP_ERROR_CHECK(tinyusb_msc_storage_init_sdmmc(&config_sdmmc));
+    ESP_ERROR_CHECK(tinyusb_msc_storage_mount(BASE_PATH));
 
-    ESP_LOGI(TAG, "USB initialization");
-    const tinyusb_config_t tusb_cfg = {
-        .device_descriptor = NULL,
-        .string_descriptor = hid_string_descriptor,
-        .string_descriptor_count = sizeof(hid_string_descriptor) / sizeof(hid_string_descriptor[0]),
-        .external_phy = false,
-        .configuration_descriptor = hid_configuration_descriptor,
-    };
+    // ESP_LOGI(TAG, "USB MSC initialization");
+    // const tinyusb_config_t tusb_cfg = {
+    //     .device_descriptor = &descriptor_config,
+    //     .string_descriptor = string_desc_arr,
+    //     .string_descriptor_count = sizeof(string_desc_arr) / sizeof(string_desc_arr[0]),
+    //     .external_phy = false,
+    //     .configuration_descriptor = msc_fs_configuration_desc,
+    // };
+    // ESP_ERROR_CHECK(tinyusb_driver_install(&tusb_cfg));
+    // ESP_LOGI(TAG, "USB MSC initialization DONE");
 
-    ESP_ERROR_CHECK(tinyusb_driver_install(&tusb_cfg));
-    ESP_LOGI(TAG, "USB initialization DONE");
-
-    while (1)
+    main_loop:
+    while(1)
     {
-        if (tud_mounted()) 
-        {
-            static bool send_hid_data = false;
-            if (send_hid_data)
-                app_send_hid_demo();
-            send_hid_data = !gpio_get_level(APP_BUTTON);
-        }
-
-        if(needs_respond)
-        {
-            printf("responding!\n");
-            tud_hid_report(4, hid_out_buf, HID_OUT_SIZE);
-            needs_respond = 0;
-        }
-        vTaskDelay(pdMS_TO_TICKS(10));
+        vTaskDelay(pdMS_TO_TICKS(100));
     }
+
 }
+
+
+// void app_main(void)
+// {
+//     // Initialize button that will trigger HID reports
+//     const gpio_config_t boot_button_config = {
+//         .pin_bit_mask = BIT64(APP_BUTTON),
+//         .mode = GPIO_MODE_INPUT,
+//         .intr_type = GPIO_INTR_DISABLE,
+//         .pull_up_en = true,
+//         .pull_down_en = false,
+//     };
+//     ESP_ERROR_CHECK(gpio_config(&boot_button_config));
+
+//     ESP_LOGI(TAG, "USB initialization");
+//     const tinyusb_config_t tusb_cfg = {
+//         .device_descriptor = NULL,
+//         .string_descriptor = hid_string_descriptor,
+//         .string_descriptor_count = sizeof(hid_string_descriptor) / sizeof(hid_string_descriptor[0]),
+//         .external_phy = false,
+//         .configuration_descriptor = hid_configuration_descriptor,
+//     };
+
+//     ESP_ERROR_CHECK(tinyusb_driver_install(&tusb_cfg));
+//     ESP_LOGI(TAG, "USB initialization DONE");
+
+//     while (1)
+//     {
+//         if (tud_mounted()) 
+//         {
+//             static bool send_hid_data = false;
+//             if (send_hid_data)
+//                 app_send_hid_demo();
+//             send_hid_data = !gpio_get_level(APP_BUTTON);
+//         }
+
+//         if(needs_respond)
+//         {
+//             printf("responding!\n");
+//             tud_hid_report(4, hid_out_buf, CUSTOM_HID_EPIN_SIZE);
+//             needs_respond = 0;
+//         }
+//         vTaskDelay(pdMS_TO_TICKS(10));
+//     }
+// }

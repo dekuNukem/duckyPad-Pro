@@ -1,9 +1,5 @@
 #include "sd_task.h"
 
-#include "sdmmc_cmd.h"
-#include "driver/sdmmc_host.h"
-#include "esp_vfs_fat.h"
-
 #include <string.h>
 #include <sys/unistd.h>
 #include <sys/stat.h>
@@ -13,7 +9,7 @@ const char *SD_TAG = "SD";
 // make sure to enable long file name support in menuconfig!
 
 const char config_file_path[] = "/sdcard/config.txt";
-sdmmc_card_t *card;
+sdmmc_card_t *my_sd_card;
 
 uint8_t sd_init(void)
 {
@@ -33,7 +29,7 @@ uint8_t sd_init(void)
     slot_config.cmd = SD_PIN_CMD;
     slot_config.d0 = SD_PIN_D0;
     ESP_LOGI(SD_TAG, "Mounting filesystem");
-    ret = esp_vfs_fat_sdmmc_mount(mount_point, &host, &slot_config, &mount_config, &card);
+    ret = esp_vfs_fat_sdmmc_mount(mount_point, &host, &slot_config, &mount_config, &my_sd_card);
     if (ret != ESP_OK) {
         if (ret == ESP_FAIL) {
             ESP_LOGE(SD_TAG, "Failed to mount filesystem.");
@@ -44,6 +40,6 @@ uint8_t sd_init(void)
     }
     ESP_LOGI(SD_TAG, "Filesystem mounted");
     // Card has been initialized, print its properties
-    sdmmc_card_print_info(stdout, card);
+    sdmmc_card_print_info(stdout, my_sd_card);
     return 0;
 }
