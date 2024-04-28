@@ -291,9 +291,17 @@ static void storage_mount_changed_cb(tinyusb_msc_event_t *event)
 
 void app_main(void)
 {
+    const gpio_config_t boot_button_config = {
+        .pin_bit_mask = BIT64(APP_BUTTON),
+        .mode = GPIO_MODE_INPUT,
+        .intr_type = GPIO_INTR_DISABLE,
+        .pull_up_en = true,
+        .pull_down_en = false,
+    };
+    ESP_ERROR_CHECK(gpio_config(&boot_button_config));
+
     ESP_LOGI(TAG, "Initializing storage...");
-    if(sd_init())
-        goto main_loop;
+    sd_init();
 
     const tinyusb_msc_sdmmc_config_t config_sdmmc = {
         .card = my_sd_card,
@@ -314,55 +322,24 @@ void app_main(void)
     ESP_ERROR_CHECK(tinyusb_driver_install(&tusb_cfg));
     ESP_LOGI(TAG, "USB MSC initialization DONE");
 
-    main_loop:
-    while(1)
+    while (1)
     {
-        vTaskDelay(pdMS_TO_TICKS(100));
+        if (tud_mounted()) 
+        {
+            static bool send_hid_data = false;
+            if (send_hid_data)
+                app_send_hid_demo();
+            send_hid_data = !gpio_get_level(APP_BUTTON);
+        }
+
+        if(needs_respond)
+        {
+            printf("responding!\n");
+            tud_hid_report(4, hid_out_buf, CUSTOM_HID_EPIN_SIZE);
+            needs_respond = 0;
+        }
+        vTaskDelay(pdMS_TO_TICKS(10));
     }
 
 }
 
-
-// void app_main(void)
-// {
-//     // Initialize button that will trigger HID reports
-//     const gpio_config_t boot_button_config = {
-//         .pin_bit_mask = BIT64(APP_BUTTON),
-//         .mode = GPIO_MODE_INPUT,
-//         .intr_type = GPIO_INTR_DISABLE,
-//         .pull_up_en = true,
-//         .pull_down_en = false,
-//     };
-//     ESP_ERROR_CHECK(gpio_config(&boot_button_config));
-
-//     ESP_LOGI(TAG, "USB initialization");
-//     const tinyusb_config_t tusb_cfg = {
-//         .device_descriptor = NULL,
-//         .string_descriptor = my_usb_string_descriptor,
-//         .string_descriptor_count = sizeof(my_usb_string_descriptor) / sizeof(my_usb_string_descriptor[0]),
-//         .external_phy = false,
-//         .configuration_descriptor = hid_configuration_descriptor,
-//     };
-
-//     ESP_ERROR_CHECK(tinyusb_driver_install(&tusb_cfg));
-//     ESP_LOGI(TAG, "USB initialization DONE");
-
-//     while (1)
-//     {
-//         if (tud_mounted()) 
-//         {
-//             static bool send_hid_data = false;
-//             if (send_hid_data)
-//                 app_send_hid_demo();
-//             send_hid_data = !gpio_get_level(APP_BUTTON);
-//         }
-
-//         if(needs_respond)
-//         {
-//             printf("responding!\n");
-//             tud_hid_report(4, hid_out_buf, CUSTOM_HID_EPIN_SIZE);
-//             needs_respond = 0;
-//         }
-//         vTaskDelay(pdMS_TO_TICKS(10));
-//     }
-// }
