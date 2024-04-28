@@ -155,7 +155,6 @@ static const uint8_t hid_configuration_descriptor[] = {
 // Application return pointer to descriptor, whose contents must exist long enough for transfer to complete
 uint8_t const *tud_hid_descriptor_report_cb(uint8_t instance)
 {
-    printf("hello3\n");
     // We use only one interface and one HID report descriptor, so we can ignore parameter 'instance'
     return hid_report_descriptor;
 }
@@ -165,7 +164,6 @@ uint8_t const *tud_hid_descriptor_report_cb(uint8_t instance)
 // Return zero will cause the stack to STALL request
 uint16_t tud_hid_get_report_cb(uint8_t instance, uint8_t report_id, hid_report_type_t report_type, uint8_t* buffer, uint16_t reqlen)
 {
-    printf("hello1\n");
   (void) instance;
   (void) report_id;
   (void) report_type;
@@ -188,7 +186,6 @@ void tud_hid_set_report_cb(uint8_t instance, uint8_t report_id, hid_report_type_
     for (size_t i = 0; i < bufsize; i++)
         printf("%d ", buffer[i]);
     printf("\n\n");
-
     needs_respond = 1;
 }
 
@@ -246,15 +243,13 @@ void app_main(void)
 
     while (1)
     {
-        // if (tud_mounted()) 
-        // {
-        //     // static bool send_hid_data = false;
-        //     // if (send_hid_data)
-        //     //     app_send_hid_demo();
-        //     // send_hid_data = !gpio_get_level(APP_BUTTON);
-
-            
-        // }
+        if (tud_mounted()) 
+        {
+            static bool send_hid_data = false;
+            if (send_hid_data)
+                app_send_hid_demo();
+            send_hid_data = !gpio_get_level(APP_BUTTON);
+        }
 
         if(needs_respond)
         {
