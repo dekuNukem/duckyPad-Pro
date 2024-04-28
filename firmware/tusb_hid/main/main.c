@@ -131,7 +131,7 @@ const uint8_t hid_report_descriptor[] = {
 /**
  * @brief String descriptor
  */
-const char* hid_string_descriptor[5] = {
+const char* my_usb_string_descriptor[5] = {
     // array of pointer to string descriptors
     (char[]){0x09, 0x04},  // 0: is supported language is English (0x0409)
     "dekuNukem",             // 1: Manufacturer
@@ -253,14 +253,21 @@ static tusb_desc_device_t descriptor_config = {
     .bNumConfigurations = 0x01
 };
 
-#include "..\managed_components\espressif__tinyusb\src\class\msc\msc.h"
-
 static uint8_t const msc_fs_configuration_desc[] = {
     // Config number, interface count, string index, total length, attribute, power in mA
-    TUD_CONFIG_DESCRIPTOR(1, ITF_NUM_TOTAL, 0, TUSB_DESC_TOTAL_LEN, TUSB_DESC_CONFIG_ATT_REMOTE_WAKEUP, 100),
+    TUD_CONFIG_DESCRIPTOR(0, ITF_NUM_TOTAL, 0, TUSB_DESC_TOTAL_LEN, TUSB_DESC_CONFIG_ATT_REMOTE_WAKEUP, 100),
 
+    // something wrong with this:
     // Interface number, string index, EP Out & EP In address, EP size
     TUD_MSC_DESCRIPTOR(ITF_NUM_MSC, 0, EDPT_MSC_OUT, EDPT_MSC_IN, 64),
+};
+
+static char const *string_desc_arr[] = {
+    (const char[]) { 0x09, 0x04 },  // 0: is supported language is English (0x0409)
+    "TinyUSB",                      // 1: Manufacturer
+    "TinyUSB Device",               // 2: Product
+    "123456",                       // 3: Serials
+    "Example MSC",                  // 4. MSC
 };
 
 #define BASE_PATH "/data" // base path to mount the partition
@@ -271,8 +278,6 @@ static void storage_mount_changed_cb(tinyusb_msc_event_t *event)
     ESP_LOGI(TAG, "Storage mounted to application: %s", event->mount_changed_data.is_mounted ? "Yes" : "No");
 }
 // ---------------------- USB MSC END -----------------
-
-#include "..\managed_components\espressif__esp_tinyusb\include\tusb_msc_storage.h"
 
 void app_main(void)
 {
@@ -288,16 +293,16 @@ void app_main(void)
     ESP_ERROR_CHECK(tinyusb_msc_storage_init_sdmmc(&config_sdmmc));
     ESP_ERROR_CHECK(tinyusb_msc_storage_mount(BASE_PATH));
 
-    // ESP_LOGI(TAG, "USB MSC initialization");
-    // const tinyusb_config_t tusb_cfg = {
-    //     .device_descriptor = &descriptor_config,
-    //     .string_descriptor = string_desc_arr,
-    //     .string_descriptor_count = sizeof(string_desc_arr) / sizeof(string_desc_arr[0]),
-    //     .external_phy = false,
-    //     .configuration_descriptor = msc_fs_configuration_desc,
-    // };
-    // ESP_ERROR_CHECK(tinyusb_driver_install(&tusb_cfg));
-    // ESP_LOGI(TAG, "USB MSC initialization DONE");
+    ESP_LOGI(TAG, "USB MSC initialization");
+    const tinyusb_config_t tusb_cfg = {
+        .device_descriptor = &descriptor_config,
+        .string_descriptor = string_desc_arr,
+        .string_descriptor_count = sizeof(string_desc_arr) / sizeof(string_desc_arr[0]),
+        .external_phy = false,
+        .configuration_descriptor = msc_fs_configuration_desc,
+    };
+    ESP_ERROR_CHECK(tinyusb_driver_install(&tusb_cfg));
+    ESP_LOGI(TAG, "USB MSC initialization DONE");
 
     main_loop:
     while(1)
@@ -323,8 +328,8 @@ void app_main(void)
 //     ESP_LOGI(TAG, "USB initialization");
 //     const tinyusb_config_t tusb_cfg = {
 //         .device_descriptor = NULL,
-//         .string_descriptor = hid_string_descriptor,
-//         .string_descriptor_count = sizeof(hid_string_descriptor) / sizeof(hid_string_descriptor[0]),
+//         .string_descriptor = my_usb_string_descriptor,
+//         .string_descriptor_count = sizeof(my_usb_string_descriptor) / sizeof(my_usb_string_descriptor[0]),
 //         .external_phy = false,
 //         .configuration_descriptor = hid_configuration_descriptor,
 //     };

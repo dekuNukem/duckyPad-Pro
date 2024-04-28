@@ -24938,7 +24938,10 @@
                                         "help": "MSC FIFO size, in bytes.",
                                         "id": "TINYUSB_MSC_BUFSIZE",
                                         "name": "TINYUSB_MSC_BUFSIZE",
-                                        "range": null,
+                                        "range": [
+                                            64,
+                                            10000
+                                        ],
                                         "title": "MSC FIFO size",
                                         "type": "int"
                                     },
