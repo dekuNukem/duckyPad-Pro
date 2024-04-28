@@ -130,10 +130,10 @@ const uint8_t hid_report_descriptor[] = {
 const char* hid_string_descriptor[5] = {
     // array of pointer to string descriptors
     (char[]){0x09, 0x04},  // 0: is supported language is English (0x0409)
-    "TinyUSB",             // 1: Manufacturer
-    "TinyUSB Device",      // 2: Product
-    "123456",              // 3: Serials, should use chip ID
-    "Example HID interface",  // 4: HID
+    "dekuNukem",             // 1: Manufacturer
+    "duckyPad2",      // 2: Product
+    "80085",              // 3: Serials, should use chip ID
+    "duckyPad_HID",  // 4: HID
 };
 
 /**
@@ -155,6 +155,7 @@ static const uint8_t hid_configuration_descriptor[] = {
 // Application return pointer to descriptor, whose contents must exist long enough for transfer to complete
 uint8_t const *tud_hid_descriptor_report_cb(uint8_t instance)
 {
+    printf("hello3\n");
     // We use only one interface and one HID report descriptor, so we can ignore parameter 'instance'
     return hid_report_descriptor;
 }
@@ -164,6 +165,7 @@ uint8_t const *tud_hid_descriptor_report_cb(uint8_t instance)
 // Return zero will cause the stack to STALL request
 uint16_t tud_hid_get_report_cb(uint8_t instance, uint8_t report_id, hid_report_type_t report_type, uint8_t* buffer, uint16_t reqlen)
 {
+    printf("hello1\n");
   (void) instance;
   (void) report_id;
   (void) report_type;
@@ -177,6 +179,14 @@ uint16_t tud_hid_get_report_cb(uint8_t instance, uint8_t report_id, hid_report_t
 // received data on OUT endpoint ( Report ID = 0, Type = 0 )
 void tud_hid_set_report_cb(uint8_t instance, uint8_t report_id, hid_report_type_t report_type, uint8_t const* buffer, uint16_t bufsize)
 {
+    printf("\n\ngot data!\n");
+    printf("%d %d %d %d\n", instance, report_id, report_type, bufsize);
+    for (size_t i = 0; i < bufsize; i++)
+    {
+        printf("%d ", buffer[i]);
+    }
+    printf("\n\n");
+    
 }
 
 /********* Application ***************/

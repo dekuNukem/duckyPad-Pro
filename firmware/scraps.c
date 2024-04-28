@@ -14,6 +14,19 @@ uint8_t keycode[6] = {0x40, 0, 0, 0, 0, 0};
     vTaskDelay(pdMS_TO_TICKS(100));
     tud_hid_keyboard_report(1, 0, NULL);
 
+
+static void hid_host_generic_report_callback(const uint8_t *const data, const int length)
+{
+    printf("@@@@@\n");
+    for (int i = 0; i < length; i++) 
+    {
+        printf("%02X", data[i]);
+    }
+    putchar('\n');
+}
+
+
+
 /* Initialize the oled screen */
 void ssd1306_init(void) {
     // Init OLED
