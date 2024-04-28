@@ -13,7 +13,7 @@ static const char *TAG = "example";
 
 #define TUSB_DESC_TOTAL_LEN      (TUD_CONFIG_DESC_LEN + CFG_TUD_HID * TUD_HID_DESC_LEN)
 #define CUSTOM_HID_EPIN_SIZE 63
-#define USBD_CUSTOMHID_OUTREPORT_BUF_SIZE 63
+#define USBD_CUSTOMHID_OUTREPORT_BUF_SIZE CUSTOM_HID_EPIN_SIZE
 /**
  * @brief HID report descriptor
  *
@@ -173,8 +173,7 @@ uint16_t tud_hid_get_report_cb(uint8_t instance, uint8_t report_id, hid_report_t
   return 0;
 }
 
-#define HID_OUT_SIZE 63
-uint8_t hid_out_buf[HID_OUT_SIZE];
+uint8_t hid_out_buf[CUSTOM_HID_EPIN_SIZE];
 uint8_t needs_respond;
 
 // Invoked when received SET_REPORT control request or
