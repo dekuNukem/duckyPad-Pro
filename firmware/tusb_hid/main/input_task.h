@@ -35,6 +35,14 @@
 #define RE2_A GPIO_NUM_4
 #define RE2_B GPIO_NUM_5
 
+#define BUTTON_SERVICE_UNSERVICED 0
+#define BUTTON_SERVICE_SERVICED 1
+#define BUTTON_RELEASED 0   
+#define BUTTON_PRESSED 1
+
+
+
+
 void gpio_init(void);
 
 #ifdef __cplusplus

@@ -32,6 +32,7 @@
     "esp_vfs_fat.h": "c",
     "sdmmc_host.h": "c",
     "tusb_msc_storage.h": "c",
-    "msc.h": "c"
+    "msc.h": "c",
+    "random": "c"
   }
 }
