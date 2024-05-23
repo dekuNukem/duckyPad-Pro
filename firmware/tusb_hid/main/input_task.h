@@ -25,9 +25,8 @@
 #define SW_14_GPIO GPIO_NUM_40
 #define SW_15_GPIO GPIO_NUM_41
 #define SW_16_GPIO GPIO_NUM_42
-// #define SW_17_U0TX_GPIO GPIO_NUM_43
-#define SW_17_SPICS1_GPIO GPIO_NUM_26
-#define SW_18_U0RX_GPIO GPIO_NUM_44
+#define SW_17_GPIO GPIO_NUM_26
+#define SW_18_GPIO GPIO_NUM_44
 #define SW_19_GPIO GPIO_NUM_45
 
 #define SW_PLUS_GPIO GPIO_NUM_13
@@ -42,11 +41,6 @@
 
 #define ROTARY_ENCODER_UPPER 1
 #define ROTARY_ENCODER_LOWER 2
-
-#define BUTTON_SERVICE_UNSERVICED 0
-#define BUTTON_SERVICE_SERVICED 1
-#define BUTTON_RELEASED 0   
-#define BUTTON_PRESSED 1
 
 #define SW_0 0
 #define SW_1 1
@@ -76,11 +70,9 @@
 
 typedef struct
 {
-  uint8_t prev_state;
-  uint8_t button_state;
-  uint8_t service_status; 
-} sw_stat;
-
+    uint8_t id;
+    uint8_t level;
+} switch_event_t;
 
 void switch_init(void);
 void my_rotary_encoder_init(void);

@@ -1,4 +1,9 @@
-
+// #define SW_17_U0TX_GPIO GPIO_NUM_43
+#define SW_17_SPICS1_GPIO GPIO_NUM_26
+#define SW_18_U0RX_GPIO GPIO_NUM_44
+// printf("cs1: %d\n", gpio_get_level(SW_17_GPIO));
+    // printf("count: %d\n", count);
+    // printf("%ld\n", );
 // media keys, working
 uint8_t keycode[6] = {0x40, 0, 0, 0, 0, 0};
     tud_hid_report(2, keycode, 6);
