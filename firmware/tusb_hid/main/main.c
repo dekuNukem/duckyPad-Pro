@@ -14,8 +14,9 @@ static const char *TAG = "MAIN";
 
 void app_main(void)
 {
-    switch_init();
+    ESP_ERROR_CHECK(gpio_install_isr_service(0)); // BEFORE GPIO INIT
     my_rotary_encoder_init();
+    switch_init();
     sd_init();
     oled_init();
     neopixel_init();

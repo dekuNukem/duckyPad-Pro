@@ -18,7 +18,9 @@ QueueHandle_t event_queue;
 void my_rotary_encoder_init(void)
 {
 	// esp32-rotary-encoder requires that the GPIO ISR service is installed before calling rotary_encoder_register()
-    ESP_ERROR_CHECK(gpio_install_isr_service(0));
+
+	// below is called in MAIN, no need to call twice
+    // ESP_ERROR_CHECK(gpio_install_isr_service(0));
 
     // Initialise the rotary encoder device with the GPIOs for A and B signals
     memset(&upper_rc_info, 0, sizeof(rotary_encoder_info_t));
@@ -44,9 +46,24 @@ void get_rc(void)
 		printf("Event: id: %d pos: %ld, dir: %d\n", event.state.id, event.state.position, event.state.direction);
 }
 
+volatile uint8_t count;
+
 void input_test(void)
 {
-	printf("cs1: %d\n", gpio_get_level(SW_17_SPICS1_GPIO));
+	// printf("cs1: %d\n", gpio_get_level(SW_17_SPICS1_GPIO));
+	printf("count: %d\n", count);
+	// printf("%ld\n", );
+}
+
+volatile uint32_t last_sw_isr;
+
+void sw_isr(void * args)
+{
+	uint32_t now = xTaskGetTickCountFromISR();
+	if(now - last_sw_isr <= 66)
+		return;
+	count = args;
+	last_sw_isr = now;
 }
 
 void switch_init(void)
@@ -77,11 +94,33 @@ void switch_init(void)
                 BIT64(SW_RE1_GPIO) | \
                 BIT64(SW_RE2_GPIO),
         .mode = GPIO_MODE_INPUT,
-        .intr_type = GPIO_INTR_DISABLE,
+        .intr_type = GPIO_INTR_ANYEDGE,
         .pull_up_en = true,
         .pull_down_en = false,
     };
     ESP_ERROR_CHECK(gpio_config(&boot_button_config));
-	// gpio_isr_handler_add(SW_15_GPIO, sw_isr, NULL);
-	// gpio_get_level(SW_RE2);
+	gpio_isr_handler_add(SW_0_GPIO, sw_isr, 0);
+	gpio_isr_handler_add(SW_1_GPIO, sw_isr, 1);
+	gpio_isr_handler_add(SW_2_GPIO, sw_isr, 2);
+	gpio_isr_handler_add(SW_3_GPIO, sw_isr, 3);
+	gpio_isr_handler_add(SW_4_GPIO, sw_isr, 4);
+	gpio_isr_handler_add(SW_5_GPIO, sw_isr, 5);
+	gpio_isr_handler_add(SW_6_GPIO, sw_isr, 6);
+	gpio_isr_handler_add(SW_7_GPIO, sw_isr, 7);
+	gpio_isr_handler_add(SW_8_GPIO, sw_isr, 8);
+	gpio_isr_handler_add(SW_9_GPIO, sw_isr, 9);
+	gpio_isr_handler_add(SW_10_GPIO, sw_isr, 10);
+	gpio_isr_handler_add(SW_11_GPIO, sw_isr, 11);
+	gpio_isr_handler_add(SW_12_GPIO, sw_isr, 12);
+	gpio_isr_handler_add(SW_13_GPIO, sw_isr, 13);
+	gpio_isr_handler_add(SW_14_GPIO, sw_isr, 14);
+	gpio_isr_handler_add(SW_15_GPIO, sw_isr, 15);
+	gpio_isr_handler_add(SW_16_GPIO, sw_isr, 16);
+	gpio_isr_handler_add(SW_17_SPICS1_GPIO, sw_isr, 17);
+	gpio_isr_handler_add(SW_18_U0RX_GPIO, sw_isr, 18);
+	gpio_isr_handler_add(SW_19_GPIO, sw_isr, 19);
+	gpio_isr_handler_add(SW_PLUS_GPIO, sw_isr, 20);
+	gpio_isr_handler_add(SW_MINUS_GPIO, sw_isr, 21);
+	gpio_isr_handler_add(SW_RE1_GPIO, sw_isr, 22);
+	gpio_isr_handler_add(SW_RE2_GPIO, sw_isr, 23);
 }
