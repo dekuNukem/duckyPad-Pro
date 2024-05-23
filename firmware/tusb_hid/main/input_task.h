@@ -25,7 +25,8 @@
 #define SW_14_GPIO GPIO_NUM_40
 #define SW_15_GPIO GPIO_NUM_41
 #define SW_16_GPIO GPIO_NUM_42
-#define SW_17_U0TX_GPIO GPIO_NUM_43
+// #define SW_17_U0TX_GPIO GPIO_NUM_43
+#define SW_17_SPICS1_GPIO GPIO_NUM_26
 #define SW_18_U0RX_GPIO GPIO_NUM_44
 #define SW_19_GPIO GPIO_NUM_45
 
@@ -84,6 +85,7 @@ typedef struct
 void switch_init(void);
 void my_rotary_encoder_init(void);
 void get_rc(void);
+void input_test(void);
 
 #ifdef __cplusplus
 }

@@ -22,7 +22,7 @@ void app_main(void)
 
     while(1)
     {
-        get_rc();
+        input_test();
         vTaskDelay(pdMS_TO_TICKS(500));
     }
 }

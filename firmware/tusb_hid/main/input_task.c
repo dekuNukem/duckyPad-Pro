@@ -44,9 +44,9 @@ void get_rc(void)
 		printf("Event: id: %d pos: %ld, dir: %d\n", event.state.id, event.state.position, event.state.direction);
 }
 
-void sw_isr(void)
+void input_test(void)
 {
-	;
+	printf("cs1: %d\n", gpio_get_level(SW_17_SPICS1_GPIO));
 }
 
 void switch_init(void)
@@ -69,7 +69,7 @@ void switch_init(void)
 				BIT64(SW_14_GPIO) | \
 				BIT64(SW_15_GPIO) | \
 				BIT64(SW_16_GPIO) | \
-				/* BIT64(SW_17_U0TX_GPIO) | */ \
+				BIT64(SW_17_SPICS1_GPIO) | \
 			    BIT64(SW_18_U0RX_GPIO) | \
 				BIT64(SW_19_GPIO) | \
                 BIT64(SW_PLUS_GPIO) | \
@@ -77,11 +77,11 @@ void switch_init(void)
                 BIT64(SW_RE1_GPIO) | \
                 BIT64(SW_RE2_GPIO),
         .mode = GPIO_MODE_INPUT,
-        .intr_type = GPIO_INTR_ANYEDGE,
+        .intr_type = GPIO_INTR_DISABLE,
         .pull_up_en = true,
         .pull_down_en = false,
     };
     ESP_ERROR_CHECK(gpio_config(&boot_button_config));
-	gpio_isr_handler_add(SW_15_GPIO, sw_isr, NULL);
+	// gpio_isr_handler_add(SW_15_GPIO, sw_isr, NULL);
 	// gpio_get_level(SW_RE2);
 }
