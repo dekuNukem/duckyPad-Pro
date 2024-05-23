@@ -19491,7 +19491,7 @@ LOAD c:/users/allen/.espressif/tools/xtensa-esp32s3-elf/esp-12.2.0_20230208/xten
  *fill*         0x0000000042008965        0x3 
  .text.my_rotary_encoder_init
                 0x0000000042008968       0xfa esp-idf/main/libmain.a(input_task.c.obj)
-                                        0x11a (size before relaxing)
+                                        0x11e (size before relaxing)
                 0x0000000042008968                my_rotary_encoder_init
  *fill*         0x0000000042008a62        0x2 
  .text.get_rc   0x0000000042008a64       0x3a esp-idf/main/libmain.a(input_task.c.obj)

@@ -67,13 +67,13 @@ void switch_init(void)
 				BIT64(SW_20) | \
                 BIT64(SW_PLUS) | \
                 BIT64(SW_MINUS) | \
-                BIT64(RE1_SW) | \
-                BIT64(RE2_SW),
+                BIT64(SW_RE1) | \
+                BIT64(SW_RE2),
         .mode = GPIO_MODE_INPUT,
         .intr_type = GPIO_INTR_DISABLE,
         .pull_up_en = true,
         .pull_down_en = false,
     };
     ESP_ERROR_CHECK(gpio_config(&boot_button_config));
-	
+	// gpio_get_level(SW_RE2);
 }

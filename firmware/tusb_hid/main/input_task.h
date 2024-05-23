@@ -28,21 +28,16 @@
 
 #define SW_PLUS GPIO_NUM_13
 #define SW_MINUS GPIO_NUM_14
-#define RE1_SW GPIO_NUM_0
+#define SW_RE1 GPIO_NUM_0
+#define SW_RE2 GPIO_NUM_3
+
 #define RE1_A GPIO_NUM_1
 #define RE1_B GPIO_NUM_2
-#define RE2_SW GPIO_NUM_3
 #define RE2_A GPIO_NUM_4
 #define RE2_B GPIO_NUM_5
 
-#define BUTTON_SERVICE_UNSERVICED 0
-#define BUTTON_SERVICE_SERVICED 1
-#define BUTTON_RELEASED 0   
-#define BUTTON_PRESSED 1
-
-#define ROTARY_ENCODER_UPPER 0
-#define ROTARY_ENCODER_LOWER 1
-
+#define ROTARY_ENCODER_UPPER 1
+#define ROTARY_ENCODER_LOWER 2
 
 void switch_init(void);
 void my_rotary_encoder_init(void);
