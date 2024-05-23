@@ -196,6 +196,7 @@ static void _isr_rotenc(void * args)
             {
                 .position = info->state.position,
                 .direction = info->state.direction,
+                .id = info->id,
             },
         };
         BaseType_t task_woken = pdFALSE;
@@ -207,7 +208,7 @@ static void _isr_rotenc(void * args)
     }
 }
 
-esp_err_t rotary_encoder_init(rotary_encoder_info_t * info, gpio_num_t pin_a, gpio_num_t pin_b)
+esp_err_t rotary_encoder_init(rotary_encoder_info_t * info, gpio_num_t pin_a, gpio_num_t pin_b, uint8_t device_id)
 {
     esp_err_t err = ESP_OK;
     if (info)
@@ -218,6 +219,7 @@ esp_err_t rotary_encoder_init(rotary_encoder_info_t * info, gpio_num_t pin_a, gp
         info->table_state = R_START;
         info->state.position = 0;
         info->state.direction = ROTARY_ENCODER_DIRECTION_NOT_SET;
+        info->id = device_id;
 
         // configure GPIOs
         const gpio_config_t rc_cofig = {

@@ -40,7 +40,8 @@
 #define BUTTON_RELEASED 0   
 #define BUTTON_PRESSED 1
 
-
+#define ROTARY_ENCODER_UPPER 0
+#define ROTARY_ENCODER_LOWER 1
 
 
 void switch_init(void);
