@@ -6554,6 +6554,7 @@ type 0309, grid 2.5 mm</description>
 <part name="GND62" library="supply1" library_urn="urn:adsk.eagle:library:371" deviceset="GND" device=""/>
 <part name="JP3" library="adafruit_changed" deviceset="PINHD-1X1" device="CB"/>
 <part name="D1" library="adafruit_changed" deviceset="DIODE" device="SOD-123"/>
+<part name="R18" library="joyAnalog" deviceset="RESISTOR" device="0805-RES" value="470"/>
 </parts>
 <sheets>
 <sheet>
@@ -7332,6 +7333,12 @@ D1 = SDA = MOSI</text>
 <instance part="D1" gate="G$1" x="210.82" y="-251.46" smashed="yes">
 <attribute name="NAME" x="208.28" y="-248.92" size="1.27" layer="95"/>
 <attribute name="VALUE" x="208.28" y="-255.27" size="1.27" layer="96"/>
+</instance>
+<instance part="R18" gate="G$1" x="330.2" y="-71.12" smashed="yes" rot="MR180">
+<attribute name="NAME" x="326.39" y="-72.6186" size="1.778" layer="95" rot="MR180"/>
+<attribute name="VALUE" x="326.39" y="-67.818" size="1.778" layer="96" rot="MR180"/>
+<attribute name="NAME" x="326.39" y="-72.6186" size="1.778" layer="95" rot="MR180"/>
+<attribute name="VALUE" x="326.39" y="-67.818" size="1.778" layer="96" rot="MR180"/>
 </instance>
 </instances>
 <busses>
@@ -8400,13 +8407,13 @@ D1 = SDA = MOSI</text>
 <label x="38.1" y="27.94" size="1.778" layer="95"/>
 </segment>
 <segment>
-<pinref part="U3" gate="G$1" pin="U0TXD"/>
-<wire x1="347.98" y1="-71.12" x2="320.04" y2="-71.12" width="0.1524" layer="91"/>
 <label x="299.72" y="-71.12" size="1.778" layer="95"/>
 <pinref part="JP3" gate="G$1" pin="1"/>
 <wire x1="320.04" y1="-71.12" x2="302.26" y2="-71.12" width="0.1524" layer="91"/>
 <wire x1="320.04" y1="-76.2" x2="320.04" y2="-71.12" width="0.1524" layer="91"/>
 <junction x="320.04" y="-71.12"/>
+<wire x1="325.12" y1="-71.12" x2="320.04" y2="-71.12" width="0.1524" layer="91"/>
+<pinref part="R18" gate="G$1" pin="1"/>
 </segment>
 </net>
 <net name="SW_R2C2" class="0">
@@ -9013,6 +9020,13 @@ D1 = SDA = MOSI</text>
 <wire x1="434.34" y1="-281.94" x2="297.18" y2="-281.94" width="0.1524" layer="91"/>
 <wire x1="434.34" y1="-335.28" x2="434.34" y2="-281.94" width="0.1524" layer="91"/>
 <junction x="434.34" y="-281.94"/>
+</segment>
+</net>
+<net name="N$44" class="0">
+<segment>
+<pinref part="U3" gate="G$1" pin="U0TXD"/>
+<wire x1="347.98" y1="-71.12" x2="335.28" y2="-71.12" width="0.1524" layer="91"/>
+<pinref part="R18" gate="G$1" pin="2"/>
 </segment>
 </net>
 </nets>

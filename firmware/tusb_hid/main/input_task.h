@@ -5,31 +5,34 @@
  extern "C" {
 #endif 
 
-#define SW_1 GPIO_NUM_15
-#define SW_2 GPIO_NUM_16
-#define SW_3 GPIO_NUM_17
-#define SW_4 GPIO_NUM_18
-#define SW_5 GPIO_NUM_21
-#define SW_6 GPIO_NUM_48
-#define SW_7 GPIO_NUM_47
-#define SW_8 GPIO_NUM_33
-#define SW_9 GPIO_NUM_34
-#define SW_10 GPIO_NUM_35
-#define SW_11 GPIO_NUM_36
-#define SW_12 GPIO_NUM_37
-#define SW_13 GPIO_NUM_38
-#define SW_14 GPIO_NUM_39
-#define SW_15 GPIO_NUM_40
-#define SW_16 GPIO_NUM_41
-#define SW_17 GPIO_NUM_42
-#define SW_18_U0TX GPIO_NUM_43
-#define SW_19_U0RX GPIO_NUM_44
-#define SW_20 GPIO_NUM_45
+#define TOTAL_SW_COUNT 24
+#define MAPPABLE_SW_COUNT (TOTAL_SW_COUNT-2)
 
-#define SW_PLUS GPIO_NUM_13
-#define SW_MINUS GPIO_NUM_14
-#define SW_RE1 GPIO_NUM_0
-#define SW_RE2 GPIO_NUM_3
+#define SW_0_GPIO GPIO_NUM_15
+#define SW_1_GPIO GPIO_NUM_16
+#define SW_2_GPIO GPIO_NUM_17
+#define SW_3_GPIO GPIO_NUM_18
+#define SW_4_GPIO GPIO_NUM_21
+#define SW_5_GPIO GPIO_NUM_48
+#define SW_6_GPIO GPIO_NUM_47
+#define SW_7_GPIO GPIO_NUM_33
+#define SW_8_GPIO GPIO_NUM_34
+#define SW_9_GPIO GPIO_NUM_35
+#define SW_10_GPIO GPIO_NUM_36
+#define SW_11_GPIO GPIO_NUM_37
+#define SW_12_GPIO GPIO_NUM_38
+#define SW_13_GPIO GPIO_NUM_39
+#define SW_14_GPIO GPIO_NUM_40
+#define SW_15_GPIO GPIO_NUM_41
+#define SW_16_GPIO GPIO_NUM_42
+#define SW_17_U0TX_GPIO GPIO_NUM_43
+#define SW_18_U0RX_GPIO GPIO_NUM_44
+#define SW_19_GPIO GPIO_NUM_45
+
+#define SW_PLUS_GPIO GPIO_NUM_13
+#define SW_MINUS_GPIO GPIO_NUM_14
+#define SW_RE1_GPIO GPIO_NUM_0
+#define SW_RE2_GPIO GPIO_NUM_3
 
 #define RE1_A GPIO_NUM_1
 #define RE1_B GPIO_NUM_2
@@ -38,6 +41,45 @@
 
 #define ROTARY_ENCODER_UPPER 1
 #define ROTARY_ENCODER_LOWER 2
+
+#define BUTTON_SERVICE_UNSERVICED 0
+#define BUTTON_SERVICE_SERVICED 1
+#define BUTTON_RELEASED 0   
+#define BUTTON_PRESSED 1
+
+#define SW_0 0
+#define SW_1 1
+#define SW_2 2
+#define SW_3 3
+#define SW_4 4
+#define SW_5 5
+#define SW_6 6
+#define SW_7 7
+#define SW_8 8
+#define SW_9 9
+#define SW_10 10
+#define SW_11 11
+#define SW_12 12
+#define SW_13 13
+#define SW_14 14
+#define SW_15 15
+#define SW_16 16
+#define SW_17 17
+#define SW_18 18
+#define SW_19 19
+
+#define SW_PLUS 20
+#define SW_MINUS 21
+#define SW_RE1 22
+#define SW_RE2 23
+
+typedef struct
+{
+  uint8_t prev_state;
+  uint8_t button_state;
+  uint8_t service_status; 
+} sw_stat;
+
 
 void switch_init(void);
 void my_rotary_encoder_init(void);
