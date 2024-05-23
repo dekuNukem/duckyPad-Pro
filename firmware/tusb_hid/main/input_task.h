@@ -43,7 +43,9 @@
 
 
 
-void gpio_init(void);
+void switch_init(void);
+void my_rotary_encoder_init(void);
+void get_rc(void);
 
 #ifdef __cplusplus
 }
