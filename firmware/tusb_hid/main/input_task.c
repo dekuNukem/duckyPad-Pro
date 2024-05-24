@@ -11,7 +11,7 @@ static const char *TAG = "INPUT";
 #define SWITCH_EVENT_QUEUE_SIZE 10
 
 const uint8_t sw_index_to_gpio_lookup[TOTAL_SW_COUNT] = {GPIO_NUM_15, GPIO_NUM_16, GPIO_NUM_17, GPIO_NUM_18, GPIO_NUM_21, GPIO_NUM_48, GPIO_NUM_47, GPIO_NUM_33, GPIO_NUM_34, GPIO_NUM_35, GPIO_NUM_36, GPIO_NUM_37, GPIO_NUM_38, GPIO_NUM_39, GPIO_NUM_40, GPIO_NUM_41, GPIO_NUM_42, GPIO_NUM_26, GPIO_NUM_44, GPIO_NUM_45, GPIO_NUM_13, GPIO_NUM_14, GPIO_NUM_0, GPIO_NUM_3};
-uint8_t switch_status_all[TOTAL_SW_COUNT];
+switch_status_t sw_status[TOTAL_SW_COUNT];
 
 rotary_encoder_info_t upper_rc_info;
 rotary_encoder_info_t lower_rc_info;
@@ -51,25 +51,24 @@ void get_rc(void)
 
 void input_test(void)
 {
-	switch_event_t this_sw_event;
-	if (xQueueReceive(switch_event_queue, &this_sw_event, 0) == pdTRUE)
-		printf("id: %d lvl: %d\n", this_sw_event.id, this_sw_event.level);
+	switch_event_t this_event;
+	if (xQueueReceive(switch_event_queue, &this_event, 0) == pdTRUE)
+		printf("id: %d lvl: %d\n", this_event.id, this_event.level);
 }
-
-volatile uint32_t last_sw_isr;
-volatile switch_event_t sw_event;
 
 void sw_isr(void * args)
 {
+	switch_event_t sw_event = {
+		.id = (uint8_t)args,
+		.level = 1 - gpio_get_level(sw_index_to_gpio_lookup[sw_event.id]),
+	};
 	uint32_t now = xTaskGetTickCountFromISR();
-	sw_event.id = (uint8_t)args;
-	sw_event.level = 1 - gpio_get_level(sw_index_to_gpio_lookup[sw_event.id]);
-	switch_status_all[sw_event.id] = sw_event.level;
+	sw_status[sw_event.id].level = sw_event.level;
 
-	if(now - last_sw_isr <= 66)
+	if(now - sw_status[sw_event.id].last_press_ms <= 33)
 		return;
 	xQueueSendFromISR(switch_event_queue, &sw_event, NULL);
-	last_sw_isr = now;
+	sw_status[sw_event.id].last_press_ms = now;
 }
 
 void switch_init(void)

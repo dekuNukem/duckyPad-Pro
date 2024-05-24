@@ -70,9 +70,14 @@
 
 typedef struct
 {
-    uint8_t id;
     uint8_t level;
     uint32_t last_press_ms;
+} switch_status_t;
+
+typedef struct
+{
+    uint8_t id;
+    uint8_t level;
 } switch_event_t;
 
 void switch_init(void);
