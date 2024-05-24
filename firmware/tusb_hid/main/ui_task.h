@@ -15,6 +15,7 @@
 extern spi_device_handle_t my_spi_handle;
 
 void oled_init(void);
+void print_nosd(void);
 
 #ifdef __cplusplus
 }

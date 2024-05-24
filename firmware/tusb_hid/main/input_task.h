@@ -34,6 +34,8 @@
 #define SW_RE1_GPIO GPIO_NUM_0
 #define SW_RE2_GPIO GPIO_NUM_3
 
+#define SD_CARD_DETECT_GPIO GPIO_NUM_6
+
 #define RE1_A GPIO_NUM_1
 #define RE1_B GPIO_NUM_2
 #define RE2_A GPIO_NUM_4

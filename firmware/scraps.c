@@ -1,3 +1,7 @@
+    // printf("%d\n", gpio_get_level(SD_CARD_DETECT_GPIO));
+
+
+
 void input_test(void)
 {
     // UBaseType_t items_in_queue = uxQueueMessagesWaiting(switches_event_queue);

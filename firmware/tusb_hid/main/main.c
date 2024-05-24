@@ -9,21 +9,35 @@
 #include "sd_task.h"
 #include "ui_task.h"
 #include "neopixel_task.h"
+#include "shared.h"
+
+#include "ssd1306.h"
+
+uint8_t fw_version_major = 0;
+uint8_t fw_version_minor = 0;
+uint8_t fw_version_patch = 1;
 
 static const char *TAG = "MAIN";
 
 void app_main(void)
 {
-    ESP_ERROR_CHECK(gpio_install_isr_service(0)); // BEFORE GPIO INIT
+    vTaskDelay(pdMS_TO_TICKS(500)); // brief delay in case of SD card removal reboot
+    gpio_install_isr_service(0); // BEFORE GPIO INIT
     my_rotary_encoder_init();
     switch_init();
-    sd_init();
     oled_init();
+    // if (sd_init())
+    //     print_nosd();
     neopixel_init();
+    vTaskDelay(pdMS_TO_TICKS(500));
+    print_nosd();
+
+    ssd1306_SetCursor(20, 40);
+    ssd1306_WriteString("haha!!", Font_7x10, White);
+    ssd1306_UpdateScreen();
 
     while(1)
     {
-        input_test();
-        vTaskDelay(pdMS_TO_TICKS(16));
+        vTaskDelay(pdMS_TO_TICKS(500));
     }
 }

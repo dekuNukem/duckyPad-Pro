@@ -2,7 +2,7 @@
 #include "driver/gpio.h"
 #include "input_task.h"
 #include "rotary_encoder.h"
-
+#include "shared.h"
 #include "esp_log.h"
 
 static const char *TAG = "INPUT";
@@ -51,9 +51,14 @@ void get_rc(void)
 
 void input_test(void)
 {
-	switch_event_t this_event;
-	if (xQueueReceive(switch_event_queue, &this_event, 0) == pdTRUE)
-		printf("id: %d lvl: %d\n", this_event.id, this_event.level);
+	// switch_event_t this_event;
+	// if (xQueueReceive(switch_event_queue, &this_event, 0) == pdTRUE)
+	// 	printf("id: %d lvl: %d\n", this_event.id, this_event.level);
+}
+
+void sd_card_det_isr(void* args)
+{
+	esp_restart();
 }
 
 void sw_isr(void * args)
@@ -97,7 +102,8 @@ void switch_init(void)
                 BIT64(SW_PLUS_GPIO) | \
                 BIT64(SW_MINUS_GPIO) | \
                 BIT64(SW_RE1_GPIO) | \
-                BIT64(SW_RE2_GPIO),
+                BIT64(SW_RE2_GPIO) | \
+				BIT64(SD_CARD_DETECT_GPIO),
         .mode = GPIO_MODE_INPUT,
         .intr_type = GPIO_INTR_ANYEDGE,
         .pull_up_en = true,
@@ -128,5 +134,6 @@ void switch_init(void)
 	gpio_isr_handler_add(SW_MINUS_GPIO, sw_isr, SW_MINUS);
 	gpio_isr_handler_add(SW_RE1_GPIO, sw_isr, SW_RE1);
 	gpio_isr_handler_add(SW_RE2_GPIO, sw_isr, SW_RE2);
+	gpio_isr_handler_add(SD_CARD_DETECT_GPIO, sd_card_det_isr, NULL);
 	switch_event_queue = xQueueCreate(SWITCH_EVENT_QUEUE_SIZE, sizeof(switch_event_t));
 }
