@@ -1,3 +1,19 @@
+void input_test(void)
+{
+    // UBaseType_t items_in_queue = uxQueueMessagesWaiting(switches_event_queue);
+    // printf("queue: %d\n", items_in_queue);
+
+    for (size_t i = 0; i < TOTAL_SW_COUNT; i++)
+    {
+        printf("%d ", switch_status_all[i]);
+    }
+    printf("\n");
+
+    if (xQueueReceive(rotary_encoder_event_queue, &event, 0) == pdTRUE)
+        printf("Event: id: %d pos: %ld, dir: %d\n", event.state.id, event.state.position, event.state.direction);
+    
+}
+
 // #define SW_17_U0TX_GPIO GPIO_NUM_43
 #define SW_17_SPICS1_GPIO GPIO_NUM_26
 #define SW_18_U0RX_GPIO GPIO_NUM_44
