@@ -6516,7 +6516,6 @@ type 0309, grid 2.5 mm</description>
 <part name="GND39" library="supply1" library_urn="urn:adsk.eagle:library:371" deviceset="GND" device=""/>
 <part name="C28" library="clock" deviceset="CAP" device="0805" value="100nF"/>
 <part name="GND40" library="supply1" library_urn="urn:adsk.eagle:library:371" deviceset="GND" device=""/>
-<part name="C30" library="clock" deviceset="CAP" device="0805" value="100nF"/>
 <part name="GND41" library="supply1" library_urn="urn:adsk.eagle:library:371" deviceset="GND" device=""/>
 <part name="U$19" library="SparkFun-Retired" deviceset="V_REG_TPS61040" device="SMD"/>
 <part name="+3V32" library="supply1" library_urn="urn:adsk.eagle:library:371" deviceset="+3V3" device=""/>
@@ -7087,10 +7086,6 @@ type 0309, grid 2.5 mm</description>
 </instance>
 <instance part="GND40" gate="1" x="508" y="-33.02" smashed="yes">
 <attribute name="VALUE" x="505.46" y="-35.56" size="1.778" layer="96"/>
-</instance>
-<instance part="C30" gate="G$1" x="490.22" y="-27.94" smashed="yes" rot="R180">
-<attribute name="NAME" x="488.696" y="-30.861" size="1.778" layer="95" rot="R180"/>
-<attribute name="VALUE" x="488.696" y="-25.781" size="1.778" layer="96" rot="R180"/>
 </instance>
 <instance part="GND41" gate="1" x="490.22" y="-35.56" smashed="yes">
 <attribute name="VALUE" x="487.68" y="-38.1" size="1.778" layer="96"/>
@@ -7688,10 +7683,6 @@ type 0309, grid 2.5 mm</description>
 <pinref part="GND40" gate="1" pin="GND"/>
 </segment>
 <segment>
-<pinref part="C30" gate="G$1" pin="1"/>
-<pinref part="GND41" gate="1" pin="GND"/>
-</segment>
-<segment>
 <pinref part="C33" gate="G$1" pin="1"/>
 <pinref part="GND44" gate="1" pin="GND"/>
 <wire x1="160.02" y1="-292.1" x2="160.02" y2="-297.18" width="0.1524" layer="91"/>
@@ -7996,7 +7987,6 @@ type 0309, grid 2.5 mm</description>
 <junction x="528.32" y="-20.32"/>
 <pinref part="C28" gate="G$1" pin="2"/>
 <wire x1="482.6" y1="-22.86" x2="508" y2="-22.86" width="0.1524" layer="91"/>
-<pinref part="C30" gate="G$1" pin="2"/>
 <wire x1="482.6" y1="-25.4" x2="490.22" y2="-25.4" width="0.1524" layer="91"/>
 <junction x="482.6" y="-25.4"/>
 </segment>
@@ -9041,6 +9031,40 @@ type 0309, grid 2.5 mm</description>
 <wire x1="429.26" y1="-76.2" x2="429.26" y2="-53.34" width="0.1524" layer="91"/>
 <wire x1="429.26" y1="-53.34" x2="398.78" y2="-53.34" width="0.1524" layer="91"/>
 <label x="454.66" y="-76.2" size="1.778" layer="95"/>
+</segment>
+</net>
+<net name="AUX_DP" class="0">
+<segment>
+<pinref part="U1" gate="G$1" pin="DP2"/>
+<wire x1="43.18" y1="-185.42" x2="45.72" y2="-185.42" width="0.1524" layer="91"/>
+<wire x1="45.72" y1="-185.42" x2="45.72" y2="-182.88" width="0.1524" layer="91"/>
+<pinref part="U1" gate="G$1" pin="DP1"/>
+<wire x1="45.72" y1="-182.88" x2="43.18" y2="-182.88" width="0.1524" layer="91"/>
+<wire x1="45.72" y1="-182.88" x2="50.8" y2="-182.88" width="0.1524" layer="91"/>
+<junction x="45.72" y="-182.88"/>
+<label x="50.8" y="-182.88" size="1.778" layer="95" xref="yes"/>
+</segment>
+<segment>
+<pinref part="U3" gate="G$1" pin="XTAL_32K_N"/>
+<wire x1="347.98" y1="-50.8" x2="330.2" y2="-50.8" width="0.1524" layer="91"/>
+<label x="330.2" y="-50.8" size="1.778" layer="95" rot="R180" xref="yes"/>
+</segment>
+</net>
+<net name="AUX_DN" class="0">
+<segment>
+<pinref part="U1" gate="G$1" pin="DN2"/>
+<wire x1="43.18" y1="-193.04" x2="45.72" y2="-193.04" width="0.1524" layer="91"/>
+<wire x1="45.72" y1="-193.04" x2="45.72" y2="-190.5" width="0.1524" layer="91"/>
+<pinref part="U1" gate="G$1" pin="DN1"/>
+<wire x1="45.72" y1="-190.5" x2="43.18" y2="-190.5" width="0.1524" layer="91"/>
+<wire x1="45.72" y1="-190.5" x2="50.8" y2="-190.5" width="0.1524" layer="91"/>
+<junction x="45.72" y="-190.5"/>
+<label x="50.8" y="-190.5" size="1.778" layer="95" xref="yes"/>
+</segment>
+<segment>
+<pinref part="U3" gate="G$1" pin="XTAL_32K_P"/>
+<wire x1="347.98" y1="-48.26" x2="330.2" y2="-48.26" width="0.1524" layer="91"/>
+<label x="330.2" y="-48.26" size="1.778" layer="95" rot="R180" xref="yes"/>
 </segment>
 </net>
 </nets>
