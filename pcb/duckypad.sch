@@ -10327,18 +10327,9 @@ We've spent an enormous amount of time creating and checking these footprints an
 <net name="N$1" class="0">
 <segment>
 <pinref part="U2" gate="G$1" pin="VBUS"/>
-<wire x1="43.18" y1="-144.78" x2="78.74" y2="-144.78" width="0.1524" layer="91"/>
-<pinref part="U1" gate="G$1" pin="VBUS"/>
-<wire x1="43.18" y1="-177.8" x2="78.74" y2="-177.8" width="0.1524" layer="91"/>
-<wire x1="78.74" y1="-177.8" x2="78.74" y2="-144.78" width="0.1524" layer="91"/>
-<wire x1="78.74" y1="-144.78" x2="93.98" y2="-144.78" width="0.1524" layer="91"/>
-<junction x="78.74" y="-144.78"/>
+<wire x1="43.18" y1="-144.78" x2="93.98" y2="-144.78" width="0.1524" layer="91"/>
 <pinref part="JP2" gate="A" pin="1"/>
 <wire x1="93.98" y1="-144.78" x2="93.98" y2="-154.94" width="0.1524" layer="91"/>
-<junction x="78.74" y="-177.8"/>
-<pinref part="U$3" gate="G$1" pin="1"/>
-<wire x1="78.74" y1="-177.8" x2="124.46" y2="-177.8" width="0.1524" layer="91"/>
-<wire x1="124.46" y1="-177.8" x2="124.46" y2="-203.2" width="0.1524" layer="91"/>
 </segment>
 </net>
 <net name="USB_DN" class="0">
@@ -10518,17 +10509,6 @@ We've spent an enormous amount of time creating and checking these footprints an
 <pinref part="U3" gate="G$1" pin="LNA_IN"/>
 <pinref part="X1" gate="G$1" pin="SIGNAL"/>
 <wire x1="347.98" y1="-35.56" x2="281.94" y2="-35.56" width="0.1524" layer="91"/>
-</segment>
-</net>
-<net name="N$32" class="0">
-<segment>
-<pinref part="IC2" gate="G$1" pin="VIN"/>
-<pinref part="C29" gate="G$1" pin="2"/>
-<wire x1="119.38" y1="-144.78" x2="124.46" y2="-144.78" width="0.1524" layer="91"/>
-<wire x1="119.38" y1="-144.78" x2="96.52" y2="-144.78" width="0.1524" layer="91"/>
-<junction x="119.38" y="-144.78"/>
-<pinref part="JP2" gate="A" pin="2"/>
-<wire x1="96.52" y1="-144.78" x2="96.52" y2="-154.94" width="0.1524" layer="91"/>
 </segment>
 </net>
 <net name="12V" class="0">
@@ -11446,6 +11426,25 @@ We've spent an enormous amount of time creating and checking these footprints an
 <wire x1="312.42" y1="-96.52" x2="312.42" y2="-99.06" width="0.1524" layer="91"/>
 <pinref part="U3" gate="G$1" pin="SPID"/>
 <wire x1="312.42" y1="-99.06" x2="347.98" y2="-99.06" width="0.1524" layer="91"/>
+</segment>
+</net>
+<net name="N$66" class="0">
+<segment>
+<pinref part="U1" gate="G$1" pin="VBUS"/>
+<wire x1="43.18" y1="-177.8" x2="96.52" y2="-177.8" width="0.1524" layer="91"/>
+<pinref part="IC2" gate="G$1" pin="VIN"/>
+<pinref part="C29" gate="G$1" pin="2"/>
+<wire x1="119.38" y1="-144.78" x2="124.46" y2="-144.78" width="0.1524" layer="91"/>
+<wire x1="119.38" y1="-144.78" x2="96.52" y2="-144.78" width="0.1524" layer="91"/>
+<junction x="119.38" y="-144.78"/>
+<pinref part="JP2" gate="A" pin="2"/>
+<wire x1="96.52" y1="-144.78" x2="96.52" y2="-154.94" width="0.1524" layer="91"/>
+<pinref part="U$3" gate="G$1" pin="1"/>
+<wire x1="96.52" y1="-154.94" x2="96.52" y2="-177.8" width="0.1524" layer="91"/>
+<wire x1="96.52" y1="-177.8" x2="96.52" y2="-203.2" width="0.1524" layer="91"/>
+<wire x1="96.52" y1="-203.2" x2="124.46" y2="-203.2" width="0.1524" layer="91"/>
+<junction x="96.52" y="-154.94"/>
+<junction x="96.52" y="-177.8"/>
 </segment>
 </net>
 </nets>
