@@ -30,13 +30,13 @@
 <layer number="19" name="Unrouted" color="6" fill="1" visible="yes" active="yes"/>
 <layer number="20" name="Dimension" color="15" fill="1" visible="yes" active="yes"/>
 <layer number="21" name="tPlace" color="7" fill="1" visible="yes" active="yes"/>
-<layer number="22" name="bPlace" color="7" fill="1" visible="yes" active="yes"/>
+<layer number="22" name="bPlace" color="7" fill="1" visible="no" active="yes"/>
 <layer number="23" name="tOrigins" color="15" fill="1" visible="yes" active="yes"/>
-<layer number="24" name="bOrigins" color="15" fill="1" visible="yes" active="yes"/>
+<layer number="24" name="bOrigins" color="15" fill="1" visible="no" active="yes"/>
 <layer number="25" name="tNames" color="7" fill="1" visible="yes" active="yes"/>
-<layer number="26" name="bNames" color="7" fill="1" visible="yes" active="yes"/>
-<layer number="27" name="tValues" color="7" fill="1" visible="yes" active="yes"/>
-<layer number="28" name="bValues" color="7" fill="1" visible="yes" active="yes"/>
+<layer number="26" name="bNames" color="7" fill="1" visible="no" active="yes"/>
+<layer number="27" name="tValues" color="7" fill="1" visible="no" active="yes"/>
+<layer number="28" name="bValues" color="7" fill="1" visible="no" active="yes"/>
 <layer number="29" name="tStop" color="7" fill="3" visible="no" active="yes"/>
 <layer number="30" name="bStop" color="7" fill="6" visible="no" active="yes"/>
 <layer number="31" name="tCream" color="7" fill="4" visible="no" active="yes"/>
@@ -48,9 +48,9 @@
 <layer number="37" name="tTest" color="7" fill="1" visible="no" active="yes"/>
 <layer number="38" name="bTest" color="7" fill="1" visible="no" active="yes"/>
 <layer number="39" name="tKeepout" color="4" fill="11" visible="yes" active="yes"/>
-<layer number="40" name="bKeepout" color="1" fill="11" visible="yes" active="yes"/>
+<layer number="40" name="bKeepout" color="1" fill="11" visible="no" active="yes"/>
 <layer number="41" name="tRestrict" color="4" fill="10" visible="yes" active="yes"/>
-<layer number="42" name="bRestrict" color="1" fill="10" visible="yes" active="yes"/>
+<layer number="42" name="bRestrict" color="1" fill="10" visible="no" active="yes"/>
 <layer number="43" name="vRestrict" color="2" fill="10" visible="no" active="yes"/>
 <layer number="44" name="Drills" color="7" fill="1" visible="yes" active="yes"/>
 <layer number="45" name="Holes" color="7" fill="1" visible="yes" active="yes"/>
@@ -60,7 +60,7 @@
 <layer number="49" name="Reference" color="7" fill="1" visible="no" active="yes"/>
 <layer number="50" name="dxf" color="7" fill="1" visible="no" active="no"/>
 <layer number="51" name="tDocu" color="7" fill="1" visible="yes" active="yes"/>
-<layer number="52" name="bDocu" color="7" fill="1" visible="yes" active="yes"/>
+<layer number="52" name="bDocu" color="7" fill="1" visible="no" active="yes"/>
 <layer number="53" name="tGND_GNDA" color="7" fill="9" visible="no" active="no"/>
 <layer number="54" name="bGND_GNDA" color="1" fill="9" visible="no" active="no"/>
 <layer number="56" name="wert" color="7" fill="1" visible="no" active="no"/>
@@ -227,6 +227,8 @@ dekuNukem
 MAY2024</text>
 <rectangle x1="81.534" y1="-2.286" x2="113.792" y2="7.62" layer="41"/>
 <rectangle x1="81.28" y1="-2.286" x2="113.538" y2="7.62" layer="42"/>
+<rectangle x1="75.184" y1="89.662" x2="80.772" y2="92.964" layer="41"/>
+<rectangle x1="75.438" y1="89.662" x2="81.026" y2="92.964" layer="42"/>
 </plain>
 <libraries>
 <library name="clock">
@@ -1606,12 +1608,6 @@ These are the free and generally easy to produce 4-layer PCB design rules. You c
 <contactref element="C10" pad="1"/>
 <via x="81.722" y="86.614" extent="1-16" drill="0.5"/>
 <wire x1="83.68" y1="89.1945" x2="83.6395" y2="89.154" width="0.2032" layer="1"/>
-<wire x1="82.9139" y1="92.6084" x2="83.68" y2="93.3745" width="0.2032" layer="1"/>
-<wire x1="83.6395" y1="89.154" x2="79.436" y2="89.154" width="0.2032" layer="1"/>
-<wire x1="78.2676" y1="90.3224" x2="78.2676" y2="91.948" width="0.2032" layer="1"/>
-<wire x1="78.2676" y1="91.948" x2="78.928" y2="92.6084" width="0.2032" layer="1"/>
-<wire x1="79.436" y1="89.154" x2="78.2676" y2="90.3224" width="0.2032" layer="1"/>
-<wire x1="78.928" y1="92.6084" x2="82.9139" y2="92.6084" width="0.2032" layer="1"/>
 <contactref element="C46" pad="1"/>
 <contactref element="R17" pad="1"/>
 <polygon width="0.3048" layer="2" isolate="0.3048">
@@ -1642,7 +1638,7 @@ These are the free and generally easy to produce 4-layer PCB design rules. You c
 <contactref element="U$2" pad="1"/>
 <contactref element="SW4" pad="P$4"/>
 <contactref element="SW4" pad="P$1"/>
-<via x="75.118" y="61.595" extent="1-16" drill="0.5"/>
+<via x="70.292" y="61.087" extent="1-16" drill="0.5"/>
 <contactref element="SW1" pad="A"/>
 <contactref element="SW1" pad="A'"/>
 <contactref element="SW2" pad="A"/>
@@ -1685,6 +1681,27 @@ These are the free and generally easy to produce 4-layer PCB design rules. You c
 <contactref element="U$3" pad="FIT@2"/>
 <contactref element="U$3" pad="FIT@1"/>
 <wire x1="108.35" y1="5.584" x2="108.35" y2="17.784" width="2.032" layer="16"/>
+<via x="37.018" y="94.869" extent="1-16" drill="0.5"/>
+<via x="12.126" y="77.089" extent="1-16" drill="0.5"/>
+<via x="31.684" y="77.089" extent="1-16" drill="0.5"/>
+<via x="50.48" y="76.327" extent="1-16" drill="0.5"/>
+<via x="75.372" y="79.375" extent="1-16" drill="0.5"/>
+<via x="52.004" y="59.563" extent="1-16" drill="0.5"/>
+<via x="31.938" y="59.817" extent="1-16" drill="0.5"/>
+<via x="13.142" y="59.817" extent="1-16" drill="0.5"/>
+<via x="1.204" y="70.231" extent="1-16" drill="0.5"/>
+<via x="31.43" y="39.497" extent="1-16" drill="0.5"/>
+<via x="12.126" y="39.243" extent="1-16" drill="0.5"/>
+<via x="50.48" y="38.735" extent="1-16" drill="0.5"/>
+<via x="66.228" y="38.227" extent="1-16" drill="0.5"/>
+<via x="70.546" y="22.479" extent="1-16" drill="0.5"/>
+<via x="50.988" y="21.971" extent="1-16" drill="0.5"/>
+<via x="32.446" y="21.209" extent="1-16" drill="0.5"/>
+<via x="12.126" y="20.955" extent="1-16" drill="0.5"/>
+<via x="16.698" y="2.667" extent="1-16" drill="0.5"/>
+<via x="96.454" y="16.129" extent="1-16" drill="0.5"/>
+<via x="85.278" y="24.257" extent="1-16" drill="0.5"/>
+<via x="85.278" y="68.453" extent="1-16" drill="0.5"/>
 </signal>
 <signal name="+3V3">
 <contactref element="IC2" pad="2"/>
@@ -2555,12 +2572,12 @@ These are the free and generally easy to produce 4-layer PCB design rules. You c
 <wire x1="2.794" y1="21.463" x2="2.794" y2="8.001" width="0.2032" layer="1"/>
 <wire x1="4.445" y1="89.027" x2="2.794" y2="87.376" width="0.2032" layer="1"/>
 <wire x1="2.794" y1="78.613" x2="2.794" y2="87.376" width="0.2032" layer="1"/>
-<wire x1="4.445" y1="89.027" x2="75.184" y2="89.027" width="0.2032" layer="1"/>
-<wire x1="75.184" y1="89.027" x2="78.867" y2="85.344" width="0.2032" layer="1"/>
+<wire x1="4.445" y1="89.027" x2="73.152" y2="89.027" width="0.2032" layer="1"/>
+<wire x1="73.152" y1="89.027" x2="78.867" y2="83.312" width="0.2032" layer="1"/>
 <wire x1="80.645" y1="74.803" x2="78.867" y2="76.581" width="0.2032" layer="1"/>
 <wire x1="80.645" y1="74.803" x2="80.645" y2="73.533" width="0.2032" layer="1"/>
 <via x="80.645" y="73.533" extent="1-16" drill="0.55"/>
-<wire x1="78.867" y1="85.344" x2="78.867" y2="76.581" width="0.2032" layer="1"/>
+<wire x1="78.867" y1="83.312" x2="78.867" y2="76.581" width="0.2032" layer="1"/>
 <contactref element="U3" pad="48"/>
 <wire x1="80.645" y1="73.533" x2="80.391" y2="73.279" width="0.2032" layer="16"/>
 <wire x1="80.391" y1="70.358" x2="80.391" y2="73.279" width="0.2032" layer="16"/>
@@ -2596,11 +2613,11 @@ These are the free and generally easy to produce 4-layer PCB design rules. You c
 <wire x1="22.606" y1="26.162" x2="22.606" y2="7.239" width="0.2032" layer="1"/>
 <wire x1="24.13" y1="88.519" x2="22.606" y2="86.995" width="0.2032" layer="1"/>
 <wire x1="22.606" y1="78.613" x2="22.606" y2="86.995" width="0.2032" layer="1"/>
-<wire x1="74.422" y1="88.519" x2="77.47" y2="85.471" width="0.2032" layer="1"/>
-<wire x1="77.47" y1="85.471" x2="77.47" y2="76.2" width="0.2032" layer="1"/>
+<wire x1="72.898" y1="88.519" x2="77.47" y2="83.947" width="0.2032" layer="1"/>
+<wire x1="77.47" y1="83.947" x2="77.47" y2="76.2" width="0.2032" layer="1"/>
 <wire x1="79.502" y1="74.168" x2="79.502" y2="70.104" width="0.2032" layer="1"/>
 <via x="79.502" y="70.104" extent="1-16" drill="0.55"/>
-<wire x1="24.13" y1="88.519" x2="74.422" y2="88.519" width="0.2032" layer="1"/>
+<wire x1="24.13" y1="88.519" x2="72.898" y2="88.519" width="0.2032" layer="1"/>
 <wire x1="77.47" y1="76.2" x2="79.502" y2="74.168" width="0.2032" layer="1"/>
 <contactref element="U3" pad="47"/>
 <wire x1="79.502" y1="70.104" x2="80.976" y2="68.63" width="0.2032" layer="16"/>
