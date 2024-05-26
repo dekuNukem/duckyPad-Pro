@@ -8887,6 +8887,12 @@ We've spent an enormous amount of time creating and checking these footprints an
 <part name="R3" library="adafruit_changed" deviceset="R-US_" device="R2010"/>
 <part name="GND67" library="supply1" library_urn="urn:adsk.eagle:library:371" deviceset="GND" device=""/>
 <part name="+3V36" library="supply1" library_urn="urn:adsk.eagle:library:371" deviceset="+3V3" device=""/>
+<part name="C30" library="clock" deviceset="CAP" device="0805" value="1uF"/>
+<part name="C32" library="clock" deviceset="CAP" device="0805" value="100nF"/>
+<part name="+3V37" library="supply1" library_urn="urn:adsk.eagle:library:371" deviceset="+3V3" device=""/>
+<part name="+3V38" library="supply1" library_urn="urn:adsk.eagle:library:371" deviceset="+3V3" device=""/>
+<part name="GND68" library="supply1" library_urn="urn:adsk.eagle:library:371" deviceset="GND" device=""/>
+<part name="GND69" library="supply1" library_urn="urn:adsk.eagle:library:371" deviceset="GND" device=""/>
 </parts>
 <sheets>
 <sheet>
@@ -9791,6 +9797,26 @@ We've spent an enormous amount of time creating and checking these footprints an
 <instance part="+3V36" gate="G$1" x="317.5" y="-83.82" smashed="yes" rot="MR0">
 <attribute name="VALUE" x="320.04" y="-88.9" size="1.778" layer="96" rot="MR90"/>
 </instance>
+<instance part="C30" gate="G$1" x="254" y="-88.9" smashed="yes" rot="R180">
+<attribute name="NAME" x="252.476" y="-91.821" size="1.778" layer="95" rot="R180"/>
+<attribute name="VALUE" x="252.476" y="-86.741" size="1.778" layer="96" rot="R180"/>
+</instance>
+<instance part="C32" gate="G$1" x="264.16" y="-88.9" smashed="yes" rot="R180">
+<attribute name="NAME" x="262.636" y="-91.821" size="1.778" layer="95" rot="R180"/>
+<attribute name="VALUE" x="262.636" y="-86.741" size="1.778" layer="96" rot="R180"/>
+</instance>
+<instance part="+3V37" gate="G$1" x="254" y="-83.82" smashed="yes" rot="MR0">
+<attribute name="VALUE" x="256.54" y="-88.9" size="1.778" layer="96" rot="MR90"/>
+</instance>
+<instance part="+3V38" gate="G$1" x="264.16" y="-83.82" smashed="yes" rot="MR0">
+<attribute name="VALUE" x="266.7" y="-88.9" size="1.778" layer="96" rot="MR90"/>
+</instance>
+<instance part="GND68" gate="1" x="264.16" y="-96.52" smashed="yes">
+<attribute name="VALUE" x="261.62" y="-99.06" size="1.778" layer="96"/>
+</instance>
+<instance part="GND69" gate="1" x="254" y="-96.52" smashed="yes">
+<attribute name="VALUE" x="251.46" y="-99.06" size="1.778" layer="96"/>
+</instance>
 </instances>
 <busses>
 </busses>
@@ -10232,6 +10258,14 @@ We've spent an enormous amount of time creating and checking these footprints an
 <pinref part="GND67" gate="1" pin="GND"/>
 <wire x1="281.94" y1="-96.52" x2="271.78" y2="-96.52" width="0.1524" layer="91"/>
 </segment>
+<segment>
+<pinref part="C32" gate="G$1" pin="1"/>
+<pinref part="GND68" gate="1" pin="GND"/>
+</segment>
+<segment>
+<pinref part="C30" gate="G$1" pin="1"/>
+<pinref part="GND69" gate="1" pin="GND"/>
+</segment>
 </net>
 <net name="+3V3" class="0">
 <segment>
@@ -10499,6 +10533,14 @@ We've spent an enormous amount of time creating and checking these footprints an
 <pinref part="U5" gate="G$1" pin="VCC"/>
 <wire x1="317.5" y1="-86.36" x2="317.5" y2="-88.9" width="0.1524" layer="91"/>
 <wire x1="317.5" y1="-88.9" x2="312.42" y2="-88.9" width="0.1524" layer="91"/>
+</segment>
+<segment>
+<pinref part="C30" gate="G$1" pin="2"/>
+<pinref part="+3V37" gate="G$1" pin="+3V3"/>
+</segment>
+<segment>
+<pinref part="C32" gate="G$1" pin="2"/>
+<pinref part="+3V38" gate="G$1" pin="+3V3"/>
 </segment>
 </net>
 <net name="USB_DP" class="0">
