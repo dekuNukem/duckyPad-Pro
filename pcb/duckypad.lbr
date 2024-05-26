@@ -52,8 +52,8 @@
 <layer number="42" name="bRestrict" color="1" fill="10" visible="yes" active="yes"/>
 <layer number="43" name="vRestrict" color="2" fill="10" visible="yes" active="yes"/>
 <layer number="44" name="Drills" color="7" fill="1" visible="no" active="yes"/>
-<layer number="45" name="Holes" color="7" fill="1" visible="yes" active="yes"/>
-<layer number="46" name="Milling" color="3" fill="1" visible="yes" active="yes"/>
+<layer number="45" name="Holes" color="7" fill="1" visible="no" active="yes"/>
+<layer number="46" name="Milling" color="3" fill="1" visible="no" active="yes"/>
 <layer number="47" name="Measures" color="7" fill="1" visible="no" active="yes"/>
 <layer number="48" name="Document" color="7" fill="1" visible="yes" active="yes"/>
 <layer number="49" name="Reference" color="7" fill="1" visible="yes" active="yes"/>
@@ -198,162 +198,84 @@
 <description>Generated from &lt;b&gt;duckypad.sch&lt;/b&gt;&lt;p&gt;
 by exp-lbrs.ulp</description>
 <packages>
-<package name="KAILH_SWITCH_SOCKET_SWITCH_SOCKET">
-<wire x1="0.04" y1="3.08" x2="4.93" y2="3.08" width="0.15" layer="22"/>
-<wire x1="-6.2" y1="0.54" x2="-2.5" y2="0.54" width="0.15" layer="22"/>
-<wire x1="-2.5" y1="0.54" x2="0.04" y2="3.08" width="0.15" layer="22" curve="-90"/>
-<wire x1="4.93" y1="3.08" x2="4.93" y2="7.08" width="0.15" layer="22"/>
-<wire x1="4.93" y1="7.08" x2="-3.66" y2="7.08" width="0.15" layer="22"/>
-<wire x1="-3.66" y1="7.08" x2="-6.2" y2="4.54" width="0.15" layer="22" curve="90"/>
-<wire x1="-6.2" y1="4.54" x2="-6.2" y2="0.54" width="0.15" layer="22"/>
-<smd name="1" x="6.355" y="5.08" dx="3.2" dy="2.4" layer="16"/>
-<smd name="2" x="-7.625" y="2.54" dx="3.2" dy="2.4" layer="16"/>
-<text x="0" y="7.62" size="1.27" layer="26" ratio="12" rot="MR0" align="bottom-center">&gt;NAME</text>
-<hole x="0" y="0" drill="4"/>
-<hole x="-3.81" y="2.54" drill="3.1"/>
-<hole x="2.54" y="5.08" drill="3.1"/>
-<hole x="-5.08" y="0" drill="1.7"/>
-<hole x="5.08" y="0" drill="1.7"/>
-</package>
-<package name="REVERSE_MNT">
-<rectangle x1="-1.8" y1="-1.6" x2="1.8" y2="1.6" layer="46"/>
-<smd name="DIN" x="-2.6" y="-0.75" dx="0.82" dy="2" layer="16" rot="R270"/>
-<smd name="DOUT" x="2.6" y="0.75" dx="0.82" dy="2" layer="16" rot="R270"/>
-<smd name="GND" x="-2.6" y="0.75" dx="0.82" dy="2" layer="16" rot="R270"/>
-<smd name="VDD" x="2.6" y="-0.75" dx="0.82" dy="2" layer="16" rot="R270"/>
-<text x="4.2" y="0.75" size="1.27" layer="22" rot="R180" align="center">o</text>
-<text x="4.2" y="-0.75" size="1.27" layer="22" rot="R180" align="center">+</text>
-<text x="-4.2" y="-0.75" size="1.27" layer="22" rot="R180" align="center">i</text>
-<text x="-4.2" y="0.75" size="1.27" layer="22" rot="R180" align="center">-</text>
-<rectangle x1="-1.905" y1="-1.651" x2="1.905" y2="1.651" layer="41"/>
-<rectangle x1="-1.905" y1="-1.651" x2="1.905" y2="1.651" layer="42"/>
-</package>
-<package name="7P">
-<smd name="P$1" x="-7.62" y="0" dx="3.2" dy="1.6" layer="1" rot="R90"/>
-<smd name="P$2" x="-5.08" y="0" dx="3.2" dy="1.6" layer="1" rot="R90"/>
-<smd name="P$3" x="-2.54" y="0" dx="3.2" dy="1.6" layer="1" rot="R90"/>
-<smd name="P$4" x="0" y="0" dx="3.2" dy="1.6" layer="1" rot="R90"/>
-<smd name="P$5" x="2.54" y="0" dx="3.2" dy="1.6" layer="1" rot="R90"/>
-<smd name="P$6" x="5.08" y="0" dx="3.2" dy="1.6" layer="1" rot="R90"/>
-<smd name="P$7" x="7.62" y="0" dx="3.2" dy="1.6" layer="1" rot="R90"/>
+<package name="SM12B-SSR-H-TB">
+<description>&lt;b&gt;Shrouded Header&lt;/b&gt;</description>
+<wire x1="-7.173" y1="-1.473" x2="-7.173" y2="1.573" width="0.254" layer="51"/>
+<wire x1="-7.173" y1="1.573" x2="7.173" y2="1.573" width="0.254" layer="51"/>
+<wire x1="7.173" y1="1.573" x2="7.173" y2="-1.473" width="0.254" layer="51"/>
+<wire x1="7.173" y1="-1.473" x2="-7.173" y2="-1.473" width="0.254" layer="51"/>
+<wire x1="-7.173" y1="0.5" x2="-7.173" y2="1.573" width="0.254" layer="21"/>
+<wire x1="-7.173" y1="1.573" x2="-6.5" y2="1.573" width="0.254" layer="21"/>
+<wire x1="7.173" y1="0.5" x2="7.173" y2="1.573" width="0.254" layer="21"/>
+<wire x1="7.173" y1="1.573" x2="6.5" y2="1.573" width="0.254" layer="21"/>
+<wire x1="-5.5" y1="-1.473" x2="5.5" y2="-1.473" width="0.254" layer="21"/>
+<smd name="1" x="-5.5" y="1.925" dx="0.6" dy="1.55" layer="1" thermals="no"/>
+<smd name="2" x="-4.5" y="1.925" dx="0.6" dy="1.55" layer="1" thermals="no"/>
+<smd name="3" x="-3.5" y="1.925" dx="0.6" dy="1.55" layer="1" thermals="no"/>
+<smd name="4" x="-2.5" y="1.925" dx="0.6" dy="1.55" layer="1" thermals="no"/>
+<smd name="5" x="-1.5" y="1.925" dx="0.6" dy="1.55" layer="1" thermals="no"/>
+<smd name="6" x="-0.5" y="1.925" dx="0.6" dy="1.55" layer="1" thermals="no"/>
+<smd name="7" x="0.5" y="1.925" dx="0.6" dy="1.55" layer="1" thermals="no"/>
+<smd name="8" x="1.5" y="1.925" dx="0.6" dy="1.55" layer="1" thermals="no"/>
+<smd name="9" x="2.5" y="1.925" dx="0.6" dy="1.55" layer="1" thermals="no"/>
+<smd name="10" x="3.5" y="1.925" dx="0.6" dy="1.55" layer="1" thermals="no"/>
+<smd name="11" x="4.5" y="1.925" dx="0.6" dy="1.55" layer="1" thermals="no"/>
+<smd name="12" x="5.5" y="1.925" dx="0.6" dy="1.55" layer="1" thermals="no"/>
+<smd name="FIT@1" x="-7.1" y="-0.9" dx="1.2" dy="1.8" layer="1" thermals="no"/>
+<smd name="FIT@2" x="7.1" y="-0.9" dx="1.2" dy="1.8" layer="1" thermals="no"/>
+<text x="-8.255" y="-1.905" size="1.27" layer="25" rot="R90">&gt;NAME</text>
+<text x="9.525" y="-1.905" size="1.27" layer="27" rot="R90">&gt;VALUE</text>
 </package>
 </packages>
 <symbols>
-<symbol name="KAILH_SWITCH_SOCKET_SPST">
-<wire x1="-5.08" y1="0" x2="-2.54" y2="2.54" width="0.1524" layer="94"/>
-<wire x1="-2.54" y1="2.54" x2="0" y2="2.54" width="0.1524" layer="94"/>
-<wire x1="5.08" y1="0" x2="0" y2="0" width="0.1524" layer="94"/>
-<pin name="1" x="-5.08" y="0" visible="pad" length="point" direction="pas"/>
-<pin name="2" x="5.08" y="0" visible="pad" length="point" direction="pas" rot="R180"/>
-<text x="-5.08" y="2.54" size="1.778" layer="95">&gt;NAME</text>
-<text x="-5.08" y="5.08" size="1.778" layer="96">&gt;VALUE</text>
+<symbol name="K">
+<wire x1="1.27" y1="0" x2="0" y2="0" width="0.6096" layer="94"/>
+<pin name="S" x="-2.54" y="0" visible="off" length="short" direction="pas"/>
+<text x="2.54" y="-0.762" size="1.524" layer="95">&gt;NAME</text>
 </symbol>
-<symbol name="WS2812BLED">
-<wire x1="-7.62" y1="10.16" x2="-7.62" y2="-5.08" width="0.254" layer="94"/>
-<wire x1="-7.62" y1="-5.08" x2="0" y2="-5.08" width="0.254" layer="94"/>
-<wire x1="0" y1="-5.08" x2="7.62" y2="-5.08" width="0.254" layer="94"/>
-<wire x1="7.62" y1="-5.08" x2="7.62" y2="10.16" width="0.254" layer="94"/>
-<wire x1="7.62" y1="10.16" x2="5.08" y2="10.16" width="0.254" layer="94"/>
-<wire x1="5.08" y1="10.16" x2="-7.62" y2="10.16" width="0.254" layer="94"/>
-<wire x1="-6.35" y1="5.08" x2="-5.08" y2="5.08" width="0.254" layer="94"/>
-<wire x1="-5.08" y1="2.54" x2="-6.35" y2="5.08" width="0.254" layer="94"/>
-<wire x1="2.54" y1="2.54" x2="3.81" y2="5.08" width="0.254" layer="94"/>
-<wire x1="3.81" y1="5.08" x2="2.54" y2="5.08" width="0.254" layer="94"/>
-<wire x1="-6.35" y1="2.54" x2="-5.08" y2="2.54" width="0.254" layer="94"/>
-<wire x1="2.54" y1="2.54" x2="3.81" y2="2.54" width="0.254" layer="94"/>
-<wire x1="-1.27" y1="2.54" x2="-1.27" y2="1.27" width="0.254" layer="94"/>
-<wire x1="-1.27" y1="7.62" x2="-5.08" y2="7.62" width="0.254" layer="94"/>
-<wire x1="-5.08" y1="7.62" x2="-5.08" y2="5.08" width="0.254" layer="94"/>
-<wire x1="-1.27" y1="5.08" x2="-1.27" y2="7.62" width="0.254" layer="94"/>
-<wire x1="2.54" y1="5.08" x2="2.54" y2="7.62" width="0.254" layer="94"/>
-<wire x1="2.54" y1="7.62" x2="-1.27" y2="7.62" width="0.254" layer="94"/>
-<wire x1="-5.08" y1="5.08" x2="-3.81" y2="5.08" width="0.254" layer="94"/>
-<wire x1="-5.08" y1="2.54" x2="-3.81" y2="5.08" width="0.254" layer="94"/>
-<wire x1="1.27" y1="5.08" x2="2.54" y2="2.54" width="0.254" layer="94"/>
-<wire x1="1.27" y1="5.08" x2="2.54" y2="5.08" width="0.254" layer="94"/>
-<wire x1="-5.08" y1="2.54" x2="-5.08" y2="1.27" width="0.254" layer="94"/>
-<wire x1="2.54" y1="1.27" x2="-1.27" y2="1.27" width="0.254" layer="94"/>
-<wire x1="-1.27" y1="1.27" x2="-5.08" y2="1.27" width="0.254" layer="94"/>
-<wire x1="0" y1="-4.064" x2="0" y2="-5.08" width="0.254" layer="94"/>
-<wire x1="-3.81" y1="2.54" x2="-5.08" y2="2.54" width="0.254" layer="94"/>
-<wire x1="-2.54" y1="2.54" x2="-1.27" y2="2.54" width="0.254" layer="94"/>
-<wire x1="-1.27" y1="2.54" x2="0" y2="2.54" width="0.254" layer="94"/>
-<wire x1="-1.27" y1="2.54" x2="-2.54" y2="5.08" width="0.254" layer="94"/>
-<wire x1="-2.54" y1="5.08" x2="0" y2="5.08" width="0.254" layer="94"/>
-<wire x1="0" y1="5.08" x2="-1.27" y2="2.54" width="0.254" layer="94"/>
-<wire x1="2.54" y1="2.54" x2="1.27" y2="2.54" width="0.254" layer="94"/>
-<wire x1="2.54" y1="2.54" x2="2.54" y2="1.27" width="0.254" layer="94"/>
-<wire x1="5.08" y1="10.16" x2="5.08" y2="7.62" width="0.254" layer="94"/>
-<wire x1="2.54" y1="7.62" x2="5.08" y2="7.62" width="0.254" layer="94"/>
-<pin name="DI" x="-12.7" y="-2.54" visible="pin" length="middle" direction="in"/>
-<pin name="DO" x="12.7" y="-2.54" visible="pin" length="middle" direction="out" rot="R180"/>
-<pin name="GND" x="0" y="-10.16" visible="pin" length="middle" direction="pwr" rot="R90"/>
-<pin name="VDD" x="5.08" y="15.24" visible="pin" length="middle" direction="pwr" rot="R270"/>
-<text x="-4.064" y="8.382" size="1.27" layer="94">WS2812B</text>
-</symbol>
-<symbol name="7P">
-<pin name="1" x="-10.16" y="5.08" length="middle"/>
-<pin name="2" x="-10.16" y="2.54" length="middle"/>
-<pin name="3" x="-10.16" y="0" length="middle"/>
-<pin name="4" x="-10.16" y="-2.54" length="middle"/>
-<pin name="5" x="-10.16" y="-5.08" length="middle"/>
-<pin name="6" x="-10.16" y="-7.62" length="middle"/>
-<pin name="7" x="-10.16" y="-10.16" length="middle"/>
-<wire x1="-5.08" y1="10.16" x2="-5.08" y2="-15.24" width="0.1524" layer="94"/>
-<wire x1="-5.08" y1="-15.24" x2="5.08" y2="-15.24" width="0.1524" layer="94"/>
-<wire x1="5.08" y1="-15.24" x2="5.08" y2="10.16" width="0.1524" layer="94"/>
-<wire x1="5.08" y1="10.16" x2="-5.08" y2="10.16" width="0.1524" layer="94"/>
+<symbol name="KV">
+<wire x1="1.27" y1="0" x2="0" y2="0" width="0.6096" layer="94"/>
+<pin name="S" x="-2.54" y="0" visible="off" length="short" direction="pas"/>
+<text x="2.54" y="-0.762" size="1.524" layer="95">&gt;NAME</text>
+<text x="-0.762" y="1.397" size="1.524" layer="96">&gt;VALUE</text>
 </symbol>
 </symbols>
 <devicesets>
-<deviceset name="KAILH_SWITCH_SOCKET_KAILH_SWITCH_SOCKET" prefix="SW">
+<deviceset name="SM12B-SSR-H-TB" prefix="X">
+<description>&lt;b&gt;Disconnectable Insulation displacement connector, 1.0mm pitch&lt;/b&gt;&lt;br&gt;12 contacts</description>
 <gates>
-<gate name="G$1" symbol="KAILH_SWITCH_SOCKET_SPST" x="0" y="0"/>
+<gate name="-1" symbol="KV" x="0" y="15.24" addlevel="always" swaplevel="1"/>
+<gate name="-2" symbol="K" x="0" y="12.7" addlevel="always" swaplevel="1"/>
+<gate name="-3" symbol="K" x="0" y="10.16" addlevel="always" swaplevel="1"/>
+<gate name="-4" symbol="K" x="0" y="7.62" addlevel="always" swaplevel="1"/>
+<gate name="-5" symbol="K" x="0" y="5.08" addlevel="always" swaplevel="1"/>
+<gate name="-6" symbol="K" x="0" y="2.54" addlevel="always" swaplevel="1"/>
+<gate name="-7" symbol="K" x="0" y="0" addlevel="always" swaplevel="1"/>
+<gate name="-8" symbol="K" x="0" y="-2.54" addlevel="always" swaplevel="1"/>
+<gate name="-9" symbol="K" x="0" y="-5.08" addlevel="always" swaplevel="1"/>
+<gate name="-10" symbol="K" x="0" y="-7.62" addlevel="always" swaplevel="1"/>
+<gate name="-11" symbol="K" x="0" y="-10.16" addlevel="always" swaplevel="1"/>
+<gate name="-12" symbol="K" x="0" y="-12.7" addlevel="always" swaplevel="1"/>
+<gate name="-13" symbol="K" x="0" y="-17.78" addlevel="always" swaplevel="1"/>
+<gate name="-14" symbol="K" x="0" y="-20.32" addlevel="always" swaplevel="1"/>
 </gates>
 <devices>
-<device name="" package="KAILH_SWITCH_SOCKET_SWITCH_SOCKET">
+<device name="" package="SM12B-SSR-H-TB">
 <connects>
-<connect gate="G$1" pin="1" pad="2"/>
-<connect gate="G$1" pin="2" pad="1"/>
-</connects>
-<technologies>
-<technology name=""/>
-</technologies>
-</device>
-</devices>
-</deviceset>
-<deviceset name="WS2812B" prefix="LED">
-<gates>
-<gate name="G$1" symbol="WS2812BLED" x="0" y="-2.54"/>
-</gates>
-<devices>
-<device name="" package="REVERSE_MNT">
-<connects>
-<connect gate="G$1" pin="DI" pad="DIN"/>
-<connect gate="G$1" pin="DO" pad="DOUT"/>
-<connect gate="G$1" pin="GND" pad="GND"/>
-<connect gate="G$1" pin="VDD" pad="VDD"/>
-</connects>
-<technologies>
-<technology name=""/>
-</technologies>
-</device>
-</devices>
-</deviceset>
-<deviceset name="7PPAD">
-<gates>
-<gate name="G$1" symbol="7P" x="0" y="2.54"/>
-</gates>
-<devices>
-<device name="" package="7P">
-<connects>
-<connect gate="G$1" pin="1" pad="P$1"/>
-<connect gate="G$1" pin="2" pad="P$2"/>
-<connect gate="G$1" pin="3" pad="P$3"/>
-<connect gate="G$1" pin="4" pad="P$4"/>
-<connect gate="G$1" pin="5" pad="P$5"/>
-<connect gate="G$1" pin="6" pad="P$6"/>
-<connect gate="G$1" pin="7" pad="P$7"/>
+<connect gate="-1" pin="S" pad="1"/>
+<connect gate="-10" pin="S" pad="10"/>
+<connect gate="-11" pin="S" pad="11"/>
+<connect gate="-12" pin="S" pad="12"/>
+<connect gate="-13" pin="S" pad="FIT@1"/>
+<connect gate="-14" pin="S" pad="FIT@2"/>
+<connect gate="-2" pin="S" pad="2"/>
+<connect gate="-3" pin="S" pad="3"/>
+<connect gate="-4" pin="S" pad="4"/>
+<connect gate="-5" pin="S" pad="5"/>
+<connect gate="-6" pin="S" pad="6"/>
+<connect gate="-7" pin="S" pad="7"/>
+<connect gate="-8" pin="S" pad="8"/>
+<connect gate="-9" pin="S" pad="9"/>
 </connects>
 <technologies>
 <technology name=""/>
