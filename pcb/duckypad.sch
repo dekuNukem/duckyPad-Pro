@@ -8498,33 +8498,33 @@ We've spent an enormous amount of time creating and checking these footprints an
 <part name="GND60" library="supply1" library_urn="urn:adsk.eagle:library:371" deviceset="GND" device=""/>
 <part name="R16" library="joyAnalog" deviceset="RESISTOR" device="0805-RES" value="10K"/>
 <part name="+3V35" library="supply1" library_urn="urn:adsk.eagle:library:371" deviceset="+3V3" device=""/>
-<part name="L2" library="Discrete" deviceset="L*" device="-4030" value="PRS4018-4R7MT"/>
+<part name="L2" library="Discrete" deviceset="L*" device="-4030" value="4.7uH"/>
 <part name="C46" library="clock" deviceset="CAP" device="0805" value="4.7uF"/>
 <part name="R17" library="joyAnalog" deviceset="RESISTOR" device="0805-RES" value="10K"/>
 <part name="GND62" library="supply1" library_urn="urn:adsk.eagle:library:371" deviceset="GND" device=""/>
 <part name="JP3" library="adafruit_changed" deviceset="PINHD-1X1" device="CB"/>
-<part name="D1" library="duckypad" deviceset="ADAFRUIT_CHANGED_DIODE" device="SOD-123"/>
+<part name="D1" library="duckypad" deviceset="ADAFRUIT_CHANGED_DIODE" device="SOD-123" value="1N4148"/>
 <part name="SW4" library="3pos_slide_switch" deviceset="324_SW" device="324_SWITCH_FOOT_HOLE" value="324_SW324_SWITCH_FOOT_HOLE"/>
-<part name="D2" library="duckypad" deviceset="ADAFRUIT_CHANGED_DIODE" device="SOD-123"/>
-<part name="D3" library="duckypad" deviceset="ADAFRUIT_CHANGED_DIODE" device="SOD-123"/>
-<part name="D4" library="duckypad" deviceset="ADAFRUIT_CHANGED_DIODE" device="SOD-123"/>
-<part name="D5" library="duckypad" deviceset="ADAFRUIT_CHANGED_DIODE" device="SOD-123"/>
-<part name="D6" library="duckypad" deviceset="ADAFRUIT_CHANGED_DIODE" device="SOD-123"/>
-<part name="D7" library="duckypad" deviceset="ADAFRUIT_CHANGED_DIODE" device="SOD-123"/>
-<part name="D8" library="duckypad" deviceset="ADAFRUIT_CHANGED_DIODE" device="SOD-123"/>
-<part name="D9" library="duckypad" deviceset="ADAFRUIT_CHANGED_DIODE" device="SOD-123"/>
-<part name="D10" library="duckypad" deviceset="ADAFRUIT_CHANGED_DIODE" device="SOD-123"/>
-<part name="D11" library="duckypad" deviceset="ADAFRUIT_CHANGED_DIODE" device="SOD-123"/>
-<part name="D12" library="duckypad" deviceset="ADAFRUIT_CHANGED_DIODE" device="SOD-123"/>
-<part name="D13" library="duckypad" deviceset="ADAFRUIT_CHANGED_DIODE" device="SOD-123"/>
-<part name="D14" library="duckypad" deviceset="ADAFRUIT_CHANGED_DIODE" device="SOD-123"/>
-<part name="D15" library="duckypad" deviceset="ADAFRUIT_CHANGED_DIODE" device="SOD-123"/>
-<part name="D16" library="duckypad" deviceset="ADAFRUIT_CHANGED_DIODE" device="SOD-123"/>
-<part name="D17" library="duckypad" deviceset="ADAFRUIT_CHANGED_DIODE" device="SOD-123"/>
-<part name="D18" library="duckypad" deviceset="ADAFRUIT_CHANGED_DIODE" device="SOD-123"/>
-<part name="D19" library="duckypad" deviceset="ADAFRUIT_CHANGED_DIODE" device="SOD-123"/>
-<part name="D20" library="duckypad" deviceset="ADAFRUIT_CHANGED_DIODE" device="SOD-123"/>
-<part name="D21" library="duckypad" deviceset="ADAFRUIT_CHANGED_DIODE" device="SOD-123"/>
+<part name="D2" library="duckypad" deviceset="ADAFRUIT_CHANGED_DIODE" device="SOD-123" value="1N4148"/>
+<part name="D3" library="duckypad" deviceset="ADAFRUIT_CHANGED_DIODE" device="SOD-123" value="1N4148"/>
+<part name="D4" library="duckypad" deviceset="ADAFRUIT_CHANGED_DIODE" device="SOD-123" value="1N4148"/>
+<part name="D5" library="duckypad" deviceset="ADAFRUIT_CHANGED_DIODE" device="SOD-123" value="1N4148"/>
+<part name="D6" library="duckypad" deviceset="ADAFRUIT_CHANGED_DIODE" device="SOD-123" value="1N4148"/>
+<part name="D7" library="duckypad" deviceset="ADAFRUIT_CHANGED_DIODE" device="SOD-123" value="1N4148"/>
+<part name="D8" library="duckypad" deviceset="ADAFRUIT_CHANGED_DIODE" device="SOD-123" value="1N4148"/>
+<part name="D9" library="duckypad" deviceset="ADAFRUIT_CHANGED_DIODE" device="SOD-123" value="1N4148"/>
+<part name="D10" library="duckypad" deviceset="ADAFRUIT_CHANGED_DIODE" device="SOD-123" value="1N4148"/>
+<part name="D11" library="duckypad" deviceset="ADAFRUIT_CHANGED_DIODE" device="SOD-123" value="1N4148"/>
+<part name="D12" library="duckypad" deviceset="ADAFRUIT_CHANGED_DIODE" device="SOD-123" value="1N4148"/>
+<part name="D13" library="duckypad" deviceset="ADAFRUIT_CHANGED_DIODE" device="SOD-123" value="1N4148"/>
+<part name="D14" library="duckypad" deviceset="ADAFRUIT_CHANGED_DIODE" device="SOD-123" value="1N4148"/>
+<part name="D15" library="duckypad" deviceset="ADAFRUIT_CHANGED_DIODE" device="SOD-123" value="1N4148"/>
+<part name="D16" library="duckypad" deviceset="ADAFRUIT_CHANGED_DIODE" device="SOD-123" value="1N4148"/>
+<part name="D17" library="duckypad" deviceset="ADAFRUIT_CHANGED_DIODE" device="SOD-123" value="1N4148"/>
+<part name="D18" library="duckypad" deviceset="ADAFRUIT_CHANGED_DIODE" device="SOD-123" value="1N4148"/>
+<part name="D19" library="duckypad" deviceset="ADAFRUIT_CHANGED_DIODE" device="SOD-123" value="1N4148"/>
+<part name="D20" library="duckypad" deviceset="ADAFRUIT_CHANGED_DIODE" device="SOD-123" value="1N4148"/>
+<part name="D21" library="duckypad" deviceset="ADAFRUIT_CHANGED_DIODE" device="SOD-123" value="1N4148"/>
 <part name="GND1" library="supply1" library_urn="urn:adsk.eagle:library:371" deviceset="GND" device=""/>
 <part name="GND54" library="clock" deviceset="GND" device=""/>
 <part name="GND61" library="supply1" library_urn="urn:adsk.eagle:library:371" deviceset="GND" device=""/>
@@ -8547,7 +8547,7 @@ We've spent an enormous amount of time creating and checking these footprints an
 <part name="GND64" library="supply1" deviceset="GND" device=""/>
 <part name="R4" library="joyAnalog" deviceset="RESISTOR" device="0805-RES" value="470"/>
 <part name="R18" library="joyAnalog" deviceset="RESISTOR" device="0805-RES" value="470"/>
-<part name="R19" library="joyAnalog" deviceset="RESISTOR" device="0805-RES" value="999999"/>
+<part name="R19" library="joyAnalog" deviceset="RESISTOR" device="0805-RES" value="DNP"/>
 </parts>
 <sheets>
 <sheet>
@@ -9250,7 +9250,7 @@ We've spent an enormous amount of time creating and checking these footprints an
 </instance>
 <instance part="L2" gate="L" x="190.5" y="-252.73" smashed="yes">
 <attribute name="NAME" x="185.42" y="-251.46" size="1.27" layer="95"/>
-<attribute name="VALUE" x="182.88" y="-256.54" size="1.27" layer="96"/>
+<attribute name="VALUE" x="187.96" y="-256.54" size="1.27" layer="96"/>
 </instance>
 <instance part="C46" gate="G$1" x="233.68" y="-281.94" smashed="yes" rot="R180">
 <attribute name="NAME" x="234.696" y="-287.401" size="1.778" layer="95" rot="R180"/>

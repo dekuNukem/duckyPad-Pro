@@ -1327,7 +1327,7 @@ These are the free and generally easy to produce 4-layer PCB design rules. You c
 <element name="R16" library="joyAnalog" package="0805" value="10K" x="96.52" y="70.993" smashed="yes" rot="MR0">
 <attribute name="NAME" x="95.377" y="72.8345" size="0.8128" layer="26" rot="MR180"/>
 </element>
-<element name="L2" library="Discrete" package="L4030" value="PRS4018-4R7MT" x="84.963" y="20.066" smashed="yes" rot="MR180"/>
+<element name="L2" library="Discrete" package="L4030" value="4.7uH" x="84.963" y="20.066" smashed="yes" rot="MR180"/>
 <element name="C46" library="clock" package="0805" value="4.7uF" x="94.869" y="18.923" smashed="yes" rot="MR0">
 <attribute name="NAME" x="97.0915" y="20.193" size="0.8128" layer="26" rot="MR270"/>
 </element>
@@ -1337,88 +1337,88 @@ These are the free and generally easy to produce 4-layer PCB design rules. You c
 <element name="JP3" library="adafruit_changed" package="1X01-CLEANBIG" value="" x="107.442" y="2.159" smashed="yes">
 <attribute name="VALUE" x="106.172" y="-1.016" size="1.27" layer="27"/>
 </element>
-<element name="D1" library="duckypad" package="ADAFRUIT_CHANGED_SOD-123" value="" x="90.17" y="19.05" smashed="yes" rot="MR0">
+<element name="D1" library="duckypad" package="ADAFRUIT_CHANGED_SOD-123" value="1N4148" x="90.17" y="19.05" smashed="yes" rot="MR0">
 <attribute name="NAME" x="88.943" y="20.717" size="0.8128" layer="26" rot="MR180"/>
 <attribute name="VALUE" x="91.27" y="17.766" size="0.4064" layer="28" rot="MR0"/>
 </element>
 <element name="SW4" library="3pos_slide_switch" package="342_SWICH_FOOT_HOLE" value="324_SW324_SWITCH_FOOT_HOLE" x="108.331" y="78.994" smashed="yes" rot="R90"/>
-<element name="D2" library="duckypad" package="ADAFRUIT_CHANGED_SOD-123" value="" x="21.59" y="85.344" smashed="yes" rot="MR270">
+<element name="D2" library="duckypad" package="ADAFRUIT_CHANGED_SOD-123" value="1N4148" x="21.59" y="85.344" smashed="yes" rot="MR270">
 <attribute name="NAME" x="20.59" y="86.444" size="0.8128" layer="26" rot="MR270"/>
 <attribute name="VALUE" x="22.874" y="86.444" size="0.4064" layer="28" rot="MR270"/>
 </element>
-<element name="D3" library="duckypad" package="ADAFRUIT_CHANGED_SOD-123" value="" x="40.894" y="85.217" smashed="yes" rot="MR270">
+<element name="D3" library="duckypad" package="ADAFRUIT_CHANGED_SOD-123" value="1N4148" x="40.894" y="85.217" smashed="yes" rot="MR270">
 <attribute name="NAME" x="39.894" y="86.317" size="0.8128" layer="26" rot="MR270"/>
 <attribute name="VALUE" x="42.178" y="86.317" size="0.4064" layer="28" rot="MR270"/>
 </element>
-<element name="D4" library="duckypad" package="ADAFRUIT_CHANGED_SOD-123" value="" x="59.944" y="85.344" smashed="yes" rot="MR270">
+<element name="D4" library="duckypad" package="ADAFRUIT_CHANGED_SOD-123" value="1N4148" x="59.944" y="85.344" smashed="yes" rot="MR270">
 <attribute name="NAME" x="58.944" y="86.444" size="0.8128" layer="26" rot="MR270"/>
 <attribute name="VALUE" x="61.228" y="86.444" size="0.4064" layer="28" rot="MR270"/>
 </element>
-<element name="D5" library="duckypad" package="ADAFRUIT_CHANGED_SOD-123" value="" x="77.47" y="86.614" smashed="yes" rot="MR0">
+<element name="D5" library="duckypad" package="ADAFRUIT_CHANGED_SOD-123" value="1N4148" x="77.47" y="86.614" smashed="yes" rot="MR0">
 <attribute name="NAME" x="78.57" y="87.614" size="0.8128" layer="26" rot="MR0"/>
 <attribute name="VALUE" x="78.57" y="85.33" size="0.4064" layer="28" rot="MR0"/>
 </element>
-<element name="D6" library="duckypad" package="ADAFRUIT_CHANGED_SOD-123" value="" x="20.447" y="67.31" smashed="yes" rot="MR0">
+<element name="D6" library="duckypad" package="ADAFRUIT_CHANGED_SOD-123" value="1N4148" x="20.447" y="67.31" smashed="yes" rot="MR0">
 <attribute name="NAME" x="21.547" y="68.31" size="0.8128" layer="26" rot="MR0"/>
 <attribute name="VALUE" x="21.547" y="66.026" size="0.4064" layer="28" rot="MR0"/>
 </element>
-<element name="D7" library="duckypad" package="ADAFRUIT_CHANGED_SOD-123" value="" x="39.37" y="67.31" smashed="yes" rot="MR0">
+<element name="D7" library="duckypad" package="ADAFRUIT_CHANGED_SOD-123" value="1N4148" x="39.37" y="67.31" smashed="yes" rot="MR0">
 <attribute name="NAME" x="40.47" y="68.31" size="0.8128" layer="26" rot="MR0"/>
 <attribute name="VALUE" x="40.47" y="66.026" size="0.4064" layer="28" rot="MR0"/>
 </element>
-<element name="D8" library="duckypad" package="ADAFRUIT_CHANGED_SOD-123" value="" x="58.42" y="67.31" smashed="yes" rot="MR0">
+<element name="D8" library="duckypad" package="ADAFRUIT_CHANGED_SOD-123" value="1N4148" x="58.42" y="67.31" smashed="yes" rot="MR0">
 <attribute name="NAME" x="59.52" y="68.31" size="0.8128" layer="26" rot="MR0"/>
 <attribute name="VALUE" x="59.52" y="66.026" size="0.4064" layer="28" rot="MR0"/>
 </element>
-<element name="D9" library="duckypad" package="ADAFRUIT_CHANGED_SOD-123" value="" x="77.47" y="67.31" smashed="yes" rot="MR0">
+<element name="D9" library="duckypad" package="ADAFRUIT_CHANGED_SOD-123" value="1N4148" x="77.47" y="67.31" smashed="yes" rot="MR0">
 <attribute name="NAME" x="78.57" y="68.31" size="0.8128" layer="26" rot="MR0"/>
 <attribute name="VALUE" x="78.57" y="66.026" size="0.4064" layer="28" rot="MR0"/>
 </element>
-<element name="D10" library="duckypad" package="ADAFRUIT_CHANGED_SOD-123" value="" x="74.041" y="52.451" smashed="yes" rot="MR270">
+<element name="D10" library="duckypad" package="ADAFRUIT_CHANGED_SOD-123" value="1N4148" x="74.041" y="52.451" smashed="yes" rot="MR270">
 <attribute name="NAME" x="73.041" y="53.551" size="0.8128" layer="26" rot="MR270"/>
 <attribute name="VALUE" x="75.325" y="53.551" size="0.4064" layer="28" rot="MR270"/>
 </element>
-<element name="D11" library="duckypad" package="ADAFRUIT_CHANGED_SOD-123" value="" x="58.42" y="48.514" smashed="yes" rot="MR0">
+<element name="D11" library="duckypad" package="ADAFRUIT_CHANGED_SOD-123" value="1N4148" x="58.42" y="48.514" smashed="yes" rot="MR0">
 <attribute name="NAME" x="59.52" y="49.514" size="0.8128" layer="26" rot="MR0"/>
 <attribute name="VALUE" x="59.52" y="47.23" size="0.4064" layer="28" rot="MR0"/>
 </element>
-<element name="D12" library="duckypad" package="ADAFRUIT_CHANGED_SOD-123" value="" x="39.497" y="48.514" smashed="yes" rot="MR0">
+<element name="D12" library="duckypad" package="ADAFRUIT_CHANGED_SOD-123" value="1N4148" x="39.497" y="48.514" smashed="yes" rot="MR0">
 <attribute name="NAME" x="40.597" y="49.514" size="0.8128" layer="26" rot="MR0"/>
 <attribute name="VALUE" x="40.597" y="47.23" size="0.4064" layer="28" rot="MR0"/>
 </element>
-<element name="D13" library="duckypad" package="ADAFRUIT_CHANGED_SOD-123" value="" x="20.447" y="48.514" smashed="yes" rot="MR0">
+<element name="D13" library="duckypad" package="ADAFRUIT_CHANGED_SOD-123" value="1N4148" x="20.447" y="48.514" smashed="yes" rot="MR0">
 <attribute name="NAME" x="21.547" y="49.514" size="0.8128" layer="26" rot="MR0"/>
 <attribute name="VALUE" x="21.547" y="47.23" size="0.4064" layer="28" rot="MR0"/>
 </element>
-<element name="D14" library="duckypad" package="ADAFRUIT_CHANGED_SOD-123" value="" x="20.447" y="29.083" smashed="yes" rot="MR0">
+<element name="D14" library="duckypad" package="ADAFRUIT_CHANGED_SOD-123" value="1N4148" x="20.447" y="29.083" smashed="yes" rot="MR0">
 <attribute name="NAME" x="21.547" y="30.083" size="0.8128" layer="26" rot="MR0"/>
 <attribute name="VALUE" x="21.547" y="27.799" size="0.4064" layer="28" rot="MR0"/>
 </element>
-<element name="D15" library="duckypad" package="ADAFRUIT_CHANGED_SOD-123" value="" x="39.497" y="29.083" smashed="yes" rot="MR0">
+<element name="D15" library="duckypad" package="ADAFRUIT_CHANGED_SOD-123" value="1N4148" x="39.497" y="29.083" smashed="yes" rot="MR0">
 <attribute name="NAME" x="40.597" y="30.083" size="0.8128" layer="26" rot="MR0"/>
 <attribute name="VALUE" x="40.597" y="27.799" size="0.4064" layer="28" rot="MR0"/>
 </element>
-<element name="D16" library="duckypad" package="ADAFRUIT_CHANGED_SOD-123" value="" x="58.293" y="29.083" smashed="yes" rot="MR0">
+<element name="D16" library="duckypad" package="ADAFRUIT_CHANGED_SOD-123" value="1N4148" x="58.293" y="29.083" smashed="yes" rot="MR0">
 <attribute name="NAME" x="59.393" y="30.083" size="0.8128" layer="26" rot="MR0"/>
 <attribute name="VALUE" x="59.393" y="27.799" size="0.4064" layer="28" rot="MR0"/>
 </element>
-<element name="D17" library="duckypad" package="ADAFRUIT_CHANGED_SOD-123" value="" x="70.485" y="20.32" smashed="yes" rot="MR180">
+<element name="D17" library="duckypad" package="ADAFRUIT_CHANGED_SOD-123" value="1N4148" x="70.485" y="20.32" smashed="yes" rot="MR180">
 <attribute name="NAME" x="69.385" y="19.32" size="0.8128" layer="26" rot="MR180"/>
 <attribute name="VALUE" x="69.385" y="21.604" size="0.4064" layer="28" rot="MR180"/>
 </element>
-<element name="D18" library="duckypad" package="ADAFRUIT_CHANGED_SOD-123" value="" x="75.946" y="11.43" smashed="yes" rot="MR270">
+<element name="D18" library="duckypad" package="ADAFRUIT_CHANGED_SOD-123" value="1N4148" x="75.946" y="11.43" smashed="yes" rot="MR270">
 <attribute name="NAME" x="74.946" y="12.53" size="0.8128" layer="26" rot="MR270"/>
 <attribute name="VALUE" x="77.23" y="12.53" size="0.4064" layer="28" rot="MR270"/>
 </element>
-<element name="D19" library="duckypad" package="ADAFRUIT_CHANGED_SOD-123" value="" x="58.547" y="10.922" smashed="yes" rot="MR0">
+<element name="D19" library="duckypad" package="ADAFRUIT_CHANGED_SOD-123" value="1N4148" x="58.547" y="10.922" smashed="yes" rot="MR0">
 <attribute name="NAME" x="59.647" y="11.922" size="0.8128" layer="26" rot="MR0"/>
 <attribute name="VALUE" x="59.647" y="9.638" size="0.4064" layer="28" rot="MR0"/>
 </element>
-<element name="D20" library="duckypad" package="ADAFRUIT_CHANGED_SOD-123" value="" x="39.497" y="10.541" smashed="yes" rot="MR0">
+<element name="D20" library="duckypad" package="ADAFRUIT_CHANGED_SOD-123" value="1N4148" x="39.497" y="10.541" smashed="yes" rot="MR0">
 <attribute name="NAME" x="40.597" y="11.541" size="0.8128" layer="26" rot="MR0"/>
 <attribute name="VALUE" x="40.597" y="9.257" size="0.4064" layer="28" rot="MR0"/>
 </element>
-<element name="D21" library="duckypad" package="ADAFRUIT_CHANGED_SOD-123" value="" x="20.447" y="10.795" smashed="yes" rot="MR0">
+<element name="D21" library="duckypad" package="ADAFRUIT_CHANGED_SOD-123" value="1N4148" x="20.447" y="10.795" smashed="yes" rot="MR0">
 <attribute name="NAME" x="21.547" y="11.795" size="0.8128" layer="26" rot="MR0"/>
 <attribute name="VALUE" x="21.547" y="9.511" size="0.4064" layer="28" rot="MR0"/>
 </element>
@@ -1444,7 +1444,7 @@ These are the free and generally easy to produce 4-layer PCB design rules. You c
 <element name="R18" library="joyAnalog" package="0805" value="470" x="100.33" y="20.066" smashed="yes" rot="MR90">
 <attribute name="NAME" x="101.1555" y="19.304" size="0.8128" layer="26" rot="MR90"/>
 </element>
-<element name="R19" library="joyAnalog" package="0805" value="999999" x="91.567" y="74.168" smashed="yes" rot="R180">
+<element name="R19" library="joyAnalog" package="0805" value="DNP" x="91.567" y="74.168" smashed="yes" rot="R180">
 <attribute name="NAME" x="92.583" y="75.7555" size="0.8128" layer="25" rot="R180"/>
 </element>
 </elements>
