@@ -221,10 +221,10 @@ GPIO3 must have pull resistor, pull to high to  free up JTAG pins?
 3.5mm corner radius
 
 double check RESET jumper has NO PASTE</text>
-<text x="153.096" y="100.584" size="1.778" layer="26" rot="MR180" align="center">duckyPad Pro
-PT2
+<text x="87.818" y="79.629" size="1.778" layer="26" rot="MR180" align="center">duckyPad Pro
+PT3
 dekuNukem
-MAY2024</text>
+JUN2024</text>
 <rectangle x1="81.534" y1="-2.286" x2="113.792" y2="7.62" layer="41"/>
 <rectangle x1="81.28" y1="-2.286" x2="113.538" y2="7.62" layer="42"/>
 <rectangle x1="75.184" y1="89.662" x2="80.772" y2="92.964" layer="41"/>
@@ -1242,11 +1242,11 @@ These are the free and generally easy to produce 4-layer PCB design rules. You c
 <element name="C33" library="clock" package="0805" value="4.7uF" x="83.312" y="16.195" smashed="yes" rot="MR90">
 <attribute name="NAME" x="82.357" y="15.0495" size="0.8128" layer="26" rot="MR0"/>
 </element>
-<element name="C35" library="clock" package="0805" value="12pF" x="91.948" y="16.195" smashed="yes" rot="MR90">
-<attribute name="NAME" x="91.247" y="14.7955" size="0.8128" layer="26" rot="MR180"/>
+<element name="C35" library="clock" package="0805" value="12pF" x="92.075" y="16.195" smashed="yes" rot="MR90">
+<attribute name="NAME" x="91.374" y="14.7955" size="0.8128" layer="26" rot="MR180"/>
 </element>
-<element name="R7" library="joyAnalog" package="0805" value="560K" x="93.853" y="16.195" smashed="yes" rot="MR270">
-<attribute name="NAME" x="94.8055" y="15.682" size="0.8128" layer="26" rot="MR90"/>
+<element name="R7" library="joyAnalog" package="0805" value="560K" x="94.107" y="16.195" smashed="yes" rot="MR270">
+<attribute name="NAME" x="95.0595" y="15.682" size="0.8128" layer="26" rot="MR90"/>
 </element>
 <element name="R10" library="joyAnalog" package="0805" value="62K" x="90.043" y="16.195" smashed="yes" rot="MR90">
 <attribute name="NAME" x="88.58" y="14.7955" size="0.8128" layer="26" rot="MR180"/>
@@ -1258,7 +1258,7 @@ These are the free and generally easy to produce 4-layer PCB design rules. You c
 <attribute name="NAME" x="84.836" y="32.9565" size="0.8128" layer="26" rot="MR0"/>
 </element>
 <element name="R6" library="joyAnalog" package="0805" value="560K" x="91.948" y="21.463" smashed="yes" rot="MR90">
-<attribute name="NAME" x="91.7575" y="23.241" size="0.8128" layer="26" rot="MR90"/>
+<attribute name="NAME" x="91.6305" y="23.114" size="0.8128" layer="26" rot="MR90"/>
 </element>
 <element name="C36" library="clock" package="0805" value="4.7uF" x="89.789" y="33.401" smashed="yes" rot="MR180">
 <attribute name="NAME" x="88.646" y="32.5755" size="0.8128" layer="26" rot="MR180"/>
@@ -1279,7 +1279,7 @@ These are the free and generally easy to produce 4-layer PCB design rules. You c
 <attribute name="NAME" x="88.265" y="34.7345" size="0.8128" layer="26" rot="MR0"/>
 </element>
 <element name="C40" library="clock" package="0805" value="100nF" x="89.662" y="21.336" smashed="yes" rot="MR180">
-<attribute name="NAME" x="90.551" y="22.0345" size="0.8128" layer="26" rot="MR0"/>
+<attribute name="NAME" x="90.678" y="22.1615" size="0.8128" layer="26" rot="MR0"/>
 </element>
 <element name="U$14" library="duckypad" package="M2_SCREW_FOOT" value="M2_SCREW_DEV" x="19.5" y="76.5" smashed="yes"/>
 <element name="U$20" library="duckypad" package="M2_SCREW_FOOT" value="M2_SCREW_DEV" x="19.5" y="38.5" smashed="yes"/>
@@ -1665,6 +1665,12 @@ These are the free and generally easy to produce 4-layer PCB design rules. You c
 <vertex x="130.048" y="111.379"/>
 <vertex x="130.048" y="-16.891"/>
 <vertex x="-11.811" y="-16.891"/>
+</polygon>
+<polygon width="0.2032" layer="16" isolate="0.3048" thermals="no">
+<vertex x="82.611" y="22.352"/>
+<vertex x="97.978" y="22.352"/>
+<vertex x="97.978" y="13.716"/>
+<vertex x="82.611" y="13.716"/>
 </polygon>
 </signal>
 <signal name="+3V3">
@@ -2252,14 +2258,13 @@ These are the free and generally easy to produce 4-layer PCB design rules. You c
 <contactref element="U$2" pad="11"/>
 <contactref element="U$2" pad="2"/>
 <contactref element="C40" pad="2"/>
-<wire x1="91.948" y1="17.095" x2="92.075" y2="17.095" width="0.4064" layer="16"/>
-<wire x1="92.075" y1="17.095" x2="93.853" y2="17.095" width="0.4064" layer="16"/>
+<wire x1="92.075" y1="17.095" x2="94.107" y2="17.095" width="0.4064" layer="16"/>
 <contactref element="C46" pad="2"/>
 <contactref element="D1" pad="C"/>
 <wire x1="92.02" y1="19.05" x2="92.02" y2="17.15" width="0.4064" layer="16"/>
 <wire x1="92.02" y1="17.15" x2="92.075" y2="17.095" width="0.4064" layer="16"/>
-<wire x1="93.969" y1="18.923" x2="93.969" y2="17.211" width="0.4064" layer="16"/>
-<wire x1="93.853" y1="17.095" x2="93.969" y2="17.211" width="0.4064" layer="16"/>
+<wire x1="93.969" y1="18.923" x2="93.969" y2="17.233" width="0.4064" layer="16"/>
+<wire x1="94.107" y1="17.095" x2="93.969" y2="17.233" width="0.4064" layer="16"/>
 <wire x1="94.985" y1="21.463" x2="94.985" y2="20.193" width="0.4064" layer="16"/>
 <wire x1="94.985" y1="20.193" x2="93.969" y2="19.177" width="0.4064" layer="16"/>
 <wire x1="93.969" y1="19.177" x2="93.969" y2="18.923" width="0.4064" layer="16"/>
@@ -2289,8 +2294,8 @@ These are the free and generally easy to produce 4-layer PCB design rules. You c
 <contactref element="R7" pad="2"/>
 <wire x1="88.1681" y1="15.245" x2="89.993" y2="15.245" width="0.4064" layer="16"/>
 <wire x1="89.993" y1="15.245" x2="90.043" y2="15.295" width="0.4064" layer="16"/>
-<wire x1="90.043" y1="15.295" x2="91.948" y2="15.295" width="0.4064" layer="16"/>
-<wire x1="91.948" y1="15.295" x2="93.853" y2="15.295" width="0.4064" layer="16"/>
+<wire x1="90.043" y1="15.295" x2="92.075" y2="15.295" width="0.4064" layer="16"/>
+<wire x1="92.075" y1="15.295" x2="94.107" y2="15.295" width="0.4064" layer="16"/>
 </signal>
 <signal name="N$8">
 <contactref element="U$2" pad="3"/>
