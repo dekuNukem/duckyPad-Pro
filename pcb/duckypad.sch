@@ -10228,7 +10228,12 @@ We've spent an enormous amount of time creating and checking these footprints an
 <segment>
 <pinref part="X3" gate="-2" pin="S"/>
 <pinref part="GND64" gate="1" pin="GND"/>
-<wire x1="93.98" y1="-205.74" x2="83.82" y2="-205.74" width="0.1524" layer="91"/>
+<wire x1="93.98" y1="-205.74" x2="88.9" y2="-205.74" width="0.1524" layer="91"/>
+<pinref part="X3" gate="-5" pin="S"/>
+<wire x1="88.9" y1="-205.74" x2="83.82" y2="-205.74" width="0.1524" layer="91"/>
+<wire x1="93.98" y1="-213.36" x2="88.9" y2="-213.36" width="0.1524" layer="91"/>
+<wire x1="88.9" y1="-213.36" x2="88.9" y2="-205.74" width="0.1524" layer="91"/>
+<junction x="88.9" y="-205.74"/>
 </segment>
 <segment>
 <pinref part="X3" gate="-14" pin="S"/>
@@ -11591,15 +11596,6 @@ We've spent an enormous amount of time creating and checking these footprints an
 <wire x1="368.3" y1="-78.74" x2="368.3" y2="-210.82" width="0.1524" layer="91"/>
 <pinref part="X3" gate="-4" pin="S"/>
 <wire x1="93.98" y1="-210.82" x2="368.3" y2="-210.82" width="0.1524" layer="91"/>
-</segment>
-</net>
-<net name="N$66" class="0">
-<segment>
-<pinref part="U3" gate="G$1" pin="SPICS1"/>
-<wire x1="347.98" y1="-91.44" x2="365.76" y2="-91.44" width="0.1524" layer="91"/>
-<wire x1="365.76" y1="-91.44" x2="365.76" y2="-213.36" width="0.1524" layer="91"/>
-<wire x1="365.76" y1="-213.36" x2="93.98" y2="-213.36" width="0.1524" layer="91"/>
-<pinref part="X3" gate="-5" pin="S"/>
 </segment>
 </net>
 <net name="N$67" class="0">

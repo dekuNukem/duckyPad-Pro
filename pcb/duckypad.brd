@@ -10,7 +10,7 @@
 <grid distance="10" unitdist="mil" unit="mil" style="lines" multiple="1" display="yes" altdistance="1" altunitdist="mil" altunit="mil"/>
 <layers>
 <layer number="1" name="Top" color="4" fill="1" visible="yes" active="yes"/>
-<layer number="2" name="2_gnd" color="49" fill="1" visible="yes" active="yes"/>
+<layer number="2" name="2_gnd" color="49" fill="1" visible="no" active="yes"/>
 <layer number="3" name="Route3" color="4" fill="3" visible="no" active="no"/>
 <layer number="4" name="Route4" color="1" fill="4" visible="no" active="no"/>
 <layer number="5" name="Route5" color="4" fill="4" visible="no" active="no"/>
@@ -23,20 +23,20 @@
 <layer number="12" name="Route12" color="1" fill="5" visible="no" active="no"/>
 <layer number="13" name="Route13" color="4" fill="5" visible="no" active="no"/>
 <layer number="14" name="Route14" color="1" fill="6" visible="no" active="no"/>
-<layer number="15" name="15_pwr" color="23" fill="1" visible="yes" active="yes"/>
+<layer number="15" name="15_pwr" color="23" fill="1" visible="no" active="yes"/>
 <layer number="16" name="Bottom" color="1" fill="1" visible="yes" active="yes"/>
 <layer number="17" name="Pads" color="2" fill="1" visible="yes" active="yes"/>
 <layer number="18" name="Vias" color="2" fill="1" visible="yes" active="yes"/>
 <layer number="19" name="Unrouted" color="6" fill="1" visible="yes" active="yes"/>
 <layer number="20" name="Dimension" color="15" fill="1" visible="yes" active="yes"/>
-<layer number="21" name="tPlace" color="7" fill="1" visible="no" active="yes"/>
+<layer number="21" name="tPlace" color="7" fill="1" visible="yes" active="yes"/>
 <layer number="22" name="bPlace" color="7" fill="1" visible="yes" active="yes"/>
-<layer number="23" name="tOrigins" color="15" fill="1" visible="no" active="yes"/>
+<layer number="23" name="tOrigins" color="15" fill="1" visible="yes" active="yes"/>
 <layer number="24" name="bOrigins" color="15" fill="1" visible="yes" active="yes"/>
-<layer number="25" name="tNames" color="7" fill="1" visible="no" active="yes"/>
+<layer number="25" name="tNames" color="7" fill="1" visible="yes" active="yes"/>
 <layer number="26" name="bNames" color="7" fill="1" visible="yes" active="yes"/>
-<layer number="27" name="tValues" color="7" fill="1" visible="no" active="yes"/>
-<layer number="28" name="bValues" color="7" fill="1" visible="no" active="yes"/>
+<layer number="27" name="tValues" color="7" fill="1" visible="yes" active="yes"/>
+<layer number="28" name="bValues" color="7" fill="1" visible="yes" active="yes"/>
 <layer number="29" name="tStop" color="7" fill="3" visible="no" active="yes"/>
 <layer number="30" name="bStop" color="7" fill="6" visible="no" active="yes"/>
 <layer number="31" name="tCream" color="7" fill="4" visible="no" active="yes"/>
@@ -47,9 +47,9 @@
 <layer number="36" name="bGlue" color="7" fill="5" visible="no" active="yes"/>
 <layer number="37" name="tTest" color="7" fill="1" visible="no" active="yes"/>
 <layer number="38" name="bTest" color="7" fill="1" visible="no" active="yes"/>
-<layer number="39" name="tKeepout" color="4" fill="11" visible="no" active="yes"/>
+<layer number="39" name="tKeepout" color="4" fill="11" visible="yes" active="yes"/>
 <layer number="40" name="bKeepout" color="1" fill="11" visible="yes" active="yes"/>
-<layer number="41" name="tRestrict" color="4" fill="10" visible="no" active="yes"/>
+<layer number="41" name="tRestrict" color="4" fill="10" visible="yes" active="yes"/>
 <layer number="42" name="bRestrict" color="1" fill="10" visible="yes" active="yes"/>
 <layer number="43" name="vRestrict" color="2" fill="10" visible="no" active="yes"/>
 <layer number="44" name="Drills" color="7" fill="1" visible="yes" active="yes"/>
@@ -59,7 +59,7 @@
 <layer number="48" name="Document" color="7" fill="1" visible="no" active="yes"/>
 <layer number="49" name="Reference" color="7" fill="1" visible="no" active="yes"/>
 <layer number="50" name="dxf" color="7" fill="1" visible="no" active="no"/>
-<layer number="51" name="tDocu" color="7" fill="1" visible="no" active="yes"/>
+<layer number="51" name="tDocu" color="7" fill="1" visible="yes" active="yes"/>
 <layer number="52" name="bDocu" color="7" fill="1" visible="yes" active="yes"/>
 <layer number="53" name="tGND_GNDA" color="7" fill="9" visible="no" active="no"/>
 <layer number="54" name="bGND_GNDA" color="1" fill="9" visible="no" active="no"/>
@@ -1284,19 +1284,19 @@ These are the free and generally easy to produce 4-layer PCB design rules. You c
 <attribute name="NAME" x="90.993" y="14.7955" size="0.8128" layer="26" rot="MR180"/>
 </element>
 <element name="R7" library="joyAnalog" package="0805" value="560K" x="93.599" y="16.195" smashed="yes" rot="MR270">
-<attribute name="NAME" x="94.8055" y="15.682" size="0.8128" layer="26" rot="MR90"/>
+<attribute name="NAME" x="94.5515" y="15.682" size="0.8128" layer="26" rot="MR90"/>
 </element>
 <element name="R10" library="joyAnalog" package="0805" value="62K" x="89.789" y="16.195" smashed="yes" rot="MR90">
 <attribute name="NAME" x="88.326" y="14.7955" size="0.8128" layer="26" rot="MR180"/>
 </element>
 <element name="C31" library="clock" package="0805" value="100nF" x="95.631" y="21.463" smashed="yes" rot="MR0">
-<attribute name="NAME" x="96.647" y="22.5425" size="0.8128" layer="26" rot="MR0"/>
+<attribute name="NAME" x="96.393" y="22.2885" size="0.8128" layer="26" rot="MR0"/>
 </element>
 <element name="C34" library="clock" package="0805" value="2.2uF" x="86.36" y="33.401" smashed="yes" rot="MR180">
 <attribute name="NAME" x="84.836" y="32.9565" size="0.8128" layer="26" rot="MR0"/>
 </element>
 <element name="R6" library="joyAnalog" package="0805" value="560K" x="91.694" y="21.463" smashed="yes" rot="MR90">
-<attribute name="NAME" x="92.5195" y="20.701" size="0.8128" layer="26" rot="MR90"/>
+<attribute name="NAME" x="91.5035" y="23.241" size="0.8128" layer="26" rot="MR90"/>
 </element>
 <element name="C36" library="clock" package="0805" value="4.7uF" x="89.789" y="33.401" smashed="yes" rot="MR180">
 <attribute name="NAME" x="88.646" y="32.5755" size="0.8128" layer="26" rot="MR180"/>
@@ -1367,16 +1367,16 @@ These are the free and generally easy to produce 4-layer PCB design rules. You c
 </element>
 <element name="L2" library="Discrete" package="L4030" value="PRS4018-4R7MT" x="84.709" y="20.066" smashed="yes" rot="MR180"/>
 <element name="C46" library="clock" package="0805" value="4.7uF" x="94.615" y="18.923" smashed="yes" rot="MR0">
-<attribute name="NAME" x="96.393" y="17.2085" size="0.8128" layer="26" rot="MR0"/>
+<attribute name="NAME" x="98.171" y="18.4785" size="0.8128" layer="26" rot="MR0"/>
 </element>
 <element name="R17" library="joyAnalog" package="0805" value="10K" x="93.345" y="21.463" smashed="yes" rot="MR90">
-<attribute name="NAME" x="94.1705" y="20.701" size="0.8128" layer="26" rot="MR90"/>
+<attribute name="NAME" x="92.9005" y="22.987" size="0.8128" layer="26" rot="MR90"/>
 </element>
 <element name="JP3" library="adafruit_changed" package="1X01-CLEANBIG" value="" x="106.934" y="1.905" smashed="yes">
 <attribute name="VALUE" x="105.664" y="-1.27" size="1.27" layer="27"/>
 </element>
 <element name="D1" library="adafruit_changed" package="SOD-123" value="" x="89.916" y="19.05" smashed="yes" rot="MR0">
-<attribute name="NAME" x="92.345" y="21.547" size="0.8128" layer="26" rot="MR270"/>
+<attribute name="NAME" x="88.689" y="20.717" size="0.8128" layer="26" rot="MR180"/>
 <attribute name="VALUE" x="91.016" y="17.766" size="0.4064" layer="28" rot="MR0"/>
 </element>
 <element name="SW4" library="3pos_slide_switch" package="342_SWICH_FOOT_HOLE" value="324_SW324_SWITCH_FOOT_HOLE" x="108.331" y="78.994" smashed="yes" rot="R90"/>
@@ -1690,6 +1690,7 @@ These are the free and generally easy to produce 4-layer PCB design rules. You c
 <wire x1="61.722" y1="88.9" x2="61.214" y2="89.408" width="0.2032" layer="16"/>
 <wire x1="55.941" y1="89.408" x2="55.306" y2="90.043" width="0.2032" layer="16"/>
 <wire x1="61.214" y1="89.408" x2="55.941" y2="89.408" width="0.2032" layer="16"/>
+<contactref element="X3" pad="5"/>
 </signal>
 <signal name="+3V3">
 <contactref element="IC2" pad="2"/>
@@ -1945,8 +1946,11 @@ These are the free and generally easy to produce 4-layer PCB design rules. You c
 <wire x1="24.268" y1="15.875" x2="24.384" y2="15.759" width="0.4064" layer="16"/>
 <wire x1="4.064" y1="17.018" x2="5.196" y2="15.886" width="0.4064" layer="16"/>
 <wire x1="5.196" y1="15.886" x2="5.268" y2="15.886" width="0.4064" layer="16"/>
-<wire x1="95.631" y1="69.215" x2="95.62" y2="70.993" width="0" layer="19" extent="16-16"/>
-<wire x1="88.127" y1="71.948" x2="88" y2="77.3504" width="0" layer="19" extent="1-16"/>
+<wire x1="95.62" y1="70.993" x2="95.631" y2="70.982" width="0.2032" layer="16"/>
+<wire x1="95.631" y1="70.982" x2="95.631" y2="69.215" width="0.2032" layer="16"/>
+<via x="85.979" y="72.009" extent="1-16" drill="0.55"/>
+<wire x1="85.979" y1="72.009" x2="88.066" y2="72.009" width="0.2032" layer="16"/>
+<wire x1="88.066" y1="72.009" x2="88.127" y2="71.948" width="0.2032" layer="16"/>
 </signal>
 <signal name="USB_DP">
 <contactref element="U2" pad="A6"/>
@@ -2391,7 +2395,8 @@ These are the free and generally easy to produce 4-layer PCB design rules. You c
 <wire x1="91.628" y1="61.976" x2="95.25" y2="58.354" width="0.2032" layer="16"/>
 <wire x1="95.25" y1="54.041" x2="94.933" y2="53.724" width="0.2032" layer="16"/>
 <wire x1="95.25" y1="58.354" x2="95.25" y2="54.041" width="0.2032" layer="16"/>
-<wire x1="91.628" y1="72.009" x2="89.927" y2="71.948" width="0" layer="19" extent="16-16"/>
+<wire x1="89.927" y1="71.948" x2="91.567" y2="71.948" width="0.2032" layer="16"/>
+<wire x1="91.567" y1="71.948" x2="91.628" y2="72.009" width="0.2032" layer="16"/>
 </signal>
 <signal name="N$38">
 <contactref element="U3" pad="6"/>
@@ -2603,7 +2608,8 @@ These are the free and generally easy to produce 4-layer PCB design rules. You c
 <wire x1="80.391" y1="70.358" x2="80.391" y2="73.279" width="0.2032" layer="16"/>
 <wire x1="81.376" y1="55.769" x2="81.376" y2="69.373" width="0.2032" layer="16"/>
 <wire x1="81.376" y1="69.373" x2="80.391" y2="70.358" width="0.2032" layer="16"/>
-<wire x1="2.794" y1="21.463" x2="4.645" y2="23.92" width="0" layer="19" extent="16-16"/>
+<wire x1="2.794" y1="21.463" x2="4.645" y2="23.314" width="0.2032" layer="16"/>
+<wire x1="4.645" y1="23.314" x2="4.645" y2="23.92" width="0.2032" layer="16"/>
 </signal>
 <signal name="COL1">
 <contactref element="SWR5C2" pad="1"/>
@@ -2883,16 +2889,19 @@ These are the free and generally easy to produce 4-layer PCB design rules. You c
 <contactref element="D11" pad="C"/>
 <contactref element="D12" pad="C"/>
 <contactref element="D13" pad="C"/>
-<wire x1="60.27" y1="48.514" x2="62.683" y2="50.927" width="0.2032" layer="16"/>
-<wire x1="62.683" y1="50.927" x2="71.556" y2="50.927" width="0.2032" layer="16"/>
 <wire x1="71.556" y1="50.927" x2="72.136" y2="51.507" width="0.2032" layer="16"/>
 <wire x1="74.041" y1="54.301" x2="72.136" y2="52.396" width="0.2032" layer="16"/>
 <wire x1="72.136" y1="51.507" x2="72.136" y2="52.396" width="0.2032" layer="16"/>
 <contactref element="U3" pad="42"/>
 <wire x1="78.531" y1="54.924" x2="74.664" y2="54.924" width="0.2032" layer="16"/>
 <wire x1="74.664" y1="54.924" x2="74.041" y2="54.301" width="0.2032" layer="16"/>
-<wire x1="41.347" y1="48.514" x2="60.27" y2="48.514" width="0" layer="19" extent="16-16"/>
-<wire x1="22.297" y1="48.514" x2="41.347" y2="48.514" width="0" layer="19" extent="16-16"/>
+<wire x1="22.297" y1="48.514" x2="24.71" y2="50.927" width="0.2032" layer="16"/>
+<wire x1="24.71" y1="50.927" x2="41.347" y2="50.927" width="0.2032" layer="16"/>
+<wire x1="41.347" y1="50.927" x2="60.198" y2="50.927" width="0.2032" layer="16"/>
+<wire x1="60.27" y1="50.927" x2="71.556" y2="50.927" width="0.2032" layer="16"/>
+<wire x1="41.347" y1="48.514" x2="41.347" y2="50.927" width="0.2032" layer="16"/>
+<wire x1="60.27" y1="48.514" x2="60.27" y2="50.927" width="0.2032" layer="16"/>
+<wire x1="60.27" y1="50.927" x2="60.198" y2="50.927" width="0.2032" layer="16"/>
 </signal>
 <signal name="ROW3">
 <contactref element="D17" pad="C"/>
@@ -3020,7 +3029,9 @@ These are the free and generally easy to produce 4-layer PCB design rules. You c
 <wire x1="107.506" y1="81.044" x2="107.506" y2="83.502" width="0.2032" layer="1"/>
 <wire x1="99.5" y1="91.508" x2="99.5" y2="95" width="0.2032" layer="1"/>
 <wire x1="107.506" y1="83.502" x2="99.5" y2="91.508" width="0.2032" layer="1"/>
-<wire x1="107.506" y1="81.044" x2="107.506" y2="76.944" width="0" layer="19" extent="1-1"/>
+<wire x1="107.506" y1="81.044" x2="106.426" y2="79.964" width="0.508" layer="1"/>
+<wire x1="106.426" y1="78.024" x2="107.506" y2="76.944" width="0.508" layer="1"/>
+<wire x1="106.426" y1="79.964" x2="106.426" y2="78.024" width="0.508" layer="1"/>
 </signal>
 <signal name="N$30">
 <contactref element="U3" pad="23"/>
@@ -3059,10 +3070,10 @@ These are the free and generally easy to produce 4-layer PCB design rules. You c
 </signal>
 <signal name="N$37">
 <contactref element="U3" pad="27"/>
-<wire x1="79.776" y1="48.879" x2="79.776" y2="47.859" width="0.2032" layer="16"/>
-<wire x1="79.776" y1="47.859" x2="80.5815" y2="47.0535" width="0.2032" layer="16"/>
-<wire x1="80.5815" y1="47.0535" x2="80.5815" y2="23.4442" width="0.2032" layer="16"/>
-<wire x1="80.5815" y1="23.4442" x2="79.883" y2="22.7457" width="0.2032" layer="16"/>
+<wire x1="79.776" y1="48.879" x2="79.776" y2="47.732" width="0.2032" layer="16"/>
+<wire x1="79.776" y1="47.732" x2="80.3783" y2="47.1297" width="0.2032" layer="16"/>
+<wire x1="80.3783" y1="47.1297" x2="80.3783" y2="23.241" width="0.2032" layer="16"/>
+<wire x1="80.3783" y1="23.241" x2="79.883" y2="22.7457" width="0.2032" layer="16"/>
 <wire x1="79.883" y1="22.7457" x2="79.883" y2="11.684" width="0.2032" layer="16"/>
 <wire x1="79.883" y1="11.684" x2="81.026" y2="10.541" width="0.2032" layer="16"/>
 <wire x1="81.026" y1="10.541" x2="102.235" y2="10.541" width="0.2032" layer="16"/>
@@ -3070,52 +3081,39 @@ These are the free and generally easy to produce 4-layer PCB design rules. You c
 <wire x1="102.235" y1="10.541" x2="105.243" y2="13.549" width="0.2032" layer="16"/>
 <wire x1="105.243" y1="13.549" x2="106.025" y2="13.549" width="0.2032" layer="16"/>
 </signal>
-<signal name="N$66">
-<contactref element="U3" pad="28"/>
-<wire x1="79.376" y1="48.879" x2="79.376" y2="47.497" width="0.2032" layer="16"/>
-<wire x1="79.376" y1="47.497" x2="80.137" y2="46.736" width="0.2032" layer="16"/>
-<wire x1="80.137" y1="46.736" x2="80.137" y2="23.7363" width="0.2032" layer="16"/>
-<wire x1="80.137" y1="23.7363" x2="79.375" y2="22.9743" width="0.2032" layer="16"/>
-<wire x1="79.375" y1="22.9743" x2="79.375" y2="11.303" width="0.2032" layer="16"/>
-<wire x1="79.375" y1="11.303" x2="80.645" y2="10.033" width="0.2032" layer="16"/>
-<wire x1="102.616" y1="10.033" x2="80.645" y2="10.033" width="0.2032" layer="16"/>
-<contactref element="X3" pad="5"/>
-<wire x1="106.025" y1="12.549" x2="105.132" y2="12.549" width="0.2032" layer="16"/>
-<wire x1="105.132" y1="12.549" x2="102.616" y2="10.033" width="0.2032" layer="16"/>
-</signal>
 <signal name="N$67">
 <contactref element="U3" pad="36"/>
 <contactref element="X3" pad="6"/>
-<wire x1="78.994" y1="10.922" x2="80.391" y2="9.525" width="0.2032" layer="16"/>
-<wire x1="80.391" y1="9.525" x2="102.87" y2="9.525" width="0.2032" layer="16"/>
-<wire x1="79.756" y1="24.003" x2="78.994" y2="23.241" width="0.2032" layer="16"/>
-<wire x1="78.994" y1="23.241" x2="78.994" y2="10.922" width="0.2032" layer="16"/>
+<wire x1="79.3242" y1="11.6078" x2="80.899" y2="10.033" width="0.2032" layer="16"/>
+<wire x1="80.899" y1="10.033" x2="103.378" y2="10.033" width="0.2032" layer="16"/>
+<wire x1="79.9084" y1="23.495" x2="79.3242" y2="22.9108" width="0.2032" layer="16"/>
+<wire x1="79.3242" y1="22.9108" x2="79.3242" y2="11.6078" width="0.2032" layer="16"/>
 <wire x1="104.894" y1="11.549" x2="106.025" y2="11.549" width="0.2032" layer="16"/>
-<wire x1="102.87" y1="9.525" x2="104.894" y2="11.549" width="0.2032" layer="16"/>
+<wire x1="103.378" y1="10.033" x2="104.894" y2="11.549" width="0.2032" layer="16"/>
 <wire x1="77.035" y1="52.524" x2="76.327" y2="51.816" width="0.2032" layer="16"/>
 <wire x1="76.327" y1="51.816" x2="76.327" y2="48.5902" width="0.2032" layer="16"/>
 <wire x1="76.327" y1="48.5902" x2="76.6064" y2="48.3108" width="0.2032" layer="16"/>
-<wire x1="76.6064" y1="48.3108" x2="77.9272" y2="48.3108" width="0.2032" layer="16"/>
+<wire x1="76.6064" y1="48.3108" x2="78.5114" y2="48.3108" width="0.2032" layer="16"/>
 <wire x1="78.531" y1="52.524" x2="77.035" y2="52.524" width="0.2032" layer="16"/>
-<wire x1="77.9272" y1="48.3108" x2="79.756" y2="46.482" width="0.2032" layer="16"/>
-<wire x1="79.756" y1="46.482" x2="79.756" y2="24.003" width="0.2032" layer="16"/>
+<wire x1="78.5114" y1="48.3108" x2="79.9084" y2="46.9138" width="0.2032" layer="16"/>
+<wire x1="79.9084" y1="46.9138" x2="79.9084" y2="23.495" width="0.2032" layer="16"/>
 </signal>
 <signal name="N$68">
 <contactref element="U3" pad="37"/>
 <contactref element="X3" pad="7"/>
-<wire x1="79.375" y1="24.257" x2="78.486" y2="23.368" width="0.2032" layer="16"/>
-<wire x1="78.486" y1="10.795" x2="78.486" y2="23.368" width="0.2032" layer="16"/>
+<wire x1="79.4766" y1="23.9014" x2="78.8924" y2="23.3172" width="0.2032" layer="16"/>
+<wire x1="78.8924" y1="10.3886" x2="78.8924" y2="23.3172" width="0.2032" layer="16"/>
 <wire x1="104.783" y1="10.549" x2="106.025" y2="10.549" width="0.2032" layer="16"/>
-<wire x1="79.375" y1="46.228" x2="79.375" y2="24.257" width="0.2032" layer="16"/>
+<wire x1="79.4766" y1="46.5582" x2="79.4766" y2="23.9014" width="0.2032" layer="16"/>
 <wire x1="104.783" y1="10.549" x2="98.933" y2="4.699" width="0.2032" layer="16"/>
 <wire x1="75.819" y1="51.943" x2="75.819" y2="48.26" width="0.2032" layer="16"/>
 <wire x1="75.819" y1="48.26" x2="76.1746" y2="47.9044" width="0.2032" layer="16"/>
-<wire x1="76.1746" y1="47.9044" x2="77.6986" y2="47.9044" width="0.2032" layer="16"/>
-<wire x1="77.6986" y1="47.9044" x2="79.375" y2="46.228" width="0.2032" layer="16"/>
+<wire x1="76.1746" y1="47.9044" x2="78.1304" y2="47.9044" width="0.2032" layer="16"/>
+<wire x1="78.1304" y1="47.9044" x2="79.4766" y2="46.5582" width="0.2032" layer="16"/>
 <wire x1="78.531" y1="52.924" x2="76.8" y2="52.924" width="0.2032" layer="16"/>
 <wire x1="76.8" y1="52.924" x2="75.819" y2="51.943" width="0.2032" layer="16"/>
 <wire x1="98.933" y1="4.699" x2="91.313" y2="4.699" width="0.2032" layer="16"/>
-<wire x1="80.391" y1="8.89" x2="78.486" y2="10.795" width="0.2032" layer="16"/>
+<wire x1="80.391" y1="8.89" x2="78.8924" y2="10.3886" width="0.2032" layer="16"/>
 <wire x1="91.313" y1="4.699" x2="87.122" y2="8.89" width="0.2032" layer="16"/>
 <wire x1="87.122" y1="8.89" x2="80.391" y2="8.89" width="0.2032" layer="16"/>
 </signal>
@@ -3125,37 +3123,37 @@ These are the free and generally easy to produce 4-layer PCB design rules. You c
 <wire x1="78.531" y1="53.324" x2="76.438" y2="53.324" width="0.2032" layer="16"/>
 <wire x1="104.545" y1="9.549" x2="106.025" y2="9.549" width="0.2032" layer="16"/>
 <wire x1="76.438" y1="53.324" x2="75.311" y2="52.197" width="0.2032" layer="16"/>
-<wire x1="78.74" y1="46.228" x2="78.74" y2="24.257" width="0.2032" layer="16"/>
-<wire x1="78.74" y1="24.257" x2="77.978" y2="23.495" width="0.2032" layer="16"/>
-<wire x1="77.978" y1="10.541" x2="77.978" y2="23.495" width="0.2032" layer="16"/>
+<wire x1="79.0448" y1="46.1772" x2="79.0448" y2="24.384" width="0.2032" layer="16"/>
+<wire x1="79.0448" y1="24.384" x2="78.4098" y2="23.749" width="0.2032" layer="16"/>
+<wire x1="78.4098" y1="10.1092" x2="78.4098" y2="23.749" width="0.2032" layer="16"/>
 <wire x1="104.545" y1="9.549" x2="99.187" y2="4.191" width="0.2032" layer="16"/>
 <wire x1="75.311" y1="47.752" x2="75.6158" y2="47.4472" width="0.2032" layer="16"/>
-<wire x1="77.5208" y1="47.4472" x2="78.74" y2="46.228" width="0.2032" layer="16"/>
+<wire x1="77.7748" y1="47.4472" x2="79.0448" y2="46.1772" width="0.2032" layer="16"/>
 <wire x1="75.311" y1="52.197" x2="75.311" y2="47.752" width="0.2032" layer="16"/>
-<wire x1="75.6158" y1="47.4472" x2="77.5208" y2="47.4472" width="0.2032" layer="16"/>
+<wire x1="75.6158" y1="47.4472" x2="77.7748" y2="47.4472" width="0.2032" layer="16"/>
 <wire x1="99.187" y1="4.191" x2="91.059" y2="4.191" width="0.2032" layer="16"/>
 <wire x1="91.059" y1="4.191" x2="86.868" y2="8.382" width="0.2032" layer="16"/>
 <wire x1="86.868" y1="8.382" x2="80.137" y2="8.382" width="0.2032" layer="16"/>
-<wire x1="80.137" y1="8.382" x2="77.978" y2="10.541" width="0.2032" layer="16"/>
+<wire x1="80.137" y1="8.382" x2="78.4098" y2="10.1092" width="0.2032" layer="16"/>
 </signal>
 <signal name="N$70">
 <contactref element="U3" pad="39"/>
 <contactref element="X3" pad="9"/>
 <wire x1="78.531" y1="53.724" x2="76.203" y2="53.724" width="0.2032" layer="16"/>
 <wire x1="76.203" y1="53.724" x2="74.803" y2="52.324" width="0.2032" layer="16"/>
-<wire x1="78.232" y1="24.384" x2="77.47" y2="23.622" width="0.2032" layer="16"/>
-<wire x1="77.47" y1="10.414" x2="77.47" y2="23.622" width="0.2032" layer="16"/>
+<wire x1="78.5876" y1="24.7396" x2="77.9272" y2="24.0792" width="0.2032" layer="16"/>
+<wire x1="77.9272" y1="9.9568" x2="77.9272" y2="24.0792" width="0.2032" layer="16"/>
 <wire x1="104.434" y1="8.549" x2="106.025" y2="8.549" width="0.2032" layer="16"/>
 <wire x1="104.434" y1="8.549" x2="99.568" y2="3.683" width="0.2032" layer="16"/>
 <wire x1="74.803" y1="47.371" x2="75.184" y2="46.99" width="0.2032" layer="16"/>
 <wire x1="75.184" y1="46.99" x2="77.47" y2="46.99" width="0.2032" layer="16"/>
 <wire x1="74.803" y1="52.324" x2="74.803" y2="47.371" width="0.2032" layer="16"/>
-<wire x1="77.47" y1="46.99" x2="78.232" y2="46.228" width="0.2032" layer="16"/>
-<wire x1="78.232" y1="46.228" x2="78.232" y2="24.384" width="0.2032" layer="16"/>
+<wire x1="77.47" y1="46.99" x2="78.5876" y2="45.8724" width="0.2032" layer="16"/>
+<wire x1="78.5876" y1="45.8724" x2="78.5876" y2="24.7396" width="0.2032" layer="16"/>
 <wire x1="99.568" y1="3.683" x2="90.805" y2="3.683" width="0.2032" layer="16"/>
 <wire x1="90.805" y1="3.683" x2="86.614" y2="7.874" width="0.2032" layer="16"/>
 <wire x1="86.614" y1="7.874" x2="80.01" y2="7.874" width="0.2032" layer="16"/>
-<wire x1="80.01" y1="7.874" x2="77.47" y2="10.414" width="0.2032" layer="16"/>
+<wire x1="80.01" y1="7.874" x2="77.9272" y2="9.9568" width="0.2032" layer="16"/>
 </signal>
 <signal name="N$72">
 <contactref element="U3" pad="50"/>
