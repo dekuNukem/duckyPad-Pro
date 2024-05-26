@@ -8474,8 +8474,8 @@ We've spent an enormous amount of time creating and checking these footprints an
 <part name="C25" library="clock" deviceset="CAP" device="0805" value="100nF"/>
 <part name="U$6" library="supply1" library_urn="urn:adsk.eagle:library:371" deviceset="GND" device=""/>
 <part name="+3V30" library="supply1" library_urn="urn:adsk.eagle:library:371" deviceset="+3V3" device=""/>
-<part name="R5" library="clock" deviceset="RESISTOR" device="0805-RES" value="5.1K"/>
-<part name="C27" library="clock" deviceset="C-US" device="C1210" value="47uF"/>
+<part name="R5" library="clock" deviceset="RESISTOR" device="0805-RES" value="10K"/>
+<part name="C27" library="clock" deviceset="C-US" device="C1210" value="100uF"/>
 <part name="U$7" library="duckypad" deviceset="M2_SCREW_DEV" device=""/>
 <part name="U$9" library="duckypad" deviceset="M2_SCREW_DEV" device=""/>
 <part name="U$10" library="duckypad" deviceset="M2_SCREW_DEV" device=""/>
@@ -8487,7 +8487,7 @@ We've spent an enormous amount of time creating and checking these footprints an
 <part name="GND6" library="supply1" deviceset="GND" device=""/>
 <part name="R1" library="joyAnalog" deviceset="RESISTOR" device="0805-RES" value="5.1K"/>
 <part name="R9" library="joyAnalog" deviceset="RESISTOR" device="0805-RES" value="5.1K"/>
-<part name="C29" library="clock" deviceset="CAP" device="0805" value="10uF"/>
+<part name="C29" library="clock" deviceset="CAP" device="0805" value="4.7uF"/>
 <part name="GND16" library="supply1" library_urn="urn:adsk.eagle:library:371" deviceset="GND" device=""/>
 <part name="SWR1C2" library="lul" deviceset="KAILH_SWITCH_SOCKET_KAILH_SWITCH_SOCKET" device=""/>
 <part name="SWR1C3" library="lul" deviceset="KAILH_SWITCH_SOCKET_KAILH_SWITCH_SOCKET" device=""/>
@@ -8545,8 +8545,8 @@ We've spent an enormous amount of time creating and checking these footprints an
 <part name="GND19" library="clock" deviceset="GND" device=""/>
 <part name="Y1" library="SparkFun-Clocks" deviceset="CRYSTAL-26MHZ" device="SMD-3.2X2.5" value="16MHz_12pF"/>
 <part name="+3V27" library="supply1" library_urn="urn:adsk.eagle:library:371" deviceset="+3V3" device=""/>
-<part name="R2" library="joyAnalog" deviceset="RESISTOR" device="0805-RES" value="10K"/>
-<part name="C4" library="clock" deviceset="CAP" device="0805" value="1uF"/>
+<part name="R2" library="joyAnalog" deviceset="RESISTOR" device="0805-RES" value="62K"/>
+<part name="C4" library="clock" deviceset="CAP" device="0805" value="100nF"/>
 <part name="GND32" library="clock" deviceset="GND" device=""/>
 <part name="SW3" library="3pos_slide_switch" deviceset="324_SW" device="324_SWITCH_FOOT_HOLE" value="324_SW324_SWITCH_FOOT_HOLE"/>
 <part name="GND33" library="clock" deviceset="GND" device=""/>
@@ -8568,7 +8568,7 @@ We've spent an enormous amount of time creating and checking these footprints an
 <part name="GND44" library="supply1" deviceset="GND" device=""/>
 <part name="C33" library="clock" deviceset="CAP" device="0805" value="4.7uF"/>
 <part name="SUPPLY2" library="SparkFun-PowerSymbols" deviceset="12V" device=""/>
-<part name="C35" library="clock" deviceset="CAP" device="0805" value="22pF"/>
+<part name="C35" library="clock" deviceset="CAP" device="0805" value="12pF"/>
 <part name="GND45" library="supply1" deviceset="GND" device=""/>
 <part name="R7" library="joyAnalog" deviceset="RESISTOR" device="0805-RES" value="560K"/>
 <part name="R10" library="joyAnalog" deviceset="RESISTOR" device="0805-RES" value="62K"/>
@@ -8578,7 +8578,7 @@ We've spent an enormous amount of time creating and checking these footprints an
 <part name="SUPPLY1" library="SparkFun-PowerSymbols" deviceset="12V" device=""/>
 <part name="SUPPLY3" library="SparkFun-PowerSymbols" deviceset="12V" device=""/>
 <part name="+3V1" library="supply1" library_urn="urn:adsk.eagle:library:371" deviceset="+3V3" device=""/>
-<part name="C34" library="clock" deviceset="CAP" device="0805" value="2.2uF"/>
+<part name="C34" library="clock" deviceset="CAP" device="0805" value="4.7uF"/>
 <part name="GND42" library="supply1" library_urn="urn:adsk.eagle:library:371" deviceset="GND" device=""/>
 <part name="R6" library="joyAnalog" deviceset="RESISTOR" device="0805-RES" value="560K"/>
 <part name="GND43" library="supply1" library_urn="urn:adsk.eagle:library:371" deviceset="GND" device=""/>
@@ -8591,7 +8591,7 @@ We've spent an enormous amount of time creating and checking these footprints an
 <part name="GND51" library="supply1" library_urn="urn:adsk.eagle:library:371" deviceset="GND" device=""/>
 <part name="R11" library="joyAnalog" deviceset="RESISTOR" device="0805-RES" value="10K"/>
 <part name="+3V31" library="supply1" library_urn="urn:adsk.eagle:library:371" deviceset="+3V3" device=""/>
-<part name="C38" library="clock" deviceset="CAP" device="0805" value="2.2uF"/>
+<part name="C38" library="clock" deviceset="CAP" device="0805" value="4.7uF"/>
 <part name="C39" library="clock" deviceset="CAP" device="0805" value="100nF"/>
 <part name="GND52" library="supply1" library_urn="urn:adsk.eagle:library:371" deviceset="GND" device=""/>
 <part name="GND53" library="supply1" library_urn="urn:adsk.eagle:library:371" deviceset="GND" device=""/>
@@ -8611,17 +8611,17 @@ We've spent an enormous amount of time creating and checking these footprints an
 <part name="C45" library="clock" deviceset="CAP" device="0805" value="100nF"/>
 <part name="GND55" library="supply1" library_urn="urn:adsk.eagle:library:371" deviceset="GND" device=""/>
 <part name="GND56" library="supply1" library_urn="urn:adsk.eagle:library:371" deviceset="GND" device=""/>
-<part name="C1" library="clock" deviceset="CAP" device="0805" value="10nF"/>
-<part name="R8" library="joyAnalog" deviceset="RESISTOR" device="0805-RES" value="10K"/>
+<part name="C1" library="clock" deviceset="CAP" device="0805" value="100nF"/>
+<part name="R8" library="joyAnalog" deviceset="RESISTOR" device="0805-RES" value="62K"/>
 <part name="GND57" library="supply1" library_urn="urn:adsk.eagle:library:371" deviceset="GND" device=""/>
-<part name="R13" library="joyAnalog" deviceset="RESISTOR" device="0805-RES" value="10K"/>
-<part name="C2" library="clock" deviceset="CAP" device="0805" value="10nF"/>
+<part name="R13" library="joyAnalog" deviceset="RESISTOR" device="0805-RES" value="62K"/>
+<part name="C2" library="clock" deviceset="CAP" device="0805" value="100nF"/>
 <part name="GND58" library="supply1" library_urn="urn:adsk.eagle:library:371" deviceset="GND" device=""/>
-<part name="R14" library="joyAnalog" deviceset="RESISTOR" device="0805-RES" value="10K"/>
-<part name="C9" library="clock" deviceset="CAP" device="0805" value="10nF"/>
+<part name="R14" library="joyAnalog" deviceset="RESISTOR" device="0805-RES" value="62K"/>
+<part name="C9" library="clock" deviceset="CAP" device="0805" value="100nF"/>
 <part name="GND59" library="supply1" library_urn="urn:adsk.eagle:library:371" deviceset="GND" device=""/>
-<part name="R15" library="joyAnalog" deviceset="RESISTOR" device="0805-RES" value="10K"/>
-<part name="C10" library="clock" deviceset="CAP" device="0805" value="10nF"/>
+<part name="R15" library="joyAnalog" deviceset="RESISTOR" device="0805-RES" value="62K"/>
+<part name="C10" library="clock" deviceset="CAP" device="0805" value="100nF"/>
 <part name="GND60" library="supply1" library_urn="urn:adsk.eagle:library:371" deviceset="GND" device=""/>
 <part name="R16" library="joyAnalog" deviceset="RESISTOR" device="0805-RES" value="10K"/>
 <part name="+3V35" library="supply1" library_urn="urn:adsk.eagle:library:371" deviceset="+3V3" device=""/>
@@ -8916,16 +8916,12 @@ We've spent an enormous amount of time creating and checking these footprints an
 <attribute name="VALUE" x="-7.62" y="-175.26" size="1.778" layer="96" rot="MR0"/>
 </instance>
 <instance part="R1" gate="G$1" x="-5.08" y="-154.94" smashed="yes" rot="MR0">
-<attribute name="NAME" x="-1.27" y="-153.4414" size="1.778" layer="95" rot="MR0"/>
-<attribute name="VALUE" x="-1.27" y="-158.242" size="1.778" layer="96" rot="MR0"/>
-<attribute name="NAME" x="-1.27" y="-153.4414" size="1.778" layer="95" rot="MR0"/>
+<attribute name="NAME" x="-6.35" y="-153.4414" size="1.778" layer="95" rot="MR0"/>
 <attribute name="VALUE" x="-1.27" y="-158.242" size="1.778" layer="96" rot="MR0"/>
 </instance>
 <instance part="R9" gate="G$1" x="-5.08" y="-149.86" smashed="yes" rot="MR0">
-<attribute name="NAME" x="-1.27" y="-148.3614" size="1.778" layer="95" rot="MR0"/>
-<attribute name="VALUE" x="-1.27" y="-153.162" size="1.778" layer="96" rot="MR0"/>
-<attribute name="NAME" x="-1.27" y="-148.3614" size="1.778" layer="95" rot="MR0"/>
-<attribute name="VALUE" x="-1.27" y="-153.162" size="1.778" layer="96" rot="MR0"/>
+<attribute name="NAME" x="-8.89" y="-148.3614" size="1.778" layer="95" rot="MR0"/>
+<attribute name="VALUE" x="-1.27" y="-148.082" size="1.778" layer="96" rot="MR0"/>
 </instance>
 <instance part="C29" gate="G$1" x="119.38" y="-147.32" smashed="yes" rot="R180">
 <attribute name="NAME" x="117.856" y="-150.241" size="1.778" layer="95" rot="R180"/>
@@ -9182,13 +9178,9 @@ We've spent an enormous amount of time creating and checking these footprints an
 </instance>
 <instance part="R7" gate="G$1" x="228.6" y="-276.86" smashed="yes" rot="MR270">
 <attribute name="NAME" x="227.1014" y="-273.05" size="1.778" layer="95" rot="MR270"/>
-<attribute name="VALUE" x="231.902" y="-273.05" size="1.778" layer="96" rot="MR270"/>
-<attribute name="NAME" x="227.1014" y="-273.05" size="1.778" layer="95" rot="MR270"/>
-<attribute name="VALUE" x="231.902" y="-273.05" size="1.778" layer="96" rot="MR270"/>
+<attribute name="VALUE" x="226.822" y="-278.13" size="1.778" layer="96" rot="MR270"/>
 </instance>
 <instance part="R10" gate="G$1" x="228.6" y="-292.1" smashed="yes" rot="MR270">
-<attribute name="NAME" x="227.1014" y="-288.29" size="1.778" layer="95" rot="MR270"/>
-<attribute name="VALUE" x="231.902" y="-288.29" size="1.778" layer="96" rot="MR270"/>
 <attribute name="NAME" x="227.1014" y="-288.29" size="1.778" layer="95" rot="MR270"/>
 <attribute name="VALUE" x="231.902" y="-288.29" size="1.778" layer="96" rot="MR270"/>
 </instance>
@@ -9196,8 +9188,8 @@ We've spent an enormous amount of time creating and checking these footprints an
 <attribute name="VALUE" x="231.14" y="-307.34" size="1.778" layer="96" rot="MR0"/>
 </instance>
 <instance part="C31" gate="G$1" x="238.76" y="-281.94" smashed="yes" rot="R180">
-<attribute name="NAME" x="237.236" y="-284.861" size="1.778" layer="95" rot="R180"/>
-<attribute name="VALUE" x="237.236" y="-279.781" size="1.778" layer="96" rot="R180"/>
+<attribute name="NAME" x="242.316" y="-287.401" size="1.778" layer="95" rot="R180"/>
+<attribute name="VALUE" x="242.316" y="-279.781" size="1.778" layer="96" rot="R180"/>
 </instance>
 <instance part="GND18" gate="1" x="289.56" y="-302.26" smashed="yes">
 <attribute name="VALUE" x="287.02" y="-304.8" size="1.778" layer="96"/>
@@ -9209,7 +9201,7 @@ We've spent an enormous amount of time creating and checking these footprints an
 <attribute name="VALUE" x="281.94" y="-266.446" size="1.778" layer="96" align="bottom-center"/>
 </instance>
 <instance part="+3V1" gate="G$1" x="261.62" y="-269.24" smashed="yes">
-<attribute name="VALUE" x="259.08" y="-274.32" size="1.778" layer="96" rot="R90"/>
+<attribute name="VALUE" x="261.62" y="-266.7" size="1.778" layer="96" rot="R90"/>
 </instance>
 <instance part="C34" gate="G$1" x="325.12" y="-274.32" smashed="yes" rot="R180">
 <attribute name="NAME" x="323.596" y="-277.241" size="1.778" layer="95" rot="R180"/>
@@ -9228,12 +9220,12 @@ We've spent an enormous amount of time creating and checking these footprints an
 <attribute name="VALUE" x="274.32" y="-281.94" size="1.778" layer="96"/>
 </instance>
 <instance part="C36" gate="G$1" x="261.62" y="-276.86" smashed="yes" rot="R180">
-<attribute name="NAME" x="260.096" y="-279.781" size="1.778" layer="95" rot="R180"/>
-<attribute name="VALUE" x="260.096" y="-274.701" size="1.778" layer="96" rot="R180"/>
+<attribute name="NAME" x="262.636" y="-282.321" size="1.778" layer="95" rot="R180"/>
+<attribute name="VALUE" x="260.096" y="-279.781" size="1.778" layer="96" rot="R180"/>
 </instance>
 <instance part="C37" gate="G$1" x="266.7" y="-276.86" smashed="yes" rot="R180">
-<attribute name="NAME" x="265.176" y="-279.781" size="1.778" layer="95" rot="R180"/>
-<attribute name="VALUE" x="265.176" y="-274.701" size="1.778" layer="96" rot="R180"/>
+<attribute name="NAME" x="270.256" y="-279.781" size="1.778" layer="95" rot="R180"/>
+<attribute name="VALUE" x="272.796" y="-282.321" size="1.778" layer="96" rot="R180"/>
 </instance>
 <instance part="GND47" gate="1" x="261.62" y="-284.48" smashed="yes" rot="MR0">
 <attribute name="VALUE" x="264.16" y="-287.02" size="1.778" layer="96" rot="MR0"/>
@@ -9283,8 +9275,8 @@ We've spent an enormous amount of time creating and checking these footprints an
 <attribute name="VALUE" x="345.44" y="-271.78" size="1.778" layer="96" rot="R90"/>
 </instance>
 <instance part="C40" gate="G$1" x="246.38" y="-281.94" smashed="yes" rot="R180">
-<attribute name="NAME" x="244.856" y="-284.861" size="1.778" layer="95" rot="R180"/>
-<attribute name="VALUE" x="244.856" y="-279.781" size="1.778" layer="96" rot="R180"/>
+<attribute name="NAME" x="249.936" y="-284.861" size="1.778" layer="95" rot="R180"/>
+<attribute name="VALUE" x="249.936" y="-279.781" size="1.778" layer="96" rot="R180"/>
 </instance>
 <instance part="U$14" gate="G$1" x="548.64" y="33.02" smashed="yes"/>
 <instance part="U$20" gate="G$1" x="548.64" y="48.26" smashed="yes"/>
@@ -9343,7 +9335,7 @@ We've spent an enormous amount of time creating and checking these footprints an
 </instance>
 <instance part="C2" gate="G$1" x="665.48" y="-60.96" smashed="yes" rot="R180">
 <attribute name="NAME" x="663.956" y="-63.881" size="1.778" layer="95" rot="R180"/>
-<attribute name="VALUE" x="663.956" y="-58.801" size="1.778" layer="96" rot="R180"/>
+<attribute name="VALUE" x="676.656" y="-63.881" size="1.778" layer="96" rot="R180"/>
 </instance>
 <instance part="GND58" gate="1" x="665.48" y="-71.12" smashed="yes">
 <attribute name="VALUE" x="662.94" y="-73.66" size="1.778" layer="96"/>
@@ -9356,7 +9348,7 @@ We've spent an enormous amount of time creating and checking these footprints an
 </instance>
 <instance part="C9" gate="G$1" x="601.98" y="-55.88" smashed="yes" rot="R180">
 <attribute name="NAME" x="600.456" y="-58.801" size="1.778" layer="95" rot="R180"/>
-<attribute name="VALUE" x="600.456" y="-53.721" size="1.778" layer="96" rot="R180"/>
+<attribute name="VALUE" x="610.616" y="-58.801" size="1.778" layer="96" rot="R180"/>
 </instance>
 <instance part="GND59" gate="1" x="601.98" y="-63.5" smashed="yes">
 <attribute name="VALUE" x="599.44" y="-66.04" size="1.778" layer="96"/>
@@ -9368,8 +9360,8 @@ We've spent an enormous amount of time creating and checking these footprints an
 <attribute name="VALUE" x="590.55" y="-82.042" size="1.778" layer="96" rot="MR0"/>
 </instance>
 <instance part="C10" gate="G$1" x="596.9" y="-81.28" smashed="yes" rot="R180">
-<attribute name="NAME" x="595.376" y="-84.201" size="1.778" layer="95" rot="R180"/>
-<attribute name="VALUE" x="595.376" y="-79.121" size="1.778" layer="96" rot="R180"/>
+<attribute name="NAME" x="595.376" y="-86.741" size="1.778" layer="95" rot="R180"/>
+<attribute name="VALUE" x="605.536" y="-86.741" size="1.778" layer="96" rot="R180"/>
 </instance>
 <instance part="GND60" gate="1" x="596.9" y="-91.44" smashed="yes">
 <attribute name="VALUE" x="594.36" y="-93.98" size="1.778" layer="96"/>
@@ -9388,8 +9380,8 @@ We've spent an enormous amount of time creating and checking these footprints an
 <attribute name="VALUE" x="182.88" y="-256.54" size="1.27" layer="96"/>
 </instance>
 <instance part="C46" gate="G$1" x="233.68" y="-281.94" smashed="yes" rot="R180">
-<attribute name="NAME" x="232.156" y="-284.861" size="1.778" layer="95" rot="R180"/>
-<attribute name="VALUE" x="232.156" y="-279.781" size="1.778" layer="96" rot="R180"/>
+<attribute name="NAME" x="234.696" y="-287.401" size="1.778" layer="95" rot="R180"/>
+<attribute name="VALUE" x="237.236" y="-277.241" size="1.778" layer="96" rot="R180"/>
 </instance>
 <instance part="R17" gate="G$1" x="375.92" y="-287.02" smashed="yes" rot="MR90">
 <attribute name="NAME" x="377.4186" y="-290.83" size="1.778" layer="95" rot="MR90"/>
@@ -10179,8 +10171,6 @@ We've spent an enormous amount of time creating and checking these footprints an
 <junction x="528.32" y="-20.32"/>
 <pinref part="C28" gate="G$1" pin="2"/>
 <wire x1="482.6" y1="-22.86" x2="508" y2="-22.86" width="0.1524" layer="91"/>
-<wire x1="482.6" y1="-25.4" x2="490.22" y2="-25.4" width="0.1524" layer="91"/>
-<junction x="482.6" y="-25.4"/>
 </segment>
 <segment>
 <pinref part="LED_R1C1" gate="G$1" pin="VDD"/>
