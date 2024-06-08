@@ -17,7 +17,6 @@
 #define SD_PIN_CLK 8
 #define SD_PIN_CMD 9
 #define SD_PIN_D0 7
-#define SD_DETECT 6
 
 uint8_t sd_init(void);
 

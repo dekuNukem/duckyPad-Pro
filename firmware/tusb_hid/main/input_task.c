@@ -75,6 +75,15 @@ void switch_init(void)
         .pull_down_en = false,
     };
     ESP_ERROR_CHECK(gpio_config(&boot_button_config));
-	// gpio_isr_handler_add(SD_CARD_DETECT_GPIO, sd_card_det_isr, NULL);
+
+    const gpio_config_t sd_det_config = {
+        .pin_bit_mask = BIT64(SD_CARD_DETECT_GPIO),
+        .mode = GPIO_MODE_INPUT,
+        .intr_type = GPIO_INTR_ANYEDGE,
+        .pull_up_en = true,
+        .pull_down_en = false,
+    };
+    ESP_ERROR_CHECK(gpio_config(&sd_det_config));
+	gpio_isr_handler_add(SD_CARD_DETECT_GPIO, sd_card_det_isr, NULL);
 	switch_event_queue = xQueueCreate(SWITCH_EVENT_QUEUE_SIZE, sizeof(switch_event_t));
 }
