@@ -35,6 +35,7 @@
     "msc.h": "c",
     "random": "c",
     "stdlib.h": "c",
-    "algorithm": "c"
+    "algorithm": "c",
+    "rotary_encoder.h": "c"
   }
 }

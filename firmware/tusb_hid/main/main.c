@@ -29,7 +29,7 @@ void app_main(void)
     vTaskDelay(pdMS_TO_TICKS(500)); // brief delay in case of SD card removal reboot
     gpio_install_isr_service(0); // BEFORE GPIO INIT
 
-    // my_rotary_encoder_init();
+    my_rotary_encoder_init();
     switch_init();
     oled_init();
     if (sd_init())
@@ -40,7 +40,7 @@ void app_main(void)
 
     while(1)
     {
-        input_test();
-        vTaskDelay(pdMS_TO_TICKS(100));
+        get_rc();
+        vTaskDelay(pdMS_TO_TICKS(250));
     }
 }
