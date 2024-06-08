@@ -1,3 +1,125 @@
+-------------
+
+
+void input_test(void)
+{
+    memset(this_sw_matrix_state, 0, SW_MATRIX_BUF_SIZE);
+    gpio_set_level(SWM_COL0_GPIO, 1);
+    gpio_set_level(SWM_COL1_GPIO, 0);
+    gpio_set_level(SWM_COL2_GPIO, 0);
+    gpio_set_level(SWM_COL3_GPIO, 0);
+    scan_row(0);
+
+    gpio_set_level(SWM_COL0_GPIO, 0);
+    gpio_set_level(SWM_COL1_GPIO, 1);
+    gpio_set_level(SWM_COL2_GPIO, 0);
+    gpio_set_level(SWM_COL3_GPIO, 0);
+    scan_row(1);
+
+    gpio_set_level(SWM_COL0_GPIO, 0);
+    gpio_set_level(SWM_COL1_GPIO, 0);
+    gpio_set_level(SWM_COL2_GPIO, 1);
+    gpio_set_level(SWM_COL3_GPIO, 0);
+    scan_row(2);
+
+    gpio_set_level(SWM_COL0_GPIO, 0);
+    gpio_set_level(SWM_COL1_GPIO, 0);
+    gpio_set_level(SWM_COL2_GPIO, 0);
+    gpio_set_level(SWM_COL3_GPIO, 1);
+    scan_row(3);
+
+    for (int rrr = 0; rrr < SW_MATRIX_NUM_ROWS; ++rrr)
+    {
+        for (int ccc = 0; ccc < SW_MATRIX_NUM_COLS; ++ccc)
+        {
+            printf("R%dC%dS%d ", rrr, ccc, this_sw_matrix_state[rowcol_to_index(rrr, ccc)]);
+            // printf("%d ", this_sw_matrix_state[rowcol_to_index(rrr, ccc)]);
+        }
+        printf("\n");
+    }
+
+    printf("---------------\n");
+}
+
+R0C0S1 R1C0S0 R2C0S0 R3C0S0 R4C0S0 
+R0C1S0 R1C1S0 R2C1S0 R3C1S0 R4C1S0 
+R0C2S0 R1C2S0 R2C2S0 R3C2S0 R4C2S0 
+R0C3S1 R1C3S0 R2C3S0 R3C3S0 R4C3S0 
+
+--------------------------
+
+void input_test(void)
+{
+    // gpio_set_level(SWM_COL0_GPIO, 1);
+    // gpio_set_level(SWM_COL1_GPIO, 0);
+    // gpio_set_level(SWM_COL2_GPIO, 0);
+    // gpio_set_level(SWM_COL3_GPIO, 0);
+
+    // printf("%d ", gpio_get_level(SWM_ROW0_GPIO));
+    // printf("%d ", gpio_get_level(SWM_ROW1_GPIO));
+    // printf("%d ", gpio_get_level(SWM_ROW2_GPIO));
+    // printf("%d ", gpio_get_level(SWM_ROW3_GPIO));
+    // printf("%d\n", gpio_get_level(SWM_ROW4_GPIO));
+
+    for (int ccc = 0; ccc < SW_MATRIX_NUM_COLS; ++ccc)
+    {
+        for (int rrr = 0; rrr < SW_MATRIX_NUM_ROWS; ++rrr)
+        {
+            printf("R%dC%dI%02d ", rrr, ccc, rowcol_to_index(rrr, ccc));
+        }
+        printf("\n");
+    }
+
+    printf("---------------\n");
+}
+
+
+
+R0C0I00 R1C0I04 R2C0I08 R3C0I12 R4C0I16 
+R0C1I01 R1C1I05 R2C1I09 R3C1I13 R4C1I17 
+R0C2I02 R1C2I06 R2C2I10 R3C2I14 R4C2I18 
+R0C3I03 R1C3I07 R2C3I11 R3C3I15 R4C3I19 
+
+
+-0------------------------------
+
+
+
+void input_test(void)
+{
+    // gpio_set_level(SWM_COL0_GPIO, 1);
+    // gpio_set_level(SWM_COL1_GPIO, 0);
+    // gpio_set_level(SWM_COL2_GPIO, 0);
+    // gpio_set_level(SWM_COL3_GPIO, 0);
+
+    // printf("%d ", gpio_get_level(SWM_ROW0_GPIO));
+    // printf("%d ", gpio_get_level(SWM_ROW1_GPIO));
+    // printf("%d ", gpio_get_level(SWM_ROW2_GPIO));
+    // printf("%d ", gpio_get_level(SWM_ROW3_GPIO));
+    // printf("%d\n", gpio_get_level(SWM_ROW4_GPIO));
+
+    for (int rrr = 0; rrr < SW_MATRIX_NUM_ROWS; ++rrr)
+    {
+        for (int ccc = 0; ccc < SW_MATRIX_NUM_COLS; ++ccc)
+        {
+            printf("R%dC%dI%d ", rrr, ccc, rowcol_to_index(rrr, ccc));
+        }
+        printf("\n");
+    }
+
+    printf("---------------\n");
+}
+
+
+---------------
+R0C0I0 R0C1I1 R0C2I2 R0C3I3 
+R1C0I4 R1C1I5 R1C2I6 R1C3I7 
+R2C0I8 R2C1I9 R2C2I10 R2C3I11 
+R3C0I12 R3C1I13 R3C2I14 R3C3I15 
+R4C0I16 R4C1I17 R4C2I18 R4C3I19 
+
+
+
 void input_test(void)
 {
     // switch_event_t this_event;

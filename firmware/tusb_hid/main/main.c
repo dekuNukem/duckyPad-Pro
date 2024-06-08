@@ -34,6 +34,6 @@ void app_main(void)
     while(1)
     {
         input_test();
-        vTaskDelay(pdMS_TO_TICKS(500));
+        vTaskDelay(pdMS_TO_TICKS(250));
     }
 }
