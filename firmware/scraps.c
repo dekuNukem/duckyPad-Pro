@@ -1,3 +1,14 @@
+void get_rc(void)
+{
+    UBaseType_t items_in_queue = uxQueueMessagesWaiting(rotary_encoder_event_queue);
+    printf("queue: %d\n", items_in_queue);
+    // Wait for incoming events on the event queue.
+    rotary_encoder_event_t event = { 0 };
+    if (xQueueReceive(rotary_encoder_event_queue, &event, 0) == pdTRUE)
+        printf("Event: id: %d pos: %ld, dir: %d\n", event.state.id, event.state.position, event.state.direction);
+}
+
+
 -------------
 
 

@@ -38,9 +38,6 @@ void my_rotary_encoder_init(void)
 
 void get_rc(void)
 {
-	UBaseType_t items_in_queue = uxQueueMessagesWaiting(rotary_encoder_event_queue);
-	printf("queue: %d\n", items_in_queue);
-	// Wait for incoming events on the event queue.
 	rotary_encoder_event_t event = { 0 };
 	if (xQueueReceive(rotary_encoder_event_queue, &event, 0) == pdTRUE)
 		printf("Event: id: %d pos: %ld, dir: %d\n", event.state.id, event.state.position, event.state.direction);
@@ -128,7 +125,6 @@ void kb_scan_task(void)
 		{
 			if(this_sw_state[i] == 1 && last_sw_state[i] == 0)
 			{
-				// printf("sw %d pressed!\n", i);
 				switch_event_t sw_event = {
 					.id = i,
 					.level = 1,
@@ -137,7 +133,6 @@ void kb_scan_task(void)
 			}
 			else if(this_sw_state[i] == 0 && last_sw_state[i] == 1)
 			{
-				// printf("sw %d released!\n", i);
 				switch_event_t sw_event = {
 					.id = i,
 					.level = 0,

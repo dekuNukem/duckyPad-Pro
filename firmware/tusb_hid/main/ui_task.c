@@ -48,11 +48,52 @@ void oled_init(void)
     ssd1306_UpdateScreen();
 }
 
+uint8_t center_line(uint8_t line_len, uint8_t char_width_pixels, uint8_t oled_width_pixels)
+{
+  int16_t start_pixel = (oled_width_pixels - line_len * char_width_pixels) / 2;
+  if(start_pixel < 0)
+    start_pixel = 0;
+  return start_pixel;
+}
+
+#define OLED_LINE_BUF_SIZE 32
+char oled_line_buf[OLED_LINE_BUF_SIZE];
+
 void print_nosd(void)
 {
-    printf("NO SD!\n");
     ssd1306_Fill(Black);
-    ssd1306_SetCursor(0, 5);
-    ssd1306_WriteString("Please Insert SD Card",Font_7x10,White);
+
+    memset(oled_line_buf, 0, OLED_LINE_BUF_SIZE);
+    sprintf(oled_line_buf, "duckyPad Pro");
+    ssd1306_SetCursor(center_line(strlen(oled_line_buf), 7, SSD1306_WIDTH), 10);
+    ssd1306_WriteString(oled_line_buf, Font_7x10, White);
+
+    memset(oled_line_buf, 0, OLED_LINE_BUF_SIZE);
+    sprintf(oled_line_buf, "FW V%d.%d.%d", fw_version_major, fw_version_minor, fw_version_patch);
+    ssd1306_SetCursor(center_line(strlen(oled_line_buf), 7, SSD1306_WIDTH), 25);
+    ssd1306_WriteString(oled_line_buf, Font_7x10, White);
+
+
+    memset(oled_line_buf, 0, OLED_LINE_BUF_SIZE);
+    sprintf(oled_line_buf, "Please Insert");
+    ssd1306_SetCursor(center_line(strlen(oled_line_buf), 7, SSD1306_WIDTH), 55);
+    ssd1306_WriteString(oled_line_buf, Font_7x10, White);
+
+    memset(oled_line_buf, 0, OLED_LINE_BUF_SIZE);
+    sprintf(oled_line_buf, "SD card");
+    ssd1306_SetCursor(center_line(strlen(oled_line_buf), 7, SSD1306_WIDTH), 67);
+    ssd1306_WriteString(oled_line_buf, Font_7x10, White);
+
+
+    memset(oled_line_buf, 0, OLED_LINE_BUF_SIZE);
+    sprintf(oled_line_buf, "Instructions:");
+    ssd1306_SetCursor(center_line(strlen(oled_line_buf), 7, SSD1306_WIDTH), 100);
+    ssd1306_WriteString(oled_line_buf, Font_7x10, White);
+
+    memset(oled_line_buf, 0, OLED_LINE_BUF_SIZE);
+    sprintf(oled_line_buf, "duckyPad.com");
+    ssd1306_SetCursor(center_line(strlen(oled_line_buf), 7, SSD1306_WIDTH), 112);
+    ssd1306_WriteString(oled_line_buf, Font_7x10, White);
+
     ssd1306_UpdateScreen();
 }
