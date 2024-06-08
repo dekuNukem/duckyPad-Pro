@@ -32,8 +32,12 @@ void app_main(void)
     my_rotary_encoder_init();
     switch_init();
     oled_init();
-    if (sd_init())
+    if(sd_init())
+    {
         print_nosd();
+        while(1){vTaskDelay(pdMS_TO_TICKS(250));}
+    }
+    
     neopixel_init();
 
     xTaskCreate(kb_scan_task, "kb_scan_task", SW_SCAN_TASK_STACK_SIZE, NULL, 2, NULL);
