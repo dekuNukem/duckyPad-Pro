@@ -1300,7 +1300,7 @@ These are the free and generally easy to produce 4-layer PCB design rules. You c
 <element name="C45" library="clock" package="0805" value="100nF" x="5.268" y="14.986" smashed="yes" rot="MR90">
 <attribute name="NAME" x="4.125" y="13.6525" size="0.8128" layer="26" rot="MR0"/>
 </element>
-<element name="C1" library="clock" package="0805" value="1uF" x="100.772" y="83.439" smashed="yes" rot="MR90">
+<element name="C1" library="clock" package="0805" value="100nF" x="100.772" y="83.439" smashed="yes" rot="MR90">
 <attribute name="NAME" x="100.4545" y="84.963" size="0.8128" layer="26" rot="MR90"/>
 </element>
 <element name="R8" library="joyAnalog" package="0805" value="5K1" x="99.121" y="83.439" smashed="yes" rot="MR270">
@@ -1309,19 +1309,19 @@ These are the free and generally easy to produce 4-layer PCB design rules. You c
 <element name="R13" library="joyAnalog" package="0805" value="5K1" x="104.709" y="83.439" smashed="yes" rot="MR270">
 <attribute name="NAME" x="104.3915" y="84.963" size="0.8128" layer="26" rot="MR90"/>
 </element>
-<element name="C2" library="clock" package="0805" value="1uF" x="103.058" y="83.439" smashed="yes" rot="MR270">
+<element name="C2" library="clock" package="0805" value="100nF" x="103.058" y="83.439" smashed="yes" rot="MR270">
 <attribute name="NAME" x="102.7405" y="84.963" size="0.8128" layer="26" rot="MR90"/>
 </element>
 <element name="R14" library="joyAnalog" package="0805" value="5K1" x="99.248" y="58.674" smashed="yes" rot="MR180">
 <attribute name="NAME" x="97.597" y="58.3565" size="0.8128" layer="26" rot="MR0"/>
 </element>
-<element name="C9" library="clock" package="0805" value="1uF" x="99.248" y="60.325" smashed="yes" rot="MR180">
+<element name="C9" library="clock" package="0805" value="100nF" x="99.248" y="60.325" smashed="yes" rot="MR180">
 <attribute name="NAME" x="97.597" y="59.8805" size="0.8128" layer="26" rot="MR0"/>
 </element>
 <element name="R15" library="joyAnalog" package="0805" value="5K1" x="103.185" y="58.674" smashed="yes" rot="MR180">
 <attribute name="NAME" x="104.709" y="58.9915" size="0.8128" layer="26" rot="MR180"/>
 </element>
-<element name="C10" library="clock" package="0805" value="1uF" x="103.185" y="60.325" smashed="yes" rot="MR0">
+<element name="C10" library="clock" package="0805" value="100nF" x="103.185" y="60.325" smashed="yes" rot="MR0">
 <attribute name="NAME" x="104.709" y="60.6425" size="0.8128" layer="26" rot="MR180"/>
 </element>
 <element name="R16" library="joyAnalog" package="0805" value="10K" x="96.52" y="70.993" smashed="yes" rot="MR0">
