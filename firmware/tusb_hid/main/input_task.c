@@ -75,11 +75,19 @@ void input_test(void)
 		printf("id: %d lvl: %d\n", this_event.id, this_event.level);
 }
 
+void sw_matrix_col_reset(void)
+{
+	gpio_set_level(SWM_COL0_GPIO, 0);
+	gpio_set_level(SWM_COL1_GPIO, 0);
+	gpio_set_level(SWM_COL2_GPIO, 0);
+	gpio_set_level(SWM_COL3_GPIO, 0);
+}
+
 void kb_scan_task(void)
 {
 	while(1)
 	{
-		vTaskDelay(pdMS_TO_TICKS(16));
+		vTaskDelay(pdMS_TO_TICKS(20));
 
 		memset(this_sw_state, 0, TOTAL_SW_COUNT);
 		gpio_set_level(SWM_COL0_GPIO, 1);
@@ -110,11 +118,7 @@ void kb_scan_task(void)
 		vTaskDelay(pdMS_TO_TICKS(1));
 		scan_row(this_sw_state, 3);
 
-		// turn everything off, needed
-		gpio_set_level(SWM_COL0_GPIO, 0);
-		gpio_set_level(SWM_COL1_GPIO, 0);
-		gpio_set_level(SWM_COL2_GPIO, 0);
-		gpio_set_level(SWM_COL3_GPIO, 0);
+		sw_matrix_col_reset(); // need time to settle, do not remove
 		vTaskDelay(pdMS_TO_TICKS(1));
 
 		this_sw_state[SW_PLUS] = 1 - gpio_get_level(SW_PLUS_GPIO);
@@ -165,11 +169,7 @@ void switch_init(void)
         .pull_down_en = false,
     };
     ESP_ERROR_CHECK(gpio_config(&sw_matrix_col_config));
-
-    gpio_set_level(SWM_COL0_GPIO, 0);
-    gpio_set_level(SWM_COL1_GPIO, 0);
-    gpio_set_level(SWM_COL2_GPIO, 0);
-    gpio_set_level(SWM_COL3_GPIO, 0);
+    sw_matrix_col_reset();
 
     const gpio_config_t sw_matrix_row_config = {
         .pin_bit_mask = BIT64(SWM_ROW0_GPIO) | \
