@@ -5,6 +5,8 @@
 #include "esp_log.h"
 #include <string.h>
 #include "shared.h"
+#include "freertos/FreeRTOS.h"
+#include "freertos/task.h"
 
 static const char *TAG = "UI";
 spi_device_handle_t my_spi_handle;
@@ -14,7 +16,7 @@ spi_device_interface_config_t devcfg;
 
 void oled_init(void)
 {
-    oled_dc_cofig.pin_bit_mask = BIT64(OLED_DC);
+    oled_dc_cofig.pin_bit_mask = BIT64(OLED_DC) | BIT64(OLED_RESET);
     oled_dc_cofig.mode = GPIO_MODE_OUTPUT;
     oled_dc_cofig.intr_type = GPIO_INTR_DISABLE;
     oled_dc_cofig.pull_up_en = false;
@@ -34,6 +36,12 @@ void oled_init(void)
     devcfg.queue_size = 1;
     devcfg.spics_io_num = OLED_CS;
     ESP_ERROR_CHECK(spi_bus_add_device(SPI2_HOST, &devcfg, &my_spi_handle));
+
+    gpio_set_level(OLED_RESET, 0);
+    vTaskDelay(pdMS_TO_TICKS(25));
+    gpio_set_level(OLED_RESET, 1);
+    vTaskDelay(pdMS_TO_TICKS(25));
+
     ssd1306_init();
     ssd1306_SetCursor(20, 60);
     ssd1306_WriteString("hello world!!", Font_7x10, White);

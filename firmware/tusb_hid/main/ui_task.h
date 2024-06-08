@@ -7,10 +7,11 @@
 
 #include "driver/spi_master.h"
 
-#define OLED_MOSI 9
-#define OLED_CS 12
-#define OLED_DC 11
-#define OLED_SCK 8
+#define OLED_MOSI 10
+#define OLED_CS 14
+#define OLED_DC 12
+#define OLED_SCK 11
+#define OLED_RESET 13
 
 extern spi_device_handle_t my_spi_handle;
 

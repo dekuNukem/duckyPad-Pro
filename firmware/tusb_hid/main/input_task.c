@@ -61,79 +61,20 @@ void sd_card_det_isr(void* args)
 	esp_restart();
 }
 
-void sw_isr(void * args)
-{
-	switch_event_t sw_event = {
-		.id = (uint8_t)args,
-		.level = 1 - gpio_get_level(sw_index_to_gpio_lookup[sw_event.id]),
-	};
-	uint32_t now = xTaskGetTickCountFromISR();
-	sw_status[sw_event.id].level = sw_event.level;
-
-	if(now - sw_status[sw_event.id].last_press_ms <= 33)
-		return;
-	xQueueSendFromISR(switch_event_queue, &sw_event, NULL);
-	sw_status[sw_event.id].last_press_ms = now;
-}
-
 void switch_init(void)
 {
     const gpio_config_t boot_button_config = {
-        .pin_bit_mask = BIT64(SW_0_GPIO) | \
-				BIT64(SW_1_GPIO) | \
-				BIT64(SW_2_GPIO) | \
-				BIT64(SW_3_GPIO) | \
-				BIT64(SW_4_GPIO) | \
-				BIT64(SW_5_GPIO) | \
-				BIT64(SW_6_GPIO) | \
-				BIT64(SW_7_GPIO) | \
-				BIT64(SW_8_GPIO) | \
-				BIT64(SW_9_GPIO) | \
-				BIT64(SW_10_GPIO) | \
-				BIT64(SW_11_GPIO) | \
-				BIT64(SW_12_GPIO) | \
-				BIT64(SW_13_GPIO) | \
-				BIT64(SW_14_GPIO) | \
-				BIT64(SW_15_GPIO) | \
-				BIT64(SW_16_GPIO) | \
-				BIT64(SW_17_GPIO) | \
-			    BIT64(SW_18_GPIO) | \
-				BIT64(SW_19_GPIO) | \
-                BIT64(SW_PLUS_GPIO) | \
+        .pin_bit_mask = BIT64(SW_PLUS_GPIO) | \
                 BIT64(SW_MINUS_GPIO) | \
                 BIT64(SW_RE1_GPIO) | \
                 BIT64(SW_RE2_GPIO) | \
 				BIT64(SD_CARD_DETECT_GPIO),
         .mode = GPIO_MODE_INPUT,
-        .intr_type = GPIO_INTR_ANYEDGE,
+        .intr_type = GPIO_INTR_DISABLE,
         .pull_up_en = true,
         .pull_down_en = false,
     };
     ESP_ERROR_CHECK(gpio_config(&boot_button_config));
-	gpio_isr_handler_add(SW_0_GPIO, sw_isr, SW_0);
-	gpio_isr_handler_add(SW_1_GPIO, sw_isr, SW_1);
-	gpio_isr_handler_add(SW_2_GPIO, sw_isr, SW_2);
-	gpio_isr_handler_add(SW_3_GPIO, sw_isr, SW_3);
-	gpio_isr_handler_add(SW_4_GPIO, sw_isr, SW_4);
-	gpio_isr_handler_add(SW_5_GPIO, sw_isr, SW_5);
-	gpio_isr_handler_add(SW_6_GPIO, sw_isr, SW_6);
-	gpio_isr_handler_add(SW_7_GPIO, sw_isr, SW_7);
-	gpio_isr_handler_add(SW_8_GPIO, sw_isr, SW_8);
-	gpio_isr_handler_add(SW_9_GPIO, sw_isr, SW_9);
-	gpio_isr_handler_add(SW_10_GPIO, sw_isr, SW_10);
-	gpio_isr_handler_add(SW_11_GPIO, sw_isr, SW_11);
-	gpio_isr_handler_add(SW_12_GPIO, sw_isr, SW_12);
-	gpio_isr_handler_add(SW_13_GPIO, sw_isr, SW_13);
-	gpio_isr_handler_add(SW_14_GPIO, sw_isr, SW_14);
-	gpio_isr_handler_add(SW_15_GPIO, sw_isr, SW_15);
-	gpio_isr_handler_add(SW_16_GPIO, sw_isr, SW_16);
-	gpio_isr_handler_add(SW_17_GPIO, sw_isr, SW_17);
-	gpio_isr_handler_add(SW_18_GPIO, sw_isr, SW_18);
-	gpio_isr_handler_add(SW_19_GPIO, sw_isr, SW_19);
-	gpio_isr_handler_add(SW_PLUS_GPIO, sw_isr, SW_PLUS);
-	gpio_isr_handler_add(SW_MINUS_GPIO, sw_isr, SW_MINUS);
-	gpio_isr_handler_add(SW_RE1_GPIO, sw_isr, SW_RE1);
-	gpio_isr_handler_add(SW_RE2_GPIO, sw_isr, SW_RE2);
-	gpio_isr_handler_add(SD_CARD_DETECT_GPIO, sd_card_det_isr, NULL);
+	// gpio_isr_handler_add(SD_CARD_DETECT_GPIO, sd_card_det_isr, NULL);
 	switch_event_queue = xQueueCreate(SWITCH_EVENT_QUEUE_SIZE, sizeof(switch_event_t));
 }

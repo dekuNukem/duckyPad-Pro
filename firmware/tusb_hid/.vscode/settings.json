@@ -5,7 +5,7 @@
     "board/esp32s3-builtin.cfg"
   ],
   "idf.flashType": "UART",
-  "idf.portWin": "COM34",
+  "idf.portWin": "COM36",
   "files.associations": {
     "gpio.h": "c",
     "string.h": "c",
@@ -33,6 +33,7 @@
     "sdmmc_host.h": "c",
     "tusb_msc_storage.h": "c",
     "msc.h": "c",
-    "random": "c"
+    "random": "c",
+    "stdlib.h": "c"
   }
 }

@@ -1,6 +1,40 @@
     // printf("%d\n", gpio_get_level(SD_CARD_DETECT_GPIO));
+void app_main(void)
+{
+    vTaskDelay(pdMS_TO_TICKS(500)); // brief delay in case of SD card removal reboot
+    gpio_install_isr_service(0); // BEFORE GPIO INIT
+    my_rotary_encoder_init();
+    switch_init();
+    oled_init();
+    // if (sd_init())
+    //     print_nosd();
+    neopixel_init();
+    vTaskDelay(pdMS_TO_TICKS(500));
+    print_nosd();
 
+    ssd1306_SetCursor(20, 40);
+    ssd1306_WriteString("haha!!", Font_7x10, White);
+    ssd1306_UpdateScreen();
 
+    while(1)
+    {
+        vTaskDelay(pdMS_TO_TICKS(500));
+    }
+}
+void sw_isr(void * args)
+{
+    switch_event_t sw_event = {
+        .id = (uint8_t)args,
+        .level = 1 - gpio_get_level(sw_index_to_gpio_lookup[sw_event.id]),
+    };
+    uint32_t now = xTaskGetTickCountFromISR();
+    sw_status[sw_event.id].level = sw_event.level;
+
+    if(now - sw_status[sw_event.id].last_press_ms <= 33)
+        return;
+    xQueueSendFromISR(switch_event_queue, &sw_event, NULL);
+    sw_status[sw_event.id].last_press_ms = now;
+}
 
 void input_test(void)
 {
