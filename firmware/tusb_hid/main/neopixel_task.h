@@ -8,7 +8,7 @@
 #include <stdint.h>
 #include <string.h>
 
-#define NEOPIXEL_COUNT 3
+#define NEOPIXEL_COUNT 20
 #define NEOPIXEL_PIN 46
 
 void neopixel_init(void);

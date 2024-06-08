@@ -24,8 +24,8 @@ void app_main(void)
     // my_rotary_encoder_init();
     // switch_init();
     oled_init();
-    // if (sd_init())
-    //     print_nosd();
+    if (sd_init())
+        print_nosd();
     neopixel_init();
 
     while(1)

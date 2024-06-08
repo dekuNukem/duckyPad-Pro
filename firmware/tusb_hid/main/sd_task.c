@@ -22,7 +22,7 @@ uint8_t sd_init(void)
     const char mount_point[] = SD_MOUNT_POINT;
     ESP_LOGI(SD_TAG, "Initializing SD card");
     sdmmc_host_t host = SDMMC_HOST_DEFAULT();
-    host.max_freq_khz = 80000; // 8MHz
+    host.max_freq_khz = 400000; // 40MHz
     sdmmc_slot_config_t slot_config = SDMMC_SLOT_CONFIG_DEFAULT();
     slot_config.width = 1;
     slot_config.clk = SD_PIN_CLK;

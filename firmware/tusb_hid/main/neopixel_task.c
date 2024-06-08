@@ -22,6 +22,6 @@ void neopixel_init(void)
     led_strip_clear(my_led_strip);
 
     for (int idx = 0; idx < NEOPIXEL_COUNT; ++idx)
-        led_strip_set_pixel(my_led_strip, idx, 16, 32, 8);
+        led_strip_set_pixel(my_led_strip, idx, 8, 2, 8);
     led_strip_refresh(my_led_strip);
 }
