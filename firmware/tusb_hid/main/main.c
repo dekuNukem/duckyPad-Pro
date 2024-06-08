@@ -19,6 +19,11 @@ uint8_t fw_version_patch = 1;
 
 static const char *TAG = "MAIN";
 
+/*
+    xTaskCreate higher number = higher priority
+    configMAX_PRIORITIES
+*/
+
 void app_main(void)
 {
     vTaskDelay(pdMS_TO_TICKS(500)); // brief delay in case of SD card removal reboot
@@ -31,9 +36,11 @@ void app_main(void)
         print_nosd();
     neopixel_init();
 
+    xTaskCreate(kb_scan_task, "kb_scan_task", SW_SCAN_TASK_STACK_SIZE, NULL, 2, NULL);
+
     while(1)
     {
         input_test();
-        vTaskDelay(pdMS_TO_TICKS(250));
+        vTaskDelay(pdMS_TO_TICKS(100));
     }
 }

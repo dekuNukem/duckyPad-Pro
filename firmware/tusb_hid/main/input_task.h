@@ -66,12 +66,6 @@
 
 typedef struct
 {
-    uint8_t level;
-    uint32_t last_press_ms;
-} switch_status_t;
-
-typedef struct
-{
     uint8_t id;
     uint8_t level;
 } switch_event_t;
@@ -80,6 +74,9 @@ void switch_init(void);
 void my_rotary_encoder_init(void);
 void get_rc(void);
 void input_test(void);
+void kb_scan_task(void);
+
+#define SW_SCAN_TASK_STACK_SIZE 2048
 
 #ifdef __cplusplus
 }

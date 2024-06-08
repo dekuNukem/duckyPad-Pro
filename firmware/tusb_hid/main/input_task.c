@@ -11,7 +11,6 @@ static const char *TAG = "INPUT";
 #define SWITCH_EVENT_QUEUE_SIZE 10
 
 const uint8_t sw_index_to_gpio_lookup[TOTAL_SW_COUNT] = {GPIO_NUM_15, GPIO_NUM_16, GPIO_NUM_17, GPIO_NUM_18, GPIO_NUM_21, GPIO_NUM_48, GPIO_NUM_47, GPIO_NUM_33, GPIO_NUM_34, GPIO_NUM_35, GPIO_NUM_36, GPIO_NUM_37, GPIO_NUM_38, GPIO_NUM_39, GPIO_NUM_40, GPIO_NUM_41, GPIO_NUM_42, GPIO_NUM_26, GPIO_NUM_44, GPIO_NUM_45, GPIO_NUM_13, GPIO_NUM_14, GPIO_NUM_0, GPIO_NUM_3};
-switch_status_t sw_status[TOTAL_SW_COUNT];
 
 rotary_encoder_info_t upper_rc_info;
 rotary_encoder_info_t lower_rc_info;
@@ -59,64 +58,88 @@ uint8_t rowcol_to_index(uint8_t row, uint8_t col)
 	return row*SW_MATRIX_NUM_COLS + col;
 }
 
-void scan_row(uint8_t this_col)
+void scan_row(uint8_t *sw_buf, uint8_t this_col)
 {
-	this_sw_matrix_state[rowcol_to_index(0, this_col)] = gpio_get_level(SWM_ROW0_GPIO);
-	this_sw_matrix_state[rowcol_to_index(1, this_col)] = gpio_get_level(SWM_ROW1_GPIO);
-	this_sw_matrix_state[rowcol_to_index(2, this_col)] = gpio_get_level(SWM_ROW2_GPIO);
-	this_sw_matrix_state[rowcol_to_index(3, this_col)] = gpio_get_level(SWM_ROW3_GPIO);
-	this_sw_matrix_state[rowcol_to_index(4, this_col)] = gpio_get_level(SWM_ROW4_GPIO);
+	sw_buf[rowcol_to_index(0, this_col)] = gpio_get_level(SWM_ROW0_GPIO);
+	sw_buf[rowcol_to_index(1, this_col)] = gpio_get_level(SWM_ROW1_GPIO);
+	sw_buf[rowcol_to_index(2, this_col)] = gpio_get_level(SWM_ROW2_GPIO);
+	sw_buf[rowcol_to_index(3, this_col)] = gpio_get_level(SWM_ROW3_GPIO);
+	sw_buf[rowcol_to_index(4, this_col)] = gpio_get_level(SWM_ROW4_GPIO);
 }
 
 void input_test(void)
 {
-	memset(this_sw_matrix_state, 0, SW_MATRIX_BUF_SIZE);
-	gpio_set_level(SWM_COL0_GPIO, 1);
-    gpio_set_level(SWM_COL1_GPIO, 0);
-    gpio_set_level(SWM_COL2_GPIO, 0);
-    gpio_set_level(SWM_COL3_GPIO, 0);
-	vTaskDelay(pdMS_TO_TICKS(1));
-	scan_row(0);
+	// printf("hello world\n");
+	switch_event_t this_event;
+	if (xQueueReceive(switch_event_queue, &this_event, 0) == pdTRUE)
+		printf("id: %d lvl: %d\n", this_event.id, this_event.level);
+}
 
-	gpio_set_level(SWM_COL0_GPIO, 0);
-    gpio_set_level(SWM_COL1_GPIO, 1);
-    gpio_set_level(SWM_COL2_GPIO, 0);
-    gpio_set_level(SWM_COL3_GPIO, 0);
-	vTaskDelay(pdMS_TO_TICKS(1));
-	scan_row(1);
+void kb_scan_task(void)
+{
+	while(1)
+	{
+		vTaskDelay(pdMS_TO_TICKS(16));
 
-	gpio_set_level(SWM_COL0_GPIO, 0);
-    gpio_set_level(SWM_COL1_GPIO, 0);
-    gpio_set_level(SWM_COL2_GPIO, 1);
-    gpio_set_level(SWM_COL3_GPIO, 0);
-	vTaskDelay(pdMS_TO_TICKS(1));
-	scan_row(2);
+		memset(this_sw_matrix_state, 0, SW_MATRIX_BUF_SIZE);
+		gpio_set_level(SWM_COL0_GPIO, 1);
+		gpio_set_level(SWM_COL1_GPIO, 0);
+		gpio_set_level(SWM_COL2_GPIO, 0);
+		gpio_set_level(SWM_COL3_GPIO, 0);
+		vTaskDelay(pdMS_TO_TICKS(1));
+		scan_row(this_sw_matrix_state, 0);
 
-	gpio_set_level(SWM_COL0_GPIO, 0);
-    gpio_set_level(SWM_COL1_GPIO, 0);
-    gpio_set_level(SWM_COL2_GPIO, 0);
-    gpio_set_level(SWM_COL3_GPIO, 1);
-	vTaskDelay(pdMS_TO_TICKS(1));
-	scan_row(3);
+		gpio_set_level(SWM_COL0_GPIO, 0);
+		gpio_set_level(SWM_COL1_GPIO, 1);
+		gpio_set_level(SWM_COL2_GPIO, 0);
+		gpio_set_level(SWM_COL3_GPIO, 0);
+		vTaskDelay(pdMS_TO_TICKS(1));
+		scan_row(this_sw_matrix_state, 1);
 
-	// turn everything off, needed
-	gpio_set_level(SWM_COL0_GPIO, 0);
-    gpio_set_level(SWM_COL1_GPIO, 0);
-    gpio_set_level(SWM_COL2_GPIO, 0);
-    gpio_set_level(SWM_COL3_GPIO, 0);
-	vTaskDelay(pdMS_TO_TICKS(1));
+		gpio_set_level(SWM_COL0_GPIO, 0);
+		gpio_set_level(SWM_COL1_GPIO, 0);
+		gpio_set_level(SWM_COL2_GPIO, 1);
+		gpio_set_level(SWM_COL3_GPIO, 0);
+		vTaskDelay(pdMS_TO_TICKS(1));
+		scan_row(this_sw_matrix_state, 2);
 
-	for (int rrr = 0; rrr < SW_MATRIX_NUM_ROWS; ++rrr)
-    {
-        for (int ccc = 0; ccc < SW_MATRIX_NUM_COLS; ++ccc)
-        {
-            // printf("R%dC%dS%d ", rrr, ccc, this_sw_matrix_state[rowcol_to_index(rrr, ccc)]);
-			printf("%d ", this_sw_matrix_state[rowcol_to_index(rrr, ccc)]);
-        }
-        printf("\n");
-    }
+		gpio_set_level(SWM_COL0_GPIO, 0);
+		gpio_set_level(SWM_COL1_GPIO, 0);
+		gpio_set_level(SWM_COL2_GPIO, 0);
+		gpio_set_level(SWM_COL3_GPIO, 1);
+		vTaskDelay(pdMS_TO_TICKS(1));
+		scan_row(this_sw_matrix_state, 3);
 
-	printf("---------------\n");
+		// turn everything off, needed
+		gpio_set_level(SWM_COL0_GPIO, 0);
+		gpio_set_level(SWM_COL1_GPIO, 0);
+		gpio_set_level(SWM_COL2_GPIO, 0);
+		gpio_set_level(SWM_COL3_GPIO, 0);
+		vTaskDelay(pdMS_TO_TICKS(1));
+
+		for (uint8_t i = 0; i < SW_MATRIX_BUF_SIZE; i++)
+		{
+			if(this_sw_matrix_state[i] == 1 && last_sw_matrix_state[i] == 0)
+			{
+				// printf("sw %d pressed!\n", i);
+				switch_event_t sw_event = {
+					.id = i,
+					.level = 1,
+				};
+				xQueueSend(switch_event_queue, &sw_event, NULL);
+			}
+			else if(this_sw_matrix_state[i] == 0 && last_sw_matrix_state[i] == 1)
+			{
+				// printf("sw %d released!\n", i);
+				switch_event_t sw_event = {
+					.id = i,
+					.level = 0,
+				};
+				xQueueSend(switch_event_queue, &sw_event, NULL);
+			}
+		}
+		memcpy(last_sw_matrix_state, this_sw_matrix_state, SW_MATRIX_BUF_SIZE);
+	}
 }
 
 void sd_card_det_isr(void* args)
