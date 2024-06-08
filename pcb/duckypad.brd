@@ -1245,7 +1245,7 @@ These are the free and generally easy to produce 4-layer PCB design rules. You c
 <element name="C35" library="clock" package="0805" value="12pF" x="92.075" y="16.195" smashed="yes" rot="MR90">
 <attribute name="NAME" x="91.374" y="14.7955" size="0.8128" layer="26" rot="MR180"/>
 </element>
-<element name="R7" library="joyAnalog" package="0805" value="560K" x="94.107" y="16.195" smashed="yes" rot="MR270">
+<element name="R7" library="joyAnalog" package="0805" value="510K" x="94.107" y="16.195" smashed="yes" rot="MR270">
 <attribute name="NAME" x="95.0595" y="15.682" size="0.8128" layer="26" rot="MR90"/>
 </element>
 <element name="R10" library="joyAnalog" package="0805" value="62K" x="90.043" y="16.195" smashed="yes" rot="MR90">
@@ -1257,7 +1257,7 @@ These are the free and generally easy to produce 4-layer PCB design rules. You c
 <element name="C34" library="clock" package="0805" value="4.7uF" x="86.36" y="33.401" smashed="yes" rot="MR180">
 <attribute name="NAME" x="84.836" y="32.9565" size="0.8128" layer="26" rot="MR0"/>
 </element>
-<element name="R6" library="joyAnalog" package="0805" value="560K" x="91.948" y="21.463" smashed="yes" rot="MR90">
+<element name="R6" library="joyAnalog" package="0805" value="510K" x="91.948" y="21.463" smashed="yes" rot="MR90">
 <attribute name="NAME" x="91.6305" y="23.114" size="0.8128" layer="26" rot="MR90"/>
 </element>
 <element name="C36" library="clock" package="0805" value="4.7uF" x="89.789" y="33.401" smashed="yes" rot="MR180">

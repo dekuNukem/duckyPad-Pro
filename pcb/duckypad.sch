@@ -8443,7 +8443,7 @@ We've spent an enormous amount of time creating and checking these footprints an
 <part name="SUPPLY2" library="SparkFun-PowerSymbols" deviceset="12V" device=""/>
 <part name="C35" library="clock" deviceset="CAP" device="0805" value="12pF"/>
 <part name="GND45" library="supply1" deviceset="GND" device=""/>
-<part name="R7" library="joyAnalog" deviceset="RESISTOR" device="0805-RES" value="560K"/>
+<part name="R7" library="joyAnalog" deviceset="RESISTOR" device="0805-RES" value="510K"/>
 <part name="R10" library="joyAnalog" deviceset="RESISTOR" device="0805-RES" value="62K"/>
 <part name="GND46" library="supply1" deviceset="GND" device=""/>
 <part name="C31" library="clock" deviceset="CAP" device="0805" value="100nF"/>
@@ -8453,7 +8453,7 @@ We've spent an enormous amount of time creating and checking these footprints an
 <part name="+3V1" library="supply1" library_urn="urn:adsk.eagle:library:371" deviceset="+3V3" device=""/>
 <part name="C34" library="clock" deviceset="CAP" device="0805" value="4.7uF"/>
 <part name="GND42" library="supply1" library_urn="urn:adsk.eagle:library:371" deviceset="GND" device=""/>
-<part name="R6" library="joyAnalog" deviceset="RESISTOR" device="0805-RES" value="560K"/>
+<part name="R6" library="joyAnalog" deviceset="RESISTOR" device="0805-RES" value="510K"/>
 <part name="GND43" library="supply1" library_urn="urn:adsk.eagle:library:371" deviceset="GND" device=""/>
 <part name="C36" library="clock" deviceset="CAP" device="0805" value="4.7uF"/>
 <part name="C37" library="clock" deviceset="CAP" device="0805" value="100nF"/>
