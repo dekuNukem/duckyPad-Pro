@@ -34,6 +34,7 @@
     "tusb_msc_storage.h": "c",
     "msc.h": "c",
     "random": "c",
-    "stdlib.h": "c"
+    "stdlib.h": "c",
+    "algorithm": "c"
   }
 }

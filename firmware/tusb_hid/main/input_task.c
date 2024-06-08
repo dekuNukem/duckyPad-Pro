@@ -52,18 +52,36 @@ void get_rc(void)
 uint8_t this_sw_matrix_state[SW_MATRIX_BUF_SIZE];
 uint8_t last_sw_matrix_state[SW_MATRIX_BUF_SIZE];
 
+uint8_t rowcol_to_index(uint8_t row, uint8_t col)
+{
+	if(row >= SW_MATRIX_NUM_ROWS || col >= SW_MATRIX_NUM_COLS)
+		return 0;
+	return row*SW_MATRIX_NUM_COLS + col;
+}
+
 void input_test(void)
 {
-	gpio_set_level(SWM_COL0_GPIO, 1);
-    gpio_set_level(SWM_COL1_GPIO, 0);
-    gpio_set_level(SWM_COL2_GPIO, 0);
-    gpio_set_level(SWM_COL3_GPIO, 0);
+	// gpio_set_level(SWM_COL0_GPIO, 1);
+    // gpio_set_level(SWM_COL1_GPIO, 0);
+    // gpio_set_level(SWM_COL2_GPIO, 0);
+    // gpio_set_level(SWM_COL3_GPIO, 0);
 
-    printf("%d ", gpio_get_level(SWM_ROW0_GPIO));
-    printf("%d ", gpio_get_level(SWM_ROW1_GPIO));
-    printf("%d ", gpio_get_level(SWM_ROW2_GPIO));
-    printf("%d ", gpio_get_level(SWM_ROW3_GPIO));
-    printf("%d\n", gpio_get_level(SWM_ROW4_GPIO));
+    // printf("%d ", gpio_get_level(SWM_ROW0_GPIO));
+    // printf("%d ", gpio_get_level(SWM_ROW1_GPIO));
+    // printf("%d ", gpio_get_level(SWM_ROW2_GPIO));
+    // printf("%d ", gpio_get_level(SWM_ROW3_GPIO));
+    // printf("%d\n", gpio_get_level(SWM_ROW4_GPIO));
+
+	for (int rrr = 0; rrr < SW_MATRIX_NUM_ROWS; ++rrr)
+	{
+		for (int ccc = 0; ccc < SW_MATRIX_NUM_COLS; ++ccc)
+		{
+			printf("R%dC%d ", rrr, ccc);
+		}
+		printf("\n");
+	}
+
+	printf("---------------\n");
 }
 
 void sd_card_det_isr(void* args)
