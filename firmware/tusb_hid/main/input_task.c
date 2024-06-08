@@ -49,11 +49,21 @@ void get_rc(void)
 		printf("Event: id: %d pos: %ld, dir: %d\n", event.state.id, event.state.position, event.state.direction);
 }
 
+uint8_t this_sw_matrix_state[SW_MATRIX_BUF_SIZE];
+uint8_t last_sw_matrix_state[SW_MATRIX_BUF_SIZE];
+
 void input_test(void)
 {
-	// switch_event_t this_event;
-	// if (xQueueReceive(switch_event_queue, &this_event, 0) == pdTRUE)
-	// 	printf("id: %d lvl: %d\n", this_event.id, this_event.level);
+	gpio_set_level(SWM_COL0_GPIO, 1);
+    gpio_set_level(SWM_COL1_GPIO, 0);
+    gpio_set_level(SWM_COL2_GPIO, 0);
+    gpio_set_level(SWM_COL3_GPIO, 0);
+
+    printf("%d ", gpio_get_level(SWM_ROW0_GPIO));
+    printf("%d ", gpio_get_level(SWM_ROW1_GPIO));
+    printf("%d ", gpio_get_level(SWM_ROW2_GPIO));
+    printf("%d ", gpio_get_level(SWM_ROW3_GPIO));
+    printf("%d\n", gpio_get_level(SWM_ROW4_GPIO));
 }
 
 void sd_card_det_isr(void* args)
@@ -63,18 +73,47 @@ void sd_card_det_isr(void* args)
 
 void switch_init(void)
 {
-    const gpio_config_t boot_button_config = {
+	const gpio_config_t sw_matrix_col_config = {
+        .pin_bit_mask = BIT64(SWM_COL0_GPIO) | \
+                BIT64(SWM_COL1_GPIO) | \
+                BIT64(SWM_COL2_GPIO) | \
+                BIT64(SWM_COL3_GPIO),
+        .mode = GPIO_MODE_OUTPUT,
+        .intr_type = GPIO_INTR_DISABLE,
+        .pull_up_en = false,
+        .pull_down_en = false,
+    };
+    ESP_ERROR_CHECK(gpio_config(&sw_matrix_col_config));
+
+    gpio_set_level(SWM_COL0_GPIO, 0);
+    gpio_set_level(SWM_COL1_GPIO, 0);
+    gpio_set_level(SWM_COL2_GPIO, 0);
+    gpio_set_level(SWM_COL3_GPIO, 0);
+
+    const gpio_config_t sw_matrix_row_config = {
+        .pin_bit_mask = BIT64(SWM_ROW0_GPIO) | \
+                BIT64(SWM_ROW1_GPIO) | \
+                BIT64(SWM_ROW2_GPIO) | \
+                BIT64(SWM_ROW3_GPIO) | \
+                BIT64(SWM_ROW4_GPIO),
+        .mode = GPIO_MODE_INPUT,
+        .intr_type = GPIO_INTR_DISABLE,
+        .pull_up_en = false,
+        .pull_down_en = true,
+    };
+    ESP_ERROR_CHECK(gpio_config(&sw_matrix_row_config));
+
+    const gpio_config_t button_config = {
         .pin_bit_mask = BIT64(SW_PLUS_GPIO) | \
                 BIT64(SW_MINUS_GPIO) | \
                 BIT64(SW_RE1_GPIO) | \
-                BIT64(SW_RE2_GPIO) | \
-				BIT64(SD_CARD_DETECT_GPIO),
+                BIT64(SW_RE2_GPIO),
         .mode = GPIO_MODE_INPUT,
         .intr_type = GPIO_INTR_DISABLE,
         .pull_up_en = true,
         .pull_down_en = false,
     };
-    ESP_ERROR_CHECK(gpio_config(&boot_button_config));
+    ESP_ERROR_CHECK(gpio_config(&button_config));
 
     const gpio_config_t sd_det_config = {
         .pin_bit_mask = BIT64(SD_CARD_DETECT_GPIO),

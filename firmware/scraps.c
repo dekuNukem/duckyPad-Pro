@@ -1,3 +1,11 @@
+void input_test(void)
+{
+    // switch_event_t this_event;
+    // if (xQueueReceive(switch_event_queue, &this_event, 0) == pdTRUE)
+    //  printf("id: %d lvl: %d\n", this_event.id, this_event.level);
+}
+
+
     // printf("%d\n", gpio_get_level(SD_CARD_DETECT_GPIO));
 void app_main(void)
 {
