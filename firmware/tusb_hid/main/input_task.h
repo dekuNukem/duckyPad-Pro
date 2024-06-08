@@ -5,7 +5,10 @@
  extern "C" {
 #endif 
 
-#define TOTAL_SW_COUNT 24
+#define SW_MATRIX_NUM_COLS 4
+#define SW_MATRIX_NUM_ROWS 5
+
+#define TOTAL_SW_COUNT (SW_MATRIX_NUM_COLS * SW_MATRIX_NUM_ROWS + 4)
 #define MAPPABLE_SW_COUNT (TOTAL_SW_COUNT-2)
 
 #define SW_PLUS_GPIO GPIO_NUM_18
@@ -20,10 +23,6 @@
 #define RE2_A GPIO_NUM_4
 #define RE2_B GPIO_NUM_5
 
-#define SW_MATRIX_NUM_COLS 4
-#define SW_MATRIX_NUM_ROWS 5
-#define SW_MATRIX_BUF_SIZE (SW_MATRIX_NUM_COLS * SW_MATRIX_NUM_ROWS)
-
 #define SWM_COL0_GPIO GPIO_NUM_42
 #define SWM_COL1_GPIO GPIO_NUM_41
 #define SWM_COL2_GPIO GPIO_NUM_39
@@ -37,27 +36,6 @@
 
 #define ROTARY_ENCODER_UPPER 1
 #define ROTARY_ENCODER_LOWER 2
-
-#define SW_0 0
-#define SW_1 1
-#define SW_2 2
-#define SW_3 3
-#define SW_4 4
-#define SW_5 5
-#define SW_6 6
-#define SW_7 7
-#define SW_8 8
-#define SW_9 9
-#define SW_10 10
-#define SW_11 11
-#define SW_12 12
-#define SW_13 13
-#define SW_14 14
-#define SW_15 15
-#define SW_16 16
-#define SW_17 17
-#define SW_18 18
-#define SW_19 19
 
 #define SW_PLUS 20
 #define SW_MINUS 21

@@ -48,8 +48,8 @@ void get_rc(void)
 		printf("Event: id: %d pos: %ld, dir: %d\n", event.state.id, event.state.position, event.state.direction);
 }
 
-uint8_t this_sw_matrix_state[SW_MATRIX_BUF_SIZE];
-uint8_t last_sw_matrix_state[SW_MATRIX_BUF_SIZE];
+uint8_t this_sw_state[TOTAL_SW_COUNT];
+uint8_t last_sw_state[TOTAL_SW_COUNT];
 
 uint8_t rowcol_to_index(uint8_t row, uint8_t col)
 {
@@ -81,34 +81,34 @@ void kb_scan_task(void)
 	{
 		vTaskDelay(pdMS_TO_TICKS(16));
 
-		memset(this_sw_matrix_state, 0, SW_MATRIX_BUF_SIZE);
+		memset(this_sw_state, 0, TOTAL_SW_COUNT);
 		gpio_set_level(SWM_COL0_GPIO, 1);
 		gpio_set_level(SWM_COL1_GPIO, 0);
 		gpio_set_level(SWM_COL2_GPIO, 0);
 		gpio_set_level(SWM_COL3_GPIO, 0);
 		vTaskDelay(pdMS_TO_TICKS(1));
-		scan_row(this_sw_matrix_state, 0);
+		scan_row(this_sw_state, 0);
 
 		gpio_set_level(SWM_COL0_GPIO, 0);
 		gpio_set_level(SWM_COL1_GPIO, 1);
 		gpio_set_level(SWM_COL2_GPIO, 0);
 		gpio_set_level(SWM_COL3_GPIO, 0);
 		vTaskDelay(pdMS_TO_TICKS(1));
-		scan_row(this_sw_matrix_state, 1);
+		scan_row(this_sw_state, 1);
 
 		gpio_set_level(SWM_COL0_GPIO, 0);
 		gpio_set_level(SWM_COL1_GPIO, 0);
 		gpio_set_level(SWM_COL2_GPIO, 1);
 		gpio_set_level(SWM_COL3_GPIO, 0);
 		vTaskDelay(pdMS_TO_TICKS(1));
-		scan_row(this_sw_matrix_state, 2);
+		scan_row(this_sw_state, 2);
 
 		gpio_set_level(SWM_COL0_GPIO, 0);
 		gpio_set_level(SWM_COL1_GPIO, 0);
 		gpio_set_level(SWM_COL2_GPIO, 0);
 		gpio_set_level(SWM_COL3_GPIO, 1);
 		vTaskDelay(pdMS_TO_TICKS(1));
-		scan_row(this_sw_matrix_state, 3);
+		scan_row(this_sw_state, 3);
 
 		// turn everything off, needed
 		gpio_set_level(SWM_COL0_GPIO, 0);
@@ -117,9 +117,14 @@ void kb_scan_task(void)
 		gpio_set_level(SWM_COL3_GPIO, 0);
 		vTaskDelay(pdMS_TO_TICKS(1));
 
-		for (uint8_t i = 0; i < SW_MATRIX_BUF_SIZE; i++)
+		this_sw_state[SW_PLUS] = 1 - gpio_get_level(SW_PLUS_GPIO);
+		this_sw_state[SW_MINUS] = 1 - gpio_get_level(SW_MINUS_GPIO);
+		this_sw_state[SW_RE1] = 1 - gpio_get_level(SW_RE1_GPIO);
+		this_sw_state[SW_RE2] = 1 - gpio_get_level(SW_RE2_GPIO);
+
+		for (uint8_t i = 0; i < TOTAL_SW_COUNT; i++)
 		{
-			if(this_sw_matrix_state[i] == 1 && last_sw_matrix_state[i] == 0)
+			if(this_sw_state[i] == 1 && last_sw_state[i] == 0)
 			{
 				// printf("sw %d pressed!\n", i);
 				switch_event_t sw_event = {
@@ -128,7 +133,7 @@ void kb_scan_task(void)
 				};
 				xQueueSend(switch_event_queue, &sw_event, NULL);
 			}
-			else if(this_sw_matrix_state[i] == 0 && last_sw_matrix_state[i] == 1)
+			else if(this_sw_state[i] == 0 && last_sw_state[i] == 1)
 			{
 				// printf("sw %d released!\n", i);
 				switch_event_t sw_event = {
@@ -138,7 +143,7 @@ void kb_scan_task(void)
 				xQueueSend(switch_event_queue, &sw_event, NULL);
 			}
 		}
-		memcpy(last_sw_matrix_state, this_sw_matrix_state, SW_MATRIX_BUF_SIZE);
+		memcpy(last_sw_state, this_sw_state, TOTAL_SW_COUNT);
 	}
 }
 
