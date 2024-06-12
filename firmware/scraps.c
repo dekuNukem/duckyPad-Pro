@@ -1,3 +1,9 @@
+void step_profile(uint8_t direction)
+{
+  
+}
+
+
     printf("%d %d %ld %s\n", sdf, dp_settings.brightness_index, dp_settings.sleep_after_ms, dp_settings.current_kb_layout);
 
 

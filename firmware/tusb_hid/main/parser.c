@@ -11,6 +11,7 @@
 #include <string.h>
 #include <sys/unistd.h>
 #include <sys/stat.h>
+#include <dirent.h> 
 
 #include "parser.h"
 
@@ -22,6 +23,8 @@ char temp_buf[TEMP_BUFSIZE];
 const char config_sleep_after_min[] = "sleep_after_min ";
 const char config_brightness_index[] = "bi ";
 const char config_keyboard_layout[] = "kbl ";
+
+uint8_t current_profile_index;
 
 int8_t load_settings(dp_global_settings* dps)
 {
@@ -56,7 +59,6 @@ int8_t load_settings(dp_global_settings* dps)
   return 0;
 }
 
-
 const char stat_last_used_profile[] = "lp ";
 uint8_t get_last_used_profile(void)
 {
@@ -76,11 +78,57 @@ uint8_t get_last_used_profile(void)
   if(ret >= MAX_PROFILES)
     ret = 0;
 
-  f_close(&sd_file);
+  fclose(sd_file);
   return ret;
+}
+
+uint8_t available_profile_list[MAX_PROFILES];
+const char* profile_dir_prefix = "profile";
+
+uint8_t is_profile_dir(char* dirname)
+{
+  if(strncmp(dirname, profile_dir_prefix, strlen(profile_dir_prefix)))
+    return 0;
+  if(strlen(dirname) == strlen(profile_dir_prefix))
+    return 0;
+  char pnumber = dirname[strlen(profile_dir_prefix)];
+  if(pnumber > '9' || pnumber < '0')
+    return 0;
+  if(strstr(dirname, "_") == 0)
+    return 0;
+  return 1;
+}
+
+void scan_profiles()
+{
+  struct dirent *dir;
+  DIR *d = opendir(SD_MOUNT_POINT);
+  memset(available_profile_list, 0, MAX_PROFILES);
+  if(d) 
+  {
+    while ((dir = readdir(d)) != NULL)
+    {
+      if(dir->d_type != DT_DIR)
+        continue;
+      if(is_profile_dir(dir->d_name) == 0)
+        continue;
+      uint8_t this_profile_number = atoi(dir->d_name + strlen(profile_dir_prefix));
+      if(this_profile_number >= MAX_PROFILES)
+        continue;
+      available_profile_list[this_profile_number] = 1;
+    }
+  }
+  closedir(d);
 }
 
 void mytest(void)
 {
-  printf("mytest: %d\n", get_last_used_profile());
+  // printf("mytest: %d\n", get_last_used_profile());
+  scan_profiles();
+  for (int i = 0; i < MAX_PROFILES; i++)
+  {
+    if(available_profile_list[i])
+      printf("%d\n", i);
+  }
+  
 }
