@@ -22,7 +22,7 @@ extern dp_global_settings dp_settings;
 
 
 void load_settings(dp_global_settings* dps);
-
+int8_t list_files(void);
 
 #ifdef __cplusplus
 }

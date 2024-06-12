@@ -456,7 +456,7 @@
     "LCD_PANEL_IO_FORMAT_BUF_SIZE": 32,
     "LCD_RGB_ISR_IRAM_SAFE": false,
     "LCD_RGB_RESTART_IN_VSYNC": false,
-    "LOG_COLORS": true,
+    "LOG_COLORS": false,
     "LOG_DEFAULT_LEVEL": 3,
     "LOG_DEFAULT_LEVEL_DEBUG": false,
     "LOG_DEFAULT_LEVEL_ERROR": false,

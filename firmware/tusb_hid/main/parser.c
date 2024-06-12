@@ -15,7 +15,7 @@
 #include "parser.h"
 
 const char config_file_path[] = "/sdcard/dp_settings.txt";
-FIL* sd_file;
+FIL sd_file;
 dp_global_settings dp_settings;
 
 char temp_buf[TEMP_BUFSIZE];
@@ -23,16 +23,34 @@ char temp_buf[TEMP_BUFSIZE];
 const char config_sleep_after_min[] = "sleep_after_min ";
 const char config_brightness_index[] = "bi ";
 const char config_keyboard_layout[] = "kbl ";
+#include <dirent.h> 
+
+int8_t list_files(void)
+{
+  DIR *d;
+  struct dirent *dir;
+  d = opendir(SD_MOUNT_POINT);
+  if (d) {
+    while ((dir = readdir(d)) != NULL) {
+      printf("%s\n", dir->d_name);
+    }
+    closedir(d);
+  }
+  return 0;
+}
 
 void load_settings(dp_global_settings* dps)
 {
   if(dps == NULL)
     return;
-  if(f_open(&sd_file, config_file_path, FA_READ) != 0)
+  
+  int result = f_open(&sd_file, config_file_path, FA_READ);
+  printf("fr %d\n", result);
+  if(result != 0)
     goto ggs_end;
   memset(temp_buf, 0, TEMP_BUFSIZE);
   memset(dps->current_kb_layout, 0, FILENAME_BUFSIZE);
-  while(f_gets(temp_buf, TEMP_BUFSIZE, &sd_file))
+  while(fgets(temp_buf, TEMP_BUFSIZE, &sd_file))
   {
     if(strncmp(temp_buf, config_sleep_after_min, strlen(config_sleep_after_min)) == 0)
       dps->sleep_after_ms = atoi(temp_buf + strlen(config_sleep_after_min)) * 60000;

@@ -41,7 +41,10 @@ void app_main(void)
     neopixel_init();
     xTaskCreate(kb_scan_task, "kb_scan_task", SW_SCAN_TASK_STACK_SIZE, NULL, 2, NULL);
 
-    load_settings(&dp_settings);
+    list_files();
+    // load_settings(&dp_settings);
+
+    // printf("%d %ld %s\n", dp_settings.brightness_index, dp_settings.sleep_after_ms, dp_settings.current_kb_layout);
 
     while(1)
     {

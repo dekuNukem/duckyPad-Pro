@@ -271,7 +271,7 @@
     "IDF_TARGET_ARCH": "xtensa",
     "IDF_TARGET_ARCH_XTENSA": true,
     "IDF_TARGET_ESP32S3": true,
-    "LOG_COLORS": true,
+    "LOG_COLORS": false,
     "LOG_DEFAULT_LEVEL": 3,
     "LOG_DEFAULT_LEVEL_DEBUG": false,
     "LOG_DEFAULT_LEVEL_ERROR": false,
