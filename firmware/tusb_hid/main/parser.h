@@ -7,10 +7,12 @@
 
 #include <stdint.h>
 #include <string.h>
+#include "input_task.h"
 
 #define TEMP_BUFSIZE 128
 #define FILENAME_BUFSIZE TEMP_BUFSIZE
 #define MAX_PROFILES 64
+#define KEYNAME_SIZE 16
 
 typedef struct
 {
@@ -19,12 +21,16 @@ typedef struct
   char current_kb_layout[FILENAME_BUFSIZE];
 } dp_global_settings;
 
+/*
+  this caches profile name, and printable keynames
+*/
 typedef struct
 {
   uint8_t index;
   uint8_t is_loaded;
   char dir_path[FILENAME_BUFSIZE];
-  char* name;
+  char* pf_name;
+  char sw_name[MAPPABLE_OBSW_COUNT][KEYNAME_SIZE];
 } profile_info;
 
 extern profile_info current_profile_info;

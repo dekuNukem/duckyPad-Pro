@@ -8,3 +8,4 @@ include($ENV{IDF_PATH}/tools/cmake/project.cmake)
 project(tusb_hid)
 
 idf_build_set_property(COMPILE_OPTIONS "-Wno-unused-const-variable" APPEND)
+idf_build_set_property(COMPILE_OPTIONS "-Wno-format-overflow" APPEND)

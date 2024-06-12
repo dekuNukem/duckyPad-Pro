@@ -14,6 +14,7 @@
 
 #include "parser.h"
 #include "shared.h"
+#include "input_task.h"
 #include "ui_task.h"
 
 const char config_file_path[] = "/sdcard/dp_settings.txt";
@@ -140,7 +141,7 @@ void print_profile_info(profile_info *pinfo)
   printf("index: %d\n", pinfo->index);
   printf("is_loaded: %d\n", pinfo->is_loaded);
   printf("dir_path: %s\n", pinfo->dir_path);
-  printf("name: %s\n", pinfo->name);
+  printf("pf_name: %s\n", pinfo->pf_name);
   printf("--------\n");
 }
 
@@ -169,13 +170,35 @@ void fill_profile_info(void)
       all_profile_info[count].is_loaded = 1;
       memset(all_profile_info[count].dir_path, 0, FILENAME_BUFSIZE);
       strcpy(all_profile_info[count].dir_path, dir->d_name);
-      all_profile_info[count].name = all_profile_info[count].dir_path + strlen(profile_dir_prefix) + how_many_digits(this_profile_number) + 1;
-      print_profile_info(&all_profile_info[count]);
-
+      all_profile_info[count].pf_name = all_profile_info[count].dir_path + strlen(profile_dir_prefix) + how_many_digits(this_profile_number) + 1;
       count++;
     }
   }
   closedir(d);
+}
+
+void parse_key_config_line()
+{
+  ;
+}
+
+void load_keynames(uint8_t which)
+{
+  // print_profile_info(&all_profile_info[i]);
+  memset(filename_buf, 0, FILENAME_BUFSIZE);
+  sprintf(filename_buf, "%s/%s/config.txt", SD_MOUNT_POINT, all_profile_info[which].dir_path);
+  printf("load_keynames: %s\n", filename_buf);
+
+  FILE *sd_file = fopen(filename_buf, "r");
+  if(sd_file == NULL)
+    return;
+  memset(temp_buf, 0, TEMP_BUFSIZE);
+  while(fgets(temp_buf, TEMP_BUFSIZE, sd_file))
+  {
+    printf("%s\n", temp_buf);
+    parse_key_config_line();
+  }
+  fclose(sd_file);
 }
 
 uint8_t scan_profiles()
@@ -193,6 +216,8 @@ uint8_t scan_profiles()
   
   memset(all_profile_info, 0, valid_profile_count * sizeof(profile_info));
   fill_profile_info();
+  load_keynames(1);
+
   return PSCAN_OK;
 }
 

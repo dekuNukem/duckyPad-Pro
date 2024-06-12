@@ -1,5 +1,37 @@
-      printf("%d %d: %s\n", count, this_profile_number, dir->d_name);
 
+uint8_t get_last_used_profile(void)
+{
+  uint8_t ret = 0;
+
+  FILE *sd_file = fopen("/sdcard/dp_stats.txt", "r");
+  if(sd_file == NULL)
+    return 1;
+
+  memset(temp_buf, 0, TEMP_BUFSIZE);
+  while(fgets(temp_buf, TEMP_BUFSIZE, sd_file))
+  {
+    if(strncmp(temp_buf, stat_last_used_profile, strlen(stat_last_used_profile)) == 0)
+      ret = atoi(temp_buf+strlen(stat_last_used_profile));
+  }
+
+  if(ret >= MAX_PROFILES)
+    ret = 0;
+
+  fclose(sd_file);
+  return ret;
+}
+
+      printf("%d %d: %s\n", count, this_profile_number, dir->d_name);
+void load_keynames(uint8_t pf_size)
+{
+  for (uint8_t i = 0; i < pf_size; i++)
+  {
+    // print_profile_info(&all_profile_info[i]);
+    memset(filename_buf, 0, FILENAME_BUFSIZE);
+    sprintf(filename_buf, "%s/%s", SD_MOUNT_POINT, all_profile_info[i].dir_path);
+    printf("%s\n", filename_buf);
+  }
+}
 
 profile_info current_profile_info;
 printf("jjj %d\n", valid_profile_count);

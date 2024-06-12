@@ -43,8 +43,8 @@ void get_rc(void)
 		printf("Event: id: %d pos: %ld, dir: %d\n", event.state.id, event.state.position, event.state.direction);
 }
 
-uint8_t this_sw_state[TOTAL_SW_COUNT];
-uint8_t last_sw_state[TOTAL_SW_COUNT];
+uint8_t this_sw_state[TOTAL_OBSW_COUNT];
+uint8_t last_sw_state[TOTAL_OBSW_COUNT];
 
 uint8_t rowcol_to_index(uint8_t row, uint8_t col)
 {
@@ -84,7 +84,7 @@ void kb_scan_task(void)
 	{
 		vTaskDelay(pdMS_TO_TICKS(20));
 
-		memset(this_sw_state, 0, TOTAL_SW_COUNT);
+		memset(this_sw_state, 0, TOTAL_OBSW_COUNT);
 		gpio_set_level(SWM_COL0_GPIO, 1);
 		gpio_set_level(SWM_COL1_GPIO, 0);
 		gpio_set_level(SWM_COL2_GPIO, 0);
@@ -121,7 +121,7 @@ void kb_scan_task(void)
 		this_sw_state[SW_RE1] = 1 - gpio_get_level(SW_RE1_GPIO);
 		this_sw_state[SW_RE2] = 1 - gpio_get_level(SW_RE2_GPIO);
 
-		for (uint8_t i = 0; i < TOTAL_SW_COUNT; i++)
+		for (uint8_t i = 0; i < TOTAL_OBSW_COUNT; i++)
 		{
 			if(this_sw_state[i] == 1 && last_sw_state[i] == 0)
 			{
@@ -140,7 +140,7 @@ void kb_scan_task(void)
 				xQueueSend(switch_event_queue, &sw_event, NULL);
 			}
 		}
-		memcpy(last_sw_state, this_sw_state, TOTAL_SW_COUNT);
+		memcpy(last_sw_state, this_sw_state, TOTAL_OBSW_COUNT);
 	}
 }
 
