@@ -11,6 +11,8 @@
 #define NEOPIXEL_COUNT 20
 #define NEOPIXEL_PIN 46
 
+#define BRIGHTNESS_LEVELS 5
+
 void neopixel_init(void);
 
 #ifdef __cplusplus

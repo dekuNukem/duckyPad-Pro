@@ -8,7 +8,6 @@ const char *SD_TAG = "SD";
 
 // make sure to enable long file name support in menuconfig!
 
-const char config_file_path[] = "/sdcard/config.txt";
 sdmmc_card_t *my_sd_card;
 
 uint8_t sd_init(void)

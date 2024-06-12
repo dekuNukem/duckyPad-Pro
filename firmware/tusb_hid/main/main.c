@@ -10,7 +10,7 @@
 #include "ui_task.h"
 #include "neopixel_task.h"
 #include "shared.h"
-
+#include "parser.h"
 #include "ssd1306.h"
 
 uint8_t fw_version_major = 0;
@@ -39,8 +39,9 @@ void app_main(void)
     }
     
     neopixel_init();
-
     xTaskCreate(kb_scan_task, "kb_scan_task", SW_SCAN_TASK_STACK_SIZE, NULL, 2, NULL);
+
+    load_settings(&dp_settings);
 
     while(1)
     {

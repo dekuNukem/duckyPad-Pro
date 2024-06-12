@@ -36,6 +36,7 @@
     "random": "c",
     "stdlib.h": "c",
     "algorithm": "c",
-    "rotary_encoder.h": "c"
+    "rotary_encoder.h": "c",
+    "parser.h": "c"
   }
 }
