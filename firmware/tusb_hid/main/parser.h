@@ -21,8 +21,10 @@ typedef struct
 
 typedef struct
 {
+  uint8_t index;
   uint8_t is_loaded;
-  char name[FILENAME_BUFSIZE];
+  char dir_path[FILENAME_BUFSIZE];
+  char* name;
 } profile_info;
 
 extern profile_info current_profile_info;

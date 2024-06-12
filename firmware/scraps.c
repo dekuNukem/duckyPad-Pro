@@ -1,3 +1,6 @@
+      printf("%d %d: %s\n", count, this_profile_number, dir->d_name);
+
+
 profile_info current_profile_info;
 printf("jjj %d\n", valid_profile_count);
 void load_profile(uint8_t pid)

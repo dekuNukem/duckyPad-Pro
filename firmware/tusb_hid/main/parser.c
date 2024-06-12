@@ -28,6 +28,7 @@ const char config_keyboard_layout[] = "kbl ";
 
 uint8_t current_profile_index;
 profile_info *all_profile_info;
+uint8_t valid_profile_count;
 
 uint8_t load_settings(dp_global_settings* dps)
 {
@@ -91,6 +92,8 @@ uint8_t is_profile_dir(char* dirname)
     return 0;
   if(strlen(dirname) == strlen(profile_dir_prefix))
     return 0;
+  if(strlen(dirname) >= FILENAME_BUFSIZE)
+    return 0;
   char pnumber = dirname[strlen(profile_dir_prefix)];
   if(pnumber > '9' || pnumber < '0')
     return 0;
@@ -129,21 +132,67 @@ uint8_t get_valid_profile_count()
   return count;
 }
 
+void print_profile_info(profile_info *pinfo)
+{
+  if(pinfo == NULL)
+    return;
+  printf("--------\n");
+  printf("index: %d\n", pinfo->index);
+  printf("is_loaded: %d\n", pinfo->is_loaded);
+  printf("dir_path: %s\n", pinfo->dir_path);
+  printf("name: %s\n", pinfo->name);
+  printf("--------\n");
+}
+
 void fill_profile_info(void)
 {
-  ;
+  uint8_t count = 0;
+  struct dirent *dir;
+  DIR *d = opendir(SD_MOUNT_POINT);
+  memset(unique_profiles, 0, MAX_PROFILES);
+  if(d) 
+  {
+    while ((dir = readdir(d)) != NULL)
+    {
+      if(dir->d_type != DT_DIR)
+        continue;
+      if(is_profile_dir(dir->d_name) == 0)
+        continue;
+      uint8_t this_profile_number = atoi(dir->d_name + strlen(profile_dir_prefix));
+      if(this_profile_number >= MAX_PROFILES)
+        continue;
+
+      // if two profile folders have same number, dont load twice
+      if(all_profile_info[count].is_loaded || count >= valid_profile_count)
+        continue;
+      all_profile_info[count].index = this_profile_number;
+      all_profile_info[count].is_loaded = 1;
+      memset(all_profile_info[count].dir_path, 0, FILENAME_BUFSIZE);
+      strcpy(all_profile_info[count].dir_path, dir->d_name);
+      all_profile_info[count].name = all_profile_info[count].dir_path + strlen(profile_dir_prefix) + how_many_digits(this_profile_number) + 1;
+      print_profile_info(&all_profile_info[count]);
+
+      count++;
+    }
+  }
+  closedir(d);
 }
 
 uint8_t scan_profiles()
 {
-  uint8_t valid_profile_count = get_valid_profile_count();
+  valid_profile_count = get_valid_profile_count();
   if(valid_profile_count == 0)    
     return PSCAN_ERROR_NO_PROFILE;
+
+  printf("%s: found %d valid profiles\n", __func__, valid_profile_count);
   
+  free(all_profile_info);
   all_profile_info = (profile_info *)malloc(valid_profile_count * sizeof(profile_info));
   if(all_profile_info == NULL)
     return PSCAN_ERROR_NO_MEMORY;
   
+  memset(all_profile_info, 0, valid_profile_count * sizeof(profile_info));
+  fill_profile_info();
   return PSCAN_OK;
 }
 

@@ -39,6 +39,8 @@
     "rotary_encoder.h": "c",
     "parser.h": "c",
     "shared.h": "c",
-    "fstream": "c"
+    "fstream": "c",
+    "typeinfo": "c",
+    "chrono": "c"
   }
 }
