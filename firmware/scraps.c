@@ -1,3 +1,84 @@
+profile_info current_profile_info;
+printf("jjj %d\n", valid_profile_count);
+void load_profile(uint8_t pid)
+{
+  ;
+}
+
+#define FILENAME_BUFSIZE 64
+
+typedef struct
+{
+    uint8_t profile_id;
+    char name[FILENAME_BUFSIZE];
+} profile_info;
+
+uint8_t get_profile_dirname(uint8_t pid, char* pname_buf, uint32_t pname_buf_size)
+{
+  struct dirent *dir;
+  DIR *d = opendir(SD_MOUNT_POINT);
+  memset(pname_buf, 0, pname_buf_size);
+  if(d) 
+  {
+    while ((dir = readdir(d)) != NULL)
+    {
+      if(dir->d_type != DT_DIR)
+        continue;
+      if(is_profile_dir(dir->d_name) == 0)
+        continue;
+      if(atoi(dir->d_name + strlen(profile_dir_prefix)) != pid)
+        continue;
+      available_profile_list[this_profile_number] = 1;
+    }
+  }
+  closedir(d);
+}
+
+
+void scan_profiles()
+{
+  struct dirent *dir;
+  DIR *d = opendir(SD_MOUNT_POINT);
+  memset(available_profile_list, 0, MAX_PROFILES);
+  if(d) 
+  {
+    while ((dir = readdir(d)) != NULL)
+    {
+      if(dir->d_type != DT_DIR)
+        continue;
+      if(is_profile_dir(dir->d_name) == 0)
+        continue;
+      uint8_t this_profile_number = atoi(dir->d_name + strlen(profile_dir_prefix));
+      if(this_profile_number >= MAX_PROFILES)
+        continue;
+      available_profile_list[this_profile_number] = 1;
+    }
+  }
+  closedir(d);
+}
+
+
+void mytest(void)
+{
+  uint8_t last_used_profile = get_last_used_profile();
+  if(last_used_profile == 0)
+    change_profile(NEXT_PROFILE);
+  else
+    restore_profile(last_profile);
+}
+void mytest(void)
+{
+  // printf("mytest: %d\n", get_last_used_profile());
+  scan_profiles();
+  for (int i = 0; i < MAX_PROFILES; i++)
+  {
+    if(available_profile_list[i])
+      printf("%d\n", i);
+  }
+  
+}
+
+
 void step_profile(uint8_t direction)
 {
   

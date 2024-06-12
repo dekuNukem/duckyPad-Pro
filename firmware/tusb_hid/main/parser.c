@@ -1,6 +1,5 @@
 #include "freertos/FreeRTOS.h"
 #include "freertos/task.h"
-#include "shared.h"
 #include "sd_task.h"
 #include "sdmmc_cmd.h"
 #include "driver/sdmmc_host.h"
@@ -14,19 +13,23 @@
 #include <dirent.h> 
 
 #include "parser.h"
+#include "shared.h"
+#include "ui_task.h"
 
 const char config_file_path[] = "/sdcard/dp_settings.txt";
 dp_global_settings dp_settings;
 
 char temp_buf[TEMP_BUFSIZE];
+char filename_buf[FILENAME_BUFSIZE];
 
 const char config_sleep_after_min[] = "sleep_after_min ";
 const char config_brightness_index[] = "bi ";
 const char config_keyboard_layout[] = "kbl ";
 
 uint8_t current_profile_index;
+profile_info *all_profile_info;
 
-int8_t load_settings(dp_global_settings* dps)
+uint8_t load_settings(dp_global_settings* dps)
 {
   if(dps == NULL)
     return 1;
@@ -50,9 +53,7 @@ int8_t load_settings(dp_global_settings* dps)
     if(strncmp(temp_buf, config_keyboard_layout, strlen(config_keyboard_layout)) == 0)
     {
       strcpy(dps->current_kb_layout, temp_buf + strlen(config_keyboard_layout));
-      for (int i = 0; i < FILENAME_BUFSIZE; ++i)
-        if(dps->current_kb_layout[i] == '\r' || dps->current_kb_layout[i] == '\n')
-          dps->current_kb_layout[i] = 0;
+      strip_newline(dps->current_kb_layout, FILENAME_BUFSIZE);
     }
   }
   fclose(sd_file);
@@ -82,7 +83,6 @@ uint8_t get_last_used_profile(void)
   return ret;
 }
 
-uint8_t available_profile_list[MAX_PROFILES];
 const char* profile_dir_prefix = "profile";
 
 uint8_t is_profile_dir(char* dirname)
@@ -99,11 +99,13 @@ uint8_t is_profile_dir(char* dirname)
   return 1;
 }
 
-void scan_profiles()
+uint8_t unique_profiles[MAX_PROFILES];
+uint8_t get_valid_profile_count()
 {
+  uint8_t count = 0;
   struct dirent *dir;
   DIR *d = opendir(SD_MOUNT_POINT);
-  memset(available_profile_list, 0, MAX_PROFILES);
+  memset(unique_profiles, 0, MAX_PROFILES);
   if(d) 
   {
     while ((dir = readdir(d)) != NULL)
@@ -115,20 +117,37 @@ void scan_profiles()
       uint8_t this_profile_number = atoi(dir->d_name + strlen(profile_dir_prefix));
       if(this_profile_number >= MAX_PROFILES)
         continue;
-      available_profile_list[this_profile_number] = 1;
+      unique_profiles[this_profile_number] = 1;
     }
   }
   closedir(d);
+
+  for (uint8_t i = 0; i < MAX_PROFILES; i++)
+    if(unique_profiles[i])
+      count++;
+  
+  return count;
+}
+
+void fill_profile_info(void)
+{
+  ;
+}
+
+uint8_t scan_profiles()
+{
+  uint8_t valid_profile_count = get_valid_profile_count();
+  if(valid_profile_count == 0)    
+    return PSCAN_ERROR_NO_PROFILE;
+  
+  all_profile_info = (profile_info *)malloc(valid_profile_count * sizeof(profile_info));
+  if(all_profile_info == NULL)
+    return PSCAN_ERROR_NO_MEMORY;
+  
+  return PSCAN_OK;
 }
 
 void mytest(void)
 {
-  // printf("mytest: %d\n", get_last_used_profile());
-  scan_profiles();
-  for (int i = 0; i < MAX_PROFILES; i++)
-  {
-    if(available_profile_list[i])
-      printf("%d\n", i);
-  }
-  
+  uint8_t last_used_profile = get_last_used_profile();
 }

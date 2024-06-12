@@ -42,8 +42,16 @@ void app_main(void)
     xTaskCreate(kb_scan_task, "kb_scan_task", SW_SCAN_TASK_STACK_SIZE, NULL, 2, NULL);
 
     load_settings(&dp_settings);
-    mytest();
     
+    uint8_t pscan_result = scan_profiles();
+    if(pscan_result == PSCAN_ERROR_NO_PROFILE)
+        print_noprofile();
+    else if(pscan_result == PSCAN_ERROR_NO_MEMORY)
+        print_nomemory();
+    
+
+    // mytest();
+
     while(1)
     {
         get_rc();

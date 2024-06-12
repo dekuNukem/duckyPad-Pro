@@ -95,3 +95,58 @@ void print_nosd(void)
 
     ssd1306_UpdateScreen();
 }
+
+void print_noprofile(void)
+{
+    ssd1306_Fill(Black);
+
+    memset(oled_line_buf, 0, OLED_LINE_BUF_SIZE);
+    sprintf(oled_line_buf, "No Valid");
+    ssd1306_SetCursor(center_line(strlen(oled_line_buf), 7, SSD1306_WIDTH), 35);
+    ssd1306_WriteString(oled_line_buf, Font_7x10, White);
+
+    memset(oled_line_buf, 0, OLED_LINE_BUF_SIZE);
+    sprintf(oled_line_buf, "Profiles");
+    ssd1306_SetCursor(center_line(strlen(oled_line_buf), 7, SSD1306_WIDTH), 47);
+    ssd1306_WriteString(oled_line_buf, Font_7x10, White);
+
+    memset(oled_line_buf, 0, OLED_LINE_BUF_SIZE);
+    sprintf(oled_line_buf, "Instructions:");
+    ssd1306_SetCursor(center_line(strlen(oled_line_buf), 7, SSD1306_WIDTH), 80);
+    ssd1306_WriteString(oled_line_buf, Font_7x10, White);
+
+    memset(oled_line_buf, 0, OLED_LINE_BUF_SIZE);
+    sprintf(oled_line_buf, "duckyPad.com");
+    ssd1306_SetCursor(center_line(strlen(oled_line_buf), 7, SSD1306_WIDTH), 92);
+    ssd1306_WriteString(oled_line_buf, Font_7x10, White);
+
+    ssd1306_UpdateScreen();
+}
+
+
+void print_nomemory(void)
+{
+    ssd1306_Fill(Black);
+
+    memset(oled_line_buf, 0, OLED_LINE_BUF_SIZE);
+    sprintf(oled_line_buf, "Memory Allocation");
+    ssd1306_SetCursor(center_line(strlen(oled_line_buf), 7, SSD1306_WIDTH), 35);
+    ssd1306_WriteString(oled_line_buf, Font_7x10, White);
+
+    memset(oled_line_buf, 0, OLED_LINE_BUF_SIZE);
+    sprintf(oled_line_buf, "Failed!");
+    ssd1306_SetCursor(center_line(strlen(oled_line_buf), 7, SSD1306_WIDTH), 47);
+    ssd1306_WriteString(oled_line_buf, Font_7x10, White);
+
+    memset(oled_line_buf, 0, OLED_LINE_BUF_SIZE);
+    sprintf(oled_line_buf, "Instructions:");
+    ssd1306_SetCursor(center_line(strlen(oled_line_buf), 7, SSD1306_WIDTH), 80);
+    ssd1306_WriteString(oled_line_buf, Font_7x10, White);
+
+    memset(oled_line_buf, 0, OLED_LINE_BUF_SIZE);
+    sprintf(oled_line_buf, "duckyPad.com");
+    ssd1306_SetCursor(center_line(strlen(oled_line_buf), 7, SSD1306_WIDTH), 92);
+    ssd1306_WriteString(oled_line_buf, Font_7x10, White);
+
+    ssd1306_UpdateScreen();
+}
