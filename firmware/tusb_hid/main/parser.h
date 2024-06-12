@@ -10,6 +10,7 @@
 
 #define TEMP_BUFSIZE 128
 #define FILENAME_BUFSIZE 64
+#define MAX_PROFILES 64
 
 typedef struct
 {
@@ -20,9 +21,9 @@ typedef struct
 
 extern dp_global_settings dp_settings;
 
+int8_t load_settings(dp_global_settings* dps);
+void mytest(void);
 
-void load_settings(dp_global_settings* dps);
-int8_t list_files(void);
 
 #ifdef __cplusplus
 }

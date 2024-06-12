@@ -15,7 +15,6 @@
 #include "parser.h"
 
 const char config_file_path[] = "/sdcard/dp_settings.txt";
-FIL sd_file;
 dp_global_settings dp_settings;
 
 char temp_buf[TEMP_BUFSIZE];
@@ -23,35 +22,22 @@ char temp_buf[TEMP_BUFSIZE];
 const char config_sleep_after_min[] = "sleep_after_min ";
 const char config_brightness_index[] = "bi ";
 const char config_keyboard_layout[] = "kbl ";
-#include <dirent.h> 
 
-int8_t list_files(void)
-{
-  DIR *d;
-  struct dirent *dir;
-  d = opendir(SD_MOUNT_POINT);
-  if (d) {
-    while ((dir = readdir(d)) != NULL) {
-      printf("%s\n", dir->d_name);
-    }
-    closedir(d);
-  }
-  return 0;
-}
-
-void load_settings(dp_global_settings* dps)
+int8_t load_settings(dp_global_settings* dps)
 {
   if(dps == NULL)
-    return;
-  
-  int result = f_open(&sd_file, config_file_path, FA_READ);
-  printf("fr %d\n", result);
-  if(result != 0)
-    goto ggs_end;
+    return 1;
+
+  FILE *sd_file = fopen(config_file_path, "r");
+  if(sd_file == NULL)
+    return 2;
+
   memset(temp_buf, 0, TEMP_BUFSIZE);
   memset(dps->current_kb_layout, 0, FILENAME_BUFSIZE);
-  while(fgets(temp_buf, TEMP_BUFSIZE, &sd_file))
+
+  while(fgets(temp_buf, TEMP_BUFSIZE, sd_file))
   {
+    // printf("tb: %s\n", temp_buf);
     if(strncmp(temp_buf, config_sleep_after_min, strlen(config_sleep_after_min)) == 0)
       dps->sleep_after_ms = atoi(temp_buf + strlen(config_sleep_after_min)) * 60000;
     if(strncmp(temp_buf, config_brightness_index, strlen(config_brightness_index)) == 0)
@@ -66,6 +52,35 @@ void load_settings(dp_global_settings* dps)
           dps->current_kb_layout[i] = 0;
     }
   }
-  ggs_end:
+  fclose(sd_file);
+  return 0;
+}
+
+
+const char stat_last_used_profile[] = "lp ";
+uint8_t get_last_used_profile(void)
+{
+  uint8_t ret = 0;
+
+  FILE *sd_file = fopen("/sdcard/dp_stats.txt", "r");
+  if(sd_file == NULL)
+    return 1;
+
+  memset(temp_buf, 0, TEMP_BUFSIZE);
+  while(fgets(temp_buf, TEMP_BUFSIZE, sd_file))
+  {
+    if(strncmp(temp_buf, stat_last_used_profile, strlen(stat_last_used_profile)) == 0)
+      ret = atoi(temp_buf+strlen(stat_last_used_profile));
+  }
+
+  if(ret >= MAX_PROFILES)
+    ret = 0;
+
   f_close(&sd_file);
+  return ret;
+}
+
+void mytest(void)
+{
+  printf("mytest: %d\n", get_last_used_profile());
 }

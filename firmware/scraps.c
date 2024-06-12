@@ -1,3 +1,24 @@
+    printf("%d %d %ld %s\n", sdf, dp_settings.brightness_index, dp_settings.sleep_after_ms, dp_settings.current_kb_layout);
+
+
+--------------
+
+#include <dirent.h> 
+
+int8_t list_files(void)
+{
+  DIR *d;
+  struct dirent *dir;
+  d = opendir(SD_MOUNT_POINT);
+  if (d) {
+    while ((dir = readdir(d)) != NULL) {
+      printf("%s\n", dir->d_name);
+    }
+    closedir(d);
+  }
+  return 0;
+}
+
 void get_rc(void)
 {
     UBaseType_t items_in_queue = uxQueueMessagesWaiting(rotary_encoder_event_queue);
