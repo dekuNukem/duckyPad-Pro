@@ -8,3 +8,14 @@ extra USB-C connectors for external accessories? like big red button or addition
 optional battery kit and battery management PCB?
 sloped case design for battery kit?
 
+new features:
+
+more keys
+rotary encoders
+larger OLED
+expansion module (custom buttons / foot pedal, etc)
+bluetooth / wifi
+much faster UI
+more profiles
+more sturdy +- button
+easier to develop (esp-idf)

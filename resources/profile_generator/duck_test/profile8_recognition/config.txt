@@ -1,0 +1,30 @@
+z1 employe
+z2 heart
+z3 difficu
+z4 disaste
+z5 directo
+z6 media
+z7 income
+z8 paper
+z9 beer
+z10 climate
+z11 instruc
+z12 drama
+z13 story
+z14 variati
+z15 percept
+SWCOLOR_1 8 32 64 
+SWCOLOR_2 32 16 32 
+SWCOLOR_3 16 32 16 
+SWCOLOR_4 32 8 8 
+SWCOLOR_5 16 16 64 
+SWCOLOR_6 32 32 16 
+SWCOLOR_7 8 64 8 
+SWCOLOR_8 16 8 32 
+SWCOLOR_9 32 64 16 
+SWCOLOR_10 32 32 32 
+SWCOLOR_11 16 8 32 
+SWCOLOR_12 32 32 32 
+SWCOLOR_13 32 16 32 
+SWCOLOR_14 8 8 8 
+SWCOLOR_15 64 16 32 

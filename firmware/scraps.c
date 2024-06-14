@@ -12,7 +12,7 @@ void index_to_rowcol(uint8_t index, uint8_t *row, uint8_t *col)
     *row = index / SW_MATRIX_NUM_COLS;
     *col = index % SW_MATRIX_NUM_COLS;
 }
-
+draw_profile(&all_profile_info[1]);
 
 printf("load_profile_config: %s\n", filename_buf);
   printf("parse_profile_config_line: %s\n", this_line);

@@ -1,0 +1,30 @@
+z1 dad
+z2 moment
+z3 beer
+z4 explana
+z5 pizza
+z6 departu
+z7 client
+z8 map
+z9 leader
+z10 gate
+z11 attitud
+z12 client
+z13 sample
+z14 child
+z15 message
+SWCOLOR_1 8 32 32 
+SWCOLOR_2 16 16 64 
+SWCOLOR_3 32 8 8 
+SWCOLOR_4 32 32 64 
+SWCOLOR_5 64 16 32 
+SWCOLOR_6 8 64 8 
+SWCOLOR_7 16 8 32 
+SWCOLOR_8 64 16 32 
+SWCOLOR_9 8 8 16 
+SWCOLOR_10 16 16 16 
+SWCOLOR_11 8 16 8 
+SWCOLOR_12 32 64 64 
+SWCOLOR_13 32 64 8 
+SWCOLOR_14 32 64 16 
+SWCOLOR_15 32 16 8 

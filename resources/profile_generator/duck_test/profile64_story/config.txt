@@ -1,0 +1,30 @@
+z1 traditi
+z2 committ
+z3 message
+z4 food
+z5 world
+z6 securit
+z7 church
+z8 river
+z9 heart
+z10 cheek
+z11 estate
+z12 traditi
+z13 fact
+z14 child
+z15 refrige
+SWCOLOR_1 8 8 32 
+SWCOLOR_2 16 16 64 
+SWCOLOR_3 8 16 32 
+SWCOLOR_4 32 16 16 
+SWCOLOR_5 16 16 64 
+SWCOLOR_6 64 64 16 
+SWCOLOR_7 8 8 16 
+SWCOLOR_8 64 16 32 
+SWCOLOR_9 32 32 32 
+SWCOLOR_10 32 32 32 
+SWCOLOR_11 8 16 16 
+SWCOLOR_12 64 8 32 
+SWCOLOR_13 64 8 8 
+SWCOLOR_14 32 64 8 
+SWCOLOR_15 32 32 8 

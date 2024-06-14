@@ -1,0 +1,30 @@
+z1 map
+z2 context
+z3 ratio
+z4 ratio
+z5 office
+z6 climate
+z7 strange
+z8 garbage
+z9 teachin
+z10 wife
+z11 estate
+z12 nation
+z13 hat
+z14 introdu
+z15 tennis
+SWCOLOR_1 32 16 16 
+SWCOLOR_2 32 16 8 
+SWCOLOR_3 32 64 64 
+SWCOLOR_4 32 16 32 
+SWCOLOR_5 8 16 32 
+SWCOLOR_6 32 16 16 
+SWCOLOR_7 64 16 8 
+SWCOLOR_8 8 16 64 
+SWCOLOR_9 8 64 8 
+SWCOLOR_10 8 8 8 
+SWCOLOR_11 64 16 32 
+SWCOLOR_12 16 16 64 
+SWCOLOR_13 8 8 16 
+SWCOLOR_14 32 32 16 
+SWCOLOR_15 32 32 8 

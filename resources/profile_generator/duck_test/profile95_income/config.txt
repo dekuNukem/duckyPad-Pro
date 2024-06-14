@@ -1,0 +1,30 @@
+z1 literat
+z2 girlfri
+z3 committ
+z4 county
+z5 heart
+z6 history
+z7 intenti
+z8 effort
+z9 paintin
+z10 client
+z11 ratio
+z12 finding
+z13 office
+z14 salad
+z15 gate
+SWCOLOR_1 8 8 32 
+SWCOLOR_2 32 32 64 
+SWCOLOR_3 8 64 32 
+SWCOLOR_4 16 16 64 
+SWCOLOR_5 64 64 64 
+SWCOLOR_6 32 64 8 
+SWCOLOR_7 64 16 64 
+SWCOLOR_8 16 64 32 
+SWCOLOR_9 8 32 8 
+SWCOLOR_10 64 32 8 
+SWCOLOR_11 16 16 8 
+SWCOLOR_12 64 64 32 
+SWCOLOR_13 8 32 32 
+SWCOLOR_14 16 16 32 
+SWCOLOR_15 8 64 8 

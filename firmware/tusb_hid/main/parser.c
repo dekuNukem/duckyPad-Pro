@@ -23,6 +23,7 @@
 const char config_file_path[] = "/sdcard/dp_settings.txt";
 dp_global_settings dp_settings;
 
+int8_t profile_number_to_index_lookup[MAX_PROFILES];
 char temp_buf[TEMP_BUFSIZE];
 char filename_buf[FILENAME_BUFSIZE];
 
@@ -190,6 +191,7 @@ void fill_profile_info(void)
       memset(all_profile_info[count].dir_path, 0, FILENAME_BUFSIZE);
       strcpy(all_profile_info[count].dir_path, dir->d_name);
       all_profile_info[count].pf_name = all_profile_info[count].dir_path + strlen(profile_dir_prefix) + how_many_digits(this_profile_number) + 1;
+      profile_number_to_index_lookup[this_profile_number] = count;
       count++;
     }
   }
@@ -299,7 +301,7 @@ void load_profile_config(profile_info* this_profile)
 uint8_t scan_profiles()
 {
   valid_profile_count = get_valid_profile_count();
-  if(valid_profile_count == 0)    
+  if(valid_profile_count == 0)
     return PSCAN_ERROR_NO_PROFILE;
 
   uint32_t bytes_to_allocate = valid_profile_count * sizeof(profile_info);
@@ -311,29 +313,51 @@ uint8_t scan_profiles()
     return PSCAN_ERROR_NO_MEMORY;
   
   memset(all_profile_info, 0, bytes_to_allocate);
+  memset(profile_number_to_index_lookup, -1, MAX_PROFILES);
   fill_profile_info();
 
   for (size_t i = 0; i < valid_profile_count; i++)
     load_profile_config(&all_profile_info[i]);
+
+  for (size_t i = 0; i < MAX_PROFILES; i++)
+    printf("%d %d\n", i, profile_number_to_index_lookup[i]);
 
   return PSCAN_OK;
 }
 
 void restore_profile(uint8_t profile_id)
 {
+  printf("restore_profile: %d\n", profile_id);
   draw_profile(&all_profile_info[profile_id]);
   // save_last_profile(profile_id);
   // reset_hold_cache();
 }
 
+void goto_next_profile(void)
+{
+  current_profile_index++;
+  if(current_profile_index >= valid_profile_count)
+    current_profile_index = 0;
+  restore_profile(current_profile_index);
+}
+
+void goto_prev_profile(void)
+{
+  if(current_profile_index == 0)
+    current_profile_index = valid_profile_count-1;
+  else
+    current_profile_index--;
+  restore_profile(current_profile_index);
+}
+
 void mytest(void)
 {
-  uint8_t last_used_profile = get_last_used_profile();
+  // uint8_t last_used_profile = get_last_used_profile();
   // if(last_used_profile == 0)
   //   change_profile(NEXT_PROFILE);
   // else
   //   restore_profile(last_used_profile);
-
+  goto_next_profile();
 }
 
 void error_loop(void)

@@ -1,0 +1,30 @@
+z1 sympath
+z2 dad
+z3 employe
+z4 estate
+z5 ladder
+z6 funeral
+z7 policy
+z8 income
+z9 county
+z10 setting
+z11 prefere
+z12 cell
+z13 attitud
+z14 effort
+z15 recogni
+SWCOLOR_1 8 64 8 
+SWCOLOR_2 64 64 8 
+SWCOLOR_3 8 32 8 
+SWCOLOR_4 8 64 64 
+SWCOLOR_5 8 32 8 
+SWCOLOR_6 16 8 16 
+SWCOLOR_7 16 16 32 
+SWCOLOR_8 64 64 64 
+SWCOLOR_9 32 32 32 
+SWCOLOR_10 32 8 32 
+SWCOLOR_11 64 16 32 
+SWCOLOR_12 16 16 16 
+SWCOLOR_13 8 32 8 
+SWCOLOR_14 64 8 8 
+SWCOLOR_15 16 64 16 

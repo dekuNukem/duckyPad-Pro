@@ -1,0 +1,30 @@
+z1 drama
+z2 tooth
+z3 people
+z4 lake
+z5 revolut
+z6 perform
+z7 emphasi
+z8 proposa
+z9 beer
+z10 food
+z11 height
+z12 appeara
+z13 child
+z14 history
+z15 inflati
+SWCOLOR_1 64 32 8 
+SWCOLOR_2 16 16 8 
+SWCOLOR_3 16 16 8 
+SWCOLOR_4 64 32 32 
+SWCOLOR_5 8 8 32 
+SWCOLOR_6 64 8 16 
+SWCOLOR_7 8 64 16 
+SWCOLOR_8 32 16 16 
+SWCOLOR_9 8 16 32 
+SWCOLOR_10 32 8 8 
+SWCOLOR_11 8 8 16 
+SWCOLOR_12 64 16 8 
+SWCOLOR_13 64 32 64 
+SWCOLOR_14 32 64 32 
+SWCOLOR_15 8 32 8 

@@ -1,0 +1,30 @@
+z1 cell
+z2 excitem
+z3 power
+z4 driver
+z5 paper
+z6 map
+z7 fact
+z8 drawing
+z9 cookie
+z10 boyfrie
+z11 operati
+z12 story
+z13 proposa
+z14 differe
+z15 cancer
+SWCOLOR_1 64 32 64 
+SWCOLOR_2 64 8 64 
+SWCOLOR_3 8 16 8 
+SWCOLOR_4 8 64 64 
+SWCOLOR_5 32 64 32 
+SWCOLOR_6 64 16 8 
+SWCOLOR_7 64 32 64 
+SWCOLOR_8 16 64 16 
+SWCOLOR_9 64 8 16 
+SWCOLOR_10 16 32 8 
+SWCOLOR_11 16 64 32 
+SWCOLOR_12 32 16 8 
+SWCOLOR_13 8 32 64 
+SWCOLOR_14 16 64 8 
+SWCOLOR_15 64 8 8 

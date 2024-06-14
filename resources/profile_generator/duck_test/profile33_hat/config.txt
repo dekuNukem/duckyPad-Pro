@@ -1,0 +1,30 @@
+z1 pie
+z2 effort
+z3 freedom
+z4 restaur
+z5 leader
+z6 player
+z7 apartme
+z8 committ
+z9 equipme
+z10 strateg
+z11 champio
+z12 thought
+z13 tennis
+z14 penalty
+z15 emphasi
+SWCOLOR_1 32 8 64 
+SWCOLOR_2 8 32 16 
+SWCOLOR_3 16 16 64 
+SWCOLOR_4 16 64 8 
+SWCOLOR_5 8 32 64 
+SWCOLOR_6 32 16 64 
+SWCOLOR_7 32 64 32 
+SWCOLOR_8 16 16 64 
+SWCOLOR_9 32 64 8 
+SWCOLOR_10 8 16 64 
+SWCOLOR_11 16 8 8 
+SWCOLOR_12 16 8 16 
+SWCOLOR_13 64 8 64 
+SWCOLOR_14 16 8 16 
+SWCOLOR_15 64 8 8 

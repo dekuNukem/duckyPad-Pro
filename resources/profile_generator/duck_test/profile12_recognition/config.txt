@@ -1,0 +1,30 @@
+z1 recogni
+z2 player
+z3 story
+z4 paintin
+z5 employe
+z6 chest
+z7 excitem
+z8 library
+z9 freedom
+z10 agency
+z11 chemist
+z12 writing
+z13 indicat
+z14 percept
+z15 departu
+SWCOLOR_1 8 16 32 
+SWCOLOR_2 16 64 16 
+SWCOLOR_3 64 16 8 
+SWCOLOR_4 32 64 32 
+SWCOLOR_5 8 64 8 
+SWCOLOR_6 8 8 16 
+SWCOLOR_7 64 16 8 
+SWCOLOR_8 64 32 8 
+SWCOLOR_9 16 64 8 
+SWCOLOR_10 16 32 16 
+SWCOLOR_11 64 64 16 
+SWCOLOR_12 8 8 32 
+SWCOLOR_13 8 32 16 
+SWCOLOR_14 32 8 32 
+SWCOLOR_15 8 16 32 

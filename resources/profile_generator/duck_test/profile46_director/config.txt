@@ -1,0 +1,30 @@
+z1 video
+z2 county
+z3 growth
+z4 selecti
+z5 platfor
+z6 finding
+z7 estate
+z8 complai
+z9 policy
+z10 revolut
+z11 emphasi
+z12 night
+z13 champio
+z14 inflati
+z15 growth
+SWCOLOR_1 8 16 8 
+SWCOLOR_2 64 32 8 
+SWCOLOR_3 8 16 16 
+SWCOLOR_4 64 8 8 
+SWCOLOR_5 16 16 8 
+SWCOLOR_6 32 64 16 
+SWCOLOR_7 32 16 32 
+SWCOLOR_8 8 8 32 
+SWCOLOR_9 64 16 64 
+SWCOLOR_10 64 32 32 
+SWCOLOR_11 32 32 8 
+SWCOLOR_12 64 8 32 
+SWCOLOR_13 32 16 64 
+SWCOLOR_14 32 32 16 
+SWCOLOR_15 32 16 8 

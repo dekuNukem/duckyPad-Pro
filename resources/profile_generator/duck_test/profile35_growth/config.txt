@@ -1,0 +1,30 @@
+z1 cheek
+z2 indicat
+z3 year
+z4 platfor
+z5 recogni
+z6 explana
+z7 growth
+z8 literat
+z9 awarene
+z10 selecti
+z11 funeral
+z12 night
+z13 funeral
+z14 percept
+z15 apartme
+SWCOLOR_1 16 64 64 
+SWCOLOR_2 16 16 32 
+SWCOLOR_3 16 16 64 
+SWCOLOR_4 32 8 16 
+SWCOLOR_5 16 32 16 
+SWCOLOR_6 8 8 32 
+SWCOLOR_7 64 8 64 
+SWCOLOR_8 8 8 64 
+SWCOLOR_9 8 64 16 
+SWCOLOR_10 16 8 64 
+SWCOLOR_11 32 16 64 
+SWCOLOR_12 64 64 16 
+SWCOLOR_13 16 32 8 
+SWCOLOR_14 32 32 16 
+SWCOLOR_15 8 16 16 

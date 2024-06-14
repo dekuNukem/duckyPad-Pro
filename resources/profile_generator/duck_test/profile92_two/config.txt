@@ -1,0 +1,30 @@
+z1 grandmo
+z2 funeral
+z3 army
+z4 nature
+z5 refrige
+z6 night
+z7 paintin
+z8 percept
+z9 exam
+z10 atmosph
+z11 perform
+z12 coffee
+z13 debt
+z14 refrige
+z15 explana
+SWCOLOR_1 64 64 16 
+SWCOLOR_2 16 64 16 
+SWCOLOR_3 8 64 32 
+SWCOLOR_4 64 64 64 
+SWCOLOR_5 16 8 32 
+SWCOLOR_6 8 16 64 
+SWCOLOR_7 8 8 8 
+SWCOLOR_8 16 64 32 
+SWCOLOR_9 16 8 32 
+SWCOLOR_10 16 32 16 
+SWCOLOR_11 32 64 64 
+SWCOLOR_12 16 32 8 
+SWCOLOR_13 64 16 8 
+SWCOLOR_14 32 64 16 
+SWCOLOR_15 32 64 8 

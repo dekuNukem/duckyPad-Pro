@@ -1,0 +1,30 @@
+z1 intenti
+z2 operati
+z3 pizza
+z4 awarene
+z5 nature
+z6 variati
+z7 proposa
+z8 interac
+z9 explana
+z10 gate
+z11 story
+z12 mood
+z13 video
+z14 assumpt
+z15 philoso
+SWCOLOR_1 64 8 64 
+SWCOLOR_2 32 64 16 
+SWCOLOR_3 16 8 64 
+SWCOLOR_4 32 64 8 
+SWCOLOR_5 8 8 16 
+SWCOLOR_6 32 16 32 
+SWCOLOR_7 32 16 64 
+SWCOLOR_8 8 16 16 
+SWCOLOR_9 64 8 64 
+SWCOLOR_10 64 8 16 
+SWCOLOR_11 8 8 8 
+SWCOLOR_12 32 32 16 
+SWCOLOR_13 8 32 64 
+SWCOLOR_14 64 8 64 
+SWCOLOR_15 8 8 16 

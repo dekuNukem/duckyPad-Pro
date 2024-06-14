@@ -1,0 +1,30 @@
+z1 family
+z2 apartme
+z3 chemist
+z4 paintin
+z5 salad
+z6 revolut
+z7 sample
+z8 cookie
+z9 differe
+z10 night
+z11 chest
+z12 income
+z13 differe
+z14 history
+z15 map
+SWCOLOR_1 32 32 32 
+SWCOLOR_2 16 32 32 
+SWCOLOR_3 32 8 16 
+SWCOLOR_4 8 64 32 
+SWCOLOR_5 8 32 64 
+SWCOLOR_6 32 64 32 
+SWCOLOR_7 64 64 32 
+SWCOLOR_8 16 16 16 
+SWCOLOR_9 16 8 64 
+SWCOLOR_10 16 64 16 
+SWCOLOR_11 8 32 64 
+SWCOLOR_12 64 32 8 
+SWCOLOR_13 8 8 64 
+SWCOLOR_14 8 32 8 
+SWCOLOR_15 64 16 8 

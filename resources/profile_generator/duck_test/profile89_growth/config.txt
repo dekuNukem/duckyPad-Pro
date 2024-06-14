@@ -1,0 +1,30 @@
+z1 operati
+z2 affair
+z3 way
+z4 atmosph
+z5 client
+z6 selecti
+z7 explana
+z8 agency
+z9 directo
+z10 idea
+z11 country
+z12 climate
+z13 drama
+z14 grandmo
+z15 polluti
+SWCOLOR_1 16 64 64 
+SWCOLOR_2 64 64 16 
+SWCOLOR_3 8 16 32 
+SWCOLOR_4 8 32 32 
+SWCOLOR_5 32 8 32 
+SWCOLOR_6 32 64 64 
+SWCOLOR_7 16 32 32 
+SWCOLOR_8 8 64 64 
+SWCOLOR_9 8 8 32 
+SWCOLOR_10 8 32 64 
+SWCOLOR_11 16 16 16 
+SWCOLOR_12 32 16 64 
+SWCOLOR_13 64 64 8 
+SWCOLOR_14 64 32 64 
+SWCOLOR_15 16 8 16 

@@ -1,0 +1,30 @@
+z1 winner
+z2 lake
+z3 resolut
+z4 quantit
+z5 hat
+z6 differe
+z7 library
+z8 analyst
+z9 year
+z10 height
+z11 wife
+z12 foundat
+z13 committ
+z14 mood
+z15 footbal
+SWCOLOR_1 64 64 8 
+SWCOLOR_2 8 16 64 
+SWCOLOR_3 64 8 32 
+SWCOLOR_4 32 32 16 
+SWCOLOR_5 16 32 16 
+SWCOLOR_6 16 64 16 
+SWCOLOR_7 64 32 32 
+SWCOLOR_8 32 64 8 
+SWCOLOR_9 8 32 64 
+SWCOLOR_10 8 32 32 
+SWCOLOR_11 8 64 32 
+SWCOLOR_12 8 32 8 
+SWCOLOR_13 16 32 8 
+SWCOLOR_14 32 8 16 
+SWCOLOR_15 16 32 32 

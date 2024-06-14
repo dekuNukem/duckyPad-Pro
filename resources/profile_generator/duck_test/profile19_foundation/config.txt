@@ -1,0 +1,30 @@
+z1 hat
+z2 assumpt
+z3 drawer
+z4 sample
+z5 tooth
+z6 climate
+z7 difficu
+z8 knowled
+z9 directo
+z10 office
+z11 affair
+z12 country
+z13 percept
+z14 departu
+z15 interac
+SWCOLOR_1 8 64 16 
+SWCOLOR_2 64 32 8 
+SWCOLOR_3 64 64 32 
+SWCOLOR_4 8 16 8 
+SWCOLOR_5 32 16 8 
+SWCOLOR_6 8 16 8 
+SWCOLOR_7 32 32 16 
+SWCOLOR_8 16 16 8 
+SWCOLOR_9 64 16 16 
+SWCOLOR_10 16 8 8 
+SWCOLOR_11 32 64 64 
+SWCOLOR_12 32 16 32 
+SWCOLOR_13 16 8 16 
+SWCOLOR_14 16 8 64 
+SWCOLOR_15 16 32 64 

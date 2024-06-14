@@ -1,0 +1,30 @@
+z1 poetry
+z2 patienc
+z3 dad
+z4 traditi
+z5 leader
+z6 strange
+z7 cheek
+z8 setting
+z9 televis
+z10 chemist
+z11 cell
+z12 thought
+z13 girlfri
+z14 ambitio
+z15 sympath
+SWCOLOR_1 16 8 16 
+SWCOLOR_2 16 64 64 
+SWCOLOR_3 8 16 64 
+SWCOLOR_4 8 8 32 
+SWCOLOR_5 32 16 64 
+SWCOLOR_6 32 32 8 
+SWCOLOR_7 32 16 16 
+SWCOLOR_8 32 32 64 
+SWCOLOR_9 64 16 64 
+SWCOLOR_10 32 16 32 
+SWCOLOR_11 64 8 8 
+SWCOLOR_12 8 64 64 
+SWCOLOR_13 8 32 64 
+SWCOLOR_14 8 32 8 
+SWCOLOR_15 8 32 64 

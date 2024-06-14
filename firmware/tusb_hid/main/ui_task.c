@@ -177,7 +177,7 @@ void draw_cell_content(uint8_t cell_x, uint8_t cell_y, char* name)
     memset(cell_temp_buf, 0, CELL_LINE_BUF_SIZE);
     strncpy(cell_temp_buf, name, str_size);
     str_size = strlen(cell_temp_buf);
-    printf("%d %s\n", str_size, cell_temp_buf);
+    // printf("%d %s\n", str_size, cell_temp_buf);
 
     /*
     str_size
@@ -248,14 +248,14 @@ void draw_profile(profile_info* this_profile)
 	ssd1306_WriteString(oled_line_buf, Font_7x10, White);
 	
   ssd1306_Line(0,10,127,10,White);
-  ssd1306_dashed_line(0,33,127,33,White);
-  ssd1306_dashed_line(0,57,127,57,White);
-  ssd1306_dashed_line(0,80,127,80,White);
-  ssd1306_dashed_line(0,103,127,103,White);
-  ssd1306_dashed_line(32,10,32,127,White);
-  ssd1306_dashed_line(64,10,64,127,White);
-  ssd1306_dashed_line(96,10,96,127,White);
-  ssd1306_dashed_line(0,127,127,127,White);
+  // ssd1306_dashed_line(0,33,127,33,White);
+  // ssd1306_dashed_line(0,57,127,57,White);
+  // ssd1306_dashed_line(0,80,127,80,White);
+  // ssd1306_dashed_line(0,103,127,103,White);
+  // ssd1306_dashed_line(32,10,32,127,White);
+  // ssd1306_dashed_line(64,10,64,127,White);
+  // ssd1306_dashed_line(96,10,96,127,White);
+  // ssd1306_dashed_line(0,127,127,127,White);
 
   for (size_t rrr = 0; rrr < SW_MATRIX_NUM_ROWS; rrr++)
   {

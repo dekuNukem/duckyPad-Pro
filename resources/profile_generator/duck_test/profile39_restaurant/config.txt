@@ -1,0 +1,30 @@
+z1 lake
+z2 news
+z3 proposa
+z4 selecti
+z5 pie
+z6 thought
+z7 food
+z8 operati
+z9 paintin
+z10 message
+z11 mood
+z12 directo
+z13 replace
+z14 way
+z15 analyst
+SWCOLOR_1 8 64 16 
+SWCOLOR_2 16 64 16 
+SWCOLOR_3 16 64 32 
+SWCOLOR_4 32 8 8 
+SWCOLOR_5 8 8 8 
+SWCOLOR_6 16 8 16 
+SWCOLOR_7 8 64 64 
+SWCOLOR_8 8 64 16 
+SWCOLOR_9 32 8 64 
+SWCOLOR_10 32 32 64 
+SWCOLOR_11 16 32 16 
+SWCOLOR_12 64 64 16 
+SWCOLOR_13 16 32 16 
+SWCOLOR_14 16 16 16 
+SWCOLOR_15 32 16 32 

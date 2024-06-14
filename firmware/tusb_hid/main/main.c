@@ -5,6 +5,7 @@
 #include "tinyusb.h"
 #include "class/hid/hid_device.h"
 
+#include "rotary_encoder.h"
 #include "input_task.h"
 #include "sd_task.h"
 #include "ui_task.h"
@@ -57,7 +58,15 @@ void app_main(void)
 
     while(1)
     {
-        get_rc();
-        vTaskDelay(pdMS_TO_TICKS(250));
+        rotary_encoder_event_t event = { 0 };
+	    if (xQueueReceive(rotary_encoder_event_queue, &event, 0) == pdTRUE)
+        {
+            printf("Event: id: %d pos: %ld, dir: %d\n", event.state.id, event.state.position, event.state.direction);
+            if(event.state.direction == ROTARY_ENCODER_DIRECTION_COUNTER_CLOCKWISE)
+                goto_next_profile();
+            else if(event.state.direction == ROTARY_ENCODER_DIRECTION_CLOCKWISE)
+                goto_prev_profile();
+        }
+        vTaskDelay(pdMS_TO_TICKS(33));
     }
 }

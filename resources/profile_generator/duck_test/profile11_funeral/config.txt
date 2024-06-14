@@ -1,0 +1,30 @@
+z1 policy
+z2 recogni
+z3 poetry
+z4 thought
+z5 employe
+z6 perform
+z7 exam
+z8 employe
+z9 message
+z10 literat
+z11 poem
+z12 differe
+z13 excitem
+z14 paper
+z15 finding
+SWCOLOR_1 16 16 8 
+SWCOLOR_2 16 32 64 
+SWCOLOR_3 8 16 64 
+SWCOLOR_4 8 8 16 
+SWCOLOR_5 16 8 64 
+SWCOLOR_6 64 32 32 
+SWCOLOR_7 16 16 16 
+SWCOLOR_8 16 32 64 
+SWCOLOR_9 64 64 32 
+SWCOLOR_10 64 32 8 
+SWCOLOR_11 32 8 16 
+SWCOLOR_12 32 8 8 
+SWCOLOR_13 8 16 64 
+SWCOLOR_14 64 32 64 
+SWCOLOR_15 32 8 8 

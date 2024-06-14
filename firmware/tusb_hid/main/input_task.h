@@ -5,6 +5,10 @@
  extern "C" {
 #endif 
 
+#include "freertos/FreeRTOS.h"
+#include "freertos/task.h"
+#include "freertos/queue.h"
+
 #define SW_MATRIX_NUM_COLS 4
 #define SW_MATRIX_NUM_ROWS 5
 
@@ -58,6 +62,8 @@ void kb_scan_task(void);
 uint8_t rowcol_to_index(uint8_t row, uint8_t col);
 
 #define SW_SCAN_TASK_STACK_SIZE 2048
+
+extern QueueHandle_t rotary_encoder_event_queue;
 
 #ifdef __cplusplus
 }

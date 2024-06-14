@@ -1,0 +1,30 @@
+z1 chest
+z2 world
+z3 paper
+z4 drawer
+z5 cell
+z6 analyst
+z7 drama
+z8 library
+z9 estate
+z10 child
+z11 ratio
+z12 emphasi
+z13 tooth
+z14 dad
+z15 ratio
+SWCOLOR_1 64 64 32 
+SWCOLOR_2 64 64 16 
+SWCOLOR_3 8 16 8 
+SWCOLOR_4 32 32 8 
+SWCOLOR_5 64 8 8 
+SWCOLOR_6 32 8 8 
+SWCOLOR_7 8 64 16 
+SWCOLOR_8 8 16 32 
+SWCOLOR_9 64 8 8 
+SWCOLOR_10 16 64 16 
+SWCOLOR_11 8 16 32 
+SWCOLOR_12 32 8 32 
+SWCOLOR_13 64 8 16 
+SWCOLOR_14 64 8 8 
+SWCOLOR_15 32 64 32 

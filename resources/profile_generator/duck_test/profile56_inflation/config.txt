@@ -1,0 +1,30 @@
+z1 chest
+z2 army
+z3 context
+z4 night
+z5 strange
+z6 writing
+z7 explana
+z8 sympath
+z9 difficu
+z10 height
+z11 televis
+z12 sample
+z13 girlfri
+z14 editor
+z15 two
+SWCOLOR_1 16 32 16 
+SWCOLOR_2 8 32 64 
+SWCOLOR_3 64 64 32 
+SWCOLOR_4 16 64 8 
+SWCOLOR_5 8 64 32 
+SWCOLOR_6 64 64 8 
+SWCOLOR_7 32 64 32 
+SWCOLOR_8 64 16 16 
+SWCOLOR_9 64 16 8 
+SWCOLOR_10 32 16 32 
+SWCOLOR_11 16 32 16 
+SWCOLOR_12 64 64 32 
+SWCOLOR_13 16 8 16 
+SWCOLOR_14 64 8 32 
+SWCOLOR_15 8 16 32 

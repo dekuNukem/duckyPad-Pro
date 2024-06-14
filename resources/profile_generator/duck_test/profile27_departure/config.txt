@@ -1,0 +1,30 @@
+z1 family
+z2 office
+z3 night
+z4 softwar
+z5 paper
+z6 penalty
+z7 protect
+z8 garbage
+z9 power
+z10 teachin
+z11 elevato
+z12 nature
+z13 food
+z14 poet
+z15 apple
+SWCOLOR_1 32 8 16 
+SWCOLOR_2 64 32 16 
+SWCOLOR_3 64 64 16 
+SWCOLOR_4 32 32 16 
+SWCOLOR_5 64 32 16 
+SWCOLOR_6 16 64 16 
+SWCOLOR_7 32 64 8 
+SWCOLOR_8 16 64 64 
+SWCOLOR_9 16 16 16 
+SWCOLOR_10 32 16 8 
+SWCOLOR_11 8 8 8 
+SWCOLOR_12 16 8 64 
+SWCOLOR_13 16 64 64 
+SWCOLOR_14 32 16 16 
+SWCOLOR_15 64 32 64 

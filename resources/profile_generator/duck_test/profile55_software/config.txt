@@ -1,0 +1,30 @@
+z1 growth
+z2 girlfri
+z3 literat
+z4 coffee
+z5 difficu
+z6 writing
+z7 polluti
+z8 wife
+z9 polluti
+z10 library
+z11 indicat
+z12 philoso
+z13 grandmo
+z14 percent
+z15 gate
+SWCOLOR_1 32 8 8 
+SWCOLOR_2 64 16 8 
+SWCOLOR_3 8 16 64 
+SWCOLOR_4 8 8 64 
+SWCOLOR_5 8 64 16 
+SWCOLOR_6 16 64 8 
+SWCOLOR_7 32 32 32 
+SWCOLOR_8 64 32 16 
+SWCOLOR_9 64 32 32 
+SWCOLOR_10 16 64 32 
+SWCOLOR_11 8 64 64 
+SWCOLOR_12 8 32 8 
+SWCOLOR_13 16 8 32 
+SWCOLOR_14 8 16 32 
+SWCOLOR_15 16 32 32 
