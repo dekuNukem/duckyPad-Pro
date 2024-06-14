@@ -30,7 +30,7 @@ typedef struct
   uint8_t is_loaded;
   char dir_path[FILENAME_BUFSIZE];
   char* pf_name;
-  char sw_name[MAPPABLE_OBSW_COUNT][KEYNAME_SIZE];
+  char sw_name[TOTAL_OBSW_COUNT][KEYNAME_SIZE];
 } profile_info;
 
 extern profile_info current_profile_info;

@@ -13,6 +13,14 @@
 
 #define BRIGHTNESS_LEVELS 5
 
+#define THREE 3
+#define DEFAULT_BG_RED 64
+#define DEFAULT_BG_GREEN 16
+#define DEFAULT_BG_BLUE 255
+#define DEFAULT_KD_RED 255
+#define DEFAULT_KD_GREEN 255
+#define DEFAULT_KD_BLUE 255
+
 void neopixel_init(void);
 
 #ifdef __cplusplus

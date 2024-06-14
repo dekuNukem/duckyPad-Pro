@@ -1,4 +1,26 @@
+    printf("this_key_index %d\n", this_key_index);
+void parse_key_config_line(char* line, uint32_t buf_size, profile_info* this_profile)
+{
+  if(line == NULL || strlen(line) <= 2)
+    return;
+  printf("parse_key_config_line: %s\n", line);
 
+  if(line[0] == 'z')
+  {
+    uint8_t this_key_index = atoi(line+1);
+    if(this_key_index == 0)
+      return;
+    this_key_index--;
+    if(this_key_index >= MAPPABLE_OBSW_COUNT)
+      return;
+    printf("111 %d\n", this_key_index);
+    memset(this_profile->sw_name[this_key_index], 0, KEYNAME_SIZE);
+    printf("222 %d\n", this_key_index);
+    char* kn_start = goto_next_arg(line, buf_size);
+    printf("zz: %d %s\n", this_key_index, kn_start);
+  }
+
+}
 uint8_t get_last_used_profile(void)
 {
   uint8_t ret = 0;

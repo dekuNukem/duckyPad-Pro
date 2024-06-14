@@ -9,9 +9,9 @@
 #define SW_MATRIX_NUM_ROWS 5
 
 // OB = onboard
-#define MECH_OBSW_COUNT (SW_MATRIX_NUM_COLS * SW_MATRIX_NUM_COLS)
-#define TOTAL_OBSW_COUNT (MECH_OBSW_COUNT + 4)
-#define MAPPABLE_OBSW_COUNT (TOTAL_OBSW_COUNT-2)
+#define MECH_OBSW_COUNT (SW_MATRIX_NUM_COLS * SW_MATRIX_NUM_ROWS)
+// 20 mechanical switches, + and - button, 3 for each rotary encoder
+#define TOTAL_OBSW_COUNT (MECH_OBSW_COUNT + 8)
 
 #define SW_PLUS_GPIO GPIO_NUM_18
 #define SW_MINUS_GPIO GPIO_NUM_17

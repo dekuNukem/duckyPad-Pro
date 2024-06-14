@@ -16,6 +16,7 @@
 #include "shared.h"
 #include "input_task.h"
 #include "ui_task.h"
+#include "neopixel_task.h"
 
 const char config_file_path[] = "/sdcard/dp_settings.txt";
 dp_global_settings dp_settings;
@@ -142,6 +143,11 @@ void print_profile_info(profile_info *pinfo)
   printf("is_loaded: %d\n", pinfo->is_loaded);
   printf("dir_path: %s\n", pinfo->dir_path);
   printf("pf_name: %s\n", pinfo->pf_name);
+  for (size_t i = 0; i < TOTAL_OBSW_COUNT; i++)
+  {
+    if(strlen(pinfo->sw_name[i]))
+      printf("key %d: %s\n", i, pinfo->sw_name[i]);
+  }
   printf("--------\n");
 }
 
@@ -177,17 +183,35 @@ void fill_profile_info(void)
   closedir(d);
 }
 
-void parse_key_config_line()
+void parse_key_config_line(char* line, uint32_t buf_size, profile_info* this_profile)
 {
-  ;
+  if(line == NULL || strlen(line) <= 2)
+    return;
+  printf("parse_key_config_line: %s\n", line);
+
+  if(line[0] == 'z')
+  {
+    uint8_t this_key_index = atoi(line+1);
+    if(this_key_index == 0)
+      return;
+    this_key_index--;
+    if(this_key_index >= TOTAL_OBSW_COUNT)
+      return;
+    memset(this_profile->sw_name[this_key_index], 0, KEYNAME_SIZE);
+    char* kn_start = goto_next_arg(line, buf_size);
+    if(kn_start == NULL)
+      return;
+    strcpy(this_profile->sw_name[this_key_index], kn_start);
+  }
 }
 
-void load_keynames(uint8_t which)
+void load_profile_config(profile_info* this_profile)
 {
-  // print_profile_info(&all_profile_info[i]);
+  if(this_profile == NULL)
+    return;
   memset(filename_buf, 0, FILENAME_BUFSIZE);
-  sprintf(filename_buf, "%s/%s/config.txt", SD_MOUNT_POINT, all_profile_info[which].dir_path);
-  printf("load_keynames: %s\n", filename_buf);
+  sprintf(filename_buf, "%s/%s/config.txt", SD_MOUNT_POINT, this_profile->dir_path);
+  printf("load_profile_config: %s\n", filename_buf);
 
   FILE *sd_file = fopen(filename_buf, "r");
   if(sd_file == NULL)
@@ -195,9 +219,10 @@ void load_keynames(uint8_t which)
   memset(temp_buf, 0, TEMP_BUFSIZE);
   while(fgets(temp_buf, TEMP_BUFSIZE, sd_file))
   {
-    printf("%s\n", temp_buf);
-    parse_key_config_line();
+    strip_newline(temp_buf, TEMP_BUFSIZE);
+    parse_key_config_line(temp_buf, TEMP_BUFSIZE, this_profile);
   }
+  print_profile_info(this_profile);
   fclose(sd_file);
 }
 
@@ -216,7 +241,7 @@ uint8_t scan_profiles()
   
   memset(all_profile_info, 0, valid_profile_count * sizeof(profile_info));
   fill_profile_info();
-  load_keynames(1);
+  load_profile_config(&all_profile_info[1]);
 
   return PSCAN_OK;
 }

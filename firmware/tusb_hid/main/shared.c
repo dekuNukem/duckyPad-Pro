@@ -19,3 +19,18 @@ uint8_t how_many_digits(uint8_t number)
     return 2;
   return 1;
 }
+
+char* goto_next_arg(char* buf, uint32_t buf_size)
+{
+  char* curr = buf;
+  char* buf_end = buf + buf_size;
+  if(buf == NULL || curr >= buf_end)
+    return NULL;
+  while(curr < buf_end && *curr != ' ')
+      curr++;
+  while(curr < buf_end && *curr == ' ')
+      curr++;
+  if(curr >= buf_end)
+    return NULL;
+  return curr;
+}
