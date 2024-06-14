@@ -1,6 +1,25 @@
+for (size_t i = 0; i < MECH_OBSW_COUNT; i++)
+  {
+    uint8_t row = 0;
+    uint8_t col = 0;
+    index_to_rowcol(i, &row, &col);
+    printf("%d: row%d col%d\n", i, row, col);
+  }
+void index_to_rowcol(uint8_t index, uint8_t *row, uint8_t *col)
+{
+    if(index >= MECH_OBSW_COUNT)
+        return;
+    *row = index / SW_MATRIX_NUM_COLS;
+    *col = index % SW_MATRIX_NUM_COLS;
+}
+
+
 printf("load_profile_config: %s\n", filename_buf);
   printf("parse_profile_config_line: %s\n", this_line);
-
+void mytest(void)
+{
+  uint8_t last_used_profile = get_last_used_profile();
+}
 void fill_default_color(profile_info* this_profile)
 {
   if(this_profile == NULL)

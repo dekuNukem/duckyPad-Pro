@@ -48,9 +48,8 @@ void app_main(void)
         print_noprofile();
     else if(pscan_result == PSCAN_ERROR_NO_MEMORY)
         print_nomemory();
-    
 
-    // mytest();
+    mytest();
 
     while(1)
     {

@@ -113,6 +113,6 @@ SSD1306_Error_t ssd1306_FillBuffer(uint8_t* buf, uint32_t len);
 #define OLED_CMD_SET_CHARGE_PUMP        0x8D    // follow with 0x14
 
 void task_ssd1306_display_text(const void *arg_text);
-
+void ssd1306_dashed_line(uint8_t x1, uint8_t y1, uint8_t x2, uint8_t y2, SSD1306_COLOR color);
 
 #endif // __SSD1306_H__

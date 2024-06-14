@@ -6,6 +6,8 @@
 #endif 
 
 #include "driver/spi_master.h"
+#include "parser.h"
+
 
 #define OLED_MOSI 10
 #define OLED_CS 14
@@ -19,6 +21,7 @@ void oled_init(void);
 void print_nosd(void);
 void print_noprofile(void);
 void print_nomemory(void);
+void draw_profile(profile_info* this_profile);
 
 #ifdef __cplusplus
 }

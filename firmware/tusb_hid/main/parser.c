@@ -288,7 +288,7 @@ void load_profile_config(profile_info* this_profile)
     strip_newline(temp_buf, TEMP_BUFSIZE);
     parse_profile_config_line(temp_buf, this_profile);
   }
-  print_profile_info(this_profile);
+  // print_profile_info(this_profile);
   fclose(sd_file);
 }
 
@@ -310,14 +310,13 @@ uint8_t scan_profiles()
   fill_profile_info();
 
   for (size_t i = 0; i < valid_profile_count; i++)
-  {
     load_profile_config(&all_profile_info[i]);
-  }
 
   return PSCAN_OK;
 }
 
+
 void mytest(void)
 {
-  uint8_t last_used_profile = get_last_used_profile();
+  draw_profile(&all_profile_info[0]);
 }

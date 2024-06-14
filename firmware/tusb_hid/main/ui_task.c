@@ -7,6 +7,7 @@
 #include "shared.h"
 #include "freertos/FreeRTOS.h"
 #include "freertos/task.h"
+#include "input_task.h"
 
 static const char *TAG = "UI";
 spi_device_handle_t my_spi_handle;
@@ -149,4 +150,124 @@ void print_nomemory(void)
     ssd1306_WriteString(oled_line_buf, Font_7x10, White);
 
     ssd1306_UpdateScreen();
+}
+
+
+#define CELL_LONG_SIDE 32
+#define CELL_SHORT_SIDE 23
+#define TITLE_BAR_HEIGHT 11
+#define CELL_LINE_BUF_SIZE 16
+char cell_temp_buf[CELL_LINE_BUF_SIZE];
+char cell_first_line[CELL_LINE_BUF_SIZE];
+char cell_second_line[CELL_LINE_BUF_SIZE];
+
+void draw_cell_content(uint8_t cell_x, uint8_t cell_y, char* name)
+{
+    if(name == NULL)
+        return;
+    uint8_t cell_pixel_x = cell_x * CELL_LONG_SIDE;
+    uint8_t cell_pixel_y = cell_y * CELL_SHORT_SIDE + TITLE_BAR_HEIGHT + 1;
+    
+    uint8_t str_size = strlen(name);
+    if(str_size == 0)
+        return;
+    if(str_size > 10)
+        str_size = 10;
+
+    memset(cell_temp_buf, 0, CELL_LINE_BUF_SIZE);
+    strncpy(cell_temp_buf, name, str_size);
+    str_size = strlen(cell_temp_buf);
+    printf("%d %s\n", str_size, cell_temp_buf);
+
+    /*
+    str_size
+    1-4: one line of 7x10
+    5: one line of 6x8
+    6-8: two lines of 7x10
+    9-10: two lines of 6x8
+
+    maybe also add splitting lines based on space character?
+    if keyname has space and both before and after fits on a line, then split at space
+    otherwise split at 4 or 5
+    */
+    uint8_t str_pixel_x, str_pixel_y;
+    memset(cell_first_line, 0, CELL_LINE_BUF_SIZE);
+    memset(cell_second_line, 0, CELL_LINE_BUF_SIZE);
+    if(str_size <= 4)
+    {
+        str_pixel_x = cell_pixel_x + (CELL_LONG_SIDE - (str_size * 7)) / 2;
+        str_pixel_y = cell_pixel_y + 6;
+        ssd1306_SetCursor(str_pixel_x, str_pixel_y);
+        ssd1306_WriteString(cell_temp_buf, Font_7x10, White);
+    }
+    else if(str_size == 5)
+    {
+        str_pixel_x = cell_pixel_x + 2;
+        str_pixel_y = cell_pixel_y + 7;
+        ssd1306_SetCursor(str_pixel_x, str_pixel_y);
+        ssd1306_WriteString(cell_temp_buf, Font_6x8, White);
+    }
+    else if(str_size >= 6 && str_size <= 8)
+    {
+        strncpy(cell_first_line, cell_temp_buf, 4);
+        strncpy(cell_second_line, cell_temp_buf+4, 4);
+        // first line
+        str_pixel_x = cell_pixel_x + 2;
+        str_pixel_y = cell_pixel_y + 2;
+        ssd1306_SetCursor(str_pixel_x, str_pixel_y);
+        ssd1306_WriteString(cell_first_line, Font_7x10, White);
+        // second line
+        str_pixel_x = cell_pixel_x + (CELL_LONG_SIDE - (strlen(cell_second_line) * 7)) / 2;
+        str_pixel_y = cell_pixel_y + 2 + 10;
+        ssd1306_SetCursor(str_pixel_x, str_pixel_y);
+        ssd1306_WriteString(cell_second_line, Font_7x10, White);
+    }
+    else if(str_size >= 9)
+    {
+        strncpy(cell_first_line, cell_temp_buf, 5);
+        strncpy(cell_second_line, cell_temp_buf+5, 5);
+        // first line
+        str_pixel_x = cell_pixel_x + 2;
+        str_pixel_y = cell_pixel_y + 3;
+        ssd1306_SetCursor(str_pixel_x, str_pixel_y);
+        ssd1306_WriteString(cell_first_line, Font_6x8, White);
+        // second line
+        str_pixel_x = cell_pixel_x + 1 + (CELL_LONG_SIDE - (strlen(cell_second_line) * 6)) / 2;
+        str_pixel_y = cell_pixel_y + 3 + 8;
+        ssd1306_SetCursor(str_pixel_x, str_pixel_y);
+        ssd1306_WriteString(cell_second_line, Font_6x8, White);
+    }
+}
+
+void draw_profile(profile_info* this_profile)
+{
+  ssd1306_Fill(Black);
+  memset(oled_line_buf, 0, OLED_LINE_BUF_SIZE);
+  sprintf(oled_line_buf, "P%d: %s", this_profile->index, this_profile->pf_name);
+	ssd1306_SetCursor(center_line(strlen(oled_line_buf), 7, SSD1306_WIDTH), 0);
+	ssd1306_WriteString(oled_line_buf, Font_7x10, White);
+	
+  ssd1306_Line(0,10,127,10,White);
+  ssd1306_dashed_line(0,33,127,33,White);
+  ssd1306_dashed_line(0,57,127,57,White);
+  ssd1306_dashed_line(0,80,127,80,White);
+  ssd1306_dashed_line(0,103,127,103,White);
+  ssd1306_dashed_line(32,10,32,127,White);
+  ssd1306_dashed_line(64,10,64,127,White);
+  ssd1306_dashed_line(96,10,96,127,White);
+  ssd1306_dashed_line(0,127,127,127,White);
+
+  for (size_t rrr = 0; rrr < SW_MATRIX_NUM_ROWS; rrr++)
+  {
+    for (size_t ccc = 0; ccc < SW_MATRIX_NUM_COLS; ccc++)
+    {
+      uint8_t this_sw_index = rowcol_to_index(rrr, ccc);
+      memset(oled_line_buf, 0, OLED_LINE_BUF_SIZE);
+      sprintf(oled_line_buf, "-");
+      if(strlen(this_profile->sw_name[this_sw_index]))
+        sprintf(oled_line_buf, "%s", this_profile->sw_name[this_sw_index]);
+      draw_cell_content(ccc, rrr, oled_line_buf);
+    }
+  }
+  ssd1306_UpdateScreen();
 }

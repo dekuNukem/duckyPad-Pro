@@ -268,6 +268,34 @@ void ssd1306_Line(uint8_t x1, uint8_t y1, uint8_t x2, uint8_t y2, SSD1306_COLOR 
     return;
 }
 
+void ssd1306_dashed_line(uint8_t x1, uint8_t y1, uint8_t x2, uint8_t y2, SSD1306_COLOR color) {
+    int32_t deltaX = abs(x2 - x1);
+    int32_t deltaY = abs(y2 - y1);
+    int32_t signX = ((x1 < x2) ? 1 : -1);
+    int32_t signY = ((y1 < y2) ? 1 : -1);
+    int32_t error = deltaX - deltaY;
+    int32_t error2;
+    
+    ssd1306_DrawPixel(x2, y2, color);
+    uint8_t counter = 1;
+    while((x1 != x2) || (y1 != y2)) {
+        if(counter % 4 == 0)
+            ssd1306_DrawPixel(x1, y1, color);
+        error2 = error * 2;
+        if(error2 > -deltaY) {
+            error -= deltaY;
+            x1 += signX;
+        }
+        
+        if(error2 < deltaX) {
+            error += deltaX;
+            y1 += signY;
+        }
+        counter++;
+    }
+    return;
+}
+
 /* Draw polyline */
 void ssd1306_Polyline(const SSD1306_VERTEX *par_vertex, uint16_t par_size, SSD1306_COLOR color) {
     uint16_t i;
