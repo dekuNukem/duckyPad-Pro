@@ -23,7 +23,6 @@
 const char config_file_path[] = "/sdcard/dp_settings.txt";
 dp_global_settings dp_settings;
 
-int16_t profile_number_to_index_lookup[MAX_PROFILES];
 char temp_buf[TEMP_BUFSIZE];
 char filename_buf[FILENAME_BUFSIZE];
 
@@ -37,8 +36,7 @@ const char cmd_SWCOLOR[] = "SWCOLOR_";
 const char cmd_DIM_UNUSED_KEYS[] = "DIM_UNUSED_KEYS ";
 
 uint8_t current_profile_number;
-profile_info *all_profile_info;
-uint8_t valid_profile_count;
+profile_info all_profile_info[MAX_PROFILES];
 
 uint8_t load_settings(dp_global_settings* dps)
 {
@@ -113,64 +111,32 @@ uint8_t is_profile_dir(char* dirname)
   return 1;
 }
 
-uint8_t unique_profiles[MAX_PROFILES];
-uint8_t get_valid_profile_count()
-{
-  uint8_t count = 0;
-  struct dirent *dir;
-  DIR *d = opendir(SD_MOUNT_POINT);
-  memset(unique_profiles, 0, MAX_PROFILES);
-  if(d) 
-  {
-    while ((dir = readdir(d)) != NULL)
-    {
-      if(dir->d_type != DT_DIR)
-        continue;
-      if(is_profile_dir(dir->d_name) == 0)
-        continue;
-      uint8_t this_profile_number = atoi(dir->d_name + strlen(profile_dir_prefix));
-      if(this_profile_number >= MAX_PROFILES)
-        continue;
-      unique_profiles[this_profile_number] = 1;
-    }
-  }
-  closedir(d);
-
-  for (uint8_t i = 0; i < MAX_PROFILES; i++)
-    if(unique_profiles[i])
-      count++;
-  
-  return count;
-}
-
 void print_profile_info(profile_info *pinfo)
 {
   if(pinfo == NULL)
     return;
   printf("--------\n");
-  printf("index: %d\n", pinfo->pf_number);
+  printf("pf_number: %d\n", pinfo->pf_number);
   printf("is_loaded: %d\n", pinfo->is_loaded);
   printf("dir_path: %s\n", pinfo->dir_path);
   printf("pf_name: %s\n", pinfo->pf_name);
-  printf("dim_unused_keys: %d\n", pinfo->dim_unused_keys);
-  for (size_t i = 0; i < TOTAL_OBSW_COUNT; i++)
-  {
-    if(strlen(pinfo->sw_name[i]) == 0)
-      continue;
-    printf("key %d: %s\n", i, pinfo->sw_name[i]);
-    printf("sw_color %d %d %d\n", pinfo->sw_color[i][0], pinfo->sw_color[i][1], pinfo->sw_color[i][2]);
-    printf("sw_activation_color %d %d %d\n", pinfo->sw_activation_color[i][0], pinfo->sw_activation_color[i][1], pinfo->sw_activation_color[i][2]);
-    printf(".\n");
-  }
+  // printf("dim_unused_keys: %d\n", pinfo->dim_unused_keys);
+  // for (size_t i = 0; i < TOTAL_OBSW_COUNT; i++)
+  // {
+  //   if(strlen(pinfo->sw_name[i]) == 0)
+  //     continue;
+  //   printf("key %d: %s\n", i, pinfo->sw_name[i]);
+  //   printf("sw_color %d %d %d\n", pinfo->sw_color[i][0], pinfo->sw_color[i][1], pinfo->sw_color[i][2]);
+  //   printf("sw_activation_color %d %d %d\n", pinfo->sw_activation_color[i][0], pinfo->sw_activation_color[i][1], pinfo->sw_activation_color[i][2]);
+  //   printf(".\n");
+  // }
   printf("--------\n");
 }
 
-void fill_profile_info(void)
+void load_profile_info(void)
 {
-  uint8_t count = 0;
   struct dirent *dir;
   DIR *d = opendir(SD_MOUNT_POINT);
-  memset(unique_profiles, 0, MAX_PROFILES);
   if(d) 
   {
     while ((dir = readdir(d)) != NULL)
@@ -183,16 +149,11 @@ void fill_profile_info(void)
       if(this_profile_number >= MAX_PROFILES)
         continue;
 
-      // if two profile folders have same number, dont load twice
-      if(all_profile_info[count].is_loaded || count >= valid_profile_count)
-        continue;
-      all_profile_info[count].pf_number = this_profile_number;
-      all_profile_info[count].is_loaded = 1;
-      memset(all_profile_info[count].dir_path, 0, FILENAME_BUFSIZE);
-      strcpy(all_profile_info[count].dir_path, dir->d_name);
-      all_profile_info[count].pf_name = all_profile_info[count].dir_path + strlen(profile_dir_prefix) + how_many_digits(this_profile_number) + 1;
-      profile_number_to_index_lookup[this_profile_number] = count;
-      count++;
+      all_profile_info[this_profile_number].pf_number = this_profile_number;
+      all_profile_info[this_profile_number].is_loaded = 1;
+      memset(all_profile_info[this_profile_number].dir_path, 0, FILENAME_BUFSIZE);
+      strcpy(all_profile_info[this_profile_number].dir_path, dir->d_name);
+      all_profile_info[this_profile_number].pf_name = all_profile_info[this_profile_number].dir_path + strlen(profile_dir_prefix) + how_many_digits(this_profile_number) + 1;
     }
   }
   closedir(d);
@@ -280,7 +241,7 @@ void parse_profile_config_line(char* this_line, profile_info* this_profile)
 
 void load_profile_config(profile_info* this_profile)
 {
-  if(this_profile == NULL)
+  if(this_profile == NULL || this_profile->is_loaded == 0)
     return;
   memset(filename_buf, 0, FILENAME_BUFSIZE);
   sprintf(filename_buf, "%s/%s/config.txt", SD_MOUNT_POINT, this_profile->dir_path);
@@ -298,85 +259,56 @@ void load_profile_config(profile_info* this_profile)
   fclose(sd_file);
 }
 
-uint8_t get_first_valid_profile_number()
-{
-  for (size_t i = 0; i < MAX_PROFILES; i++)
-    if(profile_number_to_index_lookup[i] != -1)
-      return i;
-  return 0;
-}
-
-/*
-  profile number and profile index is different
-  profile number is the number shown on screen
-  profile index is the index of the profile info array
-  profile index and profile number may not be the same in value
-  profile index increments during the directory scan process
-*/
 uint8_t scan_profiles()
 {
-  valid_profile_count = get_valid_profile_count();
-  if(valid_profile_count == 0)
+  memset(all_profile_info, 0, sizeof(all_profile_info));
+
+  load_profile_info();
+
+  uint8_t has_valid_profile = 0;
+  for (size_t i = 0; i < MAX_PROFILES; i++)
+    has_valid_profile += all_profile_info[i].is_loaded;
+  if(has_valid_profile == 0)
     return PSCAN_ERROR_NO_PROFILE;
 
-  uint32_t bytes_to_allocate = valid_profile_count * sizeof(profile_info);
-  printf("%s: Found %d profiles, allocating %ld bytes\n", __func__, valid_profile_count, bytes_to_allocate);
-  
-  free(all_profile_info);
-  all_profile_info = (profile_info *)malloc(bytes_to_allocate);
-  if(all_profile_info == NULL)
-    return PSCAN_ERROR_NO_MEMORY;
-  
-  memset(all_profile_info, 0, bytes_to_allocate);
-  memset(profile_number_to_index_lookup, -1, (MAX_PROFILES)*sizeof(int16_t));
-  fill_profile_info();
-
-  for (size_t i = 0; i < valid_profile_count; i++)
+  for(size_t i = 0; i < MAX_PROFILES; i++)
     load_profile_config(&all_profile_info[i]);
 
-  for (size_t i = 0; i < MAX_PROFILES; i++)
-    printf("scan_profiles: pfnum=%d pfidx=%d\n", i, profile_number_to_index_lookup[i]);
   return PSCAN_OK;
 }
 
-void restore_profile(profile_info* this_profile)
+void restore_profile(uint8_t profile_number)
 {
-  printf("restore_profile: %d\n", this_profile->pf_number);
-  draw_profile(this_profile);
+  printf("restore_profile: %d\n", profile_number);
+  draw_profile(&all_profile_info[profile_number]);
   // save_last_profile(profile_index);
   // reset_hold_cache();
 }
 
 void goto_next_profile(void)
 {
-  int16_t next_profile_number = current_profile_number;
   while(1)
   {
-    next_profile_number++;
-    if(next_profile_number >= MAX_PROFILES)
-      next_profile_number = 0;
-    if(profile_number_to_index_lookup[next_profile_number] != -1)
+    current_profile_number++;
+    if(current_profile_number >= MAX_PROFILES)
+      current_profile_number = 0;
+    if(all_profile_info[current_profile_number].is_loaded)
       break;
   }
-  int16_t next_profile_index = profile_number_to_index_lookup[next_profile_number];
-  restore_profile(&all_profile_info[next_profile_index]);
-  current_profile_number = next_profile_number;
+  restore_profile(current_profile_number);
 }
 
 void goto_prev_profile(void)
 {
-  int16_t prev_profile_number = current_profile_number;
   while(1)
   {
-    prev_profile_number--;
-    if(prev_profile_number < 0)
-      prev_profile_number = MAX_PROFILES - 1;
-    if(profile_number_to_index_lookup[prev_profile_number] != -1)
+    if(current_profile_number == 0)
+      current_profile_number = MAX_PROFILES - 1;
+    current_profile_number--;
+    if(all_profile_info[current_profile_number].is_loaded)
       break;
   }
-  int16_t prev_profile_index = profile_number_to_index_lookup[prev_profile_number];
-  restore_profile(&all_profile_info[prev_profile_index]);
-  current_profile_number = prev_profile_number;
+  restore_profile(current_profile_number);
 }
 
 void profile_init(void)

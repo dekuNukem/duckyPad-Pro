@@ -48,14 +48,9 @@ void app_main(void)
         print_noprofile();
         error_loop();
     }
-    else if(pscan_result == PSCAN_ERROR_NO_MEMORY)
-    {
-        print_nomemory();
-        error_loop();
-    }
 
     goto_next_profile();
-    
+
     while(1)
     {
         rotary_encoder_event_t event = { 0 };

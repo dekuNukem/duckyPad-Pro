@@ -11,7 +11,7 @@
 #include "neopixel_task.h"
 
 #define TEMP_BUFSIZE 128
-#define FILENAME_BUFSIZE TEMP_BUFSIZE
+#define FILENAME_BUFSIZE 64
 #define MAX_PROFILES 64
 #define KEYNAME_SIZE 16
 
@@ -51,7 +51,6 @@ void profile_init(void);
 
 #define PSCAN_OK 0
 #define PSCAN_ERROR_NO_PROFILE 1
-#define PSCAN_ERROR_NO_MEMORY 2
 
 #ifdef __cplusplus
 }
