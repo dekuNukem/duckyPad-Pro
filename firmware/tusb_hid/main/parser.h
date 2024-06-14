@@ -8,6 +8,7 @@
 #include <stdint.h>
 #include <string.h>
 #include "input_task.h"
+#include "neopixel_task.h"
 
 #define TEMP_BUFSIZE 128
 #define FILENAME_BUFSIZE TEMP_BUFSIZE
@@ -31,6 +32,9 @@ typedef struct
   char dir_path[FILENAME_BUFSIZE];
   char* pf_name;
   char sw_name[TOTAL_OBSW_COUNT][KEYNAME_SIZE];
+  uint8_t sw_color[MECH_OBSW_COUNT][THREE]; // only mechanical keys have RGB LEDs
+  uint8_t sw_activation_color[MECH_OBSW_COUNT][THREE];
+  uint8_t dim_unused_keys;
 } profile_info;
 
 extern profile_info current_profile_info;

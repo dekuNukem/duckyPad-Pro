@@ -1,3 +1,19 @@
+void fill_default_color(profile_info* this_profile)
+{
+  if(this_profile == NULL)
+    return;
+  for (size_t i = 0; i < TOTAL_OBSW_COUNT; i++)
+  {
+    this_profile->sw_color[i][0] = DEFAULT_BG_RED;
+    this_profile->sw_color[i][1] = DEFAULT_BG_GREEN;
+    this_profile->sw_color[i][2] = DEFAULT_BG_BLUE;
+
+    this_profile->sw_activation_color[i][0] = DEFAULT_KD_RED;
+    this_profile->sw_activation_color[i][1] = DEFAULT_KD_GREEN;
+    this_profile->sw_activation_color[i][2] = DEFAULT_KD_BLUE;
+  }
+}
+
     printf("this_key_index %d\n", this_key_index);
 void parse_key_config_line(char* line, uint32_t buf_size, profile_info* this_profile)
 {

@@ -16,7 +16,6 @@
 #include "shared.h"
 #include "input_task.h"
 #include "ui_task.h"
-#include "neopixel_task.h"
 
 const char config_file_path[] = "/sdcard/dp_settings.txt";
 dp_global_settings dp_settings;
@@ -27,6 +26,11 @@ char filename_buf[FILENAME_BUFSIZE];
 const char config_sleep_after_min[] = "sleep_after_min ";
 const char config_brightness_index[] = "bi ";
 const char config_keyboard_layout[] = "kbl ";
+
+const char cmd_BG_COLOR[] = "BG_COLOR ";
+const char cmd_KD_COLOR[] = "KEYDOWN_COLOR ";
+const char cmd_SWCOLOR[] = "SWCOLOR_";
+const char cmd_DIM_UNUSED_KEYS[] = "DIM_UNUSED_KEYS ";
 
 uint8_t current_profile_index;
 profile_info *all_profile_info;
@@ -145,8 +149,12 @@ void print_profile_info(profile_info *pinfo)
   printf("pf_name: %s\n", pinfo->pf_name);
   for (size_t i = 0; i < TOTAL_OBSW_COUNT; i++)
   {
-    if(strlen(pinfo->sw_name[i]))
-      printf("key %d: %s\n", i, pinfo->sw_name[i]);
+    if(strlen(pinfo->sw_name[i]) == 0)
+      continue;
+    printf("key %d: %s\n", i, pinfo->sw_name[i]);
+    printf("sw_color %d %d %d\n", pinfo->sw_color[i][0], pinfo->sw_color[i][1], pinfo->sw_color[i][2]);
+    printf("sw_activation_color %d %d %d\n", pinfo->sw_activation_color[i][0], pinfo->sw_activation_color[i][1], pinfo->sw_activation_color[i][2]);
+    printf(".\n");
   }
   printf("--------\n");
 }
@@ -183,25 +191,76 @@ void fill_profile_info(void)
   closedir(d);
 }
 
-void parse_key_config_line(char* line, uint32_t buf_size, profile_info* this_profile)
+void parse_profile_config_line(char* this_line, uint32_t buf_size, profile_info* this_profile)
 {
-  if(line == NULL || strlen(line) <= 2)
+  if(this_line == NULL || strlen(this_line) <= 2)
     return;
-  printf("parse_key_config_line: %s\n", line);
+  printf("parse_profile_config_line: %s\n", this_line);
 
-  if(line[0] == 'z')
+  if(this_line[0] == 'z')
   {
-    uint8_t this_key_index = atoi(line+1);
+    uint8_t this_key_index = atoi(this_line+1);
     if(this_key_index == 0)
       return;
     this_key_index--;
     if(this_key_index >= TOTAL_OBSW_COUNT)
       return;
     memset(this_profile->sw_name[this_key_index], 0, KEYNAME_SIZE);
-    char* kn_start = goto_next_arg(line, buf_size);
+    char* kn_start = goto_next_arg(this_line, buf_size);
     if(kn_start == NULL)
       return;
     strcpy(this_profile->sw_name[this_key_index], kn_start);
+  }
+  else if(strncmp(cmd_BG_COLOR, this_line, strlen(cmd_BG_COLOR)) == 0)
+  {
+    char* curr = goto_next_arg(this_line, buf_size);
+    uint8_t rrr = atoi(curr);
+    curr = goto_next_arg(curr, buf_size);
+    uint8_t ggg = atoi(curr);
+    curr = goto_next_arg(curr, buf_size);
+    uint8_t bbb = atoi(curr);
+    for (size_t i = 0; i < MECH_OBSW_COUNT; i++)
+    {
+      this_profile->sw_color[i][0] = rrr;
+      this_profile->sw_color[i][1] = ggg;
+      this_profile->sw_color[i][2] = bbb;
+    }
+  }
+  else if(strncmp(cmd_KD_COLOR, this_line, strlen(cmd_KD_COLOR)) == 0)
+  {
+    char* curr = goto_next_arg(this_line, buf_size);
+    uint8_t rrr = atoi(curr);
+    curr = goto_next_arg(curr, buf_size);
+    uint8_t ggg = atoi(curr);
+    curr = goto_next_arg(curr, buf_size);
+    uint8_t bbb = atoi(curr);
+    for (size_t i = 0; i < MECH_OBSW_COUNT; i++)
+    {
+      this_profile->sw_activation_color[i][0] = rrr;
+      this_profile->sw_activation_color[i][1] = ggg;
+      this_profile->sw_activation_color[i][2] = bbb;
+    }
+  }
+  else if(strncmp(cmd_SWCOLOR, this_line, strlen(cmd_SWCOLOR)) == 0)
+  {
+    char* curr = this_line + strlen(cmd_SWCOLOR);
+    uint8_t sw_index = atoi(curr) - 1;
+    if(sw_index >= MECH_OBSW_COUNT)
+      return;
+    curr = goto_next_arg(curr, buf_size);
+    uint8_t rrr = atoi(curr);
+    curr = goto_next_arg(curr, buf_size);
+    uint8_t ggg = atoi(curr);
+    curr = goto_next_arg(curr, buf_size);
+    uint8_t bbb = atoi(curr);
+    this_profile->sw_color[sw_index][0] = rrr;
+    this_profile->sw_color[sw_index][1] = ggg;
+    this_profile->sw_color[sw_index][2] = bbb;
+  }
+  else if(strncmp(cmd_DIM_UNUSED_KEYS, this_line, strlen(cmd_DIM_UNUSED_KEYS)) == 0)
+  {
+    char* curr = goto_next_arg(this_line, buf_size);
+    is_unused_keys_dimmed = atoi(curr);
   }
 }
 
@@ -220,7 +279,7 @@ void load_profile_config(profile_info* this_profile)
   while(fgets(temp_buf, TEMP_BUFSIZE, sd_file))
   {
     strip_newline(temp_buf, TEMP_BUFSIZE);
-    parse_key_config_line(temp_buf, TEMP_BUFSIZE, this_profile);
+    parse_profile_config_line(temp_buf, TEMP_BUFSIZE, this_profile);
   }
   print_profile_info(this_profile);
   fclose(sd_file);
@@ -232,16 +291,17 @@ uint8_t scan_profiles()
   if(valid_profile_count == 0)    
     return PSCAN_ERROR_NO_PROFILE;
 
-  printf("%s: found %d valid profiles\n", __func__, valid_profile_count);
+  uint32_t bytes_to_allocate = valid_profile_count * sizeof(profile_info);
+  printf("%s: found %d valid profiles, allocating %ld bytes\n", __func__, valid_profile_count, bytes_to_allocate);
   
   free(all_profile_info);
-  all_profile_info = (profile_info *)malloc(valid_profile_count * sizeof(profile_info));
+  all_profile_info = (profile_info *)malloc(bytes_to_allocate);
   if(all_profile_info == NULL)
     return PSCAN_ERROR_NO_MEMORY;
   
-  memset(all_profile_info, 0, valid_profile_count * sizeof(profile_info));
+  memset(all_profile_info, 0, bytes_to_allocate);
   fill_profile_info();
-  load_profile_config(&all_profile_info[1]);
+  load_profile_config(&all_profile_info[0]);
 
   return PSCAN_OK;
 }
