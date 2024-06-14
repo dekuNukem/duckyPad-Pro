@@ -27,7 +27,7 @@ typedef struct
 */
 typedef struct
 {
-  uint8_t index;
+  uint8_t pf_number;
   uint8_t is_loaded;
   char dir_path[FILENAME_BUFSIZE];
   char* pf_name;
@@ -47,7 +47,7 @@ uint8_t scan_profiles();
 void error_loop(void);
 void goto_next_profile(void);
 void goto_prev_profile(void);
-
+void profile_init(void);
 
 #define PSCAN_OK 0
 #define PSCAN_ERROR_NO_PROFILE 1

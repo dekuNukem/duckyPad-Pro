@@ -243,7 +243,7 @@ void draw_profile(profile_info* this_profile)
 {
   ssd1306_Fill(Black);
   memset(oled_line_buf, 0, OLED_LINE_BUF_SIZE);
-  sprintf(oled_line_buf, "P%d: %s", this_profile->index, this_profile->pf_name);
+  sprintf(oled_line_buf, "P%d: %s", this_profile->pf_number, this_profile->pf_name);
 	ssd1306_SetCursor(center_line(strlen(oled_line_buf), 7, SSD1306_WIDTH), 0);
 	ssd1306_WriteString(oled_line_buf, Font_7x10, White);
 	

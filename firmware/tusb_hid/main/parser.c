@@ -23,7 +23,7 @@
 const char config_file_path[] = "/sdcard/dp_settings.txt";
 dp_global_settings dp_settings;
 
-int8_t profile_number_to_index_lookup[MAX_PROFILES];
+int16_t profile_number_to_index_lookup[MAX_PROFILES];
 char temp_buf[TEMP_BUFSIZE];
 char filename_buf[FILENAME_BUFSIZE];
 
@@ -36,7 +36,7 @@ const char cmd_KD_COLOR[] = "KEYDOWN_COLOR ";
 const char cmd_SWCOLOR[] = "SWCOLOR_";
 const char cmd_DIM_UNUSED_KEYS[] = "DIM_UNUSED_KEYS ";
 
-uint8_t current_profile_index;
+uint8_t current_profile_number;
 profile_info *all_profile_info;
 uint8_t valid_profile_count;
 
@@ -148,7 +148,7 @@ void print_profile_info(profile_info *pinfo)
   if(pinfo == NULL)
     return;
   printf("--------\n");
-  printf("index: %d\n", pinfo->index);
+  printf("index: %d\n", pinfo->pf_number);
   printf("is_loaded: %d\n", pinfo->is_loaded);
   printf("dir_path: %s\n", pinfo->dir_path);
   printf("pf_name: %s\n", pinfo->pf_name);
@@ -186,7 +186,7 @@ void fill_profile_info(void)
       // if two profile folders have same number, dont load twice
       if(all_profile_info[count].is_loaded || count >= valid_profile_count)
         continue;
-      all_profile_info[count].index = this_profile_number;
+      all_profile_info[count].pf_number = this_profile_number;
       all_profile_info[count].is_loaded = 1;
       memset(all_profile_info[count].dir_path, 0, FILENAME_BUFSIZE);
       strcpy(all_profile_info[count].dir_path, dir->d_name);
@@ -298,6 +298,21 @@ void load_profile_config(profile_info* this_profile)
   fclose(sd_file);
 }
 
+uint8_t get_first_valid_profile_number()
+{
+  for (size_t i = 0; i < MAX_PROFILES; i++)
+    if(profile_number_to_index_lookup[i] != -1)
+      return i;
+  return 0;
+}
+
+/*
+  profile number and profile index is different
+  profile number is the number shown on screen
+  profile index is the index of the profile info array
+  profile index and profile number may not be the same in value
+  profile index increments during the directory scan process
+*/
 uint8_t scan_profiles()
 {
   valid_profile_count = get_valid_profile_count();
@@ -313,51 +328,65 @@ uint8_t scan_profiles()
     return PSCAN_ERROR_NO_MEMORY;
   
   memset(all_profile_info, 0, bytes_to_allocate);
-  memset(profile_number_to_index_lookup, -1, MAX_PROFILES);
+  memset(profile_number_to_index_lookup, -1, (MAX_PROFILES)*sizeof(int16_t));
   fill_profile_info();
 
   for (size_t i = 0; i < valid_profile_count; i++)
     load_profile_config(&all_profile_info[i]);
 
   for (size_t i = 0; i < MAX_PROFILES; i++)
-    printf("%d %d\n", i, profile_number_to_index_lookup[i]);
-
+    printf("scan_profiles: pfnum=%d pfidx=%d\n", i, profile_number_to_index_lookup[i]);
   return PSCAN_OK;
 }
 
-void restore_profile(uint8_t profile_id)
+void restore_profile(profile_info* this_profile)
 {
-  printf("restore_profile: %d\n", profile_id);
-  draw_profile(&all_profile_info[profile_id]);
-  // save_last_profile(profile_id);
+  printf("restore_profile: %d\n", this_profile->pf_number);
+  draw_profile(this_profile);
+  // save_last_profile(profile_index);
   // reset_hold_cache();
 }
 
 void goto_next_profile(void)
 {
-  current_profile_index++;
-  if(current_profile_index >= valid_profile_count)
-    current_profile_index = 0;
-  restore_profile(current_profile_index);
+  int16_t next_profile_number = current_profile_number;
+  while(1)
+  {
+    next_profile_number++;
+    if(next_profile_number >= MAX_PROFILES)
+      next_profile_number = 0;
+    if(profile_number_to_index_lookup[next_profile_number] != -1)
+      break;
+  }
+  int16_t next_profile_index = profile_number_to_index_lookup[next_profile_number];
+  restore_profile(&all_profile_info[next_profile_index]);
+  current_profile_number = next_profile_number;
 }
 
 void goto_prev_profile(void)
 {
-  if(current_profile_index == 0)
-    current_profile_index = valid_profile_count-1;
-  else
-    current_profile_index--;
-  restore_profile(current_profile_index);
+  int16_t prev_profile_number = current_profile_number;
+  while(1)
+  {
+    prev_profile_number--;
+    if(prev_profile_number < 0)
+      prev_profile_number = MAX_PROFILES - 1;
+    if(profile_number_to_index_lookup[prev_profile_number] != -1)
+      break;
+  }
+  int16_t prev_profile_index = profile_number_to_index_lookup[prev_profile_number];
+  restore_profile(&all_profile_info[prev_profile_index]);
+  current_profile_number = prev_profile_number;
+}
+
+void profile_init(void)
+{
+
 }
 
 void mytest(void)
 {
-  // uint8_t last_used_profile = get_last_used_profile();
-  // if(last_used_profile == 0)
-  //   change_profile(NEXT_PROFILE);
-  // else
-  //   restore_profile(last_used_profile);
-  goto_next_profile();
+  ;
 }
 
 void error_loop(void)

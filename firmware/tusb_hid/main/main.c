@@ -54,8 +54,8 @@ void app_main(void)
         error_loop();
     }
 
-    mytest();
-
+    goto_next_profile();
+    
     while(1)
     {
         rotary_encoder_event_t event = { 0 };

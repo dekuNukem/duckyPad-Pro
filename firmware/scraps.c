@@ -1,3 +1,37 @@
+void goto_next_profile(void)
+{
+  int16_t next_profile_number = current_profile_number;
+  while(1)
+  {
+    next_profile_number++;
+    if(next_profile_number >= MAX_PROFILES)
+      next_profile_number = 0;
+    if(profile_number_to_index_lookup[next_profile_number] != -1)
+      break;
+  }
+  printf("now: %d\n", next_profile_number);
+  int16_t next_profile_index = profile_number_to_index_lookup[next_profile_number];
+  restore_profile(&all_profile_info[next_profile_index]);
+  current_profile_number = next_profile_number;
+}
+
+  printf("get_first_valid_profile_number: %d\n", get_first_valid_profile_number());
+void goto_next_profile(void)
+{
+  int8_t next_profile_index = 0;
+  while(1)
+  {
+    printf("gnp: %d\n", current_profile_number);
+    current_profile_number++;
+    if(current_profile_number >= MAX_PROFILES)
+      current_profile_number = 0;
+    if(profile_number_to_index_lookup[current_profile_number] == -1)
+      continue;
+    break;
+  }
+  printf("now: %d\n", current_profile_number);
+}
+
 for (size_t i = 0; i < MECH_OBSW_COUNT; i++)
   {
     uint8_t row = 0;
