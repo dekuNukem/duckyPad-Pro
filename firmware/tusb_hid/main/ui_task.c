@@ -218,15 +218,19 @@ void draw_profile(profile_info* this_profile)
 	ssd1306_SetCursor(center_line(strlen(oled_line_buf), 7, SSD1306_WIDTH), 0);
 	ssd1306_WriteString(oled_line_buf, Font_7x10, White);
 	
-  ssd1306_Line(0,10,127,10,White);
+  ssd1306_Line(0,10,127,10,White); // title solid line
+
+  // horizontal lines
   // ssd1306_dashed_line(0,33,127,33,White);
   // ssd1306_dashed_line(0,57,127,57,White);
   // ssd1306_dashed_line(0,80,127,80,White);
   // ssd1306_dashed_line(0,103,127,103,White);
+  // ssd1306_dashed_line(0,127,127,127,White);
+
+  // vertical lines
   // ssd1306_dashed_line(32,10,32,127,White);
   // ssd1306_dashed_line(64,10,64,127,White);
   // ssd1306_dashed_line(96,10,96,127,White);
-  // ssd1306_dashed_line(0,127,127,127,White);
 
   for (size_t rrr = 0; rrr < SW_MATRIX_NUM_ROWS; rrr++)
   {

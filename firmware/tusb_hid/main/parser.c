@@ -262,7 +262,6 @@ void load_profile_config(profile_info* this_profile)
 uint8_t scan_profiles()
 {
   memset(all_profile_info, 0, sizeof(all_profile_info));
-
   load_profile_info();
 
   uint8_t has_valid_profile = 0;
