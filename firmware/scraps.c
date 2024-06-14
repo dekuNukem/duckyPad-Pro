@@ -1,3 +1,6 @@
+printf("load_profile_config: %s\n", filename_buf);
+  printf("parse_profile_config_line: %s\n", this_line);
+
 void fill_default_color(profile_info* this_profile)
 {
   if(this_profile == NULL)

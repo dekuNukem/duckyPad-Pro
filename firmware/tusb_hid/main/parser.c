@@ -198,7 +198,6 @@ void parse_profile_config_line(char* this_line, profile_info* this_profile)
 
   if(this_line == NULL || strlen(this_line) <= 2)
     return;
-  printf("parse_profile_config_line: %s\n", this_line);
 
   if(this_line[0] == 'z')
   {
@@ -214,7 +213,7 @@ void parse_profile_config_line(char* this_line, profile_info* this_profile)
       return;
     strcpy(this_profile->sw_name[this_key_index], kn_start);
   }
-  else if(strncmp(cmd_BG_COLOR, this_line, strlen(cmd_BG_COLOR)) == 0)
+  else if(strncmp(cmd_BG_COLOR, this_line, strlen(cmd_BG_COLOR)) == 0) // order is important! BG, SW, and KD
   {
     char* curr = goto_next_arg(this_line, msg_end);
     uint8_t rrr = atoi(curr);
@@ -227,21 +226,9 @@ void parse_profile_config_line(char* this_line, profile_info* this_profile)
       this_profile->sw_color[i][0] = rrr;
       this_profile->sw_color[i][1] = ggg;
       this_profile->sw_color[i][2] = bbb;
-    }
-  }
-  else if(strncmp(cmd_KD_COLOR, this_line, strlen(cmd_KD_COLOR)) == 0)
-  {
-    char* curr = goto_next_arg(this_line, msg_end);
-    uint8_t rrr = atoi(curr);
-    curr = goto_next_arg(curr, msg_end);
-    uint8_t ggg = atoi(curr);
-    curr = goto_next_arg(curr, msg_end);
-    uint8_t bbb = atoi(curr);
-    for (size_t i = 0; i < MECH_OBSW_COUNT; i++)
-    {
-      this_profile->sw_activation_color[i][0] = rrr;
-      this_profile->sw_activation_color[i][1] = ggg;
-      this_profile->sw_activation_color[i][2] = bbb;
+      this_profile->sw_activation_color[i][0] = 255 - rrr;
+      this_profile->sw_activation_color[i][1] = 255 - ggg;
+      this_profile->sw_activation_color[i][2] = 255 - bbb;
     }
   }
   else if(strncmp(cmd_SWCOLOR, this_line, strlen(cmd_SWCOLOR)) == 0)
@@ -259,6 +246,24 @@ void parse_profile_config_line(char* this_line, profile_info* this_profile)
     this_profile->sw_color[sw_index][0] = rrr;
     this_profile->sw_color[sw_index][1] = ggg;
     this_profile->sw_color[sw_index][2] = bbb;
+    this_profile->sw_activation_color[sw_index][0] = 255 - rrr;
+    this_profile->sw_activation_color[sw_index][1] = 255 - ggg;
+    this_profile->sw_activation_color[sw_index][2] = 255 - bbb;
+  }
+  else if(strncmp(cmd_KD_COLOR, this_line, strlen(cmd_KD_COLOR)) == 0)
+  {
+    char* curr = goto_next_arg(this_line, msg_end);
+    uint8_t rrr = atoi(curr);
+    curr = goto_next_arg(curr, msg_end);
+    uint8_t ggg = atoi(curr);
+    curr = goto_next_arg(curr, msg_end);
+    uint8_t bbb = atoi(curr);
+    for (size_t i = 0; i < MECH_OBSW_COUNT; i++)
+    {
+      this_profile->sw_activation_color[i][0] = rrr;
+      this_profile->sw_activation_color[i][1] = ggg;
+      this_profile->sw_activation_color[i][2] = bbb;
+    }
   }
   else if(strncmp(cmd_DIM_UNUSED_KEYS, this_line, strlen(cmd_DIM_UNUSED_KEYS)) == 0)
   {
@@ -273,7 +278,6 @@ void load_profile_config(profile_info* this_profile)
     return;
   memset(filename_buf, 0, FILENAME_BUFSIZE);
   sprintf(filename_buf, "%s/%s/config.txt", SD_MOUNT_POINT, this_profile->dir_path);
-  printf("load_profile_config: %s\n", filename_buf);
 
   FILE *sd_file = fopen(filename_buf, "r");
   if(sd_file == NULL)
@@ -295,7 +299,7 @@ uint8_t scan_profiles()
     return PSCAN_ERROR_NO_PROFILE;
 
   uint32_t bytes_to_allocate = valid_profile_count * sizeof(profile_info);
-  printf("%s: found %d valid profiles, allocating %ld bytes\n", __func__, valid_profile_count, bytes_to_allocate);
+  printf("%s: Found %d profiles, allocating %ld bytes\n", __func__, valid_profile_count, bytes_to_allocate);
   
   free(all_profile_info);
   all_profile_info = (profile_info *)malloc(bytes_to_allocate);
@@ -304,7 +308,11 @@ uint8_t scan_profiles()
   
   memset(all_profile_info, 0, bytes_to_allocate);
   fill_profile_info();
-  load_profile_config(&all_profile_info[0]);
+
+  for (size_t i = 0; i < valid_profile_count; i++)
+  {
+    load_profile_config(&all_profile_info[i]);
+  }
 
   return PSCAN_OK;
 }
