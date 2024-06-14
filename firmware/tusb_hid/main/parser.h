@@ -44,6 +44,7 @@ extern uint8_t current_profile_index;
 uint8_t load_settings(dp_global_settings* dps);
 void mytest();
 uint8_t scan_profiles();
+void error_loop(void);
 
 #define PSCAN_OK 0
 #define PSCAN_ERROR_NO_PROFILE 1

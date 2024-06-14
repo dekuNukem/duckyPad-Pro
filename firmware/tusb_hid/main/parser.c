@@ -17,6 +17,9 @@
 #include "input_task.h"
 #include "ui_task.h"
 
+#define NEXT_PROFILE 0
+#define PREV_PROFILE 1
+
 const char config_file_path[] = "/sdcard/dp_settings.txt";
 dp_global_settings dp_settings;
 
@@ -68,6 +71,7 @@ uint8_t load_settings(dp_global_settings* dps)
 }
 
 const char stat_last_used_profile[] = "lp ";
+// 0 = error?
 uint8_t get_last_used_profile(void)
 {
   uint8_t ret = 0;
@@ -315,8 +319,28 @@ uint8_t scan_profiles()
   return PSCAN_OK;
 }
 
+void restore_profile(uint8_t profile_id)
+{
+  draw_profile(&all_profile_info[profile_id]);
+  // save_last_profile(profile_id);
+  // reset_hold_cache();
+}
 
 void mytest(void)
 {
-  draw_profile(&all_profile_info[0]);
+  uint8_t last_used_profile = get_last_used_profile();
+  // if(last_used_profile == 0)
+  //   change_profile(NEXT_PROFILE);
+  // else
+  //   restore_profile(last_used_profile);
+
+}
+
+void error_loop(void)
+{
+  while(1)
+  {
+    printf("error loop\n");
+    vTaskDelay(pdMS_TO_TICKS(250));
+  }
 }
