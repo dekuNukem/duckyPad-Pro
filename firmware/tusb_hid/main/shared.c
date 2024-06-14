@@ -20,10 +20,9 @@ uint8_t how_many_digits(uint8_t number)
   return 1;
 }
 
-char* goto_next_arg(char* buf, uint32_t buf_size)
+char* goto_next_arg(char* buf, char* buf_end)
 {
-  char* curr = buf;
-  char* buf_end = buf + buf_size;
+  char* curr = buf;  
   if(buf == NULL || curr >= buf_end)
     return NULL;
   while(curr < buf_end && *curr != ' ')

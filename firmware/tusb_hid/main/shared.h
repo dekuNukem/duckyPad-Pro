@@ -13,7 +13,7 @@ extern uint8_t fw_version_patch;
 
 void strip_newline(char* line, uint8_t size);
 uint8_t how_many_digits(uint8_t number);
-char* goto_next_arg(char* buf, uint32_t buf_size);
+char* goto_next_arg(char* buf, char* buf_end);
 
 #ifdef __cplusplus
 }

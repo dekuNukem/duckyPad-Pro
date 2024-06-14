@@ -147,6 +147,7 @@ void print_profile_info(profile_info *pinfo)
   printf("is_loaded: %d\n", pinfo->is_loaded);
   printf("dir_path: %s\n", pinfo->dir_path);
   printf("pf_name: %s\n", pinfo->pf_name);
+  printf("dim_unused_keys: %d\n", pinfo->dim_unused_keys);
   for (size_t i = 0; i < TOTAL_OBSW_COUNT; i++)
   {
     if(strlen(pinfo->sw_name[i]) == 0)
@@ -191,8 +192,10 @@ void fill_profile_info(void)
   closedir(d);
 }
 
-void parse_profile_config_line(char* this_line, uint32_t buf_size, profile_info* this_profile)
+void parse_profile_config_line(char* this_line, profile_info* this_profile)
 {
+  char* msg_end = this_line + strlen(this_line);
+
   if(this_line == NULL || strlen(this_line) <= 2)
     return;
   printf("parse_profile_config_line: %s\n", this_line);
@@ -206,18 +209,18 @@ void parse_profile_config_line(char* this_line, uint32_t buf_size, profile_info*
     if(this_key_index >= TOTAL_OBSW_COUNT)
       return;
     memset(this_profile->sw_name[this_key_index], 0, KEYNAME_SIZE);
-    char* kn_start = goto_next_arg(this_line, buf_size);
+    char* kn_start = goto_next_arg(this_line, msg_end);
     if(kn_start == NULL)
       return;
     strcpy(this_profile->sw_name[this_key_index], kn_start);
   }
   else if(strncmp(cmd_BG_COLOR, this_line, strlen(cmd_BG_COLOR)) == 0)
   {
-    char* curr = goto_next_arg(this_line, buf_size);
+    char* curr = goto_next_arg(this_line, msg_end);
     uint8_t rrr = atoi(curr);
-    curr = goto_next_arg(curr, buf_size);
+    curr = goto_next_arg(curr, msg_end);
     uint8_t ggg = atoi(curr);
-    curr = goto_next_arg(curr, buf_size);
+    curr = goto_next_arg(curr, msg_end);
     uint8_t bbb = atoi(curr);
     for (size_t i = 0; i < MECH_OBSW_COUNT; i++)
     {
@@ -228,11 +231,11 @@ void parse_profile_config_line(char* this_line, uint32_t buf_size, profile_info*
   }
   else if(strncmp(cmd_KD_COLOR, this_line, strlen(cmd_KD_COLOR)) == 0)
   {
-    char* curr = goto_next_arg(this_line, buf_size);
+    char* curr = goto_next_arg(this_line, msg_end);
     uint8_t rrr = atoi(curr);
-    curr = goto_next_arg(curr, buf_size);
+    curr = goto_next_arg(curr, msg_end);
     uint8_t ggg = atoi(curr);
-    curr = goto_next_arg(curr, buf_size);
+    curr = goto_next_arg(curr, msg_end);
     uint8_t bbb = atoi(curr);
     for (size_t i = 0; i < MECH_OBSW_COUNT; i++)
     {
@@ -247,11 +250,11 @@ void parse_profile_config_line(char* this_line, uint32_t buf_size, profile_info*
     uint8_t sw_index = atoi(curr) - 1;
     if(sw_index >= MECH_OBSW_COUNT)
       return;
-    curr = goto_next_arg(curr, buf_size);
+    curr = goto_next_arg(curr, msg_end);
     uint8_t rrr = atoi(curr);
-    curr = goto_next_arg(curr, buf_size);
+    curr = goto_next_arg(curr, msg_end);
     uint8_t ggg = atoi(curr);
-    curr = goto_next_arg(curr, buf_size);
+    curr = goto_next_arg(curr, msg_end);
     uint8_t bbb = atoi(curr);
     this_profile->sw_color[sw_index][0] = rrr;
     this_profile->sw_color[sw_index][1] = ggg;
@@ -259,8 +262,8 @@ void parse_profile_config_line(char* this_line, uint32_t buf_size, profile_info*
   }
   else if(strncmp(cmd_DIM_UNUSED_KEYS, this_line, strlen(cmd_DIM_UNUSED_KEYS)) == 0)
   {
-    char* curr = goto_next_arg(this_line, buf_size);
-    is_unused_keys_dimmed = atoi(curr);
+    char* curr = goto_next_arg(this_line, msg_end);
+    this_profile->dim_unused_keys = atoi(curr);
   }
 }
 
@@ -279,7 +282,7 @@ void load_profile_config(profile_info* this_profile)
   while(fgets(temp_buf, TEMP_BUFSIZE, sd_file))
   {
     strip_newline(temp_buf, TEMP_BUFSIZE);
-    parse_profile_config_line(temp_buf, TEMP_BUFSIZE, this_profile);
+    parse_profile_config_line(temp_buf, this_profile);
   }
   print_profile_info(this_profile);
   fclose(sd_file);
