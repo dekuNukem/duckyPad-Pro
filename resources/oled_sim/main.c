@@ -6,7 +6,7 @@
 /*
 2024 03 20
 Adjust screen size in ssd1306.h
-make; .\my_program.exe ; python .\vis.py .\OLED_128_32.bin
+make clean; make; ./my_program.exe ; python ./vis.py ./OLED_128_128.bin
 */
 
 #define FILENAME_BUF_SIZE 64
@@ -34,38 +34,13 @@ int main(int argc, char *argv[])
 
 	ssd1306_Fill(Black);
 
+    ssd1306_SetCursor(0,0);
+    ssd1306_WriteString("abcdefghijklmn", Font_6x8, White);
+    ssd1306_SetCursor(0,10);
+    ssd1306_WriteString("opqrstuvwxyz", Font_6x8, White);
 
-    memset(oled_line_buf, 0, OLED_LINE_BUF_SIZE);
-    sprintf(oled_line_buf, "duckyPad Pro");
-    ssd1306_SetCursor(center_line(strlen(oled_line_buf), 7, SSD1306_WIDTH), 10);
-    ssd1306_WriteString(oled_line_buf, Font_7x10, White);
-
-    memset(oled_line_buf, 0, OLED_LINE_BUF_SIZE);
-    sprintf(oled_line_buf, "FW V%d.%d.%d", fw_version_major, fw_version_minor, fw_version_patch);
-    ssd1306_SetCursor(center_line(strlen(oled_line_buf), 7, SSD1306_WIDTH), 25);
-    ssd1306_WriteString(oled_line_buf, Font_7x10, White);
-
-
-    memset(oled_line_buf, 0, OLED_LINE_BUF_SIZE);
-    sprintf(oled_line_buf, "Please Insert");
-    ssd1306_SetCursor(center_line(strlen(oled_line_buf), 7, SSD1306_WIDTH), 55);
-    ssd1306_WriteString(oled_line_buf, Font_7x10, White);
-
-    memset(oled_line_buf, 0, OLED_LINE_BUF_SIZE);
-    sprintf(oled_line_buf, "SD card");
-    ssd1306_SetCursor(center_line(strlen(oled_line_buf), 7, SSD1306_WIDTH), 67);
-    ssd1306_WriteString(oled_line_buf, Font_7x10, White);
-
-
-    memset(oled_line_buf, 0, OLED_LINE_BUF_SIZE);
-    sprintf(oled_line_buf, "Instructions:", fw_version_major, fw_version_minor, fw_version_patch);
-    ssd1306_SetCursor(center_line(strlen(oled_line_buf), 7, SSD1306_WIDTH), 100);
-    ssd1306_WriteString(oled_line_buf, Font_7x10, White);
-
-    memset(oled_line_buf, 0, OLED_LINE_BUF_SIZE);
-    sprintf(oled_line_buf, "duckyPad.com", fw_version_major, fw_version_minor, fw_version_patch);
-    ssd1306_SetCursor(center_line(strlen(oled_line_buf), 7, SSD1306_WIDTH), 112);
-    ssd1306_WriteString(oled_line_buf, Font_7x10, White);
+    ssd1306_SetCursor(0,20);
+    ssd1306_WriteString("1234567890", Font_6x8, White);
 
     // ------------------------------
 

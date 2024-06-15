@@ -28,6 +28,6 @@ ssd1306_fonts.o: ssd1306_fonts.c ssd1306_fonts.h
 
 # Clean target
 clean:
-	rm -f $(TARGET) *.o
+	rm -f $(TARGET) *.o *.bin *.png
 
 .PHONY: all clean
