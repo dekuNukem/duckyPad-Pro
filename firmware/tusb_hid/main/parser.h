@@ -39,7 +39,6 @@ typedef struct
 
 extern profile_info current_profile_info;
 extern dp_global_settings dp_settings;
-extern uint8_t current_profile_index;
 
 uint8_t load_settings(dp_global_settings* dps);
 void mytest();

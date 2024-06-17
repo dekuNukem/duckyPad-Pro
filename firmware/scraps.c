@@ -1,3 +1,6 @@
+  printf("goto_profile: %d\n", profile_number);
+
+
 void print_nomemory(void)
 {
     ssd1306_Fill(Black);

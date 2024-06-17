@@ -17,6 +17,7 @@
 #include "input_task.h"
 #include "ui_task.h"
 
+
 #define NEXT_PROFILE 0
 #define PREV_PROFILE 1
 
@@ -276,38 +277,55 @@ uint8_t scan_profiles()
   return PSCAN_OK;
 }
 
-void restore_profile(uint8_t profile_number)
+void save_current_profile(uint8_t profile_number)
 {
-  printf("restore_profile: %d\n", profile_number);
+  if(profile_number >= MAX_PROFILES || all_profile_info[profile_number].is_loaded == 0)
+    return;
+  memset(filename_buf, 0, FILENAME_BUFSIZE);
+  sprintf(filename_buf, "%s/dp_stats.txt", SD_MOUNT_POINT);
+  FILE *sd_file = fopen(filename_buf, "w");
+  if(sd_file == NULL)
+    return;
+  fprintf(sd_file, "lp %d\nfw %d.%d.%d\nser %02x%02x%02x", profile_number, fw_version_major, fw_version_minor, fw_version_patch, esp_mac_addr[3], esp_mac_addr[4], esp_mac_addr[5]);
+  fclose(sd_file);
+}
+
+void goto_profile(uint8_t profile_number)
+{
+  if(profile_number >= MAX_PROFILES || all_profile_info[profile_number].is_loaded == 0)
+    return;
   draw_profile(&all_profile_info[profile_number]);
-  // save_last_profile(profile_index);
+  save_current_profile(profile_number);
+  current_profile_number = profile_number;
   // reset_hold_cache();
 }
 
 void goto_next_profile(void)
 {
+  uint8_t new_profile_number = current_profile_number;
   while(1)
   {
-    current_profile_number++;
-    if(current_profile_number >= MAX_PROFILES)
-      current_profile_number = 0;
-    if(all_profile_info[current_profile_number].is_loaded)
+    new_profile_number++;
+    if(new_profile_number >= MAX_PROFILES)
+      new_profile_number = 0;
+    if(all_profile_info[new_profile_number].is_loaded)
       break;
   }
-  restore_profile(current_profile_number);
+  goto_profile(new_profile_number);
 }
 
 void goto_prev_profile(void)
 {
+  uint8_t new_profile_number = current_profile_number;
   while(1)
   {
-    if(current_profile_number == 0)
-      current_profile_number = MAX_PROFILES - 1;
-    current_profile_number--;
-    if(all_profile_info[current_profile_number].is_loaded)
+    if(new_profile_number == 0)
+      new_profile_number = MAX_PROFILES - 1;
+    new_profile_number--;
+    if(all_profile_info[new_profile_number].is_loaded)
       break;
   }
-  restore_profile(current_profile_number);
+  goto_profile(new_profile_number);
 }
 
 void profile_init(void)

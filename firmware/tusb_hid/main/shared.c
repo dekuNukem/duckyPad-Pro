@@ -4,6 +4,8 @@
 
 #include "shared.h"
 
+uint8_t esp_mac_addr[ESP_MAC_ADDR_SIZE];
+
 void strip_newline(char* line, uint8_t size)
 {
   for(int i = 0; i < size; ++i)
@@ -33,3 +35,4 @@ char* goto_next_arg(char* buf, char* buf_end)
     return NULL;
   return curr;
 }
+

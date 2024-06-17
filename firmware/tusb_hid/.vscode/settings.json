@@ -41,6 +41,7 @@
     "shared.h": "c",
     "fstream": "c",
     "typeinfo": "c",
-    "chrono": "c"
+    "chrono": "c",
+    "stat.h": "c"
   }
 }

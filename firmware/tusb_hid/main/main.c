@@ -13,6 +13,8 @@
 #include "shared.h"
 #include "parser.h"
 #include "ssd1306.h"
+#include "esp_mac.h"
+
 
 uint8_t fw_version_major = 0;
 uint8_t fw_version_minor = 0;
@@ -29,7 +31,7 @@ void app_main(void)
 {
     vTaskDelay(pdMS_TO_TICKS(500)); // brief delay in case of SD card removal reboot
     gpio_install_isr_service(0); // BEFORE GPIO INIT
-
+    esp_read_mac(esp_mac_addr, ESP_MAC_ADDR_SIZE);
     my_rotary_encoder_init();
     switch_init();
     oled_init();
