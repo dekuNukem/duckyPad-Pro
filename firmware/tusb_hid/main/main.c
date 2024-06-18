@@ -51,7 +51,7 @@ void app_main(void)
         error_loop();
     }
 
-    goto_next_profile();
+    profile_init();
 
     while(1)
     {

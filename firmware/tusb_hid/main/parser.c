@@ -72,13 +72,13 @@ uint8_t load_settings(dp_global_settings* dps)
 
 const char stat_last_used_profile[] = "lp ";
 // 0 = error?
-uint8_t get_last_used_profile(void)
+int8_t get_last_used_profile(void)
 {
-  uint8_t ret = 0;
+  int8_t ret = 0;
 
   FILE *sd_file = fopen("/sdcard/dp_stats.txt", "r");
   if(sd_file == NULL)
-    return 1;
+    return -1;
 
   memset(temp_buf, 0, TEMP_BUFSIZE);
   while(fgets(temp_buf, TEMP_BUFSIZE, sd_file))
@@ -88,7 +88,7 @@ uint8_t get_last_used_profile(void)
   }
 
   if(ret >= MAX_PROFILES)
-    ret = 0;
+    ret = -2;
 
   fclose(sd_file);
   return ret;
@@ -330,7 +330,11 @@ void goto_prev_profile(void)
 
 void profile_init(void)
 {
-
+  int8_t last_profile = get_last_used_profile();
+  if(last_profile < 0)
+    goto_next_profile();
+  else
+    goto_profile(last_profile);
 }
 
 void mytest(void)
