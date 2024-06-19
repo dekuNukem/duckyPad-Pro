@@ -14,7 +14,7 @@
 #include "profiles.h"
 #include "ssd1306.h"
 #include "esp_mac.h"
-
+#include "keypress_task.h"
 
 uint8_t fw_version_major = 0;
 uint8_t fw_version_minor = 0;
