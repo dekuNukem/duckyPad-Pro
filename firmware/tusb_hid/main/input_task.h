@@ -58,12 +58,13 @@ void switch_init(void);
 void my_rotary_encoder_init(void);
 void get_rc(void);
 void input_test(void);
-void kb_scan_task(void);
+void kb_scan_task(void *dummy);
 uint8_t rowcol_to_index(uint8_t row, uint8_t col);
 
 #define SW_SCAN_TASK_STACK_SIZE 2048
 
 extern QueueHandle_t rotary_encoder_event_queue;
+extern QueueHandle_t switch_event_queue;
 
 #ifdef __cplusplus
 }

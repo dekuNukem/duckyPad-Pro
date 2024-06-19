@@ -78,7 +78,7 @@ void sw_matrix_col_reset(void)
 	gpio_set_level(SWM_COL3_GPIO, 0);
 }
 
-void kb_scan_task(void)
+void kb_scan_task(void *dummy)
 {
 	while(1)
 	{

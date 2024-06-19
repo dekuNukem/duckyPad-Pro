@@ -42,6 +42,7 @@
     "fstream": "c",
     "typeinfo": "c",
     "chrono": "c",
-    "stat.h": "c"
+    "stat.h": "c",
+    "queue.h": "c"
   }
 }

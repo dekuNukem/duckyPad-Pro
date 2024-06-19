@@ -75,7 +75,7 @@ typedef struct
 {
     rotary_encoder_position_t position;    ///< Numerical position since reset. This value increments on clockwise rotation, and decrements on counter-clockewise rotation. Counts full or half steps depending on mode. Set to zero on reset.
     rotary_encoder_direction_t direction;  ///< Direction of last movement. Set to NOT_SET on reset.
-    uint8_t id
+    uint8_t id;
 } rotary_encoder_state_t;
 
 /**
@@ -90,7 +90,7 @@ typedef struct
     const table_row_t * table;              ///< Pointer to active state transition table
     uint8_t table_state;                    ///< Internal state
     volatile rotary_encoder_state_t state;  ///< Device state
-    uint8_t id                          ///< Device ID, added by dekuNukem may 2024
+    uint8_t id;                          ///< Device ID, added by dekuNukem may 2024
 } rotary_encoder_info_t;
 
 /**

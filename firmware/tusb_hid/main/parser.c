@@ -16,7 +16,7 @@
 #include "shared.h"
 #include "input_task.h"
 #include "ui_task.h"
-
+#include "neopixel_task.h"
 
 #define NEXT_PROFILE 0
 #define PREV_PROFILE 1
@@ -314,6 +314,7 @@ void goto_profile(uint8_t profile_number)
   draw_profile(&all_profile_info[profile_number]);
   save_current_profile(profile_number);
   current_profile_number = profile_number;
+  redraw_bg(profile_number);
   // reset_hold_cache();
 }
 

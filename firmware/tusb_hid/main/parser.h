@@ -38,8 +38,9 @@ typedef struct
   uint8_t dim_unused_keys;
 } profile_info;
 
-extern profile_info current_profile_info;
+extern profile_info all_profile_info[MAX_PROFILES];
 extern dp_global_settings dp_settings;
+extern uint8_t current_profile_number;
 
 uint8_t load_settings(dp_global_settings* dps);
 void mytest();

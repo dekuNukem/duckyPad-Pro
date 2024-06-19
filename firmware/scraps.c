@@ -1,6 +1,8 @@
   printf("goto_profile: %d\n", profile_number);
-
-
+printf("lsa %d %d %f %d %f\n", i, dest_color[i], anime_struct->current_color[i], durations_frames, anime_struct->step[i]);
+    printf("000 %d %ld\n", idx, current_frame);
+    printf("fc %ld\n", frame_counter);
+led_start_animation(&neo_anime[sw_number], color_red, ANIMATION_CROSS_FADE, 70);
 void print_nomemory(void)
 {
     ssd1306_Fill(Black);
