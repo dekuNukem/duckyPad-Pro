@@ -13,7 +13,26 @@ if os.path.isdir(root_name):
 os.mkdir(root_name)
 
 color_pool = [8, 16, 32, 64]
-word_list = ['indication', 'ambition', 'height', 'pie', 'protection', 'perception', 'selection', 'platform', 'garbage', 'interaction', 'intention', 'organization', 'gate', 'alcohol', 'nature', 'client', 'sample', 'poem', 'player', 'boyfriend', 'injury', 'inflation', 'championship', 'nation', 'wife', 'atmosphere', 'ratio', 'tea', 'mood', 'freedom', 'cousin', 'union', 'climate', 'growth', 'revolution', 'map', 'introduction', 'story', 'percentage', 'obligation', 'debt', 'drawing', 'patience', 'message', 'history', 'driver', 'football', 'cigarette', 'charity', 'cell', 'emphasis', 'idea', 'refrigerator', 'office', 'interaction', 'video', 'apple', 'knowledge', 'complaint', 'teaching', 'recognition', 'philosophy', 'food', 'girlfriend', 'editor', 'history', 'two', 'explanation', 'estate', 'agency', 'media', 'world', 'beer', 'resolution', 'funeral', 'software', 'paper', 'variation', 'river', 'affair', 'thought', 'dad', 'operation', 'climate', 'injury', 'lake', 'sympathy', 'equipment', 'elevator', 'county', 'committee', 'salad', 'drawing', 'nation', 'ambition', 'night', 'meaning', 'foundation', 'law', 'quantity', 'revolution', 'security', 'income', 'director', 'pollution', 'ambition', 'poetry', 'paper', 'strategy', 'setting', 'power', 'awareness', 'attitude', 'departure', 'philosophy', 'painting', 'church', 'sympathy', 'baseball', 'restaurant', 'difference', 'pizza', 'bonus', 'proposal', 'chemistry', 'fact', 'army', 'winner', 'hat', 'aspect', 'alcohol', 'idea', 'recognition', 'writing', 'poet', 'difficulty', 'year', 'television', 'moment', 'stranger', 'ladder', 'candidate', 'effort', 'cookie', 'heart', 'tradition', 'equipment', 'leader', 'drama', 'disaster', 'insurance', 'aspect', 'platform', 'child', 'ratio', 'wealth', 'way', 'family', 'preference', 'replacement', 'instruction', 'exam', 'finding', 'patience', 'country', 'alcohol', 'discussion', 'drawer', 'coffee', 'context', 'excitement', 'people', 'tooth', 'apartment', 'writing', 'chest', 'bonus', 'refrigerator', 'baseball', 'equipment', 'appearance', 'atmosphere', 'literature', 'grandmother', 'two', 'assumption', 'painting', 'performance', 'ambition', 'cancer', 'policy', 'cheek', 'tennis', 'news', 'resolution', 'penalty', 'library', 'drawing', 'analyst', 'employer']
+word_list = [
+    "bake", "zoom", "lamp", "fish", "rope", "wave", "desk", "jump", "rock", "mint",
+    "flag", "wish", "sock", "farm", "gift", "lamp", "deck", "song", "duck", "tree",
+    "bell", "wind", "fire", "bold", "link", "fist", "pile", "rush", "book", "nest",
+    "dove", "mail", "hunt", "wave", "salt", "leaf", "ring", "horn", "pack", "veil",
+    "fork", "line", "gold", "sail", "clip", "crab", "wolf", "veil", "seem", "clay",
+    "cat", "dog", "pig", "bat", "rat", "cow", "bee", "ant", "owl", "hen",
+    "fox", "sun", "car", "bus", "van", "map", "pen", "box", "cup", "key",
+    "top", "hat", "log", "web", "net", "zip", "fan", "jam", "pot", "pan",
+    "bag", "rug", "wig", "lip", "cap", "tip", "toy", "gum", "rod", "kit",
+    "cut", "mud", "dot", "bay", "bud", "tap", "pop", "fin", "paw", "bed",
+    "apple", "bread", "crisp", "dance", "eagle", "flame", "grape", "haste", "ivory", "jelly",
+    "knack", "lemon", "magic", "noble", "ocean", "pearl", "quilt", "roast", "shade", "twist",
+    "umbra", "valve", "whale", "xenon", "yacht", "zebra", "brush", "charm", "drift", "eager",
+    "frost", "globe", "hover", "index", "jolly", "kneel", "lodge", "mango", "niche", "opera",
+    "piano", "quark", "rider", "sheep", "tower", "ultra", "vivid", "waltz", "xerox", "youth",
+    "am", "an", "as", "at", "be", "by", "do", "go", "he", "if",
+    "in", "is", "it", "me", "my", "no", "of", "on", "or", "so",
+]
+
 word_list = list(set(word_list))
 
 def get_random_name():
@@ -34,10 +53,12 @@ for x in range(3, profile_number + 1):
 	config_name = os.path.join(profile_dir_name, 'config.txt')
 	config_content = ''
 	for y in range(1, 16):
-		config_content += 'z' + str(y) + ' ' + get_random_name()[:7] + "\n"
+		config_content += 'SWNAMEFL_' + str(y) + ' ' + get_random_name()[:5] + "\n"
+		if random.randint(0, 1):
+			config_content += 'SWNAMESL_' + str(y) + ' ' + get_random_name()[:5] + "\n"
 	for y in range(1, 16):
 		config_content += 'SWCOLOR_' + str(y) + ' ' + get_random_colors() + "\n"
-	print(config_content)
+	# print(config_content)
 
 	with open(config_name, 'w') as config_file:
 		config_file.write(config_content)

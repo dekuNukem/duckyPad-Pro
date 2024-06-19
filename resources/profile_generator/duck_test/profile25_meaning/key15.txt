@@ -1,2 +1,0 @@
-STRING client
-ENTER

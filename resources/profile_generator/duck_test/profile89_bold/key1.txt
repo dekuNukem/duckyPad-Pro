@@ -1,0 +1,2 @@
+STRING vivid
+ENTER

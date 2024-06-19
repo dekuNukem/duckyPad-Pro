@@ -1,0 +1,2 @@
+STRING log
+ENTER

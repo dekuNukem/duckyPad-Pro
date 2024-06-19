@@ -1,0 +1,2 @@
+STRING cut
+ENTER

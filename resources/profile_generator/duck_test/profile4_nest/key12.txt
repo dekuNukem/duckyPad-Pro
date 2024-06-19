@@ -1,0 +1,2 @@
+STRING fire
+ENTER

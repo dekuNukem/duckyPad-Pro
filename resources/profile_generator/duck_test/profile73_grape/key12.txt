@@ -1,0 +1,2 @@
+STRING wave
+ENTER
