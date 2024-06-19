@@ -339,7 +339,8 @@ void goto_prev_profile(void)
   {
     if(new_profile_number == 0)
       new_profile_number = MAX_PROFILES - 1;
-    new_profile_number--;
+    else
+      new_profile_number--;
     if(all_profile_info[new_profile_number].is_loaded)
       break;
   }
