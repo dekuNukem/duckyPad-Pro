@@ -355,11 +355,6 @@ void profile_init(void)
     goto_profile(last_profile);
 }
 
-void mytest(void)
-{
-  ;
-}
-
 void error_loop(void)
 {
   while(1)

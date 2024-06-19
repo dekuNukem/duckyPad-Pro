@@ -43,7 +43,6 @@ extern dp_global_settings dp_settings;
 extern uint8_t current_profile_number;
 
 uint8_t load_settings(dp_global_settings* dps);
-void mytest();
 uint8_t scan_profiles();
 void error_loop(void);
 void goto_next_profile(void);
