@@ -1,0 +1,2 @@
+STRING cow
+ENTER

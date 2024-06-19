@@ -127,86 +127,60 @@ void print_noprofile(void)
 #define CELL_LONG_SIDE 32
 #define CELL_SHORT_SIDE 23
 #define TITLE_BAR_HEIGHT 11
-#define CELL_LINE_BUF_SIZE 16
-char cell_temp_buf[CELL_LINE_BUF_SIZE];
-char cell_first_line[CELL_LINE_BUF_SIZE];
-char cell_second_line[CELL_LINE_BUF_SIZE];
 
-void draw_cell_content(uint8_t cell_x, uint8_t cell_y, char* name)
+void draw_cell_content(uint8_t cell_col, uint8_t cell_row, char* first_line, char* second_line)
 {
-    if(name == NULL)
+    if(cell_col >= SW_MATRIX_NUM_COLS || cell_row >= SW_MATRIX_NUM_ROWS)
         return;
-    uint8_t cell_pixel_x = cell_x * CELL_LONG_SIDE;
-    uint8_t cell_pixel_y = cell_y * CELL_SHORT_SIDE + TITLE_BAR_HEIGHT + 1;
+    uint8_t cell_pixel_x = cell_col * CELL_LONG_SIDE;
+    uint8_t cell_pixel_y = cell_row * CELL_SHORT_SIDE + TITLE_BAR_HEIGHT + 1;
     
-    uint8_t str_size = strlen(name);
-    if(str_size == 0)
+    uint8_t first_line_size = strlen(first_line);
+    uint8_t second_line_size = strlen(second_line);
+
+    if(first_line_size == 0)
         return;
-    if(str_size > 10)
-        str_size = 10;
 
-    memset(cell_temp_buf, 0, CELL_LINE_BUF_SIZE);
-    strncpy(cell_temp_buf, name, str_size);
-    str_size = strlen(cell_temp_buf);
-    // printf("%d %s\n", str_size, cell_temp_buf);
-
-    /*
-    str_size
-    1-4: one line of 7x10
-    5: one line of 6x8
-    6-8: two lines of 7x10
-    9-10: two lines of 6x8
-
-    maybe also add splitting lines based on space character?
-    if keyname has space and both before and after fits on a line, then split at space
-    otherwise split at 4 or 5
-    */
     uint8_t str_pixel_x, str_pixel_y;
-    memset(cell_first_line, 0, CELL_LINE_BUF_SIZE);
-    memset(cell_second_line, 0, CELL_LINE_BUF_SIZE);
-    if(str_size <= 4)
+    if(first_line_size <= 4 && second_line_size == 0)
     {
-        str_pixel_x = cell_pixel_x + (CELL_LONG_SIDE - (str_size * 7)) / 2;
+        str_pixel_x = cell_pixel_x + (CELL_LONG_SIDE - (first_line_size * 7)) / 2;
         str_pixel_y = cell_pixel_y + 6;
         ssd1306_SetCursor(str_pixel_x, str_pixel_y);
-        ssd1306_WriteString(cell_temp_buf, Font_7x10, White);
+        ssd1306_WriteString(first_line, Font_7x10, White);
     }
-    else if(str_size == 5)
+    else if(first_line_size == 5 && second_line_size == 0)
     {
         str_pixel_x = cell_pixel_x + 2;
         str_pixel_y = cell_pixel_y + 7;
         ssd1306_SetCursor(str_pixel_x, str_pixel_y);
-        ssd1306_WriteString(cell_temp_buf, Font_6x8, White);
+        ssd1306_WriteString(first_line, Font_6x8, White);
     }
-    else if(str_size >= 6 && str_size <= 8)
+    else if(first_line_size <= 4 && second_line_size <= 4)
     {
-        strncpy(cell_first_line, cell_temp_buf, 4);
-        strncpy(cell_second_line, cell_temp_buf+4, 4);
         // first line
-        str_pixel_x = cell_pixel_x + 2;
+        str_pixel_x = cell_pixel_x + (CELL_LONG_SIDE - (first_line_size * 7)) / 2;
+        str_pixel_y = cell_pixel_y + 1;
+        ssd1306_SetCursor(str_pixel_x, str_pixel_y);
+        ssd1306_WriteString(first_line, Font_7x10, White);
+        // second line
+        str_pixel_x = cell_pixel_x + (CELL_LONG_SIDE - (second_line_size * 7)) / 2;
+        str_pixel_y = cell_pixel_y + 1 + 10;
+        ssd1306_SetCursor(str_pixel_x, str_pixel_y);
+        ssd1306_WriteString(second_line, Font_7x10, White);
+    }
+    else
+    {
+        // first line
+        str_pixel_x = cell_pixel_x + 1 + (CELL_LONG_SIDE - (first_line_size * 6)) / 2;
         str_pixel_y = cell_pixel_y + 2;
         ssd1306_SetCursor(str_pixel_x, str_pixel_y);
-        ssd1306_WriteString(cell_first_line, Font_7x10, White);
+        ssd1306_WriteString(first_line, Font_6x8, White);
         // second line
-        str_pixel_x = cell_pixel_x + (CELL_LONG_SIDE - (strlen(cell_second_line) * 7)) / 2;
-        str_pixel_y = cell_pixel_y + 2 + 10;
-        ssd1306_SetCursor(str_pixel_x, str_pixel_y);
-        ssd1306_WriteString(cell_second_line, Font_7x10, White);
-    }
-    else if(str_size >= 9)
-    {
-        strncpy(cell_first_line, cell_temp_buf, 5);
-        strncpy(cell_second_line, cell_temp_buf+5, 5);
-        // first line
-        str_pixel_x = cell_pixel_x + 2;
-        str_pixel_y = cell_pixel_y + 3;
-        ssd1306_SetCursor(str_pixel_x, str_pixel_y);
-        ssd1306_WriteString(cell_first_line, Font_6x8, White);
-        // second line
-        str_pixel_x = cell_pixel_x + 1 + (CELL_LONG_SIDE - (strlen(cell_second_line) * 6)) / 2;
+        str_pixel_x = cell_pixel_x + 1 + (CELL_LONG_SIDE - (second_line_size * 6)) / 2;
         str_pixel_y = cell_pixel_y + 3 + 8;
         ssd1306_SetCursor(str_pixel_x, str_pixel_y);
-        ssd1306_WriteString(cell_second_line, Font_6x8, White);
+        ssd1306_WriteString(second_line, Font_6x8, White);
     }
 }
 
@@ -220,28 +194,26 @@ void draw_profile(profile_info* this_profile)
 	
   ssd1306_Line(0,10,127,10,White); // title solid line
 
-   for (size_t rrr = 0; rrr < SW_MATRIX_NUM_ROWS; rrr++)
+  for (size_t rrr = 0; rrr < SW_MATRIX_NUM_ROWS; rrr++)
   {
     for (size_t ccc = 0; ccc < SW_MATRIX_NUM_COLS; ccc++)
     {
       uint8_t this_sw_index = rowcol_to_index(rrr, ccc);
-      memset(oled_line_buf, 0, OLED_LINE_BUF_SIZE);
-      sprintf(oled_line_buf, "-");
-      if(strlen(this_profile->sw_name[this_sw_index]))
-        sprintf(oled_line_buf, "%s", this_profile->sw_name[this_sw_index]);
-      draw_cell_content(ccc, rrr, oled_line_buf);
+      draw_cell_content(ccc, rrr, this_profile->sw_name_firstline[this_sw_index], this_profile->sw_name_secondline[this_sw_index]);
     }
   }
   
-  ssd1306_dashed_line(0,33,127,33,White); // horizontal lines
-  ssd1306_dashed_line(0,57,127,57,White);
-  ssd1306_dashed_line(0,80,127,80,White);
-  ssd1306_dashed_line(0,103,127,103,White);
-  ssd1306_dashed_line(0,127,127,127,White);
+  ssd1306_Line(0,33,127,33,White); // horizontal lines
+  ssd1306_Line(0,57,127,57,White);
+  ssd1306_Line(0,80,127,80,White);
+  ssd1306_Line(0,103,127,103,White);
+  ssd1306_Line(0,127,127,127,White);
 
-  ssd1306_dashed_line(32,10,32,127,White); // vertical lines
-  ssd1306_dashed_line(64,10,64,127,White);
-  ssd1306_dashed_line(96,10,96,127,White);
+  ssd1306_Line(32,10,32,127,White); // vertical lines
+  ssd1306_Line(64,10,64,127,White);
+  ssd1306_Line(96,10,96,127,White);
+
+  //ssd1306_dashed_line
 
   ssd1306_UpdateScreen();
 }

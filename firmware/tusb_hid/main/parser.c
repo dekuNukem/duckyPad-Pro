@@ -160,6 +160,9 @@ void load_profile_info(void)
   closedir(d);
 }
 
+const char cmd_sw_name_firstline[] = "SWNAMEFL_";
+const char cmd_sw_name_secondline[] = "SWNAMESL_";
+
 void parse_profile_config_line(char* this_line, profile_info* this_profile)
 {
   char* msg_end = this_line + strlen(this_line);
@@ -167,19 +170,33 @@ void parse_profile_config_line(char* this_line, profile_info* this_profile)
   if(this_line == NULL || strlen(this_line) <= 2)
     return;
 
-  if(this_line[0] == 'z')
+  if(strncmp(cmd_sw_name_firstline, this_line, strlen(cmd_sw_name_firstline)) == 0)
   {
-    uint8_t this_key_index = atoi(this_line+1);
+    uint8_t this_key_index = atoi(this_line + strlen(cmd_sw_name_firstline));
     if(this_key_index == 0)
       return;
     this_key_index--;
     if(this_key_index >= TOTAL_OBSW_COUNT)
       return;
-    memset(this_profile->sw_name[this_key_index], 0, KEYNAME_SIZE);
+    memset(this_profile->sw_name_firstline[this_key_index], 0, KEYNAME_SIZE);
     char* kn_start = goto_next_arg(this_line, msg_end);
     if(kn_start == NULL)
       return;
-    strcpy(this_profile->sw_name[this_key_index], kn_start);
+    strncpy(this_profile->sw_name_firstline[this_key_index], kn_start, KEYNAME_SIZE-1);
+  }
+  else if(strncmp(cmd_sw_name_secondline, this_line, strlen(cmd_sw_name_secondline)) == 0)
+  {
+    uint8_t this_key_index = atoi(this_line + strlen(cmd_sw_name_secondline));
+    if(this_key_index == 0)
+      return;
+    this_key_index--;
+    if(this_key_index >= TOTAL_OBSW_COUNT)
+      return;
+    memset(this_profile->sw_name_secondline[this_key_index], 0, KEYNAME_SIZE);
+    char* kn_start = goto_next_arg(this_line, msg_end);
+    if(kn_start == NULL)
+      return;
+    strncpy(this_profile->sw_name_secondline[this_key_index], kn_start, KEYNAME_SIZE-1);
   }
   else if(strncmp(cmd_BG_COLOR, this_line, strlen(cmd_BG_COLOR)) == 0) // order is important! BG, SW, and KD
   {

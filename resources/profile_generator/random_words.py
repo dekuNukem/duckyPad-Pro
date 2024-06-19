@@ -5,6 +5,7 @@ import shutil
 import random
 
 profile_number = 99
+MAX_SW_COUNT = 20
 
 root_name = 'duck_test'
 
@@ -45,25 +46,25 @@ def get_random_colors():
 	return ret
 
 root_dir = os.path.join(".", root_name)
-for x in range(3, profile_number + 1):
+for x in range(0, profile_number + 1):
 	if random.randint(0, 1):
 		continue
 	profile_dir_name = os.path.join(root_dir, 'profile' + str(x) + "_" + get_random_name()[:13])
 	os.mkdir(profile_dir_name)
 	config_name = os.path.join(profile_dir_name, 'config.txt')
 	config_content = ''
-	for y in range(1, 16):
+	for y in range(1, MAX_SW_COUNT+1):
 		config_content += 'SWNAMEFL_' + str(y) + ' ' + get_random_name()[:5] + "\n"
 		if random.randint(0, 1):
 			config_content += 'SWNAMESL_' + str(y) + ' ' + get_random_name()[:5] + "\n"
-	for y in range(1, 16):
+	for y in range(1, MAX_SW_COUNT+1):
 		config_content += 'SWCOLOR_' + str(y) + ' ' + get_random_colors() + "\n"
 	# print(config_content)
 
 	with open(config_name, 'w') as config_file:
 		config_file.write(config_content)
 
-	for y in range(1, 16):
+	for y in range(1, MAX_SW_COUNT+1):
 		script_name = os.path.join(profile_dir_name, 'key' + str(y) + '.txt')
 		script_content = 'STRING ' + get_random_name() + '\nENTER\n'
 		with open(script_name, 'w') as script_file:
