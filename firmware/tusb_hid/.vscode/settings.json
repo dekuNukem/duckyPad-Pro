@@ -43,6 +43,7 @@
     "typeinfo": "c",
     "chrono": "c",
     "stat.h": "c",
-    "queue.h": "c"
+    "queue.h": "c",
+    "profiles.h": "c"
   }
 }

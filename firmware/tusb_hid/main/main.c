@@ -11,7 +11,7 @@
 #include "ui_task.h"
 #include "neopixel_task.h"
 #include "shared.h"
-#include "parser.h"
+#include "profiles.h"
 #include "ssd1306.h"
 #include "esp_mac.h"
 

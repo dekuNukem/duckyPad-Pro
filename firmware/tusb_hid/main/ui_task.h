@@ -6,8 +6,7 @@
 #endif 
 
 #include "driver/spi_master.h"
-#include "parser.h"
-
+#include "profiles.h"
 
 #define OLED_MOSI 10
 #define OLED_CS 14

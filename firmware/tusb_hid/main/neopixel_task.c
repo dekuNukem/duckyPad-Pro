@@ -3,7 +3,7 @@
 #include "freertos/FreeRTOS.h"
 #include "freertos/task.h"
 #include "esp_log.h"
-#include "parser.h"
+#include "profiles.h"
 
 const char *LED_TAG = "LED_TASK";
 
@@ -15,7 +15,7 @@ uint8_t red_buf[NEOPIXEL_COUNT];
 uint8_t green_buf[NEOPIXEL_COUNT];
 uint8_t blue_buf[NEOPIXEL_COUNT];
 led_animation neo_anime[NEOPIXEL_COUNT];
-uint8_t color_red[THREE] = {64 , 64, 64};
+uint8_t color_red[THREE] = {64 , 0, 0};
 uint8_t color_black[THREE] = {0, 0, 0};
 int8_t brightness_index = BRIGHTNESS_LEVELS - 1;
 uint8_t brightness_values[BRIGHTNESS_LEVELS] = {0, 20, 50, 70, 100};
