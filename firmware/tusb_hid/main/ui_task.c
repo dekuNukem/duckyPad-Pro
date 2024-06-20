@@ -8,6 +8,7 @@
 #include "freertos/FreeRTOS.h"
 #include "freertos/task.h"
 #include "input_task.h"
+#include "neopixel_task.h"
 
 static const char *TAG = "UI";
 spi_device_handle_t my_spi_handle;
@@ -218,7 +219,7 @@ void draw_profile(profile_info* this_profile)
   ssd1306_UpdateScreen();
 }
 
-void draw_settings(void)
+void draw_settings(dp_global_settings *dps)
 {
   ssd1306_Fill(Black);
 
@@ -230,7 +231,7 @@ void draw_settings(void)
   ssd1306_Line(0,10,128,10,White);
 
   memset(oled_line_buf, 0, OLED_LINE_BUF_SIZE);
-  sprintf(oled_line_buf, "1:Brightness 100%%");
+  sprintf(oled_line_buf, "1:Brightness %d%%", brightness_index_to_values_lookup[dps->brightness_index]);
   ssd1306_SetCursor(0, 15);
   ssd1306_WriteString(oled_line_buf, Font_7x10, White);
 
@@ -245,7 +246,7 @@ void draw_settings(void)
   ssd1306_WriteString(oled_line_buf, Font_7x10, White);
 
   memset(oled_line_buf, 0, OLED_LINE_BUF_SIZE);
-  sprintf(oled_line_buf, "english_US");
+  sprintf(oled_line_buf, "%s", dps->current_kb_layout);
   ssd1306_SetCursor(center_line(strlen(oled_line_buf), 7, SSD1306_WIDTH), 57);
   ssd1306_WriteString(oled_line_buf, Font_7x10, White);
 

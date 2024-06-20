@@ -12,7 +12,7 @@
 #define NEOPIXEL_COUNT MECH_OBSW_COUNT
 #define NEOPIXEL_PIN 46
 
-#define BRIGHTNESS_LEVELS 5
+#define BRIGHTNESS_LEVEL_SIZE 5
 #define ANIMATION_NONE 0
 #define ANIMATION_CROSS_FADE 1
 
@@ -41,7 +41,7 @@ void redraw_bg(uint8_t profile_number);
 void play_keydown_animation(uint8_t profile_number, uint8_t sw_number);
 void play_keyup_animation(uint8_t profile_number, uint8_t sw_number);
 
-extern uint8_t brightness_values[BRIGHTNESS_LEVELS];
+extern uint8_t brightness_index_to_values_lookup[BRIGHTNESS_LEVEL_SIZE];
 
 #ifdef __cplusplus
 }

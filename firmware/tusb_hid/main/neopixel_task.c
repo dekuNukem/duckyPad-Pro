@@ -17,7 +17,7 @@ uint8_t blue_buf[NEOPIXEL_COUNT];
 led_animation neo_anime[NEOPIXEL_COUNT];
 uint8_t color_red[THREE] = {64 , 0, 0};
 uint8_t color_black[THREE] = {0, 0, 0};
-uint8_t brightness_values[BRIGHTNESS_LEVELS] = {0, 20, 50, 70, 100};
+uint8_t brightness_index_to_values_lookup[BRIGHTNESS_LEVEL_SIZE] = {0, 20, 50, 70, 100};
 
 void set_pixel_3color(uint8_t which, uint8_t r, uint8_t g, uint8_t b)
 {
@@ -45,7 +45,7 @@ void redraw_bg(uint8_t profile_number)
     neo_anime[i].animation_type = ANIMATION_NONE;
     set_pixel_color(i, all_profile_info[profile_number].sw_color[i]);
   }
-  neopixel_show(red_buf, green_buf, blue_buf, brightness_values[dp_settings.brightness_index]);
+  neopixel_show(red_buf, green_buf, blue_buf, brightness_index_to_values_lookup[dp_settings.brightness_index]);
 }
 
 void neopixel_init(void)
@@ -87,7 +87,7 @@ void play_keydown_animation(uint8_t profile_number, uint8_t sw_number)
   neo_anime[sw_number].target_color[0] = all_profile_info[profile_number].sw_activation_color[sw_number][0];
   neo_anime[sw_number].target_color[1] = all_profile_info[profile_number].sw_activation_color[sw_number][1];
   neo_anime[sw_number].target_color[2] = all_profile_info[profile_number].sw_activation_color[sw_number][2];
-  neopixel_show(red_buf, green_buf, blue_buf, brightness_values[dp_settings.brightness_index]);
+  neopixel_show(red_buf, green_buf, blue_buf, brightness_index_to_values_lookup[dp_settings.brightness_index]);
 }
 
 void play_keyup_animation(uint8_t profile_number, uint8_t sw_number)
@@ -130,7 +130,7 @@ void led_animation_handler(void)
     set_pixel_3color(idx, (uint8_t)neo_anime[idx].current_color[0], (uint8_t)neo_anime[idx].current_color[1], (uint8_t)neo_anime[idx].current_color[2]);
   }
   if(needs_update)
-    neopixel_show(red_buf, green_buf, blue_buf, brightness_values[dp_settings.brightness_index]);
+    neopixel_show(red_buf, green_buf, blue_buf, brightness_index_to_values_lookup[dp_settings.brightness_index]);
 }
 
 void led_animation_init()

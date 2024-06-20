@@ -1,3 +1,5 @@
+brightness_values
+
 uint8_t save_settings(dp_global_settings* dps)
 {
   memset(temp_buf, 0, TEMP_BUFSIZE);

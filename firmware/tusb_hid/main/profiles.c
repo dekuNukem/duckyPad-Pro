@@ -45,7 +45,7 @@ uint8_t load_settings(dp_global_settings* dps)
     return 1;
 
   memset(dps, 0, sizeof(*dps));
-  dps->brightness_index = BRIGHTNESS_LEVELS - 1;
+  dps->brightness_index = BRIGHTNESS_LEVEL_SIZE - 1;
   dps->sleep_after_ms = 300*1000;
 
   FILE *sd_file = fopen(settings_file_path, "r");
@@ -61,8 +61,8 @@ uint8_t load_settings(dp_global_settings* dps)
       dps->sleep_after_ms = atoi(temp_buf + strlen(config_sleep_after_min)) * 60000;
     if(strncmp(temp_buf, config_brightness_index, strlen(config_brightness_index)) == 0)
       dps->brightness_index = atoi(temp_buf + strlen(config_brightness_index));
-    if(dps->brightness_index >= BRIGHTNESS_LEVELS)
-      dps->brightness_index = BRIGHTNESS_LEVELS - 1;
+    if(dps->brightness_index >= BRIGHTNESS_LEVEL_SIZE)
+      dps->brightness_index = BRIGHTNESS_LEVEL_SIZE - 1;
     if(strncmp(temp_buf, config_keyboard_layout, strlen(config_keyboard_layout)) == 0)
     {
       strcpy(dps->current_kb_layout, temp_buf + strlen(config_keyboard_layout));

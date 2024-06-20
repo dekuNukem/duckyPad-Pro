@@ -26,6 +26,30 @@ void handle_keyup(uint8_t swid, uint8_t event_type)
   play_keyup_animation(current_profile_number, swid);
 }
 
+void settings_ui(void)
+{
+  draw_settings(&dp_settings);
+  while(1)
+  {
+    switch_event_t sw_event = { 0 };
+    if (xQueueReceive(switch_event_queue, &sw_event, 0) == pdTRUE)
+    {
+      printf("settings_ui id: %d type: %d\n", sw_event.id, sw_event.type);
+      if(sw_event.id == 0 && sw_event.type == SW_EVENT_SHORT_PRESS)
+      {
+        dp_settings.brightness_index = (dp_settings.brightness_index + 1) % BRIGHTNESS_LEVEL_SIZE;
+        draw_settings(&dp_settings);
+      }
+
+      if(sw_event.id == 20 && sw_event.type == SW_EVENT_SHORT_PRESS)
+      {
+        return;
+      }
+    }
+    vTaskDelay(pdMS_TO_TICKS(20));
+  }
+}
+
 void handle_keyevent(uint8_t swid, uint8_t event_type)
 {
   if(swid == SW_PLUS && event_type == SW_EVENT_RELEASE)
@@ -40,7 +64,8 @@ void handle_keyevent(uint8_t swid, uint8_t event_type)
   }
   if((swid == SW_PLUS || swid == SW_MINUS) && event_type == SW_EVENT_LONG_PRESS)
   {
-    draw_settings();
+    settings_ui();
+    redraw_bg(current_profile_number);
     return;
   }
   
