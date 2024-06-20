@@ -43,6 +43,9 @@ void handle_keyevent(uint8_t swid, uint8_t event_type)
     printf("GOING TO SETTINGS\n");
     return;
   }
+  
+  if(swid == SW_PLUS || swid == SW_MINUS)
+    return;
 
   if(event_type == SW_EVENT_SHORT_PRESS)
     play_keydown_animation(current_profile_number, swid);
