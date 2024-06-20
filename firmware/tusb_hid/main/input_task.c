@@ -45,6 +45,7 @@ void get_rc(void)
 
 uint8_t this_sw_state[TOTAL_OBSW_COUNT];
 uint8_t last_sw_state[TOTAL_OBSW_COUNT];
+uint32_t last_press_ts[TOTAL_OBSW_COUNT];
 
 uint8_t rowcol_to_index(uint8_t row, uint8_t col)
 {
@@ -60,14 +61,6 @@ void scan_row(uint8_t *sw_buf, uint8_t this_col)
 	sw_buf[rowcol_to_index(2, this_col)] = gpio_get_level(SWM_ROW2_GPIO);
 	sw_buf[rowcol_to_index(3, this_col)] = gpio_get_level(SWM_ROW3_GPIO);
 	sw_buf[rowcol_to_index(4, this_col)] = gpio_get_level(SWM_ROW4_GPIO);
-}
-
-void input_test(void)
-{
-	// printf("hello world\n");
-	switch_event_t this_event;
-	if (xQueueReceive(switch_event_queue, &this_event, 0) == pdTRUE)
-		printf("id: %d lvl: %d\n", this_event.id, this_event.level);
 }
 
 void sw_matrix_col_reset(void)
@@ -125,18 +118,31 @@ void kb_scan_task(void *dummy)
 		{
 			if(this_sw_state[i] == 1 && last_sw_state[i] == 0)
 			{
-				switch_event_t sw_event = {
+				switch_event_t sw_event = 
+				{
 					.id = i,
-					.level = 1,
+					.type = SW_EVENT_SHORT_PRESS,
 				};
+				last_press_ts[i] = millis();
 				xQueueSend(switch_event_queue, &sw_event, NULL);
 			}
 			else if(this_sw_state[i] == 0 && last_sw_state[i] == 1)
 			{
-				switch_event_t sw_event = {
+				switch_event_t sw_event = 
+				{
 					.id = i,
-					.level = 0,
+					.type = SW_EVENT_RELEASE,
 				};
+				xQueueSend(switch_event_queue, &sw_event, NULL);
+			}
+			else if(this_sw_state[i] == 1 && last_press_ts[i] != MY_UINT32_MAX && millis() - last_press_ts[i] > 500)
+			{
+				switch_event_t sw_event = 
+				{
+					.id = i,
+					.type = SW_EVENT_LONG_PRESS,
+				};
+				last_press_ts[i] = MY_UINT32_MAX;
 				xQueueSend(switch_event_queue, &sw_event, NULL);
 			}
 		}

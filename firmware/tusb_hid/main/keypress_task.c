@@ -16,39 +16,38 @@
 #include "esp_mac.h"
 #include "keypress_task.h"
 
-uint32_t last_plus_button_press, last_minus_button_press;
-
 void handle_keydown(uint8_t swid)
 {
-  if(swid == SW_PLUS)
-  {
-    last_plus_button_press = millis();
-    return;
-  }
-  if(swid == SW_MINUS)
-  {
-    last_minus_button_press = millis();
-    return;
-  }
   play_keydown_animation(current_profile_number, swid);
 }
 
-void handle_keyup(uint8_t swid)
+void handle_keyup(uint8_t swid, uint8_t event_type)
 {
-  if(swid == SW_PLUS)
+  play_keyup_animation(current_profile_number, swid);
+}
+
+void handle_keyevent(uint8_t swid, uint8_t event_type)
+{
+  if(swid == SW_PLUS && event_type == SW_EVENT_RELEASE)
   {
-    printf("pp %ld\n", millis() - last_plus_button_press);
     goto_next_profile();
     return;
   }
-
-  if(swid == SW_MINUS)
+  if(swid == SW_MINUS && event_type == SW_EVENT_RELEASE)
   {
     goto_prev_profile();
     return;
   }
-  
-  play_keyup_animation(current_profile_number, swid);
+  if((swid == SW_PLUS || swid == SW_MINUS) && event_type == SW_EVENT_LONG_PRESS)
+  {
+    printf("GOING TO SETTINGS\n");
+    return;
+  }
+
+  if(event_type == SW_EVENT_SHORT_PRESS)
+    play_keydown_animation(current_profile_number, swid);
+  else
+    play_keyup_animation(current_profile_number, swid);
 }
 
 void keypress_task(void *dummy)
@@ -68,11 +67,8 @@ void keypress_task(void *dummy)
     switch_event_t sw_event = { 0 };
     if (xQueueReceive(switch_event_queue, &sw_event, 0) == pdTRUE)
     {
-      printf("id: %d lvl: %d\n", sw_event.id, sw_event.level);
-      if(sw_event.level)
-        handle_keydown(sw_event.id);
-      else
-        handle_keyup(sw_event.id);
+      printf("id: %d type: %d\n", sw_event.id, sw_event.type);
+      handle_keyevent(sw_event.id, sw_event.type);
     }
     vTaskDelay(pdMS_TO_TICKS(25));
   }

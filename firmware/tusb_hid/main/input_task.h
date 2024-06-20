@@ -48,16 +48,19 @@
 #define SW_RE1 22
 #define SW_RE2 23
 
+#define SW_EVENT_RELEASE 0
+#define SW_EVENT_SHORT_PRESS 1
+#define SW_EVENT_LONG_PRESS 2
+
 typedef struct
 {
     uint8_t id;
-    uint8_t level;
+    uint8_t type;
 } switch_event_t;
 
 void switch_init(void);
 void my_rotary_encoder_init(void);
 void get_rc(void);
-void input_test(void);
 void kb_scan_task(void *dummy);
 uint8_t rowcol_to_index(uint8_t row, uint8_t col);
 
