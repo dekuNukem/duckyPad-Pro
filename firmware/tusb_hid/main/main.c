@@ -54,7 +54,6 @@ void app_main(void)
     }
 
     profile_init();
-
     xTaskCreate(keypress_task, "keypress_task", KEYPRESS_TASK_STACK_SIZE, NULL, 2, NULL);
 
     while(1)

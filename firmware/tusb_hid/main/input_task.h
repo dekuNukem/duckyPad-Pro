@@ -17,17 +17,17 @@
 // 20 mechanical switches, + and - button, 3 for each rotary encoder
 #define TOTAL_OBSW_COUNT (MECH_OBSW_COUNT + 8)
 
-#define SW_PLUS_GPIO GPIO_NUM_18
-#define SW_MINUS_GPIO GPIO_NUM_17
+#define SW_PLUS_GPIO GPIO_NUM_17
+#define SW_MINUS_GPIO GPIO_NUM_18
 #define SW_RE1_GPIO GPIO_NUM_0
 #define SW_RE2_GPIO GPIO_NUM_3
 
 #define SD_CARD_DETECT_GPIO GPIO_NUM_6
 
-#define RE1_A GPIO_NUM_1
-#define RE1_B GPIO_NUM_2
-#define RE2_A GPIO_NUM_4
-#define RE2_B GPIO_NUM_5
+#define RE1_A GPIO_NUM_2
+#define RE1_B GPIO_NUM_1
+#define RE2_A GPIO_NUM_5
+#define RE2_B GPIO_NUM_4
 
 #define SWM_COL0_GPIO GPIO_NUM_42
 #define SWM_COL1_GPIO GPIO_NUM_41
@@ -43,8 +43,8 @@
 #define ROTARY_ENCODER_UPPER 1
 #define ROTARY_ENCODER_LOWER 2
 
-#define SW_PLUS 20
-#define SW_MINUS 21
+#define SW_MINUS 20
+#define SW_PLUS 21
 #define SW_RE1 22
 #define SW_RE2 23
 
