@@ -16,19 +16,39 @@
 #include "esp_mac.h"
 #include "keypress_task.h"
 
+uint32_t last_plus_button_press, last_minus_button_press;
+
 void handle_keydown(uint8_t swid)
 {
+  if(swid == SW_PLUS)
+  {
+    last_plus_button_press = millis();
+    return;
+  }
+  if(swid == SW_MINUS)
+  {
+    last_minus_button_press = millis();
+    return;
+  }
   play_keydown_animation(current_profile_number, swid);
 }
 
 void handle_keyup(uint8_t swid)
 {
   if(swid == SW_PLUS)
+  {
+    printf("pp %ld\n", millis() - last_plus_button_press);
     goto_next_profile();
-  else if(swid == SW_MINUS)
+    return;
+  }
+
+  if(swid == SW_MINUS)
+  {
     goto_prev_profile();
-  else
-    play_keyup_animation(current_profile_number, swid);
+    return;
+  }
+  
+  play_keyup_animation(current_profile_number, swid);
 }
 
 void keypress_task(void *dummy)
@@ -49,7 +69,7 @@ void keypress_task(void *dummy)
     if (xQueueReceive(switch_event_queue, &sw_event, 0) == pdTRUE)
     {
       printf("id: %d lvl: %d\n", sw_event.id, sw_event.level);
-      if(sw_event.level) // key down
+      if(sw_event.level)
         handle_keydown(sw_event.id);
       else
         handle_keyup(sw_event.id);

@@ -9,6 +9,8 @@
 
 #define ESP_MAC_ADDR_SIZE 6
 
+#define millis() pdTICKS_TO_MS(xTaskGetTickCount())
+
 extern uint8_t esp_mac_addr[ESP_MAC_ADDR_SIZE];
 extern uint8_t fw_version_major;
 extern uint8_t fw_version_minor;
