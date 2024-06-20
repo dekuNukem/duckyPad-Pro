@@ -19,6 +19,7 @@ typedef struct
 {
   uint32_t sleep_after_ms;
   uint8_t brightness_index;
+  uint8_t orientation;
   char current_kb_layout[FILENAME_BUFSIZE];
 } dp_global_settings;
 

@@ -21,6 +21,7 @@ void print_nosd(void);
 void print_noprofile(void);
 void print_nomemory(void);
 void draw_profile(profile_info* this_profile);
+void draw_settings(void);
 
 #ifdef __cplusplus
 }

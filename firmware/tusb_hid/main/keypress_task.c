@@ -40,7 +40,7 @@ void handle_keyevent(uint8_t swid, uint8_t event_type)
   }
   if((swid == SW_PLUS || swid == SW_MINUS) && event_type == SW_EVENT_LONG_PRESS)
   {
-    printf("GOING TO SETTINGS\n");
+    draw_settings();
     return;
   }
   

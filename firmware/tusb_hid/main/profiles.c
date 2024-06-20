@@ -21,7 +21,7 @@
 #define NEXT_PROFILE 0
 #define PREV_PROFILE 1
 
-const char config_file_path[] = "/sdcard/dp_settings.txt";
+const char settings_file_path[] = "/sdcard/dp_settings.txt";
 dp_global_settings dp_settings;
 
 char temp_buf[TEMP_BUFSIZE];
@@ -44,7 +44,11 @@ uint8_t load_settings(dp_global_settings* dps)
   if(dps == NULL)
     return 1;
 
-  FILE *sd_file = fopen(config_file_path, "r");
+  memset(dps, 0, sizeof(*dps));
+  dps->brightness_index = BRIGHTNESS_LEVELS - 1;
+  dps->sleep_after_ms = 300*1000;
+
+  FILE *sd_file = fopen(settings_file_path, "r");
   if(sd_file == NULL)
     return 2;
 
@@ -53,7 +57,6 @@ uint8_t load_settings(dp_global_settings* dps)
 
   while(fgets(temp_buf, TEMP_BUFSIZE, sd_file))
   {
-    // printf("tb: %s\n", temp_buf);
     if(strncmp(temp_buf, config_sleep_after_min, strlen(config_sleep_after_min)) == 0)
       dps->sleep_after_ms = atoi(temp_buf + strlen(config_sleep_after_min)) * 60000;
     if(strncmp(temp_buf, config_brightness_index, strlen(config_brightness_index)) == 0)
@@ -66,6 +69,18 @@ uint8_t load_settings(dp_global_settings* dps)
       strip_newline(dps->current_kb_layout, FILENAME_BUFSIZE);
     }
   }
+  fclose(sd_file);
+  return 0;
+}
+
+uint8_t save_settings(dp_global_settings* dps)
+{
+  if(dps == NULL)
+    return 1;
+  FILE *sd_file = fopen(settings_file_path, "w");
+  if(sd_file == NULL)
+    return 2;
+  fprintf(sd_file, "sleep_after_min %ld\nbi %d\nkbl %s\n", dps->sleep_after_ms/60000, dps->brightness_index, dps->current_kb_layout);
   fclose(sd_file);
   return 0;
 }
@@ -316,6 +331,7 @@ void goto_profile(uint8_t profile_number)
   current_profile_number = profile_number;
   redraw_bg(profile_number);
   // reset_hold_cache();
+  save_settings(&dp_settings);
 }
 
 void goto_next_profile(void)

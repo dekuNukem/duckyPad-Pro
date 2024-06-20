@@ -41,6 +41,8 @@ void redraw_bg(uint8_t profile_number);
 void play_keydown_animation(uint8_t profile_number, uint8_t sw_number);
 void play_keyup_animation(uint8_t profile_number, uint8_t sw_number);
 
+extern uint8_t brightness_values[BRIGHTNESS_LEVELS];
+
 #ifdef __cplusplus
 }
 #endif

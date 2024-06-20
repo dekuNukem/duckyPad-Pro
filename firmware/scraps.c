@@ -1,3 +1,23 @@
+uint8_t save_settings(dp_global_settings* dps)
+{
+  memset(temp_buf, 0, TEMP_BUFSIZE);
+  sprintf(temp_buf, "sleep_after_min %ld\nbi %d\nkbl %s\n", dps->sleep_after_ms/60000, dps->brightness_index, dps->current_kb_layout);
+  printf("%s", temp_buf);
+  return 0;
+}
+
+  void save_settings(void)
+{
+  if(f_open(&sd_file, "dp_settings.txt", FA_CREATE_ALWAYS | FA_WRITE) != 0)
+    goto ss_end;
+  memset(temp_buf, 0, PATH_SIZE);
+  sprintf(temp_buf, "sleep_after_min %d\nbi %d\nkbl %s\n", dp_settings.sleep_after_ms/60000, brightness_index, curr_kb_layout);
+  f_write(&sd_file, temp_buf, strlen(temp_buf), &bytes_read);
+  ss_end:
+  f_close(&sd_file);
+}
+
+
   printf("goto_profile: %d\n", profile_number);
 printf("lsa %d %d %f %d %f\n", i, dest_color[i], anime_struct->current_color[i], durations_frames, anime_struct->step[i]);
     printf("000 %d %ld\n", idx, current_frame);
