@@ -47,10 +47,7 @@ void neopixel_show(uint8_t* red, uint8_t* green, uint8_t* blue, uint8_t brightne
 void neopixel_draw_current_buffer(void)
 {
   while(is_neopixel_busy)
-  {
-    printf("NEOPIXEL BUSY!!!!!!!!\n");
-    vTaskDelay(pdMS_TO_TICKS(ANIMATION_FREQ_MS));
-  }
+    vTaskDelay(pdMS_TO_TICKS(1));
   neopixel_show(red_buf, green_buf, blue_buf, brightness_index_to_percent_lookup[dp_settings.brightness_index]);
 }
 
