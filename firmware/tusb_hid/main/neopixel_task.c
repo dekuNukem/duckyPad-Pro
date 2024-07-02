@@ -47,15 +47,13 @@ void neopixel_show(uint8_t* red, uint8_t* green, uint8_t* blue, uint8_t brightne
 
 void neopixel_draw_current_buffer(void)
 {
-  xSemaphoreTake(neopixel_mutex, pdMS_TO_TICKS(1000));
-  neopixel_show(red_buf, green_buf, blue_buf, brightness_index_to_percent_lookup[dp_settings.brightness_index]);
-  xSemaphoreGive(neopixel_mutex);
-}
-
-// higher priority, doesn't check
-void neopixel_draw_current_buffer_from_inside_task(void)
-{
-  neopixel_show(red_buf, green_buf, blue_buf, brightness_index_to_percent_lookup[dp_settings.brightness_index]);
+  if(xSemaphoreTake(neopixel_mutex, pdMS_TO_TICKS(NEOPIXEL_MUTEX_TIMEOUT_MS)))
+  {
+    neopixel_show(red_buf, green_buf, blue_buf, brightness_index_to_percent_lookup[dp_settings.brightness_index]);
+    xSemaphoreGive(neopixel_mutex);
+    return;
+  }
+  printf("neopixel_draw_current_buffer: unable to obtain mutex\n");
 }
 
 void redraw_bg(uint8_t profile_number)
@@ -147,10 +145,9 @@ void led_animation_handler(void)
     needs_update = 1;
     set_pixel_3color(idx, (uint8_t)neo_anime[idx].current_color[0], (uint8_t)neo_anime[idx].current_color[1], (uint8_t)neo_anime[idx].current_color[2]);
   }
-  if(needs_update)
+  if(needs_update && xSemaphoreTake(neopixel_mutex, pdMS_TO_TICKS(NEOPIXEL_MUTEX_TIMEOUT_MS)))
   {
-    xSemaphoreTake(neopixel_mutex, pdMS_TO_TICKS(1000));
-    neopixel_draw_current_buffer_from_inside_task();
+    neopixel_show(red_buf, green_buf, blue_buf, brightness_index_to_percent_lookup[dp_settings.brightness_index]);
     xSemaphoreGive(neopixel_mutex);
   }
 }

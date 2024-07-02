@@ -45,6 +45,7 @@ void neopixel_draw_current_buffer(void);
 extern uint8_t brightness_index_to_percent_lookup[BRIGHTNESS_LEVEL_SIZE];
 
 #define ANIMATION_FREQ_MS 20
+#define NEOPIXEL_MUTEX_TIMEOUT_MS 100
 
 #ifdef __cplusplus
 }
