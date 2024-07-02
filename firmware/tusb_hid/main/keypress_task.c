@@ -39,6 +39,7 @@ void settings_ui(void)
       {
         dp_settings.brightness_index = (dp_settings.brightness_index + 1) % BRIGHTNESS_LEVEL_SIZE;
         draw_settings(&dp_settings);
+        neopixel_draw_current_buffer();
       }
 
       if(sw_event.id == 20 && sw_event.type == SW_EVENT_SHORT_PRESS)

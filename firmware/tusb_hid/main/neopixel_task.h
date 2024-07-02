@@ -40,6 +40,7 @@ void led_animation_handler(void);
 void redraw_bg(uint8_t profile_number);
 void play_keydown_animation(uint8_t profile_number, uint8_t sw_number);
 void play_keyup_animation(uint8_t profile_number, uint8_t sw_number);
+void neopixel_draw_current_buffer(void);
 
 extern uint8_t brightness_index_to_values_lookup[BRIGHTNESS_LEVEL_SIZE];
 
