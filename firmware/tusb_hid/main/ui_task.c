@@ -231,7 +231,7 @@ void draw_settings(dp_global_settings *dps)
   ssd1306_Line(0,10,128,10,White);
 
   memset(oled_line_buf, 0, OLED_LINE_BUF_SIZE);
-  sprintf(oled_line_buf, "1:Brightness %d%%", brightness_index_to_values_lookup[dps->brightness_index]);
+  sprintf(oled_line_buf, "1:Brightness %d%%", brightness_index_to_percent_lookup[dps->brightness_index]);
   ssd1306_SetCursor(0, 15);
   ssd1306_WriteString(oled_line_buf, Font_7x10, White);
 

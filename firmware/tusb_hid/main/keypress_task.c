@@ -21,7 +21,7 @@ void handle_keydown(uint8_t swid)
   play_keydown_animation(current_profile_number, swid);
 }
 
-void handle_keyup(uint8_t swid, uint8_t event_type)
+void handle_keyup(uint8_t swid)
 {
   play_keyup_animation(current_profile_number, swid);
 }
@@ -35,14 +35,14 @@ void settings_ui(void)
     if (xQueueReceive(switch_event_queue, &sw_event, 0) == pdTRUE)
     {
       printf("settings_ui id: %d type: %d\n", sw_event.id, sw_event.type);
-      if(sw_event.id == 0 && sw_event.type == SW_EVENT_SHORT_PRESS)
+      if(sw_event.id == MSW_0 && sw_event.type == SW_EVENT_SHORT_PRESS)
       {
         dp_settings.brightness_index = (dp_settings.brightness_index + 1) % BRIGHTNESS_LEVEL_SIZE;
         draw_settings(&dp_settings);
         neopixel_draw_current_buffer();
       }
 
-      if(sw_event.id == 20 && sw_event.type == SW_EVENT_SHORT_PRESS)
+      if((sw_event.id == SW_MINUS || sw_event.id == SW_PLUS) && sw_event.type == SW_EVENT_SHORT_PRESS)
       {
         return;
       }
@@ -69,14 +69,18 @@ void handle_keyevent(uint8_t swid, uint8_t event_type)
     redraw_bg(current_profile_number);
     return;
   }
-  
-  if(swid == SW_PLUS || swid == SW_MINUS)
-    return;
 
-  if(event_type == SW_EVENT_SHORT_PRESS)
-    play_keydown_animation(current_profile_number, swid);
-  else
-    play_keyup_animation(current_profile_number, swid);
+  if(swid >= MSW_0 && swid <= MAX_MSW)
+  {
+    if(event_type == SW_EVENT_SHORT_PRESS)
+    {
+      handle_keydown(swid);
+    }
+    else if(event_type == SW_EVENT_RELEASE)
+    {
+      handle_keyup(swid);
+    }
+  }
 }
 
 void keypress_task(void *dummy)

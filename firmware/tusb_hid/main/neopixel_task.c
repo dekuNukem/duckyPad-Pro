@@ -7,7 +7,7 @@
 
 const char *LED_TAG = "LED_TASK";
 
-static led_strip_handle_t my_led_strip;
+led_strip_handle_t my_led_strip;
 
 uint32_t frame_counter;
 uint8_t pixel_map[NEOPIXEL_COUNT] = {3,2,1,0,4,5,6,7,11,10,9,8,12,13,14,15,19,18,17,16};
@@ -17,7 +17,8 @@ uint8_t blue_buf[NEOPIXEL_COUNT];
 led_animation neo_anime[NEOPIXEL_COUNT];
 uint8_t color_red[THREE] = {64 , 0, 0};
 uint8_t color_black[THREE] = {0, 0, 0};
-uint8_t brightness_index_to_values_lookup[BRIGHTNESS_LEVEL_SIZE] = {0, 20, 50, 70, 100};
+uint8_t brightness_index_to_percent_lookup[BRIGHTNESS_LEVEL_SIZE] = {0, 20, 50, 70, 100};
+volatile uint8_t is_neopixel_busy;
 
 void set_pixel_3color(uint8_t which, uint8_t r, uint8_t g, uint8_t b)
 {
@@ -45,7 +46,18 @@ void neopixel_show(uint8_t* red, uint8_t* green, uint8_t* blue, uint8_t brightne
 
 void neopixel_draw_current_buffer(void)
 {
-  neopixel_show(red_buf, green_buf, blue_buf, brightness_index_to_values_lookup[dp_settings.brightness_index]);
+  while(is_neopixel_busy)
+  {
+    printf("NEOPIXEL BUSY!!!!!!!!\n");
+    vTaskDelay(pdMS_TO_TICKS(ANIMATION_FREQ_MS));
+  }
+  neopixel_show(red_buf, green_buf, blue_buf, brightness_index_to_percent_lookup[dp_settings.brightness_index]);
+}
+
+// higher priority, doesn't check
+void neopixel_draw_current_buffer_from_inside_task(void)
+{
+  neopixel_show(red_buf, green_buf, blue_buf, brightness_index_to_percent_lookup[dp_settings.brightness_index]);
 }
 
 void redraw_bg(uint8_t profile_number)
@@ -70,10 +82,6 @@ void neopixel_init(void)
 
     ESP_ERROR_CHECK(led_strip_new_rmt_device(&strip_config, &rmt_config, &my_led_strip));
     led_strip_clear(my_led_strip);
-
-    for (int idx = 0; idx < NEOPIXEL_COUNT; ++idx)
-        led_strip_set_pixel(my_led_strip, idx, 8, 2, 8);
-    led_strip_refresh(my_led_strip);
 }
 
 void led_start_animation(led_animation* anime_struct, uint8_t dest_color[THREE], uint8_t anime_type, uint8_t durations_frames)
@@ -88,7 +96,7 @@ void led_start_animation(led_animation* anime_struct, uint8_t dest_color[THREE],
 
 void play_keydown_animation(uint8_t profile_number, uint8_t sw_number)
 {
-  if(sw_number >= MECH_OBSW_COUNT)
+  if(sw_number > MAX_MSW)
     return;
   set_pixel_color(sw_number, all_profile_info[profile_number].sw_activation_color[sw_number]);
   neo_anime[sw_number].current_color[0] = all_profile_info[profile_number].sw_activation_color[sw_number][0];
@@ -102,7 +110,7 @@ void play_keydown_animation(uint8_t profile_number, uint8_t sw_number)
 
 void play_keyup_animation(uint8_t profile_number, uint8_t sw_number)
 {
-  if(sw_number >= MECH_OBSW_COUNT)
+  if(sw_number > MAX_MSW)
     return;
   led_start_animation(&neo_anime[sw_number], all_profile_info[profile_number].sw_color[sw_number], ANIMATION_CROSS_FADE, 50);
 }
@@ -140,7 +148,11 @@ void led_animation_handler(void)
     set_pixel_3color(idx, (uint8_t)neo_anime[idx].current_color[0], (uint8_t)neo_anime[idx].current_color[1], (uint8_t)neo_anime[idx].current_color[2]);
   }
   if(needs_update)
-    neopixel_draw_current_buffer();
+  {
+    is_neopixel_busy = 1;
+    neopixel_draw_current_buffer_from_inside_task();
+    is_neopixel_busy = 0;
+  }
 }
 
 void led_animation_init()

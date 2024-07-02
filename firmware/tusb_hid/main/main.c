@@ -59,6 +59,6 @@ void app_main(void)
     while(1)
     {
         led_animation_handler();
-        vTaskDelay(pdMS_TO_TICKS(20));
+        vTaskDelay(pdMS_TO_TICKS(ANIMATION_FREQ_MS));
     }
 }

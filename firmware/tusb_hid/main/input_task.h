@@ -52,6 +52,29 @@
 #define SW_EVENT_SHORT_PRESS 1
 #define SW_EVENT_LONG_PRESS 2
 
+// mechnical switches
+#define MSW_0 0
+#define MSW_1 1
+#define MSW_2 2
+#define MSW_3 3
+#define MSW_4 4
+#define MSW_5 5
+#define MSW_6 6
+#define MSW_7 7
+#define MSW_8 8
+#define MSW_9  9
+#define MSW_10  10
+#define MSW_11  11
+#define MSW_12  12
+#define MSW_13  13
+#define MSW_14  14
+#define MSW_15  15
+#define MSW_16  16
+#define MSW_17  17
+#define MSW_18  18
+#define MSW_19  19
+#define MAX_MSW MSW_19
+
 typedef struct
 {
     uint8_t id;
