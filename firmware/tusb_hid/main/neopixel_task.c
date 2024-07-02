@@ -4,6 +4,7 @@
 #include "freertos/task.h"
 #include "esp_log.h"
 #include "profiles.h"
+#include "freertos/semphr.h"
 
 const char *LED_TAG = "LED_TASK";
 
@@ -18,7 +19,7 @@ led_animation neo_anime[NEOPIXEL_COUNT];
 uint8_t color_red[THREE] = {64 , 0, 0};
 uint8_t color_black[THREE] = {0, 0, 0};
 uint8_t brightness_index_to_percent_lookup[BRIGHTNESS_LEVEL_SIZE] = {0, 20, 50, 70, 100};
-volatile uint8_t is_neopixel_busy, suspend_animation;
+SemaphoreHandle_t neopixel_mutex;
 
 void set_pixel_3color(uint8_t which, uint8_t r, uint8_t g, uint8_t b)
 {
@@ -46,11 +47,9 @@ void neopixel_show(uint8_t* red, uint8_t* green, uint8_t* blue, uint8_t brightne
 
 void neopixel_draw_current_buffer(void)
 {
-  while(is_neopixel_busy)
-    vTaskDelay(pdMS_TO_TICKS(1));
-  suspend_animation = 1;
+  xSemaphoreTake(neopixel_mutex, pdMS_TO_TICKS(1000));
   neopixel_show(red_buf, green_buf, blue_buf, brightness_index_to_percent_lookup[dp_settings.brightness_index]);
-  suspend_animation = 0;
+  xSemaphoreGive(neopixel_mutex);
 }
 
 // higher priority, doesn't check
@@ -71,16 +70,18 @@ void redraw_bg(uint8_t profile_number)
 
 void neopixel_init(void)
 {
-    led_strip_config_t strip_config = {
-    .strip_gpio_num = NEOPIXEL_PIN,
-    .max_leds = NEOPIXEL_COUNT,
-    };
-    led_strip_rmt_config_t rmt_config = {
-        .resolution_hz = 10 * 1000 * 1000, // 10MHz
-    };
+  led_strip_config_t strip_config = {
+  .strip_gpio_num = NEOPIXEL_PIN,
+  .max_leds = NEOPIXEL_COUNT,
+  };
+  led_strip_rmt_config_t rmt_config = {
+      .resolution_hz = 10 * 1000 * 1000, // 10MHz
+  };
 
-    ESP_ERROR_CHECK(led_strip_new_rmt_device(&strip_config, &rmt_config, &my_led_strip));
-    led_strip_clear(my_led_strip);
+  ESP_ERROR_CHECK(led_strip_new_rmt_device(&strip_config, &rmt_config, &my_led_strip));
+  led_strip_clear(my_led_strip);
+
+  neopixel_mutex = xSemaphoreCreateMutex();
 }
 
 void led_start_animation(led_animation* anime_struct, uint8_t dest_color[THREE], uint8_t anime_type, uint8_t durations_frames)
@@ -146,11 +147,11 @@ void led_animation_handler(void)
     needs_update = 1;
     set_pixel_3color(idx, (uint8_t)neo_anime[idx].current_color[0], (uint8_t)neo_anime[idx].current_color[1], (uint8_t)neo_anime[idx].current_color[2]);
   }
-  if(needs_update && suspend_animation == 0)
+  if(needs_update)
   {
-    is_neopixel_busy = 1;
+    xSemaphoreTake(neopixel_mutex, pdMS_TO_TICKS(1000));
     neopixel_draw_current_buffer_from_inside_task();
-    is_neopixel_busy = 0;
+    xSemaphoreGive(neopixel_mutex);
   }
 }
 
