@@ -18,7 +18,7 @@ led_animation neo_anime[NEOPIXEL_COUNT];
 uint8_t color_red[THREE] = {64 , 0, 0};
 uint8_t color_black[THREE] = {0, 0, 0};
 uint8_t brightness_index_to_percent_lookup[BRIGHTNESS_LEVEL_SIZE] = {0, 20, 50, 70, 100};
-volatile uint8_t is_neopixel_busy;
+volatile uint8_t is_neopixel_busy, suspend_animation;
 
 void set_pixel_3color(uint8_t which, uint8_t r, uint8_t g, uint8_t b)
 {
@@ -48,7 +48,9 @@ void neopixel_draw_current_buffer(void)
 {
   while(is_neopixel_busy)
     vTaskDelay(pdMS_TO_TICKS(1));
+  suspend_animation = 1;
   neopixel_show(red_buf, green_buf, blue_buf, brightness_index_to_percent_lookup[dp_settings.brightness_index]);
+  suspend_animation = 0;
 }
 
 // higher priority, doesn't check
@@ -144,7 +146,7 @@ void led_animation_handler(void)
     needs_update = 1;
     set_pixel_3color(idx, (uint8_t)neo_anime[idx].current_color[0], (uint8_t)neo_anime[idx].current_color[1], (uint8_t)neo_anime[idx].current_color[2]);
   }
-  if(needs_update)
+  if(needs_update && suspend_animation == 0)
   {
     is_neopixel_busy = 1;
     neopixel_draw_current_buffer_from_inside_task();
