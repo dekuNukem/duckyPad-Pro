@@ -47,13 +47,10 @@ void neopixel_show(uint8_t* red, uint8_t* green, uint8_t* blue, uint8_t brightne
 
 void neopixel_draw_current_buffer(void)
 {
-  if(xSemaphoreTake(neopixel_mutex, pdMS_TO_TICKS(NEOPIXEL_MUTEX_TIMEOUT_MS)))
-  {
-    neopixel_show(red_buf, green_buf, blue_buf, brightness_index_to_percent_lookup[dp_settings.brightness_index]);
-    xSemaphoreGive(neopixel_mutex);
+  if(xSemaphoreTake(neopixel_mutex, pdMS_TO_TICKS(NEOPIXEL_MUTEX_TIMEOUT_MS)) == pdFALSE)
     return;
-  }
-  printf("neopixel_draw_current_buffer: unable to obtain mutex\n");
+  neopixel_show(red_buf, green_buf, blue_buf, brightness_index_to_percent_lookup[dp_settings.brightness_index]);
+  xSemaphoreGive(neopixel_mutex);
 }
 
 void redraw_bg(uint8_t profile_number)
