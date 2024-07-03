@@ -80,7 +80,7 @@ void settings_menu(void)
   }
 }
 
-void handle_keyevent(uint8_t swid, uint8_t event_type)
+void process_keyevent(uint8_t swid, uint8_t event_type)
 {
   ssd1306_SetContrast(OLED_CONTRAST_BRIGHT);
   if(swid == SW_PLUS && event_type == SW_EVENT_RELEASE)
@@ -133,6 +133,37 @@ void wakeup_from_sleep(void)
   goto_profile(current_profile_number);
 }
 
+void handle_rotary_encoder_event(rotary_encoder_event_t* this_re_event)
+{
+  last_keypress = pdTICKS_TO_MS(xTaskGetTickCount());
+  printf("reid: %d pos: %ld, dir: %d\n", this_re_event->state.id, this_re_event->state.position, this_re_event->state.direction);
+  if(is_sleeping)
+  {
+    wakeup_from_sleep();
+    return;
+  }
+  ssd1306_SetContrast(OLED_CONTRAST_BRIGHT);
+  if(this_re_event->state.direction == ROTARY_ENCODER_DIRECTION_CLOCKWISE)
+    goto_next_profile();
+  else if(this_re_event->state.direction == ROTARY_ENCODER_DIRECTION_COUNTER_CLOCKWISE)
+    goto_prev_profile();
+}
+
+void handle_sw_event(switch_event_t* this_sw_event)
+{
+  last_keypress = pdTICKS_TO_MS(xTaskGetTickCount());
+  printf("swid: %d type: %d\n", this_sw_event->id, this_sw_event->type);
+  if(is_sleeping)
+  {
+    wakeup_from_sleep();
+    return;
+  }
+  ssd1306_SetContrast(OLED_CONTRAST_BRIGHT);
+  is_busy = 1;
+  process_keyevent(this_sw_event->id, this_sw_event->type);
+  is_busy = 0;
+}
+
 void keypress_task(void *dummy)
 {
   last_keypress = pdTICKS_TO_MS(xTaskGetTickCount());
@@ -140,40 +171,11 @@ void keypress_task(void *dummy)
   {
     rotary_encoder_event_t re_event = { 0 };
     if (xQueueReceive(rotary_encoder_event_queue, &re_event, 0) == pdTRUE)
-    {
-      last_keypress = pdTICKS_TO_MS(xTaskGetTickCount());
-      printf("Event: id: %d pos: %ld, dir: %d\n", re_event.state.id, re_event.state.position, re_event.state.direction);
-      if(is_sleeping)
-      {
-        wakeup_from_sleep();
-        goto re_end;
-      }
-      if(re_event.state.direction == ROTARY_ENCODER_DIRECTION_CLOCKWISE)
-        goto_next_profile();
-      else if(re_event.state.direction == ROTARY_ENCODER_DIRECTION_COUNTER_CLOCKWISE)
-        goto_prev_profile();
-      re_end:
-      ssd1306_SetContrast(OLED_CONTRAST_BRIGHT);
-    }
+      handle_rotary_encoder_event(&re_event);
 
     switch_event_t sw_event = { 0 };
     if (xQueueReceive(switch_event_queue, &sw_event, 0) == pdTRUE)
-    {
-      last_keypress = pdTICKS_TO_MS(xTaskGetTickCount());
-      printf("id: %d type: %d\n", sw_event.id, sw_event.type);
-      if(is_sleeping)
-      {
-        wakeup_from_sleep();
-      }
-      else
-      {
-        is_busy = 1;
-        handle_keyevent(sw_event.id, sw_event.type);
-        last_keypress = pdTICKS_TO_MS(xTaskGetTickCount());
-        is_busy = 0;
-      }
-      ssd1306_SetContrast(OLED_CONTRAST_BRIGHT);
-    }
+      handle_sw_event(&sw_event);
     vTaskDelay(pdMS_TO_TICKS(25));
   }
 }
