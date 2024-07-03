@@ -1,3 +1,8 @@
+if(xSemaphoreTake(neopixel_mutex, pdMS_TO_TICKS(NEOPIXEL_MUTEX_TIMEOUT_MS)) == pdFALSE)
+    return;
+  neopixel_show(red_buf, green_buf, blue_buf, brightness_index_to_percent_lookup[dp_settings.brightness_index]);
+  xSemaphoreGive(neopixel_mutex);
+
 OLED SC: 80
 id: 20 type: 1
 OLED SC: 255
