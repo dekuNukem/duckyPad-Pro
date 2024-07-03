@@ -163,8 +163,7 @@ uint16_t MY_UNIMPLEMENTED(void)
   return 0;
 }
 
-uint8_t current_key;
-uint16_t read_var(uint16_t addr)
+uint16_t read_var(uint16_t addr, uint8_t this_key_id)
 {
   if(addr == DEFAULTDELAY_ADDR)
     return defaultdelay_value;
@@ -185,9 +184,9 @@ uint16_t read_var(uint16_t addr)
   else if (addr == _LOOP_SIZE)
     return loop_size;
   else if (addr == _READKEY)
-    return MY_UNIMPLEMENTED();//get_first_active_key(current_key);
+    return MY_UNIMPLEMENTED();//get_first_active_key(this_key_id);
   else if (addr == _KEYPRESS_COUNT)
-    return MY_UNIMPLEMENTED();//key_press_count[current_key];
+    return MY_UNIMPLEMENTED();//key_press_count[this_key_id];
   else if (addr == _NEEDS_EPILOGUE)
     return epilogue_actions;
   else if(addr < VAR_BUF_SIZE)
@@ -199,7 +198,7 @@ uint16_t read_var(uint16_t addr)
 char make_str_buf[STR_BUF_SIZE];
 #define READ_BUF_SIZE 256
 char read_buffer[READ_BUF_SIZE];
-char* make_str(uint16_t str_start_addr)
+char* make_str(uint16_t str_start_addr, uint8_t this_key_id)
 {
   uint16_t curr_addr = str_start_addr;
   uint8_t this_char, lsb, msb;
@@ -219,7 +218,7 @@ char* make_str(uint16_t str_start_addr)
       curr_addr++;
       curr_addr++;
       uint16_t var_addr = make_uint16(lsb, msb);
-      uint16_t var_value = read_var(var_addr);
+      uint16_t var_value = read_var(var_addr, this_key_id);
       memset(make_str_buf, 0, STR_BUF_SIZE);
       sprintf(make_str_buf, "%d", var_value);
       strcat(read_buffer, make_str_buf);
@@ -231,7 +230,6 @@ char* make_str(uint16_t str_start_addr)
     curr_addr++;
   }
   return read_buffer;
-  // kb_print(read_buffer, defaultchardelay_value, charjitter_value);
 }
 
 uint16_t my_index, red, green, blue;
@@ -296,7 +294,6 @@ void execute_instruction(uint16_t curr_pc, ds3_exe_result* exe, uint8_t this_key
   uint8_t byte1 = read_byte(curr_pc+2);
   uint8_t op_result;
   uint16_t op_data = make_uint16(byte0, byte1);
-  current_key = this_key_id;
   printf("PC: %04d | Opcode: %02d | 0x%02x 0x%02x | 0x%04x\n", curr_pc, this_opcode, byte0, byte1, op_data);
   
   exe->result = EXE_OK;
@@ -318,7 +315,7 @@ void execute_instruction(uint16_t curr_pc, ds3_exe_result* exe, uint8_t this_key
   }
   else if(this_opcode == OP_PUSHV)
   {
-    op_result = stack_push(&arithmetic_stack, read_var(op_data));
+    op_result = stack_push(&arithmetic_stack, read_var(op_data, this_key_id));
     if(op_result != STACK_OP_OK)
     {
       exe->result = op_result;
@@ -451,7 +448,7 @@ void execute_instruction(uint16_t curr_pc, ds3_exe_result* exe, uint8_t this_key
   }
   else if(this_opcode == OP_STR || this_opcode == OP_STRLN)
   {
-    char* str_buf = make_str(op_data);
+    char* str_buf = make_str(op_data, this_key_id);
     kb_print(str_buf, defaultchardelay_value, charjitter_value);
     if(this_opcode == OP_STRLN)
     {
@@ -524,7 +521,7 @@ void execute_instruction(uint16_t curr_pc, ds3_exe_result* exe, uint8_t this_key
   }
   else if(this_opcode == OP_OLP)
   {
-    char* str_buf = make_str(op_data);
+    char* str_buf = make_str(op_data, this_key_id);
     ssd1306_WriteString(str_buf, Font_7x10, White);
   }
   else if(this_opcode == OP_OLU)
@@ -611,5 +608,5 @@ void run_dsb(ds3_exe_result* er, uint8_t this_key_id, char* dsb_path)
     current_pc = er->next_pc;
   }
   er->epilogue_actions = epilogue_actions;
-  // printf("execution halted: %d\n", er->result);
+  printf("execution halted: %d\n", er->result);
 }
