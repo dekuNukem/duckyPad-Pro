@@ -163,6 +163,16 @@ uint16_t MY_UNIMPLEMENTED(void)
   return 0;
 }
 
+uint8_t get_first_active_key(void)
+{
+  switch_event_t sw_event = {0};
+  if(xQueueReceive(switch_event_queue, &sw_event, 0) == pdFALSE)
+    return 0;
+  if(sw_event.type == SW_EVENT_SHORT_PRESS)
+    return sw_event.id;
+  return 0;
+}
+
 uint16_t read_var(uint16_t addr, uint8_t this_key_id)
 {
   if(addr == DEFAULTDELAY_ADDR)
@@ -184,7 +194,7 @@ uint16_t read_var(uint16_t addr, uint8_t this_key_id)
   else if (addr == _LOOP_SIZE)
     return loop_size;
   else if (addr == _READKEY)
-    return MY_UNIMPLEMENTED();//get_first_active_key(this_key_id);
+    return get_first_active_key();
   else if (addr == _KEYPRESS_COUNT)
     return MY_UNIMPLEMENTED();//key_press_count[this_key_id];
   else if (addr == _NEEDS_EPILOGUE)
@@ -232,22 +242,22 @@ char* make_str(uint16_t str_start_addr, uint8_t this_key_id)
   return read_buffer;
 }
 
-uint16_t my_index, red, green, blue;
-void parse_color(uint8_t opcode, uint8_t this_key_id)
+uint16_t this_index, red, green, blue;
+void parse_swcc(uint8_t opcode, uint8_t key_id_0_indexed)
 {
   stack_pop(&arithmetic_stack, &blue);
   stack_pop(&arithmetic_stack, &green);
   stack_pop(&arithmetic_stack, &red);
-  stack_pop(&arithmetic_stack, &my_index);
+  stack_pop(&arithmetic_stack, &this_index);
 
-  if(my_index == 0)
-    my_index = this_key_id;
+  if(this_index == 0)
+    this_index = key_id_0_indexed;
   else
-    my_index--;
-  if(my_index >= MECH_OBSW_COUNT)
+    this_index--;
+  if(this_index >= NEOPIXEL_COUNT)
     return;
-  MY_UNIMPLEMENTED();//set_pixel_3color_update_buffer(my_index, red, green, blue);
-  MY_UNIMPLEMENTED();//neopixel_update();
+  set_pixel_3color(this_index, red, green, blue);
+  neopixel_draw_current_buffer();
 }
 
 void parse_swcf(void)
@@ -256,25 +266,24 @@ void parse_swcf(void)
   stack_pop(&arithmetic_stack, &green);
   stack_pop(&arithmetic_stack, &red);
   for (int i = 0; i < NEOPIXEL_COUNT; ++i)
-    MY_UNIMPLEMENTED();//set_pixel_3color_update_buffer(i, red, green, blue);
-  MY_UNIMPLEMENTED();//neopixel_update();
+    set_pixel_3color(i, red, green, blue);
+  neopixel_draw_current_buffer();
 }
 
-void parse_swcr(uint8_t this_key_id)
+void parse_swcr(uint8_t key_id_0_indexed)
 {
   uint16_t swcr_arg;
   stack_pop(&arithmetic_stack, &swcr_arg);
 
   if(swcr_arg == 0)
-    swcr_arg = this_key_id;
+    swcr_arg = key_id_0_indexed;
   else
     swcr_arg--;
 
-  if(swcr_arg >= MECH_OBSW_COUNT)
-    MY_UNIMPLEMENTED();//redraw_bg();
+  if(swcr_arg >= NEOPIXEL_COUNT)
+    redraw_bg(current_profile_number);
   else
-    MY_UNIMPLEMENTED();//key_reset(swcr_arg);
-  vTaskDelay(pdMS_TO_TICKS(1));
+    reset_key_color(swcr_arg);
 }
 
 void parse_olc(void)
@@ -294,7 +303,7 @@ void execute_instruction(uint16_t curr_pc, ds3_exe_result* exe, uint8_t this_key
   uint8_t byte1 = read_byte(curr_pc+2);
   uint8_t op_result;
   uint16_t op_data = make_uint16(byte0, byte1);
-  printf("PC: %04d | Opcode: %02d | 0x%02x 0x%02x | 0x%04x\n", curr_pc, this_opcode, byte0, byte1, op_data);
+  // printf("PC: %04d | Opcode: %02d | 0x%02x 0x%02x | 0x%04x\n", curr_pc, this_opcode, byte0, byte1, op_data);
   
   exe->result = EXE_OK;
   exe->next_pc = curr_pc + INSTRUCTION_SIZE_BYTES;
@@ -505,7 +514,7 @@ void execute_instruction(uint16_t curr_pc, ds3_exe_result* exe, uint8_t this_key
   }
   else if(this_opcode == OP_SWCC)
   {
-    parse_color(this_opcode, this_key_id);
+    parse_swcc(this_opcode, this_key_id);
   }
   else if(this_opcode == OP_SWCF)
   {

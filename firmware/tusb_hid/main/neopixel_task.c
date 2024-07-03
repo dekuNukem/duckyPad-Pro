@@ -82,6 +82,15 @@ void redraw_bg(uint8_t profile_number)
   neopixel_draw_current_buffer();
 }
 
+void reset_key_color(uint8_t which)
+{
+  if(which >= NEOPIXEL_COUNT)
+    return;
+  neo_anime[which].animation_type = ANIMATION_NONE;
+  set_pixel_color(which, all_profile_info[current_profile_number].sw_color[which]);
+  neopixel_draw_current_buffer();
+}
+
 void neopixel_init(void)
 {
   led_strip_config_t strip_config = {

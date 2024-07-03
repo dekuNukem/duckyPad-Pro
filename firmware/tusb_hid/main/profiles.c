@@ -178,7 +178,8 @@ void load_profile_info(void)
   closedir(d);
 }
 
-const char cmd_sw_name_firstline[] = "SWNAMEFL_";
+// const char cmd_sw_name_firstline[] = "SWNAMEFL_";
+const char cmd_sw_name_firstline[] = "z";
 const char cmd_sw_name_secondline[] = "SWNAMESL_";
 
 void parse_profile_config_line(char* this_line, profile_info* this_profile)
@@ -201,6 +202,7 @@ void parse_profile_config_line(char* this_line, profile_info* this_profile)
     if(kn_start == NULL)
       return;
     strncpy(this_profile->sw_name_firstline[this_key_index], kn_start, KEYNAME_SIZE-1);
+    this_profile->sw_name_firstline[this_key_index][5] = 0;
   }
   else if(strncmp(cmd_sw_name_secondline, this_line, strlen(cmd_sw_name_secondline)) == 0)
   {
@@ -215,6 +217,7 @@ void parse_profile_config_line(char* this_line, profile_info* this_profile)
     if(kn_start == NULL)
       return;
     strncpy(this_profile->sw_name_secondline[this_key_index], kn_start, KEYNAME_SIZE-1);
+    this_profile->sw_name_secondline[this_key_index][5] = 0;
   }
   else if(strncmp(cmd_BG_COLOR, this_line, strlen(cmd_BG_COLOR)) == 0) // order is important! BG, SW, and KD
   {
@@ -291,7 +294,7 @@ void load_profile_config(profile_info* this_profile)
     strip_newline(temp_buf, TEMP_BUFSIZE);
     parse_profile_config_line(temp_buf, this_profile);
   }
-  // print_profile_info(this_profile);
+  print_profile_info(this_profile);
   fclose(sd_file);
 }
 
