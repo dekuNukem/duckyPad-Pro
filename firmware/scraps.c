@@ -1,3 +1,22 @@
+OLED SC: 80
+id: 20 type: 1
+OLED SC: 255
+id: 20 type: 0
+OLED SC: 80
+id: 20 type: 1
+E (30936) spi_master: spi_device_acquire_bus(976): Cannot acquire bus when a polling transaction is in progress.
+E (30936) spi_master: spi_device_polling_start(1042): Cannot send polling transaction while the previous polling transaction is not terminated.
+E (30948) spi_master: Cannot release bus when a polling transaction is in progress.
+
+assert failed: spi_device_release_bus spi_master.c:1012 (0)
+
+
+Backtrace: 0x403758f6:0x3fcacc40 0x4037b859:0x3fcacc60 0x40381d11:0x3fcacc80 0x403789b7:0x3fcacda0 0x4200ac07:0x3fcacdc0 0x4200aee2:0x3fcacdf0 0x42009917:0x3fcace10 0x4037df11:0x3fcace40
+
+
+
+
+
 ssd1306_SetContrast(255);
 
 

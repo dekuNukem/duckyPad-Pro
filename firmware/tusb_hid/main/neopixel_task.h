@@ -42,6 +42,7 @@ void play_keydown_animation(uint8_t profile_number, uint8_t sw_number);
 void play_keyup_animation(uint8_t profile_number, uint8_t sw_number);
 void neopixel_draw_current_buffer(void);
 void draw_red(void);
+void neopixel_off(void);
 
 extern uint8_t brightness_index_to_percent_lookup[BRIGHTNESS_LEVEL_SIZE];
 

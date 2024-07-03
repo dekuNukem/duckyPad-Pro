@@ -88,6 +88,11 @@ void neopixel_init(void)
   neopixel_mutex = xSemaphoreCreateMutex();
 }
 
+void neopixel_off(void)
+{
+  led_strip_clear(my_led_strip);
+}
+
 void led_start_animation(led_animation* anime_struct, uint8_t dest_color[THREE], uint8_t anime_type, uint8_t durations_frames)
 {
   for (int i = 0; i < THREE; ++i)
