@@ -115,22 +115,20 @@ void keyboard_release_all(void);
 void init_my_key(my_key* kk);
 void media_key_release(void);
 uint8_t is_mouse_type(my_key* this_key);
-void mouse_test(void);
 void kb_print_char(my_key *kk, int32_t chardelay, int32_t char_delay_fuzz);
 uint8_t utf8ascii(uint8_t ascii);
 
 void press_key(uint8_t code, uint8_t type);
 void release_key(uint8_t code, uint8_t type);
 
+extern uint16_t duckcode_circumflex;
+extern uint16_t duckcode_diaeresis;
+extern uint16_t duckcode_grave_accent;
+extern uint16_t duckcode_acute_accent;
+extern uint16_t duckcode_tilde;
+extern uint16_t duckcode_cedilla;
 
-extern uint16_t circumflex;
-extern uint16_t diaeresis;
-extern uint16_t grave_accent;
-extern uint16_t acute_accent;
-extern uint16_t tilde;
-extern uint16_t cedilla;
-
-extern uint16_t _asciimap[ASCII_MAP_SIZE];
+extern uint16_t ascii_map[ASCII_MAP_SIZE];
 
 #ifdef __cplusplus
 }

@@ -51,6 +51,9 @@ void goto_next_profile(void);
 void goto_prev_profile(void);
 void profile_init(void);
 void goto_profile(uint8_t profile_number);
+uint8_t load_keymap_by_name(char* km_name);
+
+extern const char* default_keymap_name;
 
 #define PSCAN_OK 0
 #define PSCAN_ERROR_NO_PROFILE 1

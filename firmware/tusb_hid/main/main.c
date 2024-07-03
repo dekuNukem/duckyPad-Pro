@@ -54,10 +54,11 @@ void app_main(void)
         error_loop();
     }
 
+    load_keymap_by_name(dp_settings.current_kb_layout);
     profile_init();
+
     dp_settings.sleep_after_ms = 5000;
     xTaskCreate(keypress_task, "keypress_task", KEYPRESS_TASK_STACK_SIZE, NULL, 2, NULL);
-
     while(1)
     {
         led_animation_handler();

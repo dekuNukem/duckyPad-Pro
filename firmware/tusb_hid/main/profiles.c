@@ -17,6 +17,7 @@
 #include "input_task.h"
 #include "ui_task.h"
 #include "neopixel_task.h"
+#include "keyboard.h"
 
 #define NEXT_PROFILE 0
 #define PREV_PROFILE 1
@@ -35,6 +36,8 @@ const char cmd_BG_COLOR[] = "BG_COLOR ";
 const char cmd_KD_COLOR[] = "KEYDOWN_COLOR ";
 const char cmd_SWCOLOR[] = "SWCOLOR_";
 const char cmd_DIM_UNUSED_KEYS[] = "DIM_UNUSED_KEYS ";
+
+const char* default_keymap_name = "English(US)";
 
 uint8_t current_profile_number;
 profile_info all_profile_info[MAX_PROFILES];
@@ -369,6 +372,49 @@ void profile_init(void)
     goto_next_profile();
   else
     goto_profile(last_profile);
+}
+
+const char* dk_circumflex = "dk_circumflex";
+const char* dk_diaeresis = "dk_diaeresis";
+const char* dk_grave_accent = "dk_grave_accent";
+const char* dk_acute_accent = "dk_acute_accent";
+const char* dk_tilde = "dk_tilde";
+const char* dk_cedilla = "dk_cedilla";
+
+uint8_t load_keymap_by_name(char* km_name)
+{
+  char* next;
+  if(km_name == NULL)
+    return 1;
+  memset(temp_buf, 0, TEMP_BUFSIZE);
+  sprintf(temp_buf, "/sdcard/keymaps/%s", km_name);
+  printf("load_keymap_by_name: %s\n", temp_buf);
+  FILE *sd_file = fopen(temp_buf, "r");
+  if(sd_file == NULL)
+    return 2;
+  
+  while(fgets(temp_buf, TEMP_BUFSIZE, sd_file))
+  {
+    if(strncmp(temp_buf, dk_circumflex, strlen(dk_circumflex)) == 0)
+      duckcode_circumflex = strtoul(temp_buf + strlen(dk_circumflex), NULL, 0);
+    else if(strncmp(temp_buf, dk_diaeresis, strlen(dk_diaeresis)) == 0)
+      duckcode_diaeresis = strtoul(temp_buf + strlen(dk_diaeresis), NULL, 0);
+    else if(strncmp(temp_buf, dk_grave_accent, strlen(dk_grave_accent)) == 0)
+      duckcode_grave_accent = strtoul(temp_buf + strlen(dk_grave_accent), NULL, 0);
+    else if(strncmp(temp_buf, dk_acute_accent, strlen(dk_acute_accent)) == 0)
+      duckcode_acute_accent = strtoul(temp_buf + strlen(dk_acute_accent), NULL, 0);
+    else if(strncmp(temp_buf, dk_tilde, strlen(dk_tilde)) == 0)
+      duckcode_tilde = strtoul(temp_buf + strlen(dk_tilde), NULL, 0);
+    else if(strncmp(temp_buf, dk_cedilla, strlen(dk_cedilla)) == 0)
+      duckcode_cedilla = strtoul(temp_buf + strlen(dk_cedilla), NULL, 0);
+
+    uint8_t ascii_index = strtoul(temp_buf, &next, 0);
+    uint16_t keycode = strtoul(next, NULL, 0);
+    ascii_map[ascii_index] = keycode;
+  }
+  fclose(sd_file);
+  ascii_map[0] = 0;
+  return 0;
 }
 
 void error_loop(void)

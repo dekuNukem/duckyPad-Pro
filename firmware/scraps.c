@@ -1,3 +1,37 @@
+
+sprintf(dp_settings.current_kb_layout, "dpkm_Finnish.txt");
+int fff = load_keymap_by_name(dp_settings.current_kb_layout);
+printf("load_keymap_by_name result: %d\n", fff);
+
+
+printf("duckcode_circumflex: 0x%04X\n", duckcode_circumflex);
+printf("duckcode_diaeresis: 0x%04X\n", duckcode_diaeresis);
+printf("duckcode_grave_accent: 0x%04X\n", duckcode_grave_accent);
+printf("duckcode_acute_accent: 0x%04X\n", duckcode_acute_accent);
+printf("duckcode_tilde: 0x%04X\n", duckcode_tilde);
+printf("duckcode_cedilla: 0x%04X\n", duckcode_cedilla);
+for (size_t i = 0; i < ASCII_MAP_SIZE; i++)
+printf("0x%02x 0x%04x\n", i, ascii_map[i]);
+
+extern uint16_t duckcode_circumflex;
+extern uint16_t duckcode_diaeresis;
+extern uint16_t duckcode_grave_accent;
+extern uint16_t duckcode_acute_accent;
+extern uint16_t duckcode_tilde;
+extern uint16_t duckcode_cedilla;
+
+void validate_keymap_name(void)
+{
+  if(strlen(dp_settings.current_kb_layout) == 0)
+    strcpy(dp_settings.current_kb_layout, default_keymap_name);
+
+  memset(temp_buf, 0, TEMP_BUFSIZE);
+  sprintf(temp_buf, "/sdcard/keymaps/%s", dp_settings.current_kb_layout);
+  printf("vali: %s\n", temp_buf);
+}
+printf("%s\n", temp_buf);
+    memset(temp_buf, 0, TEMP_BUFSIZE);
+
 if(xSemaphoreTake(neopixel_mutex, pdMS_TO_TICKS(NEOPIXEL_MUTEX_TIMEOUT_MS)) == pdFALSE)
     return;
   neopixel_show(red_buf, green_buf, blue_buf, brightness_index_to_percent_lookup[dp_settings.brightness_index]);

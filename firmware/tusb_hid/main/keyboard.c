@@ -15,12 +15,12 @@
 #define SHIFT 0x100
 #define ALT_GR 0x200
 
-uint16_t circumflex;
-uint16_t diaeresis;
-uint16_t grave_accent;
-uint16_t acute_accent;
-uint16_t tilde;
-uint16_t cedilla;
+uint16_t duckcode_circumflex;
+uint16_t duckcode_diaeresis;
+uint16_t duckcode_grave_accent;
+uint16_t duckcode_acute_accent;
+uint16_t duckcode_tilde;
+uint16_t duckcode_cedilla;
 
 my_key deadkey;
 
@@ -405,17 +405,17 @@ void keyboard_press(my_key* this_key, uint8_t use_mod)
   else if(this_key->type == KEY_TYPE_CHAR)
     duckcode = ascii_map[this_key->code];
   else if(this_key->type == KEY_TYPE_DEAD_GRAVE_ACCENT)
-    duckcode = grave_accent;
+    duckcode = duckcode_grave_accent;
   else if(this_key->type == KEY_TYPE_DEAD_ACUTE_ACCENT)
-    duckcode = acute_accent;
+    duckcode = duckcode_acute_accent;
   else if(this_key->type == KEY_TYPE_DEAD_CIRCUMFLEX)
-    duckcode = circumflex;
+    duckcode = duckcode_circumflex;
   else if(this_key->type == KEY_TYPE_DEAD_TILDE)
-    duckcode = tilde;
+    duckcode = duckcode_tilde;
   else if(this_key->type == KEY_TYPE_DEAD_DIAERESIS)
-    duckcode = diaeresis;
+    duckcode = duckcode_diaeresis;
   else if(this_key->type == KEY_TYPE_DEAD_CEDILLA)
-    duckcode = cedilla;
+    duckcode = duckcode_cedilla;
   else
     return;
 
@@ -463,17 +463,17 @@ void keyboard_release(my_key* this_key)
   else if(this_key->type == KEY_TYPE_CHAR)
     duckcode = ascii_map[this_key->code];
   else if(this_key->type == KEY_TYPE_DEAD_GRAVE_ACCENT)
-    duckcode = grave_accent;
+    duckcode = duckcode_grave_accent;
   else if(this_key->type == KEY_TYPE_DEAD_ACUTE_ACCENT)
-    duckcode = acute_accent;
+    duckcode = duckcode_acute_accent;
   else if(this_key->type == KEY_TYPE_DEAD_CIRCUMFLEX)
-    duckcode = circumflex;
+    duckcode = duckcode_circumflex;
   else if(this_key->type == KEY_TYPE_DEAD_TILDE)
-    duckcode = tilde;
+    duckcode = duckcode_tilde;
   else if(this_key->type == KEY_TYPE_DEAD_DIAERESIS)
-    duckcode = diaeresis;
+    duckcode = duckcode_diaeresis;
   else if(this_key->type == KEY_TYPE_DEAD_CEDILLA)
-    duckcode = cedilla;
+    duckcode = duckcode_cedilla;
   else
     return;
 
