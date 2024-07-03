@@ -55,7 +55,7 @@
 #define OP_SLEEP 47
 
 #define INSTRUCTION_SIZE_BYTES 3
-#define STACK_SIZE 8
+#define STACK_SIZE 16
 
 #define EXE_OK 0
 
@@ -70,9 +70,8 @@
 #define EXE_ERROR 30
 
 #define DSB_OK 0
-#define DSB_FOPEN_FAILED 50
+#define DSB_FOPEN_FAIL 50
 #define DSB_FREAD_ERROR 60
-#define DSB_CHUNK_LOAD_ERROR 70
 #define DSB_READ_OVERFLOW 80
 
 #define STACK_OP_OK 0
@@ -104,7 +103,7 @@ typedef struct
 #define DEFAULT_CMD_DELAY_MS 18
 #define DEFAULT_CHAR_DELAY_MS 18
 
-void run_dsb(ds3_exe_result* er, uint8_t keynum);
+void run_dsb(ds3_exe_result* er, uint8_t this_key_id, char* dsb_path);
 
 #endif
 

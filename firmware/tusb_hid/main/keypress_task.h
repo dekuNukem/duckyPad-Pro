@@ -9,7 +9,7 @@
 #include <string.h>
 #include "input_task.h"
 
-#define KEYPRESS_TASK_STACK_SIZE 2048
+#define KEYPRESS_TASK_STACK_SIZE 4096
 
 void keypress_task(void *dummy);
 void start_sleeping(void);

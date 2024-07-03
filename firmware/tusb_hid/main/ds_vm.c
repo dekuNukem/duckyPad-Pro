@@ -16,11 +16,10 @@
 #include "ds_vm.h"
 
 // 2300 seems to be max, 2048 just to be safe
-#define BIN_BUF_SIZE 2048
+#define BIN_BUF_SIZE 65536
 uint8_t bin_buf[BIN_BUF_SIZE];
 #define VAR_BUF_SIZE 128
 uint8_t var_buf[VAR_BUF_SIZE];
-uint8_t current_bank;
 uint16_t defaultdelay_value;
 uint16_t defaultchardelay_value;
 uint16_t charjitter_value;
@@ -236,7 +235,7 @@ char* make_str(uint16_t str_start_addr)
 }
 
 uint16_t my_index, red, green, blue;
-void parse_color(uint8_t opcode, uint8_t keynum)
+void parse_color(uint8_t opcode, uint8_t this_key_id)
 {
   stack_pop(&arithmetic_stack, &blue);
   stack_pop(&arithmetic_stack, &green);
@@ -244,7 +243,7 @@ void parse_color(uint8_t opcode, uint8_t keynum)
   stack_pop(&arithmetic_stack, &my_index);
 
   if(my_index == 0)
-    my_index = keynum;
+    my_index = this_key_id;
   else
     my_index--;
   if(my_index >= MECH_OBSW_COUNT)
@@ -263,13 +262,13 @@ void parse_swcf(void)
   MY_UNIMPLEMENTED();//neopixel_update();
 }
 
-void parse_swcr(uint8_t keynum)
+void parse_swcr(uint8_t this_key_id)
 {
   uint16_t swcr_arg;
   stack_pop(&arithmetic_stack, &swcr_arg);
 
   if(swcr_arg == 0)
-    swcr_arg = keynum;
+    swcr_arg = this_key_id;
   else
     swcr_arg--;
 
@@ -290,15 +289,15 @@ void parse_olc(void)
   ssd1306_SetCursor(xxx, yyy);
 }
 
-void execute_instruction(uint16_t curr_pc, ds3_exe_result* exe, uint8_t keynum)
+void execute_instruction(uint16_t curr_pc, ds3_exe_result* exe, uint8_t this_key_id)
 {
   uint8_t this_opcode = read_byte(curr_pc);
   uint8_t byte0 = read_byte(curr_pc+1);
   uint8_t byte1 = read_byte(curr_pc+2);
   uint8_t op_result;
   uint16_t op_data = make_uint16(byte0, byte1);
-  current_key = keynum;
-  // printf("PC: %04d | Opcode: %02d | 0x%02x 0x%02x | 0x%04x\n", curr_pc, this_opcode, byte0, byte1, op_data);
+  current_key = this_key_id;
+  printf("PC: %04d | Opcode: %02d | 0x%02x 0x%02x | 0x%04x\n", curr_pc, this_opcode, byte0, byte1, op_data);
   
   exe->result = EXE_OK;
   exe->next_pc = curr_pc + INSTRUCTION_SIZE_BYTES;
@@ -509,7 +508,7 @@ void execute_instruction(uint16_t curr_pc, ds3_exe_result* exe, uint8_t keynum)
   }
   else if(this_opcode == OP_SWCC)
   {
-    parse_color(this_opcode, keynum);
+    parse_color(this_opcode, this_key_id);
   }
   else if(this_opcode == OP_SWCF)
   {
@@ -517,7 +516,7 @@ void execute_instruction(uint16_t curr_pc, ds3_exe_result* exe, uint8_t keynum)
   }
   else if(this_opcode == OP_SWCR)
   {
-    parse_swcr(keynum);
+    parse_swcr(this_key_id);
   }
   else if(this_opcode == OP_OLC)
   {
@@ -575,10 +574,24 @@ void execute_instruction(uint16_t curr_pc, ds3_exe_result* exe, uint8_t keynum)
   }
 }
 
-void run_dsb(ds3_exe_result* er, uint8_t keynum)
+uint8_t load_dsb(char* dsb_path)
 {
+  FILE *sd_file = fopen(dsb_path, "r");
+  if(sd_file == NULL)
+    return DSB_FOPEN_FAIL;
+  memset(bin_buf, 0, BIN_BUF_SIZE);
+  if(fread(bin_buf, 1, BIN_BUF_SIZE, sd_file) == 0)
+    return DSB_FREAD_ERROR;
+  fclose(sd_file);
+  return DSB_OK;
+}
+
+void run_dsb(ds3_exe_result* er, uint8_t this_key_id, char* dsb_path)
+{
+  if(load_dsb(dsb_path))
+    return;
+  
   uint16_t current_pc = 0;
-	current_bank = 255;
   stack_init(&arithmetic_stack);
   stack_init(&call_stack);
   defaultdelay_value = DEFAULT_CMD_DELAY_MS;
@@ -588,11 +601,11 @@ void run_dsb(ds3_exe_result* er, uint8_t keynum)
   rand_min = 0;
   loop_size = 0;
   epilogue_actions = 0;
-  srand(pdTICKS_TO_MS(xTaskGetTickCount()));
+  srand(xTaskGetTickCount());
 
   while(1)
   {
-    execute_instruction(current_pc, er, keynum);
+    execute_instruction(current_pc, er, this_key_id);
     if(er->result != EXE_OK)
       break;
     current_pc = er->next_pc;

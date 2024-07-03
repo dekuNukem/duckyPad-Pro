@@ -1,5 +1,20 @@
 MY_UNIMPLEMENTED
 
+uint8_t load_dsb(char* dsb_path)
+{
+  FILE *sd_file = fopen(dsb_path, "r");
+  if(sd_file == NULL)
+    return DSB_FOPEN_FAIL;
+  memset(bin_buf, 0, BIN_BUF_SIZE);
+  int32_t result = fread(bin_buf, 1, BIN_BUF_SIZE, sd_file);
+  printf("fread: %ld\n", result);
+  return DSB_OK;
+}
+
+
+FILE *sd_file = fopen(temp_buf, "r");
+  if(sd_file == NULL)
+    return 2;
 
 sprintf(dp_settings.current_kb_layout, "dpkm_Finnish.txt");
 int fff = load_keymap_by_name(dp_settings.current_kb_layout);

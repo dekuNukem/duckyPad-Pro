@@ -17,6 +17,7 @@
 #include "keypress_task.h"
 #include "unistd.h"
 #include "keyboard.h"
+#include "ds_vm.h"
 
 uint32_t last_keypress;
 
@@ -34,6 +35,17 @@ void block_until_anykey(void)
   }
 }
 
+void der_init(ds3_exe_result* der)
+{
+  der->result = EXE_EMPTY_FILE;
+  der->next_pc = 0;
+  der->data = 0;
+  der->data2 = 0;
+  der->epilogue_actions = 0;
+}
+
+ds3_exe_result this_exe;
+
 void handle_keydown(uint8_t swid)
 {
   memset(temp_buf, 0, TEMP_BUFSIZE);
@@ -48,9 +60,11 @@ void handle_keydown(uint8_t swid)
   }
   play_keydown_animation(current_profile_number, swid);
   //-------------
-  memset(temp_buf, 0, TEMP_BUFSIZE);
-  sprintf(temp_buf, "hello world");
-  kb_print(temp_buf, 20, 0);
+  // memset(temp_buf, 0, TEMP_BUFSIZE);
+  // sprintf(temp_buf, "hello world");
+  // kb_print(temp_buf, 20, 0);
+  der_init(&this_exe);
+  run_dsb(&this_exe, swid, temp_buf);
   //--------------
   play_keyup_animation(current_profile_number, swid);
 }
