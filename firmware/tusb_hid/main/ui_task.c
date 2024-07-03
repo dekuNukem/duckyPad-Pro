@@ -45,9 +45,6 @@ void oled_init(void)
     vTaskDelay(pdMS_TO_TICKS(25));
 
     ssd1306_init();
-    ssd1306_SetCursor(20, 60);
-    ssd1306_WriteString("hello world!!", Font_7x10, White);
-    ssd1306_UpdateScreen();
 }
 
 uint8_t center_line(uint8_t line_len, uint8_t char_width_pixels, uint8_t oled_width_pixels)

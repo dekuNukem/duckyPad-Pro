@@ -37,9 +37,9 @@ void app_main(void)
     oled_init();
     if(sd_init())
     {
-        
         draw_nosd();
-        while(1){vTaskDelay(pdMS_TO_TICKS(250));}
+        while(1)
+            vTaskDelay(pdMS_TO_TICKS(250));
     }
     
     neopixel_init();
@@ -60,6 +60,11 @@ void app_main(void)
     while(1)
     {
         led_animation_handler();
+
+        uint32_t ms_since_last_keypress = pdTICKS_TO_MS(xTaskGetTickCount()) - last_keypress;
+        if(ms_since_last_keypress > OLED_DIM_AFTER_MS)
+            ssd1306_SetContrast(OLED_CONTRAST_DIM);
+        
         vTaskDelay(pdMS_TO_TICKS(ANIMATION_FREQ_MS));
     }
 }

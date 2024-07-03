@@ -17,6 +17,8 @@
 #include "keypress_task.h"
 #include "unistd.h"
 
+uint32_t last_keypress;
+
 void block_until_anykey(void)
 {
   xQueueReset(switch_event_queue);
@@ -112,12 +114,15 @@ void handle_keyevent(uint8_t swid, uint8_t event_type)
 
 void keypress_task(void *dummy)
 {
+  last_keypress = pdTICKS_TO_MS(xTaskGetTickCount());
   while(1)
   {
     rotary_encoder_event_t re_event = { 0 };
     if (xQueueReceive(rotary_encoder_event_queue, &re_event, 0) == pdTRUE)
     {
+      ssd1306_SetContrast(OLED_CONTRAST_BRIGHT);
       printf("Event: id: %d pos: %ld, dir: %d\n", re_event.state.id, re_event.state.position, re_event.state.direction);
+      last_keypress = pdTICKS_TO_MS(xTaskGetTickCount());
       if(re_event.state.direction == ROTARY_ENCODER_DIRECTION_CLOCKWISE)
         goto_next_profile();
       else if(re_event.state.direction == ROTARY_ENCODER_DIRECTION_COUNTER_CLOCKWISE)
@@ -127,8 +132,10 @@ void keypress_task(void *dummy)
     switch_event_t sw_event = { 0 };
     if (xQueueReceive(switch_event_queue, &sw_event, 0) == pdTRUE)
     {
+      ssd1306_SetContrast(OLED_CONTRAST_BRIGHT);
       printf("id: %d type: %d\n", sw_event.id, sw_event.type);
       handle_keyevent(sw_event.id, sw_event.type);
+      last_keypress = pdTICKS_TO_MS(xTaskGetTickCount());
     }
     vTaskDelay(pdMS_TO_TICKS(25));
   }

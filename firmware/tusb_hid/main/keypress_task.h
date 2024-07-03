@@ -13,6 +13,8 @@
 
 void keypress_task(void *dummy);
 
+extern uint32_t last_keypress;
+
 #ifdef __cplusplus
 }
 #endif

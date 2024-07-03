@@ -72,8 +72,6 @@ void ssd1306_DrawBitmap(uint8_t x, uint8_t y, const unsigned char* bitmap, uint8
  */
 void ssd1306_SetContrast(const uint8_t value);
 
-// Low-level procedures
-void ssd1306_Reset(void);
 SSD1306_Error_t ssd1306_FillBuffer(uint8_t* buf, uint32_t len);
 
 // Control byte
@@ -112,7 +110,8 @@ SSD1306_Error_t ssd1306_FillBuffer(uint8_t* buf, uint32_t len);
 // Charge Pump (pg.62)
 #define OLED_CMD_SET_CHARGE_PUMP        0x8D    // follow with 0x14
 
-void task_ssd1306_display_text(const void *arg_text);
+#define SSD1306_SETCONTRAST 0x81
+
 void ssd1306_dashed_line(uint8_t x1, uint8_t y1, uint8_t x2, uint8_t y2, SSD1306_COLOR color);
 
 #endif // __SSD1306_H__

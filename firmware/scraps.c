@@ -1,3 +1,6 @@
+ssd1306_SetContrast(255);
+
+
   if(swid >= MSW_0 && swid <= MAX_MSW)
   {
     if(event_type == SW_EVENT_SHORT_PRESS)

@@ -12,7 +12,6 @@ const char *SSD1306_TAG = "SSD1306";
 #define SSD1306_WRITE_CMD           (0x00)
 #define SSD1306_WRITE_DAT           (0x40)
 
-
 spi_transaction_t my_transaction;
 
 static void ssd1306_write_data(const uint8_t *const data, const uint16_t data_len)
@@ -74,8 +73,6 @@ void ssd1306_init(void) {
 
     ssd1306_write_cmd_byte(0x40); //--set start line address - CHECK
 
-    // ssd1306_SetContrast(0xFF);
-
 #ifdef SSD1306_MIRROR_HORIZ
     ssd1306_write_cmd_byte(0xA0); // Mirror horizontally
 #else
@@ -129,7 +126,7 @@ void ssd1306_init(void) {
     ssd1306_write_cmd_byte(0x8D); //--set DC-DC enable
     ssd1306_write_cmd_byte(0x14); //
 
-    ssd1306_SetContrast(0x8F);
+    ssd1306_SetContrast(0xFF);
     ssd1306_write_cmd_byte(0xAF); //display on
 
     // Clear screen
@@ -535,8 +532,12 @@ void ssd1306_DrawBitmap(uint8_t x, uint8_t y, const unsigned char* bitmap, uint8
     return;
 }
 
+uint8_t current_contrast;
 void ssd1306_SetContrast(const uint8_t value)
 {
-    ssd1306_write_cmd_byte(0x81);
+    if(value == current_contrast)
+        return;
+    ssd1306_write_cmd_byte(SSD1306_SETCONTRAST);
     ssd1306_write_cmd_byte(value);
+    current_contrast = value;
 }
