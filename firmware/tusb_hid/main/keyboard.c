@@ -22,10 +22,9 @@ uint16_t acute_accent;
 uint16_t tilde;
 uint16_t cedilla;
 
-static uint8_t c1;
 my_key deadkey;
 
-uint16_t _asciimap[ASCII_MAP_SIZE] =
+uint16_t ascii_map[ASCII_MAP_SIZE] =
 {
   0x00,             // NUL
   0x00,             // SOH
@@ -295,7 +294,7 @@ uint8_t kb_buf[KB_BUF_SIZE];
 
 void USBD_CUSTOM_HID_SendReport(uint8_t* hid_buf, uint8_t hid_buf_size)
 {
-  printf("HID MSG: ");
+  printf("HID: ");
   for (size_t i = 0; i < hid_buf_size; i++)
     printf("%02x ", hid_buf[i]);
   printf("\n");
@@ -404,7 +403,7 @@ void keyboard_press(my_key* this_key, uint8_t use_mod)
   else if(this_key->type == KEY_TYPE_SPECIAL)
     duckcode = this_key->code;
   else if(this_key->type == KEY_TYPE_CHAR)
-    duckcode = _asciimap[this_key->code];
+    duckcode = ascii_map[this_key->code];
   else if(this_key->type == KEY_TYPE_DEAD_GRAVE_ACCENT)
     duckcode = grave_accent;
   else if(this_key->type == KEY_TYPE_DEAD_ACUTE_ACCENT)
@@ -462,7 +461,7 @@ void keyboard_release(my_key* this_key)
   else if(this_key->type == KEY_TYPE_SPECIAL)
     duckcode = this_key->code;
   else if(this_key->type == KEY_TYPE_CHAR)
-    duckcode = _asciimap[this_key->code];
+    duckcode = ascii_map[this_key->code];
   else if(this_key->type == KEY_TYPE_DEAD_GRAVE_ACCENT)
     duckcode = grave_accent;
   else if(this_key->type == KEY_TYPE_DEAD_ACUTE_ACCENT)
@@ -493,7 +492,9 @@ void keyboard_release(my_key* this_key)
   USBD_CUSTOM_HID_SendReport(kb_buf, KB_BUF_SIZE);
 }
 
-uint8_t utf8ascii(uint8_t ascii) {
+static uint8_t c1;
+uint8_t utf8ascii(uint8_t ascii)
+{
   if(ascii<128) // Standard ASCII-set 0..0x7F handling  
   {   
     c1=0;
@@ -523,7 +524,7 @@ void kb_print_char(my_key *kk, int32_t chardelay, int32_t charjitter)
   if no dead key, press as normal
   if has dead key, press it first
   */
-  uint16_t duckcode = _asciimap[kk->code];
+  uint16_t duckcode = ascii_map[kk->code];
   if(duckcode == 0)
   	return;
   uint16_t is_deadkey = duckcode & 0xf000;
