@@ -37,6 +37,7 @@ void app_main(void)
     oled_init();
     if(sd_init())
     {
+        
         draw_nosd();
         while(1){vTaskDelay(pdMS_TO_TICKS(250));}
     }

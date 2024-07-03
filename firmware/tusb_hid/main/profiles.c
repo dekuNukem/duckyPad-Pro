@@ -330,7 +330,6 @@ void goto_profile(uint8_t profile_number)
   save_current_profile(profile_number);
   current_profile_number = profile_number;
   redraw_bg(profile_number);
-  // reset_hold_cache();
   save_settings(&dp_settings);
 }
 

@@ -50,6 +50,7 @@ void error_loop(void);
 void goto_next_profile(void);
 void goto_prev_profile(void);
 void profile_init(void);
+void goto_profile(uint8_t profile_number);
 
 #define PSCAN_OK 0
 #define PSCAN_ERROR_NO_PROFILE 1

@@ -17,25 +17,43 @@
 #include "keypress_task.h"
 #include "unistd.h"
 
+void block_until_anykey(void)
+{
+  xQueueReset(switch_event_queue);
+  while(1)
+  {
+    vTaskDelay(pdMS_TO_TICKS(33));
+    switch_event_t sw_event = { 0 };
+    if(xQueueReceive(switch_event_queue, &sw_event, 0) == pdFALSE)
+      continue;
+    if(sw_event.type == SW_EVENT_SHORT_PRESS)
+      return;
+  }
+}
+
 void handle_keydown(uint8_t swid)
 {
   memset(temp_buf, 0, TEMP_BUFSIZE);
   sprintf(temp_buf, "/sdcard/%s/key%d.dsb", all_profile_info[current_profile_number].dir_path, swid+1);
   if(access(temp_buf, F_OK))
   {
-    printf("file does not exist: %s\n", temp_buf);
-    
+    draw_red();
+    draw_nodsb(swid);
+    block_until_anykey();
+    goto_profile(current_profile_number);
     return;
   }
   play_keydown_animation(current_profile_number, swid);
-}
-
-void handle_keyup(uint8_t swid)
-{
+  vTaskDelay(pdMS_TO_TICKS(33)); // placeholder
   play_keyup_animation(current_profile_number, swid);
 }
 
-void settings_ui(void)
+// void handle_keyup(uint8_t swid)
+// {
+//   play_keyup_animation(current_profile_number, swid);
+// }
+
+void settings_menu(void)
 {
   draw_settings(&dp_settings);
   while(1)
@@ -43,7 +61,7 @@ void settings_ui(void)
     switch_event_t sw_event = { 0 };
     if (xQueueReceive(switch_event_queue, &sw_event, 0) == pdTRUE)
     {
-      printf("settings_ui id: %d type: %d\n", sw_event.id, sw_event.type);
+      printf("settings_menu id: %d type: %d\n", sw_event.id, sw_event.type);
       if(sw_event.id == MSW_0 && sw_event.type == SW_EVENT_SHORT_PRESS)
       {
         dp_settings.brightness_index = (dp_settings.brightness_index + 1) % BRIGHTNESS_LEVEL_SIZE;
@@ -74,7 +92,7 @@ void handle_keyevent(uint8_t swid, uint8_t event_type)
   }
   if((swid == SW_PLUS || swid == SW_MINUS) && event_type == SW_EVENT_LONG_PRESS)
   {
-    settings_ui();
+    settings_menu();
     redraw_bg(current_profile_number);
     return;
   }
@@ -87,7 +105,7 @@ void handle_keyevent(uint8_t swid, uint8_t event_type)
     }
     else if(event_type == SW_EVENT_RELEASE)
     {
-      handle_keyup(swid);
+      // handle_keyup(swid);
     }
   }
 }

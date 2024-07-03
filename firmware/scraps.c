@@ -1,3 +1,15 @@
+  if(swid >= MSW_0 && swid <= MAX_MSW)
+  {
+    if(event_type == SW_EVENT_SHORT_PRESS)
+    {
+      handle_keydown(swid);
+    }
+    else if(event_type == SW_EVENT_RELEASE)
+    {
+      handle_keyup(swid);
+    }
+  }
+
 brightness_values
 
 uint8_t save_settings(dp_global_settings* dps)

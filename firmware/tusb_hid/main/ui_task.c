@@ -252,3 +252,42 @@ void draw_settings(dp_global_settings *dps)
 
   ssd1306_UpdateScreen();
 }
+
+void draw_nodsb(uint8_t swid)
+{
+  ssd1306_Fill(Black);
+
+  memset(oled_line_buf, 0, OLED_LINE_BUF_SIZE);
+  sprintf(oled_line_buf, "ERROR");
+  ssd1306_SetCursor(center_line(strlen(oled_line_buf), 7, SSD1306_WIDTH), 0);
+  ssd1306_WriteString(oled_line_buf, Font_7x10, White);
+
+  ssd1306_Line(0,10,128,10,White);
+
+  memset(oled_line_buf, 0, OLED_LINE_BUF_SIZE);
+  sprintf(oled_line_buf, "File not found:");
+  ssd1306_SetCursor(center_line(strlen(oled_line_buf), 7, SSD1306_WIDTH), 20);
+  ssd1306_WriteString(oled_line_buf, Font_7x10, White);
+
+  memset(oled_line_buf, 0, OLED_LINE_BUF_SIZE);
+  sprintf(oled_line_buf, "key%d.dsb", swid);
+  ssd1306_SetCursor(center_line(strlen(oled_line_buf), 7, SSD1306_WIDTH), 35);
+  ssd1306_WriteString(oled_line_buf, Font_7x10, White);
+
+  memset(oled_line_buf, 0, OLED_LINE_BUF_SIZE);
+  sprintf(oled_line_buf, "Open & Save");
+  ssd1306_SetCursor(center_line(strlen(oled_line_buf), 7, SSD1306_WIDTH), 70);
+  ssd1306_WriteString(oled_line_buf, Font_7x10, White);
+
+  memset(oled_line_buf, 0, OLED_LINE_BUF_SIZE);
+  sprintf(oled_line_buf, "on PC app");
+  ssd1306_SetCursor(center_line(strlen(oled_line_buf), 7, SSD1306_WIDTH), 85);
+  ssd1306_WriteString(oled_line_buf, Font_7x10, White);
+
+  memset(oled_line_buf, 0, OLED_LINE_BUF_SIZE);
+  sprintf(oled_line_buf, "Press Any Key");
+  ssd1306_SetCursor(center_line(strlen(oled_line_buf), 7, SSD1306_WIDTH), 115);
+  ssd1306_WriteString(oled_line_buf, Font_7x10, White);
+
+  ssd1306_UpdateScreen();
+}
