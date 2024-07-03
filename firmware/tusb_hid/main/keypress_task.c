@@ -16,6 +16,7 @@
 #include "esp_mac.h"
 #include "keypress_task.h"
 #include "unistd.h"
+#include "keyboard.h"
 
 uint32_t last_keypress;
 
@@ -47,6 +48,9 @@ void handle_keydown(uint8_t swid)
   }
   play_keydown_animation(current_profile_number, swid);
   vTaskDelay(pdMS_TO_TICKS(33)); // placeholder
+  memset(temp_buf, 0, TEMP_BUFSIZE);
+  sprintf(temp_buf, "hello world");
+  kb_print(temp_buf, 20, 0);
   play_keyup_animation(current_profile_number, swid);
 }
 

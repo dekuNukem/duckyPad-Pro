@@ -293,11 +293,19 @@ void delay_wrapper(int32_t amount, int32_t fuzz)
 
 uint8_t kb_buf[KB_BUF_SIZE];
 
+void USBD_CUSTOM_HID_SendReport(uint8_t* hid_buf, uint8_t hid_buf_size)
+{
+  printf("HID MSG: ");
+  for (size_t i = 0; i < hid_buf_size; i++)
+    printf("%02x ", hid_buf[i]);
+  printf("\n");
+}
+
 void keyboard_release_all(void)
 {
   memset(kb_buf, 0, KB_BUF_SIZE);
   kb_buf[0] = 1;
-  // vTaskSuspendAll();USBD_CUSTOM_HID_SendReport(&hUsbDeviceFS, kb_buf, KB_BUF_SIZE);xTaskResumeAll();
+  USBD_CUSTOM_HID_SendReport(kb_buf, KB_BUF_SIZE);
 }
 
 uint8_t is_mouse_type(my_key* this_key)
@@ -309,7 +317,7 @@ void media_key_release(void)
 {
   memset(kb_buf, 0, KB_BUF_SIZE);
   kb_buf[0] = 0x02;
-  // vTaskSuspendAll();USBD_CUSTOM_HID_SendReport(&hUsbDeviceFS, kb_buf, MEDIA_KEY_BUF_SIZE);xTaskResumeAll();
+  USBD_CUSTOM_HID_SendReport(kb_buf, MEDIA_KEY_BUF_SIZE);
 }
 
 void media_key_press(my_key* this_key)
@@ -317,7 +325,7 @@ void media_key_press(my_key* this_key)
   memset(kb_buf, 0, KB_BUF_SIZE);
   kb_buf[0] = 0x02;
   kb_buf[1] = this_key->code;
-  // vTaskSuspendAll();USBD_CUSTOM_HID_SendReport(&hUsbDeviceFS, kb_buf, MEDIA_KEY_BUF_SIZE);xTaskResumeAll();
+  USBD_CUSTOM_HID_SendReport(kb_buf, MEDIA_KEY_BUF_SIZE);
 }
 
 uint8_t should_use_mod(uint8_t ttt)
@@ -353,7 +361,7 @@ void mouse_press(my_key* this_key)
   {
     kb_buf[4] = this_key->code;
   }
-  // vTaskSuspendAll();USBD_CUSTOM_HID_SendReport(&hUsbDeviceFS, kb_buf, KB_BUF_SIZE);xTaskResumeAll();
+  USBD_CUSTOM_HID_SendReport(kb_buf, KB_BUF_SIZE);
 }
 
 void mouse_release(my_key* this_key)
@@ -372,7 +380,7 @@ void mouse_release(my_key* this_key)
   {
     kb_buf[4] = 0;
   }
-  // vTaskSuspendAll();USBD_CUSTOM_HID_SendReport(&hUsbDeviceFS, kb_buf, KB_BUF_SIZE);xTaskResumeAll();
+  USBD_CUSTOM_HID_SendReport(kb_buf, KB_BUF_SIZE);
 }
 
 void keyboard_press(my_key* this_key, uint8_t use_mod)
@@ -430,7 +438,7 @@ void keyboard_press(my_key* this_key, uint8_t use_mod)
       }
   }
   kb_buf[0] = 1;
-  // vTaskSuspendAll();USBD_CUSTOM_HID_SendReport(&hUsbDeviceFS, kb_buf, KB_BUF_SIZE);xTaskResumeAll();
+  USBD_CUSTOM_HID_SendReport(kb_buf, KB_BUF_SIZE);
 }
 
 void keyboard_release(my_key* this_key)
@@ -482,7 +490,7 @@ void keyboard_release(my_key* this_key)
     if(kb_buf[i] == (uint8_t)duckcode)
       kb_buf[i] = 0;
   kb_buf[0] = 1;
-  // vTaskSuspendAll();USBD_CUSTOM_HID_SendReport(&hUsbDeviceFS, kb_buf, KB_BUF_SIZE);xTaskResumeAll();
+  USBD_CUSTOM_HID_SendReport(kb_buf, KB_BUF_SIZE);
 }
 
 uint8_t utf8ascii(uint8_t ascii) {
