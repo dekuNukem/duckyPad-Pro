@@ -211,8 +211,6 @@ void draw_profile(profile_info* this_profile)
   ssd1306_Line(64,10,64,127,White);
   ssd1306_Line(96,10,96,127,White);
 
-  //ssd1306_dashed_line
-
   ssd1306_UpdateScreen();
 }
 

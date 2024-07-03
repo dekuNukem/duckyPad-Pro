@@ -178,7 +178,7 @@ uint16_t read_var(uint16_t addr)
   else if (addr == _RANDOM_MAX)
     return rand_max;
   else if (addr == _RANDOM_INT)
-    return MY_UNIMPLEMENTED();//(rand() + htim6.Instance->CNT) % (rand_max + 1 - rand_min) + rand_min;
+    return rand() % (rand_max + 1 - rand_min) + rand_min;
   else if (addr == _TIME_MS)
     return (uint16_t)pdTICKS_TO_MS(xTaskGetTickCount());
   else if (addr == _TIME_S)
@@ -277,7 +277,7 @@ void parse_swcr(uint8_t keynum)
     MY_UNIMPLEMENTED();//redraw_bg();
   else
     MY_UNIMPLEMENTED();//key_reset(swcr_arg);
-  MY_UNIMPLEMENTED();//osDelay(1);
+  vTaskDelay(pdMS_TO_TICKS(1));
 }
 
 void parse_olc(void)
@@ -457,9 +457,9 @@ void execute_instruction(uint16_t curr_pc, ds3_exe_result* exe, uint8_t keynum)
     if(this_opcode == OP_STRLN)
     {
     	press_key(0x28, 0x03); // ENTER key
-    	MY_UNIMPLEMENTED();//osDelay(defaultdelay_value);
+    	vTaskDelay(pdMS_TO_TICKS(defaultdelay_value));
     	release_key(0x28, 0x03);
-    	MY_UNIMPLEMENTED();//osDelay(defaultdelay_value);
+    	vTaskDelay(pdMS_TO_TICKS(defaultdelay_value));
     }
   }
   else if(this_opcode == OP_EMUK)
@@ -471,12 +471,12 @@ void execute_instruction(uint16_t curr_pc, ds3_exe_result* exe, uint8_t keynum)
   else if(this_opcode == OP_KDOWN)
   {
   	press_key(byte0, byte1);
-  	MY_UNIMPLEMENTED();//osDelay(defaultdelay_value);
+  	vTaskDelay(pdMS_TO_TICKS(defaultdelay_value));
   }
   else if(this_opcode == OP_KUP)
   {
   	release_key(byte0, byte1);
-  	MY_UNIMPLEMENTED();//osDelay(defaultdelay_value);
+  	vTaskDelay(pdMS_TO_TICKS(defaultdelay_value));
   }
   else if(this_opcode == OP_MMOV)
   {
@@ -485,7 +485,7 @@ void execute_instruction(uint16_t curr_pc, ds3_exe_result* exe, uint8_t keynum)
     kk.code2 = byte0;
     kk.type = KEY_TYPE_MOUSE_MOVEMENT;
     keyboard_press(&kk, 0);
-    MY_UNIMPLEMENTED();//osDelay(defaultdelay_value);
+    vTaskDelay(pdMS_TO_TICKS(defaultdelay_value));
   }
   else if(this_opcode == OP_DELAY)
   {
@@ -496,7 +496,7 @@ void execute_instruction(uint16_t curr_pc, ds3_exe_result* exe, uint8_t keynum)
       exe->result = op_result;
       return;
     }
-    MY_UNIMPLEMENTED();//osDelay(delay_amount);
+    vTaskDelay(pdMS_TO_TICKS(delay_amount));
   }
   else if(this_opcode == OP_MSCL)
   {
@@ -505,7 +505,7 @@ void execute_instruction(uint16_t curr_pc, ds3_exe_result* exe, uint8_t keynum)
     kk.code2 = 0;
     kk.type = KEY_TYPE_MOUSE_WHEEL;
     keyboard_press(&kk, 0);
-    MY_UNIMPLEMENTED();//osDelay(defaultdelay_value);
+    vTaskDelay(pdMS_TO_TICKS(defaultdelay_value));
   }
   else if(this_opcode == OP_SWCC)
   {
@@ -526,7 +526,7 @@ void execute_instruction(uint16_t curr_pc, ds3_exe_result* exe, uint8_t keynum)
   else if(this_opcode == OP_OLP)
   {
     char* str_buf = make_str(op_data);
-    MY_UNIMPLEMENTED();//ssd1306_WriteString(str_buf, Font_6x10,White);
+    ssd1306_WriteString(str_buf, Font_7x10, White);
   }
   else if(this_opcode == OP_OLU)
   {
@@ -538,7 +538,7 @@ void execute_instruction(uint16_t curr_pc, ds3_exe_result* exe, uint8_t keynum)
   }
   else if(this_opcode == OP_OLR)
   {
-    MY_UNIMPLEMENTED();//print_legend();
+    draw_profile(&all_profile_info[current_profile_number]);
   }
   else if(this_opcode == OP_BCLR)
   {
