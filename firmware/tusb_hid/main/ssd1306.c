@@ -540,4 +540,5 @@ void ssd1306_SetContrast(const uint8_t value)
     ssd1306_write_cmd_byte(SSD1306_SETCONTRAST);
     ssd1306_write_cmd_byte(value);
     current_contrast = value;
+    printf("OLED SC: %d\n", value);
 }

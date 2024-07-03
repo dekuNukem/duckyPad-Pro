@@ -120,22 +120,22 @@ void keypress_task(void *dummy)
     rotary_encoder_event_t re_event = { 0 };
     if (xQueueReceive(rotary_encoder_event_queue, &re_event, 0) == pdTRUE)
     {
-      ssd1306_SetContrast(OLED_CONTRAST_BRIGHT);
       printf("Event: id: %d pos: %ld, dir: %d\n", re_event.state.id, re_event.state.position, re_event.state.direction);
       last_keypress = pdTICKS_TO_MS(xTaskGetTickCount());
       if(re_event.state.direction == ROTARY_ENCODER_DIRECTION_CLOCKWISE)
         goto_next_profile();
       else if(re_event.state.direction == ROTARY_ENCODER_DIRECTION_COUNTER_CLOCKWISE)
         goto_prev_profile();
+      ssd1306_SetContrast(OLED_CONTRAST_BRIGHT);
     }
 
     switch_event_t sw_event = { 0 };
     if (xQueueReceive(switch_event_queue, &sw_event, 0) == pdTRUE)
     {
-      ssd1306_SetContrast(OLED_CONTRAST_BRIGHT);
       printf("id: %d type: %d\n", sw_event.id, sw_event.type);
       handle_keyevent(sw_event.id, sw_event.type);
       last_keypress = pdTICKS_TO_MS(xTaskGetTickCount());
+      ssd1306_SetContrast(OLED_CONTRAST_BRIGHT);
     }
     vTaskDelay(pdMS_TO_TICKS(25));
   }
