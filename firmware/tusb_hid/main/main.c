@@ -37,7 +37,7 @@ void app_main(void)
     oled_init();
     if(sd_init())
     {
-        print_nosd();
+        draw_nosd();
         while(1){vTaskDelay(pdMS_TO_TICKS(250));}
     }
     
@@ -49,7 +49,7 @@ void app_main(void)
     uint8_t pscan_result = scan_profiles();
     if(pscan_result == PSCAN_ERROR_NO_PROFILE)
     {
-        print_noprofile();
+        draw_noprofile();
         error_loop();
     }
 

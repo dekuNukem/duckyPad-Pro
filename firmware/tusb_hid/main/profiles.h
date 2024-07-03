@@ -42,6 +42,7 @@ typedef struct
 extern profile_info all_profile_info[MAX_PROFILES];
 extern dp_global_settings dp_settings;
 extern uint8_t current_profile_number;
+extern char temp_buf[TEMP_BUFSIZE];
 
 uint8_t load_settings(dp_global_settings* dps);
 uint8_t scan_profiles();

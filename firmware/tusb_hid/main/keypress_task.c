@@ -15,9 +15,18 @@
 #include "ssd1306.h"
 #include "esp_mac.h"
 #include "keypress_task.h"
+#include "unistd.h"
 
 void handle_keydown(uint8_t swid)
 {
+  memset(temp_buf, 0, TEMP_BUFSIZE);
+  sprintf(temp_buf, "/sdcard/%s/key%d.dsb", all_profile_info[current_profile_number].dir_path, swid+1);
+  if(access(temp_buf, F_OK))
+  {
+    printf("file does not exist: %s\n", temp_buf);
+    
+    return;
+  }
   play_keydown_animation(current_profile_number, swid);
 }
 

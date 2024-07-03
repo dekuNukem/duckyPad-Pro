@@ -17,9 +17,8 @@
 extern spi_device_handle_t my_spi_handle;
 
 void oled_init(void);
-void print_nosd(void);
-void print_noprofile(void);
-void print_nomemory(void);
+void draw_nosd(void);
+void draw_noprofile(void);
 void draw_profile(profile_info* this_profile);
 void draw_settings(dp_global_settings *dps);
 

@@ -61,7 +61,7 @@ uint8_t center_line(uint8_t line_len, uint8_t char_width_pixels, uint8_t oled_wi
 #define OLED_LINE_BUF_SIZE 32
 char oled_line_buf[OLED_LINE_BUF_SIZE];
 
-void print_nosd(void)
+void draw_nosd(void)
 {
     ssd1306_Fill(Black);
 
@@ -98,7 +98,7 @@ void print_nosd(void)
     ssd1306_UpdateScreen();
 }
 
-void print_noprofile(void)
+void draw_noprofile(void)
 {
     ssd1306_Fill(Black);
 

@@ -44,6 +44,10 @@
     "chrono": "c",
     "stat.h": "c",
     "queue.h": "c",
-    "profiles.h": "c"
+    "profiles.h": "c",
+    "keypress_task.h": "c",
+    "unistd.h": "c",
+    "limits": "c",
+    "functional": "c"
   }
 }
