@@ -62,6 +62,16 @@ void draw_red(void)
   neopixel_draw_current_buffer();
 }
 
+void neopixel_off(void)
+{
+  for (int i = 0; i < NEOPIXEL_COUNT; ++i)
+  {
+    neo_anime[i].animation_type = ANIMATION_NONE;
+    set_pixel_3color(i, 0, 0, 0);
+  }
+  neopixel_draw_current_buffer();
+}
+
 void redraw_bg(uint8_t profile_number)
 {
   for (int i = 0; i < NEOPIXEL_COUNT; ++i)
@@ -86,11 +96,6 @@ void neopixel_init(void)
   led_strip_clear(my_led_strip);
 
   neopixel_mutex = xSemaphoreCreateMutex();
-}
-
-void neopixel_off(void)
-{
-  led_strip_clear(my_led_strip);
 }
 
 void led_start_animation(led_animation* anime_struct, uint8_t dest_color[THREE], uint8_t anime_type, uint8_t durations_frames)
