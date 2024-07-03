@@ -35,6 +35,7 @@ word_list = [
 ]
 
 word_list = list(set(word_list))
+dsb_path = "./out.dsb"
 
 def get_random_name():
 	return random.choice(word_list)
@@ -69,3 +70,7 @@ for x in range(0, profile_number + 1):
 		script_content = 'STRING ' + get_random_name() + '\nENTER\n'
 		with open(script_name, 'w') as script_file:
 			script_file.write(script_content)
+
+		dsb_name = os.path.join(profile_dir_name, 'key' + str(y) + '.dsb')
+		print(dsb_name)
+		shutil.copyfile(dsb_path, dsb_name)

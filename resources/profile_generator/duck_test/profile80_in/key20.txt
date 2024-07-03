@@ -1,0 +1,2 @@
+STRING lamp
+ENTER
