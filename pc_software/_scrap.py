@@ -5,7 +5,18 @@ DELAY 20
 REM_BLOCK
 GUI
 END_REM
+# def debug_set_root_folder():
+#     global profile_list
+#     global dp_root_folder_path
+#     dir_result = "/Users/allen/Desktop/sample_profiles"
+#     # dir_result = "/Users/allen/Desktop/empty"
+#     dp_root_folder_path= dir_result
+#     dp_root_folder_display.set("Selected: " + dir_result)
+#     root_folder_path_label.config(foreground='navy')
 
+#     profile_list = duck_objs.build_profile(dir_result)
+#     update_profile_display()
+#     enable_buttons()
  # or result in [x.name for x in profile_list[profile_index].keylist if x is not None]
  
 def get_clean_key_name_2lines(user_text):
