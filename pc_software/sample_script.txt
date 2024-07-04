@@ -1,3 +1,28 @@
-KEYDOWN CTRL
-DELAY 10
-KEYUP CTRL
+FUNCTION wait_keypress()
+    VAR $k = 0
+    WHILE $k == 0
+        $k = $_READKEY
+        DELAY 50
+    END_WHILE
+END_FUNCTION
+
+OLED_CLEAR
+OLED_CURSOR 0 0
+OLED_PRINT READY
+OLED_UPDATE
+
+VAR $row = 1
+VAR $col = 1
+INJECT_MOD ALT
+WHILE $row <= 5
+    WHILE $col <= 4
+        // wait_keypress()
+        STRINGLN WTFSW_R$rowC$col
+        $col = $col + 1
+    END_WHILE
+    $row = $row + 1
+END_WHILE
+
+OLED_RESTORE
+
+

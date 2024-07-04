@@ -4,7 +4,6 @@ import json
 import socket
 import urllib.request
 
-MAX_KEY_COUNT = 20
 MAX_PROFILE_COUNT = 64
 
 class dp_key(object):
@@ -84,10 +83,9 @@ class dp_profile(object):
 	def read_keys(self, path):
 		key_file_list = [x for x in os.listdir(path) if x.endswith('.txt') and x.startswith('key') and x[3].isnumeric()]
 		key_file_list.sort(key=lambda s: int(s[3:].split("_")[0].split(".txt")[0])) # sort by number not by letter
-		print(key_file_list)
+		# print(key_file_list)
 		for item in key_file_list:
 			this_key = dp_key(os.path.join(path, item))
-			print("wtf", this_key.index)
 			self.keylist[this_key.index - 1] = this_key
 
 	def read_config(self, path):
@@ -136,7 +134,7 @@ class dp_profile(object):
 
 	def __init__(self):
 		super(dp_profile, self).__init__()
-		self.key_count = MAX_KEY_COUNT
+		self.key_count = 15
 		self.path = None
 		self.name = None
 		self.keylist = [None] * self.key_count
