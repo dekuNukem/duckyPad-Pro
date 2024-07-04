@@ -40,7 +40,7 @@ class dp_key(object):
 		return ret
 
 	def get_keyname(self, path, index):
-		ret = 'ERR' + str(index)
+		ret = '???' + str(index)
 		try:
 			with open(os.path.join(os.path.dirname(path), "config.txt")) as ffffff:
 				for line in ffffff:

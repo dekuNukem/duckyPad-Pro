@@ -718,6 +718,8 @@ def save_everything(save_path):
                 if this_key is None:
                     continue
                 config_file.write('z' + str(this_key.index) + ' ' + str(this_key.name) + '\n')
+                if this_key.name_line2 is not None and len(this_key.name_line2) > 0:
+                    config_file.write('x' + str(this_key.index) + ' ' + str(this_key.name_line2) + '\n')
 
             config_file.write('BG_COLOR %d %d %d\n' % (this_profile.bg_color))
             if this_profile.kd_color is not None:

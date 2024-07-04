@@ -13,7 +13,8 @@ z12 sysInfo
 z13 taskViw
 z14 DS3
 z15 ???
-z20 hshs
+z18 hshs
+x18 jhjg
 BG_COLOR 64 53 255
 SWCOLOR_1 160 0 255
 SWCOLOR_2 160 0 255
