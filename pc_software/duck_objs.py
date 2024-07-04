@@ -3,6 +3,7 @@ import sys
 import json
 import socket
 import urllib.request
+from shared import *
 
 MAX_PROFILE_COUNT = 64
 
@@ -134,7 +135,7 @@ class dp_profile(object):
 
 	def __init__(self):
 		super(dp_profile, self).__init__()
-		self.key_count = 15
+		self.key_count = MECH_OBSW_COUNT
 		self.path = None
 		self.name = None
 		self.keylist = [None] * self.key_count

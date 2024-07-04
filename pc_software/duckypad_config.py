@@ -20,6 +20,7 @@ import hid_op
 import threading
 import ds3_preprocessor
 import make_bytecode
+from shared import *
 
 """
 0.13.5
@@ -495,7 +496,7 @@ def update_profile_display():
 
 def update_key_button_appearances(profile_index):
     if profile_index is None:
-        for x in range(15):
+        for x in range(MECH_OBSW_COUNT):
             key_button_list[x].config(background=default_button_color, text='')
         return
     for count, item in enumerate(profile_list[profile_index].keylist):
@@ -985,14 +986,9 @@ def button_drag_release(event):
     drag_source_button_index = None
     drag_destination_button_index = None
 
-SW_MATRIX_NUM_COLS = 4
-SW_MATRIX_NUM_ROWS = 5
-MECH_OBSW_COUNT = (SW_MATRIX_NUM_COLS * SW_MATRIX_NUM_ROWS)
-
-
 KEY_BUTTON_HEADROOM = scaled_size(20)
 KEY_BUTTON_WIDTH = scaled_size(60)
-KEY_BUTTON_HEIGHT = scaled_size(50)
+KEY_BUTTON_HEIGHT = scaled_size(45)
 KEY_BUTTON_GAP = int((keys_lf.winfo_width() - SW_MATRIX_NUM_COLS * KEY_BUTTON_WIDTH) / 5)
 
 key_button_xy_list = [
@@ -1023,9 +1019,8 @@ key_button_xy_list = [
 (KEY_BUTTON_GAP*4+KEY_BUTTON_WIDTH*3,KEY_BUTTON_HEADROOM+PADDING*5+KEY_BUTTON_HEIGHT*4)
 ]
 
-
 key_button_list = []
-for x in range(15):
+for x in range(MECH_OBSW_COUNT):
     this_button = Label(master=keys_lf, borderwidth=1, relief="solid", background=default_button_color, font=(None, 13))
 
     this_button.place(x=key_button_xy_list[x][0], y=key_button_xy_list[x][1], width=KEY_BUTTON_WIDTH, height=KEY_BUTTON_HEIGHT)
@@ -1044,8 +1039,6 @@ def key_name_entrybox_return_pressed(event):
 key_name_entrybox = Entry(keys_lf, state=DISABLED)
 key_name_entrybox.place(x=key_name_text.winfo_width() + PADDING, y=scaled_size(305), width=scaled_size(145))
 key_name_entrybox.bind('<Return>', key_name_entrybox_return_pressed)
-
-KEY_BUTTON_GAP = int((keys_lf.winfo_width() - 2 * BUTTON_WIDTH) / 3.5)
 
 def key_rename_click():
     if is_key_selected() == False:
@@ -1072,14 +1065,16 @@ def key_remove_click():
     update_key_button_appearances(profile_index)
     key_button_click(key_button_list[selected_key])
 
+KEY_NAME_BUTTON_GAP = int((keys_lf.winfo_width() - 2 * BUTTON_WIDTH) / 3.5)
+
 key_rename_button = Button(keys_lf, text="Apply", command=key_rename_click, state=DISABLED, fg="green")
-key_rename_button.place(x=KEY_BUTTON_GAP, y=scaled_size(340), width=BUTTON_WIDTH, height=BUTTON_HEIGHT)
+key_rename_button.place(x=scaled_size(KEY_NAME_BUTTON_GAP), y=scaled_size(370), width=BUTTON_WIDTH, height=BUTTON_HEIGHT)
 root.update()
 key_remove_button = Button(keys_lf, text="Remove", command=key_remove_click, state=DISABLED, fg="red")
-key_remove_button.place(x=KEY_BUTTON_GAP*2+key_rename_button.winfo_width(), y=scaled_size(340), width=BUTTON_WIDTH, height=BUTTON_HEIGHT)
+key_remove_button.place(x=scaled_size(KEY_NAME_BUTTON_GAP*2+key_rename_button.winfo_width()), y=scaled_size(370), width=BUTTON_WIDTH, height=BUTTON_HEIGHT)
 
 key_color_text = Label(master=keys_lf, text="Key color:", fg='grey')
-key_color_text.place(x=PADDING, y=scaled_size(380))
+key_color_text.place(x=scaled_size(PADDING), y=scaled_size(400))
 root.update()
 
 def key_color_rb1_click():
@@ -1125,12 +1120,12 @@ def key_color_button_click(event):
 
 key_color_type_var = IntVar()
 key_color_rb1 = Radiobutton(keys_lf, text="Same as background", variable=key_color_type_var, value=0, command=key_color_rb1_click,state=DISABLED)
-key_color_rb1.place(x=scaled_size(85), y=scaled_size(380))
+key_color_rb1.place(x=scaled_size(85), y=scaled_size(400))
 key_color_rb2 = Radiobutton(keys_lf, text="", variable=key_color_type_var, value=1, command=key_color_rb2_click, state=DISABLED)
-key_color_rb2.place(x=scaled_size(85), y=scaled_size(405))
+key_color_rb2.place(x=scaled_size(85), y=scaled_size(425))
 
 key_color_button = Label(master=keys_lf, borderwidth=1, relief="solid")
-key_color_button.place(x=scaled_size(135), y=scaled_size(407), width=scaled_size(60), height=scaled_size(20))
+key_color_button.place(x=scaled_size(135), y=scaled_size(425), width=scaled_size(60), height=scaled_size(20))
 key_color_button.bind("<Button-1>", key_color_button_click)
 
 # ------------- Scripts frame -------------
