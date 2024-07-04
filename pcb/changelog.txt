@@ -1,0 +1,9 @@
+rev 2 to rev 3
+2024 07 04
+
+removed external SPI memory / PSRAM
+removed power switch cutout
+added power switch bypass pad jumper?
+
+TODO:
+
