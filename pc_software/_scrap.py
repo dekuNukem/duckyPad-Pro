@@ -1,3 +1,18 @@
+# def debug_set_root_folder():
+#     global profile_list
+#     global dp_root_folder_path
+#     dir_result = "/Users/allen/Desktop/sample_profiles"
+#     # dir_result = "/Users/allen/Desktop/empty"
+#     dp_root_folder_path= dir_result
+#     dp_root_folder_display.set("Selected: " + dir_result)
+#     root_folder_path_label.config(foreground='navy')
+
+#     profile_list = duck_objs.build_profile(dir_result)
+#     update_profile_display()
+#     enable_buttons()
+# if os.name == 'posix':
+#     debug_set_root_folder()
+# root.iconbitmap('icon.ico')  
 REM_BLOCK
 ESC
 END_REM

@@ -430,19 +430,6 @@ def enable_buttons():
     sleepmode_slider.set(dp_settings.sleep_after_minutes)
     profile_import_button.config(state=NORMAL)
 
-# def debug_set_root_folder():
-#     global profile_list
-#     global dp_root_folder_path
-#     dir_result = "/Users/allen/Desktop/sample_profiles"
-#     # dir_result = "/Users/allen/Desktop/empty"
-#     dp_root_folder_path= dir_result
-#     dp_root_folder_display.set("Selected: " + dir_result)
-#     root_folder_path_label.config(foreground='navy')
-
-#     profile_list = duck_objs.build_profile(dir_result)
-#     update_profile_display()
-#     enable_buttons()
-
 def profile_shift_up():
     global profile_var
     global profile_list
@@ -1341,7 +1328,7 @@ def on_closing():
 root.protocol("WM_DELETE_WINDOW", on_closing)
 
 root.after(500, repeat_func)
-# if os.name == 'posix':
-#     debug_set_root_folder()
-# root.iconbitmap('icon.ico')    
+
+# select_root_folder("sample_profiles")
+
 root.mainloop()
