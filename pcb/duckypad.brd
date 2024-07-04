@@ -29,14 +29,14 @@
 <layer number="18" name="Vias" color="2" fill="1" visible="yes" active="yes"/>
 <layer number="19" name="Unrouted" color="6" fill="1" visible="yes" active="yes"/>
 <layer number="20" name="Dimension" color="15" fill="1" visible="yes" active="yes"/>
-<layer number="21" name="tPlace" color="7" fill="1" visible="yes" active="yes"/>
-<layer number="22" name="bPlace" color="7" fill="1" visible="yes" active="yes"/>
+<layer number="21" name="tPlace" color="7" fill="1" visible="no" active="yes"/>
+<layer number="22" name="bPlace" color="7" fill="1" visible="no" active="yes"/>
 <layer number="23" name="tOrigins" color="15" fill="1" visible="yes" active="yes"/>
 <layer number="24" name="bOrigins" color="15" fill="1" visible="yes" active="yes"/>
-<layer number="25" name="tNames" color="7" fill="1" visible="yes" active="yes"/>
-<layer number="26" name="bNames" color="7" fill="1" visible="yes" active="yes"/>
-<layer number="27" name="tValues" color="7" fill="1" visible="yes" active="yes"/>
-<layer number="28" name="bValues" color="7" fill="1" visible="yes" active="yes"/>
+<layer number="25" name="tNames" color="7" fill="1" visible="no" active="yes"/>
+<layer number="26" name="bNames" color="7" fill="1" visible="no" active="yes"/>
+<layer number="27" name="tValues" color="7" fill="1" visible="no" active="yes"/>
+<layer number="28" name="bValues" color="7" fill="1" visible="no" active="yes"/>
 <layer number="29" name="tStop" color="7" fill="3" visible="no" active="yes"/>
 <layer number="30" name="bStop" color="7" fill="6" visible="no" active="yes"/>
 <layer number="31" name="tCream" color="7" fill="4" visible="no" active="yes"/>
@@ -59,8 +59,8 @@
 <layer number="48" name="Document" color="7" fill="1" visible="no" active="yes"/>
 <layer number="49" name="Reference" color="7" fill="1" visible="no" active="yes"/>
 <layer number="50" name="dxf" color="7" fill="1" visible="no" active="no"/>
-<layer number="51" name="tDocu" color="7" fill="1" visible="yes" active="yes"/>
-<layer number="52" name="bDocu" color="7" fill="1" visible="yes" active="yes"/>
+<layer number="51" name="tDocu" color="7" fill="1" visible="no" active="yes"/>
+<layer number="52" name="bDocu" color="7" fill="1" visible="no" active="yes"/>
 <layer number="53" name="tGND_GNDA" color="7" fill="9" visible="no" active="no"/>
 <layer number="54" name="bGND_GNDA" color="1" fill="9" visible="no" active="no"/>
 <layer number="56" name="wert" color="7" fill="1" visible="no" active="no"/>
@@ -531,43 +531,6 @@ EC12E series with push-on switch</description>
 </package>
 </packages>
 </library>
-<library name="oled">
-<description>Generated from &lt;b&gt;pmm.sch&lt;/b&gt;&lt;p&gt;
-by exp-lbrs.ulp</description>
-<packages>
-<package name="LUL_UG-2864HSWEG01_1.3_WRAPAROUND">
-<smd name="1" x="-2.75" y="-0.22" dx="1.28" dy="0.31" layer="16" rot="R90"/>
-<smd name="2" x="-2.25" y="-0.22" dx="1.28" dy="0.31" layer="16" rot="R90"/>
-<smd name="3" x="-1.75" y="-0.22" dx="1.28" dy="0.31" layer="16" rot="R90"/>
-<smd name="4" x="-1.25" y="-0.22" dx="1.28" dy="0.31" layer="16" rot="R90"/>
-<smd name="5" x="-0.75" y="-0.22" dx="1.28" dy="0.31" layer="16" rot="R90"/>
-<smd name="6" x="-0.25" y="-0.22" dx="1.28" dy="0.31" layer="16" rot="R90"/>
-<smd name="7" x="0.25" y="-0.22" dx="1.28" dy="0.31" layer="16" rot="R90"/>
-<smd name="8" x="0.75" y="-0.22" dx="1.28" dy="0.31" layer="16" rot="R90"/>
-<smd name="9" x="1.25" y="-0.22" dx="1.28" dy="0.31" layer="16" rot="R90"/>
-<smd name="10" x="1.75" y="-0.22" dx="1.28" dy="0.31" layer="16" rot="R90"/>
-<smd name="11" x="2.25" y="-0.22" dx="1.28" dy="0.31" layer="16" rot="R90"/>
-<smd name="12" x="2.75" y="-0.22" dx="1.28" dy="0.31" layer="16" rot="R90"/>
-<smd name="31" x="-4.95" y="-2.46" dx="3" dy="3.5" layer="16" rot="R90"/>
-<smd name="32" x="4.95" y="-2.46" dx="3" dy="3.5" layer="16" rot="R90"/>
-<text x="-2.75" y="0.796" size="0.8128" layer="52" font="vector" rot="R90">1</text>
-<text x="3.6" y="0.796" size="0.8128" layer="52" font="vector" rot="R90">12</text>
-<wire x1="6" y1="-18.703" x2="6" y2="-13.59" width="0.127" layer="51"/>
-<wire x1="6" y1="-13.59" x2="17.25" y2="-13.59" width="0.127" layer="51"/>
-<wire x1="17.25" y1="-13.59" x2="17.25" y2="23.91" width="0.127" layer="21"/>
-<wire x1="17.25" y1="23.91" x2="-17.25" y2="23.91" width="0.127" layer="21"/>
-<wire x1="-17.25" y1="23.91" x2="-17.25" y2="-13.59" width="0.127" layer="21"/>
-<wire x1="-17.25" y1="-13.59" x2="-6" y2="-13.59" width="0.127" layer="51"/>
-<wire x1="-6" y1="-13.59" x2="-6" y2="-18.703" width="0.127" layer="51"/>
-<polygon width="0.254" layer="46">
-<vertex x="-7.65" y="-18.22"/>
-<vertex x="-7.65" y="-17.22"/>
-<vertex x="7.65" y="-17.22"/>
-<vertex x="7.65" y="-18.22"/>
-</polygon>
-</package>
-</packages>
-</library>
 <library name="adafruit_changed">
 <packages>
 <package name="U.FL">
@@ -789,9 +752,40 @@ by exp-lbrs.ulp</description>
 <smd name="8" x="2.5" y="1.925" dx="0.6" dy="1.55" layer="1" thermals="no"/>
 <smd name="9" x="3.5" y="1.925" dx="0.6" dy="1.55" layer="1" thermals="no"/>
 <smd name="10" x="4.5" y="1.925" dx="0.6" dy="1.55" layer="1" thermals="no"/>
-<smd name="FIT@1" x="-6.1" y="-0.4" dx="1.2" dy="3" layer="1" thermals="no"/>
-<smd name="FIT@2" x="6.1" y="-0.4" dx="1.2" dy="3" layer="1" thermals="no"/>
+<smd name="FIT@1" x="-5.85" y="-0.4" dx="1.2" dy="3" layer="1" thermals="no"/>
+<smd name="FIT@2" x="5.85" y="-0.4" dx="1.2" dy="3" layer="1" thermals="no"/>
 <text x="-7.255" y="-1.905" size="1.27" layer="25" rot="R90">&gt;NAME</text>
+</package>
+<package name="OLED_LUL_UG-2864HSWEG01_1.3_WRAPAROUND">
+<wire x1="6" y1="-18.703" x2="6" y2="-13.59" width="0.127" layer="51"/>
+<wire x1="6" y1="-13.59" x2="17.25" y2="-13.59" width="0.127" layer="51"/>
+<wire x1="17.25" y1="-13.59" x2="17.25" y2="23.91" width="0.127" layer="21"/>
+<wire x1="17.25" y1="23.91" x2="-17.25" y2="23.91" width="0.127" layer="21"/>
+<wire x1="-17.25" y1="23.91" x2="-17.25" y2="-13.59" width="0.127" layer="21"/>
+<wire x1="-17.25" y1="-13.59" x2="-6" y2="-13.59" width="0.127" layer="51"/>
+<wire x1="-6" y1="-13.59" x2="-6" y2="-18.703" width="0.127" layer="51"/>
+<smd name="1" x="-2.75" y="-0.22" dx="1.28" dy="0.31" layer="16" rot="R90"/>
+<smd name="2" x="-2.25" y="-0.22" dx="1.28" dy="0.31" layer="16" rot="R90"/>
+<smd name="3" x="-1.75" y="-0.22" dx="1.28" dy="0.31" layer="16" rot="R90"/>
+<smd name="4" x="-1.25" y="-0.22" dx="1.28" dy="0.31" layer="16" rot="R90"/>
+<smd name="5" x="-0.75" y="-0.22" dx="1.28" dy="0.31" layer="16" rot="R90"/>
+<smd name="6" x="-0.25" y="-0.22" dx="1.28" dy="0.31" layer="16" rot="R90"/>
+<smd name="7" x="0.25" y="-0.22" dx="1.28" dy="0.31" layer="16" rot="R90"/>
+<smd name="8" x="0.75" y="-0.22" dx="1.28" dy="0.31" layer="16" rot="R90"/>
+<smd name="9" x="1.25" y="-0.22" dx="1.28" dy="0.31" layer="16" rot="R90"/>
+<smd name="10" x="1.75" y="-0.22" dx="1.28" dy="0.31" layer="16" rot="R90"/>
+<smd name="11" x="2.25" y="-0.22" dx="1.28" dy="0.31" layer="16" rot="R90"/>
+<smd name="12" x="2.75" y="-0.22" dx="1.28" dy="0.31" layer="16" rot="R90"/>
+<smd name="31" x="-4.95" y="-2.46" dx="3" dy="3.5" layer="16" rot="R90"/>
+<smd name="32" x="4.95" y="-2.46" dx="3" dy="3.5" layer="16" rot="R90"/>
+<text x="-2.75" y="0.796" size="0.8128" layer="52" font="vector" rot="R90">1</text>
+<text x="3.6" y="0.796" size="0.8128" layer="52" font="vector" rot="R90">12</text>
+<polygon width="0.254" layer="46">
+<vertex x="-7.65" y="-19.22"/>
+<vertex x="-7.65" y="-18.22"/>
+<vertex x="7.65" y="-18.22"/>
+<vertex x="7.65" y="-19.22"/>
+</polygon>
 </package>
 </packages>
 </library>
@@ -1156,7 +1150,7 @@ These are the free and generally easy to produce 4-layer PCB design rules. You c
 <attribute name="PRICE" value="None" x="81.976" y="52.324" size="1.778" layer="28" rot="MR0" display="off"/>
 <attribute name="SNAPEDA_LINK" value="https://www.snapeda.com/parts/ESP32-S3FN8/Espressif+Systems/view-part/?ref=snap" x="81.976" y="52.324" size="1.778" layer="28" rot="MR0" display="off"/>
 </element>
-<element name="U$2" library="oled" package="LUL_UG-2864HSWEG01_1.3_WRAPAROUND" value="OLED128" x="92.75" y="31" smashed="yes"/>
+<element name="U$2" library="duckypad" package="OLED_LUL_UG-2864HSWEG01_1.3_WRAPAROUND" value="OLED_OLED128" x="92.75" y="31" smashed="yes"/>
 <element name="LED_R1C1" library="duckypad" package="REVERSE_MNT" value="WS2812B" x="11" y="91" smashed="yes" rot="R180"/>
 <element name="LED_R2C1" library="duckypad" package="REVERSE_MNT" value="WS2812B" x="11" y="72" smashed="yes"/>
 <element name="LED_R3C1" library="duckypad" package="REVERSE_MNT" value="WS2812B" x="11" y="53" smashed="yes" rot="R180"/>
@@ -1591,7 +1585,7 @@ These are the free and generally easy to produce 4-layer PCB design rules. You c
 <contactref element="U$3" pad="2"/>
 <contactref element="U$3" pad="FIT@2"/>
 <contactref element="U$3" pad="FIT@1"/>
-<wire x1="108.35" y1="5.584" x2="108.35" y2="17.784" width="2.032" layer="16"/>
+<wire x1="108.35" y1="5.834" x2="108.35" y2="17.534" width="2.032" layer="16"/>
 <via x="37.018" y="94.869" extent="1-16" drill="0.5"/>
 <via x="12.126" y="77.089" extent="1-16" drill="0.5"/>
 <via x="31.684" y="77.089" extent="1-16" drill="0.5"/>
@@ -2873,15 +2867,13 @@ These are the free and generally easy to produce 4-layer PCB design rules. You c
 <wire x1="100.965" y1="25.666" x2="102.3245" y2="25.666" width="0.1524" layer="16"/>
 <wire x1="100.965" y1="26.543" x2="100.965" y2="25.666" width="0.1524" layer="16"/>
 <contactref element="U3" pad="22"/>
-<wire x1="81.776" y1="48.879" x2="81.776" y2="13.347" width="0.2032" layer="16"/>
-<wire x1="83.566" y1="11.557" x2="100.965" y2="11.557" width="0.2032" layer="16"/>
-<wire x1="100.965" y1="11.557" x2="101.727" y2="12.319" width="0.2032" layer="16"/>
-<wire x1="101.727" y1="13.97" x2="99.2378" y2="16.4592" width="0.1524" layer="16"/>
+<wire x1="81.776" y1="13.855" x2="81.776" y2="48.879" width="0.2032" layer="16"/>
 <wire x1="100.1388" y1="25.666" x2="100.965" y2="25.666" width="0.1524" layer="16"/>
-<wire x1="81.776" y1="13.347" x2="83.566" y2="11.557" width="0.2032" layer="16"/>
-<wire x1="101.727" y1="12.319" x2="101.727" y2="13.97" width="0.2032" layer="16"/>
-<wire x1="99.2378" y1="24.765" x2="100.1388" y2="25.666" width="0.1524" layer="16"/>
-<wire x1="99.2378" y1="24.765" x2="99.2378" y2="16.4592" width="0.1524" layer="16"/>
+<wire x1="100.1388" y1="25.666" x2="99.2378" y2="24.765" width="0.1524" layer="16"/>
+<wire x1="99.2378" y1="14.2748" x2="98.425" y2="13.462" width="0.1524" layer="16"/>
+<wire x1="98.425" y1="13.462" x2="82.169" y2="13.462" width="0.1524" layer="16"/>
+<wire x1="82.169" y1="13.462" x2="81.776" y2="13.855" width="0.1524" layer="16"/>
+<wire x1="99.2378" y1="24.765" x2="99.2378" y2="14.2748" width="0.1524" layer="16"/>
 </signal>
 <signal name="AUX_DN">
 <contactref element="U1" pad="B7"/>
@@ -2892,15 +2884,13 @@ These are the free and generally easy to produce 4-layer PCB design rules. You c
 <wire x1="103.509" y1="26.166" x2="102.3245" y2="26.166" width="0.1524" layer="16"/>
 <wire x1="103.759" y1="26.416" x2="103.509" y2="26.166" width="0.1524" layer="16"/>
 <contactref element="U3" pad="21"/>
-<wire x1="82.176" y1="13.709" x2="83.7692" y2="12.1158" width="0.2032" layer="16"/>
-<wire x1="83.7692" y1="12.1158" x2="100.6348" y2="12.1158" width="0.2032" layer="16"/>
-<wire x1="100.6348" y1="12.1158" x2="101.092" y2="12.573" width="0.2032" layer="16"/>
-<wire x1="101.092" y1="12.573" x2="101.092" y2="13.97" width="0.2032" layer="16"/>
-<wire x1="98.8822" y1="16.1798" x2="101.092" y2="13.97" width="0.1524" layer="16"/>
-<wire x1="82.176" y1="48.879" x2="82.176" y2="13.709" width="0.2032" layer="16"/>
+<wire x1="82.176" y1="48.879" x2="82.176" y2="14.598" width="0.2032" layer="16"/>
 <wire x1="102.3245" y1="27.166" x2="100.953" y2="27.166" width="0.1524" layer="16"/>
 <wire x1="100.953" y1="27.166" x2="98.8822" y2="25.0952" width="0.1524" layer="16"/>
-<wire x1="98.8822" y1="25.0952" x2="98.8822" y2="16.1798" width="0.1524" layer="16"/>
+<wire x1="98.8822" y1="14.6812" x2="98.171" y2="13.97" width="0.1524" layer="16"/>
+<wire x1="98.171" y1="13.97" x2="82.804" y2="13.97" width="0.1524" layer="16"/>
+<wire x1="82.804" y1="13.97" x2="82.176" y2="14.598" width="0.1524" layer="16"/>
+<wire x1="98.8822" y1="25.0952" x2="98.8822" y2="14.6812" width="0.1524" layer="16"/>
 </signal>
 <signal name="N$28">
 <contactref element="SW4" pad="P$3"/>
@@ -2925,11 +2915,11 @@ These are the free and generally easy to produce 4-layer PCB design rules. You c
 <contactref element="U3" pad="23"/>
 <contactref element="SW1" pad="B"/>
 <contactref element="SW1" pad="B'"/>
-<wire x1="83.3628" y1="10.9982" x2="101.5492" y2="10.9982" width="0.2032" layer="16"/>
-<wire x1="101.5492" y1="10.9982" x2="101.981" y2="11.43" width="0.2032" layer="16"/>
+<wire x1="83.2358" y1="11.1252" x2="101.6762" y2="11.1252" width="0.2032" layer="16"/>
+<wire x1="101.6762" y1="11.1252" x2="101.981" y2="11.43" width="0.2032" layer="16"/>
 <via x="101.981" y="11.43" extent="1-16" drill="0.5"/>
 <wire x1="81.376" y1="48.879" x2="81.376" y2="12.985" width="0.2032" layer="16"/>
-<wire x1="81.376" y1="12.985" x2="83.3628" y2="10.9982" width="0.2032" layer="16"/>
+<wire x1="81.376" y1="12.985" x2="83.2358" y2="11.1252" width="0.2032" layer="16"/>
 <wire x1="97.1" y1="5" x2="97.1" y2="7.62" width="0.3048" layer="1"/>
 <wire x1="102.616" y1="5" x2="103.9" y2="5" width="0.3048" layer="1"/>
 <wire x1="97.1" y1="7.62" x2="100.33" y2="7.62" width="0.3048" layer="1"/>
@@ -3095,9 +3085,9 @@ These are the free and generally easy to produce 4-layer PCB design rules. You c
 <wire x1="105.41" y1="24.638" x2="104.648" y2="25.4" width="0.508" layer="16"/>
 <wire x1="105.41" y1="16.799" x2="105.41" y2="24.638" width="0.508" layer="16"/>
 <wire x1="78.5" y1="91.35" x2="78.5" y2="88.9" width="0.6096" layer="2"/>
-<wire x1="78.5" y1="88.9" x2="79.756" y2="88.9" width="0.6096" layer="2"/>
-<wire x1="79.756" y1="88.9" x2="82.042" y2="91.186" width="0.6096" layer="2"/>
-<wire x1="82.042" y1="91.186" x2="84.836" y2="91.186" width="0.6096" layer="2"/>
+<wire x1="78.5" y1="88.9" x2="81.026" y2="88.9" width="0.6096" layer="2"/>
+<wire x1="81.026" y1="88.9" x2="83.312" y2="91.186" width="0.6096" layer="2"/>
+<wire x1="83.312" y1="91.186" x2="84.836" y2="91.186" width="0.6096" layer="2"/>
 <wire x1="84.836" y1="91.186" x2="86.36" y2="92.71" width="0.6096" layer="2"/>
 <wire x1="86.36" y1="92.71" x2="89.662" y2="92.71" width="0.6096" layer="2"/>
 <wire x1="89.662" y1="92.71" x2="90.424" y2="91.948" width="0.6096" layer="2"/>
@@ -3149,8 +3139,6 @@ These are the free and generally easy to produce 4-layer PCB design rules. You c
 <approved hash="8,16,4643c9857c738f8d"/>
 <approved hash="4,1,1a334f1e389e32e8"/>
 <approved hash="4,1,5850e31bc30cdd8d"/>
-<approved hash="4,16,b2d94cc9a3ae5d5e"/>
-<approved hash="4,16,f54b0b7befd011c0"/>
 <approved hash="4,16,d2d6dfe69671eff3"/>
 <approved hash="4,16,1a35eb95da36269a"/>
 <approved hash="4,16,d57af7e622e662e2"/>
@@ -3172,8 +3160,6 @@ These are the free and generally easy to produce 4-layer PCB design rules. You c
 <approved hash="6,16,2b012b09cbf5cbfd"/>
 <approved hash="6,16,c7e37e1cb3557719"/>
 <approved hash="6,16,b14db12e9d529d31"/>
-<approved hash="6,16,041204e1fe1dfeee"/>
-<approved hash="6,16,c4a1099cb538fcdb"/>
 <approved hash="6,16,4e1d404eaa32a461"/>
 <approved hash="6,16,927b06289aecf2df"/>
 <approved hash="6,16,5443f009b3a864f5"/>
@@ -3191,19 +3177,39 @@ These are the free and generally easy to produce 4-layer PCB design rules. You c
 <approved hash="6,16,9aa69b469f869e66"/>
 <approved hash="6,16,7a97c98b40a78f83"/>
 <approved hash="6,16,6e9f71a7f4722c85"/>
-<approved hash="6,1,ffb0fd7c436a41a6"/>
-<approved hash="6,1,86f84b95d7ab6926"/>
-<approved hash="6,1,1db71f7b916d93a1"/>
-<approved hash="6,1,fc225e34be7f9d05"/>
-<approved hash="6,1,6b9dc8d8bb2bd6a8"/>
-<approved hash="6,1,2965346493aa6556"/>
-<approved hash="6,16,ffb0fd7c436a41a6"/>
-<approved hash="6,16,1db71f7b916d93a1"/>
 <approved hash="6,1,a09e533166faa0b3"/>
 <approved hash="6,1,f956970cd14e9bd4"/>
 <approved hash="6,1,25e23b69b930d7b7"/>
 <approved hash="6,1,a0cf6166270d9633"/>
 <approved hash="6,1,d063bf4ce2cea8a1"/>
+<approved hash="4,16,74838ab269089707"/>
+<approved hash="4,16,33e2cd912277dc66"/>
+<approved hash="6,1,ec47ec4c1d3ddb31"/>
+<approved hash="6,1,7a929b20951f51a1"/>
+<approved hash="6,1,4c324d6d9f9f9ec0"/>
+<approved hash="6,1,c949cbdabbcb3b7f"/>
+<approved hash="6,1,c563a47ffcd505e0"/>
+<approved hash="6,1,f2e9f20c303e30db"/>
+<approved hash="6,1,40ba912a735c8b3b"/>
+<approved hash="6,1,40b161267b58a333"/>
+<approved hash="6,1,4b294baa995899db"/>
+<approved hash="6,1,fbb7f974bf62bda1"/>
+<approved hash="6,1,0db90f74b162b3af"/>
+<approved hash="6,1,ad9d2cd89d2d5ca9"/>
+<approved hash="6,1,f9f13484c8ba762f"/>
+<approved hash="6,1,7a92976b1954d1a1"/>
+<approved hash="6,1,4c324d6d9f9f9ec0"/>
+<approved hash="6,1,478de1352f1cd9a1"/>
+<approved hash="6,1,22ea220c003e00d8"/>
+<approved hash="6,1,4b294baa995899db"/>
+<approved hash="6,1,fbb7f974bf62bda1"/>
+<approved hash="6,1,0db90f74b162b3af"/>
+<approved hash="6,1,ad9d2cd89d2d5ca9"/>
+<approved hash="6,1,f9f134836bfdd56f"/>
+<approved hash="6,16,040c0462fe9efef0"/>
+<approved hash="6,16,cc668093b69a7eb1"/>
+<approved hash="6,16,fbb7f974bf62bda1"/>
+<approved hash="6,16,0db90f74b162b3af"/>
 </errors>
 </board>
 </drawing>

@@ -6,7 +6,7 @@
 <setting alwaysvectorfont="no"/>
 <setting verticaltext="up"/>
 </settings>
-<grid distance="50" unitdist="mil" unit="mil" style="lines" multiple="1" display="no" altdistance="5" altunitdist="mil" altunit="mil"/>
+<grid distance="1" unitdist="mm" unit="mm" style="lines" multiple="1" display="no" altdistance="5" altunitdist="mil" altunit="mil"/>
 <layers>
 <layer number="1" name="Top" color="4" fill="1" visible="yes" active="yes"/>
 <layer number="2" name="Route2" color="16" fill="1" visible="no" active="yes"/>
@@ -577,8 +577,8 @@ Surface Mounting type.</description>
 <smd name="8" x="2.5" y="1.925" dx="0.6" dy="1.55" layer="1" thermals="no"/>
 <smd name="9" x="3.5" y="1.925" dx="0.6" dy="1.55" layer="1" thermals="no"/>
 <smd name="10" x="4.5" y="1.925" dx="0.6" dy="1.55" layer="1" thermals="no"/>
-<smd name="FIT@1" x="-6.1" y="-0.4" dx="1.2" dy="3" layer="1" thermals="no"/>
-<smd name="FIT@2" x="6.1" y="-0.4" dx="1.2" dy="3" layer="1" thermals="no"/>
+<smd name="FIT@1" x="-5.85" y="-0.4" dx="1.2" dy="3" layer="1" thermals="no"/>
+<smd name="FIT@2" x="5.85" y="-0.4" dx="1.2" dy="3" layer="1" thermals="no"/>
 <text x="-7.255" y="-1.905" size="1.27" layer="25" rot="R90">&gt;NAME</text>
 </package>
 <package name="JOYANALOG_0805">
@@ -718,10 +718,10 @@ Surface Mounting type.</description>
 <text x="-2.75" y="0.796" size="0.8128" layer="52" font="vector" rot="R90">1</text>
 <text x="3.6" y="0.796" size="0.8128" layer="52" font="vector" rot="R90">12</text>
 <polygon width="0.254" layer="46">
+<vertex x="-7.65" y="-19.22"/>
 <vertex x="-7.65" y="-18.22"/>
-<vertex x="-7.65" y="-17.22"/>
-<vertex x="7.65" y="-17.22"/>
 <vertex x="7.65" y="-18.22"/>
+<vertex x="7.65" y="-19.22"/>
 </polygon>
 </package>
 <package name="SWITCH-ALPS_ALPS_EC12E_SW">

@@ -4416,93 +4416,6 @@ EC12E series with push-on switch</description>
 </deviceset>
 </devicesets>
 </library>
-<library name="oled">
-<description>Generated from &lt;b&gt;pmm.sch&lt;/b&gt;&lt;p&gt;
-by exp-lbrs.ulp</description>
-<packages>
-<package name="LUL_UG-2864HSWEG01_1.3_WRAPAROUND">
-<smd name="1" x="-2.75" y="-0.22" dx="1.28" dy="0.31" layer="16" rot="R90"/>
-<smd name="2" x="-2.25" y="-0.22" dx="1.28" dy="0.31" layer="16" rot="R90"/>
-<smd name="3" x="-1.75" y="-0.22" dx="1.28" dy="0.31" layer="16" rot="R90"/>
-<smd name="4" x="-1.25" y="-0.22" dx="1.28" dy="0.31" layer="16" rot="R90"/>
-<smd name="5" x="-0.75" y="-0.22" dx="1.28" dy="0.31" layer="16" rot="R90"/>
-<smd name="6" x="-0.25" y="-0.22" dx="1.28" dy="0.31" layer="16" rot="R90"/>
-<smd name="7" x="0.25" y="-0.22" dx="1.28" dy="0.31" layer="16" rot="R90"/>
-<smd name="8" x="0.75" y="-0.22" dx="1.28" dy="0.31" layer="16" rot="R90"/>
-<smd name="9" x="1.25" y="-0.22" dx="1.28" dy="0.31" layer="16" rot="R90"/>
-<smd name="10" x="1.75" y="-0.22" dx="1.28" dy="0.31" layer="16" rot="R90"/>
-<smd name="11" x="2.25" y="-0.22" dx="1.28" dy="0.31" layer="16" rot="R90"/>
-<smd name="12" x="2.75" y="-0.22" dx="1.28" dy="0.31" layer="16" rot="R90"/>
-<smd name="31" x="-4.95" y="-2.46" dx="3" dy="3.5" layer="16" rot="R90"/>
-<smd name="32" x="4.95" y="-2.46" dx="3" dy="3.5" layer="16" rot="R90"/>
-<text x="-2.75" y="0.796" size="0.8128" layer="52" font="vector" rot="R90">1</text>
-<text x="3.6" y="0.796" size="0.8128" layer="52" font="vector" rot="R90">12</text>
-<wire x1="6" y1="-18.703" x2="6" y2="-13.59" width="0.127" layer="51"/>
-<wire x1="6" y1="-13.59" x2="17.25" y2="-13.59" width="0.127" layer="51"/>
-<wire x1="17.25" y1="-13.59" x2="17.25" y2="23.91" width="0.127" layer="21"/>
-<wire x1="17.25" y1="23.91" x2="-17.25" y2="23.91" width="0.127" layer="21"/>
-<wire x1="-17.25" y1="23.91" x2="-17.25" y2="-13.59" width="0.127" layer="21"/>
-<wire x1="-17.25" y1="-13.59" x2="-6" y2="-13.59" width="0.127" layer="51"/>
-<wire x1="-6" y1="-13.59" x2="-6" y2="-18.703" width="0.127" layer="51"/>
-<polygon width="0.254" layer="46">
-<vertex x="-7.65" y="-18.22"/>
-<vertex x="-7.65" y="-17.22"/>
-<vertex x="7.65" y="-17.22"/>
-<vertex x="7.65" y="-18.22"/>
-</polygon>
-</package>
-</packages>
-<symbols>
-<symbol name="OLED_128X128">
-<pin name="GND" x="-7.62" y="17.78" length="middle"/>
-<pin name="VCC" x="-7.62" y="15.24" length="middle"/>
-<pin name="VCOMH" x="-7.62" y="12.7" length="middle"/>
-<pin name="VDD" x="-7.62" y="10.16" length="middle"/>
-<pin name="IREF" x="-7.62" y="7.62" length="middle"/>
-<pin name="CS" x="-7.62" y="5.08" length="middle"/>
-<pin name="RES" x="-7.62" y="2.54" length="middle"/>
-<pin name="DC" x="-7.62" y="0" length="middle"/>
-<pin name="D0" x="-7.62" y="-2.54" length="middle"/>
-<pin name="D1" x="-7.62" y="-5.08" length="middle"/>
-<pin name="VCC2" x="-7.62" y="-7.62" length="middle"/>
-<pin name="GND2" x="-7.62" y="-10.16" length="middle"/>
-<wire x1="-2.54" y1="20.32" x2="12.7" y2="20.32" width="0.1524" layer="94"/>
-<wire x1="12.7" y1="20.32" x2="12.7" y2="-17.78" width="0.1524" layer="94"/>
-<wire x1="12.7" y1="-17.78" x2="-2.54" y2="-17.78" width="0.1524" layer="94"/>
-<wire x1="-2.54" y1="-17.78" x2="-2.54" y2="20.32" width="0.1524" layer="94"/>
-<pin name="SHIELD" x="-7.62" y="-15.24" length="middle"/>
-</symbol>
-</symbols>
-<devicesets>
-<deviceset name="OLED128">
-<gates>
-<gate name="G$1" symbol="OLED_128X128" x="-5.08" y="-2.54"/>
-</gates>
-<devices>
-<device name="" package="LUL_UG-2864HSWEG01_1.3_WRAPAROUND">
-<connects>
-<connect gate="G$1" pin="CS" pad="6"/>
-<connect gate="G$1" pin="D0" pad="9"/>
-<connect gate="G$1" pin="D1" pad="10"/>
-<connect gate="G$1" pin="DC" pad="8"/>
-<connect gate="G$1" pin="GND" pad="1"/>
-<connect gate="G$1" pin="GND2" pad="12"/>
-<connect gate="G$1" pin="IREF" pad="5"/>
-<connect gate="G$1" pin="RES" pad="7"/>
-<connect gate="G$1" pin="SHIELD" pad="31 32"/>
-<connect gate="G$1" pin="VCC" pad="2"/>
-<connect gate="G$1" pin="VCC2" pad="11"/>
-<connect gate="G$1" pin="VCOMH" pad="3"/>
-<connect gate="G$1" pin="VDD" pad="4"/>
-</connects>
-<technologies>
-<technology name=""/>
-</technologies>
-</device>
-</devices>
-</deviceset>
-</devicesets>
-</library>
 <library name="adafruit_changed">
 <packages>
 <package name="U.FL">
@@ -7204,9 +7117,40 @@ by exp-lbrs.ulp</description>
 <smd name="8" x="2.5" y="1.925" dx="0.6" dy="1.55" layer="1" thermals="no"/>
 <smd name="9" x="3.5" y="1.925" dx="0.6" dy="1.55" layer="1" thermals="no"/>
 <smd name="10" x="4.5" y="1.925" dx="0.6" dy="1.55" layer="1" thermals="no"/>
-<smd name="FIT@1" x="-6.1" y="-0.4" dx="1.2" dy="3" layer="1" thermals="no"/>
-<smd name="FIT@2" x="6.1" y="-0.4" dx="1.2" dy="3" layer="1" thermals="no"/>
+<smd name="FIT@1" x="-5.85" y="-0.4" dx="1.2" dy="3" layer="1" thermals="no"/>
+<smd name="FIT@2" x="5.85" y="-0.4" dx="1.2" dy="3" layer="1" thermals="no"/>
 <text x="-7.255" y="-1.905" size="1.27" layer="25" rot="R90">&gt;NAME</text>
+</package>
+<package name="OLED_LUL_UG-2864HSWEG01_1.3_WRAPAROUND">
+<wire x1="6" y1="-18.703" x2="6" y2="-13.59" width="0.127" layer="51"/>
+<wire x1="6" y1="-13.59" x2="17.25" y2="-13.59" width="0.127" layer="51"/>
+<wire x1="17.25" y1="-13.59" x2="17.25" y2="23.91" width="0.127" layer="21"/>
+<wire x1="17.25" y1="23.91" x2="-17.25" y2="23.91" width="0.127" layer="21"/>
+<wire x1="-17.25" y1="23.91" x2="-17.25" y2="-13.59" width="0.127" layer="21"/>
+<wire x1="-17.25" y1="-13.59" x2="-6" y2="-13.59" width="0.127" layer="51"/>
+<wire x1="-6" y1="-13.59" x2="-6" y2="-18.703" width="0.127" layer="51"/>
+<smd name="1" x="-2.75" y="-0.22" dx="1.28" dy="0.31" layer="16" rot="R90"/>
+<smd name="2" x="-2.25" y="-0.22" dx="1.28" dy="0.31" layer="16" rot="R90"/>
+<smd name="3" x="-1.75" y="-0.22" dx="1.28" dy="0.31" layer="16" rot="R90"/>
+<smd name="4" x="-1.25" y="-0.22" dx="1.28" dy="0.31" layer="16" rot="R90"/>
+<smd name="5" x="-0.75" y="-0.22" dx="1.28" dy="0.31" layer="16" rot="R90"/>
+<smd name="6" x="-0.25" y="-0.22" dx="1.28" dy="0.31" layer="16" rot="R90"/>
+<smd name="7" x="0.25" y="-0.22" dx="1.28" dy="0.31" layer="16" rot="R90"/>
+<smd name="8" x="0.75" y="-0.22" dx="1.28" dy="0.31" layer="16" rot="R90"/>
+<smd name="9" x="1.25" y="-0.22" dx="1.28" dy="0.31" layer="16" rot="R90"/>
+<smd name="10" x="1.75" y="-0.22" dx="1.28" dy="0.31" layer="16" rot="R90"/>
+<smd name="11" x="2.25" y="-0.22" dx="1.28" dy="0.31" layer="16" rot="R90"/>
+<smd name="12" x="2.75" y="-0.22" dx="1.28" dy="0.31" layer="16" rot="R90"/>
+<smd name="31" x="-4.95" y="-2.46" dx="3" dy="3.5" layer="16" rot="R90"/>
+<smd name="32" x="4.95" y="-2.46" dx="3" dy="3.5" layer="16" rot="R90"/>
+<text x="-2.75" y="0.796" size="0.8128" layer="52" font="vector" rot="R90">1</text>
+<text x="3.6" y="0.796" size="0.8128" layer="52" font="vector" rot="R90">12</text>
+<polygon width="0.254" layer="46">
+<vertex x="-7.65" y="-19.22"/>
+<vertex x="-7.65" y="-18.22"/>
+<vertex x="7.65" y="-18.22"/>
+<vertex x="7.65" y="-19.22"/>
+</polygon>
 </package>
 </packages>
 <symbols>
@@ -7288,6 +7232,25 @@ by exp-lbrs.ulp</description>
 <wire x1="0" y1="-22.86" x2="17.78" y2="-22.86" width="0.127" layer="94"/>
 <wire x1="17.78" y1="-22.86" x2="17.78" y2="17.78" width="0.127" layer="94"/>
 <wire x1="17.78" y1="17.78" x2="0" y2="17.78" width="0.127" layer="94"/>
+</symbol>
+<symbol name="OLED_OLED_128X128">
+<wire x1="-2.54" y1="20.32" x2="12.7" y2="20.32" width="0.1524" layer="94"/>
+<wire x1="12.7" y1="20.32" x2="12.7" y2="-17.78" width="0.1524" layer="94"/>
+<wire x1="12.7" y1="-17.78" x2="-2.54" y2="-17.78" width="0.1524" layer="94"/>
+<wire x1="-2.54" y1="-17.78" x2="-2.54" y2="20.32" width="0.1524" layer="94"/>
+<pin name="CS" x="-7.62" y="5.08" length="middle"/>
+<pin name="D0" x="-7.62" y="-2.54" length="middle"/>
+<pin name="D1" x="-7.62" y="-5.08" length="middle"/>
+<pin name="DC" x="-7.62" y="0" length="middle"/>
+<pin name="GND" x="-7.62" y="17.78" length="middle"/>
+<pin name="GND2" x="-7.62" y="-10.16" length="middle"/>
+<pin name="IREF" x="-7.62" y="7.62" length="middle"/>
+<pin name="RES" x="-7.62" y="2.54" length="middle"/>
+<pin name="SHIELD" x="-7.62" y="-15.24" length="middle"/>
+<pin name="VCC" x="-7.62" y="15.24" length="middle"/>
+<pin name="VCC2" x="-7.62" y="-7.62" length="middle"/>
+<pin name="VCOMH" x="-7.62" y="12.7" length="middle"/>
+<pin name="VDD" x="-7.62" y="10.16" length="middle"/>
 </symbol>
 </symbols>
 <devicesets>
@@ -7380,6 +7343,33 @@ by exp-lbrs.ulp</description>
 <connect gate="G$1" pin="7" pad="7"/>
 <connect gate="G$1" pin="8" pad="8"/>
 <connect gate="G$1" pin="9" pad="9"/>
+</connects>
+<technologies>
+<technology name=""/>
+</technologies>
+</device>
+</devices>
+</deviceset>
+<deviceset name="OLED_OLED128">
+<gates>
+<gate name="G$1" symbol="OLED_OLED_128X128" x="-5.08" y="-2.54"/>
+</gates>
+<devices>
+<device name="" package="OLED_LUL_UG-2864HSWEG01_1.3_WRAPAROUND">
+<connects>
+<connect gate="G$1" pin="CS" pad="6"/>
+<connect gate="G$1" pin="D0" pad="9"/>
+<connect gate="G$1" pin="D1" pad="10"/>
+<connect gate="G$1" pin="DC" pad="8"/>
+<connect gate="G$1" pin="GND" pad="1"/>
+<connect gate="G$1" pin="GND2" pad="12"/>
+<connect gate="G$1" pin="IREF" pad="5"/>
+<connect gate="G$1" pin="RES" pad="7"/>
+<connect gate="G$1" pin="SHIELD" pad="31 32"/>
+<connect gate="G$1" pin="VCC" pad="2"/>
+<connect gate="G$1" pin="VCC2" pad="11"/>
+<connect gate="G$1" pin="VCOMH" pad="3"/>
+<connect gate="G$1" pin="VDD" pad="4"/>
 </connects>
 <technologies>
 <technology name=""/>
@@ -8327,7 +8317,7 @@ You are welcome to use this library for commercial purposes. For attribution, we
 <part name="SW22" library="switch-alps" library_urn="urn:adsk.eagle:library:373" deviceset="EC12E_SW" device="" package3d_urn="urn:adsk.eagle:package:27083/1"/>
 <part name="U3" library="ESP32-S3FN8" deviceset="ESP32-S3FN8" device=""/>
 <part name="GND5" library="supply1" library_urn="urn:adsk.eagle:library:371" deviceset="GND" device=""/>
-<part name="U$2" library="oled" deviceset="OLED128" device=""/>
+<part name="U$2" library="duckypad" deviceset="OLED_OLED128" device=""/>
 <part name="LED_R1C1" library="duckypad" deviceset="WS2812B" device="" value="WS2812B"/>
 <part name="LED_R2C1" library="duckypad" deviceset="WS2812B" device="" value="WS2812B"/>
 <part name="LED_R3C1" library="duckypad" deviceset="WS2812B" device="" value="WS2812B"/>
