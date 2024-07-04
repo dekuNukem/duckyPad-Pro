@@ -226,7 +226,7 @@ def ui_reset():
     key_color_text.config(fg='grey')
     reset_key_button_relief()
     update_key_button_appearances(None)
-    key_name_textbox.delete(0, 'end')
+    key_name_textbox.delete('1.0', 'end')
     selected_key = None
     key_color_button.config(background=default_button_color)
     bg_color_button.config(background=default_button_color)
@@ -488,7 +488,7 @@ def update_profile_display():
 
     update_key_button_appearances(index)
     reset_key_button_relief()
-    key_name_textbox.delete(0, 'end')
+    key_name_textbox.delete('1.0', 'end')
     selected_key = None
     key_color_button.config(background=default_button_color)
     key_color_rb1.config(state=DISABLED)
@@ -569,9 +569,9 @@ def kd_color_click(event):
 
 invalid_filename_characters = ['<', '>', ':', '"', '/', '\\', '|', '?', '*']
 
-def clean_input(str_input, len_limit=None, clean_filename=True):
+def clean_input(str_input, len_limit=None, is_filename=True):
     result = ''.join([x for x in str_input if 32 <= ord(x) <= 126 and x not in invalid_filename_characters])
-    if clean_filename is False:
+    if is_filename is False:
         result = ''.join([x for x in str_input if 32 <= ord(x) <= 126])
     while('  ' in result):
         result = result.replace('  ', ' ')
@@ -740,14 +740,14 @@ def save_everything(save_path):
             for index, line in enumerate(dp_settings.list_of_lines):
                 if 'sleep_after_min' in line:
                     found = True
-                    dp_settings.list_of_lines[index] = "sleep_after_min " + str(sleepmode_slider.get()) + "\n";
+                    dp_settings.list_of_lines[index] = "sleep_after_min " + str(sleepmode_slider.get()) + "\n"
             if found is False:
                 dp_settings.list_of_lines.append("sleep_after_min " + str(sleepmode_slider.get()) + "\n")
         except Exception as e:
             print("dps", e)
 
         with open(dps_path, 'w+', encoding='utf8', newline='') as setting_file:
-            setting_file.writelines(dp_settings.list_of_lines);
+            setting_file.writelines(dp_settings.list_of_lines)
 
         dp_root_folder_display.set("Saved!")
         return True
@@ -793,11 +793,11 @@ def key_button_click(button_widget):
     selected_key = key_button_list.index(button_widget)
     reset_key_button_relief()
     button_widget.config(borderwidth=7, relief='sunken')
-    key_name_textbox.delete(0, 'end')
+    key_name_textbox.delete('1.0', 'end')
     if profile_list[profile_index].keylist[selected_key] is not None:
         scripts_lf.place(x=scaled_size(536), y=scaled_size(50))
         empty_script_lf.place_forget()
-        key_name_textbox.insert(0, profile_list[profile_index].keylist[selected_key].name)
+        key_name_textbox.insert(1.0, profile_list[profile_index].keylist[selected_key].name)
         script_textbox.delete(1.0, 'end')
         script_textbox.insert(1.0, profile_list[profile_index].keylist[selected_key].script.rstrip('\n').rstrip('\r'))
     else:
@@ -1042,12 +1042,28 @@ root.update()
 key_name_textbox = Text(keys_lf, state=DISABLED, wrap="word")
 key_name_textbox.place(x=scaled_size(100), y=scaled_size(310), width=scaled_size(80), height=scaled_size(40))
 
+# return: is_success, line1, line2
+def get_clean_key_name_2lines(user_text):
+    split_line = user_text.replace('\r', '').split('\n')[:2]
+    line1_clean = ''
+    line2_clean = ''
+    try:
+        line1_clean = clean_input(split_line[0], KEY_NAME_MAX_CHAR_PER_LINE, is_filename=False)
+    except:
+        pass
+    try:
+        line2_clean = clean_input(split_line[1], KEY_NAME_MAX_CHAR_PER_LINE, is_filename=False)
+    except:
+        pass
+    return line1_clean, line2_clean
+
 def key_rename_click():
     if is_key_selected() == False:
         return
     profile_index = profile_lstbox.curselection()[0]
-    result = clean_input(key_name_textbox.get(), 7, clean_filename=False)
-    if len(result) <= 0: # or result in [x.name for x in profile_list[profile_index].keylist if x is not None]
+    result = key_name_textbox.get("1.0", END)
+    keyname_line1, keyname_line2 = get_clean_key_name_2lines(result)
+    if len(keyname_line1) == 0:
         return
     if profile_list[profile_index].keylist[selected_key] is not None:
         profile_list[profile_index].keylist[selected_key].name = result

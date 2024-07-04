@@ -6,6 +6,32 @@ REM_BLOCK
 GUI
 END_REM
 
+ # or result in [x.name for x in profile_list[profile_index].keylist if x is not None]
+ 
+def get_clean_key_name_2lines(user_text):
+    split_line = user_text.replace('\r', '').split('\n')[:2]
+    if len(split_line) == 0:
+        return False, None, None
+    line1_clean = None
+    line2_clean = None
+    print(split_line)
+    if len(split_line) == 1:
+        line1_clean = clean_input(split_line[0], KEY_NAME_MAX_LEN_PER_LINE, is_filename=False)
+    if len(split_line) > 1:
+        line2_clean = clean_input(split_line[1], KEY_NAME_MAX_LEN_PER_LINE, is_filename=False)
+    print("line1:", line1_clean)
+    print("line2:", line2_clean)
+
+def get_clean_key_name_2lines(user_text):
+    split_line = user_text.replace('\r', '').split('\n')[:2]
+    if len(split_line) == 0:
+        return False, None, None
+    if len(split_line) == 1:
+        line1_clean = clean_input(split_line[0], KEY_NAME_MAX_LEN_PER_LINE, is_filename=False)
+        return True, None, None
+
+def clean_input(str_input, len_limit=None, clean_filename=True):
+
 script_textbox = Text(scripts_lf, relief='solid', borderwidth=1, padx=2, pady=2, spacing3=5, wrap="word")
 script_textbox.place(x=key_button_list[0].winfo_x(), y=KEY_BUTTON_HEADROOM+PADDING-3, width=key_button_list[-1].winfo_x() + KEY_BUTTON_WIDTH - KEY_BUTTON_GAP, height=key_button_list[-1].winfo_y() - key_button_list[0].winfo_y() + KEY_BUTTON_HEIGHT + 5)
 root.update()

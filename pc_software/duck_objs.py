@@ -32,6 +32,7 @@ class dp_key(object):
 		ret += str('...............') + '\n'
 		ret += "path:\t" + str(self.path) + '\n'
 		ret += "name:\t" + str(self.name) + '\n'
+		ret += "name_line2:\t" + str(self.name_line2) + '\n'
 		ret += "index:\t" + str(self.index) + '\n'
 		ret += "color:\t" + str(self.color) + '\n'
 		ret += "script:\t" + str(len(self.script)) + " characters\n"
@@ -56,6 +57,7 @@ class dp_key(object):
 		super(dp_key, self).__init__()
 		self.path = path
 		self.name = None
+		self.name_line2 = None
 		self.index = None
 		self.color = None
 		self.has_loop = False
