@@ -106,7 +106,7 @@ void load_profile_info(void)
 #define ERROR_NO_KEYMAP_FOLDER 1
 #define ERROR_KEYMAP_NOT_FOUND 2
 
-uint8_t get_next_keymap(char* current_keymap_filename, char* next_keymap_filename, uint8_t next_keymap_buf_size)
+uint8_t get_next_keymap(char* current_keymap_filename, char* next_keymap_filename)
 {
   struct dirent *dir;
   DIR *d = opendir("/sdcard/keymaps");
@@ -132,7 +132,7 @@ uint8_t get_next_keymap(char* current_keymap_filename, char* next_keymap_filenam
   return ERROR_KEYMAP_NOT_FOUND;
 }
 
-uint8_t get_first_keymap(char* keymap_filename, uint8_t keymap_buf_size)
+uint8_t get_first_keymap(char* keymap_filename)
 {
   struct dirent *dir;
   DIR *d = opendir("/sdcard/keymaps");
@@ -155,7 +155,11 @@ uint8_t get_first_keymap(char* keymap_filename, uint8_t keymap_buf_size)
 void settings_menu(void)
 {
   draw_settings(&dp_settings);
-  sprintf(dp_settings.current_kb_layout, "dpkm_French.txt");
+
+  memset(dp_settings.current_kb_layout, 0, FILENAME_BUFSIZE);
+  get_first_keymap(dp_settings.current_kb_layout);
+  printf("first keymap: %s\n", dp_settings.current_kb_layout);
+
   while(1)
   {
     switch_event_t sw_event = { 0 };
@@ -170,14 +174,21 @@ void settings_menu(void)
       }
       if(sw_event.id == MSW_19 && sw_event.type == SW_EVENT_SHORT_PRESS)
       {
-        // memset(temp_buf, 0, TEMP_BUFSIZE);
-        // get_next_keymap(dp_settings.current_kb_layout, temp_buf, TEMP_BUFSIZE);
-        // strcpy(dp_settings.current_kb_layout, temp_buf);
-        // printf("current keymap: %s\n", temp_buf);
-
         memset(temp_buf, 0, TEMP_BUFSIZE);
-        get_first_keymap(temp_buf, TEMP_BUFSIZE);
-        printf("first keymap: %s\n", temp_buf);
+        uint8_t ddd = get_next_keymap(dp_settings.current_kb_layout, temp_buf);
+        if(ddd)
+        {
+          memset(dp_settings.current_kb_layout, 0, FILENAME_BUFSIZE);
+          get_first_keymap(dp_settings.current_kb_layout);
+        }
+        else
+        {
+          strcpy(dp_settings.current_kb_layout, temp_buf);
+        }
+
+        printf("current keymap: %s\n", dp_settings.current_kb_layout);
+
+        
 
         // draw_settings(&dp_settings);
         // neopixel_draw_current_buffer();
