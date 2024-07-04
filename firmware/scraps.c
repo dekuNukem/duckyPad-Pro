@@ -1,5 +1,31 @@
 MY_UNIMPLEMENTED
-
+uint8_t get_next_keymap(char* current_keymap_filename, char* next_keymap_filename, uint8_t next_keymap_buf_size)
+{
+  struct dirent *dir;
+  DIR *d = opendir("/sdcard/keymaps");
+  printf("current keymap: %s\n", current_keymap_filename);
+  if(d == NULL)
+    return 1;
+  uint8_t found = 0;
+  while ((dir = readdir(d)) != NULL)
+  {
+    if(dir->d_type != DT_REG)
+      continue;
+    if(!(strncmp(dir->d_name, "dpkm_", 5) == 0 && strstr(dir->d_name, ".txt") != NULL))
+      continue;
+    if(found)
+    {
+      strcpy(next_keymap_filename, dir->d_name);
+      closedir(d);
+      return 0;
+    }
+    if(strcmp(dir->d_name, current_keymap_filename) == 0)
+      found = 1;
+    printf("gnk %s\n", dir->d_name);
+  }
+  closedir(d);
+  return 2;
+}
 uint8_t load_dsb(char* dsb_path)
 {
   FILE *sd_file = fopen(dsb_path, "r");

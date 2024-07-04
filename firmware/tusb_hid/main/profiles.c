@@ -294,7 +294,7 @@ void load_profile_config(profile_info* this_profile)
     strip_newline(temp_buf, TEMP_BUFSIZE);
     parse_profile_config_line(temp_buf, this_profile);
   }
-  print_profile_info(this_profile);
+  // print_profile_info(this_profile);
   fclose(sd_file);
 }
 

@@ -18,6 +18,7 @@
 #include "unistd.h"
 #include "keyboard.h"
 #include "ds_vm.h"
+#include <dirent.h>
 
 uint32_t last_keypress;
 
@@ -74,9 +75,87 @@ void handle_keydown(uint8_t swid)
 //   play_keyup_animation(current_profile_number, swid);
 // }
 
+/*
+void load_profile_info(void)
+{
+  struct dirent *dir;
+  DIR *d = opendir(SD_MOUNT_POINT);
+  if(d) 
+  {
+    while ((dir = readdir(d)) != NULL)
+    {
+      if(dir->d_type != DT_DIR)
+        continue;
+      if(is_profile_dir(dir->d_name) == 0)
+        continue;
+      uint8_t this_profile_number = atoi(dir->d_name + strlen(profile_dir_prefix));
+      if(this_profile_number >= MAX_PROFILES)
+        continue;
+
+      all_profile_info[this_profile_number].pf_number = this_profile_number;
+      all_profile_info[this_profile_number].is_loaded = 1;
+      memset(all_profile_info[this_profile_number].dir_path, 0, FILENAME_BUFSIZE);
+      strcpy(all_profile_info[this_profile_number].dir_path, dir->d_name);
+      all_profile_info[this_profile_number].pf_name = all_profile_info[this_profile_number].dir_path + strlen(profile_dir_prefix) + how_many_digits(this_profile_number) + 1;
+    }
+  }
+  closedir(d);
+}
+*/
+
+#define ERROR_NO_KEYMAP_FOLDER 1
+#define ERROR_KEYMAP_NOT_FOUND 2
+
+uint8_t get_next_keymap(char* current_keymap_filename, char* next_keymap_filename, uint8_t next_keymap_buf_size)
+{
+  struct dirent *dir;
+  DIR *d = opendir("/sdcard/keymaps");
+  if(d == NULL)
+    return ERROR_NO_KEYMAP_FOLDER;
+  uint8_t found = 0;
+  while ((dir = readdir(d)) != NULL)
+  {
+    if(dir->d_type != DT_REG)
+      continue;
+    if(!(strncmp(dir->d_name, "dpkm_", 5) == 0 && strstr(dir->d_name, ".txt") != NULL))
+      continue;
+    if(found)
+    {
+      strcpy(next_keymap_filename, dir->d_name);
+      closedir(d);
+      return 0;
+    }
+    if(strcmp(dir->d_name, current_keymap_filename) == 0)
+      found = 1;
+  }
+  closedir(d);
+  return ERROR_KEYMAP_NOT_FOUND;
+}
+
+uint8_t get_first_keymap(char* keymap_filename, uint8_t keymap_buf_size)
+{
+  struct dirent *dir;
+  DIR *d = opendir("/sdcard/keymaps");
+  if(d == NULL)
+    return ERROR_NO_KEYMAP_FOLDER;
+  while ((dir = readdir(d)) != NULL)
+  {
+    if(dir->d_type != DT_REG)
+      continue;
+    if(!(strncmp(dir->d_name, "dpkm_", 5) == 0 && strstr(dir->d_name, ".txt") != NULL))
+      continue;
+    strcpy(keymap_filename, dir->d_name);
+    closedir(d);
+    return 0;
+  }
+  closedir(d);
+  return ERROR_KEYMAP_NOT_FOUND;
+}
+
 void settings_menu(void)
 {
   draw_settings(&dp_settings);
+  sprintf(dp_settings.current_kb_layout, "dpkm_French.txt");
   while(1)
   {
     switch_event_t sw_event = { 0 };
@@ -89,7 +168,20 @@ void settings_menu(void)
         draw_settings(&dp_settings);
         neopixel_draw_current_buffer();
       }
+      if(sw_event.id == MSW_19 && sw_event.type == SW_EVENT_SHORT_PRESS)
+      {
+        // memset(temp_buf, 0, TEMP_BUFSIZE);
+        // get_next_keymap(dp_settings.current_kb_layout, temp_buf, TEMP_BUFSIZE);
+        // strcpy(dp_settings.current_kb_layout, temp_buf);
+        // printf("current keymap: %s\n", temp_buf);
 
+        memset(temp_buf, 0, TEMP_BUFSIZE);
+        get_first_keymap(temp_buf, TEMP_BUFSIZE);
+        printf("first keymap: %s\n", temp_buf);
+
+        // draw_settings(&dp_settings);
+        // neopixel_draw_current_buffer();
+      }
       if((sw_event.id == SW_MINUS || sw_event.id == SW_PLUS) && sw_event.type == SW_EVENT_SHORT_PRESS)
       {
         return;
