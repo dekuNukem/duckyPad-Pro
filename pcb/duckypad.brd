@@ -10,7 +10,7 @@
 <grid distance="5" unitdist="mil" unit="mil" style="lines" multiple="1" display="yes" altdistance="1" altunitdist="mil" altunit="mil"/>
 <layers>
 <layer number="1" name="Top" color="4" fill="1" visible="yes" active="yes"/>
-<layer number="2" name="pwr" color="49" fill="1" visible="no" active="yes"/>
+<layer number="2" name="pwr" color="49" fill="1" visible="yes" active="yes"/>
 <layer number="3" name="Route3" color="4" fill="3" visible="no" active="no"/>
 <layer number="4" name="Route4" color="1" fill="4" visible="no" active="no"/>
 <layer number="5" name="Route5" color="4" fill="4" visible="no" active="no"/>
@@ -23,7 +23,7 @@
 <layer number="12" name="Route12" color="1" fill="5" visible="no" active="no"/>
 <layer number="13" name="Route13" color="4" fill="5" visible="no" active="no"/>
 <layer number="14" name="Route14" color="1" fill="6" visible="no" active="no"/>
-<layer number="15" name="gnd" color="23" fill="1" visible="no" active="yes"/>
+<layer number="15" name="gnd" color="23" fill="1" visible="yes" active="yes"/>
 <layer number="16" name="Bottom" color="1" fill="1" visible="yes" active="yes"/>
 <layer number="17" name="Pads" color="2" fill="1" visible="yes" active="yes"/>
 <layer number="18" name="Vias" color="2" fill="1" visible="yes" active="yes"/>
@@ -3032,9 +3032,9 @@ These are the free and generally easy to produce 4-layer PCB design rules. You c
 <wire x1="82.296" y1="71.628" x2="82.296" y2="70.358" width="0.2032" layer="2"/>
 <wire x1="82.296" y1="70.358" x2="75.184" y2="63.246" width="0.2032" layer="2"/>
 <wire x1="75.184" y1="63.246" x2="75.184" y2="20.193" width="0.2032" layer="2"/>
-<wire x1="75.184" y1="20.193" x2="83.439" y2="11.938" width="0.2032" layer="2"/>
-<wire x1="83.439" y1="11.938" x2="98.552" y2="11.938" width="0.2032" layer="2"/>
-<wire x1="98.552" y1="11.938" x2="103.886" y2="6.604" width="0.2032" layer="2"/>
+<wire x1="75.184" y1="20.193" x2="84.455" y2="10.922" width="0.2032" layer="2"/>
+<wire x1="84.455" y1="10.922" x2="99.568" y2="10.922" width="0.2032" layer="2"/>
+<wire x1="99.568" y1="10.922" x2="103.886" y2="6.604" width="0.2032" layer="2"/>
 </signal>
 <signal name="N$73">
 <contactref element="U3" pad="49"/>
@@ -3049,10 +3049,10 @@ These are the free and generally easy to produce 4-layer PCB design rules. You c
 <wire x1="81.28" y1="70.993" x2="81.28" y2="70.231" width="0.2032" layer="2"/>
 <wire x1="81.28" y1="70.231" x2="74.676" y2="63.627" width="0.2032" layer="2"/>
 <wire x1="74.676" y1="63.627" x2="74.676" y2="19.939" width="0.2032" layer="2"/>
-<wire x1="83.3053" y1="11.3097" x2="96.1323" y2="11.3097" width="0.2032" layer="2"/>
-<wire x1="96.1323" y1="11.3097" x2="105.283" y2="2.159" width="0.2032" layer="2"/>
+<wire x1="84.1943" y1="10.4207" x2="97.0213" y2="10.4207" width="0.2032" layer="2"/>
+<wire x1="97.0213" y1="10.4207" x2="105.283" y2="2.159" width="0.2032" layer="2"/>
 <wire x1="105.283" y1="2.159" x2="107.442" y2="2.159" width="0.2032" layer="2"/>
-<wire x1="74.676" y1="19.939" x2="83.3053" y2="11.3097" width="0.2032" layer="2"/>
+<wire x1="74.676" y1="19.939" x2="84.1943" y2="10.4207" width="0.2032" layer="2"/>
 </signal>
 <signal name="N$71">
 <contactref element="X2" pad="3"/>
