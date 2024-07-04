@@ -40,18 +40,20 @@ class dp_key(object):
 		return ret
 
 	def get_keyname(self, path, index):
-		ret = '???' + str(index)
+		line1 = '???' + str(index)
+		line2 = ''
 		try:
 			with open(os.path.join(os.path.dirname(path), "config.txt")) as ffffff:
 				for line in ffffff:
 					this_split = line.replace('\n','').replace('\r','').split(' ', 1)
 					if this_split[0].startswith('z') and int(this_split[0][1:]) == index:
-						ret = this_split[1]
-						break
+						line1 = this_split[1]
+					if this_split[0].startswith('x') and int(this_split[0][1:]) == index:
+						line2 = this_split[1]
 		except Exception as e:
 			print('get_keyname exception:', e)
 			pass
-		return ret
+		return line1, line2
 
 	def __init__(self, path=None):
 		super(dp_key, self).__init__()
@@ -70,7 +72,7 @@ class dp_key(object):
 		if '_' in os.path.basename(os.path.normpath(path)):
 			self.name = os.path.basename(os.path.normpath(path)).rsplit('.', 1)[0].split('_', 1)[-1]
 		else:
-			self.name = self.get_keyname(path, self.index)
+			self.name, self.name_line2 = self.get_keyname(path, self.index)
 		self.color = None
 		self.script = self.load_script(path).replace('\r', '')
 		try:
