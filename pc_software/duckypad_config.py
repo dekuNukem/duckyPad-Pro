@@ -218,14 +218,15 @@ def ui_reset():
     key_remove_button.config(state=DISABLED)
     for button in script_command_button_list:
         button.config(state=DISABLED)
-    key_name_entrybox.config(state=DISABLED)
+    key_name_textbox.config(state=DISABLED)
     bg_color_label.config(fg='grey')
     kd_color_label.config(fg='grey')
-    key_name_text.config(fg='grey')
+    key_name_label.config(fg='grey')
+    key_char_limit_label.config(fg='grey')
     key_color_text.config(fg='grey')
     reset_key_button_relief()
     update_key_button_appearances(None)
-    key_name_entrybox.delete(0, 'end')
+    key_name_textbox.delete(0, 'end')
     selected_key = None
     key_color_button.config(background=default_button_color)
     bg_color_button.config(background=default_button_color)
@@ -408,10 +409,11 @@ def enable_buttons():
     key_remove_button.config(state=NORMAL)
     for button in script_command_button_list:
         button.config(state=NORMAL)
-    key_name_entrybox.config(state=NORMAL)
+    key_name_textbox.config(state=NORMAL)
     bg_color_label.config(fg='black')
     kd_color_label.config(fg='black')
-    key_name_text.config(fg='black')
+    key_name_label.config(fg='black')
+    key_char_limit_label.config(fg='black')
     key_color_text.config(fg='black')
     sleepmode_slider.config(state=NORMAL)
     sleepmode_slider.set(dp_settings.sleep_after_minutes)
@@ -486,7 +488,7 @@ def update_profile_display():
 
     update_key_button_appearances(index)
     reset_key_button_relief()
-    key_name_entrybox.delete(0, 'end')
+    key_name_textbox.delete(0, 'end')
     selected_key = None
     key_color_button.config(background=default_button_color)
     key_color_rb1.config(state=DISABLED)
@@ -791,11 +793,11 @@ def key_button_click(button_widget):
     selected_key = key_button_list.index(button_widget)
     reset_key_button_relief()
     button_widget.config(borderwidth=7, relief='sunken')
-    key_name_entrybox.delete(0, 'end')
+    key_name_textbox.delete(0, 'end')
     if profile_list[profile_index].keylist[selected_key] is not None:
         scripts_lf.place(x=scaled_size(536), y=scaled_size(50))
         empty_script_lf.place_forget()
-        key_name_entrybox.insert(0, profile_list[profile_index].keylist[selected_key].name)
+        key_name_textbox.insert(0, profile_list[profile_index].keylist[selected_key].name)
         script_textbox.delete(1.0, 'end')
         script_textbox.insert(1.0, profile_list[profile_index].keylist[selected_key].script.rstrip('\n').rstrip('\r'))
     else:
@@ -1029,22 +1031,22 @@ for x in range(MECH_OBSW_COUNT):
     this_button.bind("<ButtonRelease-1>", button_drag_release)
     key_button_list.append(this_button)
 
-key_name_text = Label(master=keys_lf, text="Key name:", fg='grey')
-key_name_text.place(x=PADDING, y=scaled_size(305))
+key_name_label = Label(master=keys_lf, text="Key name:", fg='grey')
+key_name_label.place(x=scaled_size(20), y=scaled_size(310))
 root.update()
 
-def key_name_entrybox_return_pressed(event):
-    key_rename_click()
+key_char_limit_label = Label(master=keys_lf, text="max 2 lines\n5 char per line", fg='grey')
+key_char_limit_label.place(x=scaled_size(200), y=scaled_size(310))
+root.update()
 
-key_name_entrybox = Entry(keys_lf, state=DISABLED)
-key_name_entrybox.place(x=key_name_text.winfo_width() + PADDING, y=scaled_size(305), width=scaled_size(145))
-key_name_entrybox.bind('<Return>', key_name_entrybox_return_pressed)
+key_name_textbox = Text(keys_lf, state=DISABLED, wrap="word")
+key_name_textbox.place(x=scaled_size(100), y=scaled_size(310), width=scaled_size(80), height=scaled_size(40))
 
 def key_rename_click():
     if is_key_selected() == False:
         return
     profile_index = profile_lstbox.curselection()[0]
-    result = clean_input(key_name_entrybox.get(), 7, clean_filename=False)
+    result = clean_input(key_name_textbox.get(), 7, clean_filename=False)
     if len(result) <= 0: # or result in [x.name for x in profile_list[profile_index].keylist if x is not None]
         return
     if profile_list[profile_index].keylist[selected_key] is not None:
@@ -1068,10 +1070,10 @@ def key_remove_click():
 KEY_NAME_BUTTON_GAP = int((keys_lf.winfo_width() - 2 * BUTTON_WIDTH) / 3.5)
 
 key_rename_button = Button(keys_lf, text="Apply", command=key_rename_click, state=DISABLED, fg="green")
-key_rename_button.place(x=scaled_size(KEY_NAME_BUTTON_GAP), y=scaled_size(370), width=BUTTON_WIDTH, height=BUTTON_HEIGHT)
+key_rename_button.place(x=scaled_size(KEY_NAME_BUTTON_GAP), y=scaled_size(365), width=BUTTON_WIDTH, height=BUTTON_HEIGHT)
 root.update()
 key_remove_button = Button(keys_lf, text="Remove", command=key_remove_click, state=DISABLED, fg="red")
-key_remove_button.place(x=scaled_size(KEY_NAME_BUTTON_GAP*2+key_rename_button.winfo_width()), y=scaled_size(370), width=BUTTON_WIDTH, height=BUTTON_HEIGHT)
+key_remove_button.place(x=scaled_size(KEY_NAME_BUTTON_GAP*2+key_rename_button.winfo_width()), y=scaled_size(365), width=BUTTON_WIDTH, height=BUTTON_HEIGHT)
 
 key_color_text = Label(master=keys_lf, text="Key color:", fg='grey')
 key_color_text.place(x=scaled_size(PADDING), y=scaled_size(400))
@@ -1357,6 +1359,6 @@ root.protocol("WM_DELETE_WINDOW", on_closing)
 
 root.after(500, repeat_func)
 
-select_root_folder("sample_profiles");
+select_root_folder("sample_profiles")
 
 root.mainloop()

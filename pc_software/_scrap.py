@@ -6,6 +6,15 @@ REM_BLOCK
 GUI
 END_REM
 
+script_textbox = Text(scripts_lf, relief='solid', borderwidth=1, padx=2, pady=2, spacing3=5, wrap="word")
+script_textbox.place(x=key_button_list[0].winfo_x(), y=KEY_BUTTON_HEADROOM+PADDING-3, width=key_button_list[-1].winfo_x() + KEY_BUTTON_WIDTH - KEY_BUTTON_GAP, height=key_button_list[-1].winfo_y() - key_button_list[0].winfo_y() + KEY_BUTTON_HEIGHT + 5)
+root.update()
+script_textbox.bind("<<Modified>>", script_textbox_event)
+script_textbox.tag_configure("error", background="#ffff00")
+
+
+key_name_textbox = Text(keys_lf, state=DISABLED, relief='solid', borderwidth=1, padx=2, pady=2, spacing3=5, wrap="word")
+
 
 if first_word == REM_BLOCK:
             print("hhhhh")
