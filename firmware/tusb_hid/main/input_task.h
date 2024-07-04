@@ -43,11 +43,6 @@
 #define ROTARY_ENCODER_UPPER 1
 #define ROTARY_ENCODER_LOWER 2
 
-#define SW_MINUS 20
-#define SW_PLUS 21
-#define SW_RE1 22
-#define SW_RE2 23
-
 #define SW_EVENT_RELEASE 0
 #define SW_EVENT_SHORT_PRESS 1
 #define SW_EVENT_LONG_PRESS 2
@@ -75,13 +70,15 @@
 #define MSW_19  19
 #define MAX_MSW MSW_19
 
-#define UPPER_RE_CW 20
-#define UPPER_RE_CCW 21
-#define UPPER_RE_SW 22
+#define SW_MINUS 20
+#define SW_PLUS 21
+#define SW_RE1 22
+#define SW_RE2 23
 
-#define LOWER_RE_CW 23
-#define LOWER_RE_CCW 24
-#define LOWER_RE_SW 25
+#define RE1_CW 24
+#define RE1_CCW 25
+#define RE2_CW 26
+#define RE2_CCW 27
 
 typedef struct
 {
