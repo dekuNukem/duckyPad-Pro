@@ -134,24 +134,11 @@ backup_path = os.path.join(save_path, 'profile_backups')
 ensure_dir(save_path)
 ensure_dir(backup_path)
 save_filename = os.path.join(save_path, 'config.txt')
-config_dict = {}
 hid_dump_path = os.path.join(save_path, "hid_dump")
 hid_modified_dir_path = os.path.join(save_path, "hid_new")
 
 print("This window will print debug information!")
 print("Used for troubleshooting if it crashes!")
-
-try:
-    with open(save_filename) as json_file:
-        temp = json.load(json_file)
-        if isinstance(temp, dict):
-            config_dict = temp
-        else:
-            raise ValueError("not a valid config file")
-except Exception as e:
-    pass
-
-config_dict['auto_backup_enabled'] = True
 
 default_button_color = 'SystemButtonFace'
 if 'linux' in sys.platform:
@@ -1341,7 +1328,7 @@ def on_closing():
 root.protocol("WM_DELETE_WINDOW", on_closing)
 
 root.after(500, repeat_func)
-# if os.name == 'posix':
-#     debug_set_root_folder()
-# root.iconbitmap('icon.ico')    
+
+select_root_folder("sample_profiles");
+
 root.mainloop()
