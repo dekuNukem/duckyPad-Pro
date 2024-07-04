@@ -75,6 +75,14 @@
 #define MSW_19  19
 #define MAX_MSW MSW_19
 
+#define UPPER_RE_CW 20
+#define UPPER_RE_CCW 21
+#define UPPER_RE_SW 22
+
+#define LOWER_RE_CW 23
+#define LOWER_RE_CCW 24
+#define LOWER_RE_SW 25
+
 typedef struct
 {
     uint8_t id;
