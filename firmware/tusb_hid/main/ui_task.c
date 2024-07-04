@@ -55,7 +55,7 @@ uint8_t center_line(uint8_t line_len, uint8_t char_width_pixels, uint8_t oled_wi
   return start_pixel;
 }
 
-#define OLED_LINE_BUF_SIZE 32
+#define OLED_LINE_BUF_SIZE 64
 char oled_line_buf[OLED_LINE_BUF_SIZE];
 
 void draw_nosd(void)
@@ -241,8 +241,12 @@ void draw_settings(dp_global_settings *dps)
   ssd1306_WriteString(oled_line_buf, Font_7x10, White);
 
   memset(oled_line_buf, 0, OLED_LINE_BUF_SIZE);
-  sprintf(oled_line_buf, "%s", dps->current_kb_layout);
-  ssd1306_SetCursor(center_line(strlen(oled_line_buf), 7, SSD1306_WIDTH), 57);
+  if(strlen(dps->current_kb_layout) >= 9)
+  {
+    strcpy(oled_line_buf, dps->current_kb_layout+5);
+    oled_line_buf[strlen(oled_line_buf)-4] = 0; // don't print .txt extension
+  }
+  ssd1306_SetCursor(center_line(strlen(oled_line_buf), 7, SSD1306_WIDTH), 60);
   ssd1306_WriteString(oled_line_buf, Font_7x10, White);
 
   ssd1306_UpdateScreen();

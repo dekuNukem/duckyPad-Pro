@@ -394,7 +394,7 @@ uint8_t load_keymap_by_name(char* km_name)
   printf("load_keymap_by_name: %s\n", temp_buf);
   FILE *sd_file = fopen(temp_buf, "r");
   if(sd_file == NULL)
-    return 2;
+    return ERROR_KEYMAP_NOT_FOUND;
   
   while(fgets(temp_buf, TEMP_BUFSIZE, sd_file))
   {
@@ -418,6 +418,52 @@ uint8_t load_keymap_by_name(char* km_name)
   fclose(sd_file);
   ascii_map[0] = 0;
   return 0;
+}
+
+uint8_t get_next_keymap(char* current_keymap_filename, char* next_keymap_filename)
+{
+  struct dirent *dir;
+  DIR *d = opendir("/sdcard/keymaps");
+  if(d == NULL)
+    return ERROR_NO_KEYMAP_FOLDER;
+  uint8_t found = 0;
+  while ((dir = readdir(d)) != NULL)
+  {
+    if(dir->d_type != DT_REG)
+      continue;
+    if(!(strncmp(dir->d_name, "dpkm_", 5) == 0 && strstr(dir->d_name, ".txt") != NULL))
+      continue;
+    if(found)
+    {
+      strcpy(next_keymap_filename, dir->d_name);
+      closedir(d);
+      return 0;
+    }
+    if(strcmp(dir->d_name, current_keymap_filename) == 0)
+      found = 1;
+  }
+  closedir(d);
+  return ERROR_KEYMAP_NOT_FOUND;
+}
+
+uint8_t get_first_keymap(char* keymap_filename)
+{
+  struct dirent *dir;
+  DIR *d = opendir("/sdcard/keymaps");
+  if(d == NULL)
+    return ERROR_NO_KEYMAP_FOLDER;
+  while ((dir = readdir(d)) != NULL)
+  {
+    if(dir->d_type != DT_REG)
+      continue;
+    if(!(strncmp(dir->d_name, "dpkm_", 5) == 0 && strstr(dir->d_name, ".txt") != NULL))
+      continue;
+    strcpy(keymap_filename, dir->d_name);
+    closedir(d);
+    return 0;
+  }
+  closedir(d);
+  return ERROR_KEYMAP_NOT_FOUND;
 }
 
 void error_loop(void)

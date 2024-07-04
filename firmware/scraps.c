@@ -1,4 +1,13 @@
 MY_UNIMPLEMENTED
+
+        printf("current keymap: %s\n", dp_settings.current_kb_layout);
+
+
+  memset(dp_settings.current_kb_layout, 0, FILENAME_BUFSIZE);
+  get_first_keymap(dp_settings.current_kb_layout);
+  printf("first keymap: %s\n", dp_settings.current_kb_layout);
+
+
 uint8_t get_next_keymap(char* current_keymap_filename, char* next_keymap_filename, uint8_t next_keymap_buf_size)
 {
   struct dirent *dir;
