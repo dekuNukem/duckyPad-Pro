@@ -54,6 +54,7 @@ void goto_profile(uint8_t profile_number);
 uint8_t load_keymap_by_name(char* km_name);
 uint8_t get_next_keymap(char* current_keymap_filename, char* next_keymap_filename);
 uint8_t get_first_keymap(char* keymap_filename);
+uint8_t save_settings(dp_global_settings* dps);
 
 extern const char* default_keymap_name;
 

@@ -27,59 +27,71 @@ int main(int argc, char *argv[])
 
     //--------------------------------
 
+  uint8_t fw_version_major = 10;
+  uint8_t fw_version_minor = 10;
+  uint8_t fw_version_patch = 10;
 
-	ssd1306_Fill(Black);
+  ssd1306_Fill(Black);
 
-    memset(oled_line_buf, 0, OLED_LINE_BUF_SIZE);
-    sprintf(oled_line_buf, "ERROR");
-    ssd1306_SetCursor(center_line(strlen(oled_line_buf), 7, SSD1306_WIDTH), 0);
-    ssd1306_WriteString(oled_line_buf, Font_7x10, White);
+  memset(oled_line_buf, 0, OLED_LINE_BUF_SIZE);
+  sprintf(oled_line_buf, "Settings");
+  ssd1306_SetCursor(center_line(strlen(oled_line_buf), 7, SSD1306_WIDTH), 0);
+  ssd1306_WriteString(oled_line_buf, Font_7x10, White);
 
-    ssd1306_Line(0,10,128,10,White);
+  ssd1306_Line(0,10,128,10,White);
 
-    memset(oled_line_buf, 0, OLED_LINE_BUF_SIZE);
-    sprintf(oled_line_buf, "File not found:");
-    ssd1306_SetCursor(center_line(strlen(oled_line_buf), 7, SSD1306_WIDTH), 20);
-    ssd1306_WriteString(oled_line_buf, Font_7x10, White);
+  memset(oled_line_buf, 0, OLED_LINE_BUF_SIZE);
+  sprintf(oled_line_buf, "1:Brightness %d%%", 100);
+  ssd1306_SetCursor(0, 15);
+  ssd1306_WriteString(oled_line_buf, Font_7x10, White);
 
-    memset(oled_line_buf, 0, OLED_LINE_BUF_SIZE);
-    sprintf(oled_line_buf, "key20.dsb");
-    ssd1306_SetCursor(center_line(strlen(oled_line_buf), 7, SSD1306_WIDTH), 35);
-    ssd1306_WriteString(oled_line_buf, Font_7x10, White);
+  memset(oled_line_buf, 0, OLED_LINE_BUF_SIZE);
+  sprintf(oled_line_buf, "2:Orientation");
+  ssd1306_SetCursor(0, 30);
+  ssd1306_WriteString(oled_line_buf, Font_7x10, White);
 
-    memset(oled_line_buf, 0, OLED_LINE_BUF_SIZE);
-    sprintf(oled_line_buf, "Open & Save");
-    ssd1306_SetCursor(center_line(strlen(oled_line_buf), 7, SSD1306_WIDTH), 70);
-    ssd1306_WriteString(oled_line_buf, Font_7x10, White);
+  memset(oled_line_buf, 0, OLED_LINE_BUF_SIZE);
+  sprintf(oled_line_buf, "3:Keyboard Region");
+  ssd1306_SetCursor(0, 45);
+  ssd1306_WriteString(oled_line_buf, Font_7x10, White);
 
-    memset(oled_line_buf, 0, OLED_LINE_BUF_SIZE);
-    sprintf(oled_line_buf, "on PC app");
-    ssd1306_SetCursor(center_line(strlen(oled_line_buf), 7, SSD1306_WIDTH), 85);
-    ssd1306_WriteString(oled_line_buf, Font_7x10, White);
+  memset(oled_line_buf, 0, OLED_LINE_BUF_SIZE);
+  sprintf(oled_line_buf, "English (US)");
+  ssd1306_SetCursor(center_line(strlen(oled_line_buf), 7, SSD1306_WIDTH), 60);
+  ssd1306_WriteString(oled_line_buf, Font_7x10, White);
 
-    memset(oled_line_buf, 0, OLED_LINE_BUF_SIZE);
-    sprintf(oled_line_buf, "Press Any Key");
-    ssd1306_SetCursor(center_line(strlen(oled_line_buf), 7, SSD1306_WIDTH), 115);
-    ssd1306_WriteString(oled_line_buf, Font_7x10, White);
+  memset(oled_line_buf, 0, OLED_LINE_BUF_SIZE);
+  sprintf(oled_line_buf, "17-20:Exit");
+  ssd1306_SetCursor(0, 102);
+  ssd1306_WriteString(oled_line_buf, Font_7x10, White);
 
-    // ------------------------------
+  ssd1306_Line(0,115,128,115,White);
+
+  memset(oled_line_buf, 0, OLED_LINE_BUF_SIZE);
+  sprintf(oled_line_buf, "FW V%d.%d.%d", fw_version_major, fw_version_minor, fw_version_patch);
+  ssd1306_SetCursor(center_line(strlen(oled_line_buf), 7, SSD1306_WIDTH), 118);
+  ssd1306_WriteString(oled_line_buf, Font_7x10, White);
+
+
+
+  // ------------------------------
 
 	sprintf(filename_buf, "OLED_%d_%d.bin", SSD1306_WIDTH, SSD1306_HEIGHT);
 
 	FILE* file = fopen(filename_buf, "wb");
-    if (file == NULL) {
-        printf("Failed to open file\n");
-        return 1;
-    }
+  if (file == NULL) {
+      printf("Failed to open file\n");
+      return 1;
+  }
 
-    size_t written = fwrite(SSD1306_Buffer, sizeof(uint8_t), SSD1306_BUFFER_SIZE, file);
-    if (written < SSD1306_BUFFER_SIZE)
-    {
-        printf("Failed to write the complete buffer to file\n");
-        return 2;
-    }
+  size_t written = fwrite(SSD1306_Buffer, sizeof(uint8_t), SSD1306_BUFFER_SIZE, file);
+  if (written < SSD1306_BUFFER_SIZE)
+  {
+      printf("Failed to write the complete buffer to file\n");
+      return 2;
+  }
 
-    fclose(file);
-    printf("done!\n");
+  fclose(file);
+  printf("done!\n");
 }
 

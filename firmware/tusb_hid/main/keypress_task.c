@@ -78,6 +78,7 @@ void handle_keydown(uint8_t swid)
 void settings_menu(void)
 {
   draw_settings(&dp_settings);
+  draw_settings_led();
   while(1)
   {
     switch_event_t sw_event = { 0 };
@@ -88,13 +89,12 @@ void settings_menu(void)
       {
         dp_settings.brightness_index = (dp_settings.brightness_index + 1) % BRIGHTNESS_LEVEL_SIZE;
         draw_settings(&dp_settings);
-        neopixel_draw_current_buffer();
+        draw_settings_led();
       }
-      if(sw_event.id == MSW_19 && sw_event.type == SW_EVENT_SHORT_PRESS)
+      if(sw_event.id == MSW_2 && sw_event.type == SW_EVENT_SHORT_PRESS)
       {
         memset(temp_buf, 0, TEMP_BUFSIZE);
-        uint8_t ddd = get_next_keymap(dp_settings.current_kb_layout, temp_buf);
-        if(ddd)
+        if(get_next_keymap(dp_settings.current_kb_layout, temp_buf))
         {
           memset(dp_settings.current_kb_layout, 0, FILENAME_BUFSIZE);
           get_first_keymap(dp_settings.current_kb_layout);
@@ -104,9 +104,9 @@ void settings_menu(void)
           strcpy(dp_settings.current_kb_layout, temp_buf);
         }
         draw_settings(&dp_settings);
-        // neopixel_draw_current_buffer();
+        save_settings(&dp_settings);
       }
-      if((sw_event.id == SW_MINUS || sw_event.id == SW_PLUS) && sw_event.type == SW_EVENT_SHORT_PRESS)
+      if((sw_event.id >= MSW_16 && sw_event.id <= MSW_19) && sw_event.type == SW_EVENT_SHORT_PRESS)
       {
         return;
       }
@@ -131,7 +131,7 @@ void process_keyevent(uint8_t swid, uint8_t event_type)
   if((swid == SW_PLUS || swid == SW_MINUS) && event_type == SW_EVENT_LONG_PRESS)
   {
     settings_menu();
-    redraw_bg(current_profile_number);
+    goto_profile(current_profile_number);
     return;
   }
 

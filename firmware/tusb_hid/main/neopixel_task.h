@@ -45,6 +45,7 @@ void draw_red(void);
 void neopixel_off(void);
 void set_pixel_3color(uint8_t which, uint8_t r, uint8_t g, uint8_t b);
 void reset_key_color(uint8_t which);
+void draw_settings_led(void);
 
 extern uint8_t brightness_index_to_percent_lookup[BRIGHTNESS_LEVEL_SIZE];
 

@@ -192,3 +192,18 @@ void led_animation_init()
     neo_anime[i].animation_type = ANIMATION_NONE;
   }
 }
+
+void draw_settings_led(void)
+{
+  neopixel_off();
+
+  set_pixel_3color(0, 0, 0, 255);
+  set_pixel_3color(1, 0, 0, 255);
+  set_pixel_3color(2, 0, 0, 255);
+  
+  set_pixel_3color(16, 0, 255, 0);
+  set_pixel_3color(17, 0, 255, 0);
+  set_pixel_3color(18, 0, 255, 0);
+  set_pixel_3color(19, 0, 255, 0);
+  neopixel_draw_current_buffer();
+}
