@@ -36,13 +36,6 @@ void my_rotary_encoder_init(void)
 	ESP_ERROR_CHECK(rotary_encoder_set_queue(&lower_rc_info, rotary_encoder_event_queue));
 }
 
-void get_rc(void)
-{
-	rotary_encoder_event_t event = { 0 };
-	if (xQueueReceive(rotary_encoder_event_queue, &event, 0) == pdTRUE)
-		printf("Event: id: %d pos: %ld, dir: %d\n", event.state.id, event.state.position, event.state.direction);
-}
-
 uint8_t this_sw_state[TOTAL_OBSW_COUNT];
 uint8_t last_sw_state[TOTAL_OBSW_COUNT];
 uint32_t last_press_ts[TOTAL_OBSW_COUNT];

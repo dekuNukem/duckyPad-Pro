@@ -14,8 +14,8 @@
 
 // OB = onboard
 #define MECH_OBSW_COUNT (SW_MATRIX_NUM_COLS * SW_MATRIX_NUM_ROWS)
-// 20 mechanical switches, + and - button, 3 for each rotary encoder
-#define TOTAL_OBSW_COUNT (MECH_OBSW_COUNT + 8)
+// 20 mechanical switches, + and - button, 1 for each rotary encoder
+#define TOTAL_OBSW_COUNT (MECH_OBSW_COUNT + 4)
 
 #define SW_PLUS_GPIO GPIO_NUM_17
 #define SW_MINUS_GPIO GPIO_NUM_18
@@ -75,11 +75,6 @@
 #define SW_RE1 22
 #define SW_RE2 23
 
-#define RE1_CW 24
-#define RE1_CCW 25
-#define RE2_CW 26
-#define RE2_CCW 27
-
 typedef struct
 {
     uint8_t id;
@@ -88,7 +83,6 @@ typedef struct
 
 void switch_init(void);
 void my_rotary_encoder_init(void);
-void get_rc(void);
 void kb_scan_task(void *dummy);
 uint8_t rowcol_to_index(uint8_t row, uint8_t col);
 

@@ -10,7 +10,12 @@ uint8_t load_dsb(char* dsb_path)
   printf("fread: %ld\n", result);
   return DSB_OK;
 }
-
+void get_rc(void)
+{
+  rotary_encoder_event_t event = { 0 };
+  if (xQueueReceive(rotary_encoder_event_queue, &event, 0) == pdTRUE)
+    printf("Event: id: %d pos: %ld, dir: %d\n", event.state.id, event.state.position, event.state.direction);
+}
 
 FILE *sd_file = fopen(temp_buf, "r");
   if(sd_file == NULL)
