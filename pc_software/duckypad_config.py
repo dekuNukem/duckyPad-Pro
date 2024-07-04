@@ -851,7 +851,7 @@ backup_button.place(x=scaled_size(700), y=0, width=scaled_size(65), height=scale
 # ------------- Profiles frame -------------
 
 profile_var = StringVar()
-profiles_lf = LabelFrame(root, text="Profiles", width=int(MAIN_WINDOW_WIDTH / 3 - PADDING * 1.3), height=MAIN_COLUMN_HEIGHT - HEIGHT_ROOT_FOLDER_LF - PADDING)
+profiles_lf = LabelFrame(root, text="Profiles", width=scaled_size(260), height=scaled_size(MAIN_COLUMN_HEIGHT - HEIGHT_ROOT_FOLDER_LF - PADDING))
 profiles_lf.place(x=PADDING, y=HEIGHT_ROOT_FOLDER_LF)
 root.update()
 
@@ -908,13 +908,14 @@ kd_R2.place(x=scaled_size(130), y=scaled_size(405))
 # ------------- Keys frame -------------
 selected_key = None
 
-keys_lf = LabelFrame(root, text="Keys", width=int(MAIN_WINDOW_WIDTH / 3 - PADDING * 1.3), height=MAIN_COLUMN_HEIGHT - HEIGHT_ROOT_FOLDER_LF - PADDING)
+keys_lf = LabelFrame(root, text="Keys", width=scaled_size(350), height=scaled_size(MAIN_COLUMN_HEIGHT - HEIGHT_ROOT_FOLDER_LF - PADDING))
 keys_lf.place(x=profiles_lf.winfo_x() + profiles_lf.winfo_width() + PADDING, y=profiles_lf.winfo_y())
 root.update()
 
-key_instruction = Label(master=keys_lf, text="click to edit, drag to rearrange")
+key_instruction_label = Label(master=keys_lf, text="click to edit, drag to rearrange")
 root.update()
-key_instruction.place(x=scaled_size(30), y=0)
+key_instruction_label_x_pos = keys_lf.winfo_width() - len(key_instruction_label.cget("text")) * scaled_size(8)
+key_instruction_label.place(x=key_instruction_label_x_pos, y=scaled_size(5))
 
 KEY_BUTTON_HEADROOM = scaled_size(20)
 KEY_BUTTON_WIDTH = scaled_size(75)
@@ -1100,7 +1101,7 @@ key_color_button.place(x=scaled_size(135), y=scaled_size(407), width=scaled_size
 key_color_button.bind("<Button-1>", key_color_button_click)
 
 # ------------- Scripts frame -------------
-scripts_lf = LabelFrame(root, text="Scripts", width=int(MAIN_WINDOW_WIDTH / 3 - PADDING * 1.3), height=MAIN_COLUMN_HEIGHT - HEIGHT_ROOT_FOLDER_LF - PADDING)
+scripts_lf = LabelFrame(root, text="Scripts", width=int(MAIN_WINDOW_WIDTH / 3 - PADDING * 1.3), height=scaled_size(MAIN_COLUMN_HEIGHT - HEIGHT_ROOT_FOLDER_LF - PADDING))
 
 def open_duckyscript_url():
     webbrowser.open('https://github.com/dekuNukem/duckyPad/blob/master/duckyscript_info.md#writing-duckyscript')
