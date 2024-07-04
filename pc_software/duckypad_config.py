@@ -133,7 +133,6 @@ save_path = user_data_dir(appname, appauthor, roaming=True)
 backup_path = os.path.join(save_path, 'profile_backups')
 ensure_dir(save_path)
 ensure_dir(backup_path)
-save_filename = os.path.join(save_path, 'config.txt')
 hid_dump_path = os.path.join(save_path, "hid_dump")
 hid_modified_dir_path = os.path.join(save_path, "hid_new")
 
@@ -144,7 +143,7 @@ default_button_color = 'SystemButtonFace'
 if 'linux' in sys.platform:
     default_button_color = 'grey'
 
-MAIN_WINDOW_WIDTH = scaled_size(800)
+MAIN_WINDOW_WIDTH = scaled_size(1000)
 MAIN_WINDOW_HEIGHT = scaled_size(605)
 MAIN_COLUMN_HEIGHT = scaled_size(533)
 PADDING = scaled_size(10)
