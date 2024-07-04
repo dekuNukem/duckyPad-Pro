@@ -496,6 +496,13 @@ def update_profile_display():
     script_textbox.delete(1.0, 'end')
     check_syntax_label.config(text="", fg="green")
 
+def make_key_button_text_from_two_lines(line1, line2):
+    if line1 is None:
+        return ''
+    if line2 is None or len(line2) == 0:
+        return clean_input(line1, KEY_NAME_MAX_CHAR_PER_LINE, is_filename=False)
+    return clean_input(line1, KEY_NAME_MAX_CHAR_PER_LINE, is_filename=False) + "\n" + clean_input(line2, KEY_NAME_MAX_CHAR_PER_LINE, is_filename=False)
+
 def update_key_button_appearances(profile_index):
     if profile_index is None:
         for x in range(MECH_OBSW_COUNT):
@@ -510,7 +517,8 @@ def update_key_button_appearances(profile_index):
             else:
                 key_button_list[count].config(background=rgb_to_hex(profile_list[profile_index].bg_color))
                 this_color = profile_list[profile_index].bg_color
-            key_button_list[count].config(text=item.name[:7], foreground=adapt_color(this_color))
+            this_key_name = make_key_button_text_from_two_lines(item.name, item.name_line2)
+            key_button_list[count].config(text=this_key_name, foreground=adapt_color(this_color))
         elif item is None and profile_list[profile_index].dim_unused is False:
             key_button_list[count].config(text='', background=rgb_to_hex(profile_list[profile_index].bg_color))
         elif item is None and profile_list[profile_index].dim_unused:
@@ -797,7 +805,8 @@ def key_button_click(button_widget):
     if profile_list[profile_index].keylist[selected_key] is not None:
         scripts_lf.place(x=scaled_size(536), y=scaled_size(50))
         empty_script_lf.place_forget()
-        key_name_textbox.insert(1.0, profile_list[profile_index].keylist[selected_key].name)
+        this_key_name = make_key_button_text_from_two_lines(profile_list[profile_index].keylist[selected_key].name, profile_list[profile_index].keylist[selected_key].name_line2)
+        key_name_textbox.insert(1.0, this_key_name)
         script_textbox.delete(1.0, 'end')
         script_textbox.insert(1.0, profile_list[profile_index].keylist[selected_key].script.rstrip('\n').rstrip('\r'))
     else:
@@ -1061,15 +1070,16 @@ def key_rename_click():
     if is_key_selected() == False:
         return
     profile_index = profile_lstbox.curselection()[0]
-    result = key_name_textbox.get("1.0", END)
-    keyname_line1, keyname_line2 = get_clean_key_name_2lines(result)
+    keyname_line1, keyname_line2 = get_clean_key_name_2lines(key_name_textbox.get("1.0", END))
     if len(keyname_line1) == 0:
         return
     if profile_list[profile_index].keylist[selected_key] is not None:
-        profile_list[profile_index].keylist[selected_key].name = result
+        profile_list[profile_index].keylist[selected_key].name = keyname_line1
+        profile_list[profile_index].keylist[selected_key].name_line2 = keyname_line2
     else:
         new_key = duck_objs.dp_key()
-        new_key.name = result
+        new_key.name = keyname_line1
+        new_key.name_line2 = keyname_line2
         profile_list[profile_index].keylist[selected_key] = new_key
         update_keylist_index()
     update_key_button_appearances(profile_index)
