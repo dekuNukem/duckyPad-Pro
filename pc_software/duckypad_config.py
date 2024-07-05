@@ -909,14 +909,13 @@ kd_R2.place(x=scaled_size(130), y=scaled_size(405))
 # ------------- Keys frame -------------
 selected_key = None
 
-keys_lf = LabelFrame(root, text="Keys", width=scaled_size(300), height=scaled_size(MAIN_COLUMN_HEIGHT - HEIGHT_ROOT_FOLDER_LF - PADDING))
+keys_lf = LabelFrame(root, text="On-board Keys", width=scaled_size(300), height=scaled_size(MAIN_COLUMN_HEIGHT - HEIGHT_ROOT_FOLDER_LF - PADDING))
 keys_lf.place(x=profiles_lf.winfo_x() + profiles_lf.winfo_width() + PADDING, y=profiles_lf.winfo_y())
 root.update()
 
 key_instruction_label = Label(master=keys_lf, text="click to edit, drag to rearrange")
 root.update()
-key_instruction_label_x_pos = keys_lf.winfo_width() - len(key_instruction_label.cget("text")) * scaled_size(8)
-key_instruction_label.place(x=key_instruction_label_x_pos, y=scaled_size(0))
+key_instruction_label.place(x=scaled_size(60), y=scaled_size(0))
 
 def search_button(rootx, rooty):
     for index, item in enumerate(key_button_list):
@@ -1022,7 +1021,6 @@ key_button_xy_list = [
 key_button_list = []
 for x in range(MECH_OBSW_COUNT):
     this_button = Label(master=keys_lf, borderwidth=1, relief="solid", background=default_button_color, font=(None, 13))
-
     this_button.place(x=key_button_xy_list[x][0], y=key_button_xy_list[x][1], width=KEY_BUTTON_WIDTH, height=KEY_BUTTON_HEIGHT)
     this_button.bind("<Button-1>", key_button_click_event)
     this_button.bind("<B1-Motion>", button_drag_start)
@@ -1143,6 +1141,47 @@ key_color_rb2.place(x=scaled_size(85), y=scaled_size(425))
 key_color_button = Label(master=keys_lf, borderwidth=1, relief="solid")
 key_color_button.place(x=scaled_size(135), y=scaled_size(425), width=scaled_size(60), height=scaled_size(20))
 key_color_button.bind("<Button-1>", key_color_button_click)
+
+# ------------- RE frame -----------------
+
+RE_BUTTON_WIDTH = 130
+RE_BUTTON_HEIGHT = 25
+
+re_lf = LabelFrame(root, text="Rotary Encoders", width=scaled_size(150), height=scaled_size(205))
+re_lf.place(x=scaled_size(590), y=scaled_size(50))
+root.update()
+
+upper_re_cw = Label(master=re_lf, text='Upper RE CW', borderwidth=1, relief="solid", background=default_button_color, font=(None, 13))
+upper_re_cw.place(x=scaled_size(7), y=scaled_size(5), width=RE_BUTTON_WIDTH, height=RE_BUTTON_HEIGHT)
+
+upper_re_ccw = Label(master=re_lf, text='Upper RE CCW', borderwidth=1, relief="solid", background=default_button_color, font=(None, 13))
+upper_re_ccw.place(x=scaled_size(7), y=scaled_size(35), width=RE_BUTTON_WIDTH, height=RE_BUTTON_HEIGHT)
+
+upper_re_sw = Label(master=re_lf, text='Upper RE Push', borderwidth=1, relief="solid", background=default_button_color, font=(None, 13))
+upper_re_sw.place(x=scaled_size(7), y=scaled_size(65), width=RE_BUTTON_WIDTH, height=RE_BUTTON_HEIGHT)
+
+lower_re_cw = Label(master=re_lf, text='Lower RE CW', borderwidth=1, relief="solid", background=default_button_color, font=(None, 13))
+lower_re_cw.place(x=scaled_size(7), y=scaled_size(95), width=RE_BUTTON_WIDTH, height=RE_BUTTON_HEIGHT)
+
+lower_re_ccw = Label(master=re_lf, text='Lower RE CCW', borderwidth=1, relief="solid", background=default_button_color, font=(None, 13))
+lower_re_ccw.place(x=scaled_size(7), y=scaled_size(125), width=RE_BUTTON_WIDTH, height=RE_BUTTON_HEIGHT)
+
+lower_re_sw = Label(master=re_lf, text='Lower RE Push', borderwidth=1, relief="solid", background=default_button_color, font=(None, 13))
+lower_re_sw.place(x=scaled_size(7), y=scaled_size(155), width=RE_BUTTON_WIDTH, height=RE_BUTTON_HEIGHT)
+
+# ------------- Expansion frame ------------
+
+def open_expansion_instruction(event):
+    messagebox.showinfo("oops", f"not implemented yet!!!")
+
+expansion_lf = LabelFrame(root, text="Expansion Keys", width=scaled_size(150), height=scaled_size(263))
+expansion_lf.place(x=scaled_size(590), y=scaled_size(260))
+root.update()
+
+expansion_instruction = Label(master=expansion_lf, text="Whats this??", fg="blue", cursor="hand2")
+root.update()
+expansion_instruction.place(x=scaled_size(30), y=scaled_size(0))
+expansion_instruction.bind("<Button-1>", open_expansion_instruction)
 
 # ------------- Scripts frame -------------
 scripts_lf = LabelFrame(root, text="Scripts", width=int(MAIN_WINDOW_WIDTH / 3 - PADDING * 1.3), height=scaled_size(MAIN_COLUMN_HEIGHT - HEIGHT_ROOT_FOLDER_LF - PADDING))
@@ -1308,7 +1347,7 @@ profile_import_button = Button(profiles_lf, text="Import", command=import_profil
 profile_import_button.place(x=PADDING * 2, y=BUTTON_Y_POS + BUTTON_HEIGHT + int(PADDING/2), width=BUTTON_WIDTH, height=BUTTON_HEIGHT)
 
 empty_script_lf = Label(root, text="<-- Select a key")
-empty_script_lf.place(x=scaled_size(600), y=scaled_size(300))
+empty_script_lf.place(x=scaled_size(800), y=scaled_size(300))
 root.update()
 
 def repeat_func():
