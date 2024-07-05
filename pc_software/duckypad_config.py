@@ -117,6 +117,7 @@ MAX_DUCKYPAD_FIRMWARE_VERSION = "1.10.10"
 
 ENV_UI_SCALE = os.getenv("DUCKYPAD_UI_SCALE")
 UI_SCALE = float(ENV_UI_SCALE) if ENV_UI_SCALE else 1
+UI_SCALE = 1
 
 def ensure_dir(dir_path):
     if not os.path.exists(dir_path):
@@ -144,7 +145,7 @@ default_button_color = 'SystemButtonFace'
 if 'linux' in sys.platform:
     default_button_color = 'grey'
 
-MAIN_WINDOW_WIDTH = scaled_size(1000)
+MAIN_WINDOW_WIDTH = scaled_size(1070)
 MAIN_WINDOW_HEIGHT = scaled_size(605)
 MAIN_COLUMN_HEIGHT = scaled_size(533)
 PADDING = scaled_size(10)
@@ -792,15 +793,15 @@ def key_button_click(button_widget):
     button_widget.config(borderwidth=7, relief='sunken')
     key_name_textbox.delete('1.0', 'end')
     if profile_list[profile_index].keylist[selected_key] is not None:
-        scripts_lf.place(x=scaled_size(536), y=scaled_size(50))
-        empty_script_lf.place_forget()
+        scripts_lf.place(x=scaled_size(750), y=scaled_size(50))
+        empty_script_lable.place_forget()
         this_key_name = make_key_button_text_from_two_lines(profile_list[profile_index].keylist[selected_key].name, profile_list[profile_index].keylist[selected_key].name_line2)
         key_name_textbox.insert(1.0, this_key_name)
         script_textbox.delete(1.0, 'end')
         script_textbox.insert(1.0, profile_list[profile_index].keylist[selected_key].script.rstrip('\n').rstrip('\r'))
     else:
         scripts_lf.place_forget()
-        empty_script_lf.place(x=scaled_size(600), y=scaled_size(300))
+        empty_script_lable.place(x=scaled_size(800), y=scaled_size(300))
         key_color_button.config(background=default_button_color)
         key_color_rb1.config(state=DISABLED)
         key_color_rb2.config(state=DISABLED)
@@ -852,7 +853,7 @@ backup_button.place(x=scaled_size(700), y=0, width=scaled_size(65), height=scale
 # ------------- Profiles frame -------------
 
 profile_var = StringVar()
-profiles_lf = LabelFrame(root, text="Profiles", width=scaled_size(260), height=scaled_size(MAIN_COLUMN_HEIGHT - HEIGHT_ROOT_FOLDER_LF - PADDING))
+profiles_lf = LabelFrame(root, text="Profiles", width=scaled_size(260), height=scaled_size(473))
 profiles_lf.place(x=PADDING, y=HEIGHT_ROOT_FOLDER_LF)
 root.update()
 
@@ -909,7 +910,7 @@ kd_R2.place(x=scaled_size(130), y=scaled_size(405))
 # ------------- Keys frame -------------
 selected_key = None
 
-keys_lf = LabelFrame(root, text="On-board Keys", width=scaled_size(300), height=scaled_size(MAIN_COLUMN_HEIGHT - HEIGHT_ROOT_FOLDER_LF - PADDING))
+keys_lf = LabelFrame(root, text="On-board Keys", width=scaled_size(300), height=scaled_size(473))
 keys_lf.place(x=profiles_lf.winfo_x() + profiles_lf.winfo_width() + PADDING, y=profiles_lf.winfo_y())
 root.update()
 
@@ -1082,10 +1083,10 @@ def key_remove_click():
 KEY_NAME_BUTTON_GAP = int((keys_lf.winfo_width() - 2 * BUTTON_WIDTH) / 3.5)
 
 key_rename_button = Button(keys_lf, text="Apply", command=key_rename_click, state=DISABLED, fg="green")
-key_rename_button.place(x=scaled_size(KEY_NAME_BUTTON_GAP), y=scaled_size(365), width=BUTTON_WIDTH, height=BUTTON_HEIGHT)
+key_rename_button.place(x=scaled_size(30), y=scaled_size(365), width=BUTTON_WIDTH, height=BUTTON_HEIGHT)
 root.update()
 key_remove_button = Button(keys_lf, text="Remove", command=key_remove_click, state=DISABLED, fg="red")
-key_remove_button.place(x=scaled_size(KEY_NAME_BUTTON_GAP*2+key_rename_button.winfo_width()), y=scaled_size(365), width=BUTTON_WIDTH, height=BUTTON_HEIGHT)
+key_remove_button.place(x=scaled_size(160), y=scaled_size(365), width=BUTTON_WIDTH, height=BUTTON_HEIGHT)
 
 key_color_text = Label(master=keys_lf, text="Key color:", fg='grey')
 key_color_text.place(x=scaled_size(PADDING), y=scaled_size(400))
@@ -1144,29 +1145,29 @@ key_color_button.bind("<Button-1>", key_color_button_click)
 
 # ------------- RE frame -----------------
 
-RE_BUTTON_WIDTH = 130
-RE_BUTTON_HEIGHT = 25
+RE_BUTTON_WIDTH = scaled_size(130)
+RE_BUTTON_HEIGHT = scaled_size(25)
 
 re_lf = LabelFrame(root, text="Rotary Encoders", width=scaled_size(150), height=scaled_size(205))
 re_lf.place(x=scaled_size(590), y=scaled_size(50))
 root.update()
 
-upper_re_cw = Label(master=re_lf, text='Upper RE CW', borderwidth=1, relief="solid", background=default_button_color, font=(None, 13))
+upper_re_cw = Label(master=re_lf, text='RE1 CW', borderwidth=1, relief="solid", background=default_button_color, font=(None, 13))
 upper_re_cw.place(x=scaled_size(7), y=scaled_size(5), width=RE_BUTTON_WIDTH, height=RE_BUTTON_HEIGHT)
 
-upper_re_ccw = Label(master=re_lf, text='Upper RE CCW', borderwidth=1, relief="solid", background=default_button_color, font=(None, 13))
+upper_re_ccw = Label(master=re_lf, text='RE1 CCW', borderwidth=1, relief="solid", background=default_button_color, font=(None, 13))
 upper_re_ccw.place(x=scaled_size(7), y=scaled_size(35), width=RE_BUTTON_WIDTH, height=RE_BUTTON_HEIGHT)
 
-upper_re_sw = Label(master=re_lf, text='Upper RE Push', borderwidth=1, relief="solid", background=default_button_color, font=(None, 13))
+upper_re_sw = Label(master=re_lf, text='RE1 Push', borderwidth=1, relief="solid", background=default_button_color, font=(None, 13))
 upper_re_sw.place(x=scaled_size(7), y=scaled_size(65), width=RE_BUTTON_WIDTH, height=RE_BUTTON_HEIGHT)
 
-lower_re_cw = Label(master=re_lf, text='Lower RE CW', borderwidth=1, relief="solid", background=default_button_color, font=(None, 13))
+lower_re_cw = Label(master=re_lf, text='RE2 CW', borderwidth=1, relief="solid", background=default_button_color, font=(None, 13))
 lower_re_cw.place(x=scaled_size(7), y=scaled_size(95), width=RE_BUTTON_WIDTH, height=RE_BUTTON_HEIGHT)
 
-lower_re_ccw = Label(master=re_lf, text='Lower RE CCW', borderwidth=1, relief="solid", background=default_button_color, font=(None, 13))
+lower_re_ccw = Label(master=re_lf, text='RE2 CCW', borderwidth=1, relief="solid", background=default_button_color, font=(None, 13))
 lower_re_ccw.place(x=scaled_size(7), y=scaled_size(125), width=RE_BUTTON_WIDTH, height=RE_BUTTON_HEIGHT)
 
-lower_re_sw = Label(master=re_lf, text='Lower RE Push', borderwidth=1, relief="solid", background=default_button_color, font=(None, 13))
+lower_re_sw = Label(master=re_lf, text='RE2 Push', borderwidth=1, relief="solid", background=default_button_color, font=(None, 13))
 lower_re_sw.place(x=scaled_size(7), y=scaled_size(155), width=RE_BUTTON_WIDTH, height=RE_BUTTON_HEIGHT)
 
 # ------------- Expansion frame ------------
@@ -1184,7 +1185,7 @@ expansion_instruction.place(x=scaled_size(30), y=scaled_size(0))
 expansion_instruction.bind("<Button-1>", open_expansion_instruction)
 
 # ------------- Scripts frame -------------
-scripts_lf = LabelFrame(root, text="Scripts", width=int(MAIN_WINDOW_WIDTH / 3 - PADDING * 1.3), height=scaled_size(MAIN_COLUMN_HEIGHT - HEIGHT_ROOT_FOLDER_LF - PADDING))
+scripts_lf = LabelFrame(root, text="Scripts", width=scaled_size(310), height=scaled_size(473))
 
 def open_duckyscript_url():
     webbrowser.open('https://github.com/dekuNukem/duckyPad/blob/master/duckyscript_info.md#writing-duckyscript')
@@ -1194,7 +1195,7 @@ def script_instruction_click(event):
 
 script_instruction = Label(master=scripts_lf, text="Read more about Duckyscript...", fg="blue", cursor="hand2")
 root.update()
-script_instruction.place(x=scaled_size(25), y=0)
+script_instruction.place(x=scaled_size(60), y=0)
 script_instruction.bind("<Button-1>", script_instruction_click)
 
 modified_count = 0
@@ -1346,8 +1347,8 @@ autoswitch_button.place(x=scaled_size(250), y=0, width=scaled_size(200), height=
 profile_import_button = Button(profiles_lf, text="Import", command=import_profile_click, state=DISABLED)
 profile_import_button.place(x=PADDING * 2, y=BUTTON_Y_POS + BUTTON_HEIGHT + int(PADDING/2), width=BUTTON_WIDTH, height=BUTTON_HEIGHT)
 
-empty_script_lf = Label(root, text="<-- Select a key")
-empty_script_lf.place(x=scaled_size(800), y=scaled_size(300))
+empty_script_lable = Label(root, text="<-- Select a key")
+empty_script_lable.place(x=scaled_size(800), y=scaled_size(300))
 root.update()
 
 def repeat_func():
