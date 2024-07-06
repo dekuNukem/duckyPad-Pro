@@ -139,10 +139,10 @@ class dp_profile(object):
 
 	def __init__(self):
 		super(dp_profile, self).__init__()
-		self.key_count = MECH_OBSW_COUNT
 		self.path = None
 		self.name = None
-		self.keylist = [None] * self.key_count
+		self.keylist = [None] * MECH_OBSW_COUNT
+		self.rotary_encoder_keylist = [None] * (ROTARY_ENCODER_COUNT * 3)
 		self.bg_color = (84,22,180)
 		self.kd_color = None
 		self.dim_unused = True

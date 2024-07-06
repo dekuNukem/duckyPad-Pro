@@ -2,6 +2,7 @@ MAIN_WINDOW_WIDTH = scaled_size(1070)
 MAIN_WINDOW_HEIGHT = scaled_size(605)
 MAIN_COLUMN_HEIGHT = scaled_size(533)
 PADDING = scaled_size(10)
+HEIGHT_ROOT_FOLDER_LF = scaled_size(50)
 
 
 REM_BLOCK

@@ -1145,6 +1145,23 @@ key_color_button.bind("<Button-1>", key_color_button_click)
 
 # ------------- RE frame -----------------
 
+def reset_rotary_encoder_button_relief():
+    upper_re_cw.config(borderwidth=1, relief="solid")
+    upper_re_ccw.config(borderwidth=1, relief="solid")
+    upper_re_sw.config(borderwidth=1, relief="solid")
+    lower_re_cw.config(borderwidth=1, relief="solid")
+    lower_re_ccw.config(borderwidth=1, relief="solid")
+    lower_re_sw.config(borderwidth=1, relief="solid")
+
+def rotary_encoder_button_click_event(event):
+    rotary_encoder_button_click(event.widget)
+
+def rotary_encoder_button_click(button_widget):
+    print(button_widget)
+    reset_key_button_relief()
+    reset_rotary_encoder_button_relief()
+    button_widget.config(borderwidth=3, relief='sunken')
+
 RE_BUTTON_WIDTH = scaled_size(130)
 RE_BUTTON_HEIGHT = scaled_size(25)
 
@@ -1154,21 +1171,27 @@ root.update()
 
 upper_re_cw = Label(master=re_lf, text='RE1 CW', borderwidth=1, relief="solid", background=default_button_color, font=(None, 13))
 upper_re_cw.place(x=scaled_size(7), y=scaled_size(5), width=RE_BUTTON_WIDTH, height=RE_BUTTON_HEIGHT)
+upper_re_cw.bind("<Button-1>", rotary_encoder_button_click_event)
 
 upper_re_ccw = Label(master=re_lf, text='RE1 CCW', borderwidth=1, relief="solid", background=default_button_color, font=(None, 13))
 upper_re_ccw.place(x=scaled_size(7), y=scaled_size(35), width=RE_BUTTON_WIDTH, height=RE_BUTTON_HEIGHT)
+upper_re_ccw.bind("<Button-1>", rotary_encoder_button_click_event)
 
 upper_re_sw = Label(master=re_lf, text='RE1 Push', borderwidth=1, relief="solid", background=default_button_color, font=(None, 13))
 upper_re_sw.place(x=scaled_size(7), y=scaled_size(65), width=RE_BUTTON_WIDTH, height=RE_BUTTON_HEIGHT)
+upper_re_sw.bind("<Button-1>", rotary_encoder_button_click_event)
 
 lower_re_cw = Label(master=re_lf, text='RE2 CW', borderwidth=1, relief="solid", background=default_button_color, font=(None, 13))
 lower_re_cw.place(x=scaled_size(7), y=scaled_size(95), width=RE_BUTTON_WIDTH, height=RE_BUTTON_HEIGHT)
+lower_re_cw.bind("<Button-1>", rotary_encoder_button_click_event)
 
 lower_re_ccw = Label(master=re_lf, text='RE2 CCW', borderwidth=1, relief="solid", background=default_button_color, font=(None, 13))
 lower_re_ccw.place(x=scaled_size(7), y=scaled_size(125), width=RE_BUTTON_WIDTH, height=RE_BUTTON_HEIGHT)
+lower_re_ccw.bind("<Button-1>", rotary_encoder_button_click_event)
 
 lower_re_sw = Label(master=re_lf, text='RE2 Push', borderwidth=1, relief="solid", background=default_button_color, font=(None, 13))
 lower_re_sw.place(x=scaled_size(7), y=scaled_size(155), width=RE_BUTTON_WIDTH, height=RE_BUTTON_HEIGHT)
+lower_re_sw.bind("<Button-1>", rotary_encoder_button_click_event)
 
 # ------------- Expansion frame ------------
 
