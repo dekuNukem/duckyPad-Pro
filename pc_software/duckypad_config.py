@@ -714,8 +714,10 @@ def save_everything(save_path):
                 config_file.write('KEYDOWN_COLOR %d %d %d\n' % (this_profile.kd_color))
             if this_profile.dim_unused is False:
                 config_file.write('DIM_UNUSED_KEYS 0\n')
-            for this_key in this_profile.keylist:
+            for key_index, this_key in enumerate(this_profile.keylist):
                 if this_key is None:
+                    continue
+                if key_index >= MECH_OBSW_COUNT and len(this_key.script.replace('\r', '').replace('\n', '')) <= 1:
                     continue
                 # newline='' is important, it forces python to not write \r, only \n
                 # otherwise it will read back as double \n
