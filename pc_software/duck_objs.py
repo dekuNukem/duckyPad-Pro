@@ -141,11 +141,29 @@ class dp_profile(object):
 		super(dp_profile, self).__init__()
 		self.path = None
 		self.name = None
-		self.keylist = [None] * MECH_OBSW_COUNT
-		self.rotary_encoder_keylist = [None] * (ROTARY_ENCODER_COUNT * 3)
+		self.keylist = [None] * (MECH_OBSW_COUNT + ROTARY_ENCODER_SW_COUNT)
 		self.bg_color = (84,22,180)
 		self.kd_color = None
 		self.dim_unused = True
+
+		new_key = dp_key()
+		new_key.name = "R1CW"
+		self.keylist[BUTTON_RE1_CW] = new_key
+		new_key = dp_key()
+		new_key.name = "R1CCW"
+		self.keylist[BUTTON_RE1_CCW] = new_key
+		new_key = dp_key()
+		new_key.name = "R1BTN"
+		self.keylist[BUTTON_RE1_PUSH] = new_key
+		new_key = dp_key()
+		new_key.name = "R2CW"
+		self.keylist[BUTTON_RE2_CW] = new_key
+		new_key = dp_key()
+		new_key.name = "R2CCW"
+		self.keylist[BUTTON_RE2_CCW] = new_key
+		new_key = dp_key()
+		new_key.name = "R2BTN"
+		self.keylist[BUTTON_RE2_PUSH] = new_key
 
 class dp_global_settings(object):
 	def load_from_path(self, path):

@@ -789,8 +789,12 @@ def key_button_click(button_widget):
         return
     profile_index = profile_lstbox.curselection()[0]
     selected_key = key_button_list.index(button_widget)
+    print(selected_key)
     reset_key_button_relief()
-    button_widget.config(borderwidth=7, relief='sunken')
+    this_borderwidth = scaled_size(7)
+    if selected_key >= MECH_OBSW_COUNT:
+        this_borderwidth = scaled_size(5)
+    button_widget.config(borderwidth=this_borderwidth, relief='sunken')
     key_name_textbox.delete('1.0', 'end')
     if profile_list[profile_index].keylist[selected_key] is not None:
         scripts_lf.place(x=scaled_size(750), y=scaled_size(50))
@@ -907,6 +911,13 @@ kd_R1.place(x=scaled_size(130), y=scaled_size(380))
 kd_R2 = Radiobutton(profiles_lf, text="", variable=kd_color_var, value=1, command=kd_radiobutton_custom_click, state=DISABLED)
 kd_R2.place(x=scaled_size(130), y=scaled_size(405))
 
+# ------------- RE frame -----------------
+re_lf = LabelFrame(root, text="Rotary Encoders", width=scaled_size(150), height=scaled_size(205))
+re_lf.place(x=scaled_size(590), y=scaled_size(50))
+root.update()
+RE_BUTTON_WIDTH = scaled_size(130)
+RE_BUTTON_HEIGHT = scaled_size(25)
+
 # ------------- Keys frame -------------
 selected_key = None
 
@@ -988,35 +999,36 @@ def button_drag_release(event):
 
 KEY_BUTTON_HEADROOM = scaled_size(20)
 KEY_BUTTON_WIDTH = scaled_size(60)
-KEY_BUTTON_HEIGHT = scaled_size(45)
-KEY_BUTTON_GAP = int((keys_lf.winfo_width() - SW_MATRIX_NUM_COLS * KEY_BUTTON_WIDTH) / 5)
+KEY_BUTTON_HEIGHT = scaled_size(50)
+KEY_BUTTON_GAP = 12
+COL_GAP = 6
 
 key_button_xy_list = [
 # ROW 0
-(KEY_BUTTON_GAP,KEY_BUTTON_HEADROOM+PADDING),
-(KEY_BUTTON_GAP*2+KEY_BUTTON_WIDTH,KEY_BUTTON_HEADROOM+PADDING),
-(KEY_BUTTON_GAP*3+KEY_BUTTON_WIDTH*2,KEY_BUTTON_HEADROOM+PADDING),
-(KEY_BUTTON_GAP*4+KEY_BUTTON_WIDTH*3,KEY_BUTTON_HEADROOM+PADDING),
+(KEY_BUTTON_GAP,KEY_BUTTON_HEADROOM+COL_GAP),
+(KEY_BUTTON_GAP*2+KEY_BUTTON_WIDTH,KEY_BUTTON_HEADROOM+COL_GAP),
+(KEY_BUTTON_GAP*3+KEY_BUTTON_WIDTH*2,KEY_BUTTON_HEADROOM+COL_GAP),
+(KEY_BUTTON_GAP*4+KEY_BUTTON_WIDTH*3,KEY_BUTTON_HEADROOM+COL_GAP),
 # ROW 1
-(KEY_BUTTON_GAP,KEY_BUTTON_HEADROOM+PADDING*2+KEY_BUTTON_HEIGHT),
-(KEY_BUTTON_GAP*2+KEY_BUTTON_WIDTH,KEY_BUTTON_HEADROOM+PADDING*2+KEY_BUTTON_HEIGHT),
-(KEY_BUTTON_GAP*3+KEY_BUTTON_WIDTH*2,KEY_BUTTON_HEADROOM+PADDING*2+KEY_BUTTON_HEIGHT),
-(KEY_BUTTON_GAP*4+KEY_BUTTON_WIDTH*3,KEY_BUTTON_HEADROOM+PADDING*2+KEY_BUTTON_HEIGHT),
+(KEY_BUTTON_GAP,KEY_BUTTON_HEADROOM+COL_GAP*2+KEY_BUTTON_HEIGHT),
+(KEY_BUTTON_GAP*2+KEY_BUTTON_WIDTH,KEY_BUTTON_HEADROOM+COL_GAP*2+KEY_BUTTON_HEIGHT),
+(KEY_BUTTON_GAP*3+KEY_BUTTON_WIDTH*2,KEY_BUTTON_HEADROOM+COL_GAP*2+KEY_BUTTON_HEIGHT),
+(KEY_BUTTON_GAP*4+KEY_BUTTON_WIDTH*3,KEY_BUTTON_HEADROOM+COL_GAP*2+KEY_BUTTON_HEIGHT),
 # ROW 2
-(KEY_BUTTON_GAP,KEY_BUTTON_HEADROOM+PADDING*3+KEY_BUTTON_HEIGHT*2),
-(KEY_BUTTON_GAP*2+KEY_BUTTON_WIDTH,KEY_BUTTON_HEADROOM+PADDING*3+KEY_BUTTON_HEIGHT*2),
-(KEY_BUTTON_GAP*3+KEY_BUTTON_WIDTH*2,KEY_BUTTON_HEADROOM+PADDING*3+KEY_BUTTON_HEIGHT*2),
-(KEY_BUTTON_GAP*4+KEY_BUTTON_WIDTH*3,KEY_BUTTON_HEADROOM+PADDING*3+KEY_BUTTON_HEIGHT*2),
+(KEY_BUTTON_GAP,KEY_BUTTON_HEADROOM+COL_GAP*3+KEY_BUTTON_HEIGHT*2),
+(KEY_BUTTON_GAP*2+KEY_BUTTON_WIDTH,KEY_BUTTON_HEADROOM+COL_GAP*3+KEY_BUTTON_HEIGHT*2),
+(KEY_BUTTON_GAP*3+KEY_BUTTON_WIDTH*2,KEY_BUTTON_HEADROOM+COL_GAP*3+KEY_BUTTON_HEIGHT*2),
+(KEY_BUTTON_GAP*4+KEY_BUTTON_WIDTH*3,KEY_BUTTON_HEADROOM+COL_GAP*3+KEY_BUTTON_HEIGHT*2),
 # ROW 3
-(KEY_BUTTON_GAP,KEY_BUTTON_HEADROOM+PADDING*4+KEY_BUTTON_HEIGHT*3),
-(KEY_BUTTON_GAP*2+KEY_BUTTON_WIDTH,KEY_BUTTON_HEADROOM+PADDING*4+KEY_BUTTON_HEIGHT*3),
-(KEY_BUTTON_GAP*3+KEY_BUTTON_WIDTH*2,KEY_BUTTON_HEADROOM+PADDING*4+KEY_BUTTON_HEIGHT*3),
-(KEY_BUTTON_GAP*4+KEY_BUTTON_WIDTH*3,KEY_BUTTON_HEADROOM+PADDING*4+KEY_BUTTON_HEIGHT*3),
+(KEY_BUTTON_GAP,KEY_BUTTON_HEADROOM+COL_GAP*4+KEY_BUTTON_HEIGHT*3),
+(KEY_BUTTON_GAP*2+KEY_BUTTON_WIDTH,KEY_BUTTON_HEADROOM+COL_GAP*4+KEY_BUTTON_HEIGHT*3),
+(KEY_BUTTON_GAP*3+KEY_BUTTON_WIDTH*2,KEY_BUTTON_HEADROOM+COL_GAP*4+KEY_BUTTON_HEIGHT*3),
+(KEY_BUTTON_GAP*4+KEY_BUTTON_WIDTH*3,KEY_BUTTON_HEADROOM+COL_GAP*4+KEY_BUTTON_HEIGHT*3),
 # ROW 4
-(KEY_BUTTON_GAP,KEY_BUTTON_HEADROOM+PADDING*5+KEY_BUTTON_HEIGHT*4),
-(KEY_BUTTON_GAP*2+KEY_BUTTON_WIDTH,KEY_BUTTON_HEADROOM+PADDING*5+KEY_BUTTON_HEIGHT*4),
-(KEY_BUTTON_GAP*3+KEY_BUTTON_WIDTH*2,KEY_BUTTON_HEADROOM+PADDING*5+KEY_BUTTON_HEIGHT*4),
-(KEY_BUTTON_GAP*4+KEY_BUTTON_WIDTH*3,KEY_BUTTON_HEADROOM+PADDING*5+KEY_BUTTON_HEIGHT*4)
+(KEY_BUTTON_GAP,KEY_BUTTON_HEADROOM+COL_GAP*5+KEY_BUTTON_HEIGHT*4),
+(KEY_BUTTON_GAP*2+KEY_BUTTON_WIDTH,KEY_BUTTON_HEADROOM+COL_GAP*5+KEY_BUTTON_HEIGHT*4),
+(KEY_BUTTON_GAP*3+KEY_BUTTON_WIDTH*2,KEY_BUTTON_HEADROOM+COL_GAP*5+KEY_BUTTON_HEIGHT*4),
+(KEY_BUTTON_GAP*4+KEY_BUTTON_WIDTH*3,KEY_BUTTON_HEADROOM+COL_GAP*5+KEY_BUTTON_HEIGHT*4)
 ]
 
 key_button_list = []
@@ -1027,6 +1039,36 @@ for x in range(MECH_OBSW_COUNT):
     this_button.bind("<B1-Motion>", button_drag_start)
     this_button.bind("<ButtonRelease-1>", button_drag_release)
     key_button_list.append(this_button)
+
+upper_re_cw = Label(master=re_lf, borderwidth=1, relief="solid", background=default_button_color, font=(None, 13))
+upper_re_cw.place(x=scaled_size(7), y=scaled_size(5), width=RE_BUTTON_WIDTH, height=RE_BUTTON_HEIGHT)
+upper_re_cw.bind("<Button-1>", key_button_click_event)
+key_button_list.append(upper_re_cw)
+
+upper_re_ccw = Label(master=re_lf, borderwidth=1, relief="solid", background=default_button_color, font=(None, 13))
+upper_re_ccw.place(x=scaled_size(7), y=scaled_size(35), width=RE_BUTTON_WIDTH, height=RE_BUTTON_HEIGHT)
+upper_re_ccw.bind("<Button-1>", key_button_click_event)
+key_button_list.append(upper_re_ccw)
+
+upper_re_sw = Label(master=re_lf, borderwidth=1, relief="solid", background=default_button_color, font=(None, 13))
+upper_re_sw.place(x=scaled_size(7), y=scaled_size(65), width=RE_BUTTON_WIDTH, height=RE_BUTTON_HEIGHT)
+upper_re_sw.bind("<Button-1>", key_button_click_event)
+key_button_list.append(upper_re_sw)
+
+lower_re_cw = Label(master=re_lf, borderwidth=1, relief="solid", background=default_button_color, font=(None, 13))
+lower_re_cw.place(x=scaled_size(7), y=scaled_size(95), width=RE_BUTTON_WIDTH, height=RE_BUTTON_HEIGHT)
+lower_re_cw.bind("<Button-1>", key_button_click_event)
+key_button_list.append(lower_re_cw)
+
+lower_re_ccw = Label(master=re_lf, borderwidth=1, relief="solid", background=default_button_color, font=(None, 13))
+lower_re_ccw.place(x=scaled_size(7), y=scaled_size(125), width=RE_BUTTON_WIDTH, height=RE_BUTTON_HEIGHT)
+lower_re_ccw.bind("<Button-1>", key_button_click_event)
+key_button_list.append(lower_re_ccw)
+
+lower_re_sw = Label(master=re_lf, borderwidth=1, relief="solid", background=default_button_color, font=(None, 13))
+lower_re_sw.place(x=scaled_size(7), y=scaled_size(155), width=RE_BUTTON_WIDTH, height=RE_BUTTON_HEIGHT)
+lower_re_sw.bind("<Button-1>", key_button_click_event)
+key_button_list.append(lower_re_sw)
 
 key_name_label = Label(master=keys_lf, text="Key name:", fg='grey')
 key_name_label.place(x=scaled_size(20), y=scaled_size(310))
@@ -1056,6 +1098,8 @@ def get_clean_key_name_2lines(user_text):
 def key_rename_click():
     if is_key_selected() == False:
         return
+    if selected_key >= MECH_OBSW_COUNT:
+        return
     profile_index = profile_lstbox.curselection()[0]
     keyname_line1, keyname_line2 = get_clean_key_name_2lines(key_name_textbox.get("1.0", END))
     if len(keyname_line1) == 0:
@@ -1074,6 +1118,8 @@ def key_rename_click():
 
 def key_remove_click():
     if is_key_selected() == False:
+        return
+    if selected_key >= MECH_OBSW_COUNT:
         return
     profile_index = profile_lstbox.curselection()[0]
     profile_list[profile_index].keylist[selected_key] = None
@@ -1143,56 +1189,6 @@ key_color_button = Label(master=keys_lf, borderwidth=1, relief="solid")
 key_color_button.place(x=scaled_size(135), y=scaled_size(425), width=scaled_size(60), height=scaled_size(20))
 key_color_button.bind("<Button-1>", key_color_button_click)
 
-# ------------- RE frame -----------------
-
-def reset_rotary_encoder_button_relief():
-    upper_re_cw.config(borderwidth=1, relief="solid")
-    upper_re_ccw.config(borderwidth=1, relief="solid")
-    upper_re_sw.config(borderwidth=1, relief="solid")
-    lower_re_cw.config(borderwidth=1, relief="solid")
-    lower_re_ccw.config(borderwidth=1, relief="solid")
-    lower_re_sw.config(borderwidth=1, relief="solid")
-
-def rotary_encoder_button_click_event(event):
-    rotary_encoder_button_click(event.widget)
-
-def rotary_encoder_button_click(button_widget):
-    print(button_widget)
-    reset_key_button_relief()
-    reset_rotary_encoder_button_relief()
-    button_widget.config(borderwidth=3, relief='sunken')
-
-RE_BUTTON_WIDTH = scaled_size(130)
-RE_BUTTON_HEIGHT = scaled_size(25)
-
-re_lf = LabelFrame(root, text="Rotary Encoders", width=scaled_size(150), height=scaled_size(205))
-re_lf.place(x=scaled_size(590), y=scaled_size(50))
-root.update()
-
-upper_re_cw = Label(master=re_lf, text='RE1 CW', borderwidth=1, relief="solid", background=default_button_color, font=(None, 13))
-upper_re_cw.place(x=scaled_size(7), y=scaled_size(5), width=RE_BUTTON_WIDTH, height=RE_BUTTON_HEIGHT)
-upper_re_cw.bind("<Button-1>", rotary_encoder_button_click_event)
-
-upper_re_ccw = Label(master=re_lf, text='RE1 CCW', borderwidth=1, relief="solid", background=default_button_color, font=(None, 13))
-upper_re_ccw.place(x=scaled_size(7), y=scaled_size(35), width=RE_BUTTON_WIDTH, height=RE_BUTTON_HEIGHT)
-upper_re_ccw.bind("<Button-1>", rotary_encoder_button_click_event)
-
-upper_re_sw = Label(master=re_lf, text='RE1 Push', borderwidth=1, relief="solid", background=default_button_color, font=(None, 13))
-upper_re_sw.place(x=scaled_size(7), y=scaled_size(65), width=RE_BUTTON_WIDTH, height=RE_BUTTON_HEIGHT)
-upper_re_sw.bind("<Button-1>", rotary_encoder_button_click_event)
-
-lower_re_cw = Label(master=re_lf, text='RE2 CW', borderwidth=1, relief="solid", background=default_button_color, font=(None, 13))
-lower_re_cw.place(x=scaled_size(7), y=scaled_size(95), width=RE_BUTTON_WIDTH, height=RE_BUTTON_HEIGHT)
-lower_re_cw.bind("<Button-1>", rotary_encoder_button_click_event)
-
-lower_re_ccw = Label(master=re_lf, text='RE2 CCW', borderwidth=1, relief="solid", background=default_button_color, font=(None, 13))
-lower_re_ccw.place(x=scaled_size(7), y=scaled_size(125), width=RE_BUTTON_WIDTH, height=RE_BUTTON_HEIGHT)
-lower_re_ccw.bind("<Button-1>", rotary_encoder_button_click_event)
-
-lower_re_sw = Label(master=re_lf, text='RE2 Push', borderwidth=1, relief="solid", background=default_button_color, font=(None, 13))
-lower_re_sw.place(x=scaled_size(7), y=scaled_size(155), width=RE_BUTTON_WIDTH, height=RE_BUTTON_HEIGHT)
-lower_re_sw.bind("<Button-1>", rotary_encoder_button_click_event)
-
 # ------------- Expansion frame ------------
 
 def open_expansion_instruction(event):
@@ -1249,7 +1245,7 @@ def script_textbox_event(event):
     script_textbox.tk.call(script_textbox._w, 'edit', 'modified', 0)
 
 script_textbox = Text(scripts_lf, relief='solid', borderwidth=1, padx=2, pady=2, spacing3=5, wrap="word")
-script_textbox.place(x=key_button_list[0].winfo_x(), y=KEY_BUTTON_HEADROOM+PADDING-3, width=key_button_list[-1].winfo_x() + KEY_BUTTON_WIDTH - KEY_BUTTON_GAP, height=key_button_list[-1].winfo_y() - key_button_list[0].winfo_y() + KEY_BUTTON_HEIGHT + 5)
+script_textbox.place(x=key_button_list[0].winfo_x(), y=KEY_BUTTON_HEADROOM+PADDING-3, width=275, height=260)
 root.update()
 script_textbox.bind("<<Modified>>", script_textbox_event)
 script_textbox.tag_configure("error", background="#ffff00")
