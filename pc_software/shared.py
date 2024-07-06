@@ -10,3 +10,6 @@ BUTTON_RE1_PUSH = 22
 BUTTON_RE2_CW = 23
 BUTTON_RE2_CCW = 24
 BUTTON_RE2_PUSH = 25
+
+def is_rotary_encoder_button(key_index_start_from_0):
+    return BUTTON_RE1_CW <= key_index_start_from_0 <= BUTTON_RE2_PUSH

@@ -496,21 +496,24 @@ def update_key_button_appearances(profile_index):
         for x in range(MECH_OBSW_COUNT):
             key_button_list[x].config(background=default_button_color, text='')
         return
-    for count, item in enumerate(profile_list[profile_index].keylist):
+    for key_index, item in enumerate(profile_list[profile_index].keylist):
         if item is not None:
             this_color = None
             if item.color is not None:
-                key_button_list[count].config(background=rgb_to_hex(item.color))
+                key_button_list[key_index].config(background=rgb_to_hex(item.color))
                 this_color = item.color
             else:
-                key_button_list[count].config(background=rgb_to_hex(profile_list[profile_index].bg_color))
+                key_button_list[key_index].config(background=rgb_to_hex(profile_list[profile_index].bg_color))
                 this_color = profile_list[profile_index].bg_color
             this_key_name = make_key_button_text_from_two_lines(item.name, item.name_line2)
-            key_button_list[count].config(text=this_key_name, foreground=adapt_color(this_color))
+            key_button_list[key_index].config(text=this_key_name, foreground=adapt_color(this_color))
         elif item is None and profile_list[profile_index].dim_unused is False:
-            key_button_list[count].config(text='', background=rgb_to_hex(profile_list[profile_index].bg_color))
+            key_button_list[key_index].config(text='', background=rgb_to_hex(profile_list[profile_index].bg_color))
         elif item is None and profile_list[profile_index].dim_unused:
-            key_button_list[count].config(background=default_button_color, text='')
+            key_button_list[key_index].config(background=default_button_color, text='')
+
+        # if is_rotary_encoder_button(key_index):
+        #     key_button_list[key_index].config(foreground="white", background="grey")
 
 def kd_radiobutton_auto_click():
     global profile_list
@@ -717,7 +720,7 @@ def save_everything(save_path):
             for key_index, this_key in enumerate(this_profile.keylist):
                 if this_key is None:
                     continue
-                if key_index >= MECH_OBSW_COUNT and len(this_key.script.replace('\r', '').replace('\n', '')) <= 1:
+                if is_rotary_encoder_button(key_index) and len(this_key.script.replace('\r', '').replace('\n', '')) <= 1:
                     continue
                 # newline='' is important, it forces python to not write \r, only \n
                 # otherwise it will read back as double \n
@@ -791,10 +794,9 @@ def key_button_click(button_widget):
         return
     profile_index = profile_lstbox.curselection()[0]
     selected_key = key_button_list.index(button_widget)
-    print(selected_key)
     reset_key_button_relief()
     this_borderwidth = scaled_size(7)
-    if selected_key >= MECH_OBSW_COUNT:
+    if is_rotary_encoder_button(selected_key):
         this_borderwidth = scaled_size(5)
     button_widget.config(borderwidth=this_borderwidth, relief='sunken')
     key_name_textbox.delete('1.0', 'end')
@@ -837,7 +839,7 @@ dp_root_folder_display = StringVar()
 dp_root_folder_path= ''
 dp_root_folder_display.set(INVALID_ROOT_FOLDER_STRING)
 
-root_folder_lf = LabelFrame(root, text="Files", width=scaled_size(779), height=HEIGHT_ROOT_FOLDER_LF)
+root_folder_lf = LabelFrame(root, text="Files", width=scaled_size(1050), height=HEIGHT_ROOT_FOLDER_LF)
 root_folder_lf.place(x=PADDING, y=0)
 root.update()
 
@@ -851,10 +853,10 @@ root_folder_path_label = Label(master=root_folder_lf, textvariable=dp_root_folde
 root_folder_path_label.place(x=scaled_size(155), y=0)
 
 save_button = Button(root_folder_lf, text="Save", command=save_click, state=DISABLED)
-save_button.place(x=scaled_size(630), y=0, width=scaled_size(65), height=scaled_size(25))
+save_button.place(x=scaled_size(630+270), y=0, width=scaled_size(65), height=scaled_size(25))
 
 backup_button = Button(root_folder_lf, text="Backup...", command=backup_button_click)
-backup_button.place(x=scaled_size(700), y=0, width=scaled_size(65), height=scaled_size(25))
+backup_button.place(x=scaled_size(700+270), y=0, width=scaled_size(65), height=scaled_size(25))
 
 # ------------- Profiles frame -------------
 
@@ -1100,7 +1102,7 @@ def get_clean_key_name_2lines(user_text):
 def key_rename_click():
     if is_key_selected() == False:
         return
-    if selected_key >= MECH_OBSW_COUNT:
+    if is_rotary_encoder_button(selected_key):
         return
     profile_index = profile_lstbox.curselection()[0]
     keyname_line1, keyname_line2 = get_clean_key_name_2lines(key_name_textbox.get("1.0", END))
@@ -1121,7 +1123,7 @@ def key_rename_click():
 def key_remove_click():
     if is_key_selected() == False:
         return
-    if selected_key >= MECH_OBSW_COUNT:
+    if is_rotary_encoder_button(selected_key):
         return
     profile_index = profile_lstbox.curselection()[0]
     profile_list[profile_index].keylist[selected_key] = None
