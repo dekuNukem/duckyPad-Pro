@@ -159,7 +159,7 @@ def open_discord_link():
     try:
         webbrowser.open(str(urllib.request.urlopen(discord_link_url).read().decode('latin-1')).split('\n')[0])
     except Exception as e:
-        messagebox.showerror("Error", "Failed to open discord link!\n"+str(e))
+        messagebox.showerror("Error", "I can't find the discord link...\n"+str(e))
 
 def create_help_window():
     help_window = Toplevel(root)
