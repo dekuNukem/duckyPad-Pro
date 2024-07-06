@@ -168,18 +168,18 @@ def create_help_window():
     help_window.resizable(width=FALSE, height=FALSE)
     help_window.grab_set()
 
-    user_manual_label = Label(master=help_window, text="Not sure what to do? Please read...")
-    user_manual_label.place(x=scaled_size(35), y=scaled_size(5))
+    user_manual_label = Label(master=help_window, text="Not sure what to do?")
+    user_manual_label.place(x=scaled_size(80), y=scaled_size(5))
     user_manual_button = Button(help_window, text="User Manual", command=open_duckypad_user_manual_url)
     user_manual_button.place(x=scaled_size(60), y=scaled_size(30), width=scaled_size(160))
 
-    troubleshoot_label = Label(master=help_window, text="Problems? Please see...")
-    troubleshoot_label.place(x=scaled_size(35), y=scaled_size(60))
+    troubleshoot_label = Label(master=help_window, text="Problems?")
+    troubleshoot_label.place(x=scaled_size(110), y=scaled_size(60))
     troubleshoot_button = Button(help_window, text="Troubleshooting Guides", command=open_duckypad_troubleshooting_url)
     troubleshoot_button.place(x=scaled_size(50), y=scaled_size(85), width=scaled_size(180))
 
-    discord_label = Label(master=help_window, text="Questions or comments? Ask in...")
-    discord_label.place(x=scaled_size(35), y=scaled_size(60 + 55))
+    discord_label = Label(master=help_window, text="Questions or comments?")
+    discord_label.place(x=scaled_size(70), y=scaled_size(60 + 55))
     discord_button = Button(help_window, text="Official Discord Chatroom", command=open_discord_link)
     discord_button.place(x=scaled_size(50), y=scaled_size(85 + 55), width=scaled_size(180))
 
@@ -1249,7 +1249,7 @@ def script_textbox_event(event):
     script_textbox.tk.call(script_textbox._w, 'edit', 'modified', 0)
 
 script_textbox = Text(scripts_lf, relief='solid', borderwidth=1, padx=2, pady=2, spacing3=5, wrap="word")
-script_textbox.place(x=key_button_list[0].winfo_x(), y=KEY_BUTTON_HEADROOM+PADDING-3, width=275, height=260)
+script_textbox.place(x=PADDING, y=scaled_size(27), width=scaled_size(285), height=scaled_size(270))
 root.update()
 script_textbox.bind("<<Modified>>", script_textbox_event)
 script_textbox.tag_configure("error", background="#ffff00")
@@ -1279,7 +1279,7 @@ check_syntax_label = Label(scripts_lf, text="")
 check_syntax_label.place(x=scaled_size(10), y=scaled_size(417))
 root.update()
 
-SCRIPT_BUTTON_WIDTH = script_textbox.winfo_width()/3.4
+SCRIPT_BUTTON_WIDTH = script_textbox.winfo_width()/3.3
 SCRIPT_BUTTON_GAP = scaled_size(5)
 PADDING = scaled_size(2)
 
@@ -1317,7 +1317,7 @@ def minutes_to_str(value):
 def slider_adjust_sleepmode(value):
     enter_sleep_mode_label.config(text="Sleep after: " + minutes_to_str(value))
 
-settings_lf = LabelFrame(root, text="Settings", width=scaled_size(516), height=scaled_size(70))
+settings_lf = LabelFrame(root, text="Settings", width=scaled_size(516+214), height=scaled_size(70))
 settings_lf.place(x=scaled_size(10), y=scaled_size(525))
 enter_sleep_mode_label = Label(master=settings_lf, text="Sleep after: Never")
 enter_sleep_mode_label.place(x=scaled_size(10), y=0)
@@ -1328,8 +1328,8 @@ sleepmode_slider.set(0)
 sleepmode_slider.place(x=scaled_size(10), y=scaled_size(20))
 sleepmode_slider.config(state=DISABLED)
 
-updates_lf = LabelFrame(root, text="Updates", width=scaled_size(253), height=scaled_size(70))
-updates_lf.place(x=scaled_size(536), y=scaled_size(525))
+updates_lf = LabelFrame(root, text="Updates", width=scaled_size(310), height=scaled_size(70))
+updates_lf.place(x=scaled_size(750), y=scaled_size(525))
 
 pc_app_update_label = Label(master=updates_lf)
 pc_app_update_label.place(x=scaled_size(5), y=scaled_size(0))
@@ -1371,7 +1371,7 @@ profile_import_button = Button(profiles_lf, text="Import", command=import_profil
 profile_import_button.place(x=PADDING * 2, y=BUTTON_Y_POS + BUTTON_HEIGHT + int(PADDING/2), width=BUTTON_WIDTH, height=BUTTON_HEIGHT)
 
 empty_script_lable = Label(root, text="<-- Select a key")
-empty_script_lable.place(x=scaled_size(800), y=scaled_size(300))
+empty_script_lable.place(x=scaled_size(850), y=scaled_size(200))
 root.update()
 
 def repeat_func():
