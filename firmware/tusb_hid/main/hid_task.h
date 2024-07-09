@@ -9,6 +9,9 @@
 #include "freertos/task.h"
 #include "freertos/queue.h"
 
+void mount_usb_msc(void);
+void app_send_hid_demo(void);
+
 #ifdef __cplusplus
 }
 #endif

@@ -24,6 +24,10 @@
 #include "diskio_impl.h"
 #include "diskio_sdmmc.h"
 
+#include "esp_mac.h"
+
+static const char *TAG = "USBHID";
+
 #define CUSTOM_HID_EPIN_SIZE 63
 #define USBD_CUSTOMHID_OUTREPORT_BUF_SIZE CUSTOM_HID_EPIN_SIZE
 
@@ -260,7 +264,7 @@ static void storage_mount_changed_cb(tinyusb_msc_event_t *event)
 
 // ---------------------- USB MSC END -----------------
 
-uint8_t mount_usb_msc(void)
+void mount_usb_msc(void)
 {
     const tinyusb_msc_sdmmc_config_t config_sdmmc = {
         .card = my_sd_card,
@@ -269,5 +273,14 @@ uint8_t mount_usb_msc(void)
     };
     ESP_ERROR_CHECK(tinyusb_msc_storage_init_sdmmc(&config_sdmmc));
     ESP_ERROR_CHECK(tinyusb_msc_storage_mount(BASE_PATH));
-    return 0;
+    ESP_LOGI(TAG, "USB MSC initialization");
+    const tinyusb_config_t tusb_cfg = {
+        .device_descriptor = &msc_desc_device,
+        .string_descriptor = string_desc_arr,
+        .string_descriptor_count = sizeof(string_desc_arr) / sizeof(string_desc_arr[0]),
+        .external_phy = false,
+        .configuration_descriptor = desc_fs_configuration,
+    };
+    ESP_ERROR_CHECK(tinyusb_driver_install(&tusb_cfg));
+    ESP_LOGI(TAG, "USB MSC initialization DONE");
 }
