@@ -48,6 +48,7 @@
     "keypress_task.h": "c",
     "unistd.h": "c",
     "limits": "c",
-    "functional": "c"
+    "functional": "c",
+    "diskio_sdmmc.h": "c"
   }
 }

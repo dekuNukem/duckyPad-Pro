@@ -20,6 +20,10 @@
 #include "ds_vm.h"
 #include "hid_task.h"
 
+#include "tusb_msc_storage.h"
+#include "diskio_impl.h"
+#include "diskio_sdmmc.h"
+
 #define CUSTOM_HID_EPIN_SIZE 63
 #define USBD_CUSTOMHID_OUTREPORT_BUF_SIZE CUSTOM_HID_EPIN_SIZE
 
@@ -251,7 +255,7 @@ char const *string_desc_arr[] =
 
 static void storage_mount_changed_cb(tinyusb_msc_event_t *event)
 {
-    ESP_LOGI(TAG, "Storage mounted to application: %s", event->mount_changed_data.is_mounted ? "Yes" : "No");
+    printf("Storage mounted to application: %s", event->mount_changed_data.is_mounted ? "Yes" : "No");
 }
 
 // ---------------------- USB MSC END -----------------
@@ -265,4 +269,5 @@ uint8_t mount_usb_msc(void)
     };
     ESP_ERROR_CHECK(tinyusb_msc_storage_init_sdmmc(&config_sdmmc));
     ESP_ERROR_CHECK(tinyusb_msc_storage_mount(BASE_PATH));
+    return 0;
 }
