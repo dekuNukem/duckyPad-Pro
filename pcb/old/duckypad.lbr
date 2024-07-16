@@ -6,7 +6,7 @@
 <setting alwaysvectorfont="no"/>
 <setting verticaltext="up"/>
 </settings>
-<grid distance="1" unitdist="mm" unit="mm" style="lines" multiple="1" display="no" altdistance="5" altunitdist="mil" altunit="mil"/>
+<grid distance="0.1" unitdist="inch" unit="inch" style="lines" multiple="1" display="no" altdistance="0.01" altunitdist="inch" altunit="inch"/>
 <layers>
 <layer number="1" name="Top" color="4" fill="1" visible="yes" active="yes"/>
 <layer number="2" name="Route2" color="16" fill="1" visible="no" active="yes"/>
@@ -743,6 +743,12 @@ EC12E series with push-on switch</description>
 <text x="-2.5" y="8.5" size="1.27" layer="25">&gt;NAME</text>
 <text x="3.5" y="-9" size="1.27" layer="27" rot="R180">&gt;VALUE</text>
 </package>
+<package name="SW_OPENING">
+<wire x1="-6.95" y1="-6.95" x2="-6.95" y2="6.95" width="0" layer="20"/>
+<wire x1="-6.95" y1="6.95" x2="6.95" y2="6.95" width="0" layer="20"/>
+<wire x1="6.95" y1="6.95" x2="6.95" y2="-6.95" width="0" layer="20"/>
+<wire x1="6.95" y1="-6.95" x2="-6.95" y2="-6.95" width="0" layer="20"/>
+</package>
 </packages>
 <symbols>
 <symbol name="3POS_SLIDE_SWITCH_342_SWITCH_SYM">
@@ -1235,6 +1241,13 @@ EC12E series with push-on switch</description>
 <wire x1="0" y1="-22.86" x2="17.78" y2="-22.86" width="0.127" layer="94"/>
 <wire x1="17.78" y1="-22.86" x2="17.78" y2="17.78" width="0.127" layer="94"/>
 <wire x1="17.78" y1="17.78" x2="0" y2="17.78" width="0.127" layer="94"/>
+</symbol>
+<symbol name="SW_OPENING">
+<wire x1="-7.62" y1="5.08" x2="12.7" y2="5.08" width="0" layer="94"/>
+<wire x1="12.7" y1="5.08" x2="12.7" y2="-7.62" width="0" layer="94"/>
+<wire x1="12.7" y1="-7.62" x2="-7.62" y2="-7.62" width="0" layer="94"/>
+<wire x1="-7.62" y1="-7.62" x2="-7.62" y2="5.08" width="0" layer="94"/>
+<text x="-2.54" y="-2.54" size="1.778" layer="94">sw opening</text>
 </symbol>
 </symbols>
 <devicesets>
@@ -1958,6 +1971,18 @@ Basic schematic elements and footprints for 0603, 1206, and PTH resistors.</desc
 <connect gate="G$1" pin="8" pad="8"/>
 <connect gate="G$1" pin="9" pad="9"/>
 </connects>
+<technologies>
+<technology name=""/>
+</technologies>
+</device>
+</devices>
+</deviceset>
+<deviceset name="SW_OPENM">
+<gates>
+<gate name="G$1" symbol="SW_OPENING" x="-2.54" y="2.54"/>
+</gates>
+<devices>
+<device name="" package="SW_OPENING">
 <technologies>
 <technology name=""/>
 </technologies>
