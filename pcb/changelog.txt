@@ -6,6 +6,6 @@ removed power switch cutout
 added power switch bypass pad jumper?
 moved OLED cutout 1mm downwards
 adjusted aux connector shield pin
-
-TODO:
+adjust screw location
+adjusted PCB size
 
