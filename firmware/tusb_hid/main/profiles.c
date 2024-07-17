@@ -178,9 +178,8 @@ void load_profile_info(void)
   closedir(d);
 }
 
-// const char cmd_sw_name_firstline[] = "SWNAMEFL_";
 const char cmd_sw_name_firstline[] = "z";
-const char cmd_sw_name_secondline[] = "SWNAMESL_";
+const char cmd_sw_name_secondline[] = "x";
 
 void parse_profile_config_line(char* this_line, profile_info* this_profile)
 {

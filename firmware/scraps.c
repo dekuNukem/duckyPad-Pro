@@ -5,6 +5,32 @@ void app_send_hid_demo(void)
     /*
     tud_hid_report, first argument is usage ID, see HID descriptor, keyboard is 1, media
     key is 2, mouse is 3, etc
+    can also use tud_hid_keyboard_report, but probably easier to use tud_hid_report
+    */
+    // Keyboard output: Send key 'a/A' pressed and released
+    printf("Sending Keyboard report\n");
+    uint8_t keycode[6] = {HID_KEY_A, 0, 0, 0, 0, 0};
+    tud_hid_keyboard_report(1, 0, keycode);
+    vTaskDelay(pdMS_TO_TICKS(100));
+    tud_hid_keyboard_report(1, 0, NULL);
+}
+
+void USBD_CUSTOM_HID_SendReport(uint8_t* hid_buf)
+{
+    printf("HID: ");
+    for (size_t i = 0; i < KB_BUF_SIZE; i++)
+        printf("%02x ", hid_buf[i]);
+    printf("\n");
+
+    printf("tud: %d\n", );
+}
+
+
+void app_send_hid_demo(void)
+{
+    /*
+    tud_hid_report, first argument is usage ID, see HID descriptor, keyboard is 1, media
+    key is 2, mouse is 3, etc
 
     can also use tud_hid_keyboard_report, but probably easier to use tud_hid_report
     */
