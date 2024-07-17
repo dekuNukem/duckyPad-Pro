@@ -11,7 +11,7 @@
 
 void mount_usb_msc(void);
 void mount_hid_only(void);
-void send_keyboard_hid_msg(uint8_t* hid_buf);
+void USBD_CUSTOM_HID_SendReport(uint8_t* hid_buf);
 
 #ifdef __cplusplus
 }

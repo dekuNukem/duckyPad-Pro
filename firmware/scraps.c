@@ -1,5 +1,13 @@
 MY_UNIMPLEMENTED
 
+
+void send_keyboard_hid_msg(uint8_t* hid_buf)
+{
+    // usage_id, modifier, rest of the buffer size 6
+    tud_hid_keyboard_report(HID_USAGE_ID_KEYBOARD, hid_buf[1], hid_buf+2);
+    
+}
+
 void app_send_hid_demo(void)
 {
     /*

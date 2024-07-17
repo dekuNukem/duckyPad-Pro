@@ -167,11 +167,27 @@ void tud_hid_set_report_cb(uint8_t instance, uint8_t report_id, hid_report_type_
 #define HID_USAGE_ID_KEYBOARD 1
 #define HID_USAGE_ID_MEDIA_KEY 2
 #define HID_USAGE_ID_MOUSE 3
+#define EIGHT 8
+uint8_t new_hid_buf[EIGHT];
 
-void send_keyboard_hid_msg(uint8_t* hid_buf)
+void USBD_CUSTOM_HID_SendReport(uint8_t* hid_buf)
 {
-    // usage_id, modifier, rest of the buffer size 6
-    tud_hid_keyboard_report(HID_USAGE_ID_KEYBOARD, hid_buf[1], hid_buf+2);
+    printf("HID: ");
+    for (size_t i = 0; i < KB_BUF_SIZE; i++)
+        printf("%02x ", hid_buf[i]);
+    printf("\n");
+
+    memset(new_hid_buf, 0, EIGHT);
+    new_hid_buf[0] = hid_buf[1]; // modifier
+    new_hid_buf[1] = 0; // reserved
+    new_hid_buf[2] = hid_buf[2];
+    new_hid_buf[3] = hid_buf[3];
+    new_hid_buf[4] = hid_buf[4];
+    new_hid_buf[5] = hid_buf[5];
+    new_hid_buf[6] = hid_buf[6];
+    new_hid_buf[7] = hid_buf[7];
+
+    tud_hid_n_report(0, hid_buf[0], new_hid_buf, sizeof(new_hid_buf));
 }
 
 // ---------------- USB MSC --------------------
