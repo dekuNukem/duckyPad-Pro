@@ -12,6 +12,7 @@
 void mount_usb_msc(void);
 void app_send_hid_demo(void);
 void mount_hid_only(void);
+void USBD_CUSTOM_HID_SendReport(uint8_t* hid_buf, uint8_t hid_buf_size);
 
 #ifdef __cplusplus
 }

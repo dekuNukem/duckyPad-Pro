@@ -12,6 +12,8 @@
 #include "freertos/FreeRTOS.h"
 #include "freertos/task.h"
 
+#include "hid_task.h"
+
 #define SHIFT 0x100
 #define ALT_GR 0x200
 
@@ -291,14 +293,6 @@ void delay_wrapper(int32_t amount, int32_t fuzz)
 }
 
 uint8_t kb_buf[KB_BUF_SIZE];
-
-void USBD_CUSTOM_HID_SendReport(uint8_t* hid_buf, uint8_t hid_buf_size)
-{
-  printf("HID: ");
-  for (size_t i = 0; i < hid_buf_size; i++)
-    printf("%02x ", hid_buf[i]);
-  printf("\n");
-}
 
 void keyboard_release_all(void)
 {

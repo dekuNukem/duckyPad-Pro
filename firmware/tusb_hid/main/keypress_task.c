@@ -50,26 +50,21 @@ ds3_exe_result this_exe;
 
 void handle_keydown(uint8_t swid)
 {
-  // memset(temp_buf, 0, TEMP_BUFSIZE);
-  // sprintf(temp_buf, "/sdcard/%s/key%d.dsb", all_profile_info[current_profile_number].dir_path, swid+1);
-  // if(access(temp_buf, F_OK))
-  // {
-  //   draw_red();
-  //   draw_nodsb(swid);
-  //   block_until_anykey();
-  //   goto_profile(current_profile_number);
-  //   return;
-  // }
+  memset(temp_buf, 0, TEMP_BUFSIZE);
+  sprintf(temp_buf, "/sdcard/%s/key%d.dsb", all_profile_info[current_profile_number].dir_path, swid+1);
+  if(access(temp_buf, F_OK))
+  {
+    draw_red();
+    draw_nodsb(swid);
+    block_until_anykey();
+    goto_profile(current_profile_number);
+    return;
+  }
   play_keydown_animation(current_profile_number, swid);
   //-------------
-  // memset(temp_buf, 0, TEMP_BUFSIZE);
-  // sprintf(temp_buf, "hello world");
-  // kb_print(temp_buf, 20, 0);
-
-  // der_init(&this_exe);
-  // run_dsb(&this_exe, swid, temp_buf);
-
-  app_send_hid_demo();
+  der_init(&this_exe);
+  run_dsb(&this_exe, swid, temp_buf);
+  // app_send_hid_demo();
   //--------------
   play_keyup_animation(current_profile_number, swid);
 }

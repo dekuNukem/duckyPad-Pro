@@ -1,5 +1,31 @@
 MY_UNIMPLEMENTED
 
+void app_send_hid_demo(void)
+{
+    /*
+    tud_hid_report, first argument is usage ID, see HID descriptor, keyboard is 1, media
+    key is 2, mouse is 3, etc
+
+    can also use tud_hid_keyboard_report, but probably easier to use tud_hid_report
+    */
+    // Keyboard output: Send key 'a/A' pressed and released
+    printf("Sending Keyboard report\n");
+    uint8_t keycode[6] = {0x40, 0, 0, 0, 0, 0};
+    tud_hid_report(2, keycode, 6);
+    vTaskDelay(pdMS_TO_TICKS(100));
+    memset(keycode, 0, 6);
+    tud_hid_report(2, keycode, 6);
+}
+
+  der_init(&this_exe);
+  run_dsb(&this_exe, swid, temp_buf);
+
+  app_send_hid_demo();
+  memset(temp_buf, 0, TEMP_BUFSIZE);
+  sprintf(temp_buf, "hello world");
+  kb_print(temp_buf, 20, 0);
+
+
         printf("current keymap: %s\n", dp_settings.current_kb_layout);
 
 
