@@ -64,14 +64,7 @@
 #define KEY_MK_NEXT 0x1
 
 #define HID_TX_BUF_SIZE (CUSTOM_HID_EPIN_SIZE+1)
-#define MOUSE_BUF_SIZE 5
-#define MEDIA_KEY_BUF_SIZE 2
 #define KB_BUF_SIZE 8
-
-#define KB_LAYOUT_WQERTY 0
-#define KB_LAYOUT_AZERTY_FR 1
-#define KB_LAYOUT_AZERTY_BE 2
-#define KB_LAYOUT_DVORAK 3
 
 #define KEY_TYPE_UNKNOWN 0
 #define KEY_TYPE_CHAR 1
@@ -129,6 +122,10 @@ extern uint16_t duckcode_tilde;
 extern uint16_t duckcode_cedilla;
 
 extern uint16_t ascii_map[ASCII_MAP_SIZE];
+
+#define HID_USAGE_ID_KEYBOARD 1
+#define HID_USAGE_ID_MEDIA_KEY 2
+#define HID_USAGE_ID_MOUSE 3
 
 #ifdef __cplusplus
 }
