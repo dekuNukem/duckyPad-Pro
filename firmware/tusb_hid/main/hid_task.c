@@ -164,6 +164,7 @@ void tud_hid_set_report_cb(uint8_t instance, uint8_t report_id, hid_report_type_
     needs_respond = 1;
 }
 
+#define SIX 6
 #define EIGHT 8
 uint8_t esp_hid_msg[EIGHT];
 
@@ -173,21 +174,13 @@ void USBD_CUSTOM_HID_SendReport(uint8_t* hid_buf)
     memset(esp_hid_msg, 0, EIGHT);
     if(hid_usage_type == HID_USAGE_ID_KEYBOARD)
     {
+        memcpy(esp_hid_msg, hid_buf, SIX);
         esp_hid_msg[0] = hid_buf[1]; // modifier
         esp_hid_msg[1] = 0; // reserved
-        esp_hid_msg[2] = hid_buf[2];
-        esp_hid_msg[3] = hid_buf[3];
-        esp_hid_msg[4] = hid_buf[4];
-        esp_hid_msg[5] = hid_buf[5];
-        esp_hid_msg[6] = hid_buf[6];
-        esp_hid_msg[7] = hid_buf[7];
     }
     else if(hid_usage_type == HID_USAGE_ID_MOUSE)
     {
-        esp_hid_msg[0] = hid_buf[1];
-        esp_hid_msg[1] = hid_buf[2];
-        esp_hid_msg[2] = hid_buf[3];
-        esp_hid_msg[3] = hid_buf[4];
+        memcpy(esp_hid_msg, hid_buf+1, SIX-1);
     }
     else if(hid_usage_type == HID_USAGE_ID_MEDIA_KEY)
     {
