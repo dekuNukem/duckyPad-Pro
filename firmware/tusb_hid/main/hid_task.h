@@ -11,6 +11,7 @@
 
 void mount_usb_msc(void);
 void app_send_hid_demo(void);
+void mount_hid_only(void);
 
 #ifdef __cplusplus
 }

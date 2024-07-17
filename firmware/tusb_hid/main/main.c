@@ -61,7 +61,8 @@ void app_main(void)
     dp_settings.sleep_after_ms = 120000;
     xTaskCreate(keypress_task, "keypress_task", KEYPRESS_TASK_STACK_SIZE, NULL, 2, NULL);
 
-    mount_usb_msc();
+    // mount_usb_msc();
+    mount_hid_only();
 
     while(1)
     {
