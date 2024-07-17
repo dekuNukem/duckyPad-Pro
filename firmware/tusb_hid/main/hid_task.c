@@ -190,7 +190,7 @@ void USBD_CUSTOM_HID_SendReport(uint8_t* hid_buf, uint8_t hid_buf_size)
         printf("%02x ", hid_buf[i]);
     printf("\n");
 
-    printf("tud: %d\n", tud_hid_keyboard_report(HID_USAGE_ID_KEYBOARD, 0, hid_buf+2));
+    printf("tud: %d\n", tud_hid_keyboard_report(HID_USAGE_ID_KEYBOARD, hid_buf[1], hid_buf+2));
 }
 
 // ---------------- USB MSC --------------------
