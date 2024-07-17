@@ -169,9 +169,9 @@ uint8_t esp_hid_msg[EIGHT];
 
 void USBD_CUSTOM_HID_SendReport(uint8_t* hid_buf)
 {
+    uint8_t hid_usage_type = hid_buf[0];
     memset(esp_hid_msg, 0, EIGHT);
-
-    if(hid_buf[0] == HID_USAGE_ID_KEYBOARD)
+    if(hid_usage_type == HID_USAGE_ID_KEYBOARD)
     {
         esp_hid_msg[0] = hid_buf[1]; // modifier
         esp_hid_msg[1] = 0; // reserved
@@ -182,14 +182,18 @@ void USBD_CUSTOM_HID_SendReport(uint8_t* hid_buf)
         esp_hid_msg[6] = hid_buf[6];
         esp_hid_msg[7] = hid_buf[7];
     }
-    else if(hid_buf[0] == HID_USAGE_ID_MOUSE)
+    else if(hid_usage_type == HID_USAGE_ID_MOUSE)
     {
         esp_hid_msg[0] = hid_buf[1];
         esp_hid_msg[1] = hid_buf[2];
         esp_hid_msg[2] = hid_buf[3];
         esp_hid_msg[3] = hid_buf[4];
     }
-    tud_hid_n_report(0, hid_buf[0], esp_hid_msg, sizeof(esp_hid_msg));
+    else if(hid_usage_type == HID_USAGE_ID_MEDIA_KEY)
+    {
+        esp_hid_msg[0] = hid_buf[1];
+    }
+    tud_hid_report(hid_usage_type, esp_hid_msg, sizeof(esp_hid_msg));
 }
 
 // ---------------- USB MSC --------------------
