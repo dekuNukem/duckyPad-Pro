@@ -73,7 +73,7 @@ pc_to_duckypad_buf = [0] * PC_TO_DUCKYPAD_HID_BUF_SIZE
 pc_to_duckypad_buf[0] = 5	# HID Usage ID, always 5
 pc_to_duckypad_buf[1] = 0	# Sequence Number
 pc_to_duckypad_buf[2] = HID_COMMAND_GOTO_PROFILE	# Command type
-pc_to_duckypad_buf[3] = 98
+pc_to_duckypad_buf[3] = 2
 
 print("\n\nSending to duckyPad:\n", pc_to_duckypad_buf)
 duckypad_to_pc_buf = duckypad_hid_write(pc_to_duckypad_buf)

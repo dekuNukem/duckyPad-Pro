@@ -409,6 +409,7 @@ void handle_hid_command(const uint8_t* hid_rx_buf, uint8_t rx_buf_size)
     {
       is_sleeping = 0;
       ssd1306_SetContrast(OLED_CONTRAST_BRIGHT);
+      last_keypress = pdTICKS_TO_MS(xTaskGetTickCount());
       goto_profile(target_profile);
       send_hid_cmd_response(hid_tx_buf);
     }
