@@ -16,7 +16,7 @@ h = hid.device()
 def get_duckypad_path():
     path_dict = {}
     for device_dict in hid.enumerate():
-        if device_dict['vendor_id'] == 12346 and device_dict['product_id'] == 16388:
+        if device_dict['vendor_id'] == 12346 and device_dict['product_id'] == 16390:
             path_dict[device_dict['usage']] = device_dict['path']
     if len(path_dict) == 0:
         return None

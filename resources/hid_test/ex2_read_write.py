@@ -17,8 +17,8 @@ h = hid.device()
 
 def get_duckypad_path():
 	for device_dict in hid.enumerate():
-	    if device_dict['vendor_id'] == 51966 and \
-	    device_dict['product_id'] == 57105 and \
+	    if device_dict['vendor_id'] == 12346 and \
+	    device_dict['product_id'] == 16390 and \
 	    device_dict['usage'] == 58:
 	    	return device_dict['path']
 	return None
@@ -49,7 +49,7 @@ def duckypad_hid_write(hid_buf_64b):
 pc_to_duckypad_buf = [0] * PC_TO_DUCKYPAD_HID_BUF_SIZE
 pc_to_duckypad_buf[0] = 5	# HID Usage ID, always 5
 pc_to_duckypad_buf[1] = 0	# Sequence Number
-pc_to_duckypad_buf[2] = 3	# Command type
+pc_to_duckypad_buf[2] = 7	# Command type
 print("\n\nSending to duckyPad:\n", pc_to_duckypad_buf)
 duckypad_to_pc_buf = duckypad_hid_write(pc_to_duckypad_buf)
 print("\nduckyPad response:\n", duckypad_to_pc_buf)

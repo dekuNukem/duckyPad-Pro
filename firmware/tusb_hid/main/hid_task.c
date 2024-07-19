@@ -151,17 +151,15 @@ uint16_t tud_hid_get_report_cb(uint8_t instance, uint8_t report_id, hid_report_t
   return 0;
 }
 
-uint8_t hid_out_buf[CUSTOM_HID_EPIN_SIZE];
-uint8_t needs_respond;
-
 void tud_hid_set_report_cb(uint8_t instance, uint8_t report_id, hid_report_type_t report_type, uint8_t const* buffer, uint16_t bufsize)
 {
-    printf("\n\ngot data!\n");
-    printf("%d %d %d %d\n", instance, report_id, report_type, bufsize);
-    for (size_t i = 0; i < bufsize; i++)
-        printf("%d ", buffer[i]);
-    printf("\n\n");
-    needs_respond = 1;
+    // printf("\n\ngot data!\n");
+    // printf("%d %d %d %d\n", instance, report_id, report_type, bufsize);
+    // for (size_t i = 0; i < bufsize; i++)
+    //     printf("%d ", buffer[i]);
+    // printf("\n\n");
+
+    handle_hid_command(buffer, bufsize);
 }
 
 #define SIX 6
@@ -322,4 +320,89 @@ void mount_hid_only(void)
     };
     ESP_ERROR_CHECK(tinyusb_driver_install(&tusb_cfg));
     ESP_LOGI(TAG, "USB HID only initialization DONE");
+}
+
+
+
+// ----------------- HID command parsing -------------------
+
+uint8_t command_type;
+uint8_t hid_tx_buf[HID_TX_BUF_SIZE];
+
+void whoops(uint8_t* hid_cmdbuf)
+{
+    printf("whoops\n");
+    for (int i = 0; i < HID_TX_BUF_SIZE; ++i)
+        printf("0x%x ", hid_cmdbuf[i]);
+    printf("\n--------\n");
+    tud_hid_report(HID_USAGE_ID_NAMED_PIPE, hid_cmdbuf, HID_TX_BUF_SIZE-1);
+}
+
+void handle_hid_command(const uint8_t* hid_rx_buf, uint8_t rx_buf_size)
+{
+  printf("new data!\n");
+  for (int i = 0; i < rx_buf_size; ++i)
+    printf("0x%x ", hid_rx_buf[i]);
+  printf("\ndone\n");
+
+  command_type = hid_rx_buf[1];
+
+  memset(hid_tx_buf, 0, HID_TX_BUF_SIZE);
+  hid_tx_buf[0] = HID_USAGE_ID_NAMED_PIPE;
+  hid_tx_buf[1] = 0;
+  hid_tx_buf[2] = HID_RESPONSE_OK;
+
+  /*
+  duckyPad to PC
+  [0]   report_id: always 4
+  [1]   seq number (same as above)
+  [2]   0 = OK, 1 = ERROR, 2 = BUSY
+  */
+  if(is_busy)
+  {
+    hid_tx_buf[2] = HID_RESPONSE_BUSY;
+    whoops(hid_tx_buf);
+    return;
+  }
+
+  /*
+  HID GET INFO
+  -----------
+  PC to duckyPad:
+  [0]   report_id: always 5
+  [1]   seq number
+  [2]   command: 0
+  -----------
+  duckyPad to PC
+  [0]   report_id: always 4
+  [1]   seq number (same as above)
+  [2]   0 = OK
+  [3]   firmware version major
+  [4]   firmware version minor
+  [5]   firmware version patch
+  [6]   hardware revision
+  [7 - 10]   UUID (uint32_t)
+  [11]   current profile
+  [12] is_sleeping
+  */
+  if(command_type == 7)
+  {
+    hid_tx_buf[3] = fw_version_major;
+    hid_tx_buf[4] = fw_version_minor;
+    hid_tx_buf[5] = fw_version_patch;
+    hid_tx_buf[6] = 24;
+    hid_tx_buf[7] = esp_mac_addr[2];
+    hid_tx_buf[8] = esp_mac_addr[3];
+    hid_tx_buf[9] = esp_mac_addr[4];
+    hid_tx_buf[10] = esp_mac_addr[5];
+    hid_tx_buf[11] = current_profile_number;
+    hid_tx_buf[12] = is_sleeping;
+    whoops(hid_tx_buf);
+    printf("here!\n");
+  }
+  else
+  {
+    hid_tx_buf[2] = HID_RESPONSE_ERROR;
+    whoops(hid_tx_buf);
+  }
 }

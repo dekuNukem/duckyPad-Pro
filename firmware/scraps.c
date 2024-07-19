@@ -1,4 +1,451 @@
 MY_UNIMPLEMENTED
+void USBD_CUSTOM_HID_SendReport(uint8_t* hid_buf)
+{
+    uint8_t hid_usage_type = hid_buf[0];
+    memset(esp_hid_msg, 0, EIGHT);
+    if(hid_usage_type == HID_USAGE_ID_KEYBOARD)
+    {
+        memcpy(esp_hid_msg, hid_buf, SIX);
+        esp_hid_msg[0] = hid_buf[1]; // modifier
+        esp_hid_msg[1] = 0; // reserved
+    }
+    else if(hid_usage_type == HID_USAGE_ID_MOUSE)
+    {
+        memcpy(esp_hid_msg, hid_buf+1, SIX-1);
+    }
+    else if(hid_usage_type == HID_USAGE_ID_MEDIA_KEY)
+    {
+        esp_hid_msg[0] = hid_buf[1];
+    }
+    else if(hid_usage_type == HID_USAGE_ID_NAMED_PIPE)
+    {
+        memcpy(esp_hid_msg, hid_buf, SIX);
+    }
+    tud_hid_report(hid_usage_type, esp_hid_msg, sizeof(esp_hid_msg));
+}
+
+
+// ----------------- HID command parsing -------------------
+
+uint8_t command_type;
+uint8_t hid_tx_buf[HID_TX_BUF_SIZE];
+
+void handle_hid_command(char* hid_rx_buf, uint8_t rx_buf_size)
+{
+  printf("new data!\n");
+  for (int i = 0; i < rx_buf_size; ++i)
+    printf("%c ", hid_rx_buf[i]);
+  printf("\ndone\n");
+
+  command_type = hid_rx_buf[2];
+
+  memset(hid_tx_buf, 0, HID_TX_BUF_SIZE);
+  hid_tx_buf[0] = 4;
+  hid_tx_buf[1] = 0;
+  hid_tx_buf[2] = HID_RESPONSE_OK;
+
+  /*
+  duckyPad to PC
+  [0]   report_id: always 4
+  [1]   seq number (same as above)
+  [2]   0 = OK, 1 = ERROR, 2 = BUSY
+  */
+  if(is_busy)
+  {
+    hid_tx_buf[2] = HID_RESPONSE_BUSY;
+    USBD_CUSTOM_HID_SendReport(hid_tx_buf);
+    return;
+  }
+
+  /*
+  HID GET INFO
+  -----------
+  PC to duckyPad:
+  [0]   report_id: always 5
+  [1]   seq number
+  [2]   command: 0
+  -----------
+  duckyPad to PC
+  [0]   report_id: always 4
+  [1]   seq number (same as above)
+  [2]   0 = OK
+  [3]   firmware version major
+  [4]   firmware version minor
+  [5]   firmware version patch
+  [6]   hardware revision
+  [7 - 10]   UUID (uint32_t)
+  [11]   current profile
+  [12] is_sleeping
+  */
+  if(command_type == HID_COMMAND_GET_INFO)
+  {
+    hid_tx_buf[3] = fw_version_major;
+    hid_tx_buf[4] = fw_version_minor;
+    hid_tx_buf[5] = fw_version_patch;
+    hid_tx_buf[6] = 24;
+    hid_tx_buf[7] = esp_mac_addr[2];
+    hid_tx_buf[8] = esp_mac_addr[3];
+    hid_tx_buf[9] = esp_mac_addr[4];
+    hid_tx_buf[10] = esp_mac_addr[5];
+    hid_tx_buf[11] = current_profile_number;
+    hid_tx_buf[12] = is_sleeping;
+    USBD_CUSTOM_HID_SendReport(hid_tx_buf);
+  }
+  /*
+  HID GOTO PROFILE
+  -----------
+  PC to duckyPad:
+  [0]   report_id: always 5
+  [1]   seq number
+  [2]   command: 1
+  [3]   profile number to switch to
+  -----------
+  duckyPad to PC
+  [0]   report_id: always 4
+  [1]   seq number (same as above)
+  [2]   0 = OK, 1 = ERROR
+  */
+  else if(command_type == HID_COMMAND_GOTO_PROFILE)
+  {
+    if(p_cache.available_profile[hid_rx_buf[3]])
+    {
+      USBD_CUSTOM_HID_SendReport(hid_tx_buf);
+      is_sleeping = 0;
+      oled_full_brightness();
+      restore_profile(hid_rx_buf[3]);
+    }
+    else
+    {
+      hid_tx_buf[2] = HID_RESPONSE_ERROR;
+      USBD_CUSTOM_HID_SendReport(hid_tx_buf);
+    }
+  }
+  /*
+  HID PREV PROFILE
+  -----------
+  PC to duckyPad:
+  [0]   report_id: always 5
+  [1]   seq number
+  [2]   command: 2
+  -----------
+  duckyPad to PC
+  [0]   report_id: always 4
+  [1]   seq number (same as above)
+  [2]   0 = OK
+  */
+  else if(command_type == HID_COMMAND_PREV_PROFILE)
+  {
+    USBD_CUSTOM_HID_SendReport(hid_tx_buf);
+    oled_full_brightness();
+    change_profile(PREV_PROFILE);
+    is_sleeping = 0;
+  }
+  /*
+  HID NEXT PROFILE
+  -----------
+  PC to duckyPad:
+  [0]   report_id: always 5
+  [1]   seq number
+  [2]   command: 3
+  -----------
+  duckyPad to PC
+  [0]   report_id: always 4
+  [1]   seq number (same as above)
+  [2]   0 = OK
+  */
+  else if(command_type == HID_COMMAND_NEXT_PROFILE)
+  {
+    USBD_CUSTOM_HID_SendReport(hid_tx_buf);
+    oled_full_brightness();
+    change_profile(NEXT_PROFILE);
+    is_sleeping = 0;
+  }
+
+  /*
+  HID LIST FILES
+  -----------
+  PC to duckyPad:
+  [0]   report_id: always 5
+  [1]   seq number
+  [2]   command: 10
+  [3 ... 63]   starting directory, zero-terminated string, all 0 for root
+  -----------
+  duckyPad to PC
+  [0]   report_id: always 4
+  [1]   seq number (same as above)
+  [2]   0 = OK, 1 = ERROR, 2 = BUSY, 3 = EOF
+  [3]   file type, 0 = file, 1 = directory
+  [4 ... 63] zero-terminated string of file name
+  */
+  else if(command_type == HID_COMMAND_LIST_FILES)
+  {
+    char* this_filename;
+    fno.lfname = lfn_buf; 
+    fno.lfsize = FILENAME_SIZE - 1;
+    if (f_opendir(&dir, hid_rx_buf+3) != FR_OK)
+      goto list_file_end;
+    memset(temp_buf, 0, PATH_SIZE);
+    while(1)
+    {
+      hid_rx_has_unprocessed_data = 0;
+      memset(lfn_buf, 0, FILENAME_SIZE);
+      memset(hid_tx_buf, 0, HID_TX_BUF_SIZE);
+      hid_tx_buf[0] = 4;
+      hid_tx_buf[1] = 0;
+      hid_tx_buf[2] = HID_RESPONSE_OK;
+      
+      if (f_readdir(&dir, &fno) != FR_OK || fno.fname[0] == 0)
+        break;
+      if (fno.fattrib & AM_DIR)
+        hid_tx_buf[3] = 1;
+      this_filename = fno.lfname[0] ? fno.lfname : fno.fname;
+      // if(strstr(this_filename, ".dsb")) // saves some time skipping dsb file
+      //   continue;
+      strncpy(hid_tx_buf+4, this_filename, FILENAME_SIZE);
+      USBD_CUSTOM_HID_SendReport(hid_tx_buf);
+      
+      if(check_resume() == 0)
+        goto hid_read_file_end;
+
+    }
+    list_file_end:
+    memset(hid_tx_buf, 0, HID_TX_BUF_SIZE);
+    hid_tx_buf[0] = 4;
+    hid_tx_buf[1] = 0;
+    hid_tx_buf[2] = HID_RESPONSE_EOF;
+    USBD_CUSTOM_HID_SendReport(hid_tx_buf);
+    f_closedir(&dir);
+    hid_rx_has_unprocessed_data = 0;
+  }
+  /*
+  HID READ FILE
+  -----------
+  PC to duckyPad:
+  [0]   report_id: always 5
+  [1]   seq number
+  [2]   command: 10
+  [3 ... 63]   file path, zero-terminated string
+  -----------
+  duckyPad to PC
+  [0]   report_id: always 4
+  [1]   seq number, xxxincrementing
+  [2]   0 = OK, 1 = ERROR, 2 = BUSY, 3 = EOF
+  [3 ... 60] file content
+  */
+  else if(command_type == HID_COMMAND_READ_FILE)
+  {
+    if(f_open(&sd_file, hid_rx_buf+3, FA_READ) != 0)
+      goto hid_read_file_end;
+
+    while(1)
+    {
+      hid_rx_has_unprocessed_data = 0;
+      memset(hid_tx_buf, 0, HID_TX_BUF_SIZE);
+      memset(read_buffer, 0, READ_BUF_SIZE);
+      hid_tx_buf[0] = 4;
+      hid_tx_buf[2] = HID_RESPONSE_OK;
+      f_read(&sd_file, read_buffer, HID_FILE_READ_BUF_SIZE, &bytes_read);
+      memcpy(hid_tx_buf+3, read_buffer, bytes_read);
+      hid_tx_buf[1] = bytes_read;
+      USBD_CUSTOM_HID_SendReport(hid_tx_buf);
+
+      if(check_resume() == 0)
+        goto hid_read_file_end;
+      
+      if(bytes_read < HID_FILE_READ_BUF_SIZE)
+        break;
+    }
+    hid_read_file_end:
+    f_close(&sd_file);
+    memset(hid_tx_buf, 0, HID_TX_BUF_SIZE);
+    hid_tx_buf[0] = 4;
+    hid_tx_buf[1] = 0;
+    hid_tx_buf[2] = HID_RESPONSE_EOF;
+    USBD_CUSTOM_HID_SendReport(hid_tx_buf);
+    hid_rx_has_unprocessed_data = 0;
+  }
+  /*
+  HID OPEN FILE FOR WRITING
+  -----------
+  PC to duckyPad:
+  [0]   report_id: always 5
+  [1]   seq number
+  [2]   command: 14
+  [3 ... 63]   file path, zero-terminated string
+  -----------
+  duckyPad to PC
+  [0]   report_id: always 4
+  [1]   seq number (same as above)
+  [2]   0 = OK, 1 = ERROR, 2 = BUSY
+  [3 ... 60] file content
+  */
+  else if(command_type == HID_COMMAND_OPEN_FILE_FOR_WRITING)
+  {
+    if(f_open(&sd_file, hid_rx_buf+3, FA_CREATE_ALWAYS | FA_WRITE) != 0)
+    {
+      hid_tx_buf[2] = HID_RESPONSE_ERROR;
+      goto hid_open_for_write_end;
+    }
+
+    hid_tx_buf[2] = HID_RESPONSE_OK;
+    hid_open_for_write_end:
+    USBD_CUSTOM_HID_SendReport(hid_tx_buf);
+  }
+  /*
+  HID WRITE TO FILE
+  -----------
+  PC to duckyPad:
+  [0]   report_id: always 5
+  [1]   data length in bytes
+  [2]   command: 15
+  [3 ... 63]   content
+  -----------
+  duckyPad to PC
+  [0]   report_id: always 4
+  [1]   reserved
+  [2]   0 = OK, 1 = ERROR, 2 = BUSY
+  */
+  else if(command_type == HID_COMMAND_WRITE_FILE)
+  {
+    if(f_write(&sd_file, hid_rx_buf+3, hid_rx_buf[1], &bytes_read) != 0)
+      hid_tx_buf[2] = HID_RESPONSE_ERROR;
+    USBD_CUSTOM_HID_SendReport(hid_tx_buf);
+  }
+  /*
+  HID CLOSE FILE
+  -----------
+  PC to duckyPad:
+  [0]   report_id: always 5
+  [1]   seq number
+  [2]   command: 16
+  -----------
+  duckyPad to PC
+  [0]   report_id: always 4
+  [1]   seq number (same as above)
+  [2]   0 = OK, 1 = ERROR, 2 = BUSY
+  */
+  else if(command_type == HID_COMMAND_CLOSE_FILE)
+  {
+    f_close(&sd_file);
+    USBD_CUSTOM_HID_SendReport(hid_tx_buf);
+  }
+  /*
+  HID DELETE FILE
+  -----------
+  PC to duckyPad:
+  [0]   report_id: always 5
+  [1]   seq number
+  [2]   command
+  [3 ... 63]   file name string, zero terminated
+  -----------
+  duckyPad to PC
+  [0]   report_id: always 4
+  [1]   seq number (same as above)
+  [2]   0 = OK, 1 = ERROR, 2 = BUSY
+  */
+  else if(command_type == HID_COMMAND_DELETE_FILE)
+  {
+    f_close(&sd_file);
+    // if(f_unlink(hid_rx_buf+3) != 0)
+    //   hid_tx_buf[2] = HID_RESPONSE_ERROR;
+    f_unlink(hid_rx_buf+3);
+    USBD_CUSTOM_HID_SendReport(hid_tx_buf);
+  }
+  /*
+  HID create DIR
+  -----------
+  PC to duckyPad:
+  [0]   report_id: always 5
+  [1]   seq number
+  [2]   command
+  [3 ... 63]   directory name string, zero terminated
+  -----------
+  duckyPad to PC
+  [0]   report_id: always 4
+  [1]   seq number (same as above)
+  [2]   0 = OK, 1 = ERROR, 2 = BUSY
+  */
+  else if(command_type == HID_COMMAND_CREATE_DIR)
+  {
+    if(f_mkdir(hid_rx_buf+3) != 0)
+      hid_tx_buf[2] = HID_RESPONSE_ERROR;
+    USBD_CUSTOM_HID_SendReport(hid_tx_buf);
+  }
+  /*
+  HID DELETE DIR
+  -----------
+  PC to duckyPad:
+  [0]   report_id: always 5
+  [1]   seq number
+  [2]   command
+  [3 ... 63]   dir name string, zero terminated
+  -----------
+  duckyPad to PC
+  [0]   report_id: always 4
+  [1]   seq number (same as above)
+  [2]   0 = OK, 1 = ERROR, 2 = BUSY
+  */
+  else if(command_type == HID_COMMAND_DELETE_DIR)
+  {
+    // if(delete_node(hid_rx_buf+3, rx_buf_size - 3, &fno) != 0)
+    //   hid_tx_buf[2] = HID_RESPONSE_ERROR;
+    delete_node(hid_rx_buf+3, rx_buf_size - 3, &fno);
+    USBD_CUSTOM_HID_SendReport(hid_tx_buf);
+  }
+  /*
+  HID SOFTWARE RESET
+  -----------
+  PC to duckyPad:
+  [0]   report_id: always 5
+  [1]   seq number
+  [2]   command
+  -----------
+  duckyPad to PC
+  [0]   report_id: always 4
+  [1]   seq number (same as above)
+  [2]   0 = OK
+  */
+  else if(command_type == HID_COMMAND_SW_RESET)
+  {
+    USBD_CUSTOM_HID_SendReport(hid_tx_buf);
+    osDelay(50);
+    NVIC_SystemReset();
+  }
+  /*
+  HID SLEEP
+  -----------
+  PC to duckyPad:
+  [0]   report_id: always 5
+  [1]   seq number
+  [2]   command
+  -----------
+  duckyPad to PC
+  [0]   report_id: always 4
+  [1]   seq number (same as above)
+  [2]   0 = OK
+  */
+  else if(command_type == HID_COMMAND_SLEEP)
+  {
+    USBD_CUSTOM_HID_SendReport(hid_tx_buf);
+    start_sleeping();
+  }
+  /*
+    unknown command
+    -----------
+    duckyPad to PC
+    [0]   report_id: always 4
+    [1]   seq number
+    [2]   1 = ERROR
+    */
+  else
+  {
+    hid_tx_buf[2] = HID_RESPONSE_ERROR;
+    USBD_CUSTOM_HID_SendReport(hid_tx_buf);
+  }
+}
+
+
+esp_mac_addr[3], esp_mac_addr[4], esp_mac_addr[5]
 
 
 void send_keyboard_hid_msg(uint8_t* hid_buf)

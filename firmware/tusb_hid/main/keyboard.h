@@ -123,10 +123,6 @@ extern uint16_t duckcode_cedilla;
 
 extern uint16_t ascii_map[ASCII_MAP_SIZE];
 
-#define HID_USAGE_ID_KEYBOARD 1
-#define HID_USAGE_ID_MEDIA_KEY 2
-#define HID_USAGE_ID_MOUSE 3
-
 #ifdef __cplusplus
 }
 #endif
