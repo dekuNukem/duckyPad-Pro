@@ -326,15 +326,10 @@ void mount_hid_only(void)
 
 // ----------------- HID command parsing -------------------
 
-uint8_t command_type;
 uint8_t hid_tx_buf[HID_TX_BUF_SIZE];
 
-void whoops(uint8_t* hid_cmdbuf)
+void send_hid_cmd_response(uint8_t* hid_cmdbuf)
 {
-    printf("whoops\n");
-    for (int i = 0; i < HID_TX_BUF_SIZE; ++i)
-        printf("0x%x ", hid_cmdbuf[i]);
-    printf("\n--------\n");
     tud_hid_report(HID_USAGE_ID_NAMED_PIPE, hid_cmdbuf, HID_TX_BUF_SIZE-1);
 }
 
@@ -345,23 +340,21 @@ void handle_hid_command(const uint8_t* hid_rx_buf, uint8_t rx_buf_size)
     printf("0x%x ", hid_rx_buf[i]);
   printf("\ndone\n");
 
-  command_type = hid_rx_buf[1];
+  uint8_t command_type = hid_rx_buf[1];
 
   memset(hid_tx_buf, 0, HID_TX_BUF_SIZE);
-  hid_tx_buf[0] = HID_USAGE_ID_NAMED_PIPE;
-  hid_tx_buf[1] = 0;
-  hid_tx_buf[2] = HID_RESPONSE_OK;
+  hid_tx_buf[0] = 0;
+  hid_tx_buf[1] = HID_RESPONSE_OK;
 
   /*
   duckyPad to PC
-  [0]   report_id: always 4
-  [1]   seq number (same as above)
-  [2]   0 = OK, 1 = ERROR, 2 = BUSY
+  [0]   seq number (not used)
+  [1]   Status, 0 = OK, 1 = ERROR, 2 = BUSY
   */
   if(is_busy)
   {
-    hid_tx_buf[2] = HID_RESPONSE_BUSY;
-    whoops(hid_tx_buf);
+    hid_tx_buf[1] = HID_RESPONSE_BUSY;
+    send_hid_cmd_response(hid_tx_buf);
     return;
   }
 
@@ -369,40 +362,65 @@ void handle_hid_command(const uint8_t* hid_rx_buf, uint8_t rx_buf_size)
   HID GET INFO
   -----------
   PC to duckyPad:
-  [0]   report_id: always 5
-  [1]   seq number
-  [2]   command: 0
+  [0]   seq number (not used)
+  [1]   command: 0
   -----------
   duckyPad to PC
-  [0]   report_id: always 4
-  [1]   seq number (same as above)
-  [2]   0 = OK
-  [3]   firmware version major
-  [4]   firmware version minor
-  [5]   firmware version patch
-  [6]   hardware revision
-  [7 - 10]   UUID (uint32_t)
-  [11]   current profile
-  [12] is_sleeping
+  [0]   seq number (not used)
+  [1]   Status, 0 = OK
+  [2]   firmware version major
+  [3]   firmware version minor
+  [4]   firmware version patch
+  [5]   hardware revision
+  [6 - 9]   UUID (uint32_t)
+  [10]   current profile
+  [11] is_sleeping
   */
-  if(command_type == 7)
+  if(command_type == HID_COMMAND_GET_INFO)
   {
-    hid_tx_buf[3] = fw_version_major;
-    hid_tx_buf[4] = fw_version_minor;
-    hid_tx_buf[5] = fw_version_patch;
-    hid_tx_buf[6] = 24;
-    hid_tx_buf[7] = esp_mac_addr[2];
-    hid_tx_buf[8] = esp_mac_addr[3];
-    hid_tx_buf[9] = esp_mac_addr[4];
-    hid_tx_buf[10] = esp_mac_addr[5];
-    hid_tx_buf[11] = current_profile_number;
-    hid_tx_buf[12] = is_sleeping;
-    whoops(hid_tx_buf);
-    printf("here!\n");
+    hid_tx_buf[2] = fw_version_major;
+    hid_tx_buf[3] = fw_version_minor;
+    hid_tx_buf[4] = fw_version_patch;
+    hid_tx_buf[5] = 24;
+    hid_tx_buf[6] = esp_mac_addr[2];
+    hid_tx_buf[7] = esp_mac_addr[3];
+    hid_tx_buf[8] = esp_mac_addr[4];
+    hid_tx_buf[9] = esp_mac_addr[5];
+    hid_tx_buf[10] = current_profile_number;
+    hid_tx_buf[11] = is_sleeping;
+    send_hid_cmd_response(hid_tx_buf);
+  }
+  /*
+  HID GOTO PROFILE
+  -----------
+  PC to duckyPad:
+  [0]   seq number
+  [1]   command
+  [2]   profile number to switch to
+  -----------
+  duckyPad to PC
+  [0]   seq number (not used)
+  [1]   Status, 0 = OK, 1 = ERROR
+  */
+  else if(command_type == HID_COMMAND_GOTO_PROFILE)
+  {
+    uint8_t target_profile = hid_rx_buf[2];
+    if(all_profile_info[target_profile].is_loaded)
+    {
+      is_sleeping = 0;
+      ssd1306_SetContrast(OLED_CONTRAST_BRIGHT);
+      goto_profile(target_profile);
+      send_hid_cmd_response(hid_tx_buf);
+    }
+    else
+    {
+      hid_tx_buf[1] = HID_RESPONSE_ERROR;
+      send_hid_cmd_response(hid_tx_buf);
+    }
   }
   else
   {
-    hid_tx_buf[2] = HID_RESPONSE_ERROR;
-    whoops(hid_tx_buf);
+    hid_tx_buf[1] = HID_RESPONSE_ERROR;
+    send_hid_cmd_response(hid_tx_buf);
   }
 }

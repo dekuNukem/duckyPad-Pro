@@ -46,10 +46,35 @@ def duckypad_hid_write(hid_buf_64b):
 	h.close()
 	return result
 
+HID_COMMAND_GET_INFO = 0
+HID_COMMAND_GOTO_PROFILE = 1
+HID_COMMAND_PREV_PROFILE = 2
+HID_COMMAND_NEXT_PROFILE = 3
+HID_COMMAND_RELOAD_CURRENT_PROFILE = 4
+HID_COMMAND_SW_COLOR = 5
+HID_COMMAND_PRINT_TEXT = 6
+HID_COMMAND_PRINT_BITMAP = 7
+HID_COMMAND_CLEAR_SCREEN = 8
+HID_COMMAND_UPDATE_SCREEN = 9
+HID_COMMAND_LIST_FILES = 10
+HID_COMMAND_READ_FILE = 11
+HID_COMMAND_OP_RESUME = 12
+HID_COMMAND_OP_ABORT = 13
+HID_COMMAND_OPEN_FILE_FOR_WRITING = 14
+HID_COMMAND_WRITE_FILE = 15
+HID_COMMAND_CLOSE_FILE = 16
+HID_COMMAND_DELETE_FILE = 17
+HID_COMMAND_CREATE_DIR = 18
+HID_COMMAND_DELETE_DIR = 19
+HID_COMMAND_SW_RESET = 20
+HID_COMMAND_SLEEP = 21
+
 pc_to_duckypad_buf = [0] * PC_TO_DUCKYPAD_HID_BUF_SIZE
 pc_to_duckypad_buf[0] = 5	# HID Usage ID, always 5
 pc_to_duckypad_buf[1] = 0	# Sequence Number
-pc_to_duckypad_buf[2] = 7	# Command type
+pc_to_duckypad_buf[2] = HID_COMMAND_GOTO_PROFILE	# Command type
+pc_to_duckypad_buf[3] = 98
+
 print("\n\nSending to duckyPad:\n", pc_to_duckypad_buf)
 duckypad_to_pc_buf = duckypad_hid_write(pc_to_duckypad_buf)
 print("\nduckyPad response:\n", duckypad_to_pc_buf)

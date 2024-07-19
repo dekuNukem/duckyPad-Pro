@@ -18,9 +18,9 @@
 #include "keyboard.h"
 #include "hid_task.h"
 
-uint8_t fw_version_major = 0;
-uint8_t fw_version_minor = 0;
-uint8_t fw_version_patch = 1;
+uint8_t fw_version_major = 5;
+uint8_t fw_version_minor = 6;
+uint8_t fw_version_patch = 7;
 
 static const char *TAG = "MAIN";
 

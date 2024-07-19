@@ -1,4 +1,14 @@
 MY_UNIMPLEMENTED
+void whoops(uint8_t* hid_cmdbuf)
+{
+    printf("whoops\n");
+    for (int i = 0; i < HID_TX_BUF_SIZE; ++i)
+        printf("0x%x ", hid_cmdbuf[i]);
+    printf("\n--------\n");
+    tud_hid_report(HID_USAGE_ID_NAMED_PIPE, hid_cmdbuf, HID_TX_BUF_SIZE-1);
+}
+
+
 void USBD_CUSTOM_HID_SendReport(uint8_t* hid_buf)
 {
     uint8_t hid_usage_type = hid_buf[0];
