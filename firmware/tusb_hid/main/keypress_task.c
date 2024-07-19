@@ -160,11 +160,17 @@ void start_sleeping(void)
   is_sleeping = 1;
 }
 
-void wakeup_from_sleep(void)
+void wakeup_from_sleep_no_load(void)
 {
   is_sleeping = 0;
   ssd1306_SetContrast(OLED_CONTRAST_BRIGHT);
-  goto_profile(current_profile_number);
+  last_keypress = pdTICKS_TO_MS(xTaskGetTickCount());
+}
+
+void wakeup_from_sleep_and_load_profile(uint8_t profile_to_load)
+{
+  wakeup_from_sleep_no_load();
+  goto_profile(profile_to_load);
 }
 
 void handle_rotary_encoder_event(rotary_encoder_event_t* this_re_event)
@@ -173,7 +179,7 @@ void handle_rotary_encoder_event(rotary_encoder_event_t* this_re_event)
   printf("reid: %d pos: %ld, dir: %d\n", this_re_event->state.id, this_re_event->state.position, this_re_event->state.direction);
   if(is_sleeping)
   {
-    wakeup_from_sleep();
+    wakeup_from_sleep_and_load_profile(current_profile_number);
     return;
   }
   ssd1306_SetContrast(OLED_CONTRAST_BRIGHT);
@@ -189,7 +195,7 @@ void handle_sw_event(switch_event_t* this_sw_event)
   printf("swid: %d type: %d\n", this_sw_event->id, this_sw_event->type);
   if(is_sleeping)
   {
-    wakeup_from_sleep();
+    wakeup_from_sleep_and_load_profile(current_profile_number);
     return;
   }
   ssd1306_SetContrast(OLED_CONTRAST_BRIGHT);

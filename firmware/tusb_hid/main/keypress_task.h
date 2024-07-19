@@ -13,7 +13,8 @@
 
 void keypress_task(void *dummy);
 void start_sleeping(void);
-void wakeup_from_sleep(void);
+void wakeup_from_sleep_and_load_profile(uint8_t profile_to_load);
+void wakeup_from_sleep_no_load(void);
 
 extern uint32_t last_keypress;
 extern volatile uint8_t is_sleeping;

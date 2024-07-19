@@ -363,7 +363,7 @@ void handle_hid_command(const uint8_t* hid_rx_buf, uint8_t rx_buf_size)
   -----------
   PC to duckyPad:
   [0]   seq number (not used)
-  [1]   command: 0
+  [1]   command
   -----------
   duckyPad to PC
   [0]   seq number (not used)
@@ -394,7 +394,7 @@ void handle_hid_command(const uint8_t* hid_rx_buf, uint8_t rx_buf_size)
   HID GOTO PROFILE
   -----------
   PC to duckyPad:
-  [0]   seq number
+  [0]   seq number (not used)
   [1]   command
   [2]   profile number to switch to
   -----------
@@ -407,10 +407,7 @@ void handle_hid_command(const uint8_t* hid_rx_buf, uint8_t rx_buf_size)
     uint8_t target_profile = hid_rx_buf[2];
     if(all_profile_info[target_profile].is_loaded)
     {
-      is_sleeping = 0;
-      ssd1306_SetContrast(OLED_CONTRAST_BRIGHT);
-      last_keypress = pdTICKS_TO_MS(xTaskGetTickCount());
-      goto_profile(target_profile);
+      wakeup_from_sleep_and_load_profile(target_profile);
       send_hid_cmd_response(hid_tx_buf);
     }
     else
@@ -418,6 +415,40 @@ void handle_hid_command(const uint8_t* hid_rx_buf, uint8_t rx_buf_size)
       hid_tx_buf[1] = HID_RESPONSE_ERROR;
       send_hid_cmd_response(hid_tx_buf);
     }
+  }
+  /*
+  HID PREV PROFILE
+  -----------
+  PC to duckyPad:
+  [0]   seq number
+  [1]   command
+  -----------
+  duckyPad to PC
+  [0]   seq number (not used)
+  [1]   0 = OK
+  */
+  else if(command_type == HID_COMMAND_PREV_PROFILE)
+  {
+    wakeup_from_sleep_no_load();
+    goto_prev_profile();
+    send_hid_cmd_response(hid_tx_buf);
+  }
+  /*
+  HID NEXT PROFILE
+  -----------
+  PC to duckyPad:
+  [0]   seq number
+  [1]   command
+  -----------
+  duckyPad to PC
+  [0]   seq number (not used)
+  [1]   0 = OK
+  */
+  else if(command_type == HID_COMMAND_NEXT_PROFILE)
+  {
+    wakeup_from_sleep_no_load();
+    goto_next_profile();
+    send_hid_cmd_response(hid_tx_buf);
   }
   else
   {

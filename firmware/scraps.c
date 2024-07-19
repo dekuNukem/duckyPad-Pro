@@ -56,8 +56,7 @@ void handle_hid_command(char* hid_rx_buf, uint8_t rx_buf_size)
 
   /*
   duckyPad to PC
-  [0]   report_id: always 4
-  [1]   seq number (same as above)
+  [1]   seq number (not used)
   [2]   0 = OK, 1 = ERROR, 2 = BUSY
   */
   if(is_busy)
@@ -71,13 +70,11 @@ void handle_hid_command(char* hid_rx_buf, uint8_t rx_buf_size)
   HID GET INFO
   -----------
   PC to duckyPad:
-  [0]   report_id: always 5
   [1]   seq number
-  [2]   command: 0
+  [2]   command
   -----------
   duckyPad to PC
-  [0]   report_id: always 4
-  [1]   seq number (same as above)
+  [1]   seq number (not used)
   [2]   0 = OK
   [3]   firmware version major
   [4]   firmware version minor
@@ -105,14 +102,12 @@ void handle_hid_command(char* hid_rx_buf, uint8_t rx_buf_size)
   HID GOTO PROFILE
   -----------
   PC to duckyPad:
-  [0]   report_id: always 5
   [1]   seq number
-  [2]   command: 1
+  [2]   command
   [3]   profile number to switch to
   -----------
   duckyPad to PC
-  [0]   report_id: always 4
-  [1]   seq number (same as above)
+  [1]   seq number (not used)
   [2]   0 = OK, 1 = ERROR
   */
   else if(command_type == HID_COMMAND_GOTO_PROFILE)
@@ -134,13 +129,11 @@ void handle_hid_command(char* hid_rx_buf, uint8_t rx_buf_size)
   HID PREV PROFILE
   -----------
   PC to duckyPad:
-  [0]   report_id: always 5
   [1]   seq number
-  [2]   command: 2
+  [2]   command
   -----------
   duckyPad to PC
-  [0]   report_id: always 4
-  [1]   seq number (same as above)
+  [1]   seq number (not used)
   [2]   0 = OK
   */
   else if(command_type == HID_COMMAND_PREV_PROFILE)
@@ -154,13 +147,11 @@ void handle_hid_command(char* hid_rx_buf, uint8_t rx_buf_size)
   HID NEXT PROFILE
   -----------
   PC to duckyPad:
-  [0]   report_id: always 5
   [1]   seq number
-  [2]   command: 3
+  [2]   command
   -----------
   duckyPad to PC
-  [0]   report_id: always 4
-  [1]   seq number (same as above)
+  [1]   seq number (not used)
   [2]   0 = OK
   */
   else if(command_type == HID_COMMAND_NEXT_PROFILE)
@@ -175,14 +166,12 @@ void handle_hid_command(char* hid_rx_buf, uint8_t rx_buf_size)
   HID LIST FILES
   -----------
   PC to duckyPad:
-  [0]   report_id: always 5
   [1]   seq number
-  [2]   command: 10
+  [2]   command
   [3 ... 63]   starting directory, zero-terminated string, all 0 for root
   -----------
   duckyPad to PC
-  [0]   report_id: always 4
-  [1]   seq number (same as above)
+  [1]   seq number (not used)
   [2]   0 = OK, 1 = ERROR, 2 = BUSY, 3 = EOF
   [3]   file type, 0 = file, 1 = directory
   [4 ... 63] zero-terminated string of file name
@@ -231,13 +220,11 @@ void handle_hid_command(char* hid_rx_buf, uint8_t rx_buf_size)
   HID READ FILE
   -----------
   PC to duckyPad:
-  [0]   report_id: always 5
   [1]   seq number
-  [2]   command: 10
+  [2]   command
   [3 ... 63]   file path, zero-terminated string
   -----------
   duckyPad to PC
-  [0]   report_id: always 4
   [1]   seq number, xxxincrementing
   [2]   0 = OK, 1 = ERROR, 2 = BUSY, 3 = EOF
   [3 ... 60] file content
@@ -278,14 +265,12 @@ void handle_hid_command(char* hid_rx_buf, uint8_t rx_buf_size)
   HID OPEN FILE FOR WRITING
   -----------
   PC to duckyPad:
-  [0]   report_id: always 5
   [1]   seq number
-  [2]   command: 14
+  [2]   command
   [3 ... 63]   file path, zero-terminated string
   -----------
   duckyPad to PC
-  [0]   report_id: always 4
-  [1]   seq number (same as above)
+  [1]   seq number (not used)
   [2]   0 = OK, 1 = ERROR, 2 = BUSY
   [3 ... 60] file content
   */
@@ -305,13 +290,11 @@ void handle_hid_command(char* hid_rx_buf, uint8_t rx_buf_size)
   HID WRITE TO FILE
   -----------
   PC to duckyPad:
-  [0]   report_id: always 5
   [1]   data length in bytes
-  [2]   command: 15
+  [2]   command
   [3 ... 63]   content
   -----------
   duckyPad to PC
-  [0]   report_id: always 4
   [1]   reserved
   [2]   0 = OK, 1 = ERROR, 2 = BUSY
   */
@@ -325,13 +308,11 @@ void handle_hid_command(char* hid_rx_buf, uint8_t rx_buf_size)
   HID CLOSE FILE
   -----------
   PC to duckyPad:
-  [0]   report_id: always 5
   [1]   seq number
-  [2]   command: 16
+  [2]   command
   -----------
   duckyPad to PC
-  [0]   report_id: always 4
-  [1]   seq number (same as above)
+  [1]   seq number (not used)
   [2]   0 = OK, 1 = ERROR, 2 = BUSY
   */
   else if(command_type == HID_COMMAND_CLOSE_FILE)
@@ -343,14 +324,12 @@ void handle_hid_command(char* hid_rx_buf, uint8_t rx_buf_size)
   HID DELETE FILE
   -----------
   PC to duckyPad:
-  [0]   report_id: always 5
   [1]   seq number
   [2]   command
   [3 ... 63]   file name string, zero terminated
   -----------
   duckyPad to PC
-  [0]   report_id: always 4
-  [1]   seq number (same as above)
+  [1]   seq number (not used)
   [2]   0 = OK, 1 = ERROR, 2 = BUSY
   */
   else if(command_type == HID_COMMAND_DELETE_FILE)
@@ -365,14 +344,12 @@ void handle_hid_command(char* hid_rx_buf, uint8_t rx_buf_size)
   HID create DIR
   -----------
   PC to duckyPad:
-  [0]   report_id: always 5
   [1]   seq number
   [2]   command
   [3 ... 63]   directory name string, zero terminated
   -----------
   duckyPad to PC
-  [0]   report_id: always 4
-  [1]   seq number (same as above)
+  [1]   seq number (not used)
   [2]   0 = OK, 1 = ERROR, 2 = BUSY
   */
   else if(command_type == HID_COMMAND_CREATE_DIR)
@@ -385,14 +362,12 @@ void handle_hid_command(char* hid_rx_buf, uint8_t rx_buf_size)
   HID DELETE DIR
   -----------
   PC to duckyPad:
-  [0]   report_id: always 5
   [1]   seq number
   [2]   command
   [3 ... 63]   dir name string, zero terminated
   -----------
   duckyPad to PC
-  [0]   report_id: always 4
-  [1]   seq number (same as above)
+  [1]   seq number (not used)
   [2]   0 = OK, 1 = ERROR, 2 = BUSY
   */
   else if(command_type == HID_COMMAND_DELETE_DIR)
@@ -406,13 +381,11 @@ void handle_hid_command(char* hid_rx_buf, uint8_t rx_buf_size)
   HID SOFTWARE RESET
   -----------
   PC to duckyPad:
-  [0]   report_id: always 5
   [1]   seq number
   [2]   command
   -----------
   duckyPad to PC
-  [0]   report_id: always 4
-  [1]   seq number (same as above)
+  [1]   seq number (not used)
   [2]   0 = OK
   */
   else if(command_type == HID_COMMAND_SW_RESET)
@@ -425,13 +398,11 @@ void handle_hid_command(char* hid_rx_buf, uint8_t rx_buf_size)
   HID SLEEP
   -----------
   PC to duckyPad:
-  [0]   report_id: always 5
   [1]   seq number
   [2]   command
   -----------
   duckyPad to PC
-  [0]   report_id: always 4
-  [1]   seq number (same as above)
+  [1]   seq number (not used)
   [2]   0 = OK
   */
   else if(command_type == HID_COMMAND_SLEEP)
@@ -443,7 +414,6 @@ void handle_hid_command(char* hid_rx_buf, uint8_t rx_buf_size)
     unknown command
     -----------
     duckyPad to PC
-    [0]   report_id: always 4
     [1]   seq number
     [2]   1 = ERROR
     */
