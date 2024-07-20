@@ -49,6 +49,7 @@
     "unistd.h": "c",
     "limits": "c",
     "functional": "c",
-    "diskio_sdmmc.h": "c"
+    "diskio_sdmmc.h": "c",
+    "hid_task.h": "c"
   }
 }

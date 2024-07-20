@@ -332,11 +332,6 @@ void send_hid_cmd_response(uint8_t* hid_cmdbuf)
 
 void handle_hid_command(const uint8_t* hid_rx_buf, uint8_t rx_buf_size)
 {
-    printf("new data!\n");
-    for (int i = 0; i < rx_buf_size; ++i)
-        printf("0x%x ", hid_rx_buf[i]);
-    printf("\ndone\n");
-
     uint8_t command_type = hid_rx_buf[1];
 
     memset(hid_tx_buf, 0, HID_TX_BUF_SIZE);

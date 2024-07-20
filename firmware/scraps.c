@@ -1,4 +1,12 @@
 MY_UNIMPLEMENTED
+
+    printf("new data!\n");
+    for (int i = 0; i < rx_buf_size; ++i)
+        printf("0x%x ", hid_rx_buf[i]);
+    printf("\ndone\n");
+
+
+    
 void whoops(uint8_t* hid_cmdbuf)
 {
     printf("whoops\n");

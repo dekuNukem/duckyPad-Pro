@@ -21,7 +21,7 @@
 #include <dirent.h>
 #include "hid_task.h"
 
-uint32_t last_keypress;
+volatile uint32_t last_keypress;
 
 void block_until_anykey(void)
 {
@@ -160,11 +160,16 @@ void start_sleeping(void)
   is_sleeping = 1;
 }
 
+void update_last_keypress(void)
+{
+  last_keypress = pdTICKS_TO_MS(xTaskGetTickCount());
+}
+
 void wakeup_from_sleep_no_load(void)
 {
   is_sleeping = 0;
   ssd1306_SetContrast(OLED_CONTRAST_BRIGHT);
-  last_keypress = pdTICKS_TO_MS(xTaskGetTickCount());
+  update_last_keypress();
 }
 
 void wakeup_from_sleep_and_load_profile(uint8_t profile_to_load)
@@ -175,7 +180,7 @@ void wakeup_from_sleep_and_load_profile(uint8_t profile_to_load)
 
 void handle_rotary_encoder_event(rotary_encoder_event_t* this_re_event)
 {
-  last_keypress = pdTICKS_TO_MS(xTaskGetTickCount());
+  update_last_keypress();
   printf("reid: %d pos: %ld, dir: %d\n", this_re_event->state.id, this_re_event->state.position, this_re_event->state.direction);
   if(is_sleeping)
   {
@@ -191,7 +196,7 @@ void handle_rotary_encoder_event(rotary_encoder_event_t* this_re_event)
 
 void handle_sw_event(switch_event_t* this_sw_event)
 {
-  last_keypress = pdTICKS_TO_MS(xTaskGetTickCount());
+  update_last_keypress();
   printf("swid: %d type: %d\n", this_sw_event->id, this_sw_event->type);
   if(is_sleeping)
   {
@@ -206,7 +211,7 @@ void handle_sw_event(switch_event_t* this_sw_event)
 
 void keypress_task(void *dummy)
 {
-  last_keypress = pdTICKS_TO_MS(xTaskGetTickCount());
+  update_last_keypress();
   while(1)
   {
     rotary_encoder_event_t re_event = { 0 };
