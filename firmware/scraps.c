@@ -8,6 +8,73 @@ void whoops(uint8_t* hid_cmdbuf)
     tud_hid_report(HID_USAGE_ID_NAMED_PIPE, hid_cmdbuf, HID_TX_BUF_SIZE-1);
 }
 
+void tud_hid_set_report_cb(uint8_t instance, uint8_t report_id, hid_report_type_t report_type, uint8_t const* buffer, uint16_t bufsize)
+{
+    // printf("\n\ngot data!\n");
+    // printf("%d %d %d %d\n", instance, report_id, report_type, bufsize);
+    // for (size_t i = 0; i < bufsize; i++)
+    //     printf("%d ", buffer[i]);
+    // printf("\n\n");
+
+    handle_hid_command(buffer, bufsize);
+}
+
+ /*
+    HID LIST FILES
+    -----------
+    PC to duckyPad:
+    [0]   seq number
+    [1]   command
+    [2 ... 63]   starting directory, zero-terminated string, all 0 for root
+    -----------
+    duckyPad to PC
+    [0]   seq number (not used)
+    [1]   0 = OK, 1 = ERROR, 2 = BUSY, 3 = EOF
+    [2]   file type, 0 = file, 1 = directory
+    [3 ... 63] zero-terminated string of file name
+    */
+    else if(command_type == HID_COMMAND_LIST_FILES)
+    {
+        char* dir_path = "/sdcard";
+        if(hid_rx_buf[2])
+            dir_path = hid_rx_buf[2];
+        
+        struct dirent *dir;
+        DIR *d = opendir(dir_path);
+        if(d == NULL)
+            goto list_file_end;
+        while(1)
+        {
+            hid_rx_has_unprocessed_data = 0;
+            memset(lfn_buf, 0, FILENAME_SIZE);
+            memset(hid_tx_buf, 0, HID_TX_BUF_SIZE);
+            hid_tx_buf[0] = 4;
+            hid_tx_buf[1] = 0;
+            hid_tx_buf[2] = HID_RESPONSE_OK;
+            
+            if (f_readdir(&dir, &fno) != FR_OK || fno.fname[0] == 0)
+                break;
+            if (fno.fattrib & AM_DIR)
+                hid_tx_buf[3] = 1;
+            this_filename = fno.lfname[0] ? fno.lfname : fno.fname;
+            // if(strstr(this_filename, ".dsb")) // saves some time skipping dsb file
+            //   continue;
+            strncpy(hid_tx_buf+4, this_filename, FILENAME_SIZE);
+            send_hid_cmd_response(hid_tx_buf);
+            
+            if(check_resume() == 0)
+                goto hid_read_file_end;
+
+        }
+        list_file_end:
+        memset(hid_tx_buf, 0, HID_TX_BUF_SIZE);
+        hid_tx_buf[0] = 0; 
+        hid_tx_buf[1] = HID_RESPONSE_EOF;
+        send_hid_cmd_response(hid_tx_buf);
+        closedir(d);
+        hid_rx_has_unprocessed_data = 0;
+    }
+        
 
 void USBD_CUSTOM_HID_SendReport(uint8_t* hid_buf)
 {

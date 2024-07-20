@@ -26,6 +26,9 @@
 
 #include "esp_mac.h"
 
+#include <dirent.h> 
+
+
 static const char *TAG = "USBHID";
 
 #define TUSB_DESC_TOTAL_LEN      (TUD_CONFIG_DESC_LEN + CFG_TUD_HID * TUD_HID_DESC_LEN)
@@ -153,12 +156,6 @@ uint16_t tud_hid_get_report_cb(uint8_t instance, uint8_t report_id, hid_report_t
 
 void tud_hid_set_report_cb(uint8_t instance, uint8_t report_id, hid_report_type_t report_type, uint8_t const* buffer, uint16_t bufsize)
 {
-    // printf("\n\ngot data!\n");
-    // printf("%d %d %d %d\n", instance, report_id, report_type, bufsize);
-    // for (size_t i = 0; i < bufsize; i++)
-    //     printf("%d ", buffer[i]);
-    // printf("\n\n");
-
     handle_hid_command(buffer, bufsize);
 }
 
@@ -335,124 +332,156 @@ void send_hid_cmd_response(uint8_t* hid_cmdbuf)
 
 void handle_hid_command(const uint8_t* hid_rx_buf, uint8_t rx_buf_size)
 {
-  printf("new data!\n");
-  for (int i = 0; i < rx_buf_size; ++i)
-    printf("0x%x ", hid_rx_buf[i]);
-  printf("\ndone\n");
+    printf("new data!\n");
+    for (int i = 0; i < rx_buf_size; ++i)
+        printf("0x%x ", hid_rx_buf[i]);
+    printf("\ndone\n");
 
-  uint8_t command_type = hid_rx_buf[1];
+    uint8_t command_type = hid_rx_buf[1];
 
-  memset(hid_tx_buf, 0, HID_TX_BUF_SIZE);
-  hid_tx_buf[0] = 0;
-  hid_tx_buf[1] = HID_RESPONSE_OK;
+    memset(hid_tx_buf, 0, HID_TX_BUF_SIZE);
+    hid_tx_buf[0] = 0;
+    hid_tx_buf[1] = HID_RESPONSE_OK;
 
-  /*
-  duckyPad to PC
-  [0]   seq number (not used)
-  [1]   Status, 0 = OK, 1 = ERROR, 2 = BUSY
-  */
-  if(is_busy)
-  {
-    hid_tx_buf[1] = HID_RESPONSE_BUSY;
-    send_hid_cmd_response(hid_tx_buf);
-    return;
-  }
-
-  /*
-  HID GET INFO
-  -----------
-  PC to duckyPad:
-  [0]   seq number (not used)
-  [1]   command
-  -----------
-  duckyPad to PC
-  [0]   seq number (not used)
-  [1]   Status, 0 = OK
-  [2]   firmware version major
-  [3]   firmware version minor
-  [4]   firmware version patch
-  [5]   hardware revision
-  [6 - 9]   UUID (uint32_t)
-  [10]   current profile
-  [11] is_sleeping
-  */
-  if(command_type == HID_COMMAND_GET_INFO)
-  {
-    hid_tx_buf[2] = fw_version_major;
-    hid_tx_buf[3] = fw_version_minor;
-    hid_tx_buf[4] = fw_version_patch;
-    hid_tx_buf[5] = 24;
-    hid_tx_buf[6] = esp_mac_addr[2];
-    hid_tx_buf[7] = esp_mac_addr[3];
-    hid_tx_buf[8] = esp_mac_addr[4];
-    hid_tx_buf[9] = esp_mac_addr[5];
-    hid_tx_buf[10] = current_profile_number;
-    hid_tx_buf[11] = is_sleeping;
-    send_hid_cmd_response(hid_tx_buf);
-  }
-  /*
-  HID GOTO PROFILE
-  -----------
-  PC to duckyPad:
-  [0]   seq number (not used)
-  [1]   command
-  [2]   profile number to switch to
-  -----------
-  duckyPad to PC
-  [0]   seq number (not used)
-  [1]   Status, 0 = OK, 1 = ERROR
-  */
-  else if(command_type == HID_COMMAND_GOTO_PROFILE)
-  {
-    uint8_t target_profile = hid_rx_buf[2];
-    if(all_profile_info[target_profile].is_loaded)
+    /*
+    duckyPad to PC
+    [0]   seq number (not used)
+    [1]   Status, 0 = OK, 1 = ERROR, 2 = BUSY
+    */
+    if(is_busy)
     {
-      wakeup_from_sleep_and_load_profile(target_profile);
-      send_hid_cmd_response(hid_tx_buf);
+        hid_tx_buf[1] = HID_RESPONSE_BUSY;
+        send_hid_cmd_response(hid_tx_buf);
+        return;
     }
-    else
+
+    /*
+    GET INFO
+    -----------
+    PC to duckyPad:
+    [0]   seq number (not used)
+    [1]   command
+    -----------
+    duckyPad to PC
+    [0]   seq number (not used)
+    [1]   Status, 0 = OK
+    [2]   firmware version major
+    [3]   firmware version minor
+    [4]   firmware version patch
+    [5]   hardware revision
+    [6 - 9]   UUID (uint32_t)
+    [10]   current profile
+    [11] is_sleeping
+    */
+    if(command_type == HID_COMMAND_GET_INFO)
     {
-      hid_tx_buf[1] = HID_RESPONSE_ERROR;
-      send_hid_cmd_response(hid_tx_buf);
+        hid_tx_buf[2] = fw_version_major;
+        hid_tx_buf[3] = fw_version_minor;
+        hid_tx_buf[4] = fw_version_patch;
+        hid_tx_buf[5] = 24;
+        hid_tx_buf[6] = esp_mac_addr[2];
+        hid_tx_buf[7] = esp_mac_addr[3];
+        hid_tx_buf[8] = esp_mac_addr[4];
+        hid_tx_buf[9] = esp_mac_addr[5];
+        hid_tx_buf[10] = current_profile_number;
+        hid_tx_buf[11] = is_sleeping;
+        send_hid_cmd_response(hid_tx_buf);
     }
-  }
-  /*
-  HID PREV PROFILE
-  -----------
-  PC to duckyPad:
-  [0]   seq number
-  [1]   command
-  -----------
-  duckyPad to PC
-  [0]   seq number (not used)
-  [1]   0 = OK
-  */
-  else if(command_type == HID_COMMAND_PREV_PROFILE)
-  {
-    wakeup_from_sleep_no_load();
-    goto_prev_profile();
-    send_hid_cmd_response(hid_tx_buf);
-  }
-  /*
-  HID NEXT PROFILE
-  -----------
-  PC to duckyPad:
-  [0]   seq number
-  [1]   command
-  -----------
-  duckyPad to PC
-  [0]   seq number (not used)
-  [1]   0 = OK
-  */
-  else if(command_type == HID_COMMAND_NEXT_PROFILE)
-  {
-    wakeup_from_sleep_no_load();
-    goto_next_profile();
-    send_hid_cmd_response(hid_tx_buf);
-  }
-  else
-  {
-    hid_tx_buf[1] = HID_RESPONSE_ERROR;
-    send_hid_cmd_response(hid_tx_buf);
-  }
+    /*
+    GOTO PROFILE
+    -----------
+    PC to duckyPad:
+    [0]   seq number (not used)
+    [1]   command
+    [2]   profile number to switch to
+    -----------
+    duckyPad to PC
+    [0]   seq number (not used)
+    [1]   Status, 0 = OK, 1 = ERROR
+    */
+    else if(command_type == HID_COMMAND_GOTO_PROFILE)
+    {
+        uint8_t target_profile = hid_rx_buf[2];
+        if(all_profile_info[target_profile].is_loaded)
+        {
+        wakeup_from_sleep_and_load_profile(target_profile);
+        send_hid_cmd_response(hid_tx_buf);
+        }
+        else
+        {
+        hid_tx_buf[1] = HID_RESPONSE_ERROR;
+        send_hid_cmd_response(hid_tx_buf);
+        }
+    }
+    /*
+    PREV PROFILE
+    -----------
+    PC to duckyPad:
+    [0]   seq number
+    [1]   command
+    -----------
+    duckyPad to PC
+    [0]   seq number (not used)
+    [1]   0 = OK
+    */
+    else if(command_type == HID_COMMAND_PREV_PROFILE)
+    {
+        wakeup_from_sleep_no_load();
+        goto_prev_profile();
+        send_hid_cmd_response(hid_tx_buf);
+    }
+    /*
+    NEXT PROFILE
+    -----------
+    PC to duckyPad:
+    [0]   seq number
+    [1]   command
+    -----------
+    duckyPad to PC
+    [0]   seq number (not used)
+    [1]   0 = OK
+    */
+    else if(command_type == HID_COMMAND_NEXT_PROFILE)
+    {
+        wakeup_from_sleep_no_load();
+        goto_next_profile();
+        send_hid_cmd_response(hid_tx_buf);
+    }
+    /*
+    SOFTWARE RESET
+    -----------
+    PC to duckyPad:
+    [0]   seq number (not used)
+    [1]   command
+    -----------
+    duckyPad to PC
+    [0]   seq number (not used)
+    [1]   0 = OK
+    */
+    else if(command_type == HID_COMMAND_SW_RESET)
+    {
+        send_hid_cmd_response(hid_tx_buf);
+        esp_restart();
+    }
+    /*
+    SLEEP
+    -----------
+    PC to duckyPad:
+    [0]   seq number (not used)
+    [1]   command
+    -----------
+    duckyPad to PC
+    [0]   seq number (not used)
+    [1]   0 = OK
+    */
+    else if(command_type == HID_COMMAND_SLEEP)
+    {
+        send_hid_cmd_response(hid_tx_buf);
+        start_sleeping();
+    }
+    else // not a valid HID command
+    {
+        hid_tx_buf[1] = HID_RESPONSE_ERROR;
+        send_hid_cmd_response(hid_tx_buf);
+    }
 }
