@@ -68,11 +68,12 @@ HID_COMMAND_CREATE_DIR = 18
 HID_COMMAND_DELETE_DIR = 19
 HID_COMMAND_SW_RESET = 20
 HID_COMMAND_SLEEP = 21
+HID_COMMAND_WAKEUP = 22
 
 pc_to_duckypad_buf = [0] * PC_TO_DUCKYPAD_HID_BUF_SIZE
 pc_to_duckypad_buf[0] = 5	# HID Usage ID, always 5
 pc_to_duckypad_buf[1] = 0	# Sequence Number
-pc_to_duckypad_buf[2] = HID_COMMAND_GET_INFO	# Command type
+pc_to_duckypad_buf[2] = HID_COMMAND_WAKEUP	# Command type
 
 print("\n\nSending to duckyPad:\n", pc_to_duckypad_buf)
 duckypad_to_pc_buf = duckypad_hid_write(pc_to_duckypad_buf)

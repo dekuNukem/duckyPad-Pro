@@ -344,9 +344,9 @@ void handle_hid_command(const uint8_t* hid_rx_buf, uint8_t rx_buf_size)
     hid_tx_buf[1] = HID_RESPONSE_OK;
 
     /*
-    duckyPad to PC
-    [0]   seq number (not used)
-    [1]   Status, 0 = OK, 1 = ERROR, 2 = BUSY
+        duckyPad to PC
+        [0]   seq number (not used)
+        [1]   Status, 0 = OK, 1 = ERROR, 2 = BUSY
     */
     if(is_busy)
     {
@@ -356,22 +356,22 @@ void handle_hid_command(const uint8_t* hid_rx_buf, uint8_t rx_buf_size)
     }
 
     /*
-    GET INFO
-    -----------
-    PC to duckyPad:
-    [0]   seq number (not used)
-    [1]   command
-    -----------
-    duckyPad to PC
-    [0]   seq number (not used)
-    [1]   Status, 0 = OK
-    [2]   firmware version major
-    [3]   firmware version minor
-    [4]   firmware version patch
-    [5]   hardware revision
-    [6 - 9]   UUID (uint32_t)
-    [10]   current profile
-    [11] is_sleeping
+        GET INFO
+        -----------
+        PC to duckyPad:
+        [0]   seq number (not used)
+        [1]   command
+        -----------
+        duckyPad to PC
+        [0]   seq number (not used)
+        [1]   Status, 0 = OK
+        [2]   firmware version major
+        [3]   firmware version minor
+        [4]   firmware version patch
+        [5]   hardware revision
+        [6 - 9]   UUID (uint32_t)
+        [10]   current profile
+        [11] is_sleeping
     */
     if(command_type == HID_COMMAND_GET_INFO)
     {
@@ -388,16 +388,16 @@ void handle_hid_command(const uint8_t* hid_rx_buf, uint8_t rx_buf_size)
         send_hid_cmd_response(hid_tx_buf);
     }
     /*
-    GOTO PROFILE
-    -----------
-    PC to duckyPad:
-    [0]   seq number (not used)
-    [1]   command
-    [2]   profile number to switch to
-    -----------
-    duckyPad to PC
-    [0]   seq number (not used)
-    [1]   Status, 0 = OK, 1 = ERROR
+        GOTO PROFILE
+        -----------
+        PC to duckyPad:
+        [0]   seq number (not used)
+        [1]   command
+        [2]   profile number to switch to
+        -----------
+        duckyPad to PC
+        [0]   seq number (not used)
+        [1]   Status, 0 = OK, 1 = ERROR
     */
     else if(command_type == HID_COMMAND_GOTO_PROFILE)
     {
@@ -414,15 +414,15 @@ void handle_hid_command(const uint8_t* hid_rx_buf, uint8_t rx_buf_size)
         }
     }
     /*
-    PREV PROFILE
-    -----------
-    PC to duckyPad:
-    [0]   seq number
-    [1]   command
-    -----------
-    duckyPad to PC
-    [0]   seq number (not used)
-    [1]   0 = OK
+        PREV PROFILE
+        -----------
+        PC to duckyPad:
+        [0]   seq number
+        [1]   command
+        -----------
+        duckyPad to PC
+        [0]   seq number (not used)
+        [1]   0 = OK
     */
     else if(command_type == HID_COMMAND_PREV_PROFILE)
     {
@@ -431,15 +431,15 @@ void handle_hid_command(const uint8_t* hid_rx_buf, uint8_t rx_buf_size)
         send_hid_cmd_response(hid_tx_buf);
     }
     /*
-    NEXT PROFILE
-    -----------
-    PC to duckyPad:
-    [0]   seq number
-    [1]   command
-    -----------
-    duckyPad to PC
-    [0]   seq number (not used)
-    [1]   0 = OK
+        NEXT PROFILE
+        -----------
+        PC to duckyPad:
+        [0]   seq number
+        [1]   command
+        -----------
+        duckyPad to PC
+        [0]   seq number (not used)
+        [1]   0 = OK
     */
     else if(command_type == HID_COMMAND_NEXT_PROFILE)
     {
@@ -448,15 +448,15 @@ void handle_hid_command(const uint8_t* hid_rx_buf, uint8_t rx_buf_size)
         send_hid_cmd_response(hid_tx_buf);
     }
     /*
-    SOFTWARE RESET
-    -----------
-    PC to duckyPad:
-    [0]   seq number (not used)
-    [1]   command
-    -----------
-    duckyPad to PC
-    [0]   seq number (not used)
-    [1]   0 = OK
+        SOFTWARE RESET
+        -----------
+        PC to duckyPad:
+        [0]   seq number (not used)
+        [1]   command
+        -----------
+        duckyPad to PC
+        [0]   seq number (not used)
+        [1]   0 = OK
     */
     else if(command_type == HID_COMMAND_SW_RESET)
     {
@@ -464,20 +464,36 @@ void handle_hid_command(const uint8_t* hid_rx_buf, uint8_t rx_buf_size)
         esp_restart();
     }
     /*
-    SLEEP
-    -----------
-    PC to duckyPad:
-    [0]   seq number (not used)
-    [1]   command
-    -----------
-    duckyPad to PC
-    [0]   seq number (not used)
-    [1]   0 = OK
+        SLEEP
+        -----------
+        PC to duckyPad:
+        [0]   seq number (not used)
+        [1]   command
+        -----------
+        duckyPad to PC
+        [0]   seq number (not used)
+        [1]   0 = OK
     */
     else if(command_type == HID_COMMAND_SLEEP)
     {
         send_hid_cmd_response(hid_tx_buf);
         start_sleeping();
+    }
+    /*
+        WAKE UP
+        -----------
+        PC to duckyPad:
+        [0]   seq number (not used)
+        [1]   command
+        -----------
+        duckyPad to PC
+        [0]   seq number (not used)
+        [1]   0 = OK
+    */
+    else if(command_type == HID_COMMAND_WAKEUP)
+    {
+        wakeup_from_sleep_and_load_profile(current_profile_number);
+        send_hid_cmd_response(hid_tx_buf);
     }
     else // not a valid HID command
     {
