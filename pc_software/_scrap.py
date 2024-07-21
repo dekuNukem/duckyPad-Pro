@@ -1,3 +1,5 @@
+# hid_op.duckypad_hid_sw_reset(reboot_into_usb_msc_mode=1)
+
 HID_NOP = 0
 HID_DUMP = 1
 HID_SAVE = 2

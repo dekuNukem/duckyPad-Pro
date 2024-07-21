@@ -351,7 +351,7 @@ def connect_button_click():
             incompatible_fw_msgbox(fw_str, fw_status)
         print_fw_update_label(fw_str)
     except Exception as e:
-        print("connect_button_click 1", e)
+        print("connect_button_click:", e)
         init_success = False
 
     if init_success is False and 'linux' in sys.platform:
@@ -379,7 +379,6 @@ def connect_button_click():
         return
 
     disk_label = f'DP{dp_info[6]}_{dp_info[9]:02X}{dp_info[10]:02X}'
-    hid_op.duckypad_hid_sw_reset(reboot_into_usb_msc_mode=1)
     print("disk label should be", disk_label)
     duckypad_drive_path = hid_op.get_duckypad_drive(disk_label)
     if duckypad_drive_path is None:
@@ -1372,5 +1371,5 @@ def repeat_func():
 root.after(500, repeat_func)
 
 # select_root_folder("sample_profiles")
-select_root_folder("D:")
+# select_root_folder("D:")
 root.mainloop()
