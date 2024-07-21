@@ -18,6 +18,8 @@
 #include "keyboard.h"
 #include "hid_task.h"
 
+#include "esp_vfs_fat.h"
+
 uint8_t fw_version_major = 5;
 uint8_t fw_version_minor = 6;
 uint8_t fw_version_patch = 7;
@@ -57,6 +59,10 @@ void app_main(void)
 
     load_keymap_by_name(dp_settings.current_kb_layout);
     profile_init();
+
+    memset(temp_buf, 0, TEMP_BUFSIZE);
+    sprintf(temp_buf, "DKP24_%02x%02x", esp_mac_addr[ESP_MAC_ADDR_SIZE-1], esp_mac_addr[ESP_MAC_ADDR_SIZE-2]);
+    f_setlabel(temp_buf);
 
     dp_settings.sleep_after_ms = 120000;
     xTaskCreate(keypress_task, "keypress_task", KEYPRESS_TASK_STACK_SIZE, NULL, 2, NULL);

@@ -1,11 +1,16 @@
 MY_UNIMPLEMENTED
 
+    memset(temp_buf, 0, TEMP_BUFSIZE);
+    f_getlabel("", temp_buf, 0);
+    printf("vol label is: %s\n", temp_buf);
     printf("new data!\n");
     for (int i = 0; i < rx_buf_size; ++i)
         printf("0x%x ", hid_rx_buf[i]);
     printf("\ndone\n");
 
-
+    char ttttt[12];
+    f_getlabel("", ttttt, 0);
+    printf("vol label is: %s\n", ttttt);
     
 void whoops(uint8_t* hid_cmdbuf)
 {
