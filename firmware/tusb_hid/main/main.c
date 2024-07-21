@@ -20,9 +20,9 @@
 
 #include "esp_vfs_fat.h"
 
-uint8_t fw_version_major = 5;
-uint8_t fw_version_minor = 6;
-uint8_t fw_version_patch = 7;
+uint8_t fw_version_major = 2;
+uint8_t fw_version_minor = 3;
+uint8_t fw_version_patch = 4;
 
 static const char *TAG = "MAIN";
 
@@ -47,7 +47,7 @@ void app_main(void)
     }
     
     memset(temp_buf, 0, TEMP_BUFSIZE);
-    sprintf(temp_buf, "DP24_%02x%02x", esp_mac_addr[ESP_MAC_ADDR_SIZE-1], esp_mac_addr[ESP_MAC_ADDR_SIZE-2]);
+    sprintf(temp_buf, "DP24_%02x%02x", esp_mac_addr[ESP_MAC_ADDR_SIZE-2], esp_mac_addr[ESP_MAC_ADDR_SIZE-1]);
     f_setlabel(temp_buf);
 
     led_animation_init();

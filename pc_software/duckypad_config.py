@@ -3,7 +3,6 @@ import time
 import copy
 import shutil
 from datetime import datetime
-import traceback
 import duck_objs
 import webbrowser
 import check_update
@@ -14,10 +13,8 @@ from tkinter.colorchooser import askcolor
 from tkinter import messagebox
 import urllib.request
 from appdirs import *
-import json
 import subprocess
 import hid_op
-import threading
 import ds3_preprocessor
 import make_bytecode
 from shared import *
@@ -112,8 +109,8 @@ Fixed a bug where TRUE and FALSE is replaced with 1 and 0 inside STRING statemen
 """
 
 THIS_VERSION_NUMBER = '1.6.4'
-MIN_DUCKYPAD_FIRMWARE_VERSION = "1.1.2"
-MAX_DUCKYPAD_FIRMWARE_VERSION = "1.10.10"
+MIN_DUCKYPAD_FIRMWARE_VERSION = "2.0.0"
+MAX_DUCKYPAD_FIRMWARE_VERSION = "2.99.99"
 
 ENV_UI_SCALE = os.getenv("DUCKYPAD_UI_SCALE")
 UI_SCALE = float(ENV_UI_SCALE) if ENV_UI_SCALE else 1
@@ -332,7 +329,7 @@ def incompatible_fw_msgbox(current_fw_str, fw_status):
 
 def connect_button_click():
     if hid_op.get_duckypad_path() is None:
-        if(messagebox.askokcancel("Info", "duckyPad not found!\n\nConfigure via SD card instead?") == False):
+        if(messagebox.askokcancel("Info", "duckyPad not found!\n\nManually select a folder instead?") == False):
             return
         select_root_folder()
         return
@@ -341,6 +338,7 @@ def connect_button_click():
     hid_op.duckypad_hid_close()
     try:
         hid_op.duckypad_hid_init()
+        dp_info = hid_op.get_dp_info()
         is_dp_ready, comment = hid_op.is_dp_ready()
         if is_dp_ready is False:
             messagebox.showerror("Error", comment)
@@ -378,6 +376,10 @@ def connect_button_click():
         elif box_result is False:
             select_root_folder()
         return
+
+    disk_label = f'DP{dp_info[6]}_{dp_info[9]:02X}{dp_info[10]:02X}'
+    hid_op.duckypad_hid_sw_reset(reboot_into_usb_msc_mode=1)
+    print("disk label should be", disk_label)
 
 def enable_buttons():
     profile_add_button.config(state=NORMAL)
