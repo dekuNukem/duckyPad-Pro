@@ -186,7 +186,8 @@ void USBD_CUSTOM_HID_SendReport(uint8_t* hid_buf)
 
 // ---------------- USB MSC --------------------
 
-#define USB_PID   0xd11c
+// #define USB_PID   0xd11c
+#define USB_PID   (0xd11c+1)
 #define USB_VID   0x0483
 #define USB_BCD   0x0200
 
@@ -356,11 +357,18 @@ void handle_hid_command(const uint8_t* hid_rx_buf, uint8_t rx_buf_size)
     /*
         duckyPad to PC
         [0]   seq number (not used)
-        [1]   Status, 0 = OK, 1 = ERROR, 2 = BUSY
+        [1]   Status
     */
     if(is_busy)
     {
         hid_tx_buf[1] = HID_RESPONSE_BUSY;
+        send_hid_cmd_response(hid_tx_buf);
+        return;
+    }
+
+    if(is_profile_load_complete == 0 && (command_type != HID_COMMAND_GET_INFO && command_type != HID_COMMAND_SW_RESET))
+    {
+        hid_tx_buf[1] = HID_RESPONSE_NO_PROFILE;
         send_hid_cmd_response(hid_tx_buf);
         return;
     }
@@ -407,20 +415,20 @@ void handle_hid_command(const uint8_t* hid_rx_buf, uint8_t rx_buf_size)
         -----------
         duckyPad to PC
         [0]   seq number (not used)
-        [1]   Status, 0 = OK, 1 = ERROR
+        [1]   Status
     */
     else if(command_type == HID_COMMAND_GOTO_PROFILE)
     {
         uint8_t target_profile = hid_rx_buf[2];
         if(all_profile_info[target_profile].is_loaded)
         {
-        wakeup_from_sleep_and_load_profile(target_profile);
-        send_hid_cmd_response(hid_tx_buf);
+            wakeup_from_sleep_and_load_profile(target_profile);
+            send_hid_cmd_response(hid_tx_buf);
         }
         else
         {
-        hid_tx_buf[1] = HID_RESPONSE_ERROR;
-        send_hid_cmd_response(hid_tx_buf);
+            hid_tx_buf[1] = HID_RESPONSE_INVALID_ARG;
+            send_hid_cmd_response(hid_tx_buf);
         }
     }
     /*
@@ -507,7 +515,7 @@ void handle_hid_command(const uint8_t* hid_rx_buf, uint8_t rx_buf_size)
     }
     else // not a valid HID command
     {
-        hid_tx_buf[1] = HID_RESPONSE_ERROR;
+        hid_tx_buf[1] = HID_RESPONSE_UNKNOWN_CMD;
         send_hid_cmd_response(hid_tx_buf);
     }
 }

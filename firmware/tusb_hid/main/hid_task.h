@@ -31,9 +31,13 @@ void handle_hid_command(const uint8_t* hid_rx_buf, uint8_t rx_buf_size);
 #define HID_COMMAND_WAKEUP 22
 
 #define HID_RESPONSE_OK 0
-#define HID_RESPONSE_ERROR 1
+// #define HID_RESPONSE_GENERIC_ERROR 1
 #define HID_RESPONSE_BUSY 2
-#define HID_RESPONSE_EOF 3
+// #define HID_RESPONSE_EOF 3
+#define HID_RESPONSE_NO_PROFILE 4
+#define HID_RESPONSE_INVALID_ARG 5
+#define HID_RESPONSE_UNKNOWN_CMD 6
+
 
 #define HID_USAGE_ID_KEYBOARD 1
 #define HID_USAGE_ID_MEDIA_KEY 2

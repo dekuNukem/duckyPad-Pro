@@ -45,6 +45,11 @@ void app_main(void)
         draw_nosd();
         error_loop();
     }
+    
+    memset(temp_buf, 0, TEMP_BUFSIZE);
+    sprintf(temp_buf, "DP24_%02x%02x", esp_mac_addr[ESP_MAC_ADDR_SIZE-1], esp_mac_addr[ESP_MAC_ADDR_SIZE-2]);
+    f_setlabel(temp_buf);
+
     led_animation_init();
 
     xTaskCreate(kb_scan_task, "kb_scan_task", SW_SCAN_TASK_STACK_SIZE, NULL, 2, NULL);
@@ -66,10 +71,7 @@ void app_main(void)
 
     load_keymap_by_name(dp_settings.current_kb_layout);
     profile_init();
-
-    memset(temp_buf, 0, TEMP_BUFSIZE);
-    sprintf(temp_buf, "DP24_%02x%02x", esp_mac_addr[ESP_MAC_ADDR_SIZE-1], esp_mac_addr[ESP_MAC_ADDR_SIZE-2]);
-    f_setlabel(temp_buf);
+    is_profile_load_complete = 1;
 
     dp_settings.sleep_after_ms = 120000;
     xTaskCreate(keypress_task, "keypress_task", KEYPRESS_TASK_STACK_SIZE, NULL, 2, NULL);

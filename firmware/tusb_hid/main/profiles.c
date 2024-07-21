@@ -19,9 +19,6 @@
 #include "neopixel_task.h"
 #include "keyboard.h"
 
-#define NEXT_PROFILE 0
-#define PREV_PROFILE 1
-
 const char settings_file_path[] = "/sdcard/dp_settings.txt";
 dp_global_settings dp_settings;
 
@@ -39,6 +36,7 @@ const char cmd_DIM_UNUSED_KEYS[] = "DIM_UNUSED_KEYS ";
 
 const char* default_keymap_name = "English(US)";
 
+uint8_t is_profile_load_complete;
 uint8_t current_profile_number;
 profile_info all_profile_info[MAX_PROFILES];
 

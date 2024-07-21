@@ -58,6 +58,7 @@ uint8_t save_settings(dp_global_settings* dps);
 uint8_t should_mount_usb_msc(void);
 
 extern const char* default_keymap_name;
+extern uint8_t is_profile_load_complete;
 
 #define PSCAN_OK 0
 #define PSCAN_ERROR_NO_PROFILE 1
