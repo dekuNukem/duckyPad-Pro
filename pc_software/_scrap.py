@@ -1,5 +1,20 @@
 # hid_op.duckypad_hid_sw_reset(reboot_into_usb_msc_mode=1)
-
+shes!
+disk label should be DP24_9BB0
+root_path D:\
+Exception in Tkinter callback
+Traceback (most recent call last):
+  File "C:\Program Files\Python310\lib\tkinter\__init__.py", line 1921, in __call__
+    return self.func(*args)
+  File "C:\Users\allen\Desktop\repos\duckyPad2\pc_software\duckypad_config.py", line 404, in connect_button_click
+    select_root_folder(duckypad_drive_path)
+  File "C:\Users\allen\Desktop\repos\duckyPad2\pc_software\duckypad_config.py", line 306, in select_root_folder
+    duckypad_fw_ver = print_fw_update_label()
+  File "C:\Users\allen\Desktop\repos\duckyPad2\pc_software\duckypad_config.py", line 257, in print_fw_update_label
+    fw_result, this_version = check_firmware_update(current_fw_str)
+  File "C:\Users\allen\Desktop\repos\duckyPad2\pc_software\duckypad_config.py", line 242, in check_firmware_update
+    filelist = os.listdir(dp_root_folder_path)
+OSError: [WinError 1006] The volume for a file has been externally altered so that the opened file is no longer valid: 'D:\\'
 HID_NOP = 0
 HID_DUMP = 1
 HID_SAVE = 2
