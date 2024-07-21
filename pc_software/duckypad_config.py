@@ -921,7 +921,7 @@ root.update()
 key_instruction_label.place(x=scaled_size(60), y=scaled_size(0))
 
 def search_button(rootx, rooty):
-    for index, item in enumerate(key_button_list):
+    for index, item in enumerate(key_button_list[:MECH_OBSW_COUNT]):
         xstart = item.winfo_rootx()
         xend = item.winfo_rootx() + item.winfo_width()
         ystart = item.winfo_rooty()
