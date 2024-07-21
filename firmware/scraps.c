@@ -1,5 +1,6 @@
 MY_UNIMPLEMENTED
 
+printf("should_mount_usb_msc: %d\n", );
     memset(temp_buf, 0, TEMP_BUFSIZE);
     f_getlabel("", temp_buf, 0);
     printf("vol label is: %s\n", temp_buf);
@@ -11,7 +12,7 @@ MY_UNIMPLEMENTED
     char ttttt[12];
     f_getlabel("", ttttt, 0);
     printf("vol label is: %s\n", ttttt);
-    
+
 void whoops(uint8_t* hid_cmdbuf)
 {
     printf("whoops\n");

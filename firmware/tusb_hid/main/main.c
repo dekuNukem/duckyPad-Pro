@@ -43,13 +43,18 @@ void app_main(void)
     if(sd_init())
     {
         draw_nosd();
-        while(1)
-            vTaskDelay(pdMS_TO_TICKS(250));
+        error_loop();
     }
     led_animation_init();
 
     xTaskCreate(kb_scan_task, "kb_scan_task", SW_SCAN_TASK_STACK_SIZE, NULL, 2, NULL);
 
+    if(should_mount_usb_msc())
+    {
+        mount_usb_msc();
+        draw_msc_mode();
+        error_loop();
+    }
     
     load_settings(&dp_settings);
     uint8_t pscan_result = scan_profiles();
@@ -69,9 +74,6 @@ void app_main(void)
     dp_settings.sleep_after_ms = 120000;
     xTaskCreate(keypress_task, "keypress_task", KEYPRESS_TASK_STACK_SIZE, NULL, 2, NULL);
 
-    printf("should_mount_usb_msc: %d\n", );
-
-    mount_usb_msc();
     // mount_hid_only();
 
     while(1)

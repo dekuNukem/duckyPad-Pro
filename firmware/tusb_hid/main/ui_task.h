@@ -22,6 +22,7 @@ void draw_noprofile(void);
 void draw_profile(profile_info* this_profile);
 void draw_settings(dp_global_settings *dps);
 void draw_nodsb(uint8_t swid);
+void draw_msc_mode(void);
 
 #define OLED_DIM_AFTER_MS 60000
 #define OLED_CONTRAST_DIM 80
