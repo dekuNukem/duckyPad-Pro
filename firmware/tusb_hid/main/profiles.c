@@ -473,3 +473,25 @@ void error_loop(void)
     vTaskDelay(pdMS_TO_TICKS(250));
   }
 }
+
+uint8_t should_mount_usb_msc(void)
+{
+  uint8_t found = 0;
+  struct dirent *dir;
+  DIR *d = opendir(SD_MOUNT_POINT);
+  if(d == NULL)
+    return found;
+
+  while ((dir = readdir(d)) != NULL)
+  {
+    if(dir->d_type != DT_REG)
+      continue;
+    if(strncmp(dir->d_name, "MOUNTMSC.TXT", 12) == 0)
+    {
+      found = 1;
+      break;
+    }
+  }
+  closedir(d);
+  return found;
+}
