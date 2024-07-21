@@ -291,6 +291,7 @@ def check_fw_support(current_fw_str):
 def select_root_folder(root_path=None, check_fw=True):
     global profile_list
     global dp_root_folder_path
+    print("root_path", root_path)
     if root_path is None:
         root_path = filedialog.askdirectory()
     if len(root_path) <= 0:
@@ -380,6 +381,13 @@ def connect_button_click():
     disk_label = f'DP{dp_info[6]}_{dp_info[9]:02X}{dp_info[10]:02X}'
     hid_op.duckypad_hid_sw_reset(reboot_into_usb_msc_mode=1)
     print("disk label should be", disk_label)
+    duckypad_drive_path = hid_op.get_duckypad_drive(disk_label)
+    if duckypad_drive_path is None:
+        if(messagebox.askokcancel("Info", "duckyPad not found!\n\nManually select a folder instead?") == False):
+            return
+        select_root_folder()
+        return
+    select_root_folder(duckypad_drive_path)
 
 def enable_buttons():
     profile_add_button.config(state=NORMAL)
@@ -1364,5 +1372,5 @@ def repeat_func():
 root.after(500, repeat_func)
 
 # select_root_folder("sample_profiles")
-
+select_root_folder("D:")
 root.mainloop()

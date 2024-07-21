@@ -93,7 +93,7 @@ def get_duckypad_drive_windows(vol_str):
     for item in removable_drives:
         vol_label = win32api.GetVolumeInformation(item.mountpoint)[0]
         if vol_str.strip().lower() in vol_label.strip().lower():
-            return item.mountpoint
+            return item.mountpoint.replace('\\\\', '\\')
     return None
 
 def get_duckypad_drive_mac(vol_str):
@@ -114,9 +114,9 @@ def get_duckypad_drive(vol_str):
         return get_duckypad_drive_linux(vol_str)
     return None
 
-result = get_duckypad_drive_mac("DP24_9BB0")
-print(result)
-print(os.listdir(result))
+# result = get_duckypad_drive("DP24_9BB0")
+# print(result)
+# print(os.listdir(result))
 # duckypad_hid_init()
 # print(is_dp_ready())
 # duckypad_hid_sw_reset()

@@ -467,7 +467,7 @@ void error_loop(void)
 {
   while(1)
   {
-    printf("idle loop\n");
+    // printf("idle loop\n");
     vTaskDelay(pdMS_TO_TICKS(1000));
   }
 }
