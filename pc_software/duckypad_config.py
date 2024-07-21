@@ -405,6 +405,7 @@ def connect_button_click():
         dp_root_folder_display.set(f"duckyPad Pro detected! Waiting for storage to show up... {int(seconds_to_wait - time_elapsed)}")
         root.update()
         time.sleep(0.5)
+    dp_root_folder_display.set("")
     
     if duckypad_drive_path is None:
         if(messagebox.askokcancel("Info", "duckyPad drive not found!\n\nSelect manually instead?") == False):
