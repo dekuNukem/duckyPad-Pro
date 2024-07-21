@@ -149,11 +149,12 @@ Perform a software reset.
 |     0    |        0x05        |
 |     1    | Reserved |
 |     2    |        0x14        |
+|     3    |        reboot options<br>0 = normal<br>1 = reboot into USB MSC mode  |
 | 3 ... 63 | 0x00 |
 
 💬 duckyPad to PC:
 
-No response because it's resetting!
+No response because it's rebooting!
 
 Wait at least 3 seconds before trying to talk to it again.
 

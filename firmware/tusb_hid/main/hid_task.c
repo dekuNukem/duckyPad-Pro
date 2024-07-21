@@ -471,7 +471,7 @@ void handle_hid_command(const uint8_t* hid_rx_buf, uint8_t rx_buf_size)
         PC to duckyPad:
         [0]   seq number (not used)
         [1]   command
-        [2]   reboot into msc?
+        [2]   reboot options. 0 = normal, 1 = reboot into MSC
         -----------
         duckyPad to PC
         [0]   seq number (not used)
