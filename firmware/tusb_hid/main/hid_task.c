@@ -186,10 +186,9 @@ void USBD_CUSTOM_HID_SendReport(uint8_t* hid_buf)
 
 // ---------------- USB MSC --------------------
 
-#define USB_PID   0xdf11
-#define USB_VID   0xcafe
+#define USB_PID   0xd11c
+#define USB_VID   0x0483
 #define USB_BCD   0x0200
-
 
 static tusb_desc_device_t msc_desc_device =
 {
@@ -306,6 +305,30 @@ static const uint8_t hid_configuration_descriptor[] = {
     TUD_HID_DESCRIPTOR(0, 4, false, sizeof(hid_report_descriptor), 0x81, 16, 10),
 };
 
+// static tusb_desc_device_t hid_desc_device =
+// {
+//     .bLength            = sizeof(tusb_desc_device_t),
+//     .bDescriptorType    = TUSB_DESC_DEVICE,
+//     .bcdUSB             = USB_BCD,
+
+//     // As required by USB Specs IAD's subclass must be common class (2) and protocol must be IAD (1)
+//     .bDeviceClass       = TUSB_CLASS_MISC,
+//     .bDeviceSubClass    = MISC_SUBCLASS_COMMON,
+//     .bDeviceProtocol    = MISC_PROTOCOL_IAD,
+
+//     .bMaxPacketSize0    = CFG_TUD_ENDPOINT0_SIZE,
+
+//     .idVendor           = USB_VID,
+//     .idProduct          = USB_PID,
+//     .bcdDevice          = 0x0100,
+
+//     .iManufacturer      = 0x01,
+//     .iProduct           = 0x02,
+//     .iSerialNumber      = 0x03,
+
+//     .bNumConfigurations = 0x01
+// };
+
 void mount_hid_only(void)
 {
      const tinyusb_config_t tusb_cfg = {
@@ -318,8 +341,6 @@ void mount_hid_only(void)
     ESP_ERROR_CHECK(tinyusb_driver_install(&tusb_cfg));
     ESP_LOGI(TAG, "USB HID only initialization DONE");
 }
-
-
 
 // ----------------- HID command parsing -------------------
 
