@@ -471,6 +471,7 @@ void handle_hid_command(const uint8_t* hid_rx_buf, uint8_t rx_buf_size)
         PC to duckyPad:
         [0]   seq number (not used)
         [1]   command
+        [2]   reboot into msc?
         -----------
         duckyPad to PC
         [0]   seq number (not used)
@@ -479,6 +480,8 @@ void handle_hid_command(const uint8_t* hid_rx_buf, uint8_t rx_buf_size)
     else if(command_type == HID_COMMAND_SW_RESET)
     {
         send_hid_cmd_response(hid_tx_buf);
+        if(hid_rx_buf[2])
+            generate_msc_flag_file();
         esp_restart();
     }
     /*

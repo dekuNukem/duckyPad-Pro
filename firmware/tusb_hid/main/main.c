@@ -58,6 +58,7 @@ void app_main(void)
     {
         mount_usb_msc();
         draw_msc_mode();
+        delete_msc_flag_file();
         error_loop();
     }
     

@@ -493,3 +493,14 @@ uint8_t should_mount_usb_msc(void)
   closedir(d);
   return found;
 }
+
+void delete_msc_flag_file(void)
+{
+  remove("/sdcard/MOUNTMSC.TXT");
+}
+
+void generate_msc_flag_file(void)
+{
+  FILE* mff = fopen("/sdcard/MOUNTMSC.TXT", "w");
+  fclose(mff);
+}

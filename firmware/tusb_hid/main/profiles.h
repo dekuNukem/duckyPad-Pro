@@ -56,6 +56,8 @@ uint8_t get_next_keymap(char* current_keymap_filename, char* next_keymap_filenam
 uint8_t get_first_keymap(char* keymap_filename);
 uint8_t save_settings(dp_global_settings* dps);
 uint8_t should_mount_usb_msc(void);
+void delete_msc_flag_file(void);
+void generate_msc_flag_file(void);
 
 extern const char* default_keymap_name;
 extern uint8_t is_profile_load_complete;
