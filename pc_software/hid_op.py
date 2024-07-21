@@ -2,8 +2,12 @@ import os
 import hid
 import time
 import sys
+import psutil
 
 HID_WAIT_TIME = float(os.getenv('HID_WAIT_TIME', 0))
+
+if 'win32' in sys.platform:
+    import win32api
 
 def get_duckypad_path():
     if 'win32' in sys.platform:
@@ -81,6 +85,19 @@ def duckypad_hid_sw_reset(reboot_into_usb_msc_mode=False):
     if(reboot_into_usb_msc_mode):
         pc_to_duckypad_buf[3] = 1 
     h.write(pc_to_duckypad_buf)
+
+def get_duckypad_drive(vol_str):
+    removable_drives = [x for x in psutil.disk_partitions() if 'removable' in x.opts.lower()]
+    if len(removable_drives) == 0:
+        return None
+    for item in removable_drives:
+        vol_label = win32api.GetVolumeInformation(item.mountpoint)[0]
+        if vol_str.strip().lower() in vol_label.strip().lower():
+            return item.mountpoint
+    return None
+
+result = get_duckypad_drive("DP24_9BB0")
+print(result)
 
 # duckypad_hid_init()
 # print(is_dp_ready())
