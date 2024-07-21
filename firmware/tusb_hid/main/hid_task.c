@@ -232,30 +232,22 @@ uint8_t const desc_fs_configuration[] =
     // Config number, interface count, string index, total length, attribute, power in mA
     TUD_CONFIG_DESCRIPTOR(1, ITF_NUM_TOTAL, 0, CONFIG_TOTAL_LEN, 0x00, 100),
 
-    // Interface number, string index, EP Out & EP In address, EP size
-    TUD_MSC_DESCRIPTOR(ITF_NUM_MSC, 5, EPNUM_MSC_OUT, EPNUM_MSC_IN, 64),
-
     // Interface number, string index, boot protocol, report descriptor len, EP In address, size & polling interval
     TUD_HID_DESCRIPTOR(ITF_NUM_HID, 4, false, sizeof(hid_report_descriptor), 0x81, 16, 10),
+
+    // Interface number, string index, EP Out & EP In address, EP size
+    TUD_MSC_DESCRIPTOR(ITF_NUM_MSC, 5, EPNUM_MSC_OUT, EPNUM_MSC_IN, 64),
 };
 
-
-enum {
-  STRID_LANGID = 0,
-  STRID_MANUFACTURER,
-  STRID_PRODUCT,
-  STRID_SERIAL,
-};
-
-char const *msc_hid_string_desc_arr[] =
+char *msc_hid_string_desc_arr[] =
 {
     // array of pointer to string descriptors
     (char[]){0x09, 0x04},   // 0: is supported language is English (0x0409)
     "dekuNukem",            // 1: Manufacturer
     "duckyPad Pro",         // 2: Product
-    "80085",                // 3: Serials, should use chip ID
-    "duckyPad Pro HID",         // 4: product string
-    "duckyPad Pro MSC",         // 5: product string
+    "DP24_00000000",                // 3: Serial number
+    "duckyPad Pro HID",              // 4
+    "duckyPad Pro MSC",                     // 5
 };
 
 #define BASE_PATH "/data"
@@ -269,6 +261,7 @@ static void storage_mount_changed_cb(tinyusb_msc_event_t *event)
 
 void mount_usb_msc(void)
 {
+    sprintf(msc_hid_string_desc_arr[3], "DP24_%02X%02X%02X%02X", esp_mac_addr[ESP_MAC_ADDR_SIZE-4], esp_mac_addr[ESP_MAC_ADDR_SIZE-3], esp_mac_addr[ESP_MAC_ADDR_SIZE-2], esp_mac_addr[ESP_MAC_ADDR_SIZE-1]);
     const tinyusb_msc_sdmmc_config_t config_sdmmc = {
         .card = my_sd_card,
         .callback_mount_changed = storage_mount_changed_cb,
@@ -288,13 +281,13 @@ void mount_usb_msc(void)
     ESP_LOGI(TAG, "USB MSC initialization DONE");
 }
 
-const char* hid_string_descriptor[5] = {
+char* hid_string_descriptor[] = {
     // array of pointer to string descriptors
     (char[]){0x09, 0x04},  // 0: is supported language is English (0x0409)
     "dekuNukem",             // 1: Manufacturer
-    "duckyPad2",      // 2: Product
-    "80085",              // 3: Serials, should use chip ID
-    "duckyPad Pro HID",  // 4: HID
+    "duckyPad Pro",      // 2: Product
+    "DP24_00000000",              // 3: Serial number
+    "duckyPad Pro HID",      // 4
 };
 
 static const uint8_t hid_configuration_descriptor[] = {
@@ -305,34 +298,35 @@ static const uint8_t hid_configuration_descriptor[] = {
     TUD_HID_DESCRIPTOR(0, 4, false, sizeof(hid_report_descriptor), 0x81, 16, 10),
 };
 
-// static tusb_desc_device_t hid_desc_device =
-// {
-//     .bLength            = sizeof(tusb_desc_device_t),
-//     .bDescriptorType    = TUSB_DESC_DEVICE,
-//     .bcdUSB             = USB_BCD,
+static tusb_desc_device_t hid_desc_device =
+{
+    .bLength            = sizeof(tusb_desc_device_t),
+    .bDescriptorType    = TUSB_DESC_DEVICE,
+    .bcdUSB             = USB_BCD,
 
-//     // As required by USB Specs IAD's subclass must be common class (2) and protocol must be IAD (1)
-//     .bDeviceClass       = TUSB_CLASS_MISC,
-//     .bDeviceSubClass    = MISC_SUBCLASS_COMMON,
-//     .bDeviceProtocol    = MISC_PROTOCOL_IAD,
+    // As required by USB Specs IAD's subclass must be common class (2) and protocol must be IAD (1)
+    .bDeviceClass       = TUSB_CLASS_HID,
+    .bDeviceSubClass    = MISC_SUBCLASS_COMMON,
+    .bDeviceProtocol    = MISC_PROTOCOL_IAD,
 
-//     .bMaxPacketSize0    = CFG_TUD_ENDPOINT0_SIZE,
+    .bMaxPacketSize0    = CFG_TUD_ENDPOINT0_SIZE,
 
-//     .idVendor           = USB_VID,
-//     .idProduct          = USB_PID,
-//     .bcdDevice          = 0x0100,
+    .idVendor           = USB_VID,
+    .idProduct          = USB_PID,
+    .bcdDevice          = 0x0100,
 
-//     .iManufacturer      = 0x01,
-//     .iProduct           = 0x02,
-//     .iSerialNumber      = 0x03,
+    .iManufacturer      = 0x01,
+    .iProduct           = 0x02,
+    .iSerialNumber      = 0x03,
 
-//     .bNumConfigurations = 0x01
-// };
+    .bNumConfigurations = 0x01
+};
 
 void mount_hid_only(void)
 {
-     const tinyusb_config_t tusb_cfg = {
-        .device_descriptor = NULL,
+    sprintf(hid_string_descriptor[3], "DP24_%02X%02X%02X%02X", esp_mac_addr[ESP_MAC_ADDR_SIZE-4], esp_mac_addr[ESP_MAC_ADDR_SIZE-3], esp_mac_addr[ESP_MAC_ADDR_SIZE-2], esp_mac_addr[ESP_MAC_ADDR_SIZE-1]);
+    const tinyusb_config_t tusb_cfg = {
+        .device_descriptor = &hid_desc_device,
         .string_descriptor = hid_string_descriptor,
         .string_descriptor_count = sizeof(hid_string_descriptor) / sizeof(hid_string_descriptor[0]),
         .external_phy = false,

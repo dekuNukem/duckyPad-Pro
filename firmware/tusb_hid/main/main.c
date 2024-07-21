@@ -49,12 +49,12 @@ void app_main(void)
 
     xTaskCreate(kb_scan_task, "kb_scan_task", SW_SCAN_TASK_STACK_SIZE, NULL, 2, NULL);
 
-    // if(should_mount_usb_msc())
-    // {
-    //     mount_usb_msc();
-    //     draw_msc_mode();
-    //     error_loop();
-    // }
+    if(should_mount_usb_msc())
+    {
+        mount_usb_msc();
+        draw_msc_mode();
+        error_loop();
+    }
     
     load_settings(&dp_settings);
     uint8_t pscan_result = scan_profiles();

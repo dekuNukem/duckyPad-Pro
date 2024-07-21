@@ -51,6 +51,11 @@
     "functional": "c",
     "diskio_sdmmc.h": "c",
     "hid_task.h": "c",
-    "cstring": "c"
+    "cstring": "c",
+    "compare": "c",
+    "concepts": "c",
+    "type_traits": "c",
+    "cmath": "c",
+    "new": "c"
   }
 }

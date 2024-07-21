@@ -262,47 +262,47 @@ usage : 2
 usage_page : 1
 vendor_id : 1739
 
-interface_number : -1
+interface_number : 1
 manufacturer_string : dekuNukem
-path : b'\\\\?\\HID#VID_303A&PID_4006&Col01#8&11cd1985&0&0000#{4d1e55b2-f16f-11cf-88cb-001111000030}\\KBD'
-product_id : 16390
-product_string : duckyPad2
+path : b'\\\\?\\HID#VID_0483&PID_D11C&MI_01&Col01#9&39a8dcd5&0&0000#{4d1e55b2-f16f-11cf-88cb-001111000030}\\KBD'
+product_id : 53532
+product_string : duckyPad Pro HID
 release_number : 256
-serial_number : 80085
+serial_number : DP24_DA579BB0
 usage : 6
 usage_page : 1
-vendor_id : 12346
+vendor_id : 1155
 
-interface_number : -1
+interface_number : 1
 manufacturer_string : dekuNukem
-path : b'\\\\?\\HID#VID_303A&PID_4006&Col02#8&11cd1985&0&0001#{4d1e55b2-f16f-11cf-88cb-001111000030}'
-product_id : 16390
-product_string : duckyPad2
+path : b'\\\\?\\HID#VID_0483&PID_D11C&MI_01&Col02#9&39a8dcd5&0&0001#{4d1e55b2-f16f-11cf-88cb-001111000030}'
+product_id : 53532
+product_string : duckyPad Pro HID
 release_number : 256
-serial_number : 80085
+serial_number : DP24_DA579BB0
 usage : 1
 usage_page : 12
-vendor_id : 12346
+vendor_id : 1155
 
-interface_number : -1
+interface_number : 1
 manufacturer_string : dekuNukem
-path : b'\\\\?\\HID#VID_303A&PID_4006&Col03#8&11cd1985&0&0002#{4d1e55b2-f16f-11cf-88cb-001111000030}'
-product_id : 16390
-product_string : duckyPad2
+path : b'\\\\?\\HID#VID_0483&PID_D11C&MI_01&Col03#9&39a8dcd5&0&0002#{4d1e55b2-f16f-11cf-88cb-001111000030}'
+product_id : 53532
+product_string : duckyPad Pro HID
 release_number : 256
-serial_number : 80085
+serial_number : DP24_DA579BB0
 usage : 2
 usage_page : 1
-vendor_id : 12346
+vendor_id : 1155
 
-interface_number : -1
+interface_number : 1
 manufacturer_string : dekuNukem
-path : b'\\\\?\\HID#VID_303A&PID_4006&Col04#8&11cd1985&0&0003#{4d1e55b2-f16f-11cf-88cb-001111000030}'
-product_id : 16390
-product_string : duckyPad2
+path : b'\\\\?\\HID#VID_0483&PID_D11C&MI_01&Col04#9&39a8dcd5&0&0003#{4d1e55b2-f16f-11cf-88cb-001111000030}'
+product_id : 53532
+product_string : duckyPad Pro HID
 release_number : 256
-serial_number : 80085
+serial_number : DP24_DA579BB0
 usage : 58
 usage_page : 1
-vendor_id : 12346
+vendor_id : 1155
 
