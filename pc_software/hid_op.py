@@ -86,7 +86,7 @@ def duckypad_hid_sw_reset(reboot_into_usb_msc_mode=False):
         pc_to_duckypad_buf[3] = 1 
     h.write(pc_to_duckypad_buf)
 
-def get_duckypad_drive(vol_str):
+def get_duckypad_drive_windows(vol_str):
     removable_drives = [x for x in psutil.disk_partitions() if 'removable' in x.opts.lower()]
     if len(removable_drives) == 0:
         return None
@@ -96,9 +96,27 @@ def get_duckypad_drive(vol_str):
             return item.mountpoint
     return None
 
-result = get_duckypad_drive("DP24_9BB0")
-print(result)
+def get_duckypad_drive_mac(vol_str):
+    vol_list = [x for x in psutil.disk_partitions() if vol_str.strip().lower() in x.mountpoint.strip().lower()]
+    if len(vol_list) == 0:
+        return None
+    return vol_list[0].mountpoint
 
+def get_duckypad_drive_linux(vol_str):
+    return None
+
+def get_duckypad_drive(vol_str):
+    if 'win32' in sys.platform:
+        return get_duckypad_drive_windows(vol_str)
+    elif 'darwin' in sys.platform:
+        return get_duckypad_drive_mac(vol_str)
+    elif 'linux' in sys.platform:
+        return get_duckypad_drive_linux(vol_str)
+    return None
+
+result = get_duckypad_drive_mac("DP24_9BB0")
+print(result)
+print(os.listdir(result))
 # duckypad_hid_init()
 # print(is_dp_ready())
 # duckypad_hid_sw_reset()
