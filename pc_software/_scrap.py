@@ -1,9 +1,67 @@
+HID_NOP = 0
+HID_DUMP = 1
+HID_SAVE = 2
+current_hid_op = HID_NOP
+is_using_hid = False
+
+def t1_worker():
+    global current_hid_op
+    while(1):
+        time.sleep(0.2)
+        if current_hid_op == HID_NOP:
+            continue
+        is_dp_ready, comment = hid_op.is_dp_ready()
+        if is_dp_ready is False:
+            messagebox.showerror("Error", comment)
+            dp_root_folder_display.set("")
+            current_hid_op = HID_NOP
+            continue
+        if current_hid_op == HID_DUMP:
+            root_folder_path_label.config(foreground='navy')
+            dp_root_folder_display.set("Loading...")
+            current_hid_op = HID_NOP
+            try:
+                hid_op.dump_from_hid(hid_dump_path, dp_root_folder_display)
+                select_root_folder(hid_dump_path, check_fw=False)
+                print("done!")
+                dp_root_folder_display.set("done!")
+            except Exception as e:
+                messagebox.showerror("Error", "error:\n\n"+str(traceback.format_exc()))
+                dp_root_folder_display.set("HID load error!")
+                continue
+        if current_hid_op == HID_SAVE:
+            hid_op.duckypad_hid_close()
+            try:
+                hid_op.duckypad_hid_init()
+                hid_op.duckypad_hid_file_sync(hid_dump_path, hid_modified_dir_path, dp_root_folder_display)
+                hid_op.duckypad_hid_sw_reset()
+                try:
+                    shutil.rmtree(hid_dump_path)
+                    time.sleep(0.05)
+                except FileNotFoundError:
+                    pass
+                os.rename(hid_modified_dir_path, hid_dump_path)
+            except Exception as e:
+                messagebox.showerror("error", "Save error: " + str(traceback.format_exc()))
+                dp_root_folder_display.set("Save FAILED!")
+            current_hid_op = HID_NOP
+
+t1 = threading.Thread(target=t1_worker, daemon=True)
+t1.start()
+
+
 new_key = duck_objs.dp_key()
         new_key.name = keyname_line1
         new_key.name_line2 = keyname_line2
         profile_list[profile_index].keylist[selected_key] = new_key
         update_keylist_index()
 
+# def on_closing():
+#     root.destroy()
+
+# root.protocol("WM_DELETE_WINDOW", on_closing)
+
+# select_root_folder("sample_profiles")
 
 upper_re_cw = Label(master=re_lf, text='RE1 CW', borderwidth=1, relief="solid", background=default_button_color, font=(None, 13))
 upper_re_cw.place(x=scaled_size(7), y=scaled_size(5), width=RE_BUTTON_WIDTH, height=RE_BUTTON_HEIGHT)

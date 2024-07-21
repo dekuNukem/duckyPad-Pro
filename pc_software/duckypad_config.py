@@ -319,11 +319,6 @@ def select_root_folder(root_path=None, check_fw=True):
     except Exception as e:
         print("select_root_folder:", e)
 
-HID_NOP = 0
-HID_DUMP = 1
-HID_SAVE = 2
-current_hid_op = HID_NOP
-is_using_hid = False
 
 def incompatible_fw_msgbox(current_fw_str, fw_status):
     if fw_status == FW_TOO_LOW:
@@ -336,11 +331,6 @@ def incompatible_fw_msgbox(current_fw_str, fw_status):
         messagebox.showinfo("Info", f"duckyPad firmware unknown!\n\n")
 
 def connect_button_click():
-    global current_hid_op
-    global is_using_hid
-
-    is_using_hid = False
-
     if hid_op.get_duckypad_path() is None:
         if(messagebox.askokcancel("Info", "duckyPad not found!\n\nConfigure via SD card instead?") == False):
             return
@@ -364,11 +354,6 @@ def connect_button_click():
     except Exception as e:
         print("connect_button_click 1", e)
         init_success = False
-
-    if init_success:
-        current_hid_op = HID_DUMP
-        is_using_hid = True
-        return
 
     if init_success is False and 'linux' in sys.platform:
         box_result = messagebox.askyesnocancel("Info", "duckyPad detected, but additional permissions needed.\n\nClick Yes for instructions\n\nClick No to configure via SD card.")
@@ -764,15 +749,8 @@ def make_default_backup_dir_name():
     return 'duckyPad_backup_' + datetime.now().strftime("%Y-%m-%dT%H-%M-%S")
 
 def save_click():
-    global is_using_hid
-    global current_hid_op
-    if save_everything(os.path.join(backup_path, make_default_backup_dir_name())) is False:
-        return
-    if is_using_hid is False:
-        save_everything(dp_root_folder_path)
-    else:
-        save_everything(hid_modified_dir_path)
-        current_hid_op = HID_SAVE
+    save_everything(os.path.join(backup_path, make_default_backup_dir_name()))
+    save_everything(dp_root_folder_path)
 
 def backup_button_click():
     messagebox.showinfo("Backups", "All your backups are here!\n\nCopy back to SD card to restore")
@@ -1381,61 +1359,8 @@ def repeat_func():
         modification_checked = 1
     root.after(500, repeat_func)
 
-def t1_worker():
-    global current_hid_op
-    while(1):
-        time.sleep(0.2)
-        if current_hid_op == HID_NOP:
-            continue
-        is_dp_ready, comment = hid_op.is_dp_ready()
-        if is_dp_ready is False:
-            messagebox.showerror("Error", comment)
-            dp_root_folder_display.set("")
-            current_hid_op = HID_NOP
-            continue
-        if current_hid_op == HID_DUMP:
-            root_folder_path_label.config(foreground='navy')
-            dp_root_folder_display.set("Loading...")
-            current_hid_op = HID_NOP
-            try:
-                hid_op.dump_from_hid(hid_dump_path, dp_root_folder_display)
-                select_root_folder(hid_dump_path, check_fw=False)
-                print("done!")
-                dp_root_folder_display.set("done!")
-            except Exception as e:
-                messagebox.showerror("Error", "error:\n\n"+str(traceback.format_exc()))
-                dp_root_folder_display.set("HID load error!")
-                continue
-        if current_hid_op == HID_SAVE:
-            hid_op.duckypad_hid_close()
-            try:
-                hid_op.duckypad_hid_init()
-                hid_op.duckypad_hid_file_sync(hid_dump_path, hid_modified_dir_path, dp_root_folder_display)
-                hid_op.duckypad_hid_sw_reset()
-                try:
-                    shutil.rmtree(hid_dump_path)
-                    time.sleep(0.05)
-                except FileNotFoundError:
-                    pass
-                os.rename(hid_modified_dir_path, hid_dump_path)
-            except Exception as e:
-                messagebox.showerror("error", "Save error: " + str(traceback.format_exc()))
-                dp_root_folder_display.set("Save FAILED!")
-            current_hid_op = HID_NOP
-
-t1 = threading.Thread(target=t1_worker, daemon=True)
-t1.start()
-
-def on_closing():
-    if current_hid_op == HID_NOP:
-        root.destroy()
-    elif messagebox.askokcancel("Quit", "Still saving data! Quit anyway?"):
-        root.destroy()
-
-root.protocol("WM_DELETE_WINDOW", on_closing)
-
 root.after(500, repeat_func)
 
-select_root_folder("sample_profiles")
+# select_root_folder("sample_profiles")
 
 root.mainloop()
