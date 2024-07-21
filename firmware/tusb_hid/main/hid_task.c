@@ -255,8 +255,8 @@ char const *string_desc_arr[] =
     "dekuNukem",            // 1: Manufacturer
     "duckyPad Pro",         // 2: Product
     "80085",                // 3: Serials, should use chip ID
-    "duckyPad_HID",         // 4: HID
-    "duckyPad_MSC",         // 5: MSC
+    "duckyPad Pro HID",         // 4: product string
+    "duckyPad Pro MSC",         // 5: product string
 };
 
 #define BASE_PATH "/data"
@@ -295,7 +295,7 @@ const char* hid_string_descriptor[5] = {
     "dekuNukem",             // 1: Manufacturer
     "duckyPad2",      // 2: Product
     "80085",              // 3: Serials, should use chip ID
-    "duckyPad_HID",  // 4: HID
+    "duckyPad Pro HID",  // 4: HID
 };
 
 static const uint8_t hid_configuration_descriptor[] = {

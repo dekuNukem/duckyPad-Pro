@@ -1,0 +1,308 @@
+interface_number : 0
+manufacturer_string : Logitech
+path : b'\\\\?\\HID#VID_046D&PID_C07E&MI_00#7&206489ab&0&0000#{4d1e55b2-f16f-11cf-88cb-001111000030}'
+product_id : 49278
+product_string : Gaming Mouse G402
+release_number : 36867
+serial_number : 6D7F287F5152
+usage : 2
+usage_page : 1
+vendor_id : 1133
+
+interface_number : 1
+manufacturer_string : dekuNukem
+path : b'\\\\?\\HID#VID_CAFE&PID_DF11&MI_01&Col01#9&1a7a3c17&0&0000#{4d1e55b2-f16f-11cf-88cb-001111000030}\\KBD'
+product_id : 57105
+product_string : duckyPad Pro HID
+release_number : 256
+serial_number : 80085
+usage : 6
+usage_page : 1
+vendor_id : 51966
+
+interface_number : 1
+manufacturer_string : Logitech
+path : b'\\\\?\\HID#VID_046D&PID_C07E&MI_01&Col05#7&8a0fd66&0&0004#{4d1e55b2-f16f-11cf-88cb-001111000030}'
+product_id : 49278
+product_string : Gaming Mouse G402
+release_number : 36867
+serial_number : 6D7F287F5152
+usage : 2
+usage_page : 65280
+vendor_id : 1133
+
+interface_number : 1
+manufacturer_string : dekuNukem
+path : b'\\\\?\\HID#VID_CAFE&PID_DF11&MI_01&Col02#9&1a7a3c17&0&0001#{4d1e55b2-f16f-11cf-88cb-001111000030}'
+product_id : 57105
+product_string : duckyPad Pro HID
+release_number : 256
+serial_number : 80085
+usage : 1
+usage_page : 12
+vendor_id : 51966
+
+interface_number : -1
+manufacturer_string : 
+path : b'\\\\?\\HID#INTC816&Col01#3&36a7043c&0&0000#{4d1e55b2-f16f-11cf-88cb-001111000030}'
+product_id : 2590
+product_string : 
+release_number : 512
+serial_number : 
+usage : 12
+usage_page : 1
+vendor_id : 32903
+
+interface_number : -1
+manufacturer_string : Microsoft
+path : b'\\\\?\\HID#DELL0825&Col02#5&78be050&0&0001#{4d1e55b2-f16f-11cf-88cb-001111000030}'
+product_id : 32402
+product_string : HIDI2C Device
+release_number : 1
+serial_number : 9999
+usage : 5
+usage_page : 13
+vendor_id : 1739
+
+interface_number : 1
+manufacturer_string : dekuNukem
+path : b'\\\\?\\HID#VID_CAFE&PID_DF11&MI_01&Col03#9&1a7a3c17&0&0002#{4d1e55b2-f16f-11cf-88cb-001111000030}'
+product_id : 57105
+product_string : duckyPad Pro HID
+release_number : 256
+serial_number : 80085
+usage : 2
+usage_page : 1
+vendor_id : 51966
+
+interface_number : -1
+manufacturer_string : 
+path : b'\\\\?\\HID#INTC816&Col02#3&36a7043c&0&0001#{4d1e55b2-f16f-11cf-88cb-001111000030}'
+product_id : 2590
+product_string : 
+release_number : 512
+serial_number : 
+usage : 13
+usage_page : 1
+vendor_id : 32903
+
+interface_number : 1
+manufacturer_string : dekuNukem
+path : b'\\\\?\\HID#VID_CAFE&PID_DF11&MI_01&Col04#9&1a7a3c17&0&0003#{4d1e55b2-f16f-11cf-88cb-001111000030}'
+product_id : 57105
+product_string : duckyPad Pro HID
+release_number : 256
+serial_number : 80085
+usage : 58
+usage_page : 1
+vendor_id : 51966
+
+interface_number : -1
+manufacturer_string : Microsoft
+path : b'\\\\?\\HID#DELL0825&Col03#5&78be050&0&0002#{4d1e55b2-f16f-11cf-88cb-001111000030}'
+product_id : 32402
+product_string : HIDI2C Device
+release_number : 1
+serial_number : 9999
+usage : 14
+usage_page : 13
+vendor_id : 1739
+
+interface_number : -1
+manufacturer_string : 
+path : b'\\\\?\\HID#ConvertedDevice&Col02#5&379854aa&0&0001#{4d1e55b2-f16f-11cf-88cb-001111000030}'
+product_id : 0
+product_string : 
+release_number : 0
+serial_number : 
+usage : 1
+usage_page : 12
+vendor_id : 1118
+
+interface_number : -1
+manufacturer_string : 
+path : b'\\\\?\\HID#ConvertedDevice&Col03#5&379854aa&0&0002#{4d1e55b2-f16f-11cf-88cb-001111000030}'
+product_id : 0
+product_string : 
+release_number : 0
+serial_number : 
+usage : 128
+usage_page : 1
+vendor_id : 1118
+
+interface_number : 1
+manufacturer_string : 
+path : b'\\\\?\\HID#VID_13BA&PID_0018&MI_01&Col01#7&ca5d280&0&0000#{4d1e55b2-f16f-11cf-88cb-001111000030}'
+product_id : 24
+product_string : 
+release_number : 1
+serial_number : 
+usage : 2
+usage_page : 1
+vendor_id : 5050
+
+interface_number : -1
+manufacturer_string : Microsoft
+path : b'\\\\?\\HID#DELL0825&Col04#5&78be050&0&0003#{4d1e55b2-f16f-11cf-88cb-001111000030}'
+product_id : 32402
+product_string : HIDI2C Device
+release_number : 1
+serial_number : 9999
+usage : 1
+usage_page : 65280
+vendor_id : 1739
+
+interface_number : 1
+manufacturer_string : Logitech
+path : b'\\\\?\\HID#VID_046D&PID_C07E&MI_01&Col02#7&8a0fd66&0&0001#{4d1e55b2-f16f-11cf-88cb-001111000030}'
+product_id : 49278
+product_string : Gaming Mouse G402
+release_number : 36867
+serial_number : 6D7F287F5152
+usage : 1
+usage_page : 12
+vendor_id : 1133
+
+interface_number : 0
+manufacturer_string : 
+path : b'\\\\?\\HID#VID_13BA&PID_0018&MI_00#7&24695ec5&0&0000#{4d1e55b2-f16f-11cf-88cb-001111000030}\\KBD'
+product_id : 24
+product_string : 
+release_number : 1
+serial_number : 
+usage : 6
+usage_page : 1
+vendor_id : 5050
+
+interface_number : 1
+manufacturer_string : 
+path : b'\\\\?\\HID#VID_13BA&PID_0018&MI_01&Col02#7&ca5d280&0&0001#{4d1e55b2-f16f-11cf-88cb-001111000030}'
+product_id : 24
+product_string : 
+release_number : 1
+serial_number : 
+usage : 128
+usage_page : 1
+vendor_id : 5050
+
+interface_number : -1
+manufacturer_string : dekuNukem
+path : b'\\\\?\\HID#VID_0483&PID_D11C&Col01#8&3a0783ae&0&0000#{4d1e55b2-f16f-11cf-88cb-001111000030}\\KBD'
+product_id : 53532
+product_string : duckyPad(2020)
+release_number : 512
+serial_number : DP20_78426107
+usage : 6
+usage_page : 1
+vendor_id : 1155
+
+interface_number : 1
+manufacturer_string : Logitech
+path : b'\\\\?\\HID#VID_046D&PID_C07E&MI_01&Col03#7&8a0fd66&0&0002#{4d1e55b2-f16f-11cf-88cb-001111000030}'
+product_id : 49278
+product_string : Gaming Mouse G402
+release_number : 36867
+serial_number : 6D7F287F5152
+usage : 128
+usage_page : 1
+vendor_id : 1133
+
+interface_number : 1
+manufacturer_string : Logitech
+path : b'\\\\?\\HID#VID_046D&PID_C07E&MI_01&Col01#7&8a0fd66&0&0000#{4d1e55b2-f16f-11cf-88cb-001111000030}\\KBD'
+product_id : 49278
+product_string : Gaming Mouse G402
+release_number : 36867
+serial_number : 6D7F287F5152
+usage : 6
+usage_page : 1
+vendor_id : 1133
+
+interface_number : 1
+manufacturer_string : 
+path : b'\\\\?\\HID#VID_13BA&PID_0018&MI_01&Col03#7&ca5d280&0&0002#{4d1e55b2-f16f-11cf-88cb-001111000030}'
+product_id : 24
+product_string : 
+release_number : 1
+serial_number : 
+usage : 1
+usage_page : 12
+vendor_id : 5050
+
+interface_number : 5
+manufacturer_string : 
+path : b'\\\\?\\HID#VID_046D&PID_0893&MI_05#8&28324ec4&0&0000#{4d1e55b2-f16f-11cf-88cb-001111000030}'
+product_id : 2195
+product_string : Logitech StreamCam
+release_number : 23
+serial_number : C9A34C95
+usage : 1
+usage_page : 65280
+vendor_id : 1133
+
+interface_number : -1
+manufacturer_string : dekuNukem
+path : b'\\\\?\\HID#VID_0483&PID_D11C&Col02#8&3a0783ae&0&0001#{4d1e55b2-f16f-11cf-88cb-001111000030}'
+product_id : 53532
+product_string : duckyPad(2020)
+release_number : 512
+serial_number : DP20_78426107
+usage : 1
+usage_page : 12
+vendor_id : 1155
+
+interface_number : 1
+manufacturer_string : Logitech
+path : b'\\\\?\\HID#VID_046D&PID_C07E&MI_01&Col04#7&8a0fd66&0&0003#{4d1e55b2-f16f-11cf-88cb-001111000030}'
+product_id : 49278
+product_string : Gaming Mouse G402
+release_number : 36867
+serial_number : 6D7F287F5152
+usage : 1
+usage_page : 65280
+vendor_id : 1133
+
+interface_number : -1
+manufacturer_string : dekuNukem
+path : b'\\\\?\\HID#VID_0483&PID_D11C&Col03#8&3a0783ae&0&0002#{4d1e55b2-f16f-11cf-88cb-001111000030}'
+product_id : 53532
+product_string : duckyPad(2020)
+release_number : 512
+serial_number : DP20_78426107
+usage : 2
+usage_page : 1
+vendor_id : 1155
+
+interface_number : -1
+manufacturer_string : dekuNukem
+path : b'\\\\?\\HID#VID_0483&PID_D11C&Col04#8&3a0783ae&0&0003#{4d1e55b2-f16f-11cf-88cb-001111000030}'
+product_id : 53532
+product_string : duckyPad(2020)
+release_number : 512
+serial_number : DP20_78426107
+usage : 58
+usage_page : 1
+vendor_id : 1155
+
+interface_number : -1
+manufacturer_string : 
+path : b'\\\\?\\HID#ConvertedDevice&Col01#5&379854aa&0&0000#{4d1e55b2-f16f-11cf-88cb-001111000030}\\KBD'
+product_id : 0
+product_string : 
+release_number : 0
+serial_number : 
+usage : 6
+usage_page : 1
+vendor_id : 1118
+
+interface_number : -1
+manufacturer_string : Microsoft
+path : b'\\\\?\\HID#DELL0825&Col01#5&78be050&0&0000#{4d1e55b2-f16f-11cf-88cb-001111000030}'
+product_id : 32402
+product_string : HIDI2C Device
+release_number : 1
+serial_number : 9999
+usage : 2
+usage_page : 1
+vendor_id : 1739
+
