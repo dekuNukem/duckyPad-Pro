@@ -49,12 +49,12 @@ void app_main(void)
 
     xTaskCreate(kb_scan_task, "kb_scan_task", SW_SCAN_TASK_STACK_SIZE, NULL, 2, NULL);
 
-    if(should_mount_usb_msc())
-    {
-        mount_usb_msc();
-        draw_msc_mode();
-        error_loop();
-    }
+    // if(should_mount_usb_msc())
+    // {
+    //     mount_usb_msc();
+    //     draw_msc_mode();
+    //     error_loop();
+    // }
     
     load_settings(&dp_settings);
     uint8_t pscan_result = scan_profiles();
@@ -68,13 +68,13 @@ void app_main(void)
     profile_init();
 
     memset(temp_buf, 0, TEMP_BUFSIZE);
-    sprintf(temp_buf, "DKP24_%02x%02x", esp_mac_addr[ESP_MAC_ADDR_SIZE-1], esp_mac_addr[ESP_MAC_ADDR_SIZE-2]);
+    sprintf(temp_buf, "DP24_%02x%02x", esp_mac_addr[ESP_MAC_ADDR_SIZE-1], esp_mac_addr[ESP_MAC_ADDR_SIZE-2]);
     f_setlabel(temp_buf);
 
     dp_settings.sleep_after_ms = 120000;
     xTaskCreate(keypress_task, "keypress_task", KEYPRESS_TASK_STACK_SIZE, NULL, 2, NULL);
 
-    // mount_hid_only();
+    mount_hid_only();
 
     while(1)
     {

@@ -247,7 +247,7 @@ enum {
   STRID_SERIAL,
 };
 
-char const *string_desc_arr[] =
+char const *msc_hid_string_desc_arr[] =
 {
     // array of pointer to string descriptors
     (char[]){0x09, 0x04},   // 0: is supported language is English (0x0409)
@@ -279,8 +279,8 @@ void mount_usb_msc(void)
     ESP_LOGI(TAG, "USB MSC initialization");
     const tinyusb_config_t tusb_cfg = {
         .device_descriptor = &msc_desc_device,
-        .string_descriptor = string_desc_arr,
-        .string_descriptor_count = sizeof(string_desc_arr) / sizeof(string_desc_arr[0]),
+        .string_descriptor = msc_hid_string_desc_arr,
+        .string_descriptor_count = sizeof(msc_hid_string_desc_arr) / sizeof(msc_hid_string_desc_arr[0]),
         .external_phy = false,
         .configuration_descriptor = desc_fs_configuration,
     };

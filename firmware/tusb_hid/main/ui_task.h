@@ -25,7 +25,7 @@ void draw_nodsb(uint8_t swid);
 void draw_msc_mode(void);
 
 #define OLED_DIM_AFTER_MS 60000
-#define OLED_CONTRAST_DIM 80
+#define OLED_CONTRAST_DIM 100
 #define OLED_CONTRAST_BRIGHT 255
 
 #ifdef __cplusplus
