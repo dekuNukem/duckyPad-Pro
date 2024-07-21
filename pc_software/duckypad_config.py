@@ -381,26 +381,33 @@ def connect_button_click():
     disk_label = f'DP{dp_info[6]}_{dp_info[9]:02X}{dp_info[10]:02X}'
     print("disk label should be", disk_label)
 
+    duckypad_drive_path = hid_op.get_duckypad_drive(disk_label)
+    # Already mounted
+    if duckypad_drive_path is not None:
+        select_root_folder(duckypad_drive_path)
+        return
+
     root_folder_path_label.config(foreground="blue")
     dp_root_folder_display.set("duckyPad Pro detected! Waiting for storage to show up...")
+
+    hid_op.duckypad_hid_sw_reset(reboot_into_usb_msc_mode=1)
     ui_reset()
     root.update()
-    hid_op.duckypad_hid_sw_reset(reboot_into_usb_msc_mode=1)
-    time.sleep(1)
-
-    duckypad_drive_path = None
+    seconds_to_wait = 8
     entry_time = time.time()
     while 1:
         duckypad_drive_path = hid_op.get_duckypad_drive(disk_label)
         if duckypad_drive_path is not None:
             break
-        if time.time() - entry_time > 5:
+        time_elapsed = time.time() - entry_time
+        if time_elapsed > seconds_to_wait:
             break
+        dp_root_folder_display.set(f"duckyPad Pro detected! Waiting for storage to show up... {int(seconds_to_wait - time_elapsed)}")
         root.update()
         time.sleep(0.5)
     
     if duckypad_drive_path is None:
-        if(messagebox.askokcancel("Info", "duckyPad drive not found!\n\nManually select a folder instead?") == False):
+        if(messagebox.askokcancel("Info", "duckyPad drive not found!\n\nSelect manually instead?") == False):
             return
         select_root_folder()
         return
