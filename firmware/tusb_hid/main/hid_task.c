@@ -141,6 +141,8 @@ const uint8_t hid_report_descriptor[] = {
 
 uint8_t const *tud_hid_descriptor_report_cb(uint8_t instance)
 {
+    // printf("&&&&&&&&\n");
+    // check for USB activity here, if nothing after 5 seconds, ask for bluetooth instead?
     return hid_report_descriptor;
 }
 

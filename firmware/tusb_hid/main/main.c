@@ -33,7 +33,7 @@ static const char *TAG = "MAIN";
 
 void app_main(void)
 {
-    vTaskDelay(pdMS_TO_TICKS(500)); // brief delay in case of SD card removal reboot
+    vTaskDelay(pdMS_TO_TICKS(250)); // brief delay in case of SD card removal reboot
     gpio_install_isr_service(0); // BEFORE GPIO INIT
     esp_read_mac(esp_mac_addr, ESP_MAC_ADDR_SIZE);
     my_rotary_encoder_init();
