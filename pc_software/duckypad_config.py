@@ -328,7 +328,7 @@ def incompatible_fw_msgbox(current_fw_str, fw_status):
     else:
         messagebox.showinfo("Info", f"duckyPad firmware unknown!\n\n")
 
-def put_duckypad_in_msc_mode_and_get_drive_path():
+def put_duckypad_in_msc_mode_and_get_drive_path(reset_ui=True):
     dp_info = hid_op.get_dp_info()
     if dp_info is None:
         return None
@@ -341,7 +341,8 @@ def put_duckypad_in_msc_mode_and_get_drive_path():
     root_folder_path_label.config(foreground="blue")
 
     hid_op.duckypad_hid_sw_reset(reboot_into_usb_msc_mode=1)
-    ui_reset()
+    if reset_ui:
+        ui_reset()
     root.update()
     seconds_to_wait = 8
     entry_time = time.time()
@@ -786,7 +787,16 @@ def make_default_backup_dir_name():
 
 def save_click():
     save_everything(os.path.join(backup_path, make_default_backup_dir_name()))
+    put_duckypad_in_msc_mode_and_get_drive_path(reset_ui=False)
     save_everything(dp_root_folder_path)
+    print("ejecting...")
+    time.sleep(1)
+    try:
+        hid_op.duckypad_hid_close()
+        hid_op.duckypad_hid_init()
+    except Exception as e:
+        print('save_click:',e)
+    hid_op.duckypad_hid_sw_reset()
 
 def backup_button_click():
     messagebox.showinfo("Backups", "All your backups are here!\n\nCopy back to SD card to restore")
