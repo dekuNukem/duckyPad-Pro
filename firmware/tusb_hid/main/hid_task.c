@@ -227,9 +227,8 @@ enum
 
 #define CONFIG_TOTAL_LEN    (TUD_CONFIG_DESC_LEN + TUD_MSC_DESC_LEN + CFG_TUD_HID * TUD_HID_DESC_LEN)
 
-uint8_t const desc_fs_configuration[] =
+uint8_t const hid_msc_config_desc[] =
 {
-    //CONFIG_TOTAL_LEN or TUSB_DESC_TOTAL_LEN???
     // Config number, interface count, string index, total length, attribute, power in mA
     TUD_CONFIG_DESCRIPTOR(1, ITF_NUM_TOTAL, 0, CONFIG_TOTAL_LEN, 0x00, 100),
 
@@ -240,7 +239,7 @@ uint8_t const desc_fs_configuration[] =
     TUD_MSC_DESCRIPTOR(ITF_NUM_MSC, 5, EPNUM_MSC_OUT, EPNUM_MSC_IN, 64),
 };
 
-char *msc_hid_string_desc_arr[] =
+char *msc_hid_string_desc[] =
 {
     // array of pointer to string descriptors
     (char[]){0x09, 0x04},   // 0: is supported language is English (0x0409)
@@ -258,11 +257,9 @@ static void storage_mount_changed_cb(tinyusb_msc_event_t *event)
     printf("Storage mounted to application: %s", event->mount_changed_data.is_mounted ? "Yes" : "No");
 }
 
-// ---------------------- USB MSC END -----------------
-
 void mount_usb_msc(void)
 {
-    sprintf(msc_hid_string_desc_arr[3], "DP24_%02X%02X%02X%02X", esp_mac_addr[ESP_MAC_ADDR_SIZE-4], esp_mac_addr[ESP_MAC_ADDR_SIZE-3], esp_mac_addr[ESP_MAC_ADDR_SIZE-2], esp_mac_addr[ESP_MAC_ADDR_SIZE-1]);
+    sprintf(msc_hid_string_desc[3], "DP24_%02X%02X%02X%02X", esp_mac_addr[ESP_MAC_ADDR_SIZE-4], esp_mac_addr[ESP_MAC_ADDR_SIZE-3], esp_mac_addr[ESP_MAC_ADDR_SIZE-2], esp_mac_addr[ESP_MAC_ADDR_SIZE-1]);
     const tinyusb_msc_sdmmc_config_t config_sdmmc = {
         .card = my_sd_card,
         .callback_mount_changed = storage_mount_changed_cb,
@@ -273,40 +270,42 @@ void mount_usb_msc(void)
     ESP_LOGI(TAG, "USB MSC initialization");
     const tinyusb_config_t tusb_cfg = {
         .device_descriptor = &msc_desc_device,
-        .string_descriptor = msc_hid_string_desc_arr,
-        .string_descriptor_count = sizeof(msc_hid_string_desc_arr) / sizeof(msc_hid_string_desc_arr[0]),
+        .string_descriptor = msc_hid_string_desc,
+        .string_descriptor_count = sizeof(msc_hid_string_desc) / sizeof(msc_hid_string_desc[0]),
         .external_phy = false,
-        .configuration_descriptor = desc_fs_configuration,
+        .configuration_descriptor = hid_msc_config_desc,
     };
     ESP_ERROR_CHECK(tinyusb_driver_install(&tusb_cfg));
     ESP_LOGI(TAG, "USB MSC initialization DONE");
 }
 
+// ---------------------- USB MSC END -----------------
+
 char* hid_string_descriptor[] = {
     // array of pointer to string descriptors
-    (char[]){0x09, 0x04},  // 0: is supported language is English (0x0409)
-    "dekuNukem",             // 1: Manufacturer
-    "duckyPad Pro",      // 2: Product
-    "DP24_00000000",              // 3: Serial number
-    "duckyPad Pro HID",      // 4
+    (char[]){0x09, 0x04},   // 0: is supported language is English (0x0409)
+    "dekuNukem",            // 1: Manufacturer
+    "duckyPad Pro",         // 2: Product
+    "DP24_00000000",        // 3: Serial number
+    "duckyPad Pro HID",     // 4
 };
 
-static const uint8_t hid_configuration_descriptor[] = {
+static const uint8_t hid_only_config_desc[] = {
     // Configuration number, interface count, string index, total length, attribute, power in mA
-    TUD_CONFIG_DESCRIPTOR(1, 1, 0, TUSB_DESC_TOTAL_LEN, TUSB_DESC_CONFIG_ATT_REMOTE_WAKEUP, 100),
+    TUD_CONFIG_DESCRIPTOR(1, 1, 0, TUSB_DESC_TOTAL_LEN, 0x00, 100),
 
     // Interface number, string index, boot protocol, report descriptor len, EP In address, size & polling interval
     TUD_HID_DESCRIPTOR(0, 4, false, sizeof(hid_report_descriptor), 0x81, 16, 10),
 };
 
-static tusb_desc_device_t hid_desc_device =
+static tusb_desc_device_t hid_only_desc_device =
 {
     .bLength            = sizeof(tusb_desc_device_t),
     .bDescriptorType    = TUSB_DESC_DEVICE,
     .bcdUSB             = USB_BCD,
 
     // As required by USB Specs IAD's subclass must be common class (2) and protocol must be IAD (1)
-    .bDeviceClass       = TUSB_CLASS_HID,
+    .bDeviceClass       = TUSB_CLASS_MISC,
     .bDeviceSubClass    = MISC_SUBCLASS_COMMON,
     .bDeviceProtocol    = MISC_PROTOCOL_IAD,
 
@@ -327,11 +326,11 @@ void mount_hid_only(void)
 {
     sprintf(hid_string_descriptor[3], "DP24_%02X%02X%02X%02X", esp_mac_addr[ESP_MAC_ADDR_SIZE-4], esp_mac_addr[ESP_MAC_ADDR_SIZE-3], esp_mac_addr[ESP_MAC_ADDR_SIZE-2], esp_mac_addr[ESP_MAC_ADDR_SIZE-1]);
     const tinyusb_config_t tusb_cfg = {
-        .device_descriptor = &hid_desc_device,
+        .device_descriptor = &hid_only_desc_device,
         .string_descriptor = hid_string_descriptor,
         .string_descriptor_count = sizeof(hid_string_descriptor) / sizeof(hid_string_descriptor[0]),
         .external_phy = false,
-        .configuration_descriptor = hid_configuration_descriptor,
+        .configuration_descriptor = hid_only_config_desc,
     };
     ESP_ERROR_CHECK(tinyusb_driver_install(&tusb_cfg));
     ESP_LOGI(TAG, "USB HID only initialization DONE");
