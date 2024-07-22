@@ -93,7 +93,7 @@ def get_duckypad_drive_windows(vol_str):
     for item in removable_drives:
         vol_label = win32api.GetVolumeInformation(item.mountpoint)[0]
         if vol_str.strip().lower() in vol_label.strip().lower():
-            return item.mountpoint.replace('\\\\', '\\')
+            return item.mountpoint
     return None
 
 def get_duckypad_drive_mac(vol_str):

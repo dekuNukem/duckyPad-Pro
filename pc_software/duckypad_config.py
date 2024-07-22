@@ -232,6 +232,7 @@ def ui_reset():
     key_color_rb1.config(state=DISABLED)
     key_color_rb2.config(state=DISABLED)
     script_textbox.delete(1.0, 'end')
+    profile_lstbox.delete(0, 'end')
     check_syntax_label.config(text="", fg="green")
     sleepmode_slider.config(state=DISABLED)
     profile_import_button.config(state=DISABLED)
@@ -317,7 +318,6 @@ def select_root_folder(root_path=None, check_fw=True):
     except Exception as e:
         print("select_root_folder:", e)
 
-
 def incompatible_fw_msgbox(current_fw_str, fw_status):
     if fw_status == FW_TOO_LOW:
         if messagebox.askokcancel("Info", f"duckyPad firmware too low!\n\nCurrent: {current_fw_str}\nSupported: Between {MIN_DUCKYPAD_FIRMWARE_VERSION} and {MAX_DUCKYPAD_FIRMWARE_VERSION}.\n\nSee how to update it?"):
@@ -327,6 +327,36 @@ def incompatible_fw_msgbox(current_fw_str, fw_status):
             app_update_click(None)
     else:
         messagebox.showinfo("Info", f"duckyPad firmware unknown!\n\n")
+
+def put_duckypad_in_msc_mode_and_get_drive_path():
+    dp_info = hid_op.get_dp_info()
+    if dp_info is None:
+        return None
+    disk_label = f'DP{dp_info[6]}_{dp_info[9]:02X}{dp_info[10]:02X}'
+    print("disk label should be", disk_label)
+    duckypad_drive_path = hid_op.get_duckypad_drive(disk_label)
+    # already mounted
+    if duckypad_drive_path is not None:
+        return duckypad_drive_path
+    root_folder_path_label.config(foreground="blue")
+
+    hid_op.duckypad_hid_sw_reset(reboot_into_usb_msc_mode=1)
+    ui_reset()
+    root.update()
+    seconds_to_wait = 8
+    entry_time = time.time()
+    while 1:
+        duckypad_drive_path = hid_op.get_duckypad_drive(disk_label)
+        if duckypad_drive_path is not None:
+            break
+        time_elapsed = time.time() - entry_time
+        if time_elapsed > seconds_to_wait:
+            break
+        dp_root_folder_display.set(f"duckyPad Pro detected! Waiting for storage to show up... {int(seconds_to_wait - time_elapsed)}")
+        root.update()
+        time.sleep(0.5)
+    dp_root_folder_display.set("")
+    return duckypad_drive_path
 
 def connect_button_click():
     if hid_op.get_duckypad_path() is None:
@@ -339,7 +369,6 @@ def connect_button_click():
     hid_op.duckypad_hid_close()
     try:
         hid_op.duckypad_hid_init()
-        dp_info = hid_op.get_dp_info()
         is_dp_ready, comment = hid_op.is_dp_ready()
         if is_dp_ready is False:
             messagebox.showerror("Error", comment)
@@ -378,42 +407,14 @@ def connect_button_click():
             select_root_folder()
         return
     
-    disk_label = f'DP{dp_info[6]}_{dp_info[9]:02X}{dp_info[10]:02X}'
-    print("disk label should be", disk_label)
-
-    duckypad_drive_path = hid_op.get_duckypad_drive(disk_label)
-    # Already mounted
-    if duckypad_drive_path is not None:
-        select_root_folder(duckypad_drive_path)
-        return
-
-    root_folder_path_label.config(foreground="blue")
-    dp_root_folder_display.set("duckyPad Pro detected! Waiting for storage to show up...")
-
-    hid_op.duckypad_hid_sw_reset(reboot_into_usb_msc_mode=1)
-    ui_reset()
-    root.update()
-    seconds_to_wait = 8
-    entry_time = time.time()
-    while 1:
-        duckypad_drive_path = hid_op.get_duckypad_drive(disk_label)
-        if duckypad_drive_path is not None:
-            break
-        time_elapsed = time.time() - entry_time
-        if time_elapsed > seconds_to_wait:
-            break
-        dp_root_folder_display.set(f"duckyPad Pro detected! Waiting for storage to show up... {int(seconds_to_wait - time_elapsed)}")
-        root.update()
-        time.sleep(0.5)
-    dp_root_folder_display.set("")
-    
+    duckypad_drive_path = put_duckypad_in_msc_mode_and_get_drive_path()
     if duckypad_drive_path is None:
         if(messagebox.askokcancel("Info", "duckyPad drive not found!\n\nSelect manually instead?") == False):
             return
         select_root_folder()
         return
     select_root_folder(duckypad_drive_path)
-
+    
 def enable_buttons():
     profile_add_button.config(state=NORMAL)
     profile_remove_button.config(state=NORMAL)
