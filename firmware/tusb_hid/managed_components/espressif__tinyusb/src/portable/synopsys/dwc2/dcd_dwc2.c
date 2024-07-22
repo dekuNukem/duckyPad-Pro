@@ -674,10 +674,10 @@ static bool dcd_edpt_counter_available(uint8_t rhport, uint8_t dir)
 static bool dcd_edpt_counter_release(uint8_t rhport, uint8_t dir)
 {
   if (dir) {
-    TU_ASSERT(dwc2_ep_counters[rhport].active_in == 0);    // Check if number of opened EPs is not zero
+    TU_ASSERT(dwc2_ep_counters[rhport].active_in != 0);    // Check if number of opened EPs is not zero
     dwc2_ep_counters[rhport].active_in--;                  // Decrease endpoint counter
   } else {
-    TU_ASSERT(dwc2_ep_counters[rhport].active_out == 0);
+    TU_ASSERT(dwc2_ep_counters[rhport].active_out != 0);
     dwc2_ep_counters[rhport].active_out--;
   }
   return true;

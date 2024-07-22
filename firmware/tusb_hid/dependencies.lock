@@ -6,22 +6,22 @@ dependencies:
       type: service
     version: 1.4.4
   espressif/led_strip:
-    component_hash: 67d2744208e9c12d8b1992d21c979396c1726e57cb7e35e7c171c515be20f8ea
+    component_hash: fc66f8544851132555bc668475f7b68acd6a211c8075db5ce1951cbfa27dfb88
     source:
       service_url: https://api.components.espressif.com/
       type: service
-    version: 2.5.3
+    version: 2.5.4
   espressif/tinyusb:
-    component_hash: 51f2fe138a3095c001467e63b46a77def8e4a136fb49f7cf7766533e772af820
+    component_hash: 214989d502fc168241a4a4f83b097d8ac44a93cd6f1787b4ac10069a8b3bebd3
     source:
       service_url: https://api.components.espressif.com/
       type: service
-    version: 0.15.0~8
+    version: 0.15.0~10
   idf:
     component_hash: null
     source:
       type: idf
-    version: 5.1.0
-manifest_hash: 322ab16239d080a9170a50c95d5377f584afb780ccaeef8e2a60ee0d4604a4fc
+    version: 5.3.0
+manifest_hash: f86e463364015ba6e4bdcd3a71be5592c593e68c3f5b1e6a61f439370e5d88d2
 target: esp32s3
 version: 1.0.0

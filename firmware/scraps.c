@@ -1,5 +1,7 @@
 MY_UNIMPLEMENTED
 
+FF_USE_LABEL
+
 printf("should_mount_usb_msc: %d\n", );
     memset(temp_buf, 0, TEMP_BUFSIZE);
     f_getlabel("", temp_buf, 0);

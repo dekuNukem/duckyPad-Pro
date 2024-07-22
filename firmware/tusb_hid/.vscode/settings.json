@@ -56,6 +56,8 @@
     "concepts": "c",
     "type_traits": "c",
     "cmath": "c",
-    "new": "c"
+    "new": "c",
+    "esp_mac.h": "c",
+    "bluetooth_task.h": "c"
   }
 }

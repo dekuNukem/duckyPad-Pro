@@ -17,7 +17,7 @@
 #include "keypress_task.h"
 #include "keyboard.h"
 #include "hid_task.h"
-
+#include "bluetooth_task.h"
 #include "esp_vfs_fat.h"
 
 uint8_t fw_version_major = 2;
