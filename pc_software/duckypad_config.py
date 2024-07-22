@@ -950,7 +950,7 @@ RE_BUTTON_HEIGHT = scaled_size(25)
 # ------------- Keys frame -------------
 selected_key = None
 
-keys_lf = LabelFrame(root, text="On-board Keys", width=scaled_size(300), height=scaled_size(473))
+keys_lf = LabelFrame(root, text="Onboard Switches", width=scaled_size(300), height=scaled_size(473))
 keys_lf.place(x=profiles_lf.winfo_x() + profiles_lf.winfo_width() + PADDING, y=profiles_lf.winfo_y())
 root.update()
 
@@ -1223,7 +1223,7 @@ key_color_button.bind("<Button-1>", key_color_button_click)
 def open_expansion_instruction(event):
     messagebox.showinfo("oops", f"not implemented yet!!!")
 
-expansion_lf = LabelFrame(root, text="Expansion Keys", width=scaled_size(150), height=scaled_size(263))
+expansion_lf = LabelFrame(root, text="Expansion Switches", width=scaled_size(150), height=scaled_size(263))
 expansion_lf.place(x=scaled_size(590), y=scaled_size(260))
 root.update()
 
