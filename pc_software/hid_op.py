@@ -114,6 +114,13 @@ def get_duckypad_drive(vol_str):
         return get_duckypad_drive_linux(vol_str)
     return None
 
+def eject_drive(vol_str):
+    print("ejecting...")
+    if 'darwin' in sys.platform:
+        os.system(f"umount {vol_str}")
+        return
+    time.sleep(1)
+
 # result = get_duckypad_drive("DP24_9BB0")
 # print(result)
 # print(os.listdir(result))

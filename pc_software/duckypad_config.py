@@ -344,7 +344,7 @@ def put_duckypad_in_msc_mode_and_get_drive_path(reset_ui=True):
     if reset_ui:
         ui_reset()
     root.update()
-    seconds_to_wait = 8
+    seconds_to_wait = 10
     entry_time = time.time()
     while 1:
         duckypad_drive_path = hid_op.get_duckypad_drive(disk_label)
@@ -774,7 +774,6 @@ def save_everything(save_path):
         with open(dps_path, 'w+', encoding='utf8', newline='') as setting_file:
             setting_file.writelines(dp_settings.list_of_lines)
 
-        dp_root_folder_display.set("Saved!")
         return True
     except Exception as e:
         error_msg = f"Save Failed:\n\n{e}"
@@ -789,14 +788,16 @@ def save_click():
     save_everything(os.path.join(backup_path, make_default_backup_dir_name()))
     put_duckypad_in_msc_mode_and_get_drive_path(reset_ui=False)
     save_everything(dp_root_folder_path)
-    print("ejecting...")
-    time.sleep(1)
+    dp_root_folder_display.set("Ejecting...")
+    root.update()
+    hid_op.eject_drive(dp_root_folder_path)
     try:
         hid_op.duckypad_hid_close()
         hid_op.duckypad_hid_init()
     except Exception as e:
         print('save_click:',e)
     hid_op.duckypad_hid_sw_reset()
+    dp_root_folder_display.set("Done!")
 
 def backup_button_click():
     messagebox.showinfo("Backups", "All your backups are here!\n\nCopy back to SD card to restore")
