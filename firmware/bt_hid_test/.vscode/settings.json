@@ -10,6 +10,7 @@
     "nimble_port.h": "c",
     "exception": "c",
     "*.inc": "c",
-    "input_task.h": "c"
+    "input_task.h": "c",
+    "stdint.h": "c"
   }
 }
