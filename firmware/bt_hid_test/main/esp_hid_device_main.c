@@ -205,9 +205,12 @@ void ble_hid_task_shut_down(void)
 
 #define HID_RPT_ID_CC_IN        3   // Consumer Control input report ID
 #define HID_CC_IN_RPT_LEN       2   // Consumer Control input report Len
+
+#define HID_TX_BUF_SIZE HID_CC_IN_RPT_LEN
+
 void esp_hidd_send_consumer_value(uint8_t key_cmd, bool key_pressed)
 {
-    uint8_t buffer[HID_CC_IN_RPT_LEN] = {0, 0};
+    uint8_t buffer[HID_TX_BUF_SIZE] = {0, 0};
     if (key_pressed) {
         switch (key_cmd) {
         case HID_CONSUMER_CHANNEL_UP:
@@ -278,6 +281,9 @@ void esp_hidd_send_consumer_value(uint8_t key_cmd, bool key_pressed)
             break;
         }
     }
+    for (size_t i = 0; i < HID_TX_BUF_SIZE; i++)
+        printf("%02d ", buffer[i]);
+    printf("\n");
     esp_hidd_dev_input_set(s_ble_hid_param.hid_dev, 0, HID_RPT_ID_CC_IN, buffer, HID_CC_IN_RPT_LEN);
     return;
 }

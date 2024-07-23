@@ -2,6 +2,10 @@ MY_UNIMPLEMENTED
 
 FF_USE_LABEL
 
+for (size_t i = 0; i < HID_TX_BUF_SIZE; i++)
+        printf("%02d ", buffer[i]);
+    printf("\n");
+
 printf("should_mount_usb_msc: %d\n", );
     memset(temp_buf, 0, TEMP_BUFSIZE);
     f_getlabel("", temp_buf, 0);
