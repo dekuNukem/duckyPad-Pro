@@ -5,5 +5,8 @@
     "board/esp32s3-builtin.cfg"
   ],
   "idf.flashType": "UART",
-  "idf.portWin": "COM36"
+  "idf.portWin": "COM36",
+  "files.associations": {
+    "nimble_port.h": "c"
+  }
 }

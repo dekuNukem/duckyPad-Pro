@@ -1,7 +1,7 @@
 {
     "version":            "1.1",
     "project_name":       "esp_hid_device",
-    "project_version":    "7a75f0b",
+    "project_version":    "74e368b-dirty",
     "project_path":       "C:/Users/allen/Desktop/repos/duckyPad2/firmware/bt_hid_test/esp_hid_device",
     "idf_path":           "C:/Users/allen/esp/v5.3/esp-idf",
     "build_dir":          "C:/Users/allen/Desktop/repos/duckyPad2/firmware/bt_hid_test/esp_hid_device/build",
@@ -1160,12 +1160,12 @@
             "dir": "C:/Users/allen/Desktop/repos/duckyPad2/firmware/bt_hid_test/esp_hid_device/main",
             "type": "LIBRARY",
             "lib": "__idf_main",
-            "reqs": [ "esp_hid" ],
+            "reqs": [ "esp_hid", "driver" ],
             "priv_reqs": [ "nvs_flash" ],
             "managed_reqs": [],
             "managed_priv_reqs": [],
             "file": "C:/Users/allen/Desktop/repos/duckyPad2/firmware/bt_hid_test/esp_hid_device/build/esp-idf/main/libmain.a",
-            "sources": [ "C:/Users/allen/Desktop/repos/duckyPad2/firmware/bt_hid_test/esp_hid_device/main/esp_hid_device_main.c", "C:/Users/allen/Desktop/repos/duckyPad2/firmware/bt_hid_test/esp_hid_device/main/esp_hid_gap.c" ],
+            "sources": [ "C:/Users/allen/Desktop/repos/duckyPad2/firmware/bt_hid_test/esp_hid_device/main/esp_hid_device_main.c", "C:/Users/allen/Desktop/repos/duckyPad2/firmware/bt_hid_test/esp_hid_device/main/input_task.c", "C:/Users/allen/Desktop/repos/duckyPad2/firmware/bt_hid_test/esp_hid_device/main/esp_hid_gap.c" ],
             "include_dirs": [ "." ]
         },
         "mbedtls": {
@@ -2775,7 +2775,7 @@
             "prefix": "idf",
             "dir": "C:/Users/allen/Desktop/repos/duckyPad2/firmware/bt_hid_test/esp_hid_device/main",
             "lib": "__idf_main",
-            "reqs": [ "esp_hid" ],
+            "reqs": [ "esp_hid", "driver" ],
             "priv_reqs": [ "nvs_flash" ],
             "managed_reqs": [],
             "managed_priv_reqs": [],

@@ -19,6 +19,8 @@
 #include "nvs_flash.h"
 #include "esp_bt.h"
 
+#include "input_task.h"
+
 #if CONFIG_BT_NIMBLE_ENABLED
 #include "host/ble_hs.h"
 #include "nimble/nimble_port.h"
@@ -863,6 +865,8 @@ void ble_store_config_init(void);
 
 void app_main(void)
 {
+    switch_init();
+    xTaskCreate(kb_scan_task, "kb_scan_task", SW_SCAN_TASK_STACK_SIZE, NULL, 2, NULL);
     esp_err_t ret;
 #if HID_DEV_MODE == HIDD_IDLE_MODE
     ESP_LOGE(TAG, "Please turn on BT HID device or BLE!");
@@ -922,4 +926,15 @@ void app_main(void)
         ESP_LOGE(TAG, "esp_nimble_enable failed: %d", ret);
     }
 #endif
+
+    while(1)
+    {
+        vTaskDelay(pdMS_TO_TICKS(33));
+        switch_event_t sw_event = { 0 };
+        if(xQueueReceive(switch_event_queue, &sw_event, 0) == pdFALSE)
+            continue;
+        if(sw_event.type == SW_EVENT_SHORT_PRESS)
+            printf("hhhhhh\n");
+    }
+
 }
