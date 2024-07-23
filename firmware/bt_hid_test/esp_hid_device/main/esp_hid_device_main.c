@@ -582,7 +582,7 @@ void ble_hid_task_start_up(void)
     }
 #if !CONFIG_BT_NIMBLE_ENABLED
     /* Executed for bluedroid */
-    xTaskCreate(ble_hid_demo_task, "ble_hid_demo_task", 2 * 1024, NULL, configMAX_PRIORITIES - 3,
+    xTaskCreate(ble_hid_demo_task, "ble_hid_demo_task", 4096, NULL, configMAX_PRIORITIES - 3,
                 &s_ble_hid_param.task_hdl);
 #elif CONFIG_EXAMPLE_HID_DEVICE_ROLE == 1
     xTaskCreate(ble_hid_demo_task, "ble_hid_demo_task", 3 * 1024, NULL, configMAX_PRIORITIES - 3,
@@ -940,7 +940,7 @@ void app_main(void)
         if(sw_event.type == SW_EVENT_SHORT_PRESS)
         {
             printf("!!!! key pressed\n");
-            send_keyboard('a');
+            // send_keyboard('a');
         }
     }
 

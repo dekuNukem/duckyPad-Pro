@@ -7600,7 +7600,10 @@
                                                 "help": "Maximum GATT Server Profiles Count",
                                                 "id": "BT_GATT_MAX_SR_PROFILES",
                                                 "name": "BT_GATT_MAX_SR_PROFILES",
-                                                "range": null,
+                                                "range": [
+                                                    1,
+                                                    32
+                                                ],
                                                 "title": "Max GATT Server Profiles",
                                                 "type": "int"
                                             },
@@ -7610,7 +7613,10 @@
                                                 "help": "Maximum GATT Service Attributes Count",
                                                 "id": "BT_GATT_MAX_SR_ATTRIBUTES",
                                                 "name": "BT_GATT_MAX_SR_ATTRIBUTES",
-                                                "range": null,
+                                                "range": [
+                                                    1,
+                                                    500
+                                                ],
                                                 "title": "Max GATT Service Attributes",
                                                 "type": "int"
                                             },
@@ -7701,7 +7707,10 @@
                                                 "help": "Maximum GATTC cache characteristic count",
                                                 "id": "BT_GATTC_MAX_CACHE_CHAR",
                                                 "name": "BT_GATTC_MAX_CACHE_CHAR",
-                                                "range": null,
+                                                "range": [
+                                                    1,
+                                                    500
+                                                ],
                                                 "title": "Max gattc cache characteristic for discover",
                                                 "type": "int"
                                             },
@@ -7711,7 +7720,10 @@
                                                 "help": "Maximum GATTC notify(indication) register number",
                                                 "id": "BT_GATTC_NOTIF_REG_MAX",
                                                 "name": "BT_GATTC_NOTIF_REG_MAX",
-                                                "range": null,
+                                                "range": [
+                                                    1,
+                                                    64
+                                                ],
                                                 "title": "Max gattc notify(indication) register number",
                                                 "type": "int"
                                             },
@@ -7731,7 +7743,10 @@
                                                 "help": "The number of attempts to reconnect if the connection establishment failed",
                                                 "id": "BT_GATTC_CONNECT_RETRY_COUNT",
                                                 "name": "BT_GATTC_CONNECT_RETRY_COUNT",
-                                                "range": null,
+                                                "range": [
+                                                    0,
+                                                    255
+                                                ],
                                                 "title": "The number of attempts to reconnect if the connection establishment failed",
                                                 "type": "int"
                                             }
@@ -9688,7 +9703,10 @@
                                 "help": "Maximum BT/BLE connection count. The ESP32-C3/S3 chip supports a maximum of 10 instances,\nincluding ADV, SCAN and connections. The ESP32-C3/S3 chip can connect up to 9 devices if\nADV or SCAN uses only one. If ADV and SCAN are both used, The ESP32-C3/S3 chip is connected\nto a maximum of 8 devices. Because Bluetooth cannot reclaim used instances once ADV or SCAN\nis used.",
                                 "id": "BT_ACL_CONNECTIONS",
                                 "name": "BT_ACL_CONNECTIONS",
-                                "range": null,
+                                "range": [
+                                    1,
+                                    9
+                                ],
                                 "title": "BT/BLE MAX ACL CONNECTIONS(1~9)",
                                 "type": "int"
                             },
@@ -9748,7 +9766,10 @@
                                 "help": "The number of security records for peer devices.",
                                 "id": "BT_SMP_MAX_BONDS",
                                 "name": "BT_SMP_MAX_BONDS",
-                                "range": null,
+                                "range": [
+                                    1,
+                                    32
+                                ],
                                 "title": "BT/BLE maximum bond device count",
                                 "type": "int"
                             },
@@ -9768,7 +9789,10 @@
                                 "help": "Bluetooth Connection establishment maximum time, if connection time exceeds this value, the connection\nestablishment fails, ESP_GATTC_OPEN_EVT or ESP_GATTS_OPEN_EVT is triggered.",
                                 "id": "BT_BLE_ESTAB_LINK_CONN_TOUT",
                                 "name": "BT_BLE_ESTAB_LINK_CONN_TOUT",
-                                "range": null,
+                                "range": [
+                                    1,
+                                    60
+                                ],
                                 "title": "Timeout of BLE connection establishment",
                                 "type": "int"
                             },
@@ -9778,7 +9802,10 @@
                                 "help": "Bluetooth Device name length shall be no larger than 248 octets, If the broadcast data cannot contain\nthe complete device name, then only the shortname will be displayed, the rest parts that can't fit in\nwill be truncated.",
                                 "id": "BT_MAX_DEVICE_NAME_LEN",
                                 "name": "BT_MAX_DEVICE_NAME_LEN",
-                                "range": null,
+                                "range": [
+                                    32,
+                                    248
+                                ],
                                 "title": "length of bluetooth device name",
                                 "type": "int"
                             },
@@ -9798,7 +9825,10 @@
                                 "help": "This set RPA timeout of Controller and Host.\nDefault is 900 s (15 minutes). Range is 1 s to 1 hour (3600 s).",
                                 "id": "BT_BLE_RPA_TIMEOUT",
                                 "name": "BT_BLE_RPA_TIMEOUT",
-                                "range": null,
+                                "range": [
+                                    1,
+                                    3600
+                                ],
                                 "title": "Timeout of resolvable private address",
                                 "type": "int"
                             },
@@ -9996,10 +10026,7 @@
                                 "help": "Defines maximum number of concurrent BLE connections. For ESP32, user\nis expected to configure BTDM_CTRL_BLE_MAX_CONN from controller menu\nalong with this option. Similarly for ESP32-C3 or ESP32-S3, user is expected to\nconfigure BT_CTRL_BLE_MAX_ACT from controller menu.\nFor ESP32C2, ESP32C6 and ESP32H2, each connection will take about 1k DRAM.",
                                 "id": "BT_NIMBLE_MAX_CONNECTIONS",
                                 "name": "BT_NIMBLE_MAX_CONNECTIONS",
-                                "range": [
-                                    1,
-                                    9
-                                ],
+                                "range": null,
                                 "title": "Maximum number of concurrent connections",
                                 "type": "int"
                             },
@@ -10029,10 +10056,7 @@
                                 "help": "Defines maximum number of BLE Connection Oriented Channels. When set to (0), BLE COC is not compiled in",
                                 "id": "BT_NIMBLE_L2CAP_COC_MAX_NUM",
                                 "name": "BT_NIMBLE_L2CAP_COC_MAX_NUM",
-                                "range": [
-                                    0,
-                                    9
-                                ],
+                                "range": null,
                                 "title": "Maximum number of connection oriented channels",
                                 "type": "int"
                             },
@@ -10434,10 +10458,7 @@
                                 "help": "Time interval between RPA address change.",
                                 "id": "BT_NIMBLE_RPA_TIMEOUT",
                                 "name": "BT_NIMBLE_RPA_TIMEOUT",
-                                "range": [
-                                    1,
-                                    41400
-                                ],
+                                "range": null,
                                 "title": "RPA timeout in seconds",
                                 "type": "int"
                             },
@@ -10602,10 +10623,7 @@
                                         "help": "Defines maximum number of connection reattempts.",
                                         "id": "BT_NIMBLE_MAX_CONN_REATTEMPT",
                                         "name": "BT_NIMBLE_MAX_CONN_REATTEMPT",
-                                        "range": [
-                                            1,
-                                            255
-                                        ],
+                                        "range": null,
                                         "title": "Maximum number connection reattempts",
                                         "type": "int"
                                     }
@@ -10698,10 +10716,7 @@
                                         "help": "Set this option to set the upper limit for number of periodic sync\nconnections. This should be less than maximum connections allowed by\ncontroller.",
                                         "id": "BT_NIMBLE_MAX_PERIODIC_SYNCS",
                                         "name": "BT_NIMBLE_MAX_PERIODIC_SYNCS",
-                                        "range": [
-                                            0,
-                                            8
-                                        ],
+                                        "range": null,
                                         "title": "Maximum number of periodic advertising syncs",
                                         "type": "int"
                                     },
@@ -10803,10 +10818,7 @@
                                 "help": "BLE list size",
                                 "id": "BT_NIMBLE_WHITELIST_SIZE",
                                 "name": "BT_NIMBLE_WHITELIST_SIZE",
-                                "range": [
-                                    1,
-                                    15
-                                ],
+                                "range": null,
                                 "title": "BLE white list size",
                                 "type": "int"
                             },
