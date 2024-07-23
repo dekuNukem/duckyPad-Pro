@@ -27,7 +27,6 @@ typedef struct
 void switch_init(void);
 void kb_scan_task(void *dummy);
 
-
 #define SW_SCAN_TASK_STACK_SIZE 2048
 
 extern QueueHandle_t switch_event_queue;
