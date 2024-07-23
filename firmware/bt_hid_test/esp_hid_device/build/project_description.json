@@ -1,7 +1,7 @@
 {
     "version":            "1.1",
     "project_name":       "esp_hid_device",
-    "project_version":    "74e368b-dirty",
+    "project_version":    "6b59a44-dirty",
     "project_path":       "C:/Users/allen/Desktop/repos/duckyPad2/firmware/bt_hid_test/esp_hid_device",
     "idf_path":           "C:/Users/allen/esp/v5.3/esp-idf",
     "build_dir":          "C:/Users/allen/Desktop/repos/duckyPad2/firmware/bt_hid_test/esp_hid_device/build",

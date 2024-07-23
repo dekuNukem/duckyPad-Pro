@@ -7,6 +7,8 @@
   "idf.flashType": "UART",
   "idf.portWin": "COM36",
   "files.associations": {
-    "nimble_port.h": "c"
+    "nimble_port.h": "c",
+    "exception": "c",
+    "*.inc": "c"
   }
 }

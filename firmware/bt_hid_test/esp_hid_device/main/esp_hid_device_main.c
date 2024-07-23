@@ -336,6 +336,10 @@ void send_keyboard(char c)
 {
     static uint8_t buffer[8] = {0};
     char_to_code(buffer, c);
+    for (size_t i = 0; i < 8; i++)
+        printf("%02d ", buffer[i]);
+    printf("\n");
+    
     esp_hidd_dev_input_set(s_ble_hid_param.hid_dev, 0, 1, buffer, 8);
     /* send the keyrelease event with sufficient delay */
     vTaskDelay(50 / portTICK_PERIOD_MS);
@@ -934,7 +938,10 @@ void app_main(void)
         if(xQueueReceive(switch_event_queue, &sw_event, 0) == pdFALSE)
             continue;
         if(sw_event.type == SW_EVENT_SHORT_PRESS)
-            printf("hhhhhh\n");
+        {
+            printf("!!!! key pressed\n");
+            send_keyboard('a');
+        }
     }
 
 }
