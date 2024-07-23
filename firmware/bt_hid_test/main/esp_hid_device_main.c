@@ -131,7 +131,6 @@ void ble_hid_task_shut_down(void)
     ;
 }
 
-
 #define HID_CC_RPT_MUTE                 1
 #define HID_CC_RPT_POWER                2
 #define HID_CC_RPT_LAST                 3
