@@ -128,12 +128,10 @@ def scaled_size(size: int) -> int:
 
 appname = 'duckypad_config'
 appauthor = 'dekuNukem'
-save_path = user_data_dir(appname, appauthor, roaming=True)
-backup_path = os.path.join(save_path, 'profile_backups')
-ensure_dir(save_path)
+app_save_path = user_data_dir(appname, appauthor, roaming=True)
+backup_path = os.path.join(app_save_path, 'profile_backups')
+ensure_dir(app_save_path)
 ensure_dir(backup_path)
-hid_dump_path = os.path.join(save_path, "hid_dump")
-hid_modified_dir_path = os.path.join(save_path, "hid_new")
 
 print("This window will print debug information!")
 print("Used for troubleshooting if it crashes!")
@@ -705,6 +703,16 @@ def compile_all_scripts():
         messagebox.showerror("Error", error_msg)
     return False
 
+def copy_keymaps(dest_path):
+    source_keymap_folder = "keymaps"
+    destination_keymap_folder = os.path.join(dest_path, "keymaps")
+    if not os.path.isdir(source_keymap_folder):
+        return
+    ensure_dir(destination_keymap_folder)
+    for item in [str(x.path) for x in os.scandir(source_keymap_folder) if 'dpkm_' in x.path.lower() and x.path.lower().endswith('.txt')]:
+        print("copying:", item, destination_keymap_folder)
+        shutil.copy2(item, destination_keymap_folder)
+
 def save_everything(save_path):
     if compile_all_scripts() is False:
         return False
@@ -774,6 +782,8 @@ def save_everything(save_path):
         with open(dps_path, 'w+', encoding='utf8', newline='') as setting_file:
             setting_file.writelines(dp_settings.list_of_lines)
 
+        copy_keymaps(save_path)
+
         return True
     except Exception as e:
         error_msg = f"Save Failed:\n\n{e}"
@@ -786,18 +796,22 @@ def make_default_backup_dir_name():
 
 def save_click():
     save_everything(os.path.join(backup_path, make_default_backup_dir_name()))
-    put_duckypad_in_msc_mode_and_get_drive_path(reset_ui=False)
-    save_everything(dp_root_folder_path)
-    dp_root_folder_display.set("Ejecting...")
-    root.update()
-    hid_op.eject_drive(dp_root_folder_path)
+    if os.path.isdir(dp_root_folder_path):
+        save_everything(dp_root_folder_path)
+        dp_root_folder_display.set("Done!")
+        return
     try:
+        put_duckypad_in_msc_mode_and_get_drive_path(reset_ui=False)
+        save_everything(dp_root_folder_path)
+        dp_root_folder_display.set("Ejecting...")
+        root.update()
+        hid_op.eject_drive(dp_root_folder_path)
         hid_op.duckypad_hid_close()
         hid_op.duckypad_hid_init()
+        hid_op.duckypad_hid_sw_reset()
+        dp_root_folder_display.set("Done!")
     except Exception as e:
         print('save_click:',e)
-    hid_op.duckypad_hid_sw_reset()
-    dp_root_folder_display.set("Done!")
 
 def backup_button_click():
     messagebox.showinfo("Backups", "All your backups are here!\n\nCopy back to SD card to restore")
