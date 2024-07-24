@@ -959,7 +959,7 @@ root.update()
 key_instruction_label.place(x=scaled_size(60), y=scaled_size(0))
 
 def search_button(rootx, rooty):
-    for index, item in enumerate(key_button_list[:MECH_OBSW_COUNT]):
+    for index, item in enumerate(key_button_list):
         xstart = item.winfo_rootx()
         xend = item.winfo_rootx() + item.winfo_width()
         ystart = item.winfo_rooty()
@@ -1072,31 +1072,43 @@ for x in range(MECH_OBSW_COUNT):
 upper_re_cw = Label(master=re_lf, borderwidth=1, relief="solid", background=default_button_color, font=(None, 13))
 upper_re_cw.place(x=scaled_size(7), y=scaled_size(5), width=RE_BUTTON_WIDTH, height=RE_BUTTON_HEIGHT)
 upper_re_cw.bind("<Button-1>", key_button_click_event)
+upper_re_cw.bind("<B1-Motion>", button_drag_start)
+upper_re_cw.bind("<ButtonRelease-1>", button_drag_release)
 key_button_list.append(upper_re_cw)
 
 upper_re_ccw = Label(master=re_lf, borderwidth=1, relief="solid", background=default_button_color, font=(None, 13))
 upper_re_ccw.place(x=scaled_size(7), y=scaled_size(35), width=RE_BUTTON_WIDTH, height=RE_BUTTON_HEIGHT)
 upper_re_ccw.bind("<Button-1>", key_button_click_event)
+upper_re_ccw.bind("<B1-Motion>", button_drag_start)
+upper_re_ccw.bind("<ButtonRelease-1>", button_drag_release)
 key_button_list.append(upper_re_ccw)
 
 upper_re_sw = Label(master=re_lf, borderwidth=1, relief="solid", background=default_button_color, font=(None, 13))
 upper_re_sw.place(x=scaled_size(7), y=scaled_size(65), width=RE_BUTTON_WIDTH, height=RE_BUTTON_HEIGHT)
 upper_re_sw.bind("<Button-1>", key_button_click_event)
+upper_re_sw.bind("<B1-Motion>", button_drag_start)
+upper_re_sw.bind("<ButtonRelease-1>", button_drag_release)
 key_button_list.append(upper_re_sw)
 
 lower_re_cw = Label(master=re_lf, borderwidth=1, relief="solid", background=default_button_color, font=(None, 13))
 lower_re_cw.place(x=scaled_size(7), y=scaled_size(95), width=RE_BUTTON_WIDTH, height=RE_BUTTON_HEIGHT)
 lower_re_cw.bind("<Button-1>", key_button_click_event)
+lower_re_cw.bind("<B1-Motion>", button_drag_start)
+lower_re_cw.bind("<ButtonRelease-1>", button_drag_release)
 key_button_list.append(lower_re_cw)
 
 lower_re_ccw = Label(master=re_lf, borderwidth=1, relief="solid", background=default_button_color, font=(None, 13))
 lower_re_ccw.place(x=scaled_size(7), y=scaled_size(125), width=RE_BUTTON_WIDTH, height=RE_BUTTON_HEIGHT)
 lower_re_ccw.bind("<Button-1>", key_button_click_event)
+lower_re_ccw.bind("<B1-Motion>", button_drag_start)
+lower_re_ccw.bind("<ButtonRelease-1>", button_drag_release)
 key_button_list.append(lower_re_ccw)
 
 lower_re_sw = Label(master=re_lf, borderwidth=1, relief="solid", background=default_button_color, font=(None, 13))
 lower_re_sw.place(x=scaled_size(7), y=scaled_size(155), width=RE_BUTTON_WIDTH, height=RE_BUTTON_HEIGHT)
 lower_re_sw.bind("<Button-1>", key_button_click_event)
+lower_re_sw.bind("<B1-Motion>", button_drag_start)
+lower_re_sw.bind("<ButtonRelease-1>", button_drag_release)
 key_button_list.append(lower_re_sw)
 
 key_name_label = Label(master=keys_lf, text="Key name:", fg='grey')
@@ -1408,6 +1420,6 @@ def repeat_func():
 
 root.after(500, repeat_func)
 
-# select_root_folder("sample_profiles")
+select_root_folder("sample_profiles")
 # select_root_folder("D:")
 root.mainloop()
