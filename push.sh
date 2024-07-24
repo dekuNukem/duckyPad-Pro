@@ -11,9 +11,10 @@ find . -type f -name "*.csv#*" -exec rm -f {} \;
 find . -type f -name "*.DS_Store*" -exec rm -f {} \;
 find . -type f -name "*.eggs*" -exec rm -f {} \;
 find . -name "__pycache__" -exec rm -rf {} \;
-
 find . -type f -name ".component_hash" -exec rm {} +
+
+current_branch=$(git rev-parse --abbrev-ref HEAD)
 
 git add --all
 git commit -m "$@"
-git push origin master
+git push origin "$current_branch"
