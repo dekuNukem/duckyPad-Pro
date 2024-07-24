@@ -710,7 +710,7 @@ def copy_keymaps(dest_path):
         return
     ensure_dir(destination_keymap_folder)
     for item in [str(x.path) for x in os.scandir(source_keymap_folder) if 'dpkm_' in x.path.lower() and x.path.lower().endswith('.txt')]:
-        print("copying:", item, destination_keymap_folder)
+        # print("copying:", item, destination_keymap_folder)
         shutil.copy2(item, destination_keymap_folder)
 
 def save_everything(save_path):
