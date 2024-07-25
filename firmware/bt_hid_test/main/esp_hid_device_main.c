@@ -4,6 +4,8 @@
  * SPDX-License-Identifier: Unlicense OR CC0-1.0
  */
 
+#define CONFIG_EXAMPLE_HID_DEVICE_ROLE 3
+
 #include <stdio.h>
 #include <stdlib.h>
 #include <string.h>
@@ -556,7 +558,7 @@ void esp_hidd_send_consumer_value(uint8_t key_cmd, bool key_pressed)
 #if !CONFIG_BT_NIMBLE_ENABLED || CONFIG_EXAMPLE_HID_DEVICE_ROLE == 1
 void ble_hid_demo_task(void *pvParameters)
 {
-    static bool send_volum_up = false;
+    // static bool send_volum_up = false;
     while (1) {
         // ESP_LOGI(TAG, "Send the volume");
         // if (send_volum_up) {
