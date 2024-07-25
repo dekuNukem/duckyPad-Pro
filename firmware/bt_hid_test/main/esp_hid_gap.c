@@ -14,7 +14,17 @@
 #include "freertos/semphr.h"
 
 #include "esp_hid_gap.h"
+
+#if CONFIG_BT_NIMBLE_ENABLED
+#include "host/ble_hs.h"
+#include "nimble/nimble_port.h"
+#include "host/ble_gap.h"
+#include "host/ble_hs_adv.h"
+#include "nimble/ble.h"
+#include "host/ble_sm.h"
+#else
 #include "esp_bt_device.h"
+#endif
 
 static const char *TAG = "ESP_HID_GAP";
 
@@ -140,6 +150,60 @@ static esp_hid_scan_result_t *find_scan_result(esp_bd_addr_t bda, esp_hid_scan_r
 }
 #endif /* (CONFIG_BT_HID_DEVICE_ENABLED || CONFIG_BT_BLE_ENABLED) */
 
+#if CONFIG_BT_HID_DEVICE_ENABLED
+static void add_bt_scan_result(esp_bd_addr_t bda, esp_bt_cod_t *cod, esp_bt_uuid_t *uuid, uint8_t *name, uint8_t name_len, int rssi)
+{
+    esp_hid_scan_result_t *r = find_scan_result(bda, bt_scan_results);
+    if (r) {
+        //Some info may come later
+        if (r->name == NULL && name && name_len) {
+            char *name_s = (char *)malloc(name_len + 1);
+            if (name_s == NULL) {
+                ESP_LOGE(TAG, "Malloc result name failed!");
+                return;
+            }
+            memcpy(name_s, name, name_len);
+            name_s[name_len] = 0;
+            r->name = (const char *)name_s;
+        }
+        if (r->bt.uuid.len == 0 && uuid->len) {
+            memcpy(&r->bt.uuid, uuid, sizeof(esp_bt_uuid_t));
+        }
+        if (rssi != 0) {
+            r->rssi = rssi;
+        }
+        return;
+    }
+
+    r = (esp_hid_scan_result_t *)malloc(sizeof(esp_hid_scan_result_t));
+    if (r == NULL) {
+        ESP_LOGE(TAG, "Malloc bt_hidh_scan_result_t failed!");
+        return;
+    }
+    r->transport = ESP_HID_TRANSPORT_BT;
+    memcpy(r->bda, bda, sizeof(esp_bd_addr_t));
+    memcpy(&r->bt.cod, cod, sizeof(esp_bt_cod_t));
+    memcpy(&r->bt.uuid, uuid, sizeof(esp_bt_uuid_t));
+    r->usage = esp_hid_usage_from_cod((uint32_t)cod);
+    r->rssi = rssi;
+    r->name = NULL;
+    if (name_len && name) {
+        char *name_s = (char *)malloc(name_len + 1);
+        if (name_s == NULL) {
+            free(r);
+            ESP_LOGE(TAG, "Malloc result name failed!");
+            return;
+        }
+        memcpy(name_s, name, name_len);
+        name_s[name_len] = 0;
+        r->name = (const char *)name_s;
+    }
+    r->next = bt_scan_results;
+    bt_scan_results = r;
+    num_bt_scan_results++;
+}
+#endif
+
 #if CONFIG_BT_BLE_ENABLED
 static void add_ble_scan_result(esp_bd_addr_t bda, esp_ble_addr_type_t addr_type, uint16_t appearance, uint8_t *name, uint8_t name_len, int rssi)
 {
@@ -194,6 +258,97 @@ void print_uuid(esp_bt_uuid_t *uuid)
 }
 #endif
 
+#if CONFIG_BT_HID_DEVICE_ENABLED
+static void handle_bt_device_result(struct disc_res_param *disc_res)
+{
+    GAP_DBG_PRINTF("BT : " ESP_BD_ADDR_STR, ESP_BD_ADDR_HEX(disc_res->bda));
+    uint32_t codv = 0;
+    esp_bt_cod_t *cod = (esp_bt_cod_t *)&codv;
+    int8_t rssi = 0;
+    uint8_t *name = NULL;
+    uint8_t name_len = 0;
+    esp_bt_uuid_t uuid;
+
+    uuid.len = ESP_UUID_LEN_16;
+    uuid.uuid.uuid16 = 0;
+
+    for (int i = 0; i < disc_res->num_prop; i++) {
+        esp_bt_gap_dev_prop_t *prop = &disc_res->prop[i];
+        if (prop->type != ESP_BT_GAP_DEV_PROP_EIR) {
+            GAP_DBG_PRINTF(", %s: ", gap_bt_prop_type_names[prop->type]);
+        }
+        if (prop->type == ESP_BT_GAP_DEV_PROP_BDNAME) {
+            name = (uint8_t *)prop->val;
+            name_len = strlen((const char *)name);
+            GAP_DBG_PRINTF("%s", (const char *)name);
+        } else if (prop->type == ESP_BT_GAP_DEV_PROP_RSSI) {
+            rssi = *((int8_t *)prop->val);
+            GAP_DBG_PRINTF("%d", rssi);
+        } else if (prop->type == ESP_BT_GAP_DEV_PROP_COD) {
+            memcpy(&codv, prop->val, sizeof(uint32_t));
+            GAP_DBG_PRINTF("major: %s, minor: %d, service: 0x%03x", esp_hid_cod_major_str(cod->major), cod->minor, cod->service);
+        } else if (prop->type == ESP_BT_GAP_DEV_PROP_EIR) {
+            uint8_t len = 0;
+            uint8_t *data = 0;
+
+            data = esp_bt_gap_resolve_eir_data((uint8_t *)prop->val, ESP_BT_EIR_TYPE_CMPL_16BITS_UUID, &len);
+            if (data == NULL) {
+                data = esp_bt_gap_resolve_eir_data((uint8_t *)prop->val, ESP_BT_EIR_TYPE_INCMPL_16BITS_UUID, &len);
+            }
+            if (data && len == ESP_UUID_LEN_16) {
+                uuid.len = ESP_UUID_LEN_16;
+                uuid.uuid.uuid16 = data[0] + (data[1] << 8);
+                GAP_DBG_PRINTF(", "); print_uuid(&uuid);
+                continue;
+            }
+
+            data = esp_bt_gap_resolve_eir_data((uint8_t *)prop->val, ESP_BT_EIR_TYPE_CMPL_32BITS_UUID, &len);
+            if (data == NULL) {
+                data = esp_bt_gap_resolve_eir_data((uint8_t *)prop->val, ESP_BT_EIR_TYPE_INCMPL_32BITS_UUID, &len);
+            }
+            if (data && len == ESP_UUID_LEN_32) {
+                uuid.len = len;
+                memcpy(&uuid.uuid.uuid32, data, sizeof(uint32_t));
+                GAP_DBG_PRINTF(", "); print_uuid(&uuid);
+                continue;
+            }
+
+            data = esp_bt_gap_resolve_eir_data((uint8_t *)prop->val, ESP_BT_EIR_TYPE_CMPL_128BITS_UUID, &len);
+            if (data == NULL) {
+                data = esp_bt_gap_resolve_eir_data((uint8_t *)prop->val, ESP_BT_EIR_TYPE_INCMPL_128BITS_UUID, &len);
+            }
+            if (data && len == ESP_UUID_LEN_128) {
+                uuid.len = len;
+                memcpy(uuid.uuid.uuid128, (uint8_t *)data, len);
+                GAP_DBG_PRINTF(", "); print_uuid(&uuid);
+                continue;
+            }
+
+            //try to find a name
+            if (name == NULL) {
+                data = esp_bt_gap_resolve_eir_data((uint8_t *)prop->val, ESP_BT_EIR_TYPE_CMPL_LOCAL_NAME, &len);
+                if (data == NULL) {
+                    data = esp_bt_gap_resolve_eir_data((uint8_t *)prop->val, ESP_BT_EIR_TYPE_SHORT_LOCAL_NAME, &len);
+                }
+                if (data && len) {
+                    name = data;
+                    name_len = len;
+                    GAP_DBG_PRINTF(", NAME: ");
+                    for (int x = 0; x < len; x++) {
+                        GAP_DBG_PRINTF("%c", (char)data[x]);
+                    }
+                }
+            }
+        }
+    }
+    GAP_DBG_PRINTF("\n");
+
+    if (cod->major == ESP_BT_COD_MAJOR_DEV_PERIPHERAL || (find_scan_result(disc_res->bda, bt_scan_results) != NULL)) {
+        add_bt_scan_result(disc_res->bda, cod, &uuid, name, name_len, rssi);
+    }
+}
+#endif
+
 #if CONFIG_BT_BLE_ENABLED
 static void handle_ble_device_result(struct ble_scan_result_evt_param *scan_rst)
 {
@@ -241,6 +396,110 @@ static void handle_ble_device_result(struct ble_scan_result_evt_param *scan_rst)
     }
 }
 #endif /* CONFIG_BT_BLE_ENABLED */
+
+#if CONFIG_BT_HID_DEVICE_ENABLED
+/*
+ * BT GAP
+ * */
+
+static void bt_gap_event_handler(esp_bt_gap_cb_event_t event, esp_bt_gap_cb_param_t *param)
+{
+    switch (event) {
+    case ESP_BT_GAP_DISC_STATE_CHANGED_EVT: {
+        ESP_LOGV(TAG, "BT GAP DISC_STATE %s", (param->disc_st_chg.state == ESP_BT_GAP_DISCOVERY_STARTED) ? "START" : "STOP");
+        if (param->disc_st_chg.state == ESP_BT_GAP_DISCOVERY_STOPPED) {
+            SEND_BT_CB();
+        }
+        break;
+    }
+    case ESP_BT_GAP_DISC_RES_EVT: {
+        handle_bt_device_result(&param->disc_res);
+        break;
+    }
+    case ESP_BT_GAP_PIN_REQ_EVT: {
+        ESP_LOGI(TAG, "BT GAP PIN_REQ_EVT min_16_digit:%d", param->pin_req.min_16_digit);
+        if (param->pin_req.min_16_digit) {
+            ESP_LOGI(TAG, "Input pin code: 0000 0000 0000 0000");
+            esp_bt_pin_code_t pin_code = {0};
+            esp_bt_gap_pin_reply(param->pin_req.bda, true, 16, pin_code);
+        } else {
+            ESP_LOGI(TAG, "Input pin code: 1234");
+            esp_bt_pin_code_t pin_code;
+            pin_code[0] = '1';
+            pin_code[1] = '2';
+            pin_code[2] = '3';
+            pin_code[3] = '4';
+            esp_bt_gap_pin_reply(param->pin_req.bda, true, 4, pin_code);
+        }
+        break;
+    }
+
+#if (CONFIG_EXAMPLE_SSP_ENABLED == true)
+    case ESP_BT_GAP_CFM_REQ_EVT:
+        ESP_LOGI(TAG, "BT GAP CFM_REQ_EVT Please compare the numeric value: %" PRIu32,
+                 param->cfm_req.num_val);
+        esp_bt_gap_ssp_confirm_reply(param->cfm_req.bda, true);
+        break;
+    case ESP_BT_GAP_KEY_NOTIF_EVT:
+        ESP_LOGI(TAG, "BT GAP KEY_NOTIF_EVT passkey:%" PRIu32, param->key_notif.passkey);
+        break;
+    case ESP_BT_GAP_KEY_REQ_EVT:
+        ESP_LOGI(TAG, "BT GAP KEY_REQ_EVT Please enter passkey!");
+        break;
+#endif
+    case ESP_BT_GAP_MODE_CHG_EVT:
+        ESP_LOGI(TAG, "BT GAP MODE_CHG_EVT mode:%d", param->mode_chg.mode);
+        break;
+    default:
+        ESP_LOGV(TAG, "BT GAP EVENT %s", bt_gap_evt_str(event));
+        break;
+    }
+}
+
+static esp_err_t init_bt_gap(void)
+{
+    esp_err_t ret;
+#if (CONFIG_EXAMPLE_SSP_ENABLED)
+    /* Set default parameters for Secure Simple Pairing */
+    esp_bt_sp_param_t param_type = ESP_BT_SP_IOCAP_MODE;
+    esp_bt_io_cap_t iocap = ESP_BT_IO_CAP_NONE;
+    esp_bt_gap_set_security_param(param_type, &iocap, sizeof(uint8_t));
+#endif
+    /*
+     * Set default parameters for Legacy Pairing
+     * Use fixed pin code
+     */
+    esp_bt_pin_type_t pin_type = ESP_BT_PIN_TYPE_FIXED;
+    esp_bt_pin_code_t pin_code;
+    pin_code[0] = '1';
+    pin_code[1] = '2';
+    pin_code[2] = '3';
+    pin_code[3] = '4';
+    esp_bt_gap_set_pin(pin_type, 4, pin_code);
+
+    if ((ret = esp_bt_gap_register_callback(bt_gap_event_handler)) != ESP_OK) {
+        ESP_LOGE(TAG, "esp_bt_gap_register_callback failed: %d", ret);
+        return ret;
+    }
+
+    // Allow BT devices to connect back to us
+    if ((ret = esp_bt_gap_set_scan_mode(ESP_BT_CONNECTABLE, ESP_BT_NON_DISCOVERABLE)) != ESP_OK) {
+        ESP_LOGE(TAG, "esp_bt_gap_set_scan_mode failed: %d", ret);
+        return ret;
+    }
+    return ret;
+}
+
+static esp_err_t start_bt_scan(uint32_t seconds)
+{
+    esp_err_t ret = ESP_OK;
+    if ((ret = esp_bt_gap_start_discovery(ESP_BT_INQ_MODE_GENERAL_INQUIRY, (int)(seconds / 1.28), 0)) != ESP_OK) {
+        ESP_LOGE(TAG, "esp_bt_gap_start_discovery failed: %d", ret);
+        return ret;
+    }
+    return ret;
+}
+#endif
 
 #if CONFIG_BT_BLE_ENABLED
 /*
@@ -469,6 +728,211 @@ esp_err_t esp_hid_ble_gap_adv_start(void)
 }
 #endif /* CONFIG_BT_BLE_ENABLED */
 
+#if CONFIG_BT_NIMBLE_ENABLED
+#define GATT_SVR_SVC_HID_UUID 0x1812
+
+extern void ble_hid_task_start_up(void);
+static struct ble_hs_adv_fields fields;
+
+esp_err_t esp_hid_ble_gap_adv_init(uint16_t appearance, const char *device_name)
+{
+    ble_uuid16_t *uuid16, *uuid16_1;
+    /**
+     *  Set the advertisement data included in our advertisements:
+     *     o Flags (indicates advertisement type and other general info).
+     *     o Advertising tx power.
+     *     o Device name.
+     *     o 16-bit service UUIDs (HID).
+     */
+
+    memset(&fields, 0, sizeof fields);
+
+    /* Advertise two flags:
+     *     o Discoverability in forthcoming advertisement (general)
+     *     o BLE-only (BR/EDR unsupported).
+     */
+    fields.flags = BLE_HS_ADV_F_DISC_GEN |
+                   BLE_HS_ADV_F_BREDR_UNSUP;
+
+    /* Indicate that the TX power level field should be included; have the
+     * stack fill this value automatically.  This is done by assigning the
+     * special value BLE_HS_ADV_TX_PWR_LVL_AUTO.
+     */
+    fields.tx_pwr_lvl_is_present = 1;
+    fields.tx_pwr_lvl = BLE_HS_ADV_TX_PWR_LVL_AUTO;
+
+    fields.name = (uint8_t *)device_name;
+    fields.name_len = strlen(device_name);
+    fields.name_is_complete = 1;
+
+    uuid16 = (ble_uuid16_t *)malloc(sizeof(ble_uuid16_t));
+    uuid16_1 = (ble_uuid16_t[]) {
+        BLE_UUID16_INIT(GATT_SVR_SVC_HID_UUID)
+    };
+    memcpy(uuid16, uuid16_1, sizeof(ble_uuid16_t));
+    fields.uuids16 = uuid16;
+    fields.num_uuids16 = 1;
+    fields.uuids16_is_complete = 1;
+
+    /* Initialize the security configuration */
+    ble_hs_cfg.sm_io_cap = BLE_SM_IO_CAP_DISP_ONLY;
+    ble_hs_cfg.sm_bonding = 1;
+    ble_hs_cfg.sm_mitm = 1;
+    ble_hs_cfg.sm_sc = 1;
+    ble_hs_cfg.sm_our_key_dist = BLE_SM_PAIR_KEY_DIST_ID | BLE_SM_PAIR_KEY_DIST_ENC;
+    ble_hs_cfg.sm_their_key_dist |= BLE_SM_PAIR_KEY_DIST_ID | BLE_SM_PAIR_KEY_DIST_ENC;
+
+    return ESP_OK;
+
+}
+
+static int
+nimble_hid_gap_event(struct ble_gap_event *event, void *arg)
+{
+    struct ble_gap_conn_desc desc;
+    int rc;
+
+    switch (event->type) {
+    case BLE_GAP_EVENT_CONNECT:
+        /* A new connection was established or a connection attempt failed. */
+        ESP_LOGI(TAG, "connection %s; status=%d",
+                event->connect.status == 0 ? "established" : "failed",
+                event->connect.status);
+        return 0;
+        break;
+    case BLE_GAP_EVENT_DISCONNECT:
+        ESP_LOGI(TAG, "disconnect; reason=%d", event->disconnect.reason);
+
+        return 0;
+    case BLE_GAP_EVENT_CONN_UPDATE:
+        /* The central has updated the connection parameters. */
+        ESP_LOGI(TAG, "connection updated; status=%d",
+                event->conn_update.status);
+        return 0;
+
+    case BLE_GAP_EVENT_ADV_COMPLETE:
+        ESP_LOGI(TAG, "advertise complete; reason=%d",
+                event->adv_complete.reason);
+        return 0;
+
+    case BLE_GAP_EVENT_SUBSCRIBE:
+        ESP_LOGI(TAG, "subscribe event; conn_handle=%d attr_handle=%d "
+                "reason=%d prevn=%d curn=%d previ=%d curi=%d\n",
+                event->subscribe.conn_handle,
+                event->subscribe.attr_handle,
+                event->subscribe.reason,
+                event->subscribe.prev_notify,
+                event->subscribe.cur_notify,
+                event->subscribe.prev_indicate,
+                event->subscribe.cur_indicate);
+        return 0;
+
+    case BLE_GAP_EVENT_MTU:
+        ESP_LOGI(TAG, "mtu update event; conn_handle=%d cid=%d mtu=%d",
+                event->mtu.conn_handle,
+                event->mtu.channel_id,
+                event->mtu.value);
+        return 0;
+
+    case BLE_GAP_EVENT_ENC_CHANGE:
+        /* Encryption has been enabled or disabled for this connection. */
+        MODLOG_DFLT(INFO, "encryption change event; status=%d ",
+                event->enc_change.status);
+        rc = ble_gap_conn_find(event->enc_change.conn_handle, &desc);
+        assert(rc == 0);
+        ble_hid_task_start_up();
+        return 0;
+
+    case BLE_GAP_EVENT_NOTIFY_TX:
+        MODLOG_DFLT(INFO, "notify_tx event; conn_handle=%d attr_handle=%d "
+                "status=%d is_indication=%d",
+                event->notify_tx.conn_handle,
+                event->notify_tx.attr_handle,
+                event->notify_tx.status,
+                event->notify_tx.indication);
+        return 0;
+
+    case BLE_GAP_EVENT_REPEAT_PAIRING:
+        /* We already have a bond with the peer, but it is attempting to
+         * establish a new secure link.  This app sacrifices security for
+         * convenience: just throw away the old bond and accept the new link.
+         */
+
+        /* Delete the old bond. */
+        rc = ble_gap_conn_find(event->repeat_pairing.conn_handle, &desc);
+        assert(rc == 0);
+        ble_store_util_delete_peer(&desc.peer_id_addr);
+
+        /* Return BLE_GAP_REPEAT_PAIRING_RETRY to indicate that the host should
+         * continue with the pairing operation.
+         */
+        return BLE_GAP_REPEAT_PAIRING_RETRY;
+
+    case BLE_GAP_EVENT_PASSKEY_ACTION:
+        ESP_LOGI(TAG, "PASSKEY_ACTION_EVENT started");
+        struct ble_sm_io pkey = {0};
+        int key = 0;
+
+        if (event->passkey.params.action == BLE_SM_IOACT_DISP) {
+            pkey.action = event->passkey.params.action;
+            pkey.passkey = 123456; // This is the passkey to be entered on peer
+            ESP_LOGI(TAG, "Enter passkey %" PRIu32 "on the peer side", pkey.passkey);
+            rc = ble_sm_inject_io(event->passkey.conn_handle, &pkey);
+            ESP_LOGI(TAG, "ble_sm_inject_io result: %d", rc);
+        } else if (event->passkey.params.action == BLE_SM_IOACT_NUMCMP) {
+            ESP_LOGI(TAG, "Accepting passkey..");
+            pkey.action = event->passkey.params.action;
+            pkey.numcmp_accept = key;
+            rc = ble_sm_inject_io(event->passkey.conn_handle, &pkey);
+            ESP_LOGI(TAG, "ble_sm_inject_io result: %d", rc);
+        } else if (event->passkey.params.action == BLE_SM_IOACT_OOB) {
+            static uint8_t tem_oob[16] = {0};
+            pkey.action = event->passkey.params.action;
+            for (int i = 0; i < 16; i++) {
+                pkey.oob[i] = tem_oob[i];
+            }
+            rc = ble_sm_inject_io(event->passkey.conn_handle, &pkey);
+            ESP_LOGI(TAG, "ble_sm_inject_io result: %d", rc);
+        } else if (event->passkey.params.action == BLE_SM_IOACT_INPUT) {
+            ESP_LOGI(TAG, "Input not supported passing -> 123456");
+            pkey.action = event->passkey.params.action;
+            pkey.passkey = 123456;
+            rc = ble_sm_inject_io(event->passkey.conn_handle, &pkey);
+            ESP_LOGI(TAG, "ble_sm_inject_io result: %d", rc);
+        }
+        return 0;
+    }
+    return 0;
+}
+esp_err_t esp_hid_ble_gap_adv_start(void)
+{
+    int rc;
+    struct ble_gap_adv_params adv_params;
+    /* maximum possible duration for hid device(180s) */
+    int32_t adv_duration_ms = 180000;
+
+    rc = ble_gap_adv_set_fields(&fields);
+    if (rc != 0) {
+        MODLOG_DFLT(ERROR, "error setting advertisement data; rc=%d\n", rc);
+        return rc;
+    }
+    /* Begin advertising. */
+    memset(&adv_params, 0, sizeof adv_params);
+    adv_params.conn_mode = BLE_GAP_CONN_MODE_UND;
+    adv_params.disc_mode = BLE_GAP_DISC_MODE_GEN;
+    adv_params.itvl_min = BLE_GAP_ADV_ITVL_MS(30);/* Recommended interval 30ms to 50ms */
+    adv_params.itvl_max = BLE_GAP_ADV_ITVL_MS(50);
+    rc = ble_gap_adv_start(BLE_OWN_ADDR_PUBLIC, NULL, adv_duration_ms,
+                           &adv_params, nimble_hid_gap_event, NULL);
+    if (rc != 0) {
+        MODLOG_DFLT(ERROR, "error enabling advertisement; rc=%d\n", rc);
+        return rc;
+    }
+    return rc;
+}
+#endif
+
+
 /*
  * CONTROLLER INIT
  * */
@@ -541,6 +1005,41 @@ static esp_err_t init_low_level(uint8_t mode)
 }
 #endif
 
+#if CONFIG_BT_NIMBLE_ENABLED
+static esp_err_t init_low_level(uint8_t mode)
+{
+    esp_err_t ret;
+    esp_bt_controller_config_t bt_cfg = BT_CONTROLLER_INIT_CONFIG_DEFAULT();
+#if CONFIG_IDF_TARGET_ESP32
+    bt_cfg.mode = mode;
+#endif
+    ret = esp_bt_controller_mem_release(ESP_BT_MODE_CLASSIC_BT);
+    if (ret) {
+        ESP_LOGE(TAG, "esp_bt_controller_mem_release failed: %d", ret);
+        return ret;
+    }
+    ret = esp_bt_controller_init(&bt_cfg);
+    if (ret) {
+        ESP_LOGE(TAG, "esp_bt_controller_init failed: %d", ret);
+        return ret;
+    }
+
+    ret = esp_bt_controller_enable(mode);
+    if (ret) {
+        ESP_LOGE(TAG, "esp_bt_controller_enable failed: %d", ret);
+        return ret;
+    }
+
+    ret = esp_nimble_init();
+    if (ret) {
+        ESP_LOGE(TAG, "esp_nimble_init failed: %d", ret);
+        return ret;
+    }
+
+
+    return ret;
+}
+#endif
 
 esp_err_t esp_hid_gap_init(uint8_t mode)
 {
@@ -596,6 +1095,14 @@ esp_err_t esp_hid_scan(uint32_t seconds, size_t *num_results, esp_hid_scan_resul
         return ESP_FAIL;
     }
 #endif /* CONFIG_BT_BLE_ENABLED */
+
+#if CONFIG_BT_HID_DEVICE_ENABLED
+    if (start_bt_scan(seconds) == ESP_OK) {
+        WAIT_BT_CB();
+    } else {
+        return ESP_FAIL;
+    }
+#endif
 
     *num_results = num_bt_scan_results + num_ble_scan_results;
     *results = bt_scan_results;
