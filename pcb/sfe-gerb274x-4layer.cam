@@ -6,7 +6,7 @@
     "description": {
         "EN": "SparkFun 4 layer CAM job. Compatible with EAGLE v8+ new CAM processor. Use with the SparkFun-CAMMER.ulp to automatically process, zip, and preview gerber output in one button click!"
     },
-    "output_type": "directory",
+    "output_type": "zip",
     "outputs": [
         {
             "filename_prefix": "CAMOutputs/GerberFiles",
@@ -243,7 +243,8 @@
                     },
                     "filename_format": "%N.GTO",
                     "layers": [
-                        21
+                        21,
+                        25
                     ],
                     "milling": false,
                     "name": "Silkscreen Top",
@@ -266,7 +267,8 @@
                     },
                     "filename_format": "%N.GBO",
                     "layers": [
-                        22
+                        22,
+                        26
                     ],
                     "milling": false,
                     "name": "Silkscreen Bottom",
@@ -311,7 +313,7 @@
             ]
         }
     ],
-    "timestamp": "2020-02-11T15:27:02",
+    "timestamp": "2024-07-26T13:59:34",
     "type": "EAGLE CAM job",
     "units": "metric",
     "version": "9.2.0"
