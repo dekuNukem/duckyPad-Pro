@@ -8,6 +8,7 @@
 #include <stdint.h>
 #include <string.h>
 
+void bt_test(void);
 
 #ifdef __cplusplus
 }

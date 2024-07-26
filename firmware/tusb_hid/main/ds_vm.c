@@ -15,7 +15,6 @@
 #include "keyboard.h"
 #include "ds_vm.h"
 
-// 2300 seems to be max, 2048 just to be safe
 #define BIN_BUF_SIZE 65536
 uint8_t bin_buf[BIN_BUF_SIZE];
 #define VAR_BUF_SIZE 128

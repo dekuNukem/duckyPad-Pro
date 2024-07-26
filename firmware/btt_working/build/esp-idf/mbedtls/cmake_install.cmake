@@ -39,6 +39,6 @@ endif()
 
 if(NOT CMAKE_INSTALL_LOCAL_ONLY)
   # Include the install script for the subdirectory.
-  include("C:/Users/allen/Desktop/repos/duckyPad2/firmware/btt_notworking/build/esp-idf/mbedtls/mbedtls/cmake_install.cmake")
+  include("C:/Users/allen/Desktop/repos/duckyPad2/firmware/btt_working/build/esp-idf/mbedtls/mbedtls/cmake_install.cmake")
 endif()
 

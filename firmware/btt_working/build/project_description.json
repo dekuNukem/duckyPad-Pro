@@ -1,13 +1,13 @@
 {
     "version":            "1.1",
     "project_name":       "esp_hid_device",
-    "project_version":    "5b105e9-dirty",
-    "project_path":       "C:/Users/allen/Desktop/repos/duckyPad2/firmware/btt_notworking",
+    "project_version":    "943e6a4-dirty",
+    "project_path":       "C:/Users/allen/Desktop/repos/duckyPad2/firmware/btt_working",
     "idf_path":           "C:/Users/allen/esp/v5.3/esp-idf",
-    "build_dir":          "C:/Users/allen/Desktop/repos/duckyPad2/firmware/btt_notworking/build",
-    "config_file":        "C:/Users/allen/Desktop/repos/duckyPad2/firmware/btt_notworking/sdkconfig",
-    "config_defaults":    "C:/Users/allen/Desktop/repos/duckyPad2/firmware/btt_notworking/sdkconfig.defaults",
-    "bootloader_elf":     "C:/Users/allen/Desktop/repos/duckyPad2/firmware/btt_notworking/build/bootloader/bootloader.elf",
+    "build_dir":          "C:/Users/allen/Desktop/repos/duckyPad2/firmware/btt_working/build",
+    "config_file":        "C:/Users/allen/Desktop/repos/duckyPad2/firmware/btt_working/sdkconfig",
+    "config_defaults":    "C:/Users/allen/Desktop/repos/duckyPad2/firmware/btt_working/sdkconfig.defaults",
+    "bootloader_elf":     "C:/Users/allen/Desktop/repos/duckyPad2/firmware/btt_working/build/bootloader/bootloader.elf",
     "app_elf":            "esp_hid_device.elf",
     "app_bin":            "esp_hid_device.bin",
     "build_type":         "flash_app",
@@ -22,11 +22,11 @@
     "c_compiler":         "C:/Users/allen/.espressif/tools/xtensa-esp-elf/esp-13.2.0_20240530/xtensa-esp-elf/bin/xtensa-esp32s3-elf-gcc.exe",
     "config_environment" : {
         "COMPONENT_KCONFIGS" : "C:/Users/allen/esp/v5.3/esp-idf/components/app_trace/Kconfig;C:/Users/allen/esp/v5.3/esp-idf/components/bt/Kconfig;C:/Users/allen/esp/v5.3/esp-idf/components/console/Kconfig;C:/Users/allen/esp/v5.3/esp-idf/components/driver/Kconfig;C:/Users/allen/esp/v5.3/esp-idf/components/efuse/Kconfig;C:/Users/allen/esp/v5.3/esp-idf/components/esp-tls/Kconfig;C:/Users/allen/esp/v5.3/esp-idf/components/esp_adc/Kconfig;C:/Users/allen/esp/v5.3/esp-idf/components/esp_coex/Kconfig;C:/Users/allen/esp/v5.3/esp-idf/components/esp_common/Kconfig;C:/Users/allen/esp/v5.3/esp-idf/components/esp_driver_ana_cmpr/Kconfig;C:/Users/allen/esp/v5.3/esp-idf/components/esp_driver_cam/Kconfig;C:/Users/allen/esp/v5.3/esp-idf/components/esp_driver_dac/Kconfig;C:/Users/allen/esp/v5.3/esp-idf/components/esp_driver_gpio/Kconfig;C:/Users/allen/esp/v5.3/esp-idf/components/esp_driver_gptimer/Kconfig;C:/Users/allen/esp/v5.3/esp-idf/components/esp_driver_i2c/Kconfig;C:/Users/allen/esp/v5.3/esp-idf/components/esp_driver_i2s/Kconfig;C:/Users/allen/esp/v5.3/esp-idf/components/esp_driver_isp/Kconfig;C:/Users/allen/esp/v5.3/esp-idf/components/esp_driver_jpeg/Kconfig;C:/Users/allen/esp/v5.3/esp-idf/components/esp_driver_ledc/Kconfig;C:/Users/allen/esp/v5.3/esp-idf/components/esp_driver_mcpwm/Kconfig;C:/Users/allen/esp/v5.3/esp-idf/components/esp_driver_parlio/Kconfig;C:/Users/allen/esp/v5.3/esp-idf/components/esp_driver_pcnt/Kconfig;C:/Users/allen/esp/v5.3/esp-idf/components/esp_driver_rmt/Kconfig;C:/Users/allen/esp/v5.3/esp-idf/components/esp_driver_sdm/Kconfig;C:/Users/allen/esp/v5.3/esp-idf/components/esp_driver_spi/Kconfig;C:/Users/allen/esp/v5.3/esp-idf/components/esp_driver_tsens/Kconfig;C:/Users/allen/esp/v5.3/esp-idf/components/esp_driver_uart/Kconfig;C:/Users/allen/esp/v5.3/esp-idf/components/esp_driver_usb_serial_jtag/Kconfig;C:/Users/allen/esp/v5.3/esp-idf/components/esp_eth/Kconfig;C:/Users/allen/esp/v5.3/esp-idf/components/esp_event/Kconfig;C:/Users/allen/esp/v5.3/esp-idf/components/esp_gdbstub/Kconfig;C:/Users/allen/esp/v5.3/esp-idf/components/esp_http_client/Kconfig;C:/Users/allen/esp/v5.3/esp-idf/components/esp_http_server/Kconfig;C:/Users/allen/esp/v5.3/esp-idf/components/esp_https_ota/Kconfig;C:/Users/allen/esp/v5.3/esp-idf/components/esp_https_server/Kconfig;C:/Users/allen/esp/v5.3/esp-idf/components/esp_hw_support/Kconfig;C:/Users/allen/esp/v5.3/esp-idf/components/esp_lcd/Kconfig;C:/Users/allen/esp/v5.3/esp-idf/components/esp_netif/Kconfig;C:/Users/allen/esp/v5.3/esp-idf/components/esp_partition/Kconfig;C:/Users/allen/esp/v5.3/esp-idf/components/esp_phy/Kconfig;C:/Users/allen/esp/v5.3/esp-idf/components/esp_pm/Kconfig;C:/Users/allen/esp/v5.3/esp-idf/components/esp_psram/Kconfig;C:/Users/allen/esp/v5.3/esp-idf/components/esp_ringbuf/Kconfig;C:/Users/allen/esp/v5.3/esp-idf/components/esp_system/Kconfig;C:/Users/allen/esp/v5.3/esp-idf/components/esp_timer/Kconfig;C:/Users/allen/esp/v5.3/esp-idf/components/esp_wifi/Kconfig;C:/Users/allen/esp/v5.3/esp-idf/components/espcoredump/Kconfig;C:/Users/allen/esp/v5.3/esp-idf/components/fatfs/Kconfig;C:/Users/allen/esp/v5.3/esp-idf/components/freertos/Kconfig;C:/Users/allen/esp/v5.3/esp-idf/components/hal/Kconfig;C:/Users/allen/esp/v5.3/esp-idf/components/heap/Kconfig;C:/Users/allen/esp/v5.3/esp-idf/components/ieee802154/Kconfig;C:/Users/allen/esp/v5.3/esp-idf/components/log/Kconfig;C:/Users/allen/esp/v5.3/esp-idf/components/lwip/Kconfig;C:/Users/allen/esp/v5.3/esp-idf/components/mbedtls/Kconfig;C:/Users/allen/esp/v5.3/esp-idf/components/mqtt/esp-mqtt/Kconfig;C:/Users/allen/esp/v5.3/esp-idf/components/newlib/Kconfig;C:/Users/allen/esp/v5.3/esp-idf/components/nvs_flash/Kconfig;C:/Users/allen/esp/v5.3/esp-idf/components/nvs_sec_provider/Kconfig;C:/Users/allen/esp/v5.3/esp-idf/components/openthread/Kconfig;C:/Users/allen/esp/v5.3/esp-idf/components/protocomm/Kconfig;C:/Users/allen/esp/v5.3/esp-idf/components/pthread/Kconfig;C:/Users/allen/esp/v5.3/esp-idf/components/soc/Kconfig;C:/Users/allen/esp/v5.3/esp-idf/components/spi_flash/Kconfig;C:/Users/allen/esp/v5.3/esp-idf/components/spiffs/Kconfig;C:/Users/allen/esp/v5.3/esp-idf/components/tcp_transport/Kconfig;C:/Users/allen/esp/v5.3/esp-idf/components/ulp/Kconfig;C:/Users/allen/esp/v5.3/esp-idf/components/unity/Kconfig;C:/Users/allen/esp/v5.3/esp-idf/components/usb/Kconfig;C:/Users/allen/esp/v5.3/esp-idf/components/vfs/Kconfig;C:/Users/allen/esp/v5.3/esp-idf/components/wear_levelling/Kconfig;C:/Users/allen/esp/v5.3/esp-idf/components/wifi_provisioning/Kconfig",
-        "COMPONENT_KCONFIGS_PROJBUILD" : "C:/Users/allen/esp/v5.3/esp-idf/components/bootloader/Kconfig.projbuild;C:/Users/allen/esp/v5.3/esp-idf/components/esp_app_format/Kconfig.projbuild;C:/Users/allen/esp/v5.3/esp-idf/components/esp_rom/Kconfig.projbuild;C:/Users/allen/esp/v5.3/esp-idf/components/esptool_py/Kconfig.projbuild;C:/Users/allen/esp/v5.3/esp-idf/components/partition_table/Kconfig.projbuild;C:/Users/allen/Desktop/repos/duckyPad2/firmware/btt_notworking/main/Kconfig.projbuild"
+        "COMPONENT_KCONFIGS_PROJBUILD" : "C:/Users/allen/esp/v5.3/esp-idf/components/bootloader/Kconfig.projbuild;C:/Users/allen/esp/v5.3/esp-idf/components/esp_app_format/Kconfig.projbuild;C:/Users/allen/esp/v5.3/esp-idf/components/esp_rom/Kconfig.projbuild;C:/Users/allen/esp/v5.3/esp-idf/components/esptool_py/Kconfig.projbuild;C:/Users/allen/esp/v5.3/esp-idf/components/partition_table/Kconfig.projbuild;C:/Users/allen/Desktop/repos/duckyPad2/firmware/btt_working/main/Kconfig.projbuild"
     },
     "common_component_reqs": [ "cxx", "newlib", "freertos", "esp_hw_support", "heap", "log", "soc", "hal", "esp_rom", "esp_common", "esp_system", "xtensa" ],
     "build_components" : [ "app_trace", "app_update", "bootloader", "bootloader_support", "bt", "cmock", "console", "cxx", "driver", "efuse", "esp-tls", "esp_adc", "esp_app_format", "esp_bootloader_format", "esp_coex", "esp_common", "esp_driver_ana_cmpr", "esp_driver_cam", "esp_driver_dac", "esp_driver_gpio", "esp_driver_gptimer", "esp_driver_i2c", "esp_driver_i2s", "esp_driver_isp", "esp_driver_jpeg", "esp_driver_ledc", "esp_driver_mcpwm", "esp_driver_parlio", "esp_driver_pcnt", "esp_driver_ppa", "esp_driver_rmt", "esp_driver_sdio", "esp_driver_sdm", "esp_driver_sdmmc", "esp_driver_sdspi", "esp_driver_spi", "esp_driver_tsens", "esp_driver_uart", "esp_driver_usb_serial_jtag", "esp_eth", "esp_event", "esp_gdbstub", "esp_hid", "esp_http_client", "esp_http_server", "esp_https_ota", "esp_https_server", "esp_hw_support", "esp_lcd", "esp_local_ctrl", "esp_mm", "esp_netif", "esp_netif_stack", "esp_partition", "esp_phy", "esp_pm", "esp_psram", "esp_ringbuf", "esp_rom", "esp_system", "esp_timer", "esp_vfs_console", "esp_wifi", "espcoredump", "esptool_py", "fatfs", "freertos", "hal", "heap", "http_parser", "idf_test", "ieee802154", "json", "log", "lwip", "main", "mbedtls", "mqtt", "newlib", "nvs_flash", "nvs_sec_provider", "openthread", "partition_table", "perfmon", "protobuf-c", "protocomm", "pthread", "sdmmc", "soc", "spi_flash", "spiffs", "tcp_transport", "touch_element", "ulp", "unity", "usb", "vfs", "wear_levelling", "wifi_provisioning", "wpa_supplicant", "xtensa", "" ],
-    "build_component_paths" : [ "C:/Users/allen/esp/v5.3/esp-idf/components/app_trace", "C:/Users/allen/esp/v5.3/esp-idf/components/app_update", "C:/Users/allen/esp/v5.3/esp-idf/components/bootloader", "C:/Users/allen/esp/v5.3/esp-idf/components/bootloader_support", "C:/Users/allen/esp/v5.3/esp-idf/components/bt", "C:/Users/allen/esp/v5.3/esp-idf/components/cmock", "C:/Users/allen/esp/v5.3/esp-idf/components/console", "C:/Users/allen/esp/v5.3/esp-idf/components/cxx", "C:/Users/allen/esp/v5.3/esp-idf/components/driver", "C:/Users/allen/esp/v5.3/esp-idf/components/efuse", "C:/Users/allen/esp/v5.3/esp-idf/components/esp-tls", "C:/Users/allen/esp/v5.3/esp-idf/components/esp_adc", "C:/Users/allen/esp/v5.3/esp-idf/components/esp_app_format", "C:/Users/allen/esp/v5.3/esp-idf/components/esp_bootloader_format", "C:/Users/allen/esp/v5.3/esp-idf/components/esp_coex", "C:/Users/allen/esp/v5.3/esp-idf/components/esp_common", "C:/Users/allen/esp/v5.3/esp-idf/components/esp_driver_ana_cmpr", "C:/Users/allen/esp/v5.3/esp-idf/components/esp_driver_cam", "C:/Users/allen/esp/v5.3/esp-idf/components/esp_driver_dac", "C:/Users/allen/esp/v5.3/esp-idf/components/esp_driver_gpio", "C:/Users/allen/esp/v5.3/esp-idf/components/esp_driver_gptimer", "C:/Users/allen/esp/v5.3/esp-idf/components/esp_driver_i2c", "C:/Users/allen/esp/v5.3/esp-idf/components/esp_driver_i2s", "C:/Users/allen/esp/v5.3/esp-idf/components/esp_driver_isp", "C:/Users/allen/esp/v5.3/esp-idf/components/esp_driver_jpeg", "C:/Users/allen/esp/v5.3/esp-idf/components/esp_driver_ledc", "C:/Users/allen/esp/v5.3/esp-idf/components/esp_driver_mcpwm", "C:/Users/allen/esp/v5.3/esp-idf/components/esp_driver_parlio", "C:/Users/allen/esp/v5.3/esp-idf/components/esp_driver_pcnt", "C:/Users/allen/esp/v5.3/esp-idf/components/esp_driver_ppa", "C:/Users/allen/esp/v5.3/esp-idf/components/esp_driver_rmt", "C:/Users/allen/esp/v5.3/esp-idf/components/esp_driver_sdio", "C:/Users/allen/esp/v5.3/esp-idf/components/esp_driver_sdm", "C:/Users/allen/esp/v5.3/esp-idf/components/esp_driver_sdmmc", "C:/Users/allen/esp/v5.3/esp-idf/components/esp_driver_sdspi", "C:/Users/allen/esp/v5.3/esp-idf/components/esp_driver_spi", "C:/Users/allen/esp/v5.3/esp-idf/components/esp_driver_tsens", "C:/Users/allen/esp/v5.3/esp-idf/components/esp_driver_uart", "C:/Users/allen/esp/v5.3/esp-idf/components/esp_driver_usb_serial_jtag", "C:/Users/allen/esp/v5.3/esp-idf/components/esp_eth", "C:/Users/allen/esp/v5.3/esp-idf/components/esp_event", "C:/Users/allen/esp/v5.3/esp-idf/components/esp_gdbstub", "C:/Users/allen/esp/v5.3/esp-idf/components/esp_hid", "C:/Users/allen/esp/v5.3/esp-idf/components/esp_http_client", "C:/Users/allen/esp/v5.3/esp-idf/components/esp_http_server", "C:/Users/allen/esp/v5.3/esp-idf/components/esp_https_ota", "C:/Users/allen/esp/v5.3/esp-idf/components/esp_https_server", "C:/Users/allen/esp/v5.3/esp-idf/components/esp_hw_support", "C:/Users/allen/esp/v5.3/esp-idf/components/esp_lcd", "C:/Users/allen/esp/v5.3/esp-idf/components/esp_local_ctrl", "C:/Users/allen/esp/v5.3/esp-idf/components/esp_mm", "C:/Users/allen/esp/v5.3/esp-idf/components/esp_netif", "C:/Users/allen/esp/v5.3/esp-idf/components/esp_netif_stack", "C:/Users/allen/esp/v5.3/esp-idf/components/esp_partition", "C:/Users/allen/esp/v5.3/esp-idf/components/esp_phy", "C:/Users/allen/esp/v5.3/esp-idf/components/esp_pm", "C:/Users/allen/esp/v5.3/esp-idf/components/esp_psram", "C:/Users/allen/esp/v5.3/esp-idf/components/esp_ringbuf", "C:/Users/allen/esp/v5.3/esp-idf/components/esp_rom", "C:/Users/allen/esp/v5.3/esp-idf/components/esp_system", "C:/Users/allen/esp/v5.3/esp-idf/components/esp_timer", "C:/Users/allen/esp/v5.3/esp-idf/components/esp_vfs_console", "C:/Users/allen/esp/v5.3/esp-idf/components/esp_wifi", "C:/Users/allen/esp/v5.3/esp-idf/components/espcoredump", "C:/Users/allen/esp/v5.3/esp-idf/components/esptool_py", "C:/Users/allen/esp/v5.3/esp-idf/components/fatfs", "C:/Users/allen/esp/v5.3/esp-idf/components/freertos", "C:/Users/allen/esp/v5.3/esp-idf/components/hal", "C:/Users/allen/esp/v5.3/esp-idf/components/heap", "C:/Users/allen/esp/v5.3/esp-idf/components/http_parser", "C:/Users/allen/esp/v5.3/esp-idf/components/idf_test", "C:/Users/allen/esp/v5.3/esp-idf/components/ieee802154", "C:/Users/allen/esp/v5.3/esp-idf/components/json", "C:/Users/allen/esp/v5.3/esp-idf/components/log", "C:/Users/allen/esp/v5.3/esp-idf/components/lwip", "C:/Users/allen/Desktop/repos/duckyPad2/firmware/btt_notworking/main", "C:/Users/allen/esp/v5.3/esp-idf/components/mbedtls", "C:/Users/allen/esp/v5.3/esp-idf/components/mqtt", "C:/Users/allen/esp/v5.3/esp-idf/components/newlib", "C:/Users/allen/esp/v5.3/esp-idf/components/nvs_flash", "C:/Users/allen/esp/v5.3/esp-idf/components/nvs_sec_provider", "C:/Users/allen/esp/v5.3/esp-idf/components/openthread", "C:/Users/allen/esp/v5.3/esp-idf/components/partition_table", "C:/Users/allen/esp/v5.3/esp-idf/components/perfmon", "C:/Users/allen/esp/v5.3/esp-idf/components/protobuf-c", "C:/Users/allen/esp/v5.3/esp-idf/components/protocomm", "C:/Users/allen/esp/v5.3/esp-idf/components/pthread", "C:/Users/allen/esp/v5.3/esp-idf/components/sdmmc", "C:/Users/allen/esp/v5.3/esp-idf/components/soc", "C:/Users/allen/esp/v5.3/esp-idf/components/spi_flash", "C:/Users/allen/esp/v5.3/esp-idf/components/spiffs", "C:/Users/allen/esp/v5.3/esp-idf/components/tcp_transport", "C:/Users/allen/esp/v5.3/esp-idf/components/touch_element", "C:/Users/allen/esp/v5.3/esp-idf/components/ulp", "C:/Users/allen/esp/v5.3/esp-idf/components/unity", "C:/Users/allen/esp/v5.3/esp-idf/components/usb", "C:/Users/allen/esp/v5.3/esp-idf/components/vfs", "C:/Users/allen/esp/v5.3/esp-idf/components/wear_levelling", "C:/Users/allen/esp/v5.3/esp-idf/components/wifi_provisioning", "C:/Users/allen/esp/v5.3/esp-idf/components/wpa_supplicant", "C:/Users/allen/esp/v5.3/esp-idf/components/xtensa", "" ],
+    "build_component_paths" : [ "C:/Users/allen/esp/v5.3/esp-idf/components/app_trace", "C:/Users/allen/esp/v5.3/esp-idf/components/app_update", "C:/Users/allen/esp/v5.3/esp-idf/components/bootloader", "C:/Users/allen/esp/v5.3/esp-idf/components/bootloader_support", "C:/Users/allen/esp/v5.3/esp-idf/components/bt", "C:/Users/allen/esp/v5.3/esp-idf/components/cmock", "C:/Users/allen/esp/v5.3/esp-idf/components/console", "C:/Users/allen/esp/v5.3/esp-idf/components/cxx", "C:/Users/allen/esp/v5.3/esp-idf/components/driver", "C:/Users/allen/esp/v5.3/esp-idf/components/efuse", "C:/Users/allen/esp/v5.3/esp-idf/components/esp-tls", "C:/Users/allen/esp/v5.3/esp-idf/components/esp_adc", "C:/Users/allen/esp/v5.3/esp-idf/components/esp_app_format", "C:/Users/allen/esp/v5.3/esp-idf/components/esp_bootloader_format", "C:/Users/allen/esp/v5.3/esp-idf/components/esp_coex", "C:/Users/allen/esp/v5.3/esp-idf/components/esp_common", "C:/Users/allen/esp/v5.3/esp-idf/components/esp_driver_ana_cmpr", "C:/Users/allen/esp/v5.3/esp-idf/components/esp_driver_cam", "C:/Users/allen/esp/v5.3/esp-idf/components/esp_driver_dac", "C:/Users/allen/esp/v5.3/esp-idf/components/esp_driver_gpio", "C:/Users/allen/esp/v5.3/esp-idf/components/esp_driver_gptimer", "C:/Users/allen/esp/v5.3/esp-idf/components/esp_driver_i2c", "C:/Users/allen/esp/v5.3/esp-idf/components/esp_driver_i2s", "C:/Users/allen/esp/v5.3/esp-idf/components/esp_driver_isp", "C:/Users/allen/esp/v5.3/esp-idf/components/esp_driver_jpeg", "C:/Users/allen/esp/v5.3/esp-idf/components/esp_driver_ledc", "C:/Users/allen/esp/v5.3/esp-idf/components/esp_driver_mcpwm", "C:/Users/allen/esp/v5.3/esp-idf/components/esp_driver_parlio", "C:/Users/allen/esp/v5.3/esp-idf/components/esp_driver_pcnt", "C:/Users/allen/esp/v5.3/esp-idf/components/esp_driver_ppa", "C:/Users/allen/esp/v5.3/esp-idf/components/esp_driver_rmt", "C:/Users/allen/esp/v5.3/esp-idf/components/esp_driver_sdio", "C:/Users/allen/esp/v5.3/esp-idf/components/esp_driver_sdm", "C:/Users/allen/esp/v5.3/esp-idf/components/esp_driver_sdmmc", "C:/Users/allen/esp/v5.3/esp-idf/components/esp_driver_sdspi", "C:/Users/allen/esp/v5.3/esp-idf/components/esp_driver_spi", "C:/Users/allen/esp/v5.3/esp-idf/components/esp_driver_tsens", "C:/Users/allen/esp/v5.3/esp-idf/components/esp_driver_uart", "C:/Users/allen/esp/v5.3/esp-idf/components/esp_driver_usb_serial_jtag", "C:/Users/allen/esp/v5.3/esp-idf/components/esp_eth", "C:/Users/allen/esp/v5.3/esp-idf/components/esp_event", "C:/Users/allen/esp/v5.3/esp-idf/components/esp_gdbstub", "C:/Users/allen/esp/v5.3/esp-idf/components/esp_hid", "C:/Users/allen/esp/v5.3/esp-idf/components/esp_http_client", "C:/Users/allen/esp/v5.3/esp-idf/components/esp_http_server", "C:/Users/allen/esp/v5.3/esp-idf/components/esp_https_ota", "C:/Users/allen/esp/v5.3/esp-idf/components/esp_https_server", "C:/Users/allen/esp/v5.3/esp-idf/components/esp_hw_support", "C:/Users/allen/esp/v5.3/esp-idf/components/esp_lcd", "C:/Users/allen/esp/v5.3/esp-idf/components/esp_local_ctrl", "C:/Users/allen/esp/v5.3/esp-idf/components/esp_mm", "C:/Users/allen/esp/v5.3/esp-idf/components/esp_netif", "C:/Users/allen/esp/v5.3/esp-idf/components/esp_netif_stack", "C:/Users/allen/esp/v5.3/esp-idf/components/esp_partition", "C:/Users/allen/esp/v5.3/esp-idf/components/esp_phy", "C:/Users/allen/esp/v5.3/esp-idf/components/esp_pm", "C:/Users/allen/esp/v5.3/esp-idf/components/esp_psram", "C:/Users/allen/esp/v5.3/esp-idf/components/esp_ringbuf", "C:/Users/allen/esp/v5.3/esp-idf/components/esp_rom", "C:/Users/allen/esp/v5.3/esp-idf/components/esp_system", "C:/Users/allen/esp/v5.3/esp-idf/components/esp_timer", "C:/Users/allen/esp/v5.3/esp-idf/components/esp_vfs_console", "C:/Users/allen/esp/v5.3/esp-idf/components/esp_wifi", "C:/Users/allen/esp/v5.3/esp-idf/components/espcoredump", "C:/Users/allen/esp/v5.3/esp-idf/components/esptool_py", "C:/Users/allen/esp/v5.3/esp-idf/components/fatfs", "C:/Users/allen/esp/v5.3/esp-idf/components/freertos", "C:/Users/allen/esp/v5.3/esp-idf/components/hal", "C:/Users/allen/esp/v5.3/esp-idf/components/heap", "C:/Users/allen/esp/v5.3/esp-idf/components/http_parser", "C:/Users/allen/esp/v5.3/esp-idf/components/idf_test", "C:/Users/allen/esp/v5.3/esp-idf/components/ieee802154", "C:/Users/allen/esp/v5.3/esp-idf/components/json", "C:/Users/allen/esp/v5.3/esp-idf/components/log", "C:/Users/allen/esp/v5.3/esp-idf/components/lwip", "C:/Users/allen/Desktop/repos/duckyPad2/firmware/btt_working/main", "C:/Users/allen/esp/v5.3/esp-idf/components/mbedtls", "C:/Users/allen/esp/v5.3/esp-idf/components/mqtt", "C:/Users/allen/esp/v5.3/esp-idf/components/newlib", "C:/Users/allen/esp/v5.3/esp-idf/components/nvs_flash", "C:/Users/allen/esp/v5.3/esp-idf/components/nvs_sec_provider", "C:/Users/allen/esp/v5.3/esp-idf/components/openthread", "C:/Users/allen/esp/v5.3/esp-idf/components/partition_table", "C:/Users/allen/esp/v5.3/esp-idf/components/perfmon", "C:/Users/allen/esp/v5.3/esp-idf/components/protobuf-c", "C:/Users/allen/esp/v5.3/esp-idf/components/protocomm", "C:/Users/allen/esp/v5.3/esp-idf/components/pthread", "C:/Users/allen/esp/v5.3/esp-idf/components/sdmmc", "C:/Users/allen/esp/v5.3/esp-idf/components/soc", "C:/Users/allen/esp/v5.3/esp-idf/components/spi_flash", "C:/Users/allen/esp/v5.3/esp-idf/components/spiffs", "C:/Users/allen/esp/v5.3/esp-idf/components/tcp_transport", "C:/Users/allen/esp/v5.3/esp-idf/components/touch_element", "C:/Users/allen/esp/v5.3/esp-idf/components/ulp", "C:/Users/allen/esp/v5.3/esp-idf/components/unity", "C:/Users/allen/esp/v5.3/esp-idf/components/usb", "C:/Users/allen/esp/v5.3/esp-idf/components/vfs", "C:/Users/allen/esp/v5.3/esp-idf/components/wear_levelling", "C:/Users/allen/esp/v5.3/esp-idf/components/wifi_provisioning", "C:/Users/allen/esp/v5.3/esp-idf/components/wpa_supplicant", "C:/Users/allen/esp/v5.3/esp-idf/components/xtensa", "" ],
     "build_component_info" : {
         "app_trace": {
             "alias": "idf::app_trace",
@@ -39,7 +39,7 @@
             "priv_reqs": [ "esp_driver_gptimer", "esp_driver_gpio", "esp_driver_uart" ],
             "managed_reqs": [],
             "managed_priv_reqs": [],
-            "file": "C:/Users/allen/Desktop/repos/duckyPad2/firmware/btt_notworking/build/esp-idf/app_trace/libapp_trace.a",
+            "file": "C:/Users/allen/Desktop/repos/duckyPad2/firmware/btt_working/build/esp-idf/app_trace/libapp_trace.a",
             "sources": [ "C:/Users/allen/esp/v5.3/esp-idf/components/app_trace/app_trace.c", "C:/Users/allen/esp/v5.3/esp-idf/components/app_trace/app_trace_util.c", "C:/Users/allen/esp/v5.3/esp-idf/components/app_trace/host_file_io.c", "C:/Users/allen/esp/v5.3/esp-idf/components/app_trace/port/port_uart.c" ],
             "include_dirs": [ "include" ]
         },
@@ -54,7 +54,7 @@
             "priv_reqs": [ "esptool_py", "efuse", "spi_flash" ],
             "managed_reqs": [],
             "managed_priv_reqs": [],
-            "file": "C:/Users/allen/Desktop/repos/duckyPad2/firmware/btt_notworking/build/esp-idf/app_update/libapp_update.a",
+            "file": "C:/Users/allen/Desktop/repos/duckyPad2/firmware/btt_working/build/esp-idf/app_update/libapp_update.a",
             "sources": [ "C:/Users/allen/esp/v5.3/esp-idf/components/app_update/esp_ota_ops.c", "C:/Users/allen/esp/v5.3/esp-idf/components/app_update/esp_ota_app_desc.c" ],
             "include_dirs": [ "include" ]
         },
@@ -84,7 +84,7 @@
             "priv_reqs": [ "spi_flash", "mbedtls", "efuse", "heap", "esp_bootloader_format", "esp_app_format" ],
             "managed_reqs": [],
             "managed_priv_reqs": [],
-            "file": "C:/Users/allen/Desktop/repos/duckyPad2/firmware/btt_notworking/build/esp-idf/bootloader_support/libbootloader_support.a",
+            "file": "C:/Users/allen/Desktop/repos/duckyPad2/firmware/btt_working/build/esp-idf/bootloader_support/libbootloader_support.a",
             "sources": [ "C:/Users/allen/esp/v5.3/esp-idf/components/bootloader_support/src/bootloader_common.c", "C:/Users/allen/esp/v5.3/esp-idf/components/bootloader_support/src/bootloader_common_loader.c", "C:/Users/allen/esp/v5.3/esp-idf/components/bootloader_support/src/bootloader_clock_init.c", "C:/Users/allen/esp/v5.3/esp-idf/components/bootloader_support/src/bootloader_mem.c", "C:/Users/allen/esp/v5.3/esp-idf/components/bootloader_support/src/bootloader_random.c", "C:/Users/allen/esp/v5.3/esp-idf/components/bootloader_support/src/bootloader_efuse.c", "C:/Users/allen/esp/v5.3/esp-idf/components/bootloader_support/src/flash_encrypt.c", "C:/Users/allen/esp/v5.3/esp-idf/components/bootloader_support/src/secure_boot.c", "C:/Users/allen/esp/v5.3/esp-idf/components/bootloader_support/src/bootloader_random_esp32s3.c", "C:/Users/allen/esp/v5.3/esp-idf/components/bootloader_support/bootloader_flash/src/bootloader_flash.c", "C:/Users/allen/esp/v5.3/esp-idf/components/bootloader_support/bootloader_flash/src/flash_qio_mode.c", "C:/Users/allen/esp/v5.3/esp-idf/components/bootloader_support/bootloader_flash/src/bootloader_flash_config_esp32s3.c", "C:/Users/allen/esp/v5.3/esp-idf/components/bootloader_support/src/bootloader_utility.c", "C:/Users/allen/esp/v5.3/esp-idf/components/bootloader_support/src/flash_partitions.c", "C:/Users/allen/esp/v5.3/esp-idf/components/bootloader_support/src/esp_image_format.c", "C:/Users/allen/esp/v5.3/esp-idf/components/bootloader_support/src/idf/bootloader_sha.c", "C:/Users/allen/esp/v5.3/esp-idf/components/bootloader_support/src/esp32s3/secure_boot_secure_features.c" ],
             "include_dirs": [ "include", "bootloader_flash/include" ]
         },
@@ -99,7 +99,7 @@
             "priv_reqs": [ "nvs_flash", "soc", "esp_pm", "esp_phy", "esp_coex", "mbedtls", "esp_driver_uart", "vfs", "esp_ringbuf" ],
             "managed_reqs": [],
             "managed_priv_reqs": [],
-            "file": "C:/Users/allen/Desktop/repos/duckyPad2/firmware/btt_notworking/build/esp-idf/bt/libbt.a",
+            "file": "C:/Users/allen/Desktop/repos/duckyPad2/firmware/btt_working/build/esp-idf/bt/libbt.a",
             "sources": [ "C:/Users/allen/esp/v5.3/esp-idf/components/bt/controller/esp32c3/bt.c", "C:/Users/allen/esp/v5.3/esp-idf/components/bt/common/btc/core/btc_alarm.c", "C:/Users/allen/esp/v5.3/esp-idf/components/bt/common/api/esp_blufi_api.c", "C:/Users/allen/esp/v5.3/esp-idf/components/bt/common/hci_log/bt_hci_log.c", "C:/Users/allen/esp/v5.3/esp-idf/components/bt/common/btc/core/btc_manage.c", "C:/Users/allen/esp/v5.3/esp-idf/components/bt/common/btc/core/btc_task.c", "C:/Users/allen/esp/v5.3/esp-idf/components/bt/common/btc/profile/esp/blufi/blufi_prf.c", "C:/Users/allen/esp/v5.3/esp-idf/components/bt/common/btc/profile/esp/blufi/blufi_protocol.c", "C:/Users/allen/esp/v5.3/esp-idf/components/bt/common/osi/alarm.c", "C:/Users/allen/esp/v5.3/esp-idf/components/bt/common/osi/allocator.c", "C:/Users/allen/esp/v5.3/esp-idf/components/bt/common/osi/buffer.c", "C:/Users/allen/esp/v5.3/esp-idf/components/bt/common/osi/config.c", "C:/Users/allen/esp/v5.3/esp-idf/components/bt/common/osi/fixed_queue.c", "C:/Users/allen/esp/v5.3/esp-idf/components/bt/common/osi/pkt_queue.c", "C:/Users/allen/esp/v5.3/esp-idf/components/bt/common/osi/fixed_pkt_queue.c", "C:/Users/allen/esp/v5.3/esp-idf/components/bt/common/osi/future.c", "C:/Users/allen/esp/v5.3/esp-idf/components/bt/common/osi/hash_functions.c", "C:/Users/allen/esp/v5.3/esp-idf/components/bt/common/osi/hash_map.c", "C:/Users/allen/esp/v5.3/esp-idf/components/bt/common/osi/list.c", "C:/Users/allen/esp/v5.3/esp-idf/components/bt/common/osi/mutex.c", "C:/Users/allen/esp/v5.3/esp-idf/components/bt/common/osi/thread.c", "C:/Users/allen/esp/v5.3/esp-idf/components/bt/common/osi/osi.c", "C:/Users/allen/esp/v5.3/esp-idf/components/bt/common/osi/semaphore.c", "C:/Users/allen/esp/v5.3/esp-idf/components/bt/porting/mem/bt_osi_mem.c", "C:/Users/allen/esp/v5.3/esp-idf/components/bt/host/bluedroid/api/esp_a2dp_api.c", "C:/Users/allen/esp/v5.3/esp-idf/components/bt/host/bluedroid/api/esp_avrc_api.c", "C:/Users/allen/esp/v5.3/esp-idf/components/bt/host/bluedroid/api/esp_bluedroid_hci.c", "C:/Users/allen/esp/v5.3/esp-idf/components/bt/host/bluedroid/api/esp_bt_device.c", "C:/Users/allen/esp/v5.3/esp-idf/components/bt/host/bluedroid/api/esp_bt_main.c", "C:/Users/allen/esp/v5.3/esp-idf/components/bt/host/bluedroid/api/esp_gap_ble_api.c", "C:/Users/allen/esp/v5.3/esp-idf/components/bt/host/bluedroid/api/esp_gap_bt_api.c", "C:/Users/allen/esp/v5.3/esp-idf/components/bt/host/bluedroid/api/esp_gatt_common_api.c", "C:/Users/allen/esp/v5.3/esp-idf/components/bt/host/bluedroid/api/esp_gattc_api.c", "C:/Users/allen/esp/v5.3/esp-idf/components/bt/host/bluedroid/api/esp_gatts_api.c", "C:/Users/allen/esp/v5.3/esp-idf/components/bt/host/bluedroid/api/esp_hidd_api.c", "C:/Users/allen/esp/v5.3/esp-idf/components/bt/host/bluedroid/api/esp_hidh_api.c", "C:/Users/allen/esp/v5.3/esp-idf/components/bt/host/bluedroid/api/esp_hf_ag_api.c", "C:/Users/allen/esp/v5.3/esp-idf/components/bt/host/bluedroid/api/esp_hf_client_api.c", "C:/Users/allen/esp/v5.3/esp-idf/components/bt/host/bluedroid/api/esp_spp_api.c", "C:/Users/allen/esp/v5.3/esp-idf/components/bt/host/bluedroid/api/esp_sdp_api.c", "C:/Users/allen/esp/v5.3/esp-idf/components/bt/host/bluedroid/api/esp_l2cap_bt_api.c", "C:/Users/allen/esp/v5.3/esp-idf/components/bt/host/bluedroid/bta/ar/bta_ar.c", "C:/Users/allen/esp/v5.3/esp-idf/components/bt/host/bluedroid/bta/av/bta_av_aact.c", "C:/Users/allen/esp/v5.3/esp-idf/components/bt/host/bluedroid/bta/av/bta_av_act.c", "C:/Users/allen/esp/v5.3/esp-idf/components/bt/host/bluedroid/bta/av/bta_av_api.c", "C:/Users/allen/esp/v5.3/esp-idf/components/bt/host/bluedroid/bta/av/bta_av_cfg.c", "C:/Users/allen/esp/v5.3/esp-idf/components/bt/host/bluedroid/bta/av/bta_av_ci.c", "C:/Users/allen/esp/v5.3/esp-idf/components/bt/host/bluedroid/bta/av/bta_av_main.c", "C:/Users/allen/esp/v5.3/esp-idf/components/bt/host/bluedroid/bta/av/bta_av_sbc.c", "C:/Users/allen/esp/v5.3/esp-idf/components/bt/host/bluedroid/bta/av/bta_av_ssm.c", "C:/Users/allen/esp/v5.3/esp-idf/components/bt/host/bluedroid/bta/dm/bta_dm_act.c", "C:/Users/allen/esp/v5.3/esp-idf/components/bt/host/bluedroid/bta/dm/bta_dm_api.c", "C:/Users/allen/esp/v5.3/esp-idf/components/bt/host/bluedroid/bta/dm/bta_dm_cfg.c", "C:/Users/allen/esp/v5.3/esp-idf/components/bt/host/bluedroid/bta/dm/bta_dm_ci.c", "C:/Users/allen/esp/v5.3/esp-idf/components/bt/host/bluedroid/bta/dm/bta_dm_co.c", "C:/Users/allen/esp/v5.3/esp-idf/components/bt/host/bluedroid/bta/dm/bta_dm_main.c", "C:/Users/allen/esp/v5.3/esp-idf/components/bt/host/bluedroid/bta/dm/bta_dm_pm.c", "C:/Users/allen/esp/v5.3/esp-idf/components/bt/host/bluedroid/bta/dm/bta_dm_sco.c", "C:/Users/allen/esp/v5.3/esp-idf/components/bt/host/bluedroid/bta/dm/bta_dm_qos.c", "C:/Users/allen/esp/v5.3/esp-idf/components/bt/host/bluedroid/bta/gatt/bta_gatt_common.c", "C:/Users/allen/esp/v5.3/esp-idf/components/bt/host/bluedroid/bta/gatt/bta_gattc_act.c", "C:/Users/allen/esp/v5.3/esp-idf/components/bt/host/bluedroid/bta/gatt/bta_gattc_api.c", "C:/Users/allen/esp/v5.3/esp-idf/components/bt/host/bluedroid/bta/gatt/bta_gattc_cache.c", "C:/Users/allen/esp/v5.3/esp-idf/components/bt/host/bluedroid/bta/gatt/bta_gattc_ci.c", "C:/Users/allen/esp/v5.3/esp-idf/components/bt/host/bluedroid/bta/gatt/bta_gattc_co.c", "C:/Users/allen/esp/v5.3/esp-idf/components/bt/host/bluedroid/bta/gatt/bta_gattc_main.c", "C:/Users/allen/esp/v5.3/esp-idf/components/bt/host/bluedroid/bta/gatt/bta_gattc_utils.c", "C:/Users/allen/esp/v5.3/esp-idf/components/bt/host/bluedroid/bta/gatt/bta_gatts_act.c", "C:/Users/allen/esp/v5.3/esp-idf/components/bt/host/bluedroid/bta/gatt/bta_gatts_api.c", "C:/Users/allen/esp/v5.3/esp-idf/components/bt/host/bluedroid/bta/gatt/bta_gatts_co.c", "C:/Users/allen/esp/v5.3/esp-idf/components/bt/host/bluedroid/bta/gatt/bta_gatts_main.c", "C:/Users/allen/esp/v5.3/esp-idf/components/bt/host/bluedroid/bta/gatt/bta_gatts_utils.c", "C:/Users/allen/esp/v5.3/esp-idf/components/bt/host/bluedroid/bta/hd/bta_hd_api.c", "C:/Users/allen/esp/v5.3/esp-idf/components/bt/host/bluedroid/bta/hd/bta_hd_act.c", "C:/Users/allen/esp/v5.3/esp-idf/components/bt/host/bluedroid/bta/hd/bta_hd_main.c", "C:/Users/allen/esp/v5.3/esp-idf/components/bt/host/bluedroid/bta/hh/bta_hh_act.c", "C:/Users/allen/esp/v5.3/esp-idf/components/bt/host/bluedroid/bta/hh/bta_hh_api.c", "C:/Users/allen/esp/v5.3/esp-idf/components/bt/host/bluedroid/bta/hh/bta_hh_cfg.c", "C:/Users/allen/esp/v5.3/esp-idf/components/bt/host/bluedroid/bta/hh/bta_hh_le.c", "C:/Users/allen/esp/v5.3/esp-idf/components/bt/host/bluedroid/bta/hh/bta_hh_main.c", "C:/Users/allen/esp/v5.3/esp-idf/components/bt/host/bluedroid/bta/hh/bta_hh_utils.c", "C:/Users/allen/esp/v5.3/esp-idf/components/bt/host/bluedroid/bta/jv/bta_jv_act.c", "C:/Users/allen/esp/v5.3/esp-idf/components/bt/host/bluedroid/bta/jv/bta_jv_api.c", "C:/Users/allen/esp/v5.3/esp-idf/components/bt/host/bluedroid/bta/jv/bta_jv_cfg.c", "C:/Users/allen/esp/v5.3/esp-idf/components/bt/host/bluedroid/bta/jv/bta_jv_main.c", "C:/Users/allen/esp/v5.3/esp-idf/components/bt/host/bluedroid/bta/hf_ag/bta_ag_act.c", "C:/Users/allen/esp/v5.3/esp-idf/components/bt/host/bluedroid/bta/hf_ag/bta_ag_api.c", "C:/Users/allen/esp/v5.3/esp-idf/components/bt/host/bluedroid/bta/hf_ag/bta_ag_at.c", "C:/Users/allen/esp/v5.3/esp-idf/components/bt/host/bluedroid/bta/hf_ag/bta_ag_cfg.c", "C:/Users/allen/esp/v5.3/esp-idf/components/bt/host/bluedroid/bta/hf_ag/bta_ag_cmd.c", "C:/Users/allen/esp/v5.3/esp-idf/components/bt/host/bluedroid/bta/hf_ag/bta_ag_main.c", "C:/Users/allen/esp/v5.3/esp-idf/components/bt/host/bluedroid/bta/hf_ag/bta_ag_rfc.c", "C:/Users/allen/esp/v5.3/esp-idf/components/bt/host/bluedroid/bta/hf_ag/bta_ag_sco.c", "C:/Users/allen/esp/v5.3/esp-idf/components/bt/host/bluedroid/bta/hf_ag/bta_ag_sdp.c", "C:/Users/allen/esp/v5.3/esp-idf/components/bt/host/bluedroid/bta/hf_client/bta_hf_client_act.c", "C:/Users/allen/esp/v5.3/esp-idf/components/bt/host/bluedroid/bta/hf_client/bta_hf_client_api.c", "C:/Users/allen/esp/v5.3/esp-idf/components/bt/host/bluedroid/bta/hf_client/bta_hf_client_at.c", "C:/Users/allen/esp/v5.3/esp-idf/components/bt/host/bluedroid/bta/hf_client/bta_hf_client_cmd.c", "C:/Users/allen/esp/v5.3/esp-idf/components/bt/host/bluedroid/bta/hf_client/bta_hf_client_main.c", "C:/Users/allen/esp/v5.3/esp-idf/components/bt/host/bluedroid/bta/hf_client/bta_hf_client_rfc.c", "C:/Users/allen/esp/v5.3/esp-idf/components/bt/host/bluedroid/bta/hf_client/bta_hf_client_sco.c", "C:/Users/allen/esp/v5.3/esp-idf/components/bt/host/bluedroid/bta/hf_client/bta_hf_client_sdp.c", "C:/Users/allen/esp/v5.3/esp-idf/components/bt/host/bluedroid/bta/sdp/bta_sdp.c", "C:/Users/allen/esp/v5.3/esp-idf/components/bt/host/bluedroid/bta/sdp/bta_sdp_act.c", "C:/Users/allen/esp/v5.3/esp-idf/components/bt/host/bluedroid/bta/sdp/bta_sdp_api.c", "C:/Users/allen/esp/v5.3/esp-idf/components/bt/host/bluedroid/bta/sdp/bta_sdp_cfg.c", "C:/Users/allen/esp/v5.3/esp-idf/components/bt/host/bluedroid/bta/sys/bta_sys_conn.c", "C:/Users/allen/esp/v5.3/esp-idf/components/bt/host/bluedroid/bta/sys/bta_sys_main.c", "C:/Users/allen/esp/v5.3/esp-idf/components/bt/host/bluedroid/bta/sys/utl.c", "C:/Users/allen/esp/v5.3/esp-idf/components/bt/host/bluedroid/btc/core/btc_ble_storage.c", "C:/Users/allen/esp/v5.3/esp-idf/components/bt/host/bluedroid/btc/core/btc_config.c", "C:/Users/allen/esp/v5.3/esp-idf/components/bt/host/bluedroid/btc/core/btc_dev.c", "C:/Users/allen/esp/v5.3/esp-idf/components/bt/host/bluedroid/btc/core/btc_dm.c", "C:/Users/allen/esp/v5.3/esp-idf/components/bt/host/bluedroid/btc/core/btc_main.c", "C:/Users/allen/esp/v5.3/esp-idf/components/bt/host/bluedroid/btc/core/btc_profile_queue.c", "C:/Users/allen/esp/v5.3/esp-idf/components/bt/host/bluedroid/btc/core/btc_sec.c", "C:/Users/allen/esp/v5.3/esp-idf/components/bt/host/bluedroid/btc/core/btc_sm.c", "C:/Users/allen/esp/v5.3/esp-idf/components/bt/host/bluedroid/btc/core/btc_storage.c", "C:/Users/allen/esp/v5.3/esp-idf/components/bt/host/bluedroid/btc/core/btc_util.c", "C:/Users/allen/esp/v5.3/esp-idf/components/bt/host/bluedroid/btc/profile/std/a2dp/bta_av_co.c", "C:/Users/allen/esp/v5.3/esp-idf/components/bt/host/bluedroid/btc/profile/std/a2dp/btc_a2dp.c", "C:/Users/allen/esp/v5.3/esp-idf/components/bt/host/bluedroid/btc/profile/std/a2dp/btc_a2dp_control.c", "C:/Users/allen/esp/v5.3/esp-idf/components/bt/host/bluedroid/btc/profile/std/a2dp/btc_a2dp_sink.c", "C:/Users/allen/esp/v5.3/esp-idf/components/bt/host/bluedroid/btc/profile/std/a2dp/btc_a2dp_source.c", "C:/Users/allen/esp/v5.3/esp-idf/components/bt/host/bluedroid/btc/profile/std/a2dp/btc_av.c", "C:/Users/allen/esp/v5.3/esp-idf/components/bt/host/bluedroid/btc/profile/std/avrc/btc_avrc.c", "C:/Users/allen/esp/v5.3/esp-idf/components/bt/host/bluedroid/btc/profile/std/avrc/bta_avrc_co.c", "C:/Users/allen/esp/v5.3/esp-idf/components/bt/host/bluedroid/btc/profile/std/hf_ag/bta_ag_co.c", "C:/Users/allen/esp/v5.3/esp-idf/components/bt/host/bluedroid/btc/profile/std/hf_ag/btc_hf_ag.c", "C:/Users/allen/esp/v5.3/esp-idf/components/bt/host/bluedroid/btc/profile/std/hf_client/btc_hf_client.c", "C:/Users/allen/esp/v5.3/esp-idf/components/bt/host/bluedroid/btc/profile/std/hf_client/bta_hf_client_co.c", "C:/Users/allen/esp/v5.3/esp-idf/components/bt/host/bluedroid/btc/profile/std/hid/btc_hd.c", "C:/Users/allen/esp/v5.3/esp-idf/components/bt/host/bluedroid/btc/profile/std/hid/btc_hh.c", "C:/Users/allen/esp/v5.3/esp-idf/components/bt/host/bluedroid/btc/profile/std/hid/bta_hh_co.c", "C:/Users/allen/esp/v5.3/esp-idf/components/bt/host/bluedroid/btc/profile/std/gap/btc_gap_ble.c", "C:/Users/allen/esp/v5.3/esp-idf/components/bt/host/bluedroid/btc/profile/std/gap/btc_gap_bt.c", "C:/Users/allen/esp/v5.3/esp-idf/components/bt/host/bluedroid/btc/profile/std/gap/bta_gap_bt_co.c", "C:/Users/allen/esp/v5.3/esp-idf/components/bt/host/bluedroid/btc/profile/std/gatt/btc_gatt_common.c", "C:/Users/allen/esp/v5.3/esp-idf/components/bt/host/bluedroid/btc/profile/std/gatt/btc_gatt_util.c", "C:/Users/allen/esp/v5.3/esp-idf/components/bt/host/bluedroid/btc/profile/std/gatt/btc_gattc.c", "C:/Users/allen/esp/v5.3/esp-idf/components/bt/host/bluedroid/btc/profile/std/gatt/btc_gatts.c", "C:/Users/allen/esp/v5.3/esp-idf/components/bt/host/bluedroid/btc/profile/std/spp/btc_spp.c", "C:/Users/allen/esp/v5.3/esp-idf/components/bt/host/bluedroid/btc/profile/std/sdp/btc_sdp.c", "C:/Users/allen/esp/v5.3/esp-idf/components/bt/host/bluedroid/btc/profile/std/l2cap/btc_l2cap.c", "C:/Users/allen/esp/v5.3/esp-idf/components/bt/host/bluedroid/device/bdaddr.c", "C:/Users/allen/esp/v5.3/esp-idf/components/bt/host/bluedroid/device/controller.c", "C:/Users/allen/esp/v5.3/esp-idf/components/bt/host/bluedroid/device/interop.c", "C:/Users/allen/esp/v5.3/esp-idf/components/bt/host/bluedroid/external/sbc/decoder/srce/alloc.c", "C:/Users/allen/esp/v5.3/esp-idf/components/bt/host/bluedroid/external/sbc/decoder/srce/bitalloc-sbc.c", "C:/Users/allen/esp/v5.3/esp-idf/components/bt/host/bluedroid/external/sbc/decoder/srce/bitalloc.c", "C:/Users/allen/esp/v5.3/esp-idf/components/bt/host/bluedroid/external/sbc/decoder/srce/bitstream-decode.c", "C:/Users/allen/esp/v5.3/esp-idf/components/bt/host/bluedroid/external/sbc/decoder/srce/decoder-oina.c", "C:/Users/allen/esp/v5.3/esp-idf/components/bt/host/bluedroid/external/sbc/decoder/srce/decoder-private.c", "C:/Users/allen/esp/v5.3/esp-idf/components/bt/host/bluedroid/external/sbc/decoder/srce/decoder-sbc.c", "C:/Users/allen/esp/v5.3/esp-idf/components/bt/host/bluedroid/external/sbc/decoder/srce/dequant.c", "C:/Users/allen/esp/v5.3/esp-idf/components/bt/host/bluedroid/external/sbc/decoder/srce/framing-sbc.c", "C:/Users/allen/esp/v5.3/esp-idf/components/bt/host/bluedroid/external/sbc/decoder/srce/framing.c", "C:/Users/allen/esp/v5.3/esp-idf/components/bt/host/bluedroid/external/sbc/decoder/srce/oi_codec_version.c", "C:/Users/allen/esp/v5.3/esp-idf/components/bt/host/bluedroid/external/sbc/decoder/srce/synthesis-8-generated.c", "C:/Users/allen/esp/v5.3/esp-idf/components/bt/host/bluedroid/external/sbc/decoder/srce/synthesis-dct8.c", "C:/Users/allen/esp/v5.3/esp-idf/components/bt/host/bluedroid/external/sbc/decoder/srce/synthesis-sbc.c", "C:/Users/allen/esp/v5.3/esp-idf/components/bt/host/bluedroid/external/sbc/encoder/srce/sbc_analysis.c", "C:/Users/allen/esp/v5.3/esp-idf/components/bt/host/bluedroid/external/sbc/encoder/srce/sbc_dct.c", "C:/Users/allen/esp/v5.3/esp-idf/components/bt/host/bluedroid/external/sbc/encoder/srce/sbc_dct_coeffs.c", "C:/Users/allen/esp/v5.3/esp-idf/components/bt/host/bluedroid/external/sbc/encoder/srce/sbc_enc_bit_alloc_mono.c", "C:/Users/allen/esp/v5.3/esp-idf/components/bt/host/bluedroid/external/sbc/encoder/srce/sbc_enc_bit_alloc_ste.c", "C:/Users/allen/esp/v5.3/esp-idf/components/bt/host/bluedroid/external/sbc/encoder/srce/sbc_enc_coeffs.c", "C:/Users/allen/esp/v5.3/esp-idf/components/bt/host/bluedroid/external/sbc/encoder/srce/sbc_encoder.c", "C:/Users/allen/esp/v5.3/esp-idf/components/bt/host/bluedroid/external/sbc/encoder/srce/sbc_packing.c", "C:/Users/allen/esp/v5.3/esp-idf/components/bt/host/bluedroid/external/sbc/plc/sbc_plc.c", "C:/Users/allen/esp/v5.3/esp-idf/components/bt/host/bluedroid/hci/hci_audio.c", "C:/Users/allen/esp/v5.3/esp-idf/components/bt/host/bluedroid/hci/hci_hal_h4.c", "C:/Users/allen/esp/v5.3/esp-idf/components/bt/host/bluedroid/hci/hci_layer.c", "C:/Users/allen/esp/v5.3/esp-idf/components/bt/host/bluedroid/hci/hci_packet_factory.c", "C:/Users/allen/esp/v5.3/esp-idf/components/bt/host/bluedroid/hci/hci_packet_parser.c", "C:/Users/allen/esp/v5.3/esp-idf/components/bt/host/bluedroid/hci/packet_fragmenter.c", "C:/Users/allen/esp/v5.3/esp-idf/components/bt/host/bluedroid/main/bte_init.c", "C:/Users/allen/esp/v5.3/esp-idf/components/bt/host/bluedroid/main/bte_main.c", "C:/Users/allen/esp/v5.3/esp-idf/components/bt/host/bluedroid/stack/a2dp/a2d_api.c", "C:/Users/allen/esp/v5.3/esp-idf/components/bt/host/bluedroid/stack/a2dp/a2d_sbc.c", "C:/Users/allen/esp/v5.3/esp-idf/components/bt/host/bluedroid/stack/avct/avct_api.c", "C:/Users/allen/esp/v5.3/esp-idf/components/bt/host/bluedroid/stack/avct/avct_ccb.c", "C:/Users/allen/esp/v5.3/esp-idf/components/bt/host/bluedroid/stack/avct/avct_l2c.c", "C:/Users/allen/esp/v5.3/esp-idf/components/bt/host/bluedroid/stack/avct/avct_lcb.c", "C:/Users/allen/esp/v5.3/esp-idf/components/bt/host/bluedroid/stack/avct/avct_lcb_act.c", "C:/Users/allen/esp/v5.3/esp-idf/components/bt/host/bluedroid/stack/avdt/avdt_ad.c", "C:/Users/allen/esp/v5.3/esp-idf/components/bt/host/bluedroid/stack/avdt/avdt_api.c", "C:/Users/allen/esp/v5.3/esp-idf/components/bt/host/bluedroid/stack/avdt/avdt_ccb.c", "C:/Users/allen/esp/v5.3/esp-idf/components/bt/host/bluedroid/stack/avdt/avdt_ccb_act.c", "C:/Users/allen/esp/v5.3/esp-idf/components/bt/host/bluedroid/stack/avdt/avdt_l2c.c", "C:/Users/allen/esp/v5.3/esp-idf/components/bt/host/bluedroid/stack/avdt/avdt_msg.c", "C:/Users/allen/esp/v5.3/esp-idf/components/bt/host/bluedroid/stack/avdt/avdt_scb.c", "C:/Users/allen/esp/v5.3/esp-idf/components/bt/host/bluedroid/stack/avdt/avdt_scb_act.c", "C:/Users/allen/esp/v5.3/esp-idf/components/bt/host/bluedroid/stack/avrc/avrc_api.c", "C:/Users/allen/esp/v5.3/esp-idf/components/bt/host/bluedroid/stack/avrc/avrc_bld_ct.c", "C:/Users/allen/esp/v5.3/esp-idf/components/bt/host/bluedroid/stack/avrc/avrc_bld_tg.c", "C:/Users/allen/esp/v5.3/esp-idf/components/bt/host/bluedroid/stack/avrc/avrc_opt.c", "C:/Users/allen/esp/v5.3/esp-idf/components/bt/host/bluedroid/stack/avrc/avrc_pars_ct.c", "C:/Users/allen/esp/v5.3/esp-idf/components/bt/host/bluedroid/stack/avrc/avrc_pars_tg.c", "C:/Users/allen/esp/v5.3/esp-idf/components/bt/host/bluedroid/stack/avrc/avrc_sdp.c", "C:/Users/allen/esp/v5.3/esp-idf/components/bt/host/bluedroid/stack/avrc/avrc_utils.c", "C:/Users/allen/esp/v5.3/esp-idf/components/bt/host/bluedroid/stack/hid/hidd_api.c", "C:/Users/allen/esp/v5.3/esp-idf/components/bt/host/bluedroid/stack/hid/hidd_conn.c", "C:/Users/allen/esp/v5.3/esp-idf/components/bt/host/bluedroid/stack/hid/hidh_api.c", "C:/Users/allen/esp/v5.3/esp-idf/components/bt/host/bluedroid/stack/hid/hidh_conn.c", "C:/Users/allen/esp/v5.3/esp-idf/components/bt/host/bluedroid/stack/btm/btm_acl.c", "C:/Users/allen/esp/v5.3/esp-idf/components/bt/host/bluedroid/stack/btm/btm_ble.c", "C:/Users/allen/esp/v5.3/esp-idf/components/bt/host/bluedroid/stack/btm/btm_ble_addr.c", "C:/Users/allen/esp/v5.3/esp-idf/components/bt/host/bluedroid/stack/btm/btm_ble_adv_filter.c", "C:/Users/allen/esp/v5.3/esp-idf/components/bt/host/bluedroid/stack/btm/btm_ble_batchscan.c", "C:/Users/allen/esp/v5.3/esp-idf/components/bt/host/bluedroid/stack/btm/btm_ble_bgconn.c", "C:/Users/allen/esp/v5.3/esp-idf/components/bt/host/bluedroid/stack/btm/btm_ble_cont_energy.c", "C:/Users/allen/esp/v5.3/esp-idf/components/bt/host/bluedroid/stack/btm/btm_ble_gap.c", "C:/Users/allen/esp/v5.3/esp-idf/components/bt/host/bluedroid/stack/btm/btm_ble_5_gap.c", "C:/Users/allen/esp/v5.3/esp-idf/components/bt/host/bluedroid/stack/btm/btm_ble_multi_adv.c", "C:/Users/allen/esp/v5.3/esp-idf/components/bt/host/bluedroid/stack/btm/btm_ble_privacy.c", "C:/Users/allen/esp/v5.3/esp-idf/components/bt/host/bluedroid/stack/btm/btm_dev.c", "C:/Users/allen/esp/v5.3/esp-idf/components/bt/host/bluedroid/stack/btm/btm_devctl.c", "C:/Users/allen/esp/v5.3/esp-idf/components/bt/host/bluedroid/stack/btm/btm_inq.c", "C:/Users/allen/esp/v5.3/esp-idf/components/bt/host/bluedroid/stack/btm/btm_main.c", "C:/Users/allen/esp/v5.3/esp-idf/components/bt/host/bluedroid/stack/btm/btm_pm.c", "C:/Users/allen/esp/v5.3/esp-idf/components/bt/host/bluedroid/stack/btm/btm_sco.c", "C:/Users/allen/esp/v5.3/esp-idf/components/bt/host/bluedroid/stack/btm/btm_sec.c", "C:/Users/allen/esp/v5.3/esp-idf/components/bt/host/bluedroid/stack/btu/btu_hcif.c", "C:/Users/allen/esp/v5.3/esp-idf/components/bt/host/bluedroid/stack/btu/btu_init.c", "C:/Users/allen/esp/v5.3/esp-idf/components/bt/host/bluedroid/stack/btu/btu_task.c", "C:/Users/allen/esp/v5.3/esp-idf/components/bt/host/bluedroid/stack/gap/gap_api.c", "C:/Users/allen/esp/v5.3/esp-idf/components/bt/host/bluedroid/stack/gap/gap_ble.c", "C:/Users/allen/esp/v5.3/esp-idf/components/bt/host/bluedroid/stack/gap/gap_conn.c", "C:/Users/allen/esp/v5.3/esp-idf/components/bt/host/bluedroid/stack/gap/gap_utils.c", "C:/Users/allen/esp/v5.3/esp-idf/components/bt/host/bluedroid/stack/gatt/att_protocol.c", "C:/Users/allen/esp/v5.3/esp-idf/components/bt/host/bluedroid/stack/gatt/gatt_api.c", "C:/Users/allen/esp/v5.3/esp-idf/components/bt/host/bluedroid/stack/gatt/gatt_attr.c", "C:/Users/allen/esp/v5.3/esp-idf/components/bt/host/bluedroid/stack/gatt/gatt_auth.c", "C:/Users/allen/esp/v5.3/esp-idf/components/bt/host/bluedroid/stack/gatt/gatt_cl.c", "C:/Users/allen/esp/v5.3/esp-idf/components/bt/host/bluedroid/stack/gatt/gatt_db.c", "C:/Users/allen/esp/v5.3/esp-idf/components/bt/host/bluedroid/stack/gatt/gatt_main.c", "C:/Users/allen/esp/v5.3/esp-idf/components/bt/host/bluedroid/stack/gatt/gatt_sr.c", "C:/Users/allen/esp/v5.3/esp-idf/components/bt/host/bluedroid/stack/gatt/gatt_sr_hash.c", "C:/Users/allen/esp/v5.3/esp-idf/components/bt/host/bluedroid/stack/gatt/gatt_utils.c", "C:/Users/allen/esp/v5.3/esp-idf/components/bt/host/bluedroid/stack/hcic/hciblecmds.c", "C:/Users/allen/esp/v5.3/esp-idf/components/bt/host/bluedroid/stack/hcic/hcicmds.c", "C:/Users/allen/esp/v5.3/esp-idf/components/bt/host/bluedroid/stack/l2cap/l2c_api.c", "C:/Users/allen/esp/v5.3/esp-idf/components/bt/host/bluedroid/stack/l2cap/l2c_ble.c", "C:/Users/allen/esp/v5.3/esp-idf/components/bt/host/bluedroid/stack/l2cap/l2c_csm.c", "C:/Users/allen/esp/v5.3/esp-idf/components/bt/host/bluedroid/stack/l2cap/l2c_fcr.c", "C:/Users/allen/esp/v5.3/esp-idf/components/bt/host/bluedroid/stack/l2cap/l2c_link.c", "C:/Users/allen/esp/v5.3/esp-idf/components/bt/host/bluedroid/stack/l2cap/l2c_main.c", "C:/Users/allen/esp/v5.3/esp-idf/components/bt/host/bluedroid/stack/l2cap/l2c_ucd.c", "C:/Users/allen/esp/v5.3/esp-idf/components/bt/host/bluedroid/stack/l2cap/l2c_utils.c", "C:/Users/allen/esp/v5.3/esp-idf/components/bt/host/bluedroid/stack/l2cap/l2cap_client.c", "C:/Users/allen/esp/v5.3/esp-idf/components/bt/host/bluedroid/stack/rfcomm/port_api.c", "C:/Users/allen/esp/v5.3/esp-idf/components/bt/host/bluedroid/stack/rfcomm/port_rfc.c", "C:/Users/allen/esp/v5.3/esp-idf/components/bt/host/bluedroid/stack/rfcomm/port_utils.c", "C:/Users/allen/esp/v5.3/esp-idf/components/bt/host/bluedroid/stack/rfcomm/rfc_l2cap_if.c", "C:/Users/allen/esp/v5.3/esp-idf/components/bt/host/bluedroid/stack/rfcomm/rfc_mx_fsm.c", "C:/Users/allen/esp/v5.3/esp-idf/components/bt/host/bluedroid/stack/rfcomm/rfc_port_fsm.c", "C:/Users/allen/esp/v5.3/esp-idf/components/bt/host/bluedroid/stack/rfcomm/rfc_port_if.c", "C:/Users/allen/esp/v5.3/esp-idf/components/bt/host/bluedroid/stack/rfcomm/rfc_ts_frames.c", "C:/Users/allen/esp/v5.3/esp-idf/components/bt/host/bluedroid/stack/rfcomm/rfc_utils.c", "C:/Users/allen/esp/v5.3/esp-idf/components/bt/host/bluedroid/stack/sdp/sdp_api.c", "C:/Users/allen/esp/v5.3/esp-idf/components/bt/host/bluedroid/stack/sdp/sdp_db.c", "C:/Users/allen/esp/v5.3/esp-idf/components/bt/host/bluedroid/stack/sdp/sdp_discovery.c", "C:/Users/allen/esp/v5.3/esp-idf/components/bt/host/bluedroid/stack/sdp/sdp_main.c", "C:/Users/allen/esp/v5.3/esp-idf/components/bt/host/bluedroid/stack/sdp/sdp_server.c", "C:/Users/allen/esp/v5.3/esp-idf/components/bt/host/bluedroid/stack/sdp/sdp_utils.c", "C:/Users/allen/esp/v5.3/esp-idf/components/bt/host/bluedroid/stack/smp/aes.c", "C:/Users/allen/esp/v5.3/esp-idf/components/bt/host/bluedroid/stack/smp/p_256_curvepara.c", "C:/Users/allen/esp/v5.3/esp-idf/components/bt/host/bluedroid/stack/smp/p_256_ecc_pp.c", "C:/Users/allen/esp/v5.3/esp-idf/components/bt/host/bluedroid/stack/smp/p_256_multprecision.c", "C:/Users/allen/esp/v5.3/esp-idf/components/bt/host/bluedroid/stack/smp/smp_act.c", "C:/Users/allen/esp/v5.3/esp-idf/components/bt/host/bluedroid/stack/smp/smp_api.c", "C:/Users/allen/esp/v5.3/esp-idf/components/bt/host/bluedroid/stack/smp/smp_br_main.c", "C:/Users/allen/esp/v5.3/esp-idf/components/bt/host/bluedroid/stack/smp/smp_cmac.c", "C:/Users/allen/esp/v5.3/esp-idf/components/bt/host/bluedroid/stack/smp/smp_keys.c", "C:/Users/allen/esp/v5.3/esp-idf/components/bt/host/bluedroid/stack/smp/smp_l2c.c", "C:/Users/allen/esp/v5.3/esp-idf/components/bt/host/bluedroid/stack/smp/smp_main.c", "C:/Users/allen/esp/v5.3/esp-idf/components/bt/host/bluedroid/stack/smp/smp_utils.c", "C:/Users/allen/esp/v5.3/esp-idf/components/bt/host/bluedroid/config/stack_config.c", "C:/Users/allen/esp/v5.3/esp-idf/components/bt/common/btc/profile/esp/blufi/bluedroid_host/esp_blufi.c", "C:/Users/allen/esp/v5.3/esp-idf/components/bt/porting/ext/tinycrypt/src/utils.c", "C:/Users/allen/esp/v5.3/esp-idf/components/bt/porting/ext/tinycrypt/src/sha256.c", "C:/Users/allen/esp/v5.3/esp-idf/components/bt/porting/ext/tinycrypt/src/ecc.c", "C:/Users/allen/esp/v5.3/esp-idf/components/bt/porting/ext/tinycrypt/src/ctr_prng.c", "C:/Users/allen/esp/v5.3/esp-idf/components/bt/porting/ext/tinycrypt/src/ctr_mode.c", "C:/Users/allen/esp/v5.3/esp-idf/components/bt/porting/ext/tinycrypt/src/aes_decrypt.c", "C:/Users/allen/esp/v5.3/esp-idf/components/bt/porting/ext/tinycrypt/src/aes_encrypt.c", "C:/Users/allen/esp/v5.3/esp-idf/components/bt/porting/ext/tinycrypt/src/ccm_mode.c", "C:/Users/allen/esp/v5.3/esp-idf/components/bt/porting/ext/tinycrypt/src/ecc_dsa.c", "C:/Users/allen/esp/v5.3/esp-idf/components/bt/porting/ext/tinycrypt/src/cmac_mode.c", "C:/Users/allen/esp/v5.3/esp-idf/components/bt/porting/ext/tinycrypt/src/ecc_dh.c", "C:/Users/allen/esp/v5.3/esp-idf/components/bt/porting/ext/tinycrypt/src/hmac_prng.c", "C:/Users/allen/esp/v5.3/esp-idf/components/bt/porting/ext/tinycrypt/src/ecc_platform_specific.c", "C:/Users/allen/esp/v5.3/esp-idf/components/bt/porting/ext/tinycrypt/src/hmac.c", "C:/Users/allen/esp/v5.3/esp-idf/components/bt/porting/ext/tinycrypt/src/cbc_mode.c" ],
             "include_dirs": [ "include/esp32c3/include", "common/osi/include", "common/api/include/api", "common/btc/profile/esp/blufi/include", "common/btc/profile/esp/include", "common/hci_log/include", "host/bluedroid/api/include/api", "porting/ext/tinycrypt/include" ]
         },
@@ -114,7 +114,7 @@
             "priv_reqs": [],
             "managed_reqs": [],
             "managed_priv_reqs": [],
-            "file": "C:/Users/allen/Desktop/repos/duckyPad2/firmware/btt_notworking/build/esp-idf/cmock/libcmock.a",
+            "file": "C:/Users/allen/Desktop/repos/duckyPad2/firmware/btt_working/build/esp-idf/cmock/libcmock.a",
             "sources": [ "C:/Users/allen/esp/v5.3/esp-idf/components/cmock/CMock/src/cmock.c" ],
             "include_dirs": [ "CMock/src" ]
         },
@@ -129,7 +129,7 @@
             "priv_reqs": [ "esp_driver_uart", "esp_driver_usb_serial_jtag" ],
             "managed_reqs": [],
             "managed_priv_reqs": [],
-            "file": "C:/Users/allen/Desktop/repos/duckyPad2/firmware/btt_notworking/build/esp-idf/console/libconsole.a",
+            "file": "C:/Users/allen/Desktop/repos/duckyPad2/firmware/btt_working/build/esp-idf/console/libconsole.a",
             "sources": [ "C:/Users/allen/esp/v5.3/esp-idf/components/console/commands.c", "C:/Users/allen/esp/v5.3/esp-idf/components/console/esp_console_common.c", "C:/Users/allen/esp/v5.3/esp-idf/components/console/split_argv.c", "C:/Users/allen/esp/v5.3/esp-idf/components/console/linenoise/linenoise.c", "C:/Users/allen/esp/v5.3/esp-idf/components/console/esp_console_repl_chip.c", "C:/Users/allen/esp/v5.3/esp-idf/components/console/argtable3/arg_cmd.c", "C:/Users/allen/esp/v5.3/esp-idf/components/console/argtable3/arg_date.c", "C:/Users/allen/esp/v5.3/esp-idf/components/console/argtable3/arg_dbl.c", "C:/Users/allen/esp/v5.3/esp-idf/components/console/argtable3/arg_dstr.c", "C:/Users/allen/esp/v5.3/esp-idf/components/console/argtable3/arg_end.c", "C:/Users/allen/esp/v5.3/esp-idf/components/console/argtable3/arg_file.c", "C:/Users/allen/esp/v5.3/esp-idf/components/console/argtable3/arg_hashtable.c", "C:/Users/allen/esp/v5.3/esp-idf/components/console/argtable3/arg_int.c", "C:/Users/allen/esp/v5.3/esp-idf/components/console/argtable3/arg_lit.c", "C:/Users/allen/esp/v5.3/esp-idf/components/console/argtable3/arg_rem.c", "C:/Users/allen/esp/v5.3/esp-idf/components/console/argtable3/arg_rex.c", "C:/Users/allen/esp/v5.3/esp-idf/components/console/argtable3/arg_str.c", "C:/Users/allen/esp/v5.3/esp-idf/components/console/argtable3/arg_utils.c", "C:/Users/allen/esp/v5.3/esp-idf/components/console/argtable3/argtable3.c" ],
             "include_dirs": [ "C:/Users/allen/esp/v5.3/esp-idf/components/console" ]
         },
@@ -144,7 +144,7 @@
             "priv_reqs": [ "pthread", "esp_system" ],
             "managed_reqs": [],
             "managed_priv_reqs": [],
-            "file": "C:/Users/allen/Desktop/repos/duckyPad2/firmware/btt_notworking/build/esp-idf/cxx/libcxx.a",
+            "file": "C:/Users/allen/Desktop/repos/duckyPad2/firmware/btt_working/build/esp-idf/cxx/libcxx.a",
             "sources": [ "C:/Users/allen/esp/v5.3/esp-idf/components/cxx/cxx_exception_stubs.cpp", "C:/Users/allen/esp/v5.3/esp-idf/components/cxx/cxx_guards.cpp", "C:/Users/allen/esp/v5.3/esp-idf/components/cxx/cxx_init.cpp" ],
             "include_dirs": []
         },
@@ -159,7 +159,7 @@
             "priv_reqs": [ "efuse", "esp_timer", "esp_mm" ],
             "managed_reqs": [],
             "managed_priv_reqs": [],
-            "file": "C:/Users/allen/Desktop/repos/duckyPad2/firmware/btt_notworking/build/esp-idf/driver/libdriver.a",
+            "file": "C:/Users/allen/Desktop/repos/duckyPad2/firmware/btt_working/build/esp-idf/driver/libdriver.a",
             "sources": [ "C:/Users/allen/esp/v5.3/esp-idf/components/driver/deprecated/adc_legacy.c", "C:/Users/allen/esp/v5.3/esp-idf/components/driver/deprecated/adc_dma_legacy.c", "C:/Users/allen/esp/v5.3/esp-idf/components/driver/deprecated/timer_legacy.c", "C:/Users/allen/esp/v5.3/esp-idf/components/driver/i2c/i2c.c", "C:/Users/allen/esp/v5.3/esp-idf/components/driver/deprecated/i2s_legacy.c", "C:/Users/allen/esp/v5.3/esp-idf/components/driver/deprecated/mcpwm_legacy.c", "C:/Users/allen/esp/v5.3/esp-idf/components/driver/deprecated/pcnt_legacy.c", "C:/Users/allen/esp/v5.3/esp-idf/components/driver/deprecated/rmt_legacy.c", "C:/Users/allen/esp/v5.3/esp-idf/components/driver/deprecated/sigma_delta_legacy.c", "C:/Users/allen/esp/v5.3/esp-idf/components/driver/deprecated/rtc_temperature_legacy.c", "C:/Users/allen/esp/v5.3/esp-idf/components/driver/touch_sensor/touch_sensor_common.c", "C:/Users/allen/esp/v5.3/esp-idf/components/driver/touch_sensor/esp32s3/touch_sensor.c", "C:/Users/allen/esp/v5.3/esp-idf/components/driver/twai/twai.c" ],
             "include_dirs": [ "deprecated", "i2c/include", "touch_sensor/include", "twai/include", "touch_sensor/esp32s3/include" ]
         },
@@ -174,7 +174,7 @@
             "priv_reqs": [ "bootloader_support", "soc", "spi_flash", "esp_system", "esp_partition", "esp_app_format" ],
             "managed_reqs": [],
             "managed_priv_reqs": [],
-            "file": "C:/Users/allen/Desktop/repos/duckyPad2/firmware/btt_notworking/build/esp-idf/efuse/libefuse.a",
+            "file": "C:/Users/allen/Desktop/repos/duckyPad2/firmware/btt_working/build/esp-idf/efuse/libefuse.a",
             "sources": [ "C:/Users/allen/esp/v5.3/esp-idf/components/efuse/esp32s3/esp_efuse_table.c", "C:/Users/allen/esp/v5.3/esp-idf/components/efuse/esp32s3/esp_efuse_fields.c", "C:/Users/allen/esp/v5.3/esp-idf/components/efuse/esp32s3/esp_efuse_rtc_calib.c", "C:/Users/allen/esp/v5.3/esp-idf/components/efuse/esp32s3/esp_efuse_utility.c", "C:/Users/allen/esp/v5.3/esp-idf/components/efuse/src/esp_efuse_api.c", "C:/Users/allen/esp/v5.3/esp-idf/components/efuse/src/esp_efuse_fields.c", "C:/Users/allen/esp/v5.3/esp-idf/components/efuse/src/esp_efuse_utility.c", "C:/Users/allen/esp/v5.3/esp-idf/components/efuse/src/efuse_controller/keys/with_key_purposes/esp_efuse_api_key.c", "C:/Users/allen/esp/v5.3/esp-idf/components/efuse/src/esp_efuse_startup.c" ],
             "include_dirs": [ "include", "esp32s3/include" ]
         },
@@ -189,7 +189,7 @@
             "priv_reqs": [ "http_parser", "esp_timer", "lwip" ],
             "managed_reqs": [],
             "managed_priv_reqs": [],
-            "file": "C:/Users/allen/Desktop/repos/duckyPad2/firmware/btt_notworking/build/esp-idf/esp-tls/libesp-tls.a",
+            "file": "C:/Users/allen/Desktop/repos/duckyPad2/firmware/btt_working/build/esp-idf/esp-tls/libesp-tls.a",
             "sources": [ "C:/Users/allen/esp/v5.3/esp-idf/components/esp-tls/esp_tls.c", "C:/Users/allen/esp/v5.3/esp-idf/components/esp-tls/esp-tls-crypto/esp_tls_crypto.c", "C:/Users/allen/esp/v5.3/esp-idf/components/esp-tls/esp_tls_error_capture.c", "C:/Users/allen/esp/v5.3/esp-idf/components/esp-tls/esp_tls_platform_port.c", "C:/Users/allen/esp/v5.3/esp-idf/components/esp-tls/esp_tls_mbedtls.c" ],
             "include_dirs": [ "C:/Users/allen/esp/v5.3/esp-idf/components/esp-tls", "esp-tls-crypto" ]
         },
@@ -204,7 +204,7 @@
             "priv_reqs": [ "driver", "esp_driver_gpio", "efuse", "esp_pm", "esp_ringbuf", "esp_mm" ],
             "managed_reqs": [],
             "managed_priv_reqs": [],
-            "file": "C:/Users/allen/Desktop/repos/duckyPad2/firmware/btt_notworking/build/esp-idf/esp_adc/libesp_adc.a",
+            "file": "C:/Users/allen/Desktop/repos/duckyPad2/firmware/btt_working/build/esp-idf/esp_adc/libesp_adc.a",
             "sources": [ "C:/Users/allen/esp/v5.3/esp-idf/components/esp_adc/adc_oneshot.c", "C:/Users/allen/esp/v5.3/esp-idf/components/esp_adc/adc_common.c", "C:/Users/allen/esp/v5.3/esp-idf/components/esp_adc/adc_cali.c", "C:/Users/allen/esp/v5.3/esp-idf/components/esp_adc/adc_cali_curve_fitting.c", "C:/Users/allen/esp/v5.3/esp-idf/components/esp_adc/deprecated/esp_adc_cal_common_legacy.c", "C:/Users/allen/esp/v5.3/esp-idf/components/esp_adc/adc_continuous.c", "C:/Users/allen/esp/v5.3/esp-idf/components/esp_adc/adc_monitor.c", "C:/Users/allen/esp/v5.3/esp-idf/components/esp_adc/gdma/adc_dma.c", "C:/Users/allen/esp/v5.3/esp-idf/components/esp_adc/adc_filter.c", "C:/Users/allen/esp/v5.3/esp-idf/components/esp_adc/esp32s3/curve_fitting_coefficients.c", "C:/Users/allen/esp/v5.3/esp-idf/components/esp_adc/deprecated/esp32s3/esp_adc_cal_legacy.c" ],
             "include_dirs": [ "include", "interface", "esp32s3/include", "deprecated/include" ]
         },
@@ -219,7 +219,7 @@
             "priv_reqs": [],
             "managed_reqs": [],
             "managed_priv_reqs": [],
-            "file": "C:/Users/allen/Desktop/repos/duckyPad2/firmware/btt_notworking/build/esp-idf/esp_app_format/libesp_app_format.a",
+            "file": "C:/Users/allen/Desktop/repos/duckyPad2/firmware/btt_working/build/esp-idf/esp_app_format/libesp_app_format.a",
             "sources": [ "C:/Users/allen/esp/v5.3/esp-idf/components/esp_app_format/esp_app_desc.c" ],
             "include_dirs": [ "include" ]
         },
@@ -234,7 +234,7 @@
             "priv_reqs": [],
             "managed_reqs": [],
             "managed_priv_reqs": [],
-            "file": "C:/Users/allen/Desktop/repos/duckyPad2/firmware/btt_notworking/build/esp-idf/esp_bootloader_format/libesp_bootloader_format.a",
+            "file": "C:/Users/allen/Desktop/repos/duckyPad2/firmware/btt_working/build/esp-idf/esp_bootloader_format/libesp_bootloader_format.a",
             "sources": [ "C:/Users/allen/esp/v5.3/esp-idf/components/esp_bootloader_format/esp_bootloader_desc.c" ],
             "include_dirs": [ "include" ]
         },
@@ -249,7 +249,7 @@
             "priv_reqs": [ "esp_timer", "driver", "esp_event" ],
             "managed_reqs": [],
             "managed_priv_reqs": [],
-            "file": "C:/Users/allen/Desktop/repos/duckyPad2/firmware/btt_notworking/build/esp-idf/esp_coex/libesp_coex.a",
+            "file": "C:/Users/allen/Desktop/repos/duckyPad2/firmware/btt_working/build/esp-idf/esp_coex/libesp_coex.a",
             "sources": [ "C:/Users/allen/esp/v5.3/esp-idf/components/esp_coex/src/coexist.c", "C:/Users/allen/esp/v5.3/esp-idf/components/esp_coex/src/lib_printf.c", "C:/Users/allen/esp/v5.3/esp-idf/components/esp_coex/esp32s3/esp_coex_adapter.c" ],
             "include_dirs": [ "include" ]
         },
@@ -264,7 +264,7 @@
             "priv_reqs": [],
             "managed_reqs": [],
             "managed_priv_reqs": [],
-            "file": "C:/Users/allen/Desktop/repos/duckyPad2/firmware/btt_notworking/build/esp-idf/esp_common/libesp_common.a",
+            "file": "C:/Users/allen/Desktop/repos/duckyPad2/firmware/btt_working/build/esp-idf/esp_common/libesp_common.a",
             "sources": [ "C:/Users/allen/esp/v5.3/esp-idf/components/esp_common/src/esp_err_to_name.c" ],
             "include_dirs": [ "include" ]
         },
@@ -294,7 +294,7 @@
             "priv_reqs": [ "esp_driver_gpio" ],
             "managed_reqs": [],
             "managed_priv_reqs": [],
-            "file": "C:/Users/allen/Desktop/repos/duckyPad2/firmware/btt_notworking/build/esp-idf/esp_driver_cam/libesp_driver_cam.a",
+            "file": "C:/Users/allen/Desktop/repos/duckyPad2/firmware/btt_working/build/esp-idf/esp_driver_cam/libesp_driver_cam.a",
             "sources": [ "C:/Users/allen/esp/v5.3/esp-idf/components/esp_driver_cam/esp_cam_ctlr.c", "C:/Users/allen/esp/v5.3/esp-idf/components/esp_driver_cam/dvp_share_ctrl.c" ],
             "include_dirs": [ "include", "interface" ]
         },
@@ -324,7 +324,7 @@
             "priv_reqs": [ "esp_pm" ],
             "managed_reqs": [],
             "managed_priv_reqs": [],
-            "file": "C:/Users/allen/Desktop/repos/duckyPad2/firmware/btt_notworking/build/esp-idf/esp_driver_gpio/libesp_driver_gpio.a",
+            "file": "C:/Users/allen/Desktop/repos/duckyPad2/firmware/btt_working/build/esp-idf/esp_driver_gpio/libesp_driver_gpio.a",
             "sources": [ "C:/Users/allen/esp/v5.3/esp-idf/components/esp_driver_gpio/src/gpio.c", "C:/Users/allen/esp/v5.3/esp-idf/components/esp_driver_gpio/src/gpio_glitch_filter_ops.c", "C:/Users/allen/esp/v5.3/esp-idf/components/esp_driver_gpio/src/rtc_io.c", "C:/Users/allen/esp/v5.3/esp-idf/components/esp_driver_gpio/src/dedic_gpio.c", "C:/Users/allen/esp/v5.3/esp-idf/components/esp_driver_gpio/src/gpio_pin_glitch_filter.c" ],
             "include_dirs": [ "include" ]
         },
@@ -339,7 +339,7 @@
             "priv_reqs": [],
             "managed_reqs": [],
             "managed_priv_reqs": [],
-            "file": "C:/Users/allen/Desktop/repos/duckyPad2/firmware/btt_notworking/build/esp-idf/esp_driver_gptimer/libesp_driver_gptimer.a",
+            "file": "C:/Users/allen/Desktop/repos/duckyPad2/firmware/btt_working/build/esp-idf/esp_driver_gptimer/libesp_driver_gptimer.a",
             "sources": [ "C:/Users/allen/esp/v5.3/esp-idf/components/esp_driver_gptimer/src/gptimer.c", "C:/Users/allen/esp/v5.3/esp-idf/components/esp_driver_gptimer/src/gptimer_priv.c" ],
             "include_dirs": [ "include" ]
         },
@@ -354,7 +354,7 @@
             "priv_reqs": [ "esp_driver_gpio", "esp_pm", "esp_ringbuf" ],
             "managed_reqs": [],
             "managed_priv_reqs": [],
-            "file": "C:/Users/allen/Desktop/repos/duckyPad2/firmware/btt_notworking/build/esp-idf/esp_driver_i2c/libesp_driver_i2c.a",
+            "file": "C:/Users/allen/Desktop/repos/duckyPad2/firmware/btt_working/build/esp-idf/esp_driver_i2c/libesp_driver_i2c.a",
             "sources": [ "C:/Users/allen/esp/v5.3/esp-idf/components/esp_driver_i2c/i2c_master.c", "C:/Users/allen/esp/v5.3/esp-idf/components/esp_driver_i2c/i2c_common.c", "C:/Users/allen/esp/v5.3/esp-idf/components/esp_driver_i2c/i2c_slave.c" ],
             "include_dirs": [ "include" ]
         },
@@ -369,7 +369,7 @@
             "priv_reqs": [ "esp_driver_gpio", "esp_pm", "esp_mm" ],
             "managed_reqs": [],
             "managed_priv_reqs": [],
-            "file": "C:/Users/allen/Desktop/repos/duckyPad2/firmware/btt_notworking/build/esp-idf/esp_driver_i2s/libesp_driver_i2s.a",
+            "file": "C:/Users/allen/Desktop/repos/duckyPad2/firmware/btt_working/build/esp-idf/esp_driver_i2s/libesp_driver_i2s.a",
             "sources": [ "C:/Users/allen/esp/v5.3/esp-idf/components/esp_driver_i2s/i2s_common.c", "C:/Users/allen/esp/v5.3/esp-idf/components/esp_driver_i2s/i2s_platform.c", "C:/Users/allen/esp/v5.3/esp-idf/components/esp_driver_i2s/i2s_std.c", "C:/Users/allen/esp/v5.3/esp-idf/components/esp_driver_i2s/i2s_pdm.c", "C:/Users/allen/esp/v5.3/esp-idf/components/esp_driver_i2s/i2s_tdm.c" ],
             "include_dirs": [ "include" ]
         },
@@ -414,7 +414,7 @@
             "priv_reqs": [ "esp_pm", "esp_driver_gpio" ],
             "managed_reqs": [],
             "managed_priv_reqs": [],
-            "file": "C:/Users/allen/Desktop/repos/duckyPad2/firmware/btt_notworking/build/esp-idf/esp_driver_ledc/libesp_driver_ledc.a",
+            "file": "C:/Users/allen/Desktop/repos/duckyPad2/firmware/btt_working/build/esp-idf/esp_driver_ledc/libesp_driver_ledc.a",
             "sources": [ "C:/Users/allen/esp/v5.3/esp-idf/components/esp_driver_ledc/src/ledc.c" ],
             "include_dirs": [ "include" ]
         },
@@ -429,7 +429,7 @@
             "priv_reqs": [ "esp_pm", "esp_driver_gpio" ],
             "managed_reqs": [],
             "managed_priv_reqs": [],
-            "file": "C:/Users/allen/Desktop/repos/duckyPad2/firmware/btt_notworking/build/esp-idf/esp_driver_mcpwm/libesp_driver_mcpwm.a",
+            "file": "C:/Users/allen/Desktop/repos/duckyPad2/firmware/btt_working/build/esp-idf/esp_driver_mcpwm/libesp_driver_mcpwm.a",
             "sources": [ "C:/Users/allen/esp/v5.3/esp-idf/components/esp_driver_mcpwm/src/mcpwm_cap.c", "C:/Users/allen/esp/v5.3/esp-idf/components/esp_driver_mcpwm/src/mcpwm_cmpr.c", "C:/Users/allen/esp/v5.3/esp-idf/components/esp_driver_mcpwm/src/mcpwm_com.c", "C:/Users/allen/esp/v5.3/esp-idf/components/esp_driver_mcpwm/src/mcpwm_fault.c", "C:/Users/allen/esp/v5.3/esp-idf/components/esp_driver_mcpwm/src/mcpwm_gen.c", "C:/Users/allen/esp/v5.3/esp-idf/components/esp_driver_mcpwm/src/mcpwm_oper.c", "C:/Users/allen/esp/v5.3/esp-idf/components/esp_driver_mcpwm/src/mcpwm_sync.c", "C:/Users/allen/esp/v5.3/esp-idf/components/esp_driver_mcpwm/src/mcpwm_timer.c" ],
             "include_dirs": [ "include" ]
         },
@@ -459,7 +459,7 @@
             "priv_reqs": [ "esp_pm", "esp_driver_gpio" ],
             "managed_reqs": [],
             "managed_priv_reqs": [],
-            "file": "C:/Users/allen/Desktop/repos/duckyPad2/firmware/btt_notworking/build/esp-idf/esp_driver_pcnt/libesp_driver_pcnt.a",
+            "file": "C:/Users/allen/Desktop/repos/duckyPad2/firmware/btt_working/build/esp-idf/esp_driver_pcnt/libesp_driver_pcnt.a",
             "sources": [ "C:/Users/allen/esp/v5.3/esp-idf/components/esp_driver_pcnt/src/pulse_cnt.c" ],
             "include_dirs": [ "include" ]
         },
@@ -489,7 +489,7 @@
             "priv_reqs": [ "esp_pm", "esp_driver_gpio", "esp_mm" ],
             "managed_reqs": [],
             "managed_priv_reqs": [],
-            "file": "C:/Users/allen/Desktop/repos/duckyPad2/firmware/btt_notworking/build/esp-idf/esp_driver_rmt/libesp_driver_rmt.a",
+            "file": "C:/Users/allen/Desktop/repos/duckyPad2/firmware/btt_working/build/esp-idf/esp_driver_rmt/libesp_driver_rmt.a",
             "sources": [ "C:/Users/allen/esp/v5.3/esp-idf/components/esp_driver_rmt/src/rmt_common.c", "C:/Users/allen/esp/v5.3/esp-idf/components/esp_driver_rmt/src/rmt_encoder.c", "C:/Users/allen/esp/v5.3/esp-idf/components/esp_driver_rmt/src/rmt_rx.c", "C:/Users/allen/esp/v5.3/esp-idf/components/esp_driver_rmt/src/rmt_tx.c" ],
             "include_dirs": [ "include" ]
         },
@@ -519,7 +519,7 @@
             "priv_reqs": [ "esp_pm", "esp_driver_gpio" ],
             "managed_reqs": [],
             "managed_priv_reqs": [],
-            "file": "C:/Users/allen/Desktop/repos/duckyPad2/firmware/btt_notworking/build/esp-idf/esp_driver_sdm/libesp_driver_sdm.a",
+            "file": "C:/Users/allen/Desktop/repos/duckyPad2/firmware/btt_working/build/esp-idf/esp_driver_sdm/libesp_driver_sdm.a",
             "sources": [ "C:/Users/allen/esp/v5.3/esp-idf/components/esp_driver_sdm/src/sdm.c" ],
             "include_dirs": [ "include" ]
         },
@@ -534,7 +534,7 @@
             "priv_reqs": [ "esp_timer", "esp_pm", "esp_mm" ],
             "managed_reqs": [],
             "managed_priv_reqs": [],
-            "file": "C:/Users/allen/Desktop/repos/duckyPad2/firmware/btt_notworking/build/esp-idf/esp_driver_sdmmc/libesp_driver_sdmmc.a",
+            "file": "C:/Users/allen/Desktop/repos/duckyPad2/firmware/btt_working/build/esp-idf/esp_driver_sdmmc/libesp_driver_sdmmc.a",
             "sources": [ "C:/Users/allen/esp/v5.3/esp-idf/components/esp_driver_sdmmc/src/sdmmc_transaction.c", "C:/Users/allen/esp/v5.3/esp-idf/components/esp_driver_sdmmc/src/sdmmc_host.c" ],
             "include_dirs": [ "include" ]
         },
@@ -549,7 +549,7 @@
             "priv_reqs": [ "esp_timer" ],
             "managed_reqs": [],
             "managed_priv_reqs": [],
-            "file": "C:/Users/allen/Desktop/repos/duckyPad2/firmware/btt_notworking/build/esp-idf/esp_driver_sdspi/libesp_driver_sdspi.a",
+            "file": "C:/Users/allen/Desktop/repos/duckyPad2/firmware/btt_working/build/esp-idf/esp_driver_sdspi/libesp_driver_sdspi.a",
             "sources": [ "C:/Users/allen/esp/v5.3/esp-idf/components/esp_driver_sdspi/src/sdspi_crc.c", "C:/Users/allen/esp/v5.3/esp-idf/components/esp_driver_sdspi/src/sdspi_host.c", "C:/Users/allen/esp/v5.3/esp-idf/components/esp_driver_sdspi/src/sdspi_transaction.c" ],
             "include_dirs": [ "include" ]
         },
@@ -564,7 +564,7 @@
             "priv_reqs": [ "esp_timer", "esp_mm", "esp_driver_gpio", "esp_ringbuf" ],
             "managed_reqs": [],
             "managed_priv_reqs": [],
-            "file": "C:/Users/allen/Desktop/repos/duckyPad2/firmware/btt_notworking/build/esp-idf/esp_driver_spi/libesp_driver_spi.a",
+            "file": "C:/Users/allen/Desktop/repos/duckyPad2/firmware/btt_working/build/esp-idf/esp_driver_spi/libesp_driver_spi.a",
             "sources": [ "C:/Users/allen/esp/v5.3/esp-idf/components/esp_driver_spi/src/gpspi/spi_common.c", "C:/Users/allen/esp/v5.3/esp-idf/components/esp_driver_spi/src/gpspi/spi_master.c", "C:/Users/allen/esp/v5.3/esp-idf/components/esp_driver_spi/src/gpspi/spi_slave.c", "C:/Users/allen/esp/v5.3/esp-idf/components/esp_driver_spi/src/gpspi/spi_dma.c", "C:/Users/allen/esp/v5.3/esp-idf/components/esp_driver_spi/src/gpspi/spi_slave_hd.c" ],
             "include_dirs": [ "include" ]
         },
@@ -579,7 +579,7 @@
             "priv_reqs": [ "efuse" ],
             "managed_reqs": [],
             "managed_priv_reqs": [],
-            "file": "C:/Users/allen/Desktop/repos/duckyPad2/firmware/btt_notworking/build/esp-idf/esp_driver_tsens/libesp_driver_tsens.a",
+            "file": "C:/Users/allen/Desktop/repos/duckyPad2/firmware/btt_working/build/esp-idf/esp_driver_tsens/libesp_driver_tsens.a",
             "sources": [ "C:/Users/allen/esp/v5.3/esp-idf/components/esp_driver_tsens/src/temperature_sensor.c" ],
             "include_dirs": [ "include" ]
         },
@@ -594,7 +594,7 @@
             "priv_reqs": [ "esp_pm", "esp_driver_gpio", "esp_ringbuf" ],
             "managed_reqs": [],
             "managed_priv_reqs": [],
-            "file": "C:/Users/allen/Desktop/repos/duckyPad2/firmware/btt_notworking/build/esp-idf/esp_driver_uart/libesp_driver_uart.a",
+            "file": "C:/Users/allen/Desktop/repos/duckyPad2/firmware/btt_working/build/esp-idf/esp_driver_uart/libesp_driver_uart.a",
             "sources": [ "C:/Users/allen/esp/v5.3/esp-idf/components/esp_driver_uart/src/uart.c", "C:/Users/allen/esp/v5.3/esp-idf/components/esp_driver_uart/src/uart_vfs.c" ],
             "include_dirs": [ "include" ]
         },
@@ -609,7 +609,7 @@
             "priv_reqs": [ "esp_driver_gpio", "esp_ringbuf", "esp_pm", "esp_timer" ],
             "managed_reqs": [],
             "managed_priv_reqs": [],
-            "file": "C:/Users/allen/Desktop/repos/duckyPad2/firmware/btt_notworking/build/esp-idf/esp_driver_usb_serial_jtag/libesp_driver_usb_serial_jtag.a",
+            "file": "C:/Users/allen/Desktop/repos/duckyPad2/firmware/btt_working/build/esp-idf/esp_driver_usb_serial_jtag/libesp_driver_usb_serial_jtag.a",
             "sources": [ "C:/Users/allen/esp/v5.3/esp-idf/components/esp_driver_usb_serial_jtag/src/usb_serial_jtag.c", "C:/Users/allen/esp/v5.3/esp-idf/components/esp_driver_usb_serial_jtag/src/usb_serial_jtag_connection_monitor.c", "C:/Users/allen/esp/v5.3/esp-idf/components/esp_driver_usb_serial_jtag/src/usb_serial_jtag_vfs.c" ],
             "include_dirs": [ "include" ]
         },
@@ -624,7 +624,7 @@
             "priv_reqs": [ "log", "esp_timer", "esp_driver_spi", "esp_driver_gpio" ],
             "managed_reqs": [],
             "managed_priv_reqs": [],
-            "file": "C:/Users/allen/Desktop/repos/duckyPad2/firmware/btt_notworking/build/esp-idf/esp_eth/libesp_eth.a",
+            "file": "C:/Users/allen/Desktop/repos/duckyPad2/firmware/btt_working/build/esp-idf/esp_eth/libesp_eth.a",
             "sources": [ "C:/Users/allen/esp/v5.3/esp-idf/components/esp_eth/src/esp_eth.c", "C:/Users/allen/esp/v5.3/esp-idf/components/esp_eth/src/phy/esp_eth_phy_802_3.c", "C:/Users/allen/esp/v5.3/esp-idf/components/esp_eth/src/esp_eth_netif_glue.c" ],
             "include_dirs": [ "include" ]
         },
@@ -639,7 +639,7 @@
             "priv_reqs": [ "esp_timer" ],
             "managed_reqs": [],
             "managed_priv_reqs": [],
-            "file": "C:/Users/allen/Desktop/repos/duckyPad2/firmware/btt_notworking/build/esp-idf/esp_event/libesp_event.a",
+            "file": "C:/Users/allen/Desktop/repos/duckyPad2/firmware/btt_working/build/esp-idf/esp_event/libesp_event.a",
             "sources": [ "C:/Users/allen/esp/v5.3/esp-idf/components/esp_event/default_event_loop.c", "C:/Users/allen/esp/v5.3/esp-idf/components/esp_event/esp_event.c", "C:/Users/allen/esp/v5.3/esp-idf/components/esp_event/esp_event_private.c" ],
             "include_dirs": [ "include" ]
         },
@@ -654,7 +654,7 @@
             "priv_reqs": [ "soc", "esp_rom", "esp_system" ],
             "managed_reqs": [],
             "managed_priv_reqs": [],
-            "file": "C:/Users/allen/Desktop/repos/duckyPad2/firmware/btt_notworking/build/esp-idf/esp_gdbstub/libesp_gdbstub.a",
+            "file": "C:/Users/allen/Desktop/repos/duckyPad2/firmware/btt_working/build/esp-idf/esp_gdbstub/libesp_gdbstub.a",
             "sources": [ "C:/Users/allen/esp/v5.3/esp-idf/components/esp_gdbstub/src/gdbstub.c", "C:/Users/allen/esp/v5.3/esp-idf/components/esp_gdbstub/src/gdbstub_transport.c", "C:/Users/allen/esp/v5.3/esp-idf/components/esp_gdbstub/src/packet.c", "C:/Users/allen/esp/v5.3/esp-idf/components/esp_gdbstub/src/port/xtensa/gdbstub_xtensa.c", "C:/Users/allen/esp/v5.3/esp-idf/components/esp_gdbstub/src/port/xtensa/gdbstub-entry.S", "C:/Users/allen/esp/v5.3/esp-idf/components/esp_gdbstub/src/port/xtensa/xt_debugexception.S" ],
             "include_dirs": [ "include" ]
         },
@@ -669,7 +669,7 @@
             "priv_reqs": [],
             "managed_reqs": [],
             "managed_priv_reqs": [],
-            "file": "C:/Users/allen/Desktop/repos/duckyPad2/firmware/btt_notworking/build/esp-idf/esp_hid/libesp_hid.a",
+            "file": "C:/Users/allen/Desktop/repos/duckyPad2/firmware/btt_working/build/esp-idf/esp_hid/libesp_hid.a",
             "sources": [ "C:/Users/allen/esp/v5.3/esp-idf/components/esp_hid/src/esp_hidd.c", "C:/Users/allen/esp/v5.3/esp-idf/components/esp_hid/src/esp_hidh.c", "C:/Users/allen/esp/v5.3/esp-idf/components/esp_hid/src/esp_hid_common.c", "C:/Users/allen/esp/v5.3/esp-idf/components/esp_hid/src/ble_hidd.c", "C:/Users/allen/esp/v5.3/esp-idf/components/esp_hid/src/ble_hidh.c", "C:/Users/allen/esp/v5.3/esp-idf/components/esp_hid/src/bt_hidh.c", "C:/Users/allen/esp/v5.3/esp-idf/components/esp_hid/src/bt_hidd.c" ],
             "include_dirs": [ "include" ]
         },
@@ -684,7 +684,7 @@
             "priv_reqs": [ "tcp_transport", "http_parser" ],
             "managed_reqs": [],
             "managed_priv_reqs": [],
-            "file": "C:/Users/allen/Desktop/repos/duckyPad2/firmware/btt_notworking/build/esp-idf/esp_http_client/libesp_http_client.a",
+            "file": "C:/Users/allen/Desktop/repos/duckyPad2/firmware/btt_working/build/esp-idf/esp_http_client/libesp_http_client.a",
             "sources": [ "C:/Users/allen/esp/v5.3/esp-idf/components/esp_http_client/esp_http_client.c", "C:/Users/allen/esp/v5.3/esp-idf/components/esp_http_client/lib/http_auth.c", "C:/Users/allen/esp/v5.3/esp-idf/components/esp_http_client/lib/http_header.c", "C:/Users/allen/esp/v5.3/esp-idf/components/esp_http_client/lib/http_utils.c" ],
             "include_dirs": [ "include" ]
         },
@@ -699,7 +699,7 @@
             "priv_reqs": [ "mbedtls", "lwip", "esp_timer" ],
             "managed_reqs": [],
             "managed_priv_reqs": [],
-            "file": "C:/Users/allen/Desktop/repos/duckyPad2/firmware/btt_notworking/build/esp-idf/esp_http_server/libesp_http_server.a",
+            "file": "C:/Users/allen/Desktop/repos/duckyPad2/firmware/btt_working/build/esp-idf/esp_http_server/libesp_http_server.a",
             "sources": [ "C:/Users/allen/esp/v5.3/esp-idf/components/esp_http_server/src/httpd_main.c", "C:/Users/allen/esp/v5.3/esp-idf/components/esp_http_server/src/httpd_parse.c", "C:/Users/allen/esp/v5.3/esp-idf/components/esp_http_server/src/httpd_sess.c", "C:/Users/allen/esp/v5.3/esp-idf/components/esp_http_server/src/httpd_txrx.c", "C:/Users/allen/esp/v5.3/esp-idf/components/esp_http_server/src/httpd_uri.c", "C:/Users/allen/esp/v5.3/esp-idf/components/esp_http_server/src/httpd_ws.c", "C:/Users/allen/esp/v5.3/esp-idf/components/esp_http_server/src/util/ctrl_sock.c" ],
             "include_dirs": [ "include" ]
         },
@@ -714,7 +714,7 @@
             "priv_reqs": [ "log", "app_update" ],
             "managed_reqs": [],
             "managed_priv_reqs": [],
-            "file": "C:/Users/allen/Desktop/repos/duckyPad2/firmware/btt_notworking/build/esp-idf/esp_https_ota/libesp_https_ota.a",
+            "file": "C:/Users/allen/Desktop/repos/duckyPad2/firmware/btt_working/build/esp-idf/esp_https_ota/libesp_https_ota.a",
             "sources": [ "C:/Users/allen/esp/v5.3/esp-idf/components/esp_https_ota/src/esp_https_ota.c" ],
             "include_dirs": [ "include" ]
         },
@@ -729,7 +729,7 @@
             "priv_reqs": [ "lwip" ],
             "managed_reqs": [],
             "managed_priv_reqs": [],
-            "file": "C:/Users/allen/Desktop/repos/duckyPad2/firmware/btt_notworking/build/esp-idf/esp_https_server/libesp_https_server.a",
+            "file": "C:/Users/allen/Desktop/repos/duckyPad2/firmware/btt_working/build/esp-idf/esp_https_server/libesp_https_server.a",
             "sources": [ "C:/Users/allen/esp/v5.3/esp-idf/components/esp_https_server/src/https_server.c" ],
             "include_dirs": [ "include" ]
         },
@@ -744,7 +744,7 @@
             "priv_reqs": [ "efuse", "spi_flash", "bootloader_support", "esp_driver_gpio", "esp_timer", "esp_pm", "esp_mm" ],
             "managed_reqs": [],
             "managed_priv_reqs": [],
-            "file": "C:/Users/allen/Desktop/repos/duckyPad2/firmware/btt_notworking/build/esp-idf/esp_hw_support/libesp_hw_support.a",
+            "file": "C:/Users/allen/Desktop/repos/duckyPad2/firmware/btt_working/build/esp-idf/esp_hw_support/libesp_hw_support.a",
             "sources": [ "C:/Users/allen/esp/v5.3/esp-idf/components/esp_hw_support/cpu.c", "C:/Users/allen/esp/v5.3/esp-idf/components/esp_hw_support/port/esp32s3/esp_cpu_intr.c", "C:/Users/allen/esp/v5.3/esp-idf/components/esp_hw_support/esp_memory_utils.c", "C:/Users/allen/esp/v5.3/esp-idf/components/esp_hw_support/port/esp32s3/cpu_region_protect.c", "C:/Users/allen/esp/v5.3/esp-idf/components/esp_hw_support/esp_clk.c", "C:/Users/allen/esp/v5.3/esp-idf/components/esp_hw_support/clk_ctrl_os.c", "C:/Users/allen/esp/v5.3/esp-idf/components/esp_hw_support/hw_random.c", "C:/Users/allen/esp/v5.3/esp-idf/components/esp_hw_support/intr_alloc.c", "C:/Users/allen/esp/v5.3/esp-idf/components/esp_hw_support/mac_addr.c", "C:/Users/allen/esp/v5.3/esp-idf/components/esp_hw_support/periph_ctrl.c", "C:/Users/allen/esp/v5.3/esp-idf/components/esp_hw_support/revision.c", "C:/Users/allen/esp/v5.3/esp-idf/components/esp_hw_support/rtc_module.c", "C:/Users/allen/esp/v5.3/esp-idf/components/esp_hw_support/sleep_modem.c", "C:/Users/allen/esp/v5.3/esp-idf/components/esp_hw_support/sleep_modes.c", "C:/Users/allen/esp/v5.3/esp-idf/components/esp_hw_support/sleep_console.c", "C:/Users/allen/esp/v5.3/esp-idf/components/esp_hw_support/sleep_gpio.c", "C:/Users/allen/esp/v5.3/esp-idf/components/esp_hw_support/sleep_event.c", "C:/Users/allen/esp/v5.3/esp-idf/components/esp_hw_support/regi2c_ctrl.c", "C:/Users/allen/esp/v5.3/esp-idf/components/esp_hw_support/esp_gpio_reserve.c", "C:/Users/allen/esp/v5.3/esp-idf/components/esp_hw_support/sar_periph_ctrl_common.c", "C:/Users/allen/esp/v5.3/esp-idf/components/esp_hw_support/port/esp32s3/io_mux.c", "C:/Users/allen/esp/v5.3/esp-idf/components/esp_hw_support/port/esp32s3/esp_clk_tree.c", "C:/Users/allen/esp/v5.3/esp-idf/components/esp_hw_support/port/esp_clk_tree_common.c", "C:/Users/allen/esp/v5.3/esp-idf/components/esp_hw_support/dma/esp_dma_utils.c", "C:/Users/allen/esp/v5.3/esp-idf/components/esp_hw_support/spi_share_hw_ctrl.c", "C:/Users/allen/esp/v5.3/esp-idf/components/esp_hw_support/spi_bus_lock.c", "C:/Users/allen/esp/v5.3/esp-idf/components/esp_hw_support/adc_share_hw_ctrl.c", "C:/Users/allen/esp/v5.3/esp-idf/components/esp_hw_support/dma/gdma.c", "C:/Users/allen/esp/v5.3/esp-idf/components/esp_hw_support/deprecated/gdma_legacy.c", "C:/Users/allen/esp/v5.3/esp-idf/components/esp_hw_support/dma/esp_async_memcpy.c", "C:/Users/allen/esp/v5.3/esp-idf/components/esp_hw_support/dma/async_memcpy_gdma.c", "C:/Users/allen/esp/v5.3/esp-idf/components/esp_hw_support/port/esp32s3/systimer.c", "C:/Users/allen/esp/v5.3/esp-idf/components/esp_hw_support/esp_hmac.c", "C:/Users/allen/esp/v5.3/esp-idf/components/esp_hw_support/esp_ds.c", "C:/Users/allen/esp/v5.3/esp-idf/components/esp_hw_support/mspi_timing_tuning.c", "C:/Users/allen/esp/v5.3/esp-idf/components/esp_hw_support/mspi_timing_by_mspi_delay.c", "C:/Users/allen/esp/v5.3/esp-idf/components/esp_hw_support/sleep_wake_stub.c", "C:/Users/allen/esp/v5.3/esp-idf/components/esp_hw_support/esp_clock_output.c", "C:/Users/allen/esp/v5.3/esp-idf/components/esp_hw_support/port/esp32s3/rtc_clk.c", "C:/Users/allen/esp/v5.3/esp-idf/components/esp_hw_support/port/esp32s3/rtc_clk_init.c", "C:/Users/allen/esp/v5.3/esp-idf/components/esp_hw_support/port/esp32s3/rtc_init.c", "C:/Users/allen/esp/v5.3/esp-idf/components/esp_hw_support/port/esp32s3/rtc_sleep.c", "C:/Users/allen/esp/v5.3/esp-idf/components/esp_hw_support/port/esp32s3/rtc_time.c", "C:/Users/allen/esp/v5.3/esp-idf/components/esp_hw_support/port/esp32s3/chip_info.c", "C:/Users/allen/esp/v5.3/esp-idf/components/esp_hw_support/port/esp32s3/esp_crypto_lock.c", "C:/Users/allen/esp/v5.3/esp-idf/components/esp_hw_support/port/esp32s3/sar_periph_ctrl.c", "C:/Users/allen/esp/v5.3/esp-idf/components/esp_hw_support/port/esp32s3/mspi_timing_config.c", "C:/Users/allen/esp/v5.3/esp-idf/components/esp_hw_support/port/esp32s3/esp_memprot.c", "C:/Users/allen/esp/v5.3/esp-idf/components/esp_hw_support/port/esp_memprot_conv.c", "C:/Users/allen/esp/v5.3/esp-idf/components/esp_hw_support/lowpower/cpu_retention/port/esp32s3/sleep_cpu.c" ],
             "include_dirs": [ "include", "include/soc", "include/soc/esp32s3", "dma/include", "ldo/include" ]
         },
@@ -759,7 +759,7 @@
             "priv_reqs": [ "esp_mm", "esp_psram", "esp_pm", "esp_driver_i2s" ],
             "managed_reqs": [],
             "managed_priv_reqs": [],
-            "file": "C:/Users/allen/Desktop/repos/duckyPad2/firmware/btt_notworking/build/esp-idf/esp_lcd/libesp_lcd.a",
+            "file": "C:/Users/allen/Desktop/repos/duckyPad2/firmware/btt_working/build/esp-idf/esp_lcd/libesp_lcd.a",
             "sources": [ "C:/Users/allen/esp/v5.3/esp-idf/components/esp_lcd/src/esp_lcd_common.c", "C:/Users/allen/esp/v5.3/esp-idf/components/esp_lcd/src/esp_lcd_panel_io.c", "C:/Users/allen/esp/v5.3/esp-idf/components/esp_lcd/src/esp_lcd_panel_nt35510.c", "C:/Users/allen/esp/v5.3/esp-idf/components/esp_lcd/src/esp_lcd_panel_ssd1306.c", "C:/Users/allen/esp/v5.3/esp-idf/components/esp_lcd/src/esp_lcd_panel_st7789.c", "C:/Users/allen/esp/v5.3/esp-idf/components/esp_lcd/src/esp_lcd_panel_ops.c", "C:/Users/allen/esp/v5.3/esp-idf/components/esp_lcd/i2c/esp_lcd_panel_io_i2c_v1.c", "C:/Users/allen/esp/v5.3/esp-idf/components/esp_lcd/i2c/esp_lcd_panel_io_i2c_v2.c", "C:/Users/allen/esp/v5.3/esp-idf/components/esp_lcd/spi/esp_lcd_panel_io_spi.c", "C:/Users/allen/esp/v5.3/esp-idf/components/esp_lcd/i80/esp_lcd_panel_io_i80.c", "C:/Users/allen/esp/v5.3/esp-idf/components/esp_lcd/rgb/esp_lcd_panel_rgb.c" ],
             "include_dirs": [ "include", "interface", "rgb/include" ]
         },
@@ -774,7 +774,7 @@
             "priv_reqs": [ "protobuf-c" ],
             "managed_reqs": [],
             "managed_priv_reqs": [],
-            "file": "C:/Users/allen/Desktop/repos/duckyPad2/firmware/btt_notworking/build/esp-idf/esp_local_ctrl/libesp_local_ctrl.a",
+            "file": "C:/Users/allen/Desktop/repos/duckyPad2/firmware/btt_working/build/esp-idf/esp_local_ctrl/libesp_local_ctrl.a",
             "sources": [ "C:/Users/allen/esp/v5.3/esp-idf/components/esp_local_ctrl/src/esp_local_ctrl.c", "C:/Users/allen/esp/v5.3/esp-idf/components/esp_local_ctrl/src/esp_local_ctrl_handler.c", "C:/Users/allen/esp/v5.3/esp-idf/components/esp_local_ctrl/proto-c/esp_local_ctrl.pb-c.c", "C:/Users/allen/esp/v5.3/esp-idf/components/esp_local_ctrl/src/esp_local_ctrl_transport_ble.c", "C:/Users/allen/esp/v5.3/esp-idf/components/esp_local_ctrl/src/esp_local_ctrl_transport_httpd.c" ],
             "include_dirs": [ "include" ]
         },
@@ -789,7 +789,7 @@
             "priv_reqs": [ "heap", "spi_flash" ],
             "managed_reqs": [],
             "managed_priv_reqs": [],
-            "file": "C:/Users/allen/Desktop/repos/duckyPad2/firmware/btt_notworking/build/esp-idf/esp_mm/libesp_mm.a",
+            "file": "C:/Users/allen/Desktop/repos/duckyPad2/firmware/btt_working/build/esp-idf/esp_mm/libesp_mm.a",
             "sources": [ "C:/Users/allen/esp/v5.3/esp-idf/components/esp_mm/esp_mmu_map.c", "C:/Users/allen/esp/v5.3/esp-idf/components/esp_mm/port/esp32s3/ext_mem_layout.c", "C:/Users/allen/esp/v5.3/esp-idf/components/esp_mm/esp_cache.c", "C:/Users/allen/esp/v5.3/esp-idf/components/esp_mm/heap_align_hw.c" ],
             "include_dirs": [ "include" ]
         },
@@ -804,7 +804,7 @@
             "priv_reqs": [ "esp_netif_stack" ],
             "managed_reqs": [],
             "managed_priv_reqs": [],
-            "file": "C:/Users/allen/Desktop/repos/duckyPad2/firmware/btt_notworking/build/esp-idf/esp_netif/libesp_netif.a",
+            "file": "C:/Users/allen/Desktop/repos/duckyPad2/firmware/btt_working/build/esp-idf/esp_netif/libesp_netif.a",
             "sources": [ "C:/Users/allen/esp/v5.3/esp-idf/components/esp_netif/esp_netif_handlers.c", "C:/Users/allen/esp/v5.3/esp-idf/components/esp_netif/esp_netif_objects.c", "C:/Users/allen/esp/v5.3/esp-idf/components/esp_netif/esp_netif_defaults.c", "C:/Users/allen/esp/v5.3/esp-idf/components/esp_netif/lwip/esp_netif_lwip.c", "C:/Users/allen/esp/v5.3/esp-idf/components/esp_netif/lwip/esp_netif_sntp.c", "C:/Users/allen/esp/v5.3/esp-idf/components/esp_netif/lwip/esp_netif_lwip_defaults.c", "C:/Users/allen/esp/v5.3/esp-idf/components/esp_netif/lwip/netif/wlanif.c", "C:/Users/allen/esp/v5.3/esp-idf/components/esp_netif/lwip/netif/ethernetif.c", "C:/Users/allen/esp/v5.3/esp-idf/components/esp_netif/lwip/netif/esp_pbuf_ref.c" ],
             "include_dirs": [ "include" ]
         },
@@ -834,7 +834,7 @@
             "priv_reqs": [ "esp_system", "bootloader_support", "spi_flash", "app_update", "partition_table" ],
             "managed_reqs": [],
             "managed_priv_reqs": [],
-            "file": "C:/Users/allen/Desktop/repos/duckyPad2/firmware/btt_notworking/build/esp-idf/esp_partition/libesp_partition.a",
+            "file": "C:/Users/allen/Desktop/repos/duckyPad2/firmware/btt_working/build/esp-idf/esp_partition/libesp_partition.a",
             "sources": [ "C:/Users/allen/esp/v5.3/esp-idf/components/esp_partition/partition.c", "C:/Users/allen/esp/v5.3/esp-idf/components/esp_partition/partition_target.c" ],
             "include_dirs": [ "include" ]
         },
@@ -849,7 +849,7 @@
             "priv_reqs": [ "nvs_flash", "driver", "efuse", "esp_timer", "esp_wifi" ],
             "managed_reqs": [],
             "managed_priv_reqs": [],
-            "file": "C:/Users/allen/Desktop/repos/duckyPad2/firmware/btt_notworking/build/esp-idf/esp_phy/libesp_phy.a",
+            "file": "C:/Users/allen/Desktop/repos/duckyPad2/firmware/btt_working/build/esp-idf/esp_phy/libesp_phy.a",
             "sources": [ "C:/Users/allen/esp/v5.3/esp-idf/components/esp_phy/src/phy_override.c", "C:/Users/allen/esp/v5.3/esp-idf/components/esp_phy/src/lib_printf.c", "C:/Users/allen/esp/v5.3/esp-idf/components/esp_phy/src/phy_common.c", "C:/Users/allen/esp/v5.3/esp-idf/components/esp_phy/src/phy_init.c", "C:/Users/allen/esp/v5.3/esp-idf/components/esp_phy/esp32s3/phy_init_data.c", "C:/Users/allen/esp/v5.3/esp-idf/components/esp_phy/src/btbb_init.c" ],
             "include_dirs": [ "include", "esp32s3/include" ]
         },
@@ -864,7 +864,7 @@
             "priv_reqs": [ "esp_system", "esp_driver_gpio", "esp_timer" ],
             "managed_reqs": [],
             "managed_priv_reqs": [],
-            "file": "C:/Users/allen/Desktop/repos/duckyPad2/firmware/btt_notworking/build/esp-idf/esp_pm/libesp_pm.a",
+            "file": "C:/Users/allen/Desktop/repos/duckyPad2/firmware/btt_working/build/esp-idf/esp_pm/libesp_pm.a",
             "sources": [ "C:/Users/allen/esp/v5.3/esp-idf/components/esp_pm/pm_locks.c", "C:/Users/allen/esp/v5.3/esp-idf/components/esp_pm/pm_trace.c", "C:/Users/allen/esp/v5.3/esp-idf/components/esp_pm/pm_impl.c" ],
             "include_dirs": [ "include" ]
         },
@@ -894,7 +894,7 @@
             "priv_reqs": [],
             "managed_reqs": [],
             "managed_priv_reqs": [],
-            "file": "C:/Users/allen/Desktop/repos/duckyPad2/firmware/btt_notworking/build/esp-idf/esp_ringbuf/libesp_ringbuf.a",
+            "file": "C:/Users/allen/Desktop/repos/duckyPad2/firmware/btt_working/build/esp-idf/esp_ringbuf/libesp_ringbuf.a",
             "sources": [ "C:/Users/allen/esp/v5.3/esp-idf/components/esp_ringbuf/ringbuf.c" ],
             "include_dirs": [ "include" ]
         },
@@ -909,7 +909,7 @@
             "priv_reqs": [ "soc", "hal" ],
             "managed_reqs": [],
             "managed_priv_reqs": [],
-            "file": "C:/Users/allen/Desktop/repos/duckyPad2/firmware/btt_notworking/build/esp-idf/esp_rom/libesp_rom.a",
+            "file": "C:/Users/allen/Desktop/repos/duckyPad2/firmware/btt_working/build/esp-idf/esp_rom/libesp_rom.a",
             "sources": [ "C:/Users/allen/esp/v5.3/esp-idf/components/esp_rom/patches/esp_rom_crc.c", "C:/Users/allen/esp/v5.3/esp-idf/components/esp_rom/patches/esp_rom_sys.c", "C:/Users/allen/esp/v5.3/esp-idf/components/esp_rom/patches/esp_rom_uart.c", "C:/Users/allen/esp/v5.3/esp-idf/components/esp_rom/patches/esp_rom_spiflash.c", "C:/Users/allen/esp/v5.3/esp-idf/components/esp_rom/patches/esp_rom_efuse.c", "C:/Users/allen/esp/v5.3/esp-idf/components/esp_rom/patches/esp_rom_longjmp.S", "C:/Users/allen/esp/v5.3/esp-idf/components/esp_rom/patches/esp_rom_systimer.c", "C:/Users/allen/esp/v5.3/esp-idf/components/esp_rom/patches/esp_rom_wdt.c", "C:/Users/allen/esp/v5.3/esp-idf/components/esp_rom/patches/esp_rom_cache_esp32s2_esp32s3.c", "C:/Users/allen/esp/v5.3/esp-idf/components/esp_rom/patches/esp_rom_cache_writeback_esp32s3.S" ],
             "include_dirs": [ "include", "include/esp32s3", "esp32s3" ]
         },
@@ -924,7 +924,7 @@
             "priv_reqs": [ "spi_flash", "esp_timer", "esp_mm", "bootloader_support", "esp_pm" ],
             "managed_reqs": [],
             "managed_priv_reqs": [],
-            "file": "C:/Users/allen/Desktop/repos/duckyPad2/firmware/btt_notworking/build/esp-idf/esp_system/libesp_system.a",
+            "file": "C:/Users/allen/Desktop/repos/duckyPad2/firmware/btt_working/build/esp-idf/esp_system/libesp_system.a",
             "sources": [ "C:/Users/allen/esp/v5.3/esp-idf/components/esp_system/esp_err.c", "C:/Users/allen/esp/v5.3/esp-idf/components/esp_system/crosscore_int.c", "C:/Users/allen/esp/v5.3/esp-idf/components/esp_system/esp_ipc.c", "C:/Users/allen/esp/v5.3/esp-idf/components/esp_system/freertos_hooks.c", "C:/Users/allen/esp/v5.3/esp-idf/components/esp_system/int_wdt.c", "C:/Users/allen/esp/v5.3/esp-idf/components/esp_system/panic.c", "C:/Users/allen/esp/v5.3/esp-idf/components/esp_system/esp_system.c", "C:/Users/allen/esp/v5.3/esp-idf/components/esp_system/startup.c", "C:/Users/allen/esp/v5.3/esp-idf/components/esp_system/startup_funcs.c", "C:/Users/allen/esp/v5.3/esp-idf/components/esp_system/system_time.c", "C:/Users/allen/esp/v5.3/esp-idf/components/esp_system/stack_check.c", "C:/Users/allen/esp/v5.3/esp-idf/components/esp_system/ubsan.c", "C:/Users/allen/esp/v5.3/esp-idf/components/esp_system/xt_wdt.c", "C:/Users/allen/esp/v5.3/esp-idf/components/esp_system/task_wdt/task_wdt.c", "C:/Users/allen/esp/v5.3/esp-idf/components/esp_system/task_wdt/task_wdt_impl_timergroup.c", "C:/Users/allen/esp/v5.3/esp-idf/components/esp_system/port/cpu_start.c", "C:/Users/allen/esp/v5.3/esp-idf/components/esp_system/port/panic_handler.c", "C:/Users/allen/esp/v5.3/esp-idf/components/esp_system/port/esp_system_chip.c", "C:/Users/allen/esp/v5.3/esp-idf/components/esp_system/port/image_process.c", "C:/Users/allen/esp/v5.3/esp-idf/components/esp_system/port/brownout.c", "C:/Users/allen/esp/v5.3/esp-idf/components/esp_system/port/esp_ipc_isr.c", "C:/Users/allen/esp/v5.3/esp-idf/components/esp_system/port/arch/xtensa/esp_ipc_isr_port.c", "C:/Users/allen/esp/v5.3/esp-idf/components/esp_system/port/arch/xtensa/esp_ipc_isr_handler.S", "C:/Users/allen/esp/v5.3/esp-idf/components/esp_system/port/arch/xtensa/esp_ipc_isr_routines.S", "C:/Users/allen/esp/v5.3/esp-idf/components/esp_system/port/arch/xtensa/panic_arch.c", "C:/Users/allen/esp/v5.3/esp-idf/components/esp_system/port/arch/xtensa/panic_handler_asm.S", "C:/Users/allen/esp/v5.3/esp-idf/components/esp_system/port/arch/xtensa/expression_with_stack.c", "C:/Users/allen/esp/v5.3/esp-idf/components/esp_system/port/arch/xtensa/expression_with_stack_asm.S", "C:/Users/allen/esp/v5.3/esp-idf/components/esp_system/port/arch/xtensa/debug_helpers.c", "C:/Users/allen/esp/v5.3/esp-idf/components/esp_system/port/arch/xtensa/debug_helpers_asm.S", "C:/Users/allen/esp/v5.3/esp-idf/components/esp_system/port/arch/xtensa/debug_stubs.c", "C:/Users/allen/esp/v5.3/esp-idf/components/esp_system/port/arch/xtensa/trax.c", "C:/Users/allen/esp/v5.3/esp-idf/components/esp_system/port/soc/esp32s3/highint_hdl.S", "C:/Users/allen/esp/v5.3/esp-idf/components/esp_system/port/soc/esp32s3/clk.c", "C:/Users/allen/esp/v5.3/esp-idf/components/esp_system/port/soc/esp32s3/reset_reason.c", "C:/Users/allen/esp/v5.3/esp-idf/components/esp_system/port/soc/esp32s3/system_internal.c", "C:/Users/allen/esp/v5.3/esp-idf/components/esp_system/port/soc/esp32s3/cache_err_int.c", "C:/Users/allen/esp/v5.3/esp-idf/components/esp_system/port/soc/esp32s3/apb_backup_dma.c" ],
             "include_dirs": [ "include" ]
         },
@@ -939,7 +939,7 @@
             "priv_reqs": [],
             "managed_reqs": [],
             "managed_priv_reqs": [],
-            "file": "C:/Users/allen/Desktop/repos/duckyPad2/firmware/btt_notworking/build/esp-idf/esp_timer/libesp_timer.a",
+            "file": "C:/Users/allen/Desktop/repos/duckyPad2/firmware/btt_working/build/esp-idf/esp_timer/libesp_timer.a",
             "sources": [ "C:/Users/allen/esp/v5.3/esp-idf/components/esp_timer/src/esp_timer.c", "C:/Users/allen/esp/v5.3/esp-idf/components/esp_timer/src/esp_timer_init.c", "C:/Users/allen/esp/v5.3/esp-idf/components/esp_timer/src/ets_timer_legacy.c", "C:/Users/allen/esp/v5.3/esp-idf/components/esp_timer/src/system_time.c", "C:/Users/allen/esp/v5.3/esp-idf/components/esp_timer/src/esp_timer_impl_common.c", "C:/Users/allen/esp/v5.3/esp-idf/components/esp_timer/src/esp_timer_impl_systimer.c" ],
             "include_dirs": [ "include" ]
         },
@@ -954,7 +954,7 @@
             "priv_reqs": [ "vfs", "esp_driver_uart", "esp_driver_usb_serial_jtag" ],
             "managed_reqs": [],
             "managed_priv_reqs": [],
-            "file": "C:/Users/allen/Desktop/repos/duckyPad2/firmware/btt_notworking/build/esp-idf/esp_vfs_console/libesp_vfs_console.a",
+            "file": "C:/Users/allen/Desktop/repos/duckyPad2/firmware/btt_working/build/esp-idf/esp_vfs_console/libesp_vfs_console.a",
             "sources": [ "C:/Users/allen/esp/v5.3/esp-idf/components/esp_vfs_console/vfs_console.c" ],
             "include_dirs": [ "include" ]
         },
@@ -969,7 +969,7 @@
             "priv_reqs": [ "driver", "esptool_py", "esp_pm", "esp_timer", "nvs_flash", "wpa_supplicant", "hal", "lwip", "esp_coex" ],
             "managed_reqs": [],
             "managed_priv_reqs": [],
-            "file": "C:/Users/allen/Desktop/repos/duckyPad2/firmware/btt_notworking/build/esp-idf/esp_wifi/libesp_wifi.a",
+            "file": "C:/Users/allen/Desktop/repos/duckyPad2/firmware/btt_working/build/esp-idf/esp_wifi/libesp_wifi.a",
             "sources": [ "C:/Users/allen/esp/v5.3/esp-idf/components/esp_wifi/src/lib_printf.c", "C:/Users/allen/esp/v5.3/esp-idf/components/esp_wifi/src/mesh_event.c", "C:/Users/allen/esp/v5.3/esp-idf/components/esp_wifi/src/smartconfig.c", "C:/Users/allen/esp/v5.3/esp-idf/components/esp_wifi/src/wifi_init.c", "C:/Users/allen/esp/v5.3/esp-idf/components/esp_wifi/src/wifi_default.c", "C:/Users/allen/esp/v5.3/esp-idf/components/esp_wifi/src/wifi_netif.c", "C:/Users/allen/esp/v5.3/esp-idf/components/esp_wifi/src/wifi_default_ap.c", "C:/Users/allen/esp/v5.3/esp-idf/components/esp_wifi/esp32s3/esp_adapter.c", "C:/Users/allen/esp/v5.3/esp-idf/components/esp_wifi/src/smartconfig_ack.c" ],
             "include_dirs": [ "include", "wifi_apps/include", "wifi_apps/nan_app/include", "include/local" ]
         },
@@ -984,7 +984,7 @@
             "priv_reqs": [ "esp_partition", "spi_flash", "bootloader_support", "mbedtls", "esp_rom", "soc", "esp_system", "esp_driver_gpio", "driver" ],
             "managed_reqs": [],
             "managed_priv_reqs": [],
-            "file": "C:/Users/allen/Desktop/repos/duckyPad2/firmware/btt_notworking/build/esp-idf/espcoredump/libespcoredump.a",
+            "file": "C:/Users/allen/Desktop/repos/duckyPad2/firmware/btt_working/build/esp-idf/espcoredump/libespcoredump.a",
             "sources": [ "C:/Users/allen/esp/v5.3/esp-idf/components/espcoredump/src/core_dump_init.c", "C:/Users/allen/esp/v5.3/esp-idf/components/espcoredump/src/core_dump_common.c", "C:/Users/allen/esp/v5.3/esp-idf/components/espcoredump/src/core_dump_flash.c", "C:/Users/allen/esp/v5.3/esp-idf/components/espcoredump/src/core_dump_uart.c", "C:/Users/allen/esp/v5.3/esp-idf/components/espcoredump/src/core_dump_elf.c", "C:/Users/allen/esp/v5.3/esp-idf/components/espcoredump/src/core_dump_binary.c", "C:/Users/allen/esp/v5.3/esp-idf/components/espcoredump/src/core_dump_sha.c", "C:/Users/allen/esp/v5.3/esp-idf/components/espcoredump/src/core_dump_crc.c", "C:/Users/allen/esp/v5.3/esp-idf/components/espcoredump/src/port/xtensa/core_dump_port.c" ],
             "include_dirs": [ "include", "include/port/xtensa" ]
         },
@@ -1014,7 +1014,7 @@
             "priv_reqs": [ "vfs", "esp_driver_gpio" ],
             "managed_reqs": [],
             "managed_priv_reqs": [],
-            "file": "C:/Users/allen/Desktop/repos/duckyPad2/firmware/btt_notworking/build/esp-idf/fatfs/libfatfs.a",
+            "file": "C:/Users/allen/Desktop/repos/duckyPad2/firmware/btt_working/build/esp-idf/fatfs/libfatfs.a",
             "sources": [ "C:/Users/allen/esp/v5.3/esp-idf/components/fatfs/diskio/diskio.c", "C:/Users/allen/esp/v5.3/esp-idf/components/fatfs/diskio/diskio_rawflash.c", "C:/Users/allen/esp/v5.3/esp-idf/components/fatfs/diskio/diskio_wl.c", "C:/Users/allen/esp/v5.3/esp-idf/components/fatfs/src/ff.c", "C:/Users/allen/esp/v5.3/esp-idf/components/fatfs/src/ffunicode.c", "C:/Users/allen/esp/v5.3/esp-idf/components/fatfs/port/freertos/ffsystem.c", "C:/Users/allen/esp/v5.3/esp-idf/components/fatfs/diskio/diskio_sdmmc.c", "C:/Users/allen/esp/v5.3/esp-idf/components/fatfs/vfs/vfs_fat.c", "C:/Users/allen/esp/v5.3/esp-idf/components/fatfs/vfs/vfs_fat_sdmmc.c", "C:/Users/allen/esp/v5.3/esp-idf/components/fatfs/vfs/vfs_fat_spiflash.c" ],
             "include_dirs": [ "diskio", "src", "vfs" ]
         },
@@ -1029,7 +1029,7 @@
             "priv_reqs": [],
             "managed_reqs": [],
             "managed_priv_reqs": [],
-            "file": "C:/Users/allen/Desktop/repos/duckyPad2/firmware/btt_notworking/build/esp-idf/freertos/libfreertos.a",
+            "file": "C:/Users/allen/Desktop/repos/duckyPad2/firmware/btt_working/build/esp-idf/freertos/libfreertos.a",
             "sources": [ "C:/Users/allen/esp/v5.3/esp-idf/components/freertos/heap_idf.c", "C:/Users/allen/esp/v5.3/esp-idf/components/freertos/app_startup.c", "C:/Users/allen/esp/v5.3/esp-idf/components/freertos/port_common.c", "C:/Users/allen/esp/v5.3/esp-idf/components/freertos/port_systick.c", "C:/Users/allen/esp/v5.3/esp-idf/components/freertos/FreeRTOS-Kernel/list.c", "C:/Users/allen/esp/v5.3/esp-idf/components/freertos/FreeRTOS-Kernel/queue.c", "C:/Users/allen/esp/v5.3/esp-idf/components/freertos/FreeRTOS-Kernel/tasks.c", "C:/Users/allen/esp/v5.3/esp-idf/components/freertos/FreeRTOS-Kernel/timers.c", "C:/Users/allen/esp/v5.3/esp-idf/components/freertos/FreeRTOS-Kernel/event_groups.c", "C:/Users/allen/esp/v5.3/esp-idf/components/freertos/FreeRTOS-Kernel/stream_buffer.c", "C:/Users/allen/esp/v5.3/esp-idf/components/freertos/FreeRTOS-Kernel/portable/xtensa/port.c", "C:/Users/allen/esp/v5.3/esp-idf/components/freertos/FreeRTOS-Kernel/portable/xtensa/portasm.S", "C:/Users/allen/esp/v5.3/esp-idf/components/freertos/FreeRTOS-Kernel/portable/xtensa/xtensa_init.c", "C:/Users/allen/esp/v5.3/esp-idf/components/freertos/FreeRTOS-Kernel/portable/xtensa/xtensa_overlay_os_hook.c", "C:/Users/allen/esp/v5.3/esp-idf/components/freertos/esp_additions/freertos_compatibility.c", "C:/Users/allen/esp/v5.3/esp-idf/components/freertos/esp_additions/idf_additions.c" ],
             "include_dirs": [ "config/include", "config/include/freertos", "config/xtensa/include", "FreeRTOS-Kernel/include", "FreeRTOS-Kernel/portable/xtensa/include", "FreeRTOS-Kernel/portable/xtensa/include/freertos", "esp_additions/include" ]
         },
@@ -1044,7 +1044,7 @@
             "priv_reqs": [],
             "managed_reqs": [],
             "managed_priv_reqs": [],
-            "file": "C:/Users/allen/Desktop/repos/duckyPad2/firmware/btt_notworking/build/esp-idf/hal/libhal.a",
+            "file": "C:/Users/allen/Desktop/repos/duckyPad2/firmware/btt_working/build/esp-idf/hal/libhal.a",
             "sources": [ "C:/Users/allen/esp/v5.3/esp-idf/components/hal/hal_utils.c", "C:/Users/allen/esp/v5.3/esp-idf/components/hal/mpu_hal.c", "C:/Users/allen/esp/v5.3/esp-idf/components/hal/efuse_hal.c", "C:/Users/allen/esp/v5.3/esp-idf/components/hal/esp32s3/efuse_hal.c", "C:/Users/allen/esp/v5.3/esp-idf/components/hal/mmu_hal.c", "C:/Users/allen/esp/v5.3/esp-idf/components/hal/cache_hal.c", "C:/Users/allen/esp/v5.3/esp-idf/components/hal/color_hal.c", "C:/Users/allen/esp/v5.3/esp-idf/components/hal/spi_flash_hal.c", "C:/Users/allen/esp/v5.3/esp-idf/components/hal/spi_flash_hal_iram.c", "C:/Users/allen/esp/v5.3/esp-idf/components/hal/spi_flash_encrypt_hal_iram.c", "C:/Users/allen/esp/v5.3/esp-idf/components/hal/esp32s3/clk_tree_hal.c", "C:/Users/allen/esp/v5.3/esp-idf/components/hal/systimer_hal.c", "C:/Users/allen/esp/v5.3/esp-idf/components/hal/uart_hal.c", "C:/Users/allen/esp/v5.3/esp-idf/components/hal/uart_hal_iram.c", "C:/Users/allen/esp/v5.3/esp-idf/components/hal/gpio_hal.c", "C:/Users/allen/esp/v5.3/esp-idf/components/hal/rtc_io_hal.c", "C:/Users/allen/esp/v5.3/esp-idf/components/hal/timer_hal.c", "C:/Users/allen/esp/v5.3/esp-idf/components/hal/ledc_hal.c", "C:/Users/allen/esp/v5.3/esp-idf/components/hal/ledc_hal_iram.c", "C:/Users/allen/esp/v5.3/esp-idf/components/hal/i2c_hal.c", "C:/Users/allen/esp/v5.3/esp-idf/components/hal/i2c_hal_iram.c", "C:/Users/allen/esp/v5.3/esp-idf/components/hal/rmt_hal.c", "C:/Users/allen/esp/v5.3/esp-idf/components/hal/pcnt_hal.c", "C:/Users/allen/esp/v5.3/esp-idf/components/hal/mcpwm_hal.c", "C:/Users/allen/esp/v5.3/esp-idf/components/hal/twai_hal.c", "C:/Users/allen/esp/v5.3/esp-idf/components/hal/twai_hal_iram.c", "C:/Users/allen/esp/v5.3/esp-idf/components/hal/gdma_hal_top.c", "C:/Users/allen/esp/v5.3/esp-idf/components/hal/gdma_hal_ahb_v1.c", "C:/Users/allen/esp/v5.3/esp-idf/components/hal/i2s_hal.c", "C:/Users/allen/esp/v5.3/esp-idf/components/hal/sdm_hal.c", "C:/Users/allen/esp/v5.3/esp-idf/components/hal/sdmmc_hal.c", "C:/Users/allen/esp/v5.3/esp-idf/components/hal/adc_hal_common.c", "C:/Users/allen/esp/v5.3/esp-idf/components/hal/adc_oneshot_hal.c", "C:/Users/allen/esp/v5.3/esp-idf/components/hal/adc_hal.c", "C:/Users/allen/esp/v5.3/esp-idf/components/hal/lcd_hal.c", "C:/Users/allen/esp/v5.3/esp-idf/components/hal/mpi_hal.c", "C:/Users/allen/esp/v5.3/esp-idf/components/hal/sha_hal.c", "C:/Users/allen/esp/v5.3/esp-idf/components/hal/aes_hal.c", "C:/Users/allen/esp/v5.3/esp-idf/components/hal/brownout_hal.c", "C:/Users/allen/esp/v5.3/esp-idf/components/hal/spi_hal.c", "C:/Users/allen/esp/v5.3/esp-idf/components/hal/spi_hal_iram.c", "C:/Users/allen/esp/v5.3/esp-idf/components/hal/spi_slave_hal.c", "C:/Users/allen/esp/v5.3/esp-idf/components/hal/spi_slave_hal_iram.c", "C:/Users/allen/esp/v5.3/esp-idf/components/hal/spi_slave_hd_hal.c", "C:/Users/allen/esp/v5.3/esp-idf/components/hal/spi_flash_hal_gpspi.c", "C:/Users/allen/esp/v5.3/esp-idf/components/hal/hmac_hal.c", "C:/Users/allen/esp/v5.3/esp-idf/components/hal/ds_hal.c", "C:/Users/allen/esp/v5.3/esp-idf/components/hal/usb_serial_jtag_hal.c", "C:/Users/allen/esp/v5.3/esp-idf/components/hal/usb_dwc_hal.c", "C:/Users/allen/esp/v5.3/esp-idf/components/hal/usb_wrap_hal.c", "C:/Users/allen/esp/v5.3/esp-idf/components/hal/touch_sensor_hal.c", "C:/Users/allen/esp/v5.3/esp-idf/components/hal/xt_wdt_hal.c", "C:/Users/allen/esp/v5.3/esp-idf/components/hal/esp32s3/touch_sensor_hal.c", "C:/Users/allen/esp/v5.3/esp-idf/components/hal/esp32s3/rtc_cntl_hal.c" ],
             "include_dirs": [ "platform_port/include", "esp32s3/include", "include" ]
         },
@@ -1059,7 +1059,7 @@
             "priv_reqs": [ "soc" ],
             "managed_reqs": [],
             "managed_priv_reqs": [],
-            "file": "C:/Users/allen/Desktop/repos/duckyPad2/firmware/btt_notworking/build/esp-idf/heap/libheap.a",
+            "file": "C:/Users/allen/Desktop/repos/duckyPad2/firmware/btt_working/build/esp-idf/heap/libheap.a",
             "sources": [ "C:/Users/allen/esp/v5.3/esp-idf/components/heap/heap_caps_base.c", "C:/Users/allen/esp/v5.3/esp-idf/components/heap/heap_caps.c", "C:/Users/allen/esp/v5.3/esp-idf/components/heap/heap_caps_init.c", "C:/Users/allen/esp/v5.3/esp-idf/components/heap/multi_heap.c", "C:/Users/allen/esp/v5.3/esp-idf/components/heap/tlsf/tlsf.c", "C:/Users/allen/esp/v5.3/esp-idf/components/heap/port/memory_layout_utils.c", "C:/Users/allen/esp/v5.3/esp-idf/components/heap/port/esp32s3/memory_layout.c" ],
             "include_dirs": [ "include" ]
         },
@@ -1074,7 +1074,7 @@
             "priv_reqs": [],
             "managed_reqs": [],
             "managed_priv_reqs": [],
-            "file": "C:/Users/allen/Desktop/repos/duckyPad2/firmware/btt_notworking/build/esp-idf/http_parser/libhttp_parser.a",
+            "file": "C:/Users/allen/Desktop/repos/duckyPad2/firmware/btt_working/build/esp-idf/http_parser/libhttp_parser.a",
             "sources": [ "C:/Users/allen/esp/v5.3/esp-idf/components/http_parser/http_parser.c" ],
             "include_dirs": [ "." ]
         },
@@ -1119,7 +1119,7 @@
             "priv_reqs": [],
             "managed_reqs": [],
             "managed_priv_reqs": [],
-            "file": "C:/Users/allen/Desktop/repos/duckyPad2/firmware/btt_notworking/build/esp-idf/json/libjson.a",
+            "file": "C:/Users/allen/Desktop/repos/duckyPad2/firmware/btt_working/build/esp-idf/json/libjson.a",
             "sources": [ "C:/Users/allen/esp/v5.3/esp-idf/components/json/cJSON/cJSON.c", "C:/Users/allen/esp/v5.3/esp-idf/components/json/cJSON/cJSON_Utils.c" ],
             "include_dirs": [ "cJSON" ]
         },
@@ -1134,7 +1134,7 @@
             "priv_reqs": [ "soc", "hal", "esp_hw_support" ],
             "managed_reqs": [],
             "managed_priv_reqs": [],
-            "file": "C:/Users/allen/Desktop/repos/duckyPad2/firmware/btt_notworking/build/esp-idf/log/liblog.a",
+            "file": "C:/Users/allen/Desktop/repos/duckyPad2/firmware/btt_working/build/esp-idf/log/liblog.a",
             "sources": [ "C:/Users/allen/esp/v5.3/esp-idf/components/log/log.c", "C:/Users/allen/esp/v5.3/esp-idf/components/log/log_buffers.c", "C:/Users/allen/esp/v5.3/esp-idf/components/log/log_freertos.c" ],
             "include_dirs": [ "include" ]
         },
@@ -1149,7 +1149,7 @@
             "priv_reqs": [ "vfs" ],
             "managed_reqs": [],
             "managed_priv_reqs": [],
-            "file": "C:/Users/allen/Desktop/repos/duckyPad2/firmware/btt_notworking/build/esp-idf/lwip/liblwip.a",
+            "file": "C:/Users/allen/Desktop/repos/duckyPad2/firmware/btt_working/build/esp-idf/lwip/liblwip.a",
             "sources": [ "C:/Users/allen/esp/v5.3/esp-idf/components/lwip/apps/sntp/sntp.c", "C:/Users/allen/esp/v5.3/esp-idf/components/lwip/lwip/src/api/api_lib.c", "C:/Users/allen/esp/v5.3/esp-idf/components/lwip/lwip/src/api/api_msg.c", "C:/Users/allen/esp/v5.3/esp-idf/components/lwip/lwip/src/api/err.c", "C:/Users/allen/esp/v5.3/esp-idf/components/lwip/lwip/src/api/if_api.c", "C:/Users/allen/esp/v5.3/esp-idf/components/lwip/lwip/src/api/netbuf.c", "C:/Users/allen/esp/v5.3/esp-idf/components/lwip/lwip/src/api/netdb.c", "C:/Users/allen/esp/v5.3/esp-idf/components/lwip/lwip/src/api/netifapi.c", "C:/Users/allen/esp/v5.3/esp-idf/components/lwip/lwip/src/api/sockets.c", "C:/Users/allen/esp/v5.3/esp-idf/components/lwip/lwip/src/api/tcpip.c", "C:/Users/allen/esp/v5.3/esp-idf/components/lwip/lwip/src/apps/sntp/sntp.c", "C:/Users/allen/esp/v5.3/esp-idf/components/lwip/lwip/src/apps/netbiosns/netbiosns.c", "C:/Users/allen/esp/v5.3/esp-idf/components/lwip/lwip/src/core/def.c", "C:/Users/allen/esp/v5.3/esp-idf/components/lwip/lwip/src/core/dns.c", "C:/Users/allen/esp/v5.3/esp-idf/components/lwip/lwip/src/core/inet_chksum.c", "C:/Users/allen/esp/v5.3/esp-idf/components/lwip/lwip/src/core/init.c", "C:/Users/allen/esp/v5.3/esp-idf/components/lwip/lwip/src/core/ip.c", "C:/Users/allen/esp/v5.3/esp-idf/components/lwip/lwip/src/core/mem.c", "C:/Users/allen/esp/v5.3/esp-idf/components/lwip/lwip/src/core/memp.c", "C:/Users/allen/esp/v5.3/esp-idf/components/lwip/lwip/src/core/netif.c", "C:/Users/allen/esp/v5.3/esp-idf/components/lwip/lwip/src/core/pbuf.c", "C:/Users/allen/esp/v5.3/esp-idf/components/lwip/lwip/src/core/raw.c", "C:/Users/allen/esp/v5.3/esp-idf/components/lwip/lwip/src/core/stats.c", "C:/Users/allen/esp/v5.3/esp-idf/components/lwip/lwip/src/core/sys.c", "C:/Users/allen/esp/v5.3/esp-idf/components/lwip/lwip/src/core/tcp.c", "C:/Users/allen/esp/v5.3/esp-idf/components/lwip/lwip/src/core/tcp_in.c", "C:/Users/allen/esp/v5.3/esp-idf/components/lwip/lwip/src/core/tcp_out.c", "C:/Users/allen/esp/v5.3/esp-idf/components/lwip/lwip/src/core/timeouts.c", "C:/Users/allen/esp/v5.3/esp-idf/components/lwip/lwip/src/core/udp.c", "C:/Users/allen/esp/v5.3/esp-idf/components/lwip/lwip/src/core/ipv4/autoip.c", "C:/Users/allen/esp/v5.3/esp-idf/components/lwip/lwip/src/core/ipv4/dhcp.c", "C:/Users/allen/esp/v5.3/esp-idf/components/lwip/lwip/src/core/ipv4/etharp.c", "C:/Users/allen/esp/v5.3/esp-idf/components/lwip/lwip/src/core/ipv4/icmp.c", "C:/Users/allen/esp/v5.3/esp-idf/components/lwip/lwip/src/core/ipv4/igmp.c", "C:/Users/allen/esp/v5.3/esp-idf/components/lwip/lwip/src/core/ipv4/ip4.c", "C:/Users/allen/esp/v5.3/esp-idf/components/lwip/lwip/src/core/ipv4/ip4_napt.c", "C:/Users/allen/esp/v5.3/esp-idf/components/lwip/lwip/src/core/ipv4/ip4_addr.c", "C:/Users/allen/esp/v5.3/esp-idf/components/lwip/lwip/src/core/ipv4/ip4_frag.c", "C:/Users/allen/esp/v5.3/esp-idf/components/lwip/lwip/src/core/ipv6/dhcp6.c", "C:/Users/allen/esp/v5.3/esp-idf/components/lwip/lwip/src/core/ipv6/ethip6.c", "C:/Users/allen/esp/v5.3/esp-idf/components/lwip/lwip/src/core/ipv6/icmp6.c", "C:/Users/allen/esp/v5.3/esp-idf/components/lwip/lwip/src/core/ipv6/inet6.c", "C:/Users/allen/esp/v5.3/esp-idf/components/lwip/lwip/src/core/ipv6/ip6.c", "C:/Users/allen/esp/v5.3/esp-idf/components/lwip/lwip/src/core/ipv6/ip6_addr.c", "C:/Users/allen/esp/v5.3/esp-idf/components/lwip/lwip/src/core/ipv6/ip6_frag.c", "C:/Users/allen/esp/v5.3/esp-idf/components/lwip/lwip/src/core/ipv6/mld6.c", "C:/Users/allen/esp/v5.3/esp-idf/components/lwip/lwip/src/core/ipv6/nd6.c", "C:/Users/allen/esp/v5.3/esp-idf/components/lwip/lwip/src/netif/ethernet.c", "C:/Users/allen/esp/v5.3/esp-idf/components/lwip/lwip/src/netif/bridgeif.c", "C:/Users/allen/esp/v5.3/esp-idf/components/lwip/lwip/src/netif/bridgeif_fdb.c", "C:/Users/allen/esp/v5.3/esp-idf/components/lwip/lwip/src/netif/slipif.c", "C:/Users/allen/esp/v5.3/esp-idf/components/lwip/lwip/src/netif/ppp/auth.c", "C:/Users/allen/esp/v5.3/esp-idf/components/lwip/lwip/src/netif/ppp/ccp.c", "C:/Users/allen/esp/v5.3/esp-idf/components/lwip/lwip/src/netif/ppp/chap-md5.c", "C:/Users/allen/esp/v5.3/esp-idf/components/lwip/lwip/src/netif/ppp/chap-new.c", "C:/Users/allen/esp/v5.3/esp-idf/components/lwip/lwip/src/netif/ppp/chap_ms.c", "C:/Users/allen/esp/v5.3/esp-idf/components/lwip/lwip/src/netif/ppp/demand.c", "C:/Users/allen/esp/v5.3/esp-idf/components/lwip/lwip/src/netif/ppp/eap.c", "C:/Users/allen/esp/v5.3/esp-idf/components/lwip/lwip/src/netif/ppp/ecp.c", "C:/Users/allen/esp/v5.3/esp-idf/components/lwip/lwip/src/netif/ppp/eui64.c", "C:/Users/allen/esp/v5.3/esp-idf/components/lwip/lwip/src/netif/ppp/fsm.c", "C:/Users/allen/esp/v5.3/esp-idf/components/lwip/lwip/src/netif/ppp/ipcp.c", "C:/Users/allen/esp/v5.3/esp-idf/components/lwip/lwip/src/netif/ppp/ipv6cp.c", "C:/Users/allen/esp/v5.3/esp-idf/components/lwip/lwip/src/netif/ppp/lcp.c", "C:/Users/allen/esp/v5.3/esp-idf/components/lwip/lwip/src/netif/ppp/magic.c", "C:/Users/allen/esp/v5.3/esp-idf/components/lwip/lwip/src/netif/ppp/mppe.c", "C:/Users/allen/esp/v5.3/esp-idf/components/lwip/lwip/src/netif/ppp/multilink.c", "C:/Users/allen/esp/v5.3/esp-idf/components/lwip/lwip/src/netif/ppp/ppp.c", "C:/Users/allen/esp/v5.3/esp-idf/components/lwip/lwip/src/netif/ppp/pppapi.c", "C:/Users/allen/esp/v5.3/esp-idf/components/lwip/lwip/src/netif/ppp/pppcrypt.c", "C:/Users/allen/esp/v5.3/esp-idf/components/lwip/lwip/src/netif/ppp/pppoe.c", "C:/Users/allen/esp/v5.3/esp-idf/components/lwip/lwip/src/netif/ppp/pppol2tp.c", "C:/Users/allen/esp/v5.3/esp-idf/components/lwip/lwip/src/netif/ppp/pppos.c", "C:/Users/allen/esp/v5.3/esp-idf/components/lwip/lwip/src/netif/ppp/upap.c", "C:/Users/allen/esp/v5.3/esp-idf/components/lwip/lwip/src/netif/ppp/utils.c", "C:/Users/allen/esp/v5.3/esp-idf/components/lwip/lwip/src/netif/ppp/vj.c", "C:/Users/allen/esp/v5.3/esp-idf/components/lwip/port/hooks/tcp_isn_default.c", "C:/Users/allen/esp/v5.3/esp-idf/components/lwip/port/hooks/lwip_default_hooks.c", "C:/Users/allen/esp/v5.3/esp-idf/components/lwip/port/debug/lwip_debug.c", "C:/Users/allen/esp/v5.3/esp-idf/components/lwip/port/sockets_ext.c", "C:/Users/allen/esp/v5.3/esp-idf/components/lwip/port/freertos/sys_arch.c", "C:/Users/allen/esp/v5.3/esp-idf/components/lwip/port/esp32xx/vfs_lwip.c", "C:/Users/allen/esp/v5.3/esp-idf/components/lwip/apps/ping/esp_ping.c", "C:/Users/allen/esp/v5.3/esp-idf/components/lwip/apps/ping/ping.c", "C:/Users/allen/esp/v5.3/esp-idf/components/lwip/apps/ping/ping_sock.c", "C:/Users/allen/esp/v5.3/esp-idf/components/lwip/apps/dhcpserver/dhcpserver.c" ],
             "include_dirs": [ "include", "include/apps", "include/apps/sntp", "lwip/src/include", "port/include", "port/freertos/include/", "port/esp32xx/include", "port/esp32xx/include/arch", "port/esp32xx/include/sys" ]
         },
@@ -1157,15 +1157,15 @@
             "alias": "idf::main",
             "target": "___idf_main",
             "prefix": "idf",
-            "dir": "C:/Users/allen/Desktop/repos/duckyPad2/firmware/btt_notworking/main",
+            "dir": "C:/Users/allen/Desktop/repos/duckyPad2/firmware/btt_working/main",
             "type": "LIBRARY",
             "lib": "__idf_main",
             "reqs": [ "esp_hid", "driver" ],
             "priv_reqs": [ "nvs_flash" ],
             "managed_reqs": [],
             "managed_priv_reqs": [],
-            "file": "C:/Users/allen/Desktop/repos/duckyPad2/firmware/btt_notworking/build/esp-idf/main/libmain.a",
-            "sources": [ "C:/Users/allen/Desktop/repos/duckyPad2/firmware/btt_notworking/main/esp_hid_device_main.c", "C:/Users/allen/Desktop/repos/duckyPad2/firmware/btt_notworking/main/input_task.c", "C:/Users/allen/Desktop/repos/duckyPad2/firmware/btt_notworking/main/esp_hid_gap.c" ],
+            "file": "C:/Users/allen/Desktop/repos/duckyPad2/firmware/btt_working/build/esp-idf/main/libmain.a",
+            "sources": [ "C:/Users/allen/Desktop/repos/duckyPad2/firmware/btt_working/main/esp_hid_device_main.c", "C:/Users/allen/Desktop/repos/duckyPad2/firmware/btt_working/main/input_task.c", "C:/Users/allen/Desktop/repos/duckyPad2/firmware/btt_working/main/esp_hid_gap.c" ],
             "include_dirs": [ "." ]
         },
         "mbedtls": {
@@ -1179,8 +1179,8 @@
             "priv_reqs": [ "soc", "esp_hw_support", "esp_pm" ],
             "managed_reqs": [],
             "managed_priv_reqs": [],
-            "file": "C:/Users/allen/Desktop/repos/duckyPad2/firmware/btt_notworking/build/esp-idf/mbedtls/libmbedtls.a",
-            "sources": [ "C:/Users/allen/esp/v5.3/esp-idf/components/mbedtls/esp_crt_bundle/esp_crt_bundle.c", "C:/Users/allen/Desktop/repos/duckyPad2/firmware/btt_notworking/build/x509_crt_bundle.S" ],
+            "file": "C:/Users/allen/Desktop/repos/duckyPad2/firmware/btt_working/build/esp-idf/mbedtls/libmbedtls.a",
+            "sources": [ "C:/Users/allen/esp/v5.3/esp-idf/components/mbedtls/esp_crt_bundle/esp_crt_bundle.c", "C:/Users/allen/Desktop/repos/duckyPad2/firmware/btt_working/build/x509_crt_bundle.S" ],
             "include_dirs": [ "port/include", "mbedtls/include", "mbedtls/library", "esp_crt_bundle/include" ]
         },
         "mqtt": {
@@ -1194,7 +1194,7 @@
             "priv_reqs": [ "esp_timer", "http_parser", "esp_hw_support", "heap" ],
             "managed_reqs": [],
             "managed_priv_reqs": [],
-            "file": "C:/Users/allen/Desktop/repos/duckyPad2/firmware/btt_notworking/build/esp-idf/mqtt/libmqtt.a",
+            "file": "C:/Users/allen/Desktop/repos/duckyPad2/firmware/btt_working/build/esp-idf/mqtt/libmqtt.a",
             "sources": [ "C:/Users/allen/esp/v5.3/esp-idf/components/mqtt/esp-mqtt/mqtt_client.c", "C:/Users/allen/esp/v5.3/esp-idf/components/mqtt/esp-mqtt/lib/mqtt_msg.c", "C:/Users/allen/esp/v5.3/esp-idf/components/mqtt/esp-mqtt/lib/mqtt_outbox.c", "C:/Users/allen/esp/v5.3/esp-idf/components/mqtt/esp-mqtt/lib/platform_esp32_idf.c" ],
             "include_dirs": [ "C:/Users/allen/esp/v5.3/esp-idf/components/mqtt/esp-mqtt/include" ]
         },
@@ -1209,7 +1209,7 @@
             "priv_reqs": [ "soc", "spi_flash" ],
             "managed_reqs": [],
             "managed_priv_reqs": [],
-            "file": "C:/Users/allen/Desktop/repos/duckyPad2/firmware/btt_notworking/build/esp-idf/newlib/libnewlib.a",
+            "file": "C:/Users/allen/Desktop/repos/duckyPad2/firmware/btt_working/build/esp-idf/newlib/libnewlib.a",
             "sources": [ "C:/Users/allen/esp/v5.3/esp-idf/components/newlib/abort.c", "C:/Users/allen/esp/v5.3/esp-idf/components/newlib/assert.c", "C:/Users/allen/esp/v5.3/esp-idf/components/newlib/heap.c", "C:/Users/allen/esp/v5.3/esp-idf/components/newlib/locks.c", "C:/Users/allen/esp/v5.3/esp-idf/components/newlib/poll.c", "C:/Users/allen/esp/v5.3/esp-idf/components/newlib/pthread.c", "C:/Users/allen/esp/v5.3/esp-idf/components/newlib/random.c", "C:/Users/allen/esp/v5.3/esp-idf/components/newlib/getentropy.c", "C:/Users/allen/esp/v5.3/esp-idf/components/newlib/reent_init.c", "C:/Users/allen/esp/v5.3/esp-idf/components/newlib/newlib_init.c", "C:/Users/allen/esp/v5.3/esp-idf/components/newlib/syscalls.c", "C:/Users/allen/esp/v5.3/esp-idf/components/newlib/termios.c", "C:/Users/allen/esp/v5.3/esp-idf/components/newlib/stdatomic.c", "C:/Users/allen/esp/v5.3/esp-idf/components/newlib/time.c", "C:/Users/allen/esp/v5.3/esp-idf/components/newlib/sysconf.c", "C:/Users/allen/esp/v5.3/esp-idf/components/newlib/realpath.c", "C:/Users/allen/esp/v5.3/esp-idf/components/newlib/scandir.c", "C:/Users/allen/esp/v5.3/esp-idf/components/newlib/port/esp_time_impl.c" ],
             "include_dirs": [ "platform_include" ]
         },
@@ -1224,7 +1224,7 @@
             "priv_reqs": [ "spi_flash", "newlib" ],
             "managed_reqs": [],
             "managed_priv_reqs": [],
-            "file": "C:/Users/allen/Desktop/repos/duckyPad2/firmware/btt_notworking/build/esp-idf/nvs_flash/libnvs_flash.a",
+            "file": "C:/Users/allen/Desktop/repos/duckyPad2/firmware/btt_working/build/esp-idf/nvs_flash/libnvs_flash.a",
             "sources": [ "C:/Users/allen/esp/v5.3/esp-idf/components/nvs_flash/src/nvs_api.cpp", "C:/Users/allen/esp/v5.3/esp-idf/components/nvs_flash/src/nvs_cxx_api.cpp", "C:/Users/allen/esp/v5.3/esp-idf/components/nvs_flash/src/nvs_item_hash_list.cpp", "C:/Users/allen/esp/v5.3/esp-idf/components/nvs_flash/src/nvs_page.cpp", "C:/Users/allen/esp/v5.3/esp-idf/components/nvs_flash/src/nvs_pagemanager.cpp", "C:/Users/allen/esp/v5.3/esp-idf/components/nvs_flash/src/nvs_storage.cpp", "C:/Users/allen/esp/v5.3/esp-idf/components/nvs_flash/src/nvs_handle_simple.cpp", "C:/Users/allen/esp/v5.3/esp-idf/components/nvs_flash/src/nvs_handle_locked.cpp", "C:/Users/allen/esp/v5.3/esp-idf/components/nvs_flash/src/nvs_partition.cpp", "C:/Users/allen/esp/v5.3/esp-idf/components/nvs_flash/src/nvs_partition_lookup.cpp", "C:/Users/allen/esp/v5.3/esp-idf/components/nvs_flash/src/nvs_partition_manager.cpp", "C:/Users/allen/esp/v5.3/esp-idf/components/nvs_flash/src/nvs_types.cpp", "C:/Users/allen/esp/v5.3/esp-idf/components/nvs_flash/src/nvs_platform.cpp", "C:/Users/allen/esp/v5.3/esp-idf/components/nvs_flash/src/nvs_encrypted_partition.cpp" ],
             "include_dirs": [ "include", "../spi_flash/include" ]
         },
@@ -1239,7 +1239,7 @@
             "priv_reqs": [ "bootloader_support", "efuse", "esp_partition", "nvs_flash" ],
             "managed_reqs": [],
             "managed_priv_reqs": [],
-            "file": "C:/Users/allen/Desktop/repos/duckyPad2/firmware/btt_notworking/build/esp-idf/nvs_sec_provider/libnvs_sec_provider.a",
+            "file": "C:/Users/allen/Desktop/repos/duckyPad2/firmware/btt_working/build/esp-idf/nvs_sec_provider/libnvs_sec_provider.a",
             "sources": [ "C:/Users/allen/esp/v5.3/esp-idf/components/nvs_sec_provider/nvs_sec_provider.c" ],
             "include_dirs": [ "include" ]
         },
@@ -1284,7 +1284,7 @@
             "priv_reqs": [],
             "managed_reqs": [],
             "managed_priv_reqs": [],
-            "file": "C:/Users/allen/Desktop/repos/duckyPad2/firmware/btt_notworking/build/esp-idf/perfmon/libperfmon.a",
+            "file": "C:/Users/allen/Desktop/repos/duckyPad2/firmware/btt_working/build/esp-idf/perfmon/libperfmon.a",
             "sources": [ "C:/Users/allen/esp/v5.3/esp-idf/components/perfmon/xtensa_perfmon_access.c", "C:/Users/allen/esp/v5.3/esp-idf/components/perfmon/xtensa_perfmon_apis.c", "C:/Users/allen/esp/v5.3/esp-idf/components/perfmon/xtensa_perfmon_masks.c" ],
             "include_dirs": [ "include" ]
         },
@@ -1299,7 +1299,7 @@
             "priv_reqs": [],
             "managed_reqs": [],
             "managed_priv_reqs": [],
-            "file": "C:/Users/allen/Desktop/repos/duckyPad2/firmware/btt_notworking/build/esp-idf/protobuf-c/libprotobuf-c.a",
+            "file": "C:/Users/allen/Desktop/repos/duckyPad2/firmware/btt_working/build/esp-idf/protobuf-c/libprotobuf-c.a",
             "sources": [ "C:/Users/allen/esp/v5.3/esp-idf/components/protobuf-c/protobuf-c/protobuf-c/protobuf-c.c" ],
             "include_dirs": [ "protobuf-c" ]
         },
@@ -1314,7 +1314,7 @@
             "priv_reqs": [ "protobuf-c", "mbedtls", "console", "esp_http_server", "driver" ],
             "managed_reqs": [],
             "managed_priv_reqs": [],
-            "file": "C:/Users/allen/Desktop/repos/duckyPad2/firmware/btt_notworking/build/esp-idf/protocomm/libprotocomm.a",
+            "file": "C:/Users/allen/Desktop/repos/duckyPad2/firmware/btt_working/build/esp-idf/protocomm/libprotocomm.a",
             "sources": [ "C:/Users/allen/esp/v5.3/esp-idf/components/protocomm/src/common/protocomm.c", "C:/Users/allen/esp/v5.3/esp-idf/components/protocomm/proto-c/constants.pb-c.c", "C:/Users/allen/esp/v5.3/esp-idf/components/protocomm/proto-c/sec0.pb-c.c", "C:/Users/allen/esp/v5.3/esp-idf/components/protocomm/proto-c/sec1.pb-c.c", "C:/Users/allen/esp/v5.3/esp-idf/components/protocomm/proto-c/sec2.pb-c.c", "C:/Users/allen/esp/v5.3/esp-idf/components/protocomm/proto-c/session.pb-c.c", "C:/Users/allen/esp/v5.3/esp-idf/components/protocomm/src/transports/protocomm_console.c", "C:/Users/allen/esp/v5.3/esp-idf/components/protocomm/src/transports/protocomm_httpd.c", "C:/Users/allen/esp/v5.3/esp-idf/components/protocomm/src/security/security0.c", "C:/Users/allen/esp/v5.3/esp-idf/components/protocomm/src/security/security1.c", "C:/Users/allen/esp/v5.3/esp-idf/components/protocomm/src/security/security2.c", "C:/Users/allen/esp/v5.3/esp-idf/components/protocomm/src/crypto/srp6a/esp_srp.c", "C:/Users/allen/esp/v5.3/esp-idf/components/protocomm/src/crypto/srp6a/esp_srp_mpi.c", "C:/Users/allen/esp/v5.3/esp-idf/components/protocomm/src/simple_ble/simple_ble.c", "C:/Users/allen/esp/v5.3/esp-idf/components/protocomm/src/transports/protocomm_ble.c" ],
             "include_dirs": [ "include/common", "include/security", "include/transports", "include/crypto/srp6a", "proto-c" ]
         },
@@ -1329,7 +1329,7 @@
             "priv_reqs": [],
             "managed_reqs": [],
             "managed_priv_reqs": [],
-            "file": "C:/Users/allen/Desktop/repos/duckyPad2/firmware/btt_notworking/build/esp-idf/pthread/libpthread.a",
+            "file": "C:/Users/allen/Desktop/repos/duckyPad2/firmware/btt_working/build/esp-idf/pthread/libpthread.a",
             "sources": [ "C:/Users/allen/esp/v5.3/esp-idf/components/pthread/pthread.c", "C:/Users/allen/esp/v5.3/esp-idf/components/pthread/pthread_cond_var.c", "C:/Users/allen/esp/v5.3/esp-idf/components/pthread/pthread_local_storage.c", "C:/Users/allen/esp/v5.3/esp-idf/components/pthread/pthread_rwlock.c", "C:/Users/allen/esp/v5.3/esp-idf/components/pthread/pthread_semaphore.c" ],
             "include_dirs": [ "include" ]
         },
@@ -1344,7 +1344,7 @@
             "priv_reqs": [ "soc", "esp_timer", "esp_mm" ],
             "managed_reqs": [],
             "managed_priv_reqs": [],
-            "file": "C:/Users/allen/Desktop/repos/duckyPad2/firmware/btt_notworking/build/esp-idf/sdmmc/libsdmmc.a",
+            "file": "C:/Users/allen/Desktop/repos/duckyPad2/firmware/btt_working/build/esp-idf/sdmmc/libsdmmc.a",
             "sources": [ "C:/Users/allen/esp/v5.3/esp-idf/components/sdmmc/sdmmc_cmd.c", "C:/Users/allen/esp/v5.3/esp-idf/components/sdmmc/sdmmc_common.c", "C:/Users/allen/esp/v5.3/esp-idf/components/sdmmc/sdmmc_init.c", "C:/Users/allen/esp/v5.3/esp-idf/components/sdmmc/sdmmc_io.c", "C:/Users/allen/esp/v5.3/esp-idf/components/sdmmc/sdmmc_mmc.c", "C:/Users/allen/esp/v5.3/esp-idf/components/sdmmc/sdmmc_sd.c", "C:/Users/allen/esp/v5.3/esp-idf/components/sdmmc/sd_pwr_ctrl/sd_pwr_ctrl.c" ],
             "include_dirs": [ "include" ]
         },
@@ -1359,7 +1359,7 @@
             "priv_reqs": [],
             "managed_reqs": [],
             "managed_priv_reqs": [],
-            "file": "C:/Users/allen/Desktop/repos/duckyPad2/firmware/btt_notworking/build/esp-idf/soc/libsoc.a",
+            "file": "C:/Users/allen/Desktop/repos/duckyPad2/firmware/btt_working/build/esp-idf/soc/libsoc.a",
             "sources": [ "C:/Users/allen/esp/v5.3/esp-idf/components/soc/lldesc.c", "C:/Users/allen/esp/v5.3/esp-idf/components/soc/dport_access_common.c", "C:/Users/allen/esp/v5.3/esp-idf/components/soc/esp32s3/interrupts.c", "C:/Users/allen/esp/v5.3/esp-idf/components/soc/esp32s3/gpio_periph.c", "C:/Users/allen/esp/v5.3/esp-idf/components/soc/esp32s3/uart_periph.c", "C:/Users/allen/esp/v5.3/esp-idf/components/soc/esp32s3/adc_periph.c", "C:/Users/allen/esp/v5.3/esp-idf/components/soc/esp32s3/dedic_gpio_periph.c", "C:/Users/allen/esp/v5.3/esp-idf/components/soc/esp32s3/gdma_periph.c", "C:/Users/allen/esp/v5.3/esp-idf/components/soc/esp32s3/spi_periph.c", "C:/Users/allen/esp/v5.3/esp-idf/components/soc/esp32s3/ledc_periph.c", "C:/Users/allen/esp/v5.3/esp-idf/components/soc/esp32s3/pcnt_periph.c", "C:/Users/allen/esp/v5.3/esp-idf/components/soc/esp32s3/rmt_periph.c", "C:/Users/allen/esp/v5.3/esp-idf/components/soc/esp32s3/sdm_periph.c", "C:/Users/allen/esp/v5.3/esp-idf/components/soc/esp32s3/i2s_periph.c", "C:/Users/allen/esp/v5.3/esp-idf/components/soc/esp32s3/i2c_periph.c", "C:/Users/allen/esp/v5.3/esp-idf/components/soc/esp32s3/temperature_sensor_periph.c", "C:/Users/allen/esp/v5.3/esp-idf/components/soc/esp32s3/timer_periph.c", "C:/Users/allen/esp/v5.3/esp-idf/components/soc/esp32s3/lcd_periph.c", "C:/Users/allen/esp/v5.3/esp-idf/components/soc/esp32s3/mcpwm_periph.c", "C:/Users/allen/esp/v5.3/esp-idf/components/soc/esp32s3/mpi_periph.c", "C:/Users/allen/esp/v5.3/esp-idf/components/soc/esp32s3/sdmmc_periph.c", "C:/Users/allen/esp/v5.3/esp-idf/components/soc/esp32s3/touch_sensor_periph.c", "C:/Users/allen/esp/v5.3/esp-idf/components/soc/esp32s3/twai_periph.c", "C:/Users/allen/esp/v5.3/esp-idf/components/soc/esp32s3/usb_periph.c", "C:/Users/allen/esp/v5.3/esp-idf/components/soc/esp32s3/usb_dwc_periph.c", "C:/Users/allen/esp/v5.3/esp-idf/components/soc/esp32s3/rtc_io_periph.c" ],
             "include_dirs": [ "include", "esp32s3", "esp32s3/include" ]
         },
@@ -1374,7 +1374,7 @@
             "priv_reqs": [ "bootloader_support", "app_update", "soc", "esp_mm", "esp_driver_gpio" ],
             "managed_reqs": [],
             "managed_priv_reqs": [],
-            "file": "C:/Users/allen/Desktop/repos/duckyPad2/firmware/btt_notworking/build/esp-idf/spi_flash/libspi_flash.a",
+            "file": "C:/Users/allen/Desktop/repos/duckyPad2/firmware/btt_working/build/esp-idf/spi_flash/libspi_flash.a",
             "sources": [ "C:/Users/allen/esp/v5.3/esp-idf/components/spi_flash/flash_brownout_hook.c", "C:/Users/allen/esp/v5.3/esp-idf/components/spi_flash/esp32s3/spi_flash_oct_flash_init.c", "C:/Users/allen/esp/v5.3/esp-idf/components/spi_flash/spi_flash_hpm_enable.c", "C:/Users/allen/esp/v5.3/esp-idf/components/spi_flash/spi_flash_chip_drivers.c", "C:/Users/allen/esp/v5.3/esp-idf/components/spi_flash/spi_flash_chip_generic.c", "C:/Users/allen/esp/v5.3/esp-idf/components/spi_flash/spi_flash_chip_issi.c", "C:/Users/allen/esp/v5.3/esp-idf/components/spi_flash/spi_flash_chip_mxic.c", "C:/Users/allen/esp/v5.3/esp-idf/components/spi_flash/spi_flash_chip_gd.c", "C:/Users/allen/esp/v5.3/esp-idf/components/spi_flash/spi_flash_chip_winbond.c", "C:/Users/allen/esp/v5.3/esp-idf/components/spi_flash/spi_flash_chip_boya.c", "C:/Users/allen/esp/v5.3/esp-idf/components/spi_flash/spi_flash_chip_mxic_opi.c", "C:/Users/allen/esp/v5.3/esp-idf/components/spi_flash/spi_flash_chip_th.c", "C:/Users/allen/esp/v5.3/esp-idf/components/spi_flash/memspi_host_driver.c", "C:/Users/allen/esp/v5.3/esp-idf/components/spi_flash/cache_utils.c", "C:/Users/allen/esp/v5.3/esp-idf/components/spi_flash/flash_mmap.c", "C:/Users/allen/esp/v5.3/esp-idf/components/spi_flash/flash_ops.c", "C:/Users/allen/esp/v5.3/esp-idf/components/spi_flash/spi_flash_wrap.c", "C:/Users/allen/esp/v5.3/esp-idf/components/spi_flash/esp_flash_api.c", "C:/Users/allen/esp/v5.3/esp-idf/components/spi_flash/esp_flash_spi_init.c", "C:/Users/allen/esp/v5.3/esp-idf/components/spi_flash/spi_flash_os_func_app.c", "C:/Users/allen/esp/v5.3/esp-idf/components/spi_flash/spi_flash_os_func_noos.c" ],
             "include_dirs": [ "include" ]
         },
@@ -1389,7 +1389,7 @@
             "priv_reqs": [ "bootloader_support", "esptool_py", "vfs", "spi_flash" ],
             "managed_reqs": [],
             "managed_priv_reqs": [],
-            "file": "C:/Users/allen/Desktop/repos/duckyPad2/firmware/btt_notworking/build/esp-idf/spiffs/libspiffs.a",
+            "file": "C:/Users/allen/Desktop/repos/duckyPad2/firmware/btt_working/build/esp-idf/spiffs/libspiffs.a",
             "sources": [ "C:/Users/allen/esp/v5.3/esp-idf/components/spiffs/spiffs_api.c", "C:/Users/allen/esp/v5.3/esp-idf/components/spiffs/spiffs/src/spiffs_cache.c", "C:/Users/allen/esp/v5.3/esp-idf/components/spiffs/spiffs/src/spiffs_check.c", "C:/Users/allen/esp/v5.3/esp-idf/components/spiffs/spiffs/src/spiffs_gc.c", "C:/Users/allen/esp/v5.3/esp-idf/components/spiffs/spiffs/src/spiffs_hydrogen.c", "C:/Users/allen/esp/v5.3/esp-idf/components/spiffs/spiffs/src/spiffs_nucleus.c", "C:/Users/allen/esp/v5.3/esp-idf/components/spiffs/esp_spiffs.c" ],
             "include_dirs": [ "include" ]
         },
@@ -1404,7 +1404,7 @@
             "priv_reqs": [],
             "managed_reqs": [],
             "managed_priv_reqs": [],
-            "file": "C:/Users/allen/Desktop/repos/duckyPad2/firmware/btt_notworking/build/esp-idf/tcp_transport/libtcp_transport.a",
+            "file": "C:/Users/allen/Desktop/repos/duckyPad2/firmware/btt_working/build/esp-idf/tcp_transport/libtcp_transport.a",
             "sources": [ "C:/Users/allen/esp/v5.3/esp-idf/components/tcp_transport/transport.c", "C:/Users/allen/esp/v5.3/esp-idf/components/tcp_transport/transport_ssl.c", "C:/Users/allen/esp/v5.3/esp-idf/components/tcp_transport/transport_internal.c", "C:/Users/allen/esp/v5.3/esp-idf/components/tcp_transport/transport_socks_proxy.c", "C:/Users/allen/esp/v5.3/esp-idf/components/tcp_transport/transport_ws.c" ],
             "include_dirs": [ "include" ]
         },
@@ -1419,7 +1419,7 @@
             "priv_reqs": [ "esp_timer" ],
             "managed_reqs": [],
             "managed_priv_reqs": [],
-            "file": "C:/Users/allen/Desktop/repos/duckyPad2/firmware/btt_notworking/build/esp-idf/touch_element/libtouch_element.a",
+            "file": "C:/Users/allen/Desktop/repos/duckyPad2/firmware/btt_working/build/esp-idf/touch_element/libtouch_element.a",
             "sources": [ "C:/Users/allen/esp/v5.3/esp-idf/components/touch_element/touch_element.c", "C:/Users/allen/esp/v5.3/esp-idf/components/touch_element/touch_button.c", "C:/Users/allen/esp/v5.3/esp-idf/components/touch_element/touch_slider.c", "C:/Users/allen/esp/v5.3/esp-idf/components/touch_element/touch_matrix.c" ],
             "include_dirs": [ "include" ]
         },
@@ -1449,7 +1449,7 @@
             "priv_reqs": [],
             "managed_reqs": [],
             "managed_priv_reqs": [],
-            "file": "C:/Users/allen/Desktop/repos/duckyPad2/firmware/btt_notworking/build/esp-idf/unity/libunity.a",
+            "file": "C:/Users/allen/Desktop/repos/duckyPad2/firmware/btt_working/build/esp-idf/unity/libunity.a",
             "sources": [ "C:/Users/allen/esp/v5.3/esp-idf/components/unity/unity/src/unity.c", "C:/Users/allen/esp/v5.3/esp-idf/components/unity/unity_compat.c", "C:/Users/allen/esp/v5.3/esp-idf/components/unity/unity_runner.c", "C:/Users/allen/esp/v5.3/esp-idf/components/unity/unity_utils_freertos.c", "C:/Users/allen/esp/v5.3/esp-idf/components/unity/unity_utils_cache.c", "C:/Users/allen/esp/v5.3/esp-idf/components/unity/unity_utils_memory.c", "C:/Users/allen/esp/v5.3/esp-idf/components/unity/unity_port_esp32.c", "C:/Users/allen/esp/v5.3/esp-idf/components/unity/port/esp/unity_utils_memory_esp.c" ],
             "include_dirs": [ "include", "unity/src" ]
         },
@@ -1464,7 +1464,7 @@
             "priv_reqs": [ "esp_driver_gpio", "esp_mm" ],
             "managed_reqs": [],
             "managed_priv_reqs": [],
-            "file": "C:/Users/allen/Desktop/repos/duckyPad2/firmware/btt_notworking/build/esp-idf/usb/libusb.a",
+            "file": "C:/Users/allen/Desktop/repos/duckyPad2/firmware/btt_working/build/esp-idf/usb/libusb.a",
             "sources": [ "C:/Users/allen/esp/v5.3/esp-idf/components/usb/hcd_dwc.c", "C:/Users/allen/esp/v5.3/esp-idf/components/usb/hub.c", "C:/Users/allen/esp/v5.3/esp-idf/components/usb/usb_helpers.c", "C:/Users/allen/esp/v5.3/esp-idf/components/usb/usb_host.c", "C:/Users/allen/esp/v5.3/esp-idf/components/usb/usb_private.c", "C:/Users/allen/esp/v5.3/esp-idf/components/usb/usbh.c", "C:/Users/allen/esp/v5.3/esp-idf/components/usb/usb_phy.c" ],
             "include_dirs": [ "include" ]
         },
@@ -1479,7 +1479,7 @@
             "priv_reqs": [ "esp_timer", "esp_driver_uart", "esp_driver_usb_serial_jtag", "esp_vfs_console" ],
             "managed_reqs": [],
             "managed_priv_reqs": [],
-            "file": "C:/Users/allen/Desktop/repos/duckyPad2/firmware/btt_notworking/build/esp-idf/vfs/libvfs.a",
+            "file": "C:/Users/allen/Desktop/repos/duckyPad2/firmware/btt_working/build/esp-idf/vfs/libvfs.a",
             "sources": [ "C:/Users/allen/esp/v5.3/esp-idf/components/vfs/vfs.c", "C:/Users/allen/esp/v5.3/esp-idf/components/vfs/vfs_eventfd.c", "C:/Users/allen/esp/v5.3/esp-idf/components/vfs/vfs_semihost.c" ],
             "include_dirs": [ "include" ]
         },
@@ -1494,7 +1494,7 @@
             "priv_reqs": [ "spi_flash" ],
             "managed_reqs": [],
             "managed_priv_reqs": [],
-            "file": "C:/Users/allen/Desktop/repos/duckyPad2/firmware/btt_notworking/build/esp-idf/wear_levelling/libwear_levelling.a",
+            "file": "C:/Users/allen/Desktop/repos/duckyPad2/firmware/btt_working/build/esp-idf/wear_levelling/libwear_levelling.a",
             "sources": [ "C:/Users/allen/esp/v5.3/esp-idf/components/wear_levelling/Partition.cpp", "C:/Users/allen/esp/v5.3/esp-idf/components/wear_levelling/SPI_Flash.cpp", "C:/Users/allen/esp/v5.3/esp-idf/components/wear_levelling/WL_Ext_Perf.cpp", "C:/Users/allen/esp/v5.3/esp-idf/components/wear_levelling/WL_Ext_Safe.cpp", "C:/Users/allen/esp/v5.3/esp-idf/components/wear_levelling/WL_Flash.cpp", "C:/Users/allen/esp/v5.3/esp-idf/components/wear_levelling/crc32.cpp", "C:/Users/allen/esp/v5.3/esp-idf/components/wear_levelling/wear_levelling.cpp" ],
             "include_dirs": [ "include" ]
         },
@@ -1509,7 +1509,7 @@
             "priv_reqs": [ "protobuf-c", "bt", "json", "esp_timer", "esp_wifi" ],
             "managed_reqs": [],
             "managed_priv_reqs": [],
-            "file": "C:/Users/allen/Desktop/repos/duckyPad2/firmware/btt_notworking/build/esp-idf/wifi_provisioning/libwifi_provisioning.a",
+            "file": "C:/Users/allen/Desktop/repos/duckyPad2/firmware/btt_working/build/esp-idf/wifi_provisioning/libwifi_provisioning.a",
             "sources": [ "C:/Users/allen/esp/v5.3/esp-idf/components/wifi_provisioning/src/wifi_config.c", "C:/Users/allen/esp/v5.3/esp-idf/components/wifi_provisioning/src/wifi_scan.c", "C:/Users/allen/esp/v5.3/esp-idf/components/wifi_provisioning/src/wifi_ctrl.c", "C:/Users/allen/esp/v5.3/esp-idf/components/wifi_provisioning/src/manager.c", "C:/Users/allen/esp/v5.3/esp-idf/components/wifi_provisioning/src/handlers.c", "C:/Users/allen/esp/v5.3/esp-idf/components/wifi_provisioning/src/scheme_console.c", "C:/Users/allen/esp/v5.3/esp-idf/components/wifi_provisioning/proto-c/wifi_config.pb-c.c", "C:/Users/allen/esp/v5.3/esp-idf/components/wifi_provisioning/proto-c/wifi_scan.pb-c.c", "C:/Users/allen/esp/v5.3/esp-idf/components/wifi_provisioning/proto-c/wifi_ctrl.pb-c.c", "C:/Users/allen/esp/v5.3/esp-idf/components/wifi_provisioning/proto-c/wifi_constants.pb-c.c", "C:/Users/allen/esp/v5.3/esp-idf/components/wifi_provisioning/src/scheme_softap.c", "C:/Users/allen/esp/v5.3/esp-idf/components/wifi_provisioning/src/scheme_ble.c" ],
             "include_dirs": [ "include" ]
         },
@@ -1524,7 +1524,7 @@
             "priv_reqs": [ "mbedtls", "esp_timer", "esp_wifi" ],
             "managed_reqs": [],
             "managed_priv_reqs": [],
-            "file": "C:/Users/allen/Desktop/repos/duckyPad2/firmware/btt_notworking/build/esp-idf/wpa_supplicant/libwpa_supplicant.a",
+            "file": "C:/Users/allen/Desktop/repos/duckyPad2/firmware/btt_working/build/esp-idf/wpa_supplicant/libwpa_supplicant.a",
             "sources": [ "C:/Users/allen/esp/v5.3/esp-idf/components/wpa_supplicant/port/os_xtensa.c", "C:/Users/allen/esp/v5.3/esp-idf/components/wpa_supplicant/port/eloop.c", "C:/Users/allen/esp/v5.3/esp-idf/components/wpa_supplicant/src/ap/ap_config.c", "C:/Users/allen/esp/v5.3/esp-idf/components/wpa_supplicant/src/ap/ieee802_1x.c", "C:/Users/allen/esp/v5.3/esp-idf/components/wpa_supplicant/src/ap/wpa_auth.c", "C:/Users/allen/esp/v5.3/esp-idf/components/wpa_supplicant/src/ap/wpa_auth_ie.c", "C:/Users/allen/esp/v5.3/esp-idf/components/wpa_supplicant/src/ap/pmksa_cache_auth.c", "C:/Users/allen/esp/v5.3/esp-idf/components/wpa_supplicant/src/ap/sta_info.c", "C:/Users/allen/esp/v5.3/esp-idf/components/wpa_supplicant/src/ap/ieee802_11.c", "C:/Users/allen/esp/v5.3/esp-idf/components/wpa_supplicant/src/ap/comeback_token.c", "C:/Users/allen/esp/v5.3/esp-idf/components/wpa_supplicant/src/common/sae.c", "C:/Users/allen/esp/v5.3/esp-idf/components/wpa_supplicant/src/common/dragonfly.c", "C:/Users/allen/esp/v5.3/esp-idf/components/wpa_supplicant/src/common/wpa_common.c", "C:/Users/allen/esp/v5.3/esp-idf/components/wpa_supplicant/src/utils/bitfield.c", "C:/Users/allen/esp/v5.3/esp-idf/components/wpa_supplicant/src/crypto/aes-siv.c", "C:/Users/allen/esp/v5.3/esp-idf/components/wpa_supplicant/src/crypto/sha256-kdf.c", "C:/Users/allen/esp/v5.3/esp-idf/components/wpa_supplicant/src/crypto/ccmp.c", "C:/Users/allen/esp/v5.3/esp-idf/components/wpa_supplicant/src/crypto/aes-gcm.c", "C:/Users/allen/esp/v5.3/esp-idf/components/wpa_supplicant/src/crypto/crypto_ops.c", "C:/Users/allen/esp/v5.3/esp-idf/components/wpa_supplicant/src/crypto/dh_group5.c", "C:/Users/allen/esp/v5.3/esp-idf/components/wpa_supplicant/src/crypto/dh_groups.c", "C:/Users/allen/esp/v5.3/esp-idf/components/wpa_supplicant/src/crypto/ms_funcs.c", "C:/Users/allen/esp/v5.3/esp-idf/components/wpa_supplicant/src/crypto/sha1-tlsprf.c", "C:/Users/allen/esp/v5.3/esp-idf/components/wpa_supplicant/src/crypto/sha256-tlsprf.c", "C:/Users/allen/esp/v5.3/esp-idf/components/wpa_supplicant/src/crypto/sha384-tlsprf.c", "C:/Users/allen/esp/v5.3/esp-idf/components/wpa_supplicant/src/crypto/sha256-prf.c", "C:/Users/allen/esp/v5.3/esp-idf/components/wpa_supplicant/src/crypto/sha1-prf.c", "C:/Users/allen/esp/v5.3/esp-idf/components/wpa_supplicant/src/crypto/sha384-prf.c", "C:/Users/allen/esp/v5.3/esp-idf/components/wpa_supplicant/src/crypto/md4-internal.c", "C:/Users/allen/esp/v5.3/esp-idf/components/wpa_supplicant/src/crypto/sha1-tprf.c", "C:/Users/allen/esp/v5.3/esp-idf/components/wpa_supplicant/src/eap_common/eap_wsc_common.c", "C:/Users/allen/esp/v5.3/esp-idf/components/wpa_supplicant/src/common/ieee802_11_common.c", "C:/Users/allen/esp/v5.3/esp-idf/components/wpa_supplicant/src/eap_peer/chap.c", "C:/Users/allen/esp/v5.3/esp-idf/components/wpa_supplicant/src/eap_peer/eap.c", "C:/Users/allen/esp/v5.3/esp-idf/components/wpa_supplicant/src/eap_peer/eap_common.c", "C:/Users/allen/esp/v5.3/esp-idf/components/wpa_supplicant/src/eap_peer/eap_mschapv2.c", "C:/Users/allen/esp/v5.3/esp-idf/components/wpa_supplicant/src/eap_peer/eap_peap.c", "C:/Users/allen/esp/v5.3/esp-idf/components/wpa_supplicant/src/eap_peer/eap_peap_common.c", "C:/Users/allen/esp/v5.3/esp-idf/components/wpa_supplicant/src/eap_peer/eap_tls.c", "C:/Users/allen/esp/v5.3/esp-idf/components/wpa_supplicant/src/eap_peer/eap_tls_common.c", "C:/Users/allen/esp/v5.3/esp-idf/components/wpa_supplicant/src/eap_peer/eap_ttls.c", "C:/Users/allen/esp/v5.3/esp-idf/components/wpa_supplicant/src/eap_peer/mschapv2.c", "C:/Users/allen/esp/v5.3/esp-idf/components/wpa_supplicant/src/eap_peer/eap_fast.c", "C:/Users/allen/esp/v5.3/esp-idf/components/wpa_supplicant/src/eap_peer/eap_fast_common.c", "C:/Users/allen/esp/v5.3/esp-idf/components/wpa_supplicant/src/eap_peer/eap_fast_pac.c", "C:/Users/allen/esp/v5.3/esp-idf/components/wpa_supplicant/src/rsn_supp/pmksa_cache.c", "C:/Users/allen/esp/v5.3/esp-idf/components/wpa_supplicant/src/rsn_supp/wpa.c", "C:/Users/allen/esp/v5.3/esp-idf/components/wpa_supplicant/src/rsn_supp/wpa_ie.c", "C:/Users/allen/esp/v5.3/esp-idf/components/wpa_supplicant/src/utils/base64.c", "C:/Users/allen/esp/v5.3/esp-idf/components/wpa_supplicant/src/utils/common.c", "C:/Users/allen/esp/v5.3/esp-idf/components/wpa_supplicant/src/utils/ext_password.c", "C:/Users/allen/esp/v5.3/esp-idf/components/wpa_supplicant/src/utils/uuid.c", "C:/Users/allen/esp/v5.3/esp-idf/components/wpa_supplicant/src/utils/wpabuf.c", "C:/Users/allen/esp/v5.3/esp-idf/components/wpa_supplicant/src/utils/wpa_debug.c", "C:/Users/allen/esp/v5.3/esp-idf/components/wpa_supplicant/src/utils/json.c", "C:/Users/allen/esp/v5.3/esp-idf/components/wpa_supplicant/src/wps/wps.c", "C:/Users/allen/esp/v5.3/esp-idf/components/wpa_supplicant/src/wps/wps_attr_build.c", "C:/Users/allen/esp/v5.3/esp-idf/components/wpa_supplicant/src/wps/wps_attr_parse.c", "C:/Users/allen/esp/v5.3/esp-idf/components/wpa_supplicant/src/wps/wps_attr_process.c", "C:/Users/allen/esp/v5.3/esp-idf/components/wpa_supplicant/src/wps/wps_common.c", "C:/Users/allen/esp/v5.3/esp-idf/components/wpa_supplicant/src/wps/wps_dev_attr.c", "C:/Users/allen/esp/v5.3/esp-idf/components/wpa_supplicant/src/wps/wps_enrollee.c", "C:/Users/allen/esp/v5.3/esp-idf/components/wpa_supplicant/src/common/sae_pk.c", "C:/Users/allen/esp/v5.3/esp-idf/components/wpa_supplicant/esp_supplicant/src/esp_eap_client.c", "C:/Users/allen/esp/v5.3/esp-idf/components/wpa_supplicant/esp_supplicant/src/esp_wpa2_api_port.c", "C:/Users/allen/esp/v5.3/esp-idf/components/wpa_supplicant/esp_supplicant/src/esp_wpa_main.c", "C:/Users/allen/esp/v5.3/esp-idf/components/wpa_supplicant/esp_supplicant/src/esp_wpas_glue.c", "C:/Users/allen/esp/v5.3/esp-idf/components/wpa_supplicant/esp_supplicant/src/esp_common.c", "C:/Users/allen/esp/v5.3/esp-idf/components/wpa_supplicant/esp_supplicant/src/esp_wps.c", "C:/Users/allen/esp/v5.3/esp-idf/components/wpa_supplicant/esp_supplicant/src/esp_wpa3.c", "C:/Users/allen/esp/v5.3/esp-idf/components/wpa_supplicant/esp_supplicant/src/esp_owe.c", "C:/Users/allen/esp/v5.3/esp-idf/components/wpa_supplicant/esp_supplicant/src/esp_hostap.c", "C:/Users/allen/esp/v5.3/esp-idf/components/wpa_supplicant/esp_supplicant/src/crypto/tls_mbedtls.c", "C:/Users/allen/esp/v5.3/esp-idf/components/wpa_supplicant/esp_supplicant/src/crypto/fastpbkdf2.c", "C:/Users/allen/esp/v5.3/esp-idf/components/wpa_supplicant/esp_supplicant/src/crypto/crypto_mbedtls.c", "C:/Users/allen/esp/v5.3/esp-idf/components/wpa_supplicant/esp_supplicant/src/crypto/crypto_mbedtls-bignum.c", "C:/Users/allen/esp/v5.3/esp-idf/components/wpa_supplicant/esp_supplicant/src/crypto/crypto_mbedtls-rsa.c", "C:/Users/allen/esp/v5.3/esp-idf/components/wpa_supplicant/esp_supplicant/src/crypto/crypto_mbedtls-ec.c", "C:/Users/allen/esp/v5.3/esp-idf/components/wpa_supplicant/src/crypto/rc4.c", "C:/Users/allen/esp/v5.3/esp-idf/components/wpa_supplicant/src/crypto/des-internal.c", "C:/Users/allen/esp/v5.3/esp-idf/components/wpa_supplicant/src/crypto/aes-wrap.c", "C:/Users/allen/esp/v5.3/esp-idf/components/wpa_supplicant/src/crypto/aes-unwrap.c", "C:/Users/allen/esp/v5.3/esp-idf/components/wpa_supplicant/src/crypto/aes-ccm.c" ],
             "include_dirs": [ "include", "port/include", "esp_supplicant/include" ]
         },
@@ -1539,7 +1539,7 @@
             "priv_reqs": [],
             "managed_reqs": [],
             "managed_priv_reqs": [],
-            "file": "C:/Users/allen/Desktop/repos/duckyPad2/firmware/btt_notworking/build/esp-idf/xtensa/libxtensa.a",
+            "file": "C:/Users/allen/Desktop/repos/duckyPad2/firmware/btt_working/build/esp-idf/xtensa/libxtensa.a",
             "sources": [ "C:/Users/allen/esp/v5.3/esp-idf/components/xtensa/eri.c", "C:/Users/allen/esp/v5.3/esp-idf/components/xtensa/xt_trax.c", "C:/Users/allen/esp/v5.3/esp-idf/components/xtensa/xtensa_context.S", "C:/Users/allen/esp/v5.3/esp-idf/components/xtensa/xtensa_intr_asm.S", "C:/Users/allen/esp/v5.3/esp-idf/components/xtensa/xtensa_intr.c", "C:/Users/allen/esp/v5.3/esp-idf/components/xtensa/xtensa_vectors.S" ],
             "include_dirs": [ "esp32s3/include", "include", "deprecated_include" ]
         }
@@ -2773,7 +2773,7 @@
             "alias": "idf::main",
             "target": "___idf_main",
             "prefix": "idf",
-            "dir": "C:/Users/allen/Desktop/repos/duckyPad2/firmware/btt_notworking/main",
+            "dir": "C:/Users/allen/Desktop/repos/duckyPad2/firmware/btt_working/main",
             "lib": "__idf_main",
             "reqs": [ "esp_hid", "driver" ],
             "priv_reqs": [ "nvs_flash" ],

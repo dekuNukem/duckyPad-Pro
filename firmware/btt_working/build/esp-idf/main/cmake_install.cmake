@@ -1,4 +1,4 @@
-# Install script for directory: C:/Users/allen/Desktop/repos/duckyPad2/firmware/btt_notworking/main
+# Install script for directory: C:/Users/allen/Desktop/repos/duckyPad2/firmware/btt_working/main
 
 # Set the install prefix
 if(NOT DEFINED CMAKE_INSTALL_PREFIX)
