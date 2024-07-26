@@ -109,7 +109,7 @@ void ble_hid_task_shut_down(void)
 }
 
 #define HID_RPT_ID_CC_IN        1   // Consumer Control input report ID
-#define HID_CC_IN_RPT_LEN       8   // Consumer Control input report Len
+#define HID_CC_IN_RPT_LEN       7   // Consumer Control input report Len
 
 void ble_kb_send(uint8_t* hid_buf, uint8_t bufsize)
 {
@@ -118,6 +118,8 @@ void ble_kb_send(uint8_t* hid_buf, uint8_t bufsize)
     printf("\n");
     int result = esp_hidd_dev_input_set(s_ble_hid_param.hid_dev, 0, HID_RPT_ID_CC_IN, hid_buf, HID_CC_IN_RPT_LEN);
     printf("send result: %d\n", result);
+    result = esp_hidd_dev_battery_set(s_ble_hid_param.hid_dev, 50);
+    printf("battery result: %d\n", result);
 }
 
 static void ble_hidd_event_callback(void *handler_args, esp_event_base_t base, int32_t id, void *event_data)
@@ -177,12 +179,12 @@ static void ble_hidd_event_callback(void *handler_args, esp_event_base_t base, i
     return;
 }
 
-#define HID_TX_BUF_SIZE HID_CC_IN_RPT_LEN
+#define HID_TX_BUF_SIZE HID_CC_IN_RPT_LEN-1
 uint8_t test_buf[HID_TX_BUF_SIZE];
 void my_test(void)
 {
     memset(test_buf, 0, HID_TX_BUF_SIZE);
-    test_buf[2] = 0x2C;
+    test_buf[2] = 0x21;
     ble_kb_send(test_buf, HID_TX_BUF_SIZE);
     vTaskDelay(100 / portTICK_PERIOD_MS);
 
