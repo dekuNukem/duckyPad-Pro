@@ -1,2 +1,3 @@
 firmware/tusb_hid/build
-firmware/bt_hid_test/build
+firmware/btt_mediakeyworks/build
+firmware/btt_notworking/build
