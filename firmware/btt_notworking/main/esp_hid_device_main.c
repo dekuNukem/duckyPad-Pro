@@ -66,6 +66,26 @@ const unsigned char hid_descriptor_map[] = {
     0x29, 0x94,        //   Usage Maximum (0x94) originally 65, 73 supports F13 - F24
     0x81, 0x00,        //   Input (Data,Array,Abs,No Wrap,Linear,Preferred State,No Null Position)
     0xC0,              // End Collection
+    // Report ID 2: Media Keys
+    0x05, 0x0C,        // Usage Page (Consumer)
+    0x09, 0x01,        // Usage (Consumer Control)
+    0xA1, 0x01,        // Collection (Application)
+    0x85, 0x02,        //   Report ID (2)
+    0x05, 0x0C,        //   Usage Page (Consumer)
+    0x15, 0x00,        //   Logical Minimum (0)
+    0x25, 0x01,        //   Logical Maximum (1)
+    0x75, 0x01,        //   Report Size (1)
+    0x95, 0x08,        //   Report Count (8)
+    0x09, 0xB5,        //   Usage (Scan Next Track)
+    0x09, 0xB6,        //   Usage (Scan Previous Track)
+    0x09, 0xB7,        //   Usage (Stop)
+    0x09, 0xB8,        //   Usage (Eject)
+    0x09, 0xCD,        //   Usage (Play/Pause)
+    0x09, 0xE2,        //   Usage (Mute)
+    0x09, 0xE9,        //   Usage (Volume Increment)
+    0x09, 0xEA,        //   Usage (Volume Decrement)
+    0x81, 0x02,        //   Input (Data,Var,Abs,No Wrap,Linear,Preferred State,No Null Position)
+    0xC0,               // End Collection
 };
 
 static esp_hid_raw_report_map_t ble_report_maps[] = {
@@ -169,7 +189,7 @@ static void ble_hidd_event_callback(void *handler_args, esp_event_base_t base, i
 
 #define HID_TX_BUF_SIZE HID_CC_IN_RPT_LEN-1
 uint8_t test_buf[HID_TX_BUF_SIZE];
-void my_test(void)
+void my_kb_test(void)
 {
     memset(test_buf, 0, HID_TX_BUF_SIZE);
     test_buf[2] = 0x21;
@@ -178,6 +198,20 @@ void my_test(void)
 
     memset(test_buf, 0, HID_TX_BUF_SIZE);
     ble_kb_send(test_buf, HID_TX_BUF_SIZE);
+    vTaskDelay(100 / portTICK_PERIOD_MS);
+}
+
+void my_mk_test(void)
+{
+    memset(test_buf, 0, HID_TX_BUF_SIZE);
+    test_buf[0] = 64;
+    int result = esp_hidd_dev_input_set(s_ble_hid_param.hid_dev, 0, 2, test_buf, 2);
+    printf("MK result: %d\n", result);
+    vTaskDelay(100 / portTICK_PERIOD_MS);
+
+    memset(test_buf, 0, HID_TX_BUF_SIZE);
+    result = esp_hidd_dev_input_set(s_ble_hid_param.hid_dev, 0, 2, test_buf, 2);
+    printf("MK result: %d\n", result);
     vTaskDelay(100 / portTICK_PERIOD_MS);
 }
 
@@ -216,7 +250,8 @@ void app_main(void)
         if(sw_event.type == SW_EVENT_SHORT_PRESS)
         {
             printf("!!!! key pressed\n");
-            my_test();
+            // my_kb_test();
+            my_mk_test();
         }
     }
 
