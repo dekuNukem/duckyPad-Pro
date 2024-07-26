@@ -199,3 +199,10 @@ void switch_init(void)
 	gpio_isr_handler_add(SD_CARD_DETECT_GPIO, sd_card_det_isr, NULL);
 	switch_event_queue = xQueueCreate(SWITCH_EVENT_QUEUE_SIZE, sizeof(switch_event_t));
 }
+
+uint8_t poll_sw_state(uint8_t swid_zero_indexed)
+{
+	if(swid_zero_indexed >= TOTAL_OBSW_COUNT)
+		return 0;
+	return this_sw_state[swid_zero_indexed];
+}

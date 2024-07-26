@@ -67,6 +67,11 @@ void handle_keydown(uint8_t swid)
   der_init(&this_exe);
   run_dsb(&this_exe, swid, temp_buf);
   //--------------
+  while(poll_sw_state(swid))
+  {
+    printf("still pressed!!!\n");
+    vTaskDelay(pdMS_TO_TICKS(100));
+  }
   play_keyup_animation(current_profile_number, swid);
 }
 

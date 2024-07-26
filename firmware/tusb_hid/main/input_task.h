@@ -85,6 +85,7 @@ void switch_init(void);
 void my_rotary_encoder_init(void);
 void kb_scan_task(void *dummy);
 uint8_t rowcol_to_index(uint8_t row, uint8_t col);
+uint8_t poll_sw_state(uint8_t swid_zero_indexed);
 
 #define SW_SCAN_TASK_STACK_SIZE 2048
 
