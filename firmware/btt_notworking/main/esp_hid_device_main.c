@@ -86,6 +86,46 @@ const unsigned char hid_descriptor_map[] = {
     0x09, 0xEA,        //   Usage (Volume Decrement)
     0x81, 0x02,        //   Input (Data,Var,Abs,No Wrap,Linear,Preferred State,No Null Position)
     0xC0,               // End Collection
+    // Report ID 3: Mouse
+    0x05, 0x01,        // Usage Page (Generic Desktop Ctrls)
+    0x09, 0x02,        // Usage (Mouse)
+    0xA1, 0x01,        // Collection (Application)
+    0x85, 0x03,        //   Report ID (3)
+    0x09, 0x01,        //   Usage (Pointer)
+    0xA1, 0x00,        //   Collection (Physical)
+    0x05, 0x09,        //     Usage Page (Button)
+    0x19, 0x01,        //     Usage Minimum (0x01)
+    0x29, 0x03,        //     Usage Maximum (0x03)
+    0x15, 0x00,        //     Logical Minimum (0)
+    0x25, 0x01,        //     Logical Maximum (1)
+    0x95, 0x03,        //     Report Count (3)
+    0x75, 0x01,        //     Report Size (1)
+    0x81, 0x02,        //     Input (Data,Var,Abs,No Wrap,Linear,Preferred State,No Null Position)
+    0x95, 0x01,        //     Report Count (1)
+    0x75, 0x05,        //     Report Size (5)
+    0x81, 0x01,        //     Input (Const,Array,Abs,No Wrap,Linear,Preferred State,No Null Position)
+    0x05, 0x01,        //     Usage Page (Generic Desktop Ctrls)
+    0x09, 0x30,        //     Usage (X)
+    0x09, 0x31,        //     Usage (Y)
+    0x09, 0x38,        //     Usage (Wheel)
+    0x15, 0x81,        //     Logical Minimum (-127)
+    0x25, 0x7F,        //     Logical Maximum (127)
+    0x75, 0x08,        //     Report Size (8)
+    0x95, 0x03,        //     Report Count (3)
+    0x81, 0x06,        //     Input (Data,Var,Rel,No Wrap,Linear,Preferred State,No Null Position)
+    0xC0,              //   End Collection
+    0x09, 0x3C,        //   Usage (Motion Wakeup)
+    0x05, 0xFF,        //   Usage Page (Reserved 0xFF)
+    0x09, 0x01,        //   Usage (0x01)
+    0x15, 0x00,        //   Logical Minimum (0)
+    0x25, 0x01,        //   Logical Maximum (1)
+    0x75, 0x01,        //   Report Size (1)
+    0x95, 0x02,        //   Report Count (2)
+    0xB1, 0x22,        //   Feature (Data,Var,Abs,No Wrap,Linear,No Preferred State,No Null Position,Non-volatile)
+    0x75, 0x06,        //   Report Size (6)
+    0x95, 0x01,        //   Report Count (1)
+    0xB1, 0x01,        //   Feature (Const,Array,Abs,No Wrap,Linear,Preferred State,No Null Position,Non-volatile)
+    0xC0,              // End Collection
 };
 
 static esp_hid_raw_report_map_t ble_report_maps[] = {
@@ -215,6 +255,15 @@ void my_mk_test(void)
     vTaskDelay(100 / portTICK_PERIOD_MS);
 }
 
+void my_mouse_test(void)
+{
+    memset(test_buf, 0, HID_TX_BUF_SIZE);
+    test_buf[1] = 16;
+    int result = esp_hidd_dev_input_set(s_ble_hid_param.hid_dev, 0, 3, test_buf, 4);
+    printf("MOUSE result: %d\n", result);
+    vTaskDelay(100 / portTICK_PERIOD_MS);
+}
+
 void app_main(void)
 {
     switch_init();
@@ -232,7 +281,7 @@ void app_main(void)
     ret = esp_hid_gap_init(HID_DEV_MODE);
     ESP_ERROR_CHECK(ret);
 
-    ret = esp_hid_ble_gap_adv_init(ESP_HID_APPEARANCE_KEYBOARD, ble_hid_config.device_name);
+    ret = esp_hid_ble_gap_adv_init(ESP_HID_APPEARANCE_MOUSE, ble_hid_config.device_name);
     ESP_ERROR_CHECK(ret);
     if ((ret = esp_ble_gatts_register_callback(esp_hidd_gatts_event_handler)) != ESP_OK) {
         ESP_LOGE(TAG, "GATTS register callback failed: %d", ret);
@@ -251,7 +300,8 @@ void app_main(void)
         {
             printf("!!!! key pressed\n");
             // my_kb_test();
-            my_mk_test();
+            // my_mk_test();
+            my_mouse_test();
         }
     }
 
