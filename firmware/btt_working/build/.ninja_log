@@ -1318,3 +1318,5 @@
 154454	154542	7436614132277446	CMakeFiles/esp_hid_device.elf.dir/project_elf_src_esp32s3.c.obj	34a1429df56e3207
 10697	14347	7437011160214932	esp_hid_device.elf	4a941002c3263a8c
 14348	14765	7437011164812371	.bin_timestamp	267dc82b2823be09
+102	17911550	0	CMakeFiles/confserver	e421f607175d246f
+102	17911550	0	C:/Users/allen/Desktop/repos/duckyPad2/firmware/btt_working/build/CMakeFiles/confserver	e421f607175d246f

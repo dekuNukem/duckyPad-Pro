@@ -50,6 +50,8 @@ ds3_exe_result this_exe;
 
 void handle_keydown(uint8_t swid)
 {
+  if(strlen(all_profile_info[current_profile_number].sw_name_firstline[swid]) == 0)
+    return;
   memset(temp_buf, 0, TEMP_BUFSIZE);
   sprintf(temp_buf, "/sdcard/%s/key%d.dsb", all_profile_info[current_profile_number].dir_path, swid+1);
   if(access(temp_buf, F_OK))
@@ -64,7 +66,6 @@ void handle_keydown(uint8_t swid)
   //-------------
   der_init(&this_exe);
   run_dsb(&this_exe, swid, temp_buf);
-  // app_send_hid_demo();
   //--------------
   play_keyup_animation(current_profile_number, swid);
 }
