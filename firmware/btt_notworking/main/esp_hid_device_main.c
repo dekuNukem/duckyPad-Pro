@@ -281,7 +281,7 @@ void app_main(void)
     ret = esp_hid_gap_init(HID_DEV_MODE);
     ESP_ERROR_CHECK(ret);
 
-    ret = esp_hid_ble_gap_adv_init(ESP_HID_APPEARANCE_MOUSE, ble_hid_config.device_name);
+    ret = esp_hid_ble_gap_adv_init(ESP_HID_APPEARANCE_GENERIC, ble_hid_config.device_name);
     ESP_ERROR_CHECK(ret);
     if ((ret = esp_ble_gatts_register_callback(esp_hidd_gatts_event_handler)) != ESP_OK) {
         ESP_LOGE(TAG, "GATTS register callback failed: %d", ret);
@@ -299,8 +299,8 @@ void app_main(void)
         if(sw_event.type == SW_EVENT_SHORT_PRESS)
         {
             printf("!!!! key pressed\n");
-            // my_kb_test();
-            // my_mk_test();
+            my_kb_test();
+            my_mk_test();
             my_mouse_test();
         }
     }
