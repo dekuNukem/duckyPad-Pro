@@ -4,8 +4,6 @@
  * SPDX-License-Identifier: Unlicense OR CC0-1.0
  */
 
-#define CONFIG_EXAMPLE_HID_DEVICE_ROLE 3
-
 #include <stdio.h>
 #include <stdlib.h>
 #include <string.h>
@@ -208,8 +206,8 @@ void ble_hid_demo_task_mouse(void *pvParameters)
 #if CONFIG_EXAMPLE_HID_DEVICE_ROLE && CONFIG_EXAMPLE_HID_DEVICE_ROLE == 2
 #define CASE(a, b, c)  \
                 case a: \
-                buffer[0] = b;  \
-                buffer[2] = c; \
+				buffer[0] = b;  \
+				buffer[2] = c; \
                 break;\
 
 // USB keyboard codes
@@ -268,70 +266,70 @@ const unsigned char keyboardReportMap[] = { //7 bytes input (modifiers, resrvd, 
 
 static void char_to_code(uint8_t *buffer, char ch)
 {
-    // Check if lower or upper case
-    if(ch >= 'a' && ch <= 'z')
-    {
-        buffer[0] = 0;
-        // convert ch to HID letter, starting at a = 4
-        buffer[2] = (uint8_t)(4 + (ch - 'a'));
-    }
-    else if(ch >= 'A' && ch <= 'Z')
-    {
-        // Add left shift
-        buffer[0] = USB_HID_MODIFIER_LEFT_SHIFT;
-        // convert ch to lower case
-        ch = ch - ('A'-'a');
-        // convert ch to HID letter, starting at a = 4
-        buffer[2] = (uint8_t)(4 + (ch - 'a'));
-    }
-    else if(ch >= '0' && ch <= '9') // Check if number
-    {
-        buffer[0] = 0;
-        // convert ch to HID number, starting at 1 = 30, 0 = 39
-        if(ch == '0')
-        {
-            buffer[2] = 39;
-        }
-        else
-        {
-            buffer[2] = (uint8_t)(30 + (ch - '1'));
-        }
-    }
-    else // not a letter nor a number
-    {
-        switch(ch)
-        {
+	// Check if lower or upper case
+	if(ch >= 'a' && ch <= 'z')
+	{
+		buffer[0] = 0;
+		// convert ch to HID letter, starting at a = 4
+		buffer[2] = (uint8_t)(4 + (ch - 'a'));
+	}
+	else if(ch >= 'A' && ch <= 'Z')
+	{
+		// Add left shift
+		buffer[0] = USB_HID_MODIFIER_LEFT_SHIFT;
+		// convert ch to lower case
+		ch = ch - ('A'-'a');
+		// convert ch to HID letter, starting at a = 4
+		buffer[2] = (uint8_t)(4 + (ch - 'a'));
+	}
+	else if(ch >= '0' && ch <= '9') // Check if number
+	{
+		buffer[0] = 0;
+		// convert ch to HID number, starting at 1 = 30, 0 = 39
+		if(ch == '0')
+		{
+			buffer[2] = 39;
+		}
+		else
+		{
+			buffer[2] = (uint8_t)(30 + (ch - '1'));
+		}
+	}
+	else // not a letter nor a number
+	{
+		switch(ch)
+		{
             CASE(' ', 0, USB_HID_SPACE);
-            CASE('.', 0,USB_HID_DOT);
+			CASE('.', 0,USB_HID_DOT);
             CASE('\n', 0, USB_HID_NEWLINE);
-            CASE('?', USB_HID_MODIFIER_LEFT_SHIFT, USB_HID_FSLASH);
-            CASE('/', 0 ,USB_HID_FSLASH);
-            CASE('\\', 0, USB_HID_BSLASH);
-            CASE('|', USB_HID_MODIFIER_LEFT_SHIFT, USB_HID_BSLASH);
-            CASE(',', 0, USB_HID_COMMA);
-            CASE('<', USB_HID_MODIFIER_LEFT_SHIFT, USB_HID_COMMA);
-            CASE('>', USB_HID_MODIFIER_LEFT_SHIFT, USB_HID_COMMA);
-            CASE('@', USB_HID_MODIFIER_LEFT_SHIFT, 31);
-            CASE('!', USB_HID_MODIFIER_LEFT_SHIFT, 30);
-            CASE('#', USB_HID_MODIFIER_LEFT_SHIFT, 32);
-            CASE('$', USB_HID_MODIFIER_LEFT_SHIFT, 33);
-            CASE('%', USB_HID_MODIFIER_LEFT_SHIFT, 34);
-            CASE('^', USB_HID_MODIFIER_LEFT_SHIFT,35);
-            CASE('&', USB_HID_MODIFIER_LEFT_SHIFT, 36);
-            CASE('*', USB_HID_MODIFIER_LEFT_SHIFT, 37);
-            CASE('(', USB_HID_MODIFIER_LEFT_SHIFT, 38);
-            CASE(')', USB_HID_MODIFIER_LEFT_SHIFT, 39);
-            CASE('-', 0, 0x2D);
-            CASE('_', USB_HID_MODIFIER_LEFT_SHIFT, 0x2D);
-            CASE('=', 0, 0x2E);
-            CASE('+', USB_HID_MODIFIER_LEFT_SHIFT, 39);
-            CASE(8, 0, 0x2A); // backspace
-            CASE('\t', 0, 0x2B);
-            default:
-                buffer[0] = 0;
-                buffer[2] = 0;
-        }
-    }
+			CASE('?', USB_HID_MODIFIER_LEFT_SHIFT, USB_HID_FSLASH);
+			CASE('/', 0 ,USB_HID_FSLASH);
+			CASE('\\', 0, USB_HID_BSLASH);
+			CASE('|', USB_HID_MODIFIER_LEFT_SHIFT, USB_HID_BSLASH);
+			CASE(',', 0, USB_HID_COMMA);
+			CASE('<', USB_HID_MODIFIER_LEFT_SHIFT, USB_HID_COMMA);
+			CASE('>', USB_HID_MODIFIER_LEFT_SHIFT, USB_HID_COMMA);
+			CASE('@', USB_HID_MODIFIER_LEFT_SHIFT, 31);
+			CASE('!', USB_HID_MODIFIER_LEFT_SHIFT, 30);
+			CASE('#', USB_HID_MODIFIER_LEFT_SHIFT, 32);
+			CASE('$', USB_HID_MODIFIER_LEFT_SHIFT, 33);
+			CASE('%', USB_HID_MODIFIER_LEFT_SHIFT, 34);
+			CASE('^', USB_HID_MODIFIER_LEFT_SHIFT,35);
+			CASE('&', USB_HID_MODIFIER_LEFT_SHIFT, 36);
+			CASE('*', USB_HID_MODIFIER_LEFT_SHIFT, 37);
+			CASE('(', USB_HID_MODIFIER_LEFT_SHIFT, 38);
+			CASE(')', USB_HID_MODIFIER_LEFT_SHIFT, 39);
+			CASE('-', 0, 0x2D);
+			CASE('_', USB_HID_MODIFIER_LEFT_SHIFT, 0x2D);
+			CASE('=', 0, 0x2E);
+			CASE('+', USB_HID_MODIFIER_LEFT_SHIFT, 39);
+			CASE(8, 0, 0x2A); // backspace
+			CASE('\t', 0, 0x2B);
+			default:
+				buffer[0] = 0;
+				buffer[2] = 0;
+		}
+	}
 }
 
 void send_keyboard(char c)
@@ -396,7 +394,7 @@ static esp_hid_device_config_t ble_hid_config = {
 #elif CONFIG_EXAMPLE_HID_DEVICE_ROLE == 3
     .device_name        = "ESP Mouse",
 #else
-    .device_name        = "ESP BLE HID2",
+    .device_name        = "Media Key Test",
 #endif
     .manufacturer_name  = "Espressif",
     .serial_number      = "1234567890",
@@ -558,7 +556,7 @@ void esp_hidd_send_consumer_value(uint8_t key_cmd, bool key_pressed)
 #if !CONFIG_BT_NIMBLE_ENABLED || CONFIG_EXAMPLE_HID_DEVICE_ROLE == 1
 void ble_hid_demo_task(void *pvParameters)
 {
-    // static bool send_volum_up = false;
+    static bool send_volum_up = false;
     while (1) {
         // ESP_LOGI(TAG, "Send the volume");
         // if (send_volum_up) {
@@ -935,7 +933,7 @@ void app_main(void)
     ble_store_config_init();
 
     ble_hs_cfg.store_status_cb = ble_store_util_status_rr;
-    /* Starting nimble task after gatts is initialized*/
+	/* Starting nimble task after gatts is initialized*/
     ret = esp_nimble_enable(ble_hid_device_host_task);
     if (ret) {
         ESP_LOGE(TAG, "esp_nimble_enable failed: %d", ret);

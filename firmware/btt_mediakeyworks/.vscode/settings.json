@@ -1,0 +1,15 @@
+{
+  "C_Cpp.intelliSenseEngine": "default",
+  "idf.adapterTargetName": "esp32s3",
+  "idf.openOcdConfigs": [
+    "board/esp32s3-builtin.cfg"
+  ],
+  "idf.flashType": "UART",
+  "idf.portWin": "COM36",
+  "files.associations": {
+    "nimble_port.h": "c",
+    "exception": "c",
+    "*.inc": "c",
+    "input_task.h": "c"
+  }
+}
