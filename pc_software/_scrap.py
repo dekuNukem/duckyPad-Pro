@@ -1,3 +1,9 @@
+
+    first_instruction = get_empty_instruction()
+    first_instruction['opcode'] = OP_JMP
+    first_instruction['oparg'] = DS3_INIT_JUMP_OFFSET
+    assembly_listing.append(first_instruction)
+
 def save_click():
     save_everything(os.path.join(backup_path, make_default_backup_dir_name()))
     if os.path.isdir(dp_root_folder_path):

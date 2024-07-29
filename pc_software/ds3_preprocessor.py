@@ -783,10 +783,8 @@ def split_str_cmd(cmd_type, this_line):
 
 def run_all(program_listing):
 
-    # a bit preprocessing
     new_program_listing = []
     for index, this_line in enumerate(program_listing):
-
         # remove leading space and tabs
         this_line = this_line.lstrip(" ").lstrip("\t")
         first_word = this_line.split(" ")[0]
@@ -822,17 +820,13 @@ def run_all(program_listing):
 
     program_listing = new_program_listing
 
-    print("preprocessed lines:")
-    for item in program_listing:
-        print(item)
-
     # ----------- Do a pass ---------------
 
     rdict = run_once(program_listing)
     if rdict['is_success'] is False:
         return rdict
 
-    print("\n---------First Pass OK!---------\n")
+    print("---------First Pass OK!---------")
 
     # ----------- expand STRING_BLOCK and STRINGLN_BLOCK, split STRING and STRINGLN ----------
 
