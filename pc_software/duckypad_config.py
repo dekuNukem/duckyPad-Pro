@@ -796,12 +796,9 @@ def make_default_backup_dir_name():
 
 def save_click():
     save_everything(os.path.join(backup_path, make_default_backup_dir_name()))
-    if os.path.isdir(dp_root_folder_path):
-        save_everything(dp_root_folder_path)
-        dp_root_folder_display.set("Done!")
-        return
     try:
-        put_duckypad_in_msc_mode_and_get_drive_path(reset_ui=False)
+        if os.path.isdir(dp_root_folder_path) is False:
+            put_duckypad_in_msc_mode_and_get_drive_path(reset_ui=False)
         save_everything(dp_root_folder_path)
         dp_root_folder_display.set("Ejecting...")
         root.update()
@@ -812,6 +809,7 @@ def save_click():
         dp_root_folder_display.set("Done!")
     except Exception as e:
         print('save_click:',e)
+        messagebox.showinfo("save_click", str(e))
 
 def backup_button_click():
     messagebox.showinfo("Backups", "All your backups are here!\n\nCopy back to SD card to restore")
@@ -1434,6 +1432,6 @@ def repeat_func():
 
 root.after(500, repeat_func)
 
-select_root_folder("sample_profiles")
+# select_root_folder("sample_profiles")
 # select_root_folder("D:")
 root.mainloop()

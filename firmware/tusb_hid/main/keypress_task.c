@@ -81,13 +81,14 @@ void handle_keydown(uint8_t swid)
       goto handle_keydown_end;
     if(pdTICKS_TO_MS(xTaskGetTickCount())- hold_start > 500)
       break;
-    vTaskDelay(pdMS_TO_TICKS(100));
+    vTaskDelay(pdMS_TO_TICKS(INPUT_TASK_FREQ_MS));
   }
   while(1)
   {
     if(poll_sw_state(swid) == 0)
       break;
     run_once(swid, temp_buf);
+    vTaskDelay(pdMS_TO_TICKS(INPUT_TASK_FREQ_MS));
   }
 
   handle_keydown_end:

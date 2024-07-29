@@ -1,3 +1,23 @@
+def save_click():
+    save_everything(os.path.join(backup_path, make_default_backup_dir_name()))
+    if os.path.isdir(dp_root_folder_path):
+        save_everything(dp_root_folder_path)
+        dp_root_folder_display.set("Done!")
+        return
+    try:
+        put_duckypad_in_msc_mode_and_get_drive_path(reset_ui=False)
+        save_everything(dp_root_folder_path)
+        dp_root_folder_display.set("Ejecting...")
+        root.update()
+        hid_op.eject_drive(dp_root_folder_path)
+        hid_op.duckypad_hid_close()
+        hid_op.duckypad_hid_init()
+        hid_op.duckypad_hid_sw_reset()
+        dp_root_folder_display.set("Done!")
+    except Exception as e:
+        print('save_click:',e)
+        messagebox.showinfo("save_click", str(e))
+
     disk_label = f'DP{dp_info[6]}_{dp_info[9]:02X}{dp_info[10]:02X}'
     print("disk label should be", disk_label)
 
