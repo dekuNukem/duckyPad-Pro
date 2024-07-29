@@ -4,6 +4,9 @@
 #include "rotary_encoder.h"
 #include "shared.h"
 #include "esp_log.h"
+#include "freertos/semphr.h"
+#include "freertos/FreeRTOS.h"
+#include "freertos/task.h"
 
 static const char *TAG = "INPUT";
 
@@ -14,6 +17,7 @@ rotary_encoder_info_t upper_rc_info;
 rotary_encoder_info_t lower_rc_info;
 QueueHandle_t rotary_encoder_event_queue;
 QueueHandle_t switch_event_queue;
+SemaphoreHandle_t kbscan_mutex;
 
 void my_rotary_encoder_init(void)
 {
@@ -66,6 +70,8 @@ void sw_matrix_col_reset(void)
 
 void sw_scan(void)
 {
+	if(xSemaphoreTake(kbscan_mutex, pdMS_TO_TICKS(KBSCAN_MUTEX_TIMEOUT_MS)) == pdFALSE)
+    	return;
 	memset(this_sw_state, 0, TOTAL_OBSW_COUNT);
 	gpio_set_level(SWM_COL0_GPIO, 1);
 	gpio_set_level(SWM_COL1_GPIO, 0);
@@ -102,6 +108,8 @@ void sw_scan(void)
 	this_sw_state[SW_MINUS] = 1 - gpio_get_level(SW_MINUS_GPIO);
 	this_sw_state[SW_RE1] = 1 - gpio_get_level(SW_RE1_GPIO);
 	this_sw_state[SW_RE2] = 1 - gpio_get_level(SW_RE2_GPIO);
+
+	xSemaphoreGive(kbscan_mutex);
 }
 
 void kb_scan_task(void *dummy)
@@ -203,6 +211,7 @@ void switch_init(void)
     ESP_ERROR_CHECK(gpio_config(&sd_det_config));
 	gpio_isr_handler_add(SD_CARD_DETECT_GPIO, sd_card_det_isr, NULL);
 	switch_event_queue = xQueueCreate(SWITCH_EVENT_QUEUE_SIZE, sizeof(switch_event_t));
+	kbscan_mutex = xSemaphoreCreateMutex();
 }
 
 uint8_t poll_sw_state(uint8_t swid_zero_indexed)

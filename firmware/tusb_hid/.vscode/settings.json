@@ -58,6 +58,7 @@
     "cmath": "c",
     "new": "c",
     "esp_mac.h": "c",
-    "bluetooth_task.h": "c"
+    "bluetooth_task.h": "c",
+    "semphr.h": "c"
   }
 }

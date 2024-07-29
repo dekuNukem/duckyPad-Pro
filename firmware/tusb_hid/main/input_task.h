@@ -92,6 +92,8 @@ uint8_t poll_sw_state(uint8_t swid_zero_indexed);
 extern QueueHandle_t rotary_encoder_event_queue;
 extern QueueHandle_t switch_event_queue;
 
+#define KBSCAN_MUTEX_TIMEOUT_MS 100
+
 #define INPUT_TASK_FREQ_MS 20
 
 #ifdef __cplusplus
