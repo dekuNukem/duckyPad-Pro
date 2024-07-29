@@ -68,7 +68,7 @@ void kb_scan_task(void *dummy)
 {
 	while(1)
 	{
-		vTaskDelay(pdMS_TO_TICKS(20));
+		vTaskDelay(pdMS_TO_TICKS(INPUT_TASK_FREQ_MS));
 
 		memset(this_sw_state, 0, TOTAL_OBSW_COUNT);
 		gpio_set_level(SWM_COL0_GPIO, 1);
@@ -204,5 +204,8 @@ uint8_t poll_sw_state(uint8_t swid_zero_indexed)
 {
 	if(swid_zero_indexed >= TOTAL_OBSW_COUNT)
 		return 0;
+	// for (size_t i = 0; i < TOTAL_OBSW_COUNT; i++)
+	// 	printf("%d ", this_sw_state[i]);
+	// printf("\n");
 	return this_sw_state[swid_zero_indexed];
 }

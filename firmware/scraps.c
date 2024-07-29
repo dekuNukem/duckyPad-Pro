@@ -1,5 +1,14 @@
 MY_UNIMPLEMENTED
 
+  // printf("held more than 500ms!!!\n");
+  while(1)
+  {
+    if(poll_sw_state(swid) == 0)
+      break;
+    // printf("still holding!!!\n");
+    run_once(swid, temp_buf);
+    // vTaskDelay(pdMS_TO_TICKS(INPUT_TASK_FREQ_MS*2));
+  }
 
   while(poll_sw_state(swid))
   {

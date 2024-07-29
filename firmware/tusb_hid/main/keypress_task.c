@@ -50,6 +50,7 @@ ds3_exe_result this_exe;
 
 void run_once(uint8_t swid, char* dsb_path)
 {
+  // return;
   der_init(&this_exe);
   run_dsb(&this_exe, swid, dsb_path);
 }
@@ -76,15 +77,19 @@ void handle_keydown(uint8_t swid)
   uint32_t hold_start = pdTICKS_TO_MS(xTaskGetTickCount());
   while(1)
   {
-    uint8_t hhh = poll_sw_state(swid);
-    printf("WTF %d\n", hhh);
-    if(hhh == 0)
+    if(poll_sw_state(swid) == 0)
       goto handle_keydown_end;
     if(pdTICKS_TO_MS(xTaskGetTickCount())- hold_start > 500)
       break;
+    vTaskDelay(pdMS_TO_TICKS(100));
+  }
+  while(1)
+  {
+    if(poll_sw_state(swid) == 0)
+      break;
+    run_once(swid, temp_buf);
   }
 
-  printf("held more than 500ms!!!\n");
   handle_keydown_end:
   play_keyup_animation(current_profile_number, swid);
 }
