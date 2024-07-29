@@ -4,6 +4,22 @@ import ast
 import myast
 from keywords import *
 
+"""
+duckyscript VM changelog
+version 0:
+OG duckyPad with duckyscript 3
+
+version 1:
+duckyPad Pro with duckyScript 3
+Done:
+Added VMVER to aid version checking
+
+TODO:
+mouse move and mouse scroll arguments on stack
+EMUK command 3 keys
+remove BCLR command as it's no longer needed?
+"""
+
 DS_VM_VERSION = 1
 HOW_MANY_NOP_AFTER_VMVAR = 3
 
