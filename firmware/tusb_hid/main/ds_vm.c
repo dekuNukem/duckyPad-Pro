@@ -48,20 +48,20 @@ void stack_init(my_stack* ms)
 uint8_t stack_push(my_stack* ms, uint16_t value)
 {
   if(ms->top >= STACK_SIZE)
-    return STACK_OP_OVERFLOW;
+    return EXE_STACK_OVERFLOW;
   ms->stack[ms->top] = value;
   ms->top++;
-  return STACK_OP_OK;
+  return EXE_OK;
 }
 
 uint8_t stack_pop(my_stack* ms, uint16_t *result)
 {
   if(ms->top == 0)
-    return STACK_OP_UNDERFLOW;
+    return EXE_STACK_UNDERFLOW;
   ms->top--;
   *result = ms->stack[ms->top];
   ms->stack[ms->top] = 0;
-  return STACK_OP_OK;
+  return EXE_OK;
 }
 
 uint16_t make_uint16(uint8_t b0, uint8_t b1)
@@ -100,19 +100,19 @@ void binop(ds3_exe_result* exe, FUNC_PTR bin_func)
 {
   uint16_t rhs, lhs;
   uint8_t op_result = stack_pop(&arithmetic_stack, &rhs);
-  if(op_result != STACK_OP_OK)
+  if(op_result != EXE_OK)
   {
     exe->result = op_result;
     return;
   }
   op_result = stack_pop(&arithmetic_stack, &lhs);
-  if(op_result != STACK_OP_OK)
+  if(op_result != EXE_OK)
   {
     exe->result = op_result;
     return;
   }
   op_result = stack_push(&arithmetic_stack, bin_func(lhs, rhs));
-  if(op_result != STACK_OP_OK)
+  if(op_result != EXE_OK)
   {
     exe->result = op_result;
     return;
@@ -319,7 +319,7 @@ void execute_instruction(uint16_t curr_pc, ds3_exe_result* exe, uint8_t this_key
   else if(this_opcode == OP_PUSHC)
   {
     op_result = stack_push(&arithmetic_stack, op_data);
-    if(op_result != STACK_OP_OK)
+    if(op_result != EXE_OK)
     {
       exe->result = op_result;
       return;
@@ -328,7 +328,7 @@ void execute_instruction(uint16_t curr_pc, ds3_exe_result* exe, uint8_t this_key
   else if(this_opcode == OP_PUSHV)
   {
     op_result = stack_push(&arithmetic_stack, read_var(op_data, this_key_id));
-    if(op_result != STACK_OP_OK)
+    if(op_result != EXE_OK)
     {
       exe->result = op_result;
       return;
@@ -338,7 +338,7 @@ void execute_instruction(uint16_t curr_pc, ds3_exe_result* exe, uint8_t this_key
   {
     uint16_t this_item;
     op_result = stack_pop(&arithmetic_stack, &this_item);
-    if(op_result != STACK_OP_OK)
+    if(op_result != EXE_OK)
     {
       exe->result = op_result;
       return;
@@ -349,7 +349,7 @@ void execute_instruction(uint16_t curr_pc, ds3_exe_result* exe, uint8_t this_key
   {
     uint16_t this_value;
     op_result = stack_pop(&arithmetic_stack, &this_value);
-    if(op_result != STACK_OP_OK)
+    if(op_result != EXE_OK)
     {
       exe->result = op_result;
       return;
@@ -364,7 +364,7 @@ void execute_instruction(uint16_t curr_pc, ds3_exe_result* exe, uint8_t this_key
   else if(this_opcode == OP_CALL)
   {
     op_result = stack_push(&call_stack, exe->next_pc);
-    if(op_result != STACK_OP_OK)
+    if(op_result != EXE_OK)
     {
       exe->result = op_result;
       return;
@@ -375,7 +375,7 @@ void execute_instruction(uint16_t curr_pc, ds3_exe_result* exe, uint8_t this_key
   {
     uint16_t return_pc;
     op_result = stack_pop(&call_stack, &return_pc);
-    if(op_result != STACK_OP_OK)
+    if(op_result != EXE_OK)
     {
       exe->result = op_result;
       return;
@@ -499,7 +499,7 @@ void execute_instruction(uint16_t curr_pc, ds3_exe_result* exe, uint8_t this_key
   {
     uint16_t delay_amount;
     op_result = stack_pop(&arithmetic_stack, &delay_amount);
-    if(op_result != STACK_OP_OK)
+    if(op_result != EXE_OK)
     {
       exe->result = op_result;
       return;
@@ -568,7 +568,7 @@ void execute_instruction(uint16_t curr_pc, ds3_exe_result* exe, uint8_t this_key
   {
     uint16_t target_profile;
     op_result = stack_pop(&arithmetic_stack, &target_profile);
-    if(op_result != STACK_OP_OK)
+    if(op_result != EXE_OK)
     {
       exe->result = op_result;
       return;

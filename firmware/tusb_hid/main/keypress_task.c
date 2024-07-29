@@ -50,10 +50,16 @@ ds3_exe_result this_exe;
 
 void run_once(uint8_t swid, char* dsb_path)
 {
-  // return;
   der_init(&this_exe);
   run_dsb(&this_exe, swid, dsb_path);
   printf("execution halted: %d\n", this_exe.result);
+  if(this_exe.result >= EXE_ERROR_CODE_START)
+  {
+    draw_red();
+    draw_exe_error(this_exe.result);
+    block_until_anykey();
+    goto_profile(current_profile_number);
+  }
 }
 
 void handle_keydown(uint8_t swid)
@@ -234,6 +240,7 @@ void handle_sw_event(switch_event_t* this_sw_event)
   is_busy = 1;
   process_keyevent(this_sw_event->id, this_sw_event->type);
   is_busy = 0;
+  xQueueReset(switch_event_queue);
 }
 
 void keypress_task(void *dummy)
