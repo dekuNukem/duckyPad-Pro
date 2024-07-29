@@ -146,25 +146,6 @@ class dp_profile(object):
 		self.kd_color = None
 		self.dim_unused = True
 
-		new_key = dp_key()
-		new_key.name = "R1CW"
-		self.keylist[BUTTON_RE1_CW] = new_key
-		new_key = dp_key()
-		new_key.name = "R1CCW"
-		self.keylist[BUTTON_RE1_CCW] = new_key
-		new_key = dp_key()
-		new_key.name = "R1BTN"
-		self.keylist[BUTTON_RE1_PUSH] = new_key
-		new_key = dp_key()
-		new_key.name = "R2CW"
-		self.keylist[BUTTON_RE2_CW] = new_key
-		new_key = dp_key()
-		new_key.name = "R2CCW"
-		self.keylist[BUTTON_RE2_CCW] = new_key
-		new_key = dp_key()
-		new_key.name = "R2BTN"
-		self.keylist[BUTTON_RE2_PUSH] = new_key
-
 class dp_global_settings(object):
 	def load_from_path(self, path):
 		try:

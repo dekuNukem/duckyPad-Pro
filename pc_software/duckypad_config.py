@@ -962,7 +962,7 @@ kd_R2.place(x=scaled_size(130), y=scaled_size(405))
 re_lf = LabelFrame(root, text="Rotary Encoders", width=scaled_size(150), height=scaled_size(205))
 re_lf.place(x=scaled_size(590), y=scaled_size(50))
 root.update()
-RE_BUTTON_WIDTH = scaled_size(130)
+RE_BUTTON_WIDTH = scaled_size(80)
 RE_BUTTON_HEIGHT = scaled_size(25)
 
 # ------------- Keys frame -------------
@@ -1088,46 +1088,60 @@ for x in range(MECH_OBSW_COUNT):
     key_button_list.append(this_button)
 
 upper_re_cw = Label(master=re_lf, borderwidth=1, relief="solid", background=default_button_color, font=(None, 13))
-upper_re_cw.place(x=scaled_size(7), y=scaled_size(5), width=RE_BUTTON_WIDTH, height=RE_BUTTON_HEIGHT)
+upper_re_cw.place(x=scaled_size(60), y=scaled_size(5), width=RE_BUTTON_WIDTH, height=RE_BUTTON_HEIGHT)
 upper_re_cw.bind("<Button-1>", key_button_click_event)
 upper_re_cw.bind("<B1-Motion>", button_drag_start)
 upper_re_cw.bind("<ButtonRelease-1>", button_drag_release)
 key_button_list.append(upper_re_cw)
+r1cw_label = Label(master=re_lf, text="RE1 CW")
+r1cw_label.place(x=scaled_size(0), y=scaled_size(7))
 
 upper_re_ccw = Label(master=re_lf, borderwidth=1, relief="solid", background=default_button_color, font=(None, 13))
-upper_re_ccw.place(x=scaled_size(7), y=scaled_size(35), width=RE_BUTTON_WIDTH, height=RE_BUTTON_HEIGHT)
+upper_re_ccw.place(x=scaled_size(60), y=scaled_size(35), width=RE_BUTTON_WIDTH, height=RE_BUTTON_HEIGHT)
 upper_re_ccw.bind("<Button-1>", key_button_click_event)
 upper_re_ccw.bind("<B1-Motion>", button_drag_start)
 upper_re_ccw.bind("<ButtonRelease-1>", button_drag_release)
 key_button_list.append(upper_re_ccw)
+r1ccw_label = Label(master=re_lf, text="RE1 CCW")
+r1ccw_label.place(x=scaled_size(0), y=scaled_size(37))
 
 upper_re_sw = Label(master=re_lf, borderwidth=1, relief="solid", background=default_button_color, font=(None, 13))
-upper_re_sw.place(x=scaled_size(7), y=scaled_size(65), width=RE_BUTTON_WIDTH, height=RE_BUTTON_HEIGHT)
+upper_re_sw.place(x=scaled_size(60), y=scaled_size(65), width=RE_BUTTON_WIDTH, height=RE_BUTTON_HEIGHT)
 upper_re_sw.bind("<Button-1>", key_button_click_event)
 upper_re_sw.bind("<B1-Motion>", button_drag_start)
 upper_re_sw.bind("<ButtonRelease-1>", button_drag_release)
 key_button_list.append(upper_re_sw)
+r1btn_label = Label(master=re_lf, text="RE1 Push")
+r1btn_label.place(x=scaled_size(0), y=scaled_size(67))
+
 
 lower_re_cw = Label(master=re_lf, borderwidth=1, relief="solid", background=default_button_color, font=(None, 13))
-lower_re_cw.place(x=scaled_size(7), y=scaled_size(95), width=RE_BUTTON_WIDTH, height=RE_BUTTON_HEIGHT)
+lower_re_cw.place(x=scaled_size(60), y=scaled_size(95), width=RE_BUTTON_WIDTH, height=RE_BUTTON_HEIGHT)
 lower_re_cw.bind("<Button-1>", key_button_click_event)
 lower_re_cw.bind("<B1-Motion>", button_drag_start)
 lower_re_cw.bind("<ButtonRelease-1>", button_drag_release)
 key_button_list.append(lower_re_cw)
+r2cw_label = Label(master=re_lf, text="RE2 CW")
+r2cw_label.place(x=scaled_size(0), y=scaled_size(97))
 
 lower_re_ccw = Label(master=re_lf, borderwidth=1, relief="solid", background=default_button_color, font=(None, 13))
-lower_re_ccw.place(x=scaled_size(7), y=scaled_size(125), width=RE_BUTTON_WIDTH, height=RE_BUTTON_HEIGHT)
+lower_re_ccw.place(x=scaled_size(60), y=scaled_size(125), width=RE_BUTTON_WIDTH, height=RE_BUTTON_HEIGHT)
 lower_re_ccw.bind("<Button-1>", key_button_click_event)
 lower_re_ccw.bind("<B1-Motion>", button_drag_start)
 lower_re_ccw.bind("<ButtonRelease-1>", button_drag_release)
 key_button_list.append(lower_re_ccw)
+r2ccw_label = Label(master=re_lf, text="RE2 CCW")
+r2ccw_label.place(x=scaled_size(0), y=scaled_size(127))
 
 lower_re_sw = Label(master=re_lf, borderwidth=1, relief="solid", background=default_button_color, font=(None, 13))
-lower_re_sw.place(x=scaled_size(7), y=scaled_size(155), width=RE_BUTTON_WIDTH, height=RE_BUTTON_HEIGHT)
+lower_re_sw.place(x=scaled_size(60), y=scaled_size(155), width=RE_BUTTON_WIDTH, height=RE_BUTTON_HEIGHT)
 lower_re_sw.bind("<Button-1>", key_button_click_event)
 lower_re_sw.bind("<B1-Motion>", button_drag_start)
 lower_re_sw.bind("<ButtonRelease-1>", button_drag_release)
 key_button_list.append(lower_re_sw)
+r2btn_label = Label(master=re_lf, text="RE2 Push")
+r2btn_label.place(x=scaled_size(0), y=scaled_size(157))
+
 
 key_name_label = Label(master=keys_lf, text="Key name:", fg='grey')
 key_name_label.place(x=scaled_size(20), y=scaled_size(310))
@@ -1253,7 +1267,7 @@ key_color_button.bind("<Button-1>", key_color_button_click)
 def open_expansion_instruction(event):
     messagebox.showinfo("oops", f"not implemented yet!!!")
 
-expansion_lf = LabelFrame(root, text="Expansion Switches", width=scaled_size(150), height=scaled_size(263))
+expansion_lf = LabelFrame(root, text="Expansion Modules", width=scaled_size(150), height=scaled_size(263))
 expansion_lf.place(x=scaled_size(590), y=scaled_size(260))
 root.update()
 
@@ -1438,6 +1452,6 @@ def repeat_func():
 
 root.after(500, repeat_func)
 
-# select_root_folder("sample_profiles")
+select_root_folder("sample_profiles")
 # select_root_folder("D:")
 root.mainloop()
