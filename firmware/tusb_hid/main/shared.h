@@ -15,6 +15,7 @@ extern uint8_t esp_mac_addr[ESP_MAC_ADDR_SIZE];
 extern uint8_t fw_version_major;
 extern uint8_t fw_version_minor;
 extern uint8_t fw_version_patch;
+extern uint8_t dsvm_version;
 
 void strip_newline(char* line, uint8_t size);
 uint8_t how_many_digits(uint8_t number);

@@ -39,7 +39,7 @@ void block_until_anykey(void)
 
 void der_init(ds3_exe_result* der)
 {
-  der->result = EXE_EMPTY_FILE;
+  der->result = EXE_OK;
   der->next_pc = 0;
   der->data = 0;
   der->data2 = 0;
@@ -53,6 +53,7 @@ void run_once(uint8_t swid, char* dsb_path)
   // return;
   der_init(&this_exe);
   run_dsb(&this_exe, swid, dsb_path);
+  printf("execution halted: %d\n", this_exe.result);
 }
 
 void handle_keydown(uint8_t swid)

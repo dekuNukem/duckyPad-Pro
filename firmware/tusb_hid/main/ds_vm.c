@@ -578,8 +578,7 @@ void execute_instruction(uint16_t curr_pc, ds3_exe_result* exe, uint8_t this_key
   }
   else
   {
-    // UNKNOWN OP CODE
-    exe->result = EXE_ERROR;
+    exe->result = EXE_UNKNOWN_OPCODE;
   }
 }
 
@@ -587,18 +586,26 @@ uint8_t load_dsb(char* dsb_path)
 {
   FILE *sd_file = fopen(dsb_path, "r");
   if(sd_file == NULL)
-    return DSB_FOPEN_FAIL;
+    return EXE_DSB_FOPEN_FAIL;
   memset(bin_buf, 0, BIN_BUF_SIZE);
   if(fread(bin_buf, 1, BIN_BUF_SIZE, sd_file) == 0)
-    return DSB_FREAD_ERROR;
+    return EXE_DSB_FREAD_ERROR;
   fclose(sd_file);
-  return DSB_OK;
+  if(bin_buf[0] != OP_VMVER)
+    return EXE_DSB_INCOMPATIBLE_VERSION;
+  if(bin_buf[2] != dsvm_version)
+    return EXE_DSB_INCOMPATIBLE_VERSION;
+  return EXE_OK;
 }
 
 void run_dsb(ds3_exe_result* er, uint8_t this_key_id, char* dsb_path)
 {
-  if(load_dsb(dsb_path))
+  uint8_t dsb_load_result = load_dsb(dsb_path);
+  if(dsb_load_result)
+  {
+    er->result = dsb_load_result;
     return;
+  }
   
   uint16_t current_pc = 0;
   stack_init(&arithmetic_stack);
@@ -620,5 +627,4 @@ void run_dsb(ds3_exe_result* er, uint8_t this_key_id, char* dsb_path)
     current_pc = er->next_pc;
   }
   er->epilogue_actions = epilogue_actions;
-  printf("execution halted: %d\n", er->result);
 }

@@ -4,6 +4,9 @@ import ast
 import myast
 from keywords import *
 
+DS_VM_VERSION = 1
+HOW_MANY_NOP_AFTER_VMVAR = 3
+
 # CPU instructions
 OP_NOP = ("NOP", 0)
 OP_PUSHC = ("PUSHC", 1)
@@ -466,13 +469,11 @@ def make_dsb(program_listing, profile_list=None):
 
     assembly_listing = []
 
-    how_many_noops_after_vmvar = 3
-    vm_version = 1
     first_instruction = get_empty_instruction()
     first_instruction['opcode'] = OP_VMVAR
-    first_instruction['oparg'] = ((vm_version % 0xff) << 8) | (how_many_noops_after_vmvar % 0xff)
+    first_instruction['oparg'] = ((DS_VM_VERSION % 0xff) << 8) | (HOW_MANY_NOP_AFTER_VMVAR % 0xff)
     assembly_listing.append(first_instruction)
-    for i in range(how_many_noops_after_vmvar):
+    for i in range(HOW_MANY_NOP_AFTER_VMVAR):
         assembly_listing.append(get_empty_instruction())
 
     for lnum, this_line in enumerate(compact_program_listing):
