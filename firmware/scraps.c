@@ -1,5 +1,12 @@
 MY_UNIMPLEMENTED
 
+
+  while(poll_sw_state(swid))
+  {
+    printf("still pressed!!!\n");
+    vTaskDelay(pdMS_TO_TICKS(100));
+  }
+
 FF_USE_LABEL
 
 for (size_t i = 0; i < HID_TX_BUF_SIZE; i++)
