@@ -270,7 +270,9 @@ def get_fw_str_hid():
     if dp_info is None:
         return None
     return f"{dp_info[3]}.{dp_info[4]}.{dp_info[5]}"
-    
+
+is_root_folder_duckypad_msc = False
+
 FW_OK = 0
 FW_TOO_LOW = 1
 FW_TOO_HIGH = 2
@@ -287,9 +289,12 @@ def check_fw_support(current_fw_str):
         print('check_fw_support', current_fw_str, e)
         return FW_UNKNOWN
 
-def select_root_folder(root_path=None, check_fw=True):
+def select_root_folder(root_path=None, check_fw=True, is_msc=False):
     global profile_list
     global dp_root_folder_path
+    global is_root_folder_duckypad_msc
+
+    is_root_folder_duckypad_msc = is_msc
     print("root_path", root_path)
     if root_path is None:
         root_path = filedialog.askdirectory()
@@ -412,7 +417,7 @@ def connect_button_click():
             return
         select_root_folder()
         return
-    select_root_folder(duckypad_drive_path)
+    select_root_folder(duckypad_drive_path, is_msc=True)
     
 def enable_buttons():
     profile_add_button.config(state=NORMAL)
@@ -800,12 +805,13 @@ def save_click():
         if os.path.isdir(dp_root_folder_path) is False:
             put_duckypad_in_msc_mode_and_get_drive_path(reset_ui=False)
         save_everything(dp_root_folder_path)
-        dp_root_folder_display.set("Ejecting...")
-        root.update()
-        hid_op.eject_drive(dp_root_folder_path)
-        hid_op.duckypad_hid_close()
-        hid_op.duckypad_hid_init()
-        hid_op.duckypad_hid_sw_reset()
+        if is_root_folder_duckypad_msc:
+            dp_root_folder_display.set("Ejecting...")
+            root.update()
+            hid_op.eject_drive(dp_root_folder_path)
+            hid_op.duckypad_hid_close()
+            hid_op.duckypad_hid_init()
+            hid_op.duckypad_hid_sw_reset()
         dp_root_folder_display.set("Done!")
     except Exception as e:
         print('save_click:',e)
