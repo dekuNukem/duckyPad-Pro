@@ -537,9 +537,6 @@ def update_key_button_appearances(profile_index):
         elif item is None and profile_list[profile_index].dim_unused:
             key_button_list[key_index].config(background=default_button_color, text='')
 
-        # if is_rotary_encoder_button(key_index):
-        #     key_button_list[key_index].config(foreground="white", background="grey")
-
 def kd_radiobutton_auto_click():
     global profile_list
     selection = profile_lstbox.curselection()
@@ -755,8 +752,6 @@ def save_everything(save_path):
             for key_index, this_key in enumerate(this_profile.keylist):
                 if this_key is None:
                     continue
-                if is_rotary_encoder_button(key_index) and len(this_key.script.replace('\r', '').replace('\n', '')) <= 1:
-                    continue
                 # newline='' is important, it forces python to not write \r, only \n
                 # otherwise it will read back as double \n
                 with open(this_key.path, 'w', encoding='utf8', newline='') as key_file:
@@ -968,7 +963,7 @@ RE_BUTTON_HEIGHT = scaled_size(25)
 # ------------- Keys frame -------------
 selected_key = None
 
-keys_lf = LabelFrame(root, text="Onboard Switches", width=scaled_size(300), height=scaled_size(473))
+keys_lf = LabelFrame(root, text="Onboard Switches", width=scaled_size(300), height=scaled_size(330))
 keys_lf.place(x=profiles_lf.winfo_x() + profiles_lf.winfo_width() + PADDING, y=profiles_lf.winfo_y())
 root.update()
 
@@ -1007,8 +1002,12 @@ def button_drag_start(event):
         return
     reset_key_button_relief()
     event.widget.config(borderwidth=7, relief='sunken')
+
     if drag_source_button_index is not None and drag_destination_button_index is not None and drag_destination_button_index != drag_source_button_index:
-        key_button_list[drag_destination_button_index].config(text='move\nhere', background='white', foreground='black', borderwidth=4)
+        move_here_text = "move\nhere"
+        if is_rotary_encoder_button(drag_destination_button_index):
+            move_here_text = "move"
+        key_button_list[drag_destination_button_index].config(text=move_here_text, background='white', foreground='black', borderwidth=4)
     else:
         update_key_button_appearances(profile_index)
 
@@ -1114,7 +1113,6 @@ key_button_list.append(upper_re_sw)
 r1btn_label = Label(master=re_lf, text="RE1 Push")
 r1btn_label.place(x=scaled_size(0), y=scaled_size(67))
 
-
 lower_re_cw = Label(master=re_lf, borderwidth=1, relief="solid", background=default_button_color, font=(None, 13))
 lower_re_cw.place(x=scaled_size(60), y=scaled_size(95), width=RE_BUTTON_WIDTH, height=RE_BUTTON_HEIGHT)
 lower_re_cw.bind("<Button-1>", key_button_click_event)
@@ -1143,16 +1141,20 @@ r2btn_label = Label(master=re_lf, text="RE2 Push")
 r2btn_label.place(x=scaled_size(0), y=scaled_size(157))
 
 
-key_name_label = Label(master=keys_lf, text="Key name:", fg='grey')
-key_name_label.place(x=scaled_size(20), y=scaled_size(310))
+name_editor_lf = LabelFrame(root, text="Editor", width=scaled_size(300), height=scaled_size(143))
+name_editor_lf.place(x=profiles_lf.winfo_x() + profiles_lf.winfo_width() + PADDING, y=380)
 root.update()
 
-key_char_limit_label = Label(master=keys_lf, text="max 2 lines\n5 char per line", fg='grey')
-key_char_limit_label.place(x=scaled_size(200), y=scaled_size(310))
+key_name_label = Label(master=name_editor_lf, text="Key name:", fg='grey')
+key_name_label.place(x=scaled_size(10), y=scaled_size(10))
 root.update()
 
-key_name_textbox = Text(keys_lf, state=DISABLED, wrap="word")
-key_name_textbox.place(x=scaled_size(100), y=scaled_size(310), width=scaled_size(80), height=scaled_size(40))
+key_char_limit_label = Label(master=name_editor_lf, text="max 2 lines\n5 char per line", fg='grey')
+key_char_limit_label.place(x=scaled_size(200), y=scaled_size(0))
+root.update()
+
+key_name_textbox = Text(name_editor_lf, state=DISABLED, wrap="word")
+key_name_textbox.place(x=scaled_size(100), y=scaled_size(0), width=scaled_size(80), height=scaled_size(40))
 
 def get_clean_key_name_2lines(user_text):
     split_line = user_text.replace('\r', '').split('\n')[:2]
@@ -1170,8 +1172,6 @@ def get_clean_key_name_2lines(user_text):
 
 def key_rename_click():
     if is_key_selected() == False:
-        return
-    if is_rotary_encoder_button(selected_key):
         return
     profile_index = profile_lstbox.curselection()[0]
     keyname_line1, keyname_line2 = get_clean_key_name_2lines(key_name_textbox.get("1.0", END))
@@ -1192,8 +1192,6 @@ def key_rename_click():
 def key_remove_click():
     if is_key_selected() == False:
         return
-    if is_rotary_encoder_button(selected_key):
-        return
     profile_index = profile_lstbox.curselection()[0]
     profile_list[profile_index].keylist[selected_key] = None
     update_key_button_appearances(profile_index)
@@ -1201,14 +1199,14 @@ def key_remove_click():
 
 KEY_NAME_BUTTON_GAP = int((keys_lf.winfo_width() - 2 * BUTTON_WIDTH) / 3.5)
 
-key_rename_button = Button(keys_lf, text="Apply", command=key_rename_click, state=DISABLED, fg="green")
-key_rename_button.place(x=scaled_size(30), y=scaled_size(365), width=BUTTON_WIDTH, height=BUTTON_HEIGHT)
+key_rename_button = Button(name_editor_lf, text="Apply", command=key_rename_click, state=DISABLED, fg="green")
+key_rename_button.place(x=scaled_size(30), y=scaled_size(45), width=BUTTON_WIDTH, height=22)
 root.update()
-key_remove_button = Button(keys_lf, text="Remove", command=key_remove_click, state=DISABLED, fg="red")
-key_remove_button.place(x=scaled_size(160), y=scaled_size(365), width=BUTTON_WIDTH, height=BUTTON_HEIGHT)
+key_remove_button = Button(name_editor_lf, text="Remove", command=key_remove_click, state=DISABLED, fg="red")
+key_remove_button.place(x=scaled_size(160), y=scaled_size(45), width=BUTTON_WIDTH, height=22)
 
-key_color_text = Label(master=keys_lf, text="Key color:", fg='grey')
-key_color_text.place(x=scaled_size(PADDING), y=scaled_size(400))
+key_color_text = Label(master=name_editor_lf, text="Key color:", fg='grey')
+key_color_text.place(x=scaled_size(10), y=scaled_size(70))
 root.update()
 
 def key_color_rb1_click():
@@ -1253,13 +1251,13 @@ def key_color_button_click(event):
     key_button_click(key_button_list[selected_key])
 
 key_color_type_var = IntVar()
-key_color_rb1 = Radiobutton(keys_lf, text="Same as background", variable=key_color_type_var, value=0, command=key_color_rb1_click,state=DISABLED)
-key_color_rb1.place(x=scaled_size(85), y=scaled_size(400))
-key_color_rb2 = Radiobutton(keys_lf, text="", variable=key_color_type_var, value=1, command=key_color_rb2_click, state=DISABLED)
-key_color_rb2.place(x=scaled_size(85), y=scaled_size(425))
+key_color_rb1 = Radiobutton(name_editor_lf, text="Same as background", variable=key_color_type_var, value=0, command=key_color_rb1_click,state=DISABLED)
+key_color_rb1.place(x=scaled_size(85), y=scaled_size(70))
+key_color_rb2 = Radiobutton(name_editor_lf, text="", variable=key_color_type_var, value=1, command=key_color_rb2_click, state=DISABLED)
+key_color_rb2.place(x=scaled_size(85), y=scaled_size(95))
 
-key_color_button = Label(master=keys_lf, borderwidth=1, relief="solid")
-key_color_button.place(x=scaled_size(135), y=scaled_size(425), width=scaled_size(60), height=scaled_size(20))
+key_color_button = Label(master=name_editor_lf, borderwidth=1, relief="solid")
+key_color_button.place(x=scaled_size(135), y=scaled_size(95), width=scaled_size(60), height=scaled_size(20))
 key_color_button.bind("<Button-1>", key_color_button_click)
 
 # ------------- Expansion frame ------------
