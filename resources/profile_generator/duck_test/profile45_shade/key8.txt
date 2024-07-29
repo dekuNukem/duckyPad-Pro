@@ -1,2 +1,0 @@
-STRING globe
-ENTER

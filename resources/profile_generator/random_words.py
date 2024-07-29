@@ -5,7 +5,7 @@ import shutil
 import random
 
 profile_number = 99
-MAX_SW_COUNT = 20
+MAX_SW_COUNT = 26
 
 root_name = 'duck_test'
 
@@ -35,7 +35,7 @@ word_list = [
 ]
 
 word_list = list(set(word_list))
-dsb_path = "./out.dsb"
+# dsb_path = "./out.dsb"
 
 def get_random_name():
 	return random.choice(word_list)
@@ -55,9 +55,9 @@ for x in range(0, profile_number + 1):
 	config_name = os.path.join(profile_dir_name, 'config.txt')
 	config_content = ''
 	for y in range(1, MAX_SW_COUNT+1):
-		config_content += 'SWNAMEFL_' + str(y) + ' ' + get_random_name()[:5] + "\n"
+		config_content += 'z' + str(y) + ' ' + get_random_name()[:5] + "\n"
 		if random.randint(0, 1):
-			config_content += 'SWNAMESL_' + str(y) + ' ' + get_random_name()[:5] + "\n"
+			config_content += 'x' + str(y) + ' ' + get_random_name()[:5] + "\n"
 	for y in range(1, MAX_SW_COUNT+1):
 		config_content += 'SWCOLOR_' + str(y) + ' ' + get_random_colors() + "\n"
 	# print(config_content)
@@ -71,6 +71,6 @@ for x in range(0, profile_number + 1):
 		with open(script_name, 'w') as script_file:
 			script_file.write(script_content)
 
-		dsb_name = os.path.join(profile_dir_name, 'key' + str(y) + '.dsb')
-		print(dsb_name)
-		shutil.copyfile(dsb_path, dsb_name)
+		# dsb_name = os.path.join(profile_dir_name, 'key' + str(y) + '.dsb')
+		# print(dsb_name)
+		# shutil.copyfile(dsb_path, dsb_name)

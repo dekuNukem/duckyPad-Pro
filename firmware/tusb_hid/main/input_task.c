@@ -64,48 +64,53 @@ void sw_matrix_col_reset(void)
 	gpio_set_level(SWM_COL3_GPIO, 0);
 }
 
+void sw_scan(void)
+{
+	memset(this_sw_state, 0, TOTAL_OBSW_COUNT);
+	gpio_set_level(SWM_COL0_GPIO, 1);
+	gpio_set_level(SWM_COL1_GPIO, 0);
+	gpio_set_level(SWM_COL2_GPIO, 0);
+	gpio_set_level(SWM_COL3_GPIO, 0);
+	vTaskDelay(pdMS_TO_TICKS(1));
+	scan_row(this_sw_state, 0);
+
+	gpio_set_level(SWM_COL0_GPIO, 0);
+	gpio_set_level(SWM_COL1_GPIO, 1);
+	gpio_set_level(SWM_COL2_GPIO, 0);
+	gpio_set_level(SWM_COL3_GPIO, 0);
+	vTaskDelay(pdMS_TO_TICKS(1));
+	scan_row(this_sw_state, 1);
+
+	gpio_set_level(SWM_COL0_GPIO, 0);
+	gpio_set_level(SWM_COL1_GPIO, 0);
+	gpio_set_level(SWM_COL2_GPIO, 1);
+	gpio_set_level(SWM_COL3_GPIO, 0);
+	vTaskDelay(pdMS_TO_TICKS(1));
+	scan_row(this_sw_state, 2);
+
+	gpio_set_level(SWM_COL0_GPIO, 0);
+	gpio_set_level(SWM_COL1_GPIO, 0);
+	gpio_set_level(SWM_COL2_GPIO, 0);
+	gpio_set_level(SWM_COL3_GPIO, 1);
+	vTaskDelay(pdMS_TO_TICKS(1));
+	scan_row(this_sw_state, 3);
+
+	sw_matrix_col_reset(); // need time to settle, do not remove
+	vTaskDelay(pdMS_TO_TICKS(1));
+
+	this_sw_state[SW_PLUS] = 1 - gpio_get_level(SW_PLUS_GPIO);
+	this_sw_state[SW_MINUS] = 1 - gpio_get_level(SW_MINUS_GPIO);
+	this_sw_state[SW_RE1] = 1 - gpio_get_level(SW_RE1_GPIO);
+	this_sw_state[SW_RE2] = 1 - gpio_get_level(SW_RE2_GPIO);
+}
+
 void kb_scan_task(void *dummy)
 {
 	while(1)
 	{
 		vTaskDelay(pdMS_TO_TICKS(INPUT_TASK_FREQ_MS));
 
-		memset(this_sw_state, 0, TOTAL_OBSW_COUNT);
-		gpio_set_level(SWM_COL0_GPIO, 1);
-		gpio_set_level(SWM_COL1_GPIO, 0);
-		gpio_set_level(SWM_COL2_GPIO, 0);
-		gpio_set_level(SWM_COL3_GPIO, 0);
-		vTaskDelay(pdMS_TO_TICKS(1));
-		scan_row(this_sw_state, 0);
-
-		gpio_set_level(SWM_COL0_GPIO, 0);
-		gpio_set_level(SWM_COL1_GPIO, 1);
-		gpio_set_level(SWM_COL2_GPIO, 0);
-		gpio_set_level(SWM_COL3_GPIO, 0);
-		vTaskDelay(pdMS_TO_TICKS(1));
-		scan_row(this_sw_state, 1);
-
-		gpio_set_level(SWM_COL0_GPIO, 0);
-		gpio_set_level(SWM_COL1_GPIO, 0);
-		gpio_set_level(SWM_COL2_GPIO, 1);
-		gpio_set_level(SWM_COL3_GPIO, 0);
-		vTaskDelay(pdMS_TO_TICKS(1));
-		scan_row(this_sw_state, 2);
-
-		gpio_set_level(SWM_COL0_GPIO, 0);
-		gpio_set_level(SWM_COL1_GPIO, 0);
-		gpio_set_level(SWM_COL2_GPIO, 0);
-		gpio_set_level(SWM_COL3_GPIO, 1);
-		vTaskDelay(pdMS_TO_TICKS(1));
-		scan_row(this_sw_state, 3);
-
-		sw_matrix_col_reset(); // need time to settle, do not remove
-		vTaskDelay(pdMS_TO_TICKS(1));
-
-		this_sw_state[SW_PLUS] = 1 - gpio_get_level(SW_PLUS_GPIO);
-		this_sw_state[SW_MINUS] = 1 - gpio_get_level(SW_MINUS_GPIO);
-		this_sw_state[SW_RE1] = 1 - gpio_get_level(SW_RE1_GPIO);
-		this_sw_state[SW_RE2] = 1 - gpio_get_level(SW_RE2_GPIO);
+		sw_scan();
 
 		for (uint8_t i = 0; i < TOTAL_OBSW_COUNT; i++)
 		{
@@ -204,8 +209,6 @@ uint8_t poll_sw_state(uint8_t swid_zero_indexed)
 {
 	if(swid_zero_indexed >= TOTAL_OBSW_COUNT)
 		return 0;
-	// for (size_t i = 0; i < TOTAL_OBSW_COUNT; i++)
-	// 	printf("%d ", this_sw_state[i]);
-	// printf("\n");
+	sw_scan();
 	return this_sw_state[swid_zero_indexed];
 }
