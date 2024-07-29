@@ -312,6 +312,10 @@ void execute_instruction(uint16_t curr_pc, ds3_exe_result* exe, uint8_t this_key
   {
     return;
   }
+  else if(this_opcode == OP_VMVER)
+  {
+    exe->next_pc = (byte0 + 1) * INSTRUCTION_SIZE_BYTES;
+  }
   else if(this_opcode == OP_PUSHC)
   {
     op_result = stack_push(&arithmetic_stack, op_data);

@@ -65,6 +65,8 @@ OP_NEXTP = ("NEXTP", 45)
 OP_GOTOP = ("GOTOP", 46)
 OP_SLEEP = ("SLEEP", 47)
 
+OP_VMVAR = ("VMVAR", 255)
+
 arith_lookup = {
     "Eq" : OP_EQ,
     "NotEq" : OP_NOTEQ,
@@ -463,6 +465,15 @@ def make_dsb(program_listing, profile_list=None):
     print()
 
     assembly_listing = []
+
+    how_many_noops_after_vmvar = 3
+    vm_version = 1
+    first_instruction = get_empty_instruction()
+    first_instruction['opcode'] = OP_VMVAR
+    first_instruction['oparg'] = ((vm_version % 0xff) << 8) | (how_many_noops_after_vmvar % 0xff)
+    assembly_listing.append(first_instruction)
+    for i in range(how_many_noops_after_vmvar):
+        assembly_listing.append(get_empty_instruction())
 
     for lnum, this_line in enumerate(compact_program_listing):
         lnum += 1

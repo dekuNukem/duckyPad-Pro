@@ -1,5 +1,29 @@
 MY_UNIMPLEMENTED
 
+void redraw_bg(uint8_t profile_number)
+{
+  if(profile_number >= MAX_PROFILES)
+    return;
+  for (int i = 0; i < NEOPIXEL_COUNT; ++i)
+  {
+    neo_anime[i].animation_type = ANIMATION_NONE;
+    set_pixel_color(i, all_profile_info[profile_number].sw_color[i]);
+    if(all_profile_info[profile_number].dim_unused_keys)
+  }
+  neopixel_draw_current_buffer();
+}
+
+void redraw_bg(uint8_t profile_number)
+{
+  for (int i = 0; i < NEOPIXEL_COUNT; ++i)
+  {
+    neo_anime[i].animation_type = ANIMATION_NONE;
+    set_pixel_color(i, all_profile_info[profile_number].sw_color[i]);
+  }
+  neopixel_draw_current_buffer();
+}
+
+
   // printf("held more than 500ms!!!\n");
   while(1)
   {

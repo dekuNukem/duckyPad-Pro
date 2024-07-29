@@ -54,6 +54,8 @@
 #define OP_GOTOP 46
 #define OP_SLEEP 47
 
+#define OP_VMVER 255
+
 #define INSTRUCTION_SIZE_BYTES 3
 #define STACK_SIZE 16
 

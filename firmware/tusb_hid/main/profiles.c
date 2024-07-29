@@ -285,6 +285,7 @@ void load_profile_config(profile_info* this_profile)
   FILE *sd_file = fopen(filename_buf, "r");
   if(sd_file == NULL)
     return;
+  this_profile->dim_unused_keys = 1;
   memset(temp_buf, 0, TEMP_BUFSIZE);
   while(fgets(temp_buf, TEMP_BUFSIZE, sd_file))
   {
@@ -292,6 +293,21 @@ void load_profile_config(profile_info* this_profile)
     parse_profile_config_line(temp_buf, this_profile);
   }
   // print_profile_info(this_profile);
+
+  if(this_profile->dim_unused_keys)
+  {
+    for (size_t i = 0; i < MECH_OBSW_COUNT; i++)
+    {
+      if(strlen(this_profile->sw_name_firstline[i]) > 0)
+        continue;
+      this_profile->sw_color[i][0] = 0;
+      this_profile->sw_color[i][1] = 0;
+      this_profile->sw_color[i][2] = 0;
+      this_profile->sw_activation_color[i][0] = 0;
+      this_profile->sw_activation_color[i][1] = 0;
+      this_profile->sw_activation_color[i][2] = 0;
+    }
+  }
   fclose(sd_file);
 }
 
