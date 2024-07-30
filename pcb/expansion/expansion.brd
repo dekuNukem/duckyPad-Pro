@@ -195,7 +195,7 @@
 <text x="156.4448" y="25.3036" size="1.27" layer="25" rot="R180" align="center">G</text>
 <text x="146.3174" y="24.3448" size="1.27" layer="25" rot="R270" align="center">3V3</text>
 <text x="56.7252" y="19.0434" size="1.9304" layer="25" align="center">DFU</text>
-<text x="58.1222" y="23.1074" size="1.9304" layer="25" align="center">RESET</text>
+<text x="56.7252" y="23.1074" size="1.9304" layer="25" align="center">RST</text>
 <text x="157.639" y="17.792" size="1.27" layer="25" rot="R90" align="center">PC</text>
 <text x="157.639" y="15.125" size="1.27" layer="25" align="center">G</text>
 <text x="146.6562" y="43.3924" size="2.1082" layer="26" rot="MR0" align="center">PulseHPT.com
