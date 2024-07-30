@@ -3587,6 +3587,35 @@ by exp-lbrs.ulp</description>
 </deviceset>
 </devicesets>
 </library>
+<library name="f1c100s">
+<packages>
+<package name="M2.5HOLE">
+<hole x="0" y="0" drill="2.8"/>
+<circle x="0" y="0" radius="3" width="0" layer="41"/>
+<circle x="0" y="0" radius="3" width="0" layer="42"/>
+</package>
+</packages>
+<symbols>
+<symbol name="M2.5HOLE">
+<circle x="0" y="0" radius="5.08" width="0" layer="94"/>
+<text x="7.62" y="-2.54" size="5.08" layer="94">M2.5 HOLE</text>
+</symbol>
+</symbols>
+<devicesets>
+<deviceset name="M2.5HOLE">
+<gates>
+<gate name="G$1" symbol="M2.5HOLE" x="0" y="0"/>
+</gates>
+<devices>
+<device name="" package="M2.5HOLE">
+<technologies>
+<technology name=""/>
+</technologies>
+</device>
+</devices>
+</deviceset>
+</devicesets>
+</library>
 </libraries>
 <attributes>
 </attributes>
@@ -3654,6 +3683,10 @@ by exp-lbrs.ulp</description>
 <part name="JP4" library="pinhead" library_urn="urn:adsk.eagle:library:325" deviceset="PINHD-1X3" device="" package3d_urn="urn:adsk.eagle:package:22458/2"/>
 <part name="JP5" library="pinhead" library_urn="urn:adsk.eagle:library:325" deviceset="PINHD-1X3" device="" package3d_urn="urn:adsk.eagle:package:22458/2"/>
 <part name="JP6" library="pinhead" library_urn="urn:adsk.eagle:library:325" deviceset="PINHD-1X3" device="" package3d_urn="urn:adsk.eagle:package:22458/2"/>
+<part name="U$8" library="f1c100s" deviceset="M2.5HOLE" device=""/>
+<part name="U$9" library="f1c100s" deviceset="M2.5HOLE" device=""/>
+<part name="U$10" library="f1c100s" deviceset="M2.5HOLE" device=""/>
+<part name="U$11" library="f1c100s" deviceset="M2.5HOLE" device=""/>
 </parts>
 <sheets>
 <sheet>
@@ -3832,6 +3865,10 @@ by exp-lbrs.ulp</description>
 <attribute name="NAME" x="168.91" y="-88.265" size="1.778" layer="95"/>
 <attribute name="VALUE" x="168.91" y="-101.6" size="1.778" layer="96"/>
 </instance>
+<instance part="U$8" gate="G$1" x="238.76" y="-71.12" smashed="yes"/>
+<instance part="U$9" gate="G$1" x="238.76" y="-86.36" smashed="yes"/>
+<instance part="U$10" gate="G$1" x="297.18" y="-71.12" smashed="yes"/>
+<instance part="U$11" gate="G$1" x="297.18" y="-86.36" smashed="yes"/>
 </instances>
 <busses>
 </busses>
