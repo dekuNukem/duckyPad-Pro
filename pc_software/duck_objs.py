@@ -79,8 +79,8 @@ class dp_key(object):
 		self.color = None
 		self.script = self.load_script(path_on_press).replace('\r', '')
 		self.script_on_release = self.load_script(path_on_release).replace('\r', '')
-		# if len(self.script_on_release) > 1:
-		# 	print(self.script, self.script_on_release)
+		if len(self.script_on_release) > 1:
+			print(self.script, self.script_on_release)
 		try:
 			config_path = os.path.join(os.path.dirname(path_on_press), "config.txt")
 			self.read_color(config_path)
@@ -96,7 +96,7 @@ class dp_profile(object):
 		
 		for item in key_file_list:
 			on_press_path = os.path.join(path, item)
-			on_release_filename = item.replace('.txt', '') + "release.txt"
+			on_release_filename = item.replace('.txt', '') + "-release.txt"
 			on_release_path = os.path.join(path, on_release_filename)
 			this_key = dp_key(on_press_path, on_release_path)
 			self.keylist[this_key.index - 1] = this_key
