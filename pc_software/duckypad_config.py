@@ -757,6 +757,10 @@ def save_everything(save_path):
                 # otherwise it will read back as double \n
                 with open(this_key.path, 'w', encoding='utf8', newline='') as key_file:
                     key_file.write(this_key.script)
+                
+                # if this_key.path_on_release is not None:
+                #     with open(this_key.path_on_release, 'w', encoding='utf8', newline='') as key_file:
+                #         key_file.write(this_key.script_on_release)
 
                 dsb_path = this_key.path
                 pre, ext = os.path.splitext(dsb_path)
@@ -1366,6 +1370,8 @@ def check_syntax():
         return
     script_textbox.tag_remove("error", '1.0', 'end')
     program_listing = profile_list[profile_index].keylist[selected_key].script.split('\n')
+    if on_press_release_rb_var.get() == 1:
+        program_listing = profile_list[profile_index].keylist[selected_key].script_on_release.split('\n')
     result_dict = ds3_preprocessor.run_all(program_listing)
     if result_dict["is_success"]:
         script_textbox.tag_remove("error", '1.0', 'end')
