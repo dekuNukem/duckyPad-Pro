@@ -55,28 +55,28 @@ class dp_key(object):
 			pass
 		return line1, line2
 
-	def __init__(self, path=None):
+	def __init__(self, path_on_press=None, release_path=None):
 		super(dp_key, self).__init__()
-		self.path = path
+		self.path = path_on_press
+		self.path_on_release = release_path
 		self.name = None
 		self.name_line2 = None
 		self.index = None
 		self.color = None
-		self.has_loop = False
-		self.max_loop = 0
 		self.script = ''
+		self.script_on_release = ''
 		self.binary_array = None
-		if path is None:
+		if path_on_press is None:
 			return
-		self.index = int(os.path.basename(os.path.normpath(path)).split("_")[0].split(".txt")[0].strip('key'))
-		if '_' in os.path.basename(os.path.normpath(path)):
-			self.name = os.path.basename(os.path.normpath(path)).rsplit('.', 1)[0].split('_', 1)[-1]
+		self.index = int(os.path.basename(os.path.normpath(path_on_press)).split("_")[0].split(".txt")[0].strip('key'))
+		if '_' in os.path.basename(os.path.normpath(path_on_press)):
+			self.name = os.path.basename(os.path.normpath(path_on_press)).rsplit('.', 1)[0].split('_', 1)[-1]
 		else:
-			self.name, self.name_line2 = self.get_keyname(path, self.index)
+			self.name, self.name_line2 = self.get_keyname(path_on_press, self.index)
 		self.color = None
-		self.script = self.load_script(path).replace('\r', '')
+		self.script = self.load_script(path_on_press).replace('\r', '')
 		try:
-			config_path = os.path.join(os.path.dirname(path), "config.txt")
+			config_path = os.path.join(os.path.dirname(path_on_press), "config.txt")
 			self.read_color(config_path)
 		except Exception as e:
 			print(">>> read_color:", config_path, e)
@@ -88,9 +88,13 @@ class dp_profile(object):
 	def read_keys(self, path):
 		key_file_list = [x for x in os.listdir(path) if x.endswith('.txt') and x.startswith('key') and x[3].isnumeric()]
 		key_file_list.sort(key=lambda s: int(s[3:].split("_")[0].split(".txt")[0])) # sort by number not by letter
-		# print(key_file_list)
+		
 		for item in key_file_list:
-			this_key = dp_key(os.path.join(path, item))
+			on_press_path = os.path.join(path, item)
+			on_release_filename = item.replace('.txt', '') + "_release.txt"
+			on_release_path = os.path.join(path, on_release_filename)
+			print(on_press_path, on_release_path)
+			this_key = dp_key(on_press_path)
 			self.keylist[this_key.index - 1] = this_key
 
 	def read_config(self, path):
