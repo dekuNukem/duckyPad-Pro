@@ -96,8 +96,7 @@ class dp_profile(object):
 			on_press_path = os.path.join(path, item)
 			on_release_filename = item.replace('.txt', '') + "_release.txt"
 			on_release_path = os.path.join(path, on_release_filename)
-			print(on_press_path, on_release_path)
-			this_key = dp_key(on_press_path)
+			this_key = dp_key(on_press_path, on_release_path)
 			self.keylist[this_key.index - 1] = this_key
 
 	def read_config(self, path):
