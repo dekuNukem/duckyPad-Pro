@@ -7,7 +7,7 @@
 <setting keepoldvectorfont="yes"/>
 <setting verticaltext="up"/>
 </settings>
-<grid distance="5" unitdist="mil" unit="mil" style="lines" multiple="1" display="yes" altdistance="1" altunitdist="mil" altunit="mil"/>
+<grid distance="0.5" unitdist="mm" unit="mm" style="lines" multiple="1" display="yes" altdistance="1" altunitdist="mil" altunit="mil"/>
 <layers>
 <layer number="1" name="Top" color="4" fill="1" visible="yes" active="yes"/>
 <layer number="2" name="pwr" color="49" fill="1" visible="no" active="yes"/>
@@ -201,36 +201,37 @@
 <wire x1="0" y1="92.5" x2="3.5" y2="96" width="0" layer="20" curve="-90"/>
 <wire x1="3.5" y1="96" x2="70.5" y2="96" width="0" layer="20"/>
 <wire x1="70.5" y1="96" x2="72" y2="94.5" width="0" layer="20" curve="-90"/>
-<wire x1="72" y1="94.5" x2="72" y2="93.5" width="0" layer="20"/>
-<wire x1="72" y1="93.5" x2="73.5" y2="92" width="0" layer="20" curve="90"/>
-<wire x1="73.5" y1="92" x2="81.5" y2="92" width="0" layer="20"/>
-<wire x1="81.5" y1="92" x2="83" y2="93.5" width="0" layer="20" curve="90"/>
-<wire x1="83" y1="93.5" x2="83" y2="94.5" width="0" layer="20"/>
+<wire x1="72" y1="94.5" x2="72" y2="91" width="0" layer="20"/>
+<wire x1="72" y1="91" x2="73.5" y2="89.5" width="0" layer="20" curve="90"/>
+<wire x1="73.5" y1="89.5" x2="81.5" y2="89.5" width="0" layer="20"/>
+<wire x1="81.5" y1="89.5" x2="83" y2="91" width="0" layer="20" curve="90"/>
+<wire x1="83" y1="91" x2="83" y2="94.5" width="0" layer="20"/>
 <wire x1="83" y1="94.5" x2="84.5" y2="96" width="0" layer="20" curve="-90"/>
 <wire x1="84.5" y1="96" x2="105.5" y2="96" width="0" layer="20"/>
 <wire x1="0" y1="3.5" x2="3.5" y2="0" width="0" layer="20" curve="90"/>
-<wire x1="104" y1="16.5" x2="104" y2="6.5" width="0" layer="20"/>
-<wire x1="104" y1="6.5" x2="105.5" y2="5.127" width="0" layer="20" curve="90"/>
-<wire x1="105.5" y1="5.127" x2="107.5" y2="5.127" width="0" layer="20"/>
-<wire x1="107.5" y1="5.127" x2="109" y2="3.5" width="0" layer="20" curve="-90"/>
-<wire x1="109" y1="3.5" x2="109" y2="1.5" width="0" layer="20"/>
+<wire x1="100" y1="30.75" x2="100" y2="22.25" width="0" layer="20"/>
+<wire x1="100" y1="22.25" x2="101" y2="21.25" width="0" layer="20" curve="90"/>
+<wire x1="101" y1="21.25" x2="108" y2="21.25" width="0" layer="20"/>
+<wire x1="108" y1="21.25" x2="109" y2="20.25" width="0" layer="20" curve="-90"/>
+<wire x1="109" y1="20.25" x2="109" y2="19.504" width="0" layer="20"/>
+<wire x1="109" y1="19.504" x2="108" y2="18.504" width="0" layer="20" curve="-90"/>
+<wire x1="108" y1="18.504" x2="105" y2="18.504" width="0" layer="20"/>
+<wire x1="105" y1="18.504" x2="104" y2="17.504" width="0" layer="20" curve="90"/>
+<wire x1="104" y1="17.504" x2="104" y2="5.877" width="0" layer="20"/>
+<wire x1="104" y1="5.877" x2="105" y2="4.877" width="0" layer="20" curve="90"/>
+<wire x1="105" y1="4.877" x2="108" y2="4.877" width="0" layer="20"/>
+<wire x1="108" y1="4.877" x2="109" y2="3.877" width="0" layer="20" curve="-90"/>
+<wire x1="109" y1="3.877" x2="109" y2="1.5" width="0" layer="20"/>
 <wire x1="109" y1="1.5" x2="107.5" y2="0" width="0" layer="20" curve="-90"/>
 <wire x1="107.5" y1="0" x2="3.5" y2="0" width="0" layer="20"/>
 <text x="77.343" y="52.197" size="3.175" layer="26" rot="MR0" align="center">duckyPad Pro</text>
 <text x="77.343" y="43.815" size="2.1844" layer="26" rot="MR0" align="center">dekuNukem
 2024</text>
 <wire x1="105.5" y1="96" x2="109" y2="92.5" width="0" layer="20" curve="-90"/>
-<wire x1="109" y1="92.5" x2="109" y2="33.5" width="0" layer="20"/>
-<wire x1="109" y1="33.5" x2="107.5" y2="32" width="0" layer="20" curve="-90"/>
-<wire x1="107.5" y1="32" x2="101.5" y2="32" width="0" layer="20"/>
-<wire x1="101.5" y1="32" x2="100" y2="30.5" width="0" layer="20" curve="90"/>
-<wire x1="100" y1="30.5" x2="100" y2="22.5" width="0" layer="20"/>
-<wire x1="100" y1="22.5" x2="101.5" y2="21" width="0" layer="20" curve="90"/>
-<wire x1="101.5" y1="21" x2="107.5" y2="21" width="0" layer="20"/>
-<wire x1="107.5" y1="21" x2="109" y2="19.5" width="0" layer="20" curve="-90"/>
-<wire x1="109" y1="19.5" x2="107.5" y2="18.254" width="0" layer="20" curve="-90"/>
-<wire x1="107.5" y1="18.254" x2="105.5" y2="18.254" width="0" layer="20"/>
-<wire x1="105.5" y1="18.254" x2="104" y2="16.5" width="0" layer="20" curve="90"/>
+<wire x1="109" y1="92.5" x2="109" y2="32.75" width="0" layer="20"/>
+<wire x1="109" y1="32.75" x2="108" y2="31.75" width="0" layer="20" curve="-90"/>
+<wire x1="108" y1="31.75" x2="101" y2="31.75" width="0" layer="20"/>
+<wire x1="101" y1="31.75" x2="100" y2="30.75" width="0" layer="20" curve="90"/>
 </plain>
 <libraries>
 <library name="duckypad">

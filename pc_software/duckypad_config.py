@@ -296,7 +296,6 @@ def select_root_folder(root_path=None, check_fw=True, is_msc=False):
     global is_root_folder_duckypad_msc
 
     is_root_folder_duckypad_msc = is_msc
-    print("root_path", root_path)
     if root_path is None:
         root_path = filedialog.askdirectory()
     if len(root_path) <= 0:
