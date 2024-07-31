@@ -1,4 +1,13 @@
 
+script_common_commands_lf = LabelFrame(scripts_lf, text="Common commands", width=script_textbox.winfo_width(), height=scaled_size(105))
+script_common_commands_lf.place(x=PADDING, y=scaled_size(300))
+root.update()
+
+script_button_xy_list = [(SCRIPT_BUTTON_GAP, PADDING), (SCRIPT_BUTTON_GAP*2+SCRIPT_BUTTON_WIDTH, PADDING), (SCRIPT_BUTTON_GAP*3+SCRIPT_BUTTON_WIDTH*2, PADDING), (SCRIPT_BUTTON_GAP, PADDING+BUTTON_HEIGHT+2), (SCRIPT_BUTTON_GAP*2+SCRIPT_BUTTON_WIDTH, PADDING+BUTTON_HEIGHT+2), (SCRIPT_BUTTON_GAP*3+SCRIPT_BUTTON_WIDTH*2, PADDING+BUTTON_HEIGHT+2), (SCRIPT_BUTTON_GAP, (PADDING+BUTTON_HEIGHT)*2+2), (SCRIPT_BUTTON_GAP*2+SCRIPT_BUTTON_WIDTH, (PADDING+BUTTON_HEIGHT)*2+2), (SCRIPT_BUTTON_GAP*3+SCRIPT_BUTTON_WIDTH*2, (PADDING+BUTTON_HEIGHT)*2+2)]
+script_button_commands = ["STRINGLN", "STRING", "DELAY", "CTRL", "SHIFT", "ALT", "ENTER", "REPEAT", "more..."]
+script_command_button_list = []
+
+
     first_instruction = get_empty_instruction()
     first_instruction['opcode'] = OP_JMP
     first_instruction['oparg'] = DS3_INIT_JUMP_OFFSET

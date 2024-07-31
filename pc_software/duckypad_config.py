@@ -212,8 +212,6 @@ def ui_reset():
     dim_unused_keys_checkbox.config(state=DISABLED)
     key_rename_button.config(state=DISABLED)
     key_remove_button.config(state=DISABLED)
-    for button in script_command_button_list:
-        button.config(state=DISABLED)
     key_name_textbox.config(state=DISABLED)
     bg_color_label.config(fg='grey')
     kd_color_label.config(fg='grey')
@@ -433,8 +431,6 @@ def enable_buttons():
     dim_unused_keys_checkbox.config(state=NORMAL)
     key_rename_button.config(state=NORMAL)
     key_remove_button.config(state=NORMAL)
-    for button in script_command_button_list:
-        button.config(state=NORMAL)
     key_name_textbox.config(state=NORMAL)
     bg_color_label.config(fg='black')
     kd_color_label.config(fg='black')
@@ -1318,13 +1314,24 @@ def script_textbox_event(event):
     script_textbox.tk.call(script_textbox._w, 'edit', 'modified', 0)
 
 script_textbox = Text(scripts_lf, relief='solid', borderwidth=1, padx=2, pady=2, spacing3=5, wrap="word")
-script_textbox.place(x=PADDING, y=scaled_size(27), width=scaled_size(285), height=scaled_size(270))
+script_textbox.place(x=PADDING, y=scaled_size(50), width=scaled_size(285), height=scaled_size(270))
 root.update()
 script_textbox.bind("<<Modified>>", script_textbox_event)
 script_textbox.tag_configure("error", background="#ffff00")
 
-script_common_commands_lf = LabelFrame(scripts_lf, text="Common commands", width=script_textbox.winfo_width(), height=scaled_size(105))
-script_common_commands_lf.place(x=PADDING, y=scaled_size(300))
+keyupdown_var = IntVar()
+
+def keydown_rb_click():
+    print("keydown_rb_click")
+
+def keyup_rb_click():
+    print("keyup_rb_click")
+
+keyupdown_var.set(0)
+keydown_rb = Radiobutton(scripts_lf, text="On Press", variable=keyupdown_var, value=0, command=keydown_rb_click)
+keydown_rb.place(x=scaled_size(50), y=scaled_size(25))
+keyup_rb = Radiobutton(scripts_lf, text="On Release", variable=keyupdown_var, value=1, command=keyup_rb_click)
+keyup_rb.place(x=scaled_size(150), y=scaled_size(25))
 root.update()
 
 def check_syntax():
@@ -1348,23 +1355,6 @@ check_syntax_label = Label(scripts_lf, text="")
 check_syntax_label.place(x=scaled_size(10), y=scaled_size(417))
 root.update()
 
-SCRIPT_BUTTON_WIDTH = script_textbox.winfo_width()/3.3
-SCRIPT_BUTTON_GAP = scaled_size(5)
-PADDING = scaled_size(2)
-
-script_button_xy_list = [(SCRIPT_BUTTON_GAP, PADDING), (SCRIPT_BUTTON_GAP*2+SCRIPT_BUTTON_WIDTH, PADDING), (SCRIPT_BUTTON_GAP*3+SCRIPT_BUTTON_WIDTH*2, PADDING), (SCRIPT_BUTTON_GAP, PADDING+BUTTON_HEIGHT+2), (SCRIPT_BUTTON_GAP*2+SCRIPT_BUTTON_WIDTH, PADDING+BUTTON_HEIGHT+2), (SCRIPT_BUTTON_GAP*3+SCRIPT_BUTTON_WIDTH*2, PADDING+BUTTON_HEIGHT+2), (SCRIPT_BUTTON_GAP, (PADDING+BUTTON_HEIGHT)*2+2), (SCRIPT_BUTTON_GAP*2+SCRIPT_BUTTON_WIDTH, (PADDING+BUTTON_HEIGHT)*2+2), (SCRIPT_BUTTON_GAP*3+SCRIPT_BUTTON_WIDTH*2, (PADDING+BUTTON_HEIGHT)*2+2)]
-script_button_commands = ["STRINGLN", "STRING", "DELAY", "CTRL", "SHIFT", "ALT", "ENTER", "REPEAT", "more..."]
-script_command_button_list = []
-
-for x in range(9):
-    def this_func(x=x):
-        script_textbox.insert(INSERT, "\n" + script_button_commands[x] + " ")
-    this_button = Button(script_common_commands_lf, text=script_button_commands[x], command=this_func, state=DISABLED)
-    this_button.place(x=script_button_xy_list[x][0], y=script_button_xy_list[x][1], width=SCRIPT_BUTTON_WIDTH, height=BUTTON_HEIGHT)
-    script_command_button_list.append(this_button)
-script_command_button_list[-1].config(command=open_duckyscript_url)
-
-PADDING = scaled_size(10)
 
 def add_s(word, value):
     if value == 1:
