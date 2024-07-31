@@ -9,6 +9,8 @@ MAX_PROFILE_COUNT = 64
 
 class dp_key(object):
 	def load_script(self, path):
+		if path is None or os.path.exists(path) is False:
+			return ""
 		try:
 			with open(path, encoding='utf8') as keyfile:
 				return keyfile.read()
@@ -55,10 +57,10 @@ class dp_key(object):
 			pass
 		return line1, line2
 
-	def __init__(self, path_on_press=None, release_path=None):
+	def __init__(self, path_on_press=None, path_on_release=None):
 		super(dp_key, self).__init__()
 		self.path = path_on_press
-		self.path_on_release = release_path
+		self.path_on_release = path_on_release
 		self.name = None
 		self.name_line2 = None
 		self.index = None
@@ -66,6 +68,7 @@ class dp_key(object):
 		self.script = ''
 		self.script_on_release = ''
 		self.binary_array = None
+		self.binary_array_on_release = None
 		if path_on_press is None:
 			return
 		self.index = int(os.path.basename(os.path.normpath(path_on_press)).split("_")[0].split(".txt")[0].strip('key'))
@@ -75,12 +78,12 @@ class dp_key(object):
 			self.name, self.name_line2 = self.get_keyname(path_on_press, self.index)
 		self.color = None
 		self.script = self.load_script(path_on_press).replace('\r', '')
+		self.script_on_release = self.load_script(path_on_release).replace('\r', '')
 		try:
 			config_path = os.path.join(os.path.dirname(path_on_press), "config.txt")
 			self.read_color(config_path)
 		except Exception as e:
 			print(">>> read_color:", config_path, e)
-			pass
 
 # -----------------------------------------------------------
 
