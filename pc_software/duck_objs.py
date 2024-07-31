@@ -62,10 +62,10 @@ class dp_key(object):
 		self.name_line2 = None
 		self.index = None
 		self.color = None
+		self.has_loop = False
+		self.max_loop = 0
 		self.script = ''
-		self.script_on_release = ''
 		self.binary_array = None
-		self.binary_array_on_release = None
 		if path is None:
 			return
 		self.index = int(os.path.basename(os.path.normpath(path)).split("_")[0].split(".txt")[0].strip('key'))
@@ -88,9 +88,7 @@ class dp_profile(object):
 	def read_keys(self, path):
 		key_file_list = [x for x in os.listdir(path) if x.endswith('.txt') and x.startswith('key') and x[3].isnumeric()]
 		key_file_list.sort(key=lambda s: int(s[3:].split("_")[0].split(".txt")[0])) # sort by number not by letter
-		print("!!!!!!!!!!!!!!!!")
-		print(key_file_list)
-		print("!!!!!!!!!!!!!!!!")
+		# print(key_file_list)
 		for item in key_file_list:
 			this_key = dp_key(os.path.join(path, item))
 			self.keylist[this_key.index - 1] = this_key

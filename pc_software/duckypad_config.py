@@ -106,12 +106,9 @@ automatically splits STRING/STRINGLN commands if too long
 1.6.4 2024 01 22
 Fixed a bug where TRUE and FALSE is replaced with 1 and 0 inside STRING statements
 
-
-2.0.0 August 2024
-for duckypad 2
 """
 
-THIS_VERSION_NUMBER = '2.0.0'
+THIS_VERSION_NUMBER = '1.6.4'
 MIN_DUCKYPAD_FIRMWARE_VERSION = "2.0.0"
 MAX_DUCKYPAD_FIRMWARE_VERSION = "2.99.99"
 
