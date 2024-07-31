@@ -686,6 +686,7 @@ def validate_data_objs(save_path):
             if this_key is None:
                 continue
             this_key.path = os.path.join(this_profile.path, 'key'+str(key_index+1)+'.txt')
+            this_key.path_on_release = os.path.join(this_profile.path, 'key'+str(key_index+1)+'-release.txt')
             this_key.index = key_index + 1
 
 def compile_all_scripts():
@@ -694,7 +695,9 @@ def compile_all_scripts():
             for this_key in this_profile.keylist:
                 if this_key is not None:
                     this_key.binary_array = make_bytecode.make_dsb(this_key.script.split('\n'), profile_list)
-                    if len(this_key.binary_array) >= 65530:
+                    if len(this_key.script_on_release.strip()) > 0:
+                        this_key.binary_array_on_release = make_bytecode.make_dsb(this_key.script_on_release.strip().split('\n'), profile_list)
+                    if len(this_key.binary_array) >= 65530 or (this_key.binary_array_on_release is not None and len(this_key.binary_array_on_release) >= 65530):
                         messagebox.showerror("Error", f'Script size too large!\n\nProfile: {this_profile.name}\nKey: {this_key.name}')
                         return False
         return True
@@ -757,16 +760,20 @@ def save_everything(save_path):
                 with open(this_key.path, 'w', encoding='utf8', newline='') as key_file:
                     key_file.write(this_key.script)
                 
-                # if this_key.path_on_release is not None:
-                #     with open(this_key.path_on_release, 'w', encoding='utf8', newline='') as key_file:
-                #         key_file.write(this_key.script_on_release)
+                if this_key.path_on_release is not None and len(this_key.script_on_release) > 0:
+                    with open(this_key.path_on_release, 'w', encoding='utf8', newline='') as key_file:
+                        key_file.write(this_key.script_on_release)
 
                 dsb_path = this_key.path
                 pre, ext = os.path.splitext(dsb_path)
                 dsb_path = pre + '.dsb'
+                dsb_path_onrelease = pre + "-release.dsb"
 
                 with open(dsb_path, 'wb') as dsb_file:
-                    dsb_file.write(this_key.binary_array)   
+                    dsb_file.write(this_key.binary_array)
+                if this_key.binary_array_on_release is not None:
+                    with open(dsb_path_onrelease, 'wb') as dsb_file:
+                        dsb_file.write(this_key.binary_array_on_release)
                 if this_key.color is not None:
                     config_file.write('SWCOLOR_%d %d %d %d\n' % (this_key.index, this_key.color[0], this_key.color[1], this_key.color[2]))
             config_file.close()
@@ -839,8 +846,8 @@ on_press_release_rb_var.set(0)
 
 def get_correct_script_text(key_obj):
     if on_press_release_rb_var.get() == 1:
-        return key_obj.script_on_release.rstrip('\n').rstrip('\r')
-    return key_obj.script.rstrip('\n').rstrip('\r')
+        return key_obj.script_on_release.strip()
+    return key_obj.script.strip()
 
 def key_button_click(button_widget):
     global last_rgb
@@ -1324,9 +1331,9 @@ def script_textbox_modified():
         check_syntax_label.config(text=checking_status_str, fg="black")
     if profile_list[profile_index].keylist[selected_key] is not None:
         if on_press_release_rb_var.get():
-            profile_list[profile_index].keylist[selected_key].script_on_release = script_textbox.get(1.0, END)
+            profile_list[profile_index].keylist[selected_key].script_on_release = script_textbox.get(1.0, END).strip()
         else:
-            profile_list[profile_index].keylist[selected_key].script = script_textbox.get(1.0, END)
+            profile_list[profile_index].keylist[selected_key].script = script_textbox.get(1.0, END).strip()
         modification_checked = 0
 
 def script_textbox_event(event):
@@ -1345,7 +1352,7 @@ def on_press_rb_click():
         return
     script_textbox.delete(1.0, 'end')
     script_textbox.tag_remove("error", '1.0', 'end')
-    script_textbox.insert(1.0, profile_list[profile_index].keylist[selected_key].script.rstrip('\n').rstrip('\r'))
+    script_textbox.insert(1.0, profile_list[profile_index].keylist[selected_key].script.strip())
 
 def on_release_rb_click():
     profile_index = profile_lstbox.curselection()[0]
@@ -1353,7 +1360,7 @@ def on_release_rb_click():
         return
     script_textbox.delete(1.0, 'end')
     script_textbox.tag_remove("error", '1.0', 'end')
-    script_textbox.insert(1.0, profile_list[profile_index].keylist[selected_key].script_on_release.rstrip('\n').rstrip('\r'))
+    script_textbox.insert(1.0, profile_list[profile_index].keylist[selected_key].script_on_release.strip())
 
 on_press_rb = Radiobutton(scripts_lf, text="On Press", variable=on_press_release_rb_var, value=0, command=on_press_rb_click)
 on_press_rb.place(x=scaled_size(50), y=scaled_size(20))
