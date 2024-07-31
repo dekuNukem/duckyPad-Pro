@@ -857,6 +857,7 @@ def key_button_click(button_widget):
         this_key_name = make_key_button_text_from_two_lines(profile_list[profile_index].keylist[selected_key].name, profile_list[profile_index].keylist[selected_key].name_line2)
         key_name_textbox.insert(1.0, this_key_name)
         script_textbox.delete(1.0, 'end')
+        print(profile_list[profile_index].keylist[selected_key])
         insert_script_to_textbox(profile_list[profile_index].keylist[selected_key].script.rstrip('\n').rstrip('\r'))
     else:
         scripts_lf.place_forget()
