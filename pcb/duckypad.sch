@@ -7064,11 +7064,11 @@ You are welcome to use this library for commercial purposes. For attribution, we
 by exp-lbrs.ulp</description>
 <packages>
 <package name="M2_SCREW_FOOT">
-<hole x="0" y="0" drill="2.2"/>
 <circle x="0" y="0" radius="2" width="0" layer="42"/>
 <circle x="0" y="0" radius="2" width="0" layer="41"/>
 <circle x="0" y="0" radius="2" width="0.1524" layer="21"/>
 <circle x="0" y="0" radius="2" width="0.1524" layer="22"/>
+<hole x="0" y="0" drill="2.5"/>
 </package>
 <package name="REVERSE_MNT">
 <rectangle x1="-1.8" y1="-1.6" x2="1.8" y2="1.6" layer="46"/>
