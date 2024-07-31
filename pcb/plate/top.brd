@@ -201,7 +201,11 @@
 <wire x1="0" y1="92.5" x2="3.5" y2="96" width="0" layer="20" curve="-90"/>
 <wire x1="3.5" y1="96" x2="80.5" y2="96" width="0" layer="20"/>
 <wire x1="80.5" y1="96" x2="82" y2="94.5" width="0" layer="20" curve="-90"/>
-<wire x1="82" y1="94.5" x2="82" y2="89" width="0" layer="20"/>
+<wire x1="82" y1="94.5" x2="82" y2="92" width="0" layer="20"/>
+<wire x1="82" y1="92" x2="83.5" y2="90.5" width="0" layer="20" curve="90"/>
+<wire x1="83.5" y1="90.5" x2="90.5" y2="90.5" width="0" layer="20"/>
+<wire x1="90.5" y1="90.5" x2="92" y2="92" width="0" layer="20" curve="90"/>
+<wire x1="92" y1="92" x2="92" y2="95" width="0" layer="20"/>
 <wire x1="72.5" y1="0" x2="3.5" y2="0" width="0" layer="20"/>
 <wire x1="3.5" y1="0" x2="0" y2="3.5" width="0" layer="20" curve="-90"/>
 <wire x1="90.5" y1="55" x2="78" y2="55" width="0" layer="20"/>
@@ -216,10 +220,6 @@
 <wire x1="95.5" y1="72" x2="94" y2="70.5" width="0" layer="20" curve="90"/>
 <wire x1="94" y1="70.5" x2="94" y2="58.5" width="0" layer="20"/>
 <wire x1="94" y1="58.5" x2="90.5" y2="55" width="0" layer="20" curve="-90"/>
-<wire x1="82" y1="89" x2="83.5" y2="87.5" width="0" layer="20" curve="90"/>
-<wire x1="83.5" y1="87.5" x2="90.5" y2="87.5" width="0" layer="20"/>
-<wire x1="90.5" y1="87.5" x2="92" y2="89" width="0" layer="20" curve="90"/>
-<wire x1="92" y1="89" x2="92" y2="95" width="0" layer="20"/>
 <wire x1="92" y1="95" x2="93" y2="96" width="0" layer="20" curve="-90"/>
 <wire x1="93" y1="96" x2="94" y2="95" width="0" layer="20" curve="-90"/>
 <wire x1="94" y1="95" x2="94" y2="81" width="0" layer="20"/>

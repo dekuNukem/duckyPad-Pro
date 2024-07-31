@@ -224,14 +224,17 @@
 <wire x1="109" y1="3.877" x2="109" y2="1.5" width="0" layer="20"/>
 <wire x1="109" y1="1.5" x2="107.5" y2="0" width="0" layer="20" curve="-90"/>
 <wire x1="107.5" y1="0" x2="3.5" y2="0" width="0" layer="20"/>
-<text x="77.343" y="52.197" size="3.175" layer="26" rot="MR0" align="center">duckyPad Pro</text>
-<text x="77.343" y="43.815" size="2.1844" layer="26" rot="MR0" align="center">dekuNukem
+<text x="67.843" y="65.197" size="3.175" layer="26" rot="MR0" align="center">duckyPad Pro</text>
+<text x="67.843" y="58.315" size="2.1844" layer="26" rot="MR0" align="center">dekuNukem
 2024</text>
 <wire x1="105.5" y1="96" x2="109" y2="92.5" width="0" layer="20" curve="-90"/>
 <wire x1="109" y1="92.5" x2="109" y2="32.75" width="0" layer="20"/>
 <wire x1="109" y1="32.75" x2="108" y2="31.75" width="0" layer="20" curve="-90"/>
 <wire x1="108" y1="31.75" x2="101" y2="31.75" width="0" layer="20"/>
 <wire x1="101" y1="31.75" x2="100" y2="30.75" width="0" layer="20" curve="90"/>
+<text x="107.843" y="44.315" size="2.1844" layer="26" rot="MR0" align="center-left">PUSH
+TO
+EJECT</text>
 </plain>
 <libraries>
 <library name="duckypad">
