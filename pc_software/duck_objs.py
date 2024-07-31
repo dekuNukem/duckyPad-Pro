@@ -60,7 +60,7 @@ class dp_key(object):
 	def __init__(self, path_on_press=None, path_on_release=None):
 		super(dp_key, self).__init__()
 		self.path = path_on_press
-		self.path_on_key_release = path_on_release
+		self.path_on_release = path_on_release
 		self.name = None
 		self.name_line2 = None
 		self.index = None
@@ -77,10 +77,8 @@ class dp_key(object):
 		else:
 			self.name, self.name_line2 = self.get_keyname(path_on_press, self.index)
 		self.color = None
-		self.script = self.load_script(self.path).replace('\r', '')
-		self.script_on_release = self.load_script(self.path_on_key_release).replace('\r', '')
-		if len(self.script_on_release) > 1:
-			print(self.script, self.script_on_release)
+		self.script = self.load_script(path_on_press).replace('\r', '')
+		self.script_on_release = self.load_script(path_on_release).replace('\r', '')
 		try:
 			config_path = os.path.join(os.path.dirname(path_on_press), "config.txt")
 			self.read_color(config_path)

@@ -834,8 +834,10 @@ profile_list = []
 on_press_release_rb_var = IntVar()
 on_press_release_rb_var.set(0)
 
-def insert_script_to_textbox(all_script_text):
-    script_textbox.insert(1.0, all_script_text)
+def get_correct_script_text(key_obj):
+    if on_press_release_rb_var.get() == 1:
+        return key_obj.script_on_release.rstrip('\n').rstrip('\r')
+    return key_obj.script.rstrip('\n').rstrip('\r')
 
 def key_button_click(button_widget):
     global last_rgb
@@ -851,14 +853,16 @@ def key_button_click(button_widget):
         this_borderwidth = scaled_size(5)
     button_widget.config(borderwidth=this_borderwidth, relief='sunken')
     key_name_textbox.delete('1.0', 'end')
+    on_press_release_rb_var.set(0)
     if profile_list[profile_index].keylist[selected_key] is not None:
         scripts_lf.place(x=scaled_size(750), y=scaled_size(50))
         empty_script_lable.place_forget()
         this_key_name = make_key_button_text_from_two_lines(profile_list[profile_index].keylist[selected_key].name, profile_list[profile_index].keylist[selected_key].name_line2)
         key_name_textbox.insert(1.0, this_key_name)
         script_textbox.delete(1.0, 'end')
-        print(profile_list[profile_index].keylist[selected_key])
-        insert_script_to_textbox(profile_list[profile_index].keylist[selected_key].script.rstrip('\n').rstrip('\r'))
+        script_textbox.tag_remove("error", '1.0', 'end')
+        script_text = get_correct_script_text(profile_list[profile_index].keylist[selected_key])
+        script_textbox.insert(1.0, script_text)
     else:
         scripts_lf.place_forget()
         empty_script_lable.place(x=scaled_size(800), y=scaled_size(300))
@@ -1316,7 +1320,10 @@ def script_textbox_modified():
             checking_status_str = "Checking..."
         check_syntax_label.config(text=checking_status_str, fg="black")
     if profile_list[profile_index].keylist[selected_key] is not None:
-        profile_list[profile_index].keylist[selected_key].script = script_textbox.get(1.0, END)
+        if on_press_release_rb_var.get():
+            profile_list[profile_index].keylist[selected_key].script_on_release = script_textbox.get(1.0, END)
+        else:
+            profile_list[profile_index].keylist[selected_key].script = script_textbox.get(1.0, END)
         modification_checked = 0
 
 def script_textbox_event(event):
@@ -1330,15 +1337,25 @@ script_textbox.bind("<<Modified>>", script_textbox_event)
 script_textbox.tag_configure("error", background="#ffff00")
 
 def on_press_rb_click():
-    print("on_press_rb_click")
+    profile_index = profile_lstbox.curselection()[0]
+    if profile_list[profile_index].keylist[selected_key] is None:
+        return
+    script_textbox.delete(1.0, 'end')
+    script_textbox.tag_remove("error", '1.0', 'end')
+    script_textbox.insert(1.0, profile_list[profile_index].keylist[selected_key].script.rstrip('\n').rstrip('\r'))
 
 def on_release_rb_click():
-    print("on_release_rb_click")
+    profile_index = profile_lstbox.curselection()[0]
+    if profile_list[profile_index].keylist[selected_key] is None:
+        return
+    script_textbox.delete(1.0, 'end')
+    script_textbox.tag_remove("error", '1.0', 'end')
+    script_textbox.insert(1.0, profile_list[profile_index].keylist[selected_key].script_on_release.rstrip('\n').rstrip('\r'))
 
 on_press_rb = Radiobutton(scripts_lf, text="On Press", variable=on_press_release_rb_var, value=0, command=on_press_rb_click)
-on_press_rb.place(x=scaled_size(50), y=scaled_size(25))
+on_press_rb.place(x=scaled_size(50), y=scaled_size(20))
 on_release_rb = Radiobutton(scripts_lf, text="On Release", variable=on_press_release_rb_var, value=1, command=on_release_rb_click)
-on_release_rb.place(x=scaled_size(150), y=scaled_size(25))
+on_release_rb.place(x=scaled_size(150), y=scaled_size(20))
 root.update()
 
 def check_syntax():
