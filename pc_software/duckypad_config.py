@@ -825,6 +825,18 @@ def backup_button_click():
 def key_button_click_event(event):
     key_button_click(event.widget)
 
+root = Tk()
+root.title("duckyPad configurator v" + THIS_VERSION_NUMBER)
+root.geometry(str(MAIN_WINDOW_WIDTH) + "x" + str(MAIN_WINDOW_HEIGHT))
+root.resizable(width=FALSE, height=FALSE)
+profile_list = []
+
+on_press_release_rb_var = IntVar()
+on_press_release_rb_var.set(0)
+
+def insert_script_to_textbox(all_script_text):
+    script_textbox.insert(1.0, all_script_text)
+
 def key_button_click(button_widget):
     global last_rgb
     global selected_key
@@ -845,7 +857,7 @@ def key_button_click(button_widget):
         this_key_name = make_key_button_text_from_two_lines(profile_list[profile_index].keylist[selected_key].name, profile_list[profile_index].keylist[selected_key].name_line2)
         key_name_textbox.insert(1.0, this_key_name)
         script_textbox.delete(1.0, 'end')
-        script_textbox.insert(1.0, profile_list[profile_index].keylist[selected_key].script.rstrip('\n').rstrip('\r'))
+        insert_script_to_textbox(profile_list[profile_index].keylist[selected_key].script.rstrip('\n').rstrip('\r'))
     else:
         scripts_lf.place_forget()
         empty_script_lable.place(x=scaled_size(800), y=scaled_size(300))
@@ -866,12 +878,6 @@ def key_button_click(button_widget):
         key_color_button.config(background=rgb_to_hex(profile_list[profile_index].keylist[selected_key].color))
     key_button_clicked_at = modified_count
     check_syntax()
-
-root = Tk()
-root.title("duckyPad configurator v" + THIS_VERSION_NUMBER)
-root.geometry(str(MAIN_WINDOW_WIDTH) + "x" + str(MAIN_WINDOW_HEIGHT))
-root.resizable(width=FALSE, height=FALSE)
-profile_list = []
 
 # ------------- Folder select -------------
 dp_root_folder_display = StringVar()
@@ -1303,15 +1309,15 @@ def script_textbox_modified():
     modified_count += 1
     last_textbox_edit = time.time()
     profile_index = profile_lstbox.curselection()[0]
-    cantthinkofaname = ""
+    checking_status_str = ""
     if modified_count - key_button_clicked_at > 2:
         if profile_list[profile_index].keylist[selected_key] is not None:
-            cantthinkofaname = "Checking..."
-        check_syntax_label.config(text=cantthinkofaname, fg="black")
+            checking_status_str = "Checking..."
+        check_syntax_label.config(text=checking_status_str, fg="black")
     if profile_list[profile_index].keylist[selected_key] is not None:
         profile_list[profile_index].keylist[selected_key].script = script_textbox.get(1.0, END)
         modification_checked = 0
-    
+
 def script_textbox_event(event):
     script_textbox_modified()
     script_textbox.tk.call(script_textbox._w, 'edit', 'modified', 0)
@@ -1322,18 +1328,15 @@ root.update()
 script_textbox.bind("<<Modified>>", script_textbox_event)
 script_textbox.tag_configure("error", background="#ffff00")
 
-keyupdown_var = IntVar()
-
 def on_press_rb_click():
     print("on_press_rb_click")
 
 def on_release_rb_click():
     print("on_release_rb_click")
 
-keyupdown_var.set(0)
-on_press_rb = Radiobutton(scripts_lf, text="On Press", variable=keyupdown_var, value=0, command=on_press_rb_click)
+on_press_rb = Radiobutton(scripts_lf, text="On Press", variable=on_press_release_rb_var, value=0, command=on_press_rb_click)
 on_press_rb.place(x=scaled_size(50), y=scaled_size(25))
-on_release_rb = Radiobutton(scripts_lf, text="On Release", variable=keyupdown_var, value=1, command=on_release_rb_click)
+on_release_rb = Radiobutton(scripts_lf, text="On Release", variable=on_press_release_rb_var, value=1, command=on_release_rb_click)
 on_release_rb.place(x=scaled_size(150), y=scaled_size(25))
 root.update()
 
@@ -1357,7 +1360,6 @@ def check_syntax():
 check_syntax_label = Label(scripts_lf, text="")
 check_syntax_label.place(x=scaled_size(10), y=scaled_size(417))
 root.update()
-
 
 def add_s(word, value):
     if value == 1:
