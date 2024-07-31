@@ -1335,7 +1335,7 @@ def script_textbox_event(event):
     script_textbox.tk.call(script_textbox._w, 'edit', 'modified', 0)
 
 script_textbox = Text(scripts_lf, relief='solid', borderwidth=1, padx=2, pady=2, spacing3=5, wrap="word")
-script_textbox.place(x=PADDING, y=scaled_size(50), width=scaled_size(285), height=scaled_size(270))
+script_textbox.place(x=PADDING, y=scaled_size(50), width=scaled_size(285), height=scaled_size(360))
 root.update()
 script_textbox.bind("<<Modified>>", script_textbox_event)
 script_textbox.tag_configure("error", background="#ffff00")
