@@ -1324,17 +1324,17 @@ script_textbox.tag_configure("error", background="#ffff00")
 
 keyupdown_var = IntVar()
 
-def keydown_rb_click():
-    print("keydown_rb_click")
+def on_press_rb_click():
+    print("on_press_rb_click")
 
-def keyup_rb_click():
-    print("keyup_rb_click")
+def on_release_rb_click():
+    print("on_release_rb_click")
 
 keyupdown_var.set(0)
-keydown_rb = Radiobutton(scripts_lf, text="On Press", variable=keyupdown_var, value=0, command=keydown_rb_click)
-keydown_rb.place(x=scaled_size(50), y=scaled_size(25))
-keyup_rb = Radiobutton(scripts_lf, text="On Release", variable=keyupdown_var, value=1, command=keyup_rb_click)
-keyup_rb.place(x=scaled_size(150), y=scaled_size(25))
+on_press_rb = Radiobutton(scripts_lf, text="On Press", variable=keyupdown_var, value=0, command=on_press_rb_click)
+on_press_rb.place(x=scaled_size(50), y=scaled_size(25))
+on_release_rb = Radiobutton(scripts_lf, text="On Release", variable=keyupdown_var, value=1, command=on_release_rb_click)
+on_release_rb.place(x=scaled_size(150), y=scaled_size(25))
 root.update()
 
 def check_syntax():
