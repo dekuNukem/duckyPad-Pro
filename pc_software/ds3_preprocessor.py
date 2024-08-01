@@ -600,9 +600,6 @@ def run_once(program_listing):
             presult, pcomment = check_first_arg(this_line, var_table, allow_multi_arg=True)
         elif first_word == cmd_GOTO_PROFILE:
             presult, pcomment = check_first_arg(this_line, var_table, allow_multi_arg=True)
-        elif first_word == cmd_GOTO_PROFILE_NAME:
-            presult = PARSE_OK
-            pcomment = ''
         elif first_word == cmd_SWCC:
             return_dict['color_state_save_needed'] = True
             presult, pcomment = check_color(this_line, var_table)
