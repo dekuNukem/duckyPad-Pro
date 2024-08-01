@@ -647,7 +647,6 @@ def make_dsb(program_listing, profile_list=None):
 
             this_line = f"GOTO_PROFILE {profile_index}"
             assembly_listing += parse_expression(this_line)
-
             this_instruction['opcode'] = OP_GOTOP
             assembly_listing.append(this_instruction)
         elif first_word == cmd_DP_SLEEP:

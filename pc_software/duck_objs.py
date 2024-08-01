@@ -9,6 +9,7 @@ MAX_PROFILE_COUNT = 64
 
 class dp_key(object):
 	def load_script(self, path):
+		print("load_script:", path)
 		if path is None or os.path.exists(path) is False:
 			return ""
 		try:
@@ -89,7 +90,7 @@ class dp_key(object):
 
 class dp_profile(object):
 	def read_keys(self, path):
-		key_file_list = [x for x in os.listdir(path) if x.endswith('.txt') and x.startswith('key') and x[3].isnumeric()]
+		key_file_list = [x for x in os.listdir(path) if x.endswith('.txt') and x.startswith('key') and x[3].isnumeric() and '-release' not in x]
 		key_file_list.sort(key=lambda s: int(s[3:].split("_")[0].split("-")[0].split(".txt")[0])) # sort by number not by letter
 		
 		for item in key_file_list:

@@ -562,6 +562,8 @@ def dim_unused_keys_click():
     update_profile_display()
 
 def on_profile_lstbox_select(event):
+    scripts_lf.place_forget()
+    empty_script_label.place(x=scaled_size(800), y=scaled_size(200))
     update_profile_display()
 
 def bg_color_click(event):
@@ -864,18 +866,23 @@ def key_button_click(button_widget):
     button_widget.config(borderwidth=this_borderwidth, relief='sunken')
     key_name_textbox.delete('1.0', 'end')
     on_press_release_rb_var.set(0)
-    if profile_list[profile_index].keylist[selected_key] is not None:
+    thissss_key = profile_list[profile_index].keylist[selected_key]
+    if thissss_key is not None:
         scripts_lf.place(x=scaled_size(750), y=scaled_size(50))
-        empty_script_lable.place_forget()
-        this_key_name = make_key_button_text_from_two_lines(profile_list[profile_index].keylist[selected_key].name, profile_list[profile_index].keylist[selected_key].name_line2)
+        empty_script_label.place_forget()
+        this_key_name = make_key_button_text_from_two_lines(thissss_key.name, thissss_key.name_line2)
         key_name_textbox.insert(1.0, this_key_name)
         script_textbox.delete(1.0, 'end')
         script_textbox.tag_remove("error", '1.0', 'end')
-        script_text = get_correct_script_text(profile_list[profile_index].keylist[selected_key])
+        script_text = get_correct_script_text(thissss_key)
         script_textbox.insert(1.0, script_text)
+        if len(thissss_key.script_on_release) > 0:
+            on_release_rb.configure(fg='green4')
+        else:
+            on_release_rb.configure(fg='gray20')
     else:
         scripts_lf.place_forget()
-        empty_script_lable.place(x=scaled_size(800), y=scaled_size(300))
+        empty_script_label.place(x=scaled_size(800), y=scaled_size(200))
         key_color_button.config(background=default_button_color)
         key_color_rb1.config(state=DISABLED)
         key_color_rb2.config(state=DISABLED)
@@ -884,13 +891,13 @@ def key_button_click(button_widget):
 
     key_color_rb1.config(state=NORMAL)
     key_color_rb2.config(state=NORMAL)
-    if profile_list[profile_index].keylist[selected_key].color is None:
+    if thissss_key.color is None:
         key_color_rb1.select()
         key_color_button.config(background=default_button_color)
     else:
         key_color_rb2.select()
-        last_rgb = profile_list[profile_index].keylist[selected_key].color
-        key_color_button.config(background=rgb_to_hex(profile_list[profile_index].keylist[selected_key].color))
+        last_rgb = thissss_key.color
+        key_color_button.config(background=rgb_to_hex(thissss_key.color))
     key_button_clicked_at = modified_count
     check_syntax()
 
@@ -1325,16 +1332,21 @@ def script_textbox_modified():
     last_textbox_edit = time.time()
     profile_index = profile_lstbox.curselection()[0]
     checking_status_str = ""
+    thissss_key = profile_list[profile_index].keylist[selected_key]
     if modified_count - key_button_clicked_at > 2:
-        if profile_list[profile_index].keylist[selected_key] is not None:
+        if thissss_key is not None:
             checking_status_str = "Checking..."
         check_syntax_label.config(text=checking_status_str, fg="black")
-    if profile_list[profile_index].keylist[selected_key] is not None:
+    if thissss_key is not None:
         if on_press_release_rb_var.get():
-            profile_list[profile_index].keylist[selected_key].script_on_release = script_textbox.get(1.0, END).strip()
+            thissss_key.script_on_release = script_textbox.get(1.0, END).strip()
         else:
-            profile_list[profile_index].keylist[selected_key].script = script_textbox.get(1.0, END).strip()
+            thissss_key.script = script_textbox.get(1.0, END).strip()
         modification_checked = 0
+    if len(thissss_key.script_on_release) > 0:
+        on_release_rb.configure(fg='green4')
+    else:
+        on_release_rb.configure(fg='gray20')
 
 def script_textbox_event(event):
     script_textbox_modified()
@@ -1464,8 +1476,8 @@ autoswitch_button.place(x=scaled_size(250), y=0, width=scaled_size(200), height=
 profile_import_button = Button(profiles_lf, text="Import", command=import_profile_click, state=DISABLED)
 profile_import_button.place(x=PADDING * 2, y=BUTTON_Y_POS + BUTTON_HEIGHT + int(PADDING/2), width=BUTTON_WIDTH, height=BUTTON_HEIGHT)
 
-empty_script_lable = Label(root, text="<-- Select a key")
-empty_script_lable.place(x=scaled_size(850), y=scaled_size(200))
+empty_script_label = Label(root, text="<-- Select a key")
+empty_script_label.place(x=scaled_size(800), y=scaled_size(200))
 root.update()
 
 def repeat_func():
