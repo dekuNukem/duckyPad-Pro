@@ -1,5 +1,0 @@
-LOOP0:
-STRINGLN loop 0!
-
-LOOP1:
-STRINGLN loop 1!

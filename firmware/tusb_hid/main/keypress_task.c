@@ -37,6 +37,8 @@ void block_until_anykey(void)
   }
 }
 
+ds3_exe_result this_exe;
+
 void der_init(ds3_exe_result* der)
 {
   der->result = EXE_OK;
@@ -45,21 +47,43 @@ void der_init(ds3_exe_result* der)
   der->epilogue_actions = 0;
 }
 
-void run_once(ds3_exe_result* texe, uint8_t swid, char* dsb_path)
+#define DSB_ALLOW_AUTOREPEAT 0
+#define DSB_RETURN_IMMEDIATELY 1
+uint8_t run_once(uint8_t swid, char* dsb_path)
 {
-  der_init(texe);
-  run_dsb(texe, swid, dsb_path);
-  printf("execution halted: %d\n", texe->result);
-  if(texe->result >= EXE_ERROR_CODE_START)
+  der_init(&this_exe);
+  run_dsb(&this_exe, swid, dsb_path);
+  printf("---\nexecution finished:\nresult: %d\ndata: %d\nepilogue: 0x%x\n---\n", this_exe.result, this_exe.data, this_exe.epilogue_actions);
+  if(this_exe.result >= EXE_ERROR_CODE_START)
   {
     draw_red();
-    draw_exe_error(texe->result);
+    draw_exe_error(this_exe.result);
     block_until_anykey();
     goto_profile(current_profile_number);
+    return DSB_RETURN_IMMEDIATELY;
   }
+  else if(this_exe.result == EXE_ACTION_NEXT_PROFILE)
+  {
+    goto_next_profile();
+    return DSB_RETURN_IMMEDIATELY;
+  }
+  else if(this_exe.result == EXE_ACTION_PREV_PROFILE)
+  {
+    goto_prev_profile();
+    return DSB_RETURN_IMMEDIATELY;
+  }
+  else if(this_exe.result == EXE_ACTION_SLEEP)
+  {
+    start_sleeping();
+    return DSB_RETURN_IMMEDIATELY;
+  }
+  else if(this_exe.result == EXE_ACTION_GOTO_PROFILE)
+  {
+    goto_profile(this_exe.data);
+    return DSB_RETURN_IMMEDIATELY;
+  }
+  return DSB_ALLOW_AUTOREPEAT;
 }
-
-ds3_exe_result this_exe;
 
 void handle_keydown(uint8_t swid)
 {
@@ -77,7 +101,8 @@ void handle_keydown(uint8_t swid)
   }
   play_keydown_animation(current_profile_number, swid);
   //-------------
-  run_once(&this_exe, swid, temp_buf);
+  if(run_once(swid, temp_buf) == DSB_RETURN_IMMEDIATELY)
+    return;
   //--------------
 
   uint32_t hold_start = pdTICKS_TO_MS(xTaskGetTickCount());
@@ -92,7 +117,8 @@ void handle_keydown(uint8_t swid)
   {
     if(poll_sw_state(swid) == 0)
       break;
-    run_once(&this_exe, swid, temp_buf);
+    if(run_once(swid, temp_buf) == DSB_RETURN_IMMEDIATELY)
+      return;
   }
 
   handle_keydown_end:
@@ -228,7 +254,7 @@ void handle_sw_event(switch_event_t* this_sw_event)
 {
   update_last_keypress();
   printf("swid: %d type: %d\n", this_sw_event->id, this_sw_event->type);
-  if(is_sleeping)
+  if(is_sleeping && this_sw_event->type == SW_EVENT_SHORT_PRESS)
   {
     wakeup_from_sleep_and_load_profile(current_profile_number);
     return;
