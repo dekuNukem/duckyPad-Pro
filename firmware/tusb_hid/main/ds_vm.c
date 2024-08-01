@@ -470,12 +470,6 @@ void execute_instruction(uint16_t curr_pc, ds3_exe_result* exe, uint8_t this_key
     	vTaskDelay(pdMS_TO_TICKS(defaultdelay_value));
     }
   }
-  else if(this_opcode == OP_EMUK)
-  {
-    exe->data = byte0;
-    exe->data2 = byte1;
-    exe->result = EXE_ACTION_EMUK;
-  }
   else if(this_opcode == OP_KDOWN)
   {
   	press_key(byte0, byte1);

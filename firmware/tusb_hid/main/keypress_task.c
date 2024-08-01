@@ -42,25 +42,24 @@ void der_init(ds3_exe_result* der)
   der->result = EXE_OK;
   der->next_pc = 0;
   der->data = 0;
-  der->data2 = 0;
   der->epilogue_actions = 0;
 }
 
-ds3_exe_result this_exe;
-
-void run_once(uint8_t swid, char* dsb_path)
+void run_once(ds3_exe_result* texe, uint8_t swid, char* dsb_path)
 {
-  der_init(&this_exe);
-  run_dsb(&this_exe, swid, dsb_path);
-  printf("execution halted: %d\n", this_exe.result);
-  if(this_exe.result >= EXE_ERROR_CODE_START)
+  der_init(texe);
+  run_dsb(texe, swid, dsb_path);
+  printf("execution halted: %d\n", texe->result);
+  if(texe->result >= EXE_ERROR_CODE_START)
   {
     draw_red();
-    draw_exe_error(this_exe.result);
+    draw_exe_error(texe->result);
     block_until_anykey();
     goto_profile(current_profile_number);
   }
 }
+
+ds3_exe_result this_exe;
 
 void handle_keydown(uint8_t swid)
 {
@@ -78,7 +77,7 @@ void handle_keydown(uint8_t swid)
   }
   play_keydown_animation(current_profile_number, swid);
   //-------------
-  run_once(swid, temp_buf);
+  run_once(&this_exe, swid, temp_buf);
   //--------------
 
   uint32_t hold_start = pdTICKS_TO_MS(xTaskGetTickCount());
@@ -88,14 +87,12 @@ void handle_keydown(uint8_t swid)
       goto handle_keydown_end;
     if(pdTICKS_TO_MS(xTaskGetTickCount())- hold_start > 500)
       break;
-    // vTaskDelay(pdMS_TO_TICKS(INPUT_TASK_FREQ_MS));
   }
   while(1)
   {
     if(poll_sw_state(swid) == 0)
       break;
-    run_once(swid, temp_buf);
-    // vTaskDelay(pdMS_TO_TICKS(INPUT_TASK_FREQ_MS*2));
+    run_once(&this_exe, swid, temp_buf);
   }
 
   handle_keydown_end:

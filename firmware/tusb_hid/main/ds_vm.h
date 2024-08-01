@@ -42,7 +42,7 @@
 #define OP_SWCR 34
 #define OP_STR 35
 #define OP_STRLN 36
-#define OP_EMUK 37
+// #define OP_EMUK 37
 #define OP_OLC 38
 #define OP_OLP 39
 #define OP_OLU 40
@@ -65,7 +65,6 @@
 #define EXE_ACTION_PREV_PROFILE 2
 #define EXE_ACTION_NEXT_PROFILE 3
 #define EXE_ACTION_GOTO_PROFILE 4
-#define EXE_ACTION_EMUK 5
 
 #define EXE_HALT 10
 
@@ -95,7 +94,6 @@ typedef struct
   uint8_t result;
   uint16_t next_pc;
   uint8_t data;
-  uint8_t data2;
   uint8_t epilogue_actions;
 } ds3_exe_result;
 
