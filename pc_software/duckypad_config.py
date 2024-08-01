@@ -1335,16 +1335,16 @@ def script_textbox_modified():
     profile_index = profile_lstbox.curselection()[0]
     checking_status_str = ""
     thissss_key = profile_list[profile_index].keylist[selected_key]
+    if thissss_key is None:
+        return
     if modified_count - key_button_clicked_at > 2:
-        if thissss_key is not None:
-            checking_status_str = "Checking..."
+        checking_status_str = "Checking..."
         check_syntax_label.config(text=checking_status_str, fg="black")
-    if thissss_key is not None:
-        if on_press_release_rb_var.get():
-            thissss_key.script_on_release = script_textbox.get(1.0, END).strip()
-        else:
-            thissss_key.script = script_textbox.get(1.0, END).strip()
-        modification_checked = 0
+    if on_press_release_rb_var.get():
+        thissss_key.script_on_release = script_textbox.get(1.0, END).strip()
+    else:
+        thissss_key.script = script_textbox.get(1.0, END).strip()
+    modification_checked = 0
     if len(thissss_key.script_on_release) > 0:
         on_release_rb.configure(fg='green4')
     else:

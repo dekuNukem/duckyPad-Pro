@@ -100,6 +100,11 @@ typedef struct
 #define DEFAULT_CMD_DELAY_MS 18
 #define DEFAULT_CHAR_DELAY_MS 18
 
+#define LOOP_STATE 0x1
+#define COLOR_STATE 0x2
+#define NEED_OLED_REFRESH 0x4
+
+
 void run_dsb(ds3_exe_result* er, uint8_t this_key_id, char* dsb_path);
 
 #endif

@@ -85,12 +85,14 @@ uint8_t run_once(uint8_t swid, char* dsb_path)
   return DSB_ALLOW_AUTOREPEAT;
 }
 
-void handle_keydown(uint8_t swid)
+void handle_onboard_mappable_switch_keydown(uint8_t swid)
 {
   if(strlen(all_profile_info[current_profile_number].sw_name_firstline[swid]) == 0)
     return;
   memset(temp_buf, 0, TEMP_BUFSIZE);
   sprintf(temp_buf, "/sdcard/%s/key%d.dsb", all_profile_info[current_profile_number].dir_path, swid+1);
+  memset(filename_buf, 0, FILENAME_BUFSIZE);
+  sprintf(filename_buf, "/sdcard/%s/key%d-release.dsb", all_profile_info[current_profile_number].dir_path, swid+1);
   if(access(temp_buf, F_OK))
   {
     draw_red();
@@ -109,7 +111,7 @@ void handle_keydown(uint8_t swid)
   while(1)
   {
     if(poll_sw_state(swid) == 0)
-      goto handle_keydown_end;
+      goto handle_obsw_keydown_end;
     if(pdTICKS_TO_MS(xTaskGetTickCount())- hold_start > 500)
       break;
   }
@@ -121,8 +123,10 @@ void handle_keydown(uint8_t swid)
       return;
   }
 
-  handle_keydown_end:
-  play_keyup_animation(current_profile_number, swid);
+  handle_obsw_keydown_end:
+  // play keyup animation only if there is no on-release DSB file 
+  if(access(filename_buf, F_OK))
+    play_keyup_animation(current_profile_number, swid);
 }
 
 // void handle_keyup(uint8_t swid)
@@ -194,7 +198,7 @@ void process_keyevent(uint8_t swid, uint8_t event_type)
   {
     if(event_type == SW_EVENT_SHORT_PRESS)
     {
-      handle_keydown(swid);
+      handle_onboard_mappable_switch_keydown(swid);
     }
     else if(event_type == SW_EVENT_RELEASE)
     {
