@@ -18,6 +18,7 @@
 #include "ui_task.h"
 #include "neopixel_task.h"
 #include "keyboard.h"
+#include "ds_vm.h"
 
 const char settings_file_path[] = "/sdcard/dp_settings.txt";
 dp_global_settings dp_settings;
@@ -519,4 +520,9 @@ void generate_msc_flag_file(void)
 {
   FILE* mff = fopen("/sdcard/MOUNTMSC.TXT", "w");
   fclose(mff);
+}
+
+void save_persistent_state(uint8_t epilogue_value)
+{
+  ;
 }

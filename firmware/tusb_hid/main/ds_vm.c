@@ -25,6 +25,7 @@ uint16_t charjitter_value;
 uint32_t rand_min, rand_max;
 uint16_t loop_size;
 uint8_t epilogue_actions;
+uint8_t key_press_count[MAX_TOTAL_SW_COUNT];
 
 typedef struct
 {
@@ -157,11 +158,6 @@ void write_var(uint16_t addr, uint16_t value)
     store_uint16_as_two_bytes_at(addr, value);
 }
 
-uint16_t MY_UNIMPLEMENTED(void)
-{
-  return 0;
-}
-
 uint8_t get_first_active_key(void)
 {
   switch_event_t sw_event = {0};
@@ -195,7 +191,7 @@ uint16_t read_var(uint16_t addr, uint8_t this_key_id)
   else if (addr == _READKEY)
     return get_first_active_key();
   else if (addr == _KEYPRESS_COUNT)
-    return MY_UNIMPLEMENTED();//key_press_count[this_key_id];
+    return key_press_count[this_key_id];
   else if (addr == _NEEDS_EPILOGUE)
     return epilogue_actions;
   else if(addr < VAR_BUF_SIZE)
@@ -544,7 +540,7 @@ void execute_instruction(uint16_t curr_pc, ds3_exe_result* exe, uint8_t this_key
   }
   else if(this_opcode == OP_BCLR)
   {
-    MY_UNIMPLEMENTED();//button_service_all();
+    clear_sw_re_queue();
   }
   else if(this_opcode == OP_NEXTP)
   {

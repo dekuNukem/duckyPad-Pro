@@ -17,6 +17,8 @@
 // 20 mechanical switches, + and - button, 1 for each rotary encoder
 #define TOTAL_OBSW_COUNT (MECH_OBSW_COUNT + 4)
 
+#define MAX_TOTAL_SW_COUNT 64
+
 #define SW_PLUS_GPIO GPIO_NUM_17
 #define SW_MINUS_GPIO GPIO_NUM_18
 #define SW_RE1_GPIO GPIO_NUM_0
@@ -91,6 +93,9 @@ uint8_t poll_sw_state(uint8_t swid_zero_indexed);
 
 extern QueueHandle_t rotary_encoder_event_queue;
 extern QueueHandle_t switch_event_queue;
+
+void clear_sw_re_queue(void);
+
 
 #define KBSCAN_MUTEX_TIMEOUT_MS 100
 

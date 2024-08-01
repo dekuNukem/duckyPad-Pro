@@ -221,3 +221,9 @@ uint8_t poll_sw_state(uint8_t swid_zero_indexed)
 	sw_scan();
 	return this_sw_state[swid_zero_indexed];
 }
+
+void clear_sw_re_queue(void)
+{
+	xQueueReset(switch_event_queue);
+	xQueueReset(rotary_encoder_event_queue);
+}

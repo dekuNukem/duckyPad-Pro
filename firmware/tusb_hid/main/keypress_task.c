@@ -82,6 +82,10 @@ uint8_t run_once(uint8_t swid, char* dsb_path)
     goto_profile(this_exe.data);
     return DSB_RETURN_IMMEDIATELY;
   }
+  else if(this_exe.epilogue_actions)
+  {
+    return DSB_RETURN_IMMEDIATELY;
+  }
   return DSB_ALLOW_AUTOREPEAT;
 }
 
