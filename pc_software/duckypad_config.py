@@ -433,7 +433,6 @@ def enable_buttons():
     dim_unused_keys_checkbox.config(state=NORMAL)
     key_rename_button.config(state=NORMAL)
     key_remove_button.config(state=NORMAL)
-    key_name_textbox.config(state=NORMAL)
     bg_color_label.config(fg='black')
     kd_color_label.config(fg='black')
     key_name_label.config(fg='black')
@@ -564,6 +563,8 @@ def dim_unused_keys_click():
 def on_profile_lstbox_select(event):
     scripts_lf.place_forget()
     empty_script_label.place(x=scaled_size(800), y=scaled_size(200))
+    key_name_textbox.delete('1.0', 'end')
+    key_name_textbox.config(state=DISABLED)
     update_profile_display()
 
 def bg_color_click(event):
@@ -857,6 +858,7 @@ def key_button_click(button_widget):
     global key_button_clicked_at
     if len(profile_lstbox.curselection()) <= 0:
         return
+    key_name_textbox.config(state=NORMAL)
     profile_index = profile_lstbox.curselection()[0]
     selected_key = key_button_list.index(button_widget)
     reset_key_button_relief()
@@ -1182,8 +1184,13 @@ key_char_limit_label = Label(master=name_editor_lf, text="max 2 lines\n5 char pe
 key_char_limit_label.place(x=scaled_size(200), y=scaled_size(0))
 root.update()
 
+def keyname_textbox_modified_event(event):
+    print('OMG!')
+    key_name_textbox.tk.call(key_name_textbox._w, 'edit', 'modified', 0)
+
 key_name_textbox = Text(name_editor_lf, state=DISABLED, wrap="word")
 key_name_textbox.place(x=scaled_size(107), y=scaled_size(0), width=scaled_size(80), height=scaled_size(40))
+key_name_textbox.bind("<<Modified>>", keyname_textbox_modified_event)
 
 def get_clean_key_name_2lines(user_text):
     split_line = user_text.replace('\r', '').split('\n')[:2]
