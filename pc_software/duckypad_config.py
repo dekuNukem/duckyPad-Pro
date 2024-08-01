@@ -1184,13 +1184,8 @@ key_char_limit_label = Label(master=name_editor_lf, text="max 2 lines\n5 char pe
 key_char_limit_label.place(x=scaled_size(200), y=scaled_size(0))
 root.update()
 
-def keyname_textbox_modified_event(event):
-    print('OMG!')
-    key_name_textbox.tk.call(key_name_textbox._w, 'edit', 'modified', 0)
-
 key_name_textbox = Text(name_editor_lf, state=DISABLED, wrap="word")
 key_name_textbox.place(x=scaled_size(107), y=scaled_size(0), width=scaled_size(80), height=scaled_size(40))
-key_name_textbox.bind("<<Modified>>", keyname_textbox_modified_event)
 
 def get_clean_key_name_2lines(user_text):
     split_line = user_text.replace('\r', '').split('\n')[:2]
