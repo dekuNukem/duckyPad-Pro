@@ -1,6 +1,10 @@
+  printf("swid: %d\n", swid);
+printf("here! %s\n", dsb_on_press_path_buf);
+
   printf("reid: %d pos: %ld, dir: %d\n", this_re_event->state.id, this_re_event->state.position, this_re_event->state.direction);
+  // sprintf(dsb_on_press_path_buf, "/sdcard/%s/key%d.dsb", all_profile_info[current_profile_number].dir_path, swid+1);
 
-
+    printf("here! %s\n", dsb_on_press_path_buf);
 void onboard_switch_press(uint8_t swid, char* press_path, char* release_path)
 {
   if(strlen(all_profile_info[current_profile_number].sw_name_firstline[swid]) == 0)

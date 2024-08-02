@@ -224,16 +224,12 @@ void process_keyevent(uint8_t swid, uint8_t event_type)
   memset(dsb_on_release_path_buf, 0, PATH_BUF_SIZE);
   sprintf(dsb_on_release_path_buf, "/sdcard/%s/key%d-release.dsb", all_profile_info[current_profile_number].dir_path, swid+1);
 
-  if(swid >= MSW_0 && swid <= MAX_MSW)
+  if((swid >= MSW_0 && swid <= MAX_MSW) || swid == RE1_SW || swid == RE2_SW)
   {
     if(event_type == SW_EVENT_SHORT_PRESS)
-    {
       onboard_switch_press(swid, dsb_on_press_path_buf, dsb_on_release_path_buf);
-    }
     else if(event_type == SW_EVENT_RELEASE)
-    {
       onboard_offboard_switch_release(swid, dsb_on_release_path_buf);
-    }
   }
 }
 
@@ -268,6 +264,16 @@ void wakeup_from_sleep_and_load_profile(uint8_t profile_to_load)
   goto_profile(profile_to_load);
 }
 
+void switch_press_no_additional_check(uint8_t swid)
+{
+  memset(dsb_on_press_path_buf, 0, PATH_BUF_SIZE);
+  sprintf(dsb_on_press_path_buf, "/sdcard/%s/key%d.dsb", all_profile_info[current_profile_number].dir_path, swid+1);
+  if(access(dsb_on_press_path_buf, F_OK))
+    return;
+  key_press_count[swid]++;
+  run_once(swid, dsb_on_press_path_buf);
+}
+
 void handle_rotary_encoder_event(rotary_encoder_event_t* this_re_event)
 {
   update_last_keypress();
@@ -277,35 +283,24 @@ void handle_rotary_encoder_event(rotary_encoder_event_t* this_re_event)
     return;
   }
   ssd1306_SetContrast(OLED_CONTRAST_BRIGHT);
-
-  uint8_t re_swid = 0;
+  uint8_t swid = 0;
   if(this_re_event->state.id == 1 && this_re_event->state.direction == ROTARY_ENCODER_DIRECTION_CLOCKWISE)
-  {
-    re_swid = RE1_CW;
-  }
+    swid = RE1_CW;
   else if(this_re_event->state.id == 1 && this_re_event->state.direction == ROTARY_ENCODER_DIRECTION_COUNTER_CLOCKWISE)
-  {
-    re_swid = RE1_CCW;
-  }
+    swid = RE1_CCW;
   else if(this_re_event->state.id == 2 && this_re_event->state.direction == ROTARY_ENCODER_DIRECTION_CLOCKWISE)
-  {
-    re_swid = RE2_CW;
-  }
+    swid = RE2_CW;
   else if(this_re_event->state.id == 2 && this_re_event->state.direction == ROTARY_ENCODER_DIRECTION_COUNTER_CLOCKWISE)
-  {
-    re_swid = RE2_CCW;
-  }
-  printf("re_swid: %d\n", re_swid);
-  if(re_swid == 0)
+    swid = RE2_CCW;
+  if(swid == 0)
     return;
-  memset(dsb_on_press_path_buf, 0, PATH_BUF_SIZE);
-  // sprintf(dsb_on_press_path_buf, "/sdcard/%s/key%d.dsb", all_profile_info[current_profile_number].dir_path, swid+1);
+  switch_press_no_additional_check(swid);
 }
 
 void handle_sw_event(switch_event_t* this_sw_event)
 {
   update_last_keypress();
-  printf("swid: %d type: %d\n", this_sw_event->id, this_sw_event->type);
+  // printf("swid: %d type: %d\n", this_sw_event->id, this_sw_event->type);
   if(is_sleeping && this_sw_event->type == SW_EVENT_SHORT_PRESS)
   {
     wakeup_from_sleep_and_load_profile(current_profile_number);
