@@ -342,15 +342,22 @@ void save_current_profile(uint8_t profile_number)
   fclose(sd_file);
 }
 
-void goto_profile(uint8_t profile_number)
+uint8_t goto_profile_without_updating_rgb_LED(uint8_t profile_number)
 {
   if(profile_number >= MAX_PROFILES || all_profile_info[profile_number].is_loaded == 0)
-    return;
+    return 1;
   draw_profile(&all_profile_info[profile_number]);
   save_current_profile(profile_number);
   current_profile_number = profile_number;
-  redraw_bg(profile_number);
   save_settings(&dp_settings);
+  return 0;
+} 
+
+void goto_profile(uint8_t profile_number)
+{
+  if(goto_profile_without_updating_rgb_LED(profile_number))
+    return;
+  redraw_bg(profile_number);
 }
 
 void goto_next_profile(void)
@@ -539,7 +546,6 @@ void save_persistent_state(uint8_t epilogue_value)
     uint8_t g_addr = r_addr + 1;
     uint8_t b_addr = g_addr + 1;
     uint8_t red, green, blue;
-
     if(epilogue_value & EPILOGUE_SAVE_COLOR_STATE)
     {
       get_current_color(i, &red, &green, &blue);
@@ -554,14 +560,22 @@ void save_persistent_state(uint8_t epilogue_value)
     sps_bin_buf[g_addr] = green;
     sps_bin_buf[b_addr] = blue;
   }
+  
+  memset(temp_buf, 0, TEMP_BUFSIZE);
+  sprintf(temp_buf, "/sdcard/%s/state.sps", all_profile_info[current_profile_number].dir_path);
+  printf("%s\n", temp_buf);
+  remove(temp_buf);
 
   memset(temp_buf, 0, TEMP_BUFSIZE);
-  sprintf(temp_buf, "/%s/state.sps", all_profile_info[current_profile_number].dir_path);
-  remove(temp_buf);
-  sprintf(temp_buf, "/%s/state_dpp.sps", all_profile_info[current_profile_number].dir_path);
+  sprintf(temp_buf, "/sdcard/%s/state_dpp.sps", all_profile_info[current_profile_number].dir_path);
+  printf("%s\n", temp_buf);
+
   FILE *file = fopen(temp_buf, "wb");
   if (file == NULL)
     return;
   fwrite(sps_bin_buf, 1, SPS_BIN_SIZE, file);
   fclose(file);
+  for (uint8_t i = 0; i < MAX_TOTAL_SW_COUNT; i++)
+    printf("%d ", key_press_count[i]);
+  printf("\ndone???\n");
 }

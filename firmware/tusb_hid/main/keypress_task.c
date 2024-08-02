@@ -48,45 +48,61 @@ void der_init(ds3_exe_result* der)
 }
 
 #define DSB_ALLOW_AUTOREPEAT 0
-#define DSB_RETURN_IMMEDIATELY 1
+#define DSB_DONT_PLAY_KEYUP_ANIMATION_RETURN_IMMEDIATELY 1
 uint8_t run_once(uint8_t swid, char* dsb_path)
 {
   der_init(&this_exe);
   run_dsb(&this_exe, swid, dsb_path);
   printf("---\nexecution finished:\nresult: %d\ndata: %d\nepilogue: 0x%x\n---\n", this_exe.result, this_exe.data, this_exe.epilogue_actions);
+
+  uint8_t what_to_do = DSB_ALLOW_AUTOREPEAT;
+  if(this_exe.epilogue_actions & EPILOGUE_SAVE_LOOP_STATE)
+  {
+    save_persistent_state(this_exe.epilogue_actions);
+  }
+  if(this_exe.epilogue_actions & EPILOGUE_SAVE_COLOR_STATE)
+  {
+    save_persistent_state(this_exe.epilogue_actions);
+    what_to_do = DSB_DONT_PLAY_KEYUP_ANIMATION_RETURN_IMMEDIATELY;
+  }
+  if(this_exe.epilogue_actions & EPILOGUE_NEED_OLED_RESTORE)
+  {
+    goto_profile_without_updating_rgb_LED(current_profile_number);
+  }
+
   if(this_exe.result >= EXE_ERROR_CODE_START)
   {
     draw_red();
     draw_exe_error(this_exe.result);
     block_until_anykey();
     goto_profile(current_profile_number);
-    return DSB_RETURN_IMMEDIATELY;
+    return DSB_DONT_PLAY_KEYUP_ANIMATION_RETURN_IMMEDIATELY;
   }
   else if(this_exe.result == EXE_ACTION_NEXT_PROFILE)
   {
     goto_next_profile();
-    return DSB_RETURN_IMMEDIATELY;
+    return DSB_DONT_PLAY_KEYUP_ANIMATION_RETURN_IMMEDIATELY;
   }
   else if(this_exe.result == EXE_ACTION_PREV_PROFILE)
   {
     goto_prev_profile();
-    return DSB_RETURN_IMMEDIATELY;
+    return DSB_DONT_PLAY_KEYUP_ANIMATION_RETURN_IMMEDIATELY;
   }
   else if(this_exe.result == EXE_ACTION_SLEEP)
   {
     start_sleeping();
-    return DSB_RETURN_IMMEDIATELY;
+    return DSB_DONT_PLAY_KEYUP_ANIMATION_RETURN_IMMEDIATELY;
   }
   else if(this_exe.result == EXE_ACTION_GOTO_PROFILE)
   {
     goto_profile(this_exe.data);
-    return DSB_RETURN_IMMEDIATELY;
+    return DSB_DONT_PLAY_KEYUP_ANIMATION_RETURN_IMMEDIATELY;
   }
   else if(this_exe.epilogue_actions)
   {
-    return DSB_RETURN_IMMEDIATELY;
+    return DSB_DONT_PLAY_KEYUP_ANIMATION_RETURN_IMMEDIATELY;
   }
-  return DSB_ALLOW_AUTOREPEAT;
+  return what_to_do;
 }
 
 void handle_onboard_mappable_switch_keydown(uint8_t swid)
@@ -108,7 +124,7 @@ void handle_onboard_mappable_switch_keydown(uint8_t swid)
   play_keydown_animation(current_profile_number, swid);
   key_press_count[swid]++;
   //-------------
-  if(run_once(swid, temp_buf) == DSB_RETURN_IMMEDIATELY)
+  if(run_once(swid, temp_buf) == DSB_DONT_PLAY_KEYUP_ANIMATION_RETURN_IMMEDIATELY)
     return;
   //--------------
 
@@ -124,7 +140,7 @@ void handle_onboard_mappable_switch_keydown(uint8_t swid)
   {
     if(poll_sw_state(swid) == 0)
       break;
-    if(run_once(swid, temp_buf) == DSB_RETURN_IMMEDIATELY)
+    if(run_once(swid, temp_buf) == DSB_DONT_PLAY_KEYUP_ANIMATION_RETURN_IMMEDIATELY)
       return;
   }
 

@@ -102,7 +102,7 @@ typedef struct
 
 #define EPILOGUE_SAVE_LOOP_STATE 0x1
 #define EPILOGUE_SAVE_COLOR_STATE 0x2
-#define EPILOGUE_NEED_OLED_REFRESH 0x4
+#define EPILOGUE_NEED_OLED_RESTORE 0x4
 
 extern uint8_t key_press_count[MAX_TOTAL_SW_COUNT];
 
