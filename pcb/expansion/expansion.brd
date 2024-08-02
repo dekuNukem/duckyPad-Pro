@@ -198,8 +198,9 @@
 <text x="56.7252" y="23.1074" size="1.9304" layer="25" align="center">RST</text>
 <text x="157.639" y="17.792" size="1.27" layer="25" rot="R90" align="center">PC</text>
 <text x="157.639" y="15.125" size="1.27" layer="25" align="center">G</text>
-<text x="146.6562" y="43.3924" size="2.1082" layer="26" rot="MR0" align="center">PulseHPT.com
-dekuNukem 2023</text>
+<text x="47.4692" y="21.5484" size="2.1082" layer="26" rot="MR0" align="center">duckyPad Pro
+Expansion Module
+dekuNukem 2024</text>
 <wire x1="3" y1="42" x2="86" y2="42" width="0" layer="20"/>
 <wire x1="86" y1="42" x2="88.5" y2="39.5" width="0" layer="20" curve="-90"/>
 <wire x1="88.5" y1="39.5" x2="88.5" y2="2.5" width="0" layer="20"/>
@@ -239,6 +240,12 @@ PAD
 <text x="71.7988" y="20.5806" size="2.1844" layer="25" distance="15" rot="R180" align="center">DUCKY
 PAD
 &lt;&lt;--</text>
+<text x="13.1888" y="33.4316" size="5.08" layer="26" rot="MR180" align="center">1</text>
+<text x="38.3348" y="33.3046" size="5.08" layer="26" rot="MR180" align="center">2</text>
+<text x="63.4808" y="33.1776" size="5.08" layer="26" rot="MR180" align="center">3</text>
+<text x="13.1888" y="9.0476" size="5.08" layer="26" rot="MR180" align="center">4</text>
+<text x="38.3348" y="8.9206" size="5.08" layer="26" rot="MR180" align="center">5</text>
+<text x="63.4808" y="8.9206" size="5.08" layer="26" rot="MR180" align="center">6</text>
 </plain>
 <libraries>
 <library name="clock">
