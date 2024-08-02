@@ -1,3 +1,59 @@
+if(epilogue_value & EPILOGUE_SAVE_COLOR_STATE)
+    {
+      get_current_color(i, &red, &green, &blue);
+    }
+    else
+    {
+      red = all_profile_info[current_profile_number].sw_color[i][0];
+      green = all_profile_info[current_profile_number].sw_color[i][1];
+      blue = all_profile_info[current_profile_number].sw_color[i][2];
+    }
+void save_persistent_state(uint8_t epilogue_value)
+{
+  // use a different file name for duckypad pro!
+  memset(sps_bin_buf, 0, SPS_BIN_SIZE);
+  if(epilogue_value & EPILOGUE_SAVE_LOOP_STATE)
+    memcpy(sps_bin_buf, key_press_count, MAX_TOTAL_SW_COUNT);
+  for (uint8_t i = 0; i < NEOPIXEL_COUNT; i++)
+  {
+    uint8_t r_addr = i*3 + COLOR_START_ADDR;
+    uint8_t g_addr = r_addr + 1;
+    uint8_t b_addr = g_addr + 1;
+    uint8_t red, green, blue;
+    if(epilogue_value & EPILOGUE_SAVE_COLOR_STATE)
+    {
+      get_current_color(i, &red, &green, &blue);
+    }
+    else
+    {
+      red = all_profile_info[current_profile_number].sw_color[i][0];
+      green = all_profile_info[current_profile_number].sw_color[i][1];
+      blue = all_profile_info[current_profile_number].sw_color[i][2];
+    }
+    sps_bin_buf[r_addr] = red;
+    sps_bin_buf[g_addr] = green;
+    sps_bin_buf[b_addr] = blue;
+  }
+  
+  memset(temp_buf, 0, TEMP_BUFSIZE);
+  sprintf(temp_buf, "/sdcard/%s/state.sps", all_profile_info[current_profile_number].dir_path);
+  // printf("%s\n", temp_buf);
+  remove(temp_buf);
+
+  memset(temp_buf, 0, TEMP_BUFSIZE);
+  sprintf(temp_buf, "/sdcard/%s/state_dpp.sps", all_profile_info[current_profile_number].dir_path);
+  // printf("%s\n", temp_buf);
+
+  FILE *file = fopen(temp_buf, "wb");
+  if (file == NULL)
+    return;
+  fwrite(sps_bin_buf, 1, SPS_BIN_SIZE, file);
+  fclose(file);
+  // for (uint8_t i = 0; i < MAX_TOTAL_SW_COUNT; i++)
+  //   printf("%d ", key_press_count[i]);
+  // printf("\ndone???\n");
+}
+
       printf("%s %s\n", dsb_on_press_path_buf, dsb_on_release_path_buf);
 printf("what_to_do: %d\n", what_to_do);
 #define PATH_BUF_SIZE 128

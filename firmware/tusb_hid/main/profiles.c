@@ -293,7 +293,6 @@ void load_profile_config(profile_info* this_profile)
     strip_newline(temp_buf, TEMP_BUFSIZE);
     parse_profile_config_line(temp_buf, this_profile);
   }
-  // print_profile_info(this_profile);
 
   if(this_profile->dim_unused_keys)
   {
@@ -357,7 +356,10 @@ void goto_profile(uint8_t profile_number)
 {
   if(goto_profile_without_updating_rgb_LED(profile_number))
     return;
-  redraw_bg(profile_number);
+  if(load_persistent_state())
+    redraw_bg(profile_number);
+  else
+    neopixel_draw_current_buffer();
 }
 
 void goto_next_profile(void)
@@ -530,27 +532,22 @@ void generate_msc_flag_file(void)
 }
 
 #define COLOR_START_ADDR MAX_TOTAL_SW_COUNT
-
 #define SPS_BIN_SIZE 128
 uint8_t sps_bin_buf[SPS_BIN_SIZE];
 
-void save_persistent_state(uint8_t epilogue_value)
+void save_persistent_state(uint8_t epilogue_value, uint8_t swid)
 {
-  // use a different file name for duckypad pro!
   memset(sps_bin_buf, 0, SPS_BIN_SIZE);
-  if(epilogue_value & EPILOGUE_SAVE_LOOP_STATE)
-    memcpy(sps_bin_buf, key_press_count, MAX_TOTAL_SW_COUNT);
+  memcpy(sps_bin_buf, key_press_count, MAX_TOTAL_SW_COUNT);
   for (uint8_t i = 0; i < NEOPIXEL_COUNT; i++)
   {
     uint8_t r_addr = i*3 + COLOR_START_ADDR;
     uint8_t g_addr = r_addr + 1;
     uint8_t b_addr = g_addr + 1;
     uint8_t red, green, blue;
-    if(epilogue_value & EPILOGUE_SAVE_COLOR_STATE)
-    {
-      get_current_color(i, &red, &green, &blue);
-    }
-    else
+    get_current_color(i, &red, &green, &blue);
+    // is not asking to save color state, save the current key color with assigned switch color, instead of keydown color
+    if((epilogue_value & EPILOGUE_SAVE_COLOR_STATE) == 0 && i == swid)
     {
       red = all_profile_info[current_profile_number].sw_color[i][0];
       green = all_profile_info[current_profile_number].sw_color[i][1];
@@ -561,21 +558,40 @@ void save_persistent_state(uint8_t epilogue_value)
     sps_bin_buf[b_addr] = blue;
   }
   
+  // remove sps file for old duckyPad
   memset(temp_buf, 0, TEMP_BUFSIZE);
   sprintf(temp_buf, "/sdcard/%s/state.sps", all_profile_info[current_profile_number].dir_path);
-  // printf("%s\n", temp_buf);
   remove(temp_buf);
 
   memset(temp_buf, 0, TEMP_BUFSIZE);
   sprintf(temp_buf, "/sdcard/%s/state_dpp.sps", all_profile_info[current_profile_number].dir_path);
-  // printf("%s\n", temp_buf);
 
   FILE *file = fopen(temp_buf, "wb");
   if (file == NULL)
     return;
   fwrite(sps_bin_buf, 1, SPS_BIN_SIZE, file);
   fclose(file);
-  // for (uint8_t i = 0; i < MAX_TOTAL_SW_COUNT; i++)
-  //   printf("%d ", key_press_count[i]);
-  // printf("\ndone???\n");
+}
+
+uint8_t load_persistent_state(void)
+{
+  memset(temp_buf, 0, TEMP_BUFSIZE);
+  sprintf(temp_buf, "/sdcard/%s/state_dpp.sps", all_profile_info[current_profile_number].dir_path);
+  FILE *file = fopen(temp_buf, "rb");
+  if(file == NULL)
+    return 1;
+  memset(sps_bin_buf, 0, SPS_BIN_SIZE);
+  fread(sps_bin_buf, 1, SPS_BIN_SIZE, file);
+  fclose(file);
+  memcpy(key_press_count, sps_bin_buf, MAX_TOTAL_SW_COUNT);
+
+  for (uint8_t i = 0; i < NEOPIXEL_COUNT; ++i)
+  {
+    uint8_t r_addr = i*3 + COLOR_START_ADDR;
+    uint8_t red = sps_bin_buf[r_addr];
+    uint8_t green = sps_bin_buf[r_addr+1];
+    uint8_t blue = sps_bin_buf[r_addr+2];
+    set_pixel_3color_update_buffer(i, red, green, blue);
+  }
+  return 0;
 }

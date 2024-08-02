@@ -58,11 +58,11 @@ uint8_t run_once(uint8_t swid, char* dsb_path)
   uint8_t what_to_do = DSB_ALLOW_AUTOREPEAT;
   if(this_exe.epilogue_actions & EPILOGUE_SAVE_LOOP_STATE)
   {
-    save_persistent_state(this_exe.epilogue_actions);
+    save_persistent_state(this_exe.epilogue_actions, swid);
   }
   if(this_exe.epilogue_actions & EPILOGUE_SAVE_COLOR_STATE)
   {
-    save_persistent_state(this_exe.epilogue_actions);
+    save_persistent_state(this_exe.epilogue_actions, swid);
     what_to_do = DSB_DONT_PLAY_KEYUP_ANIMATION_RETURN_IMMEDIATELY;
   }
   if(this_exe.epilogue_actions & EPILOGUE_NEED_OLED_RESTORE)

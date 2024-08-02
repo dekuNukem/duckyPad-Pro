@@ -27,6 +27,18 @@ void set_pixel_3color(uint8_t which, uint8_t r, uint8_t g, uint8_t b)
   blue_buf[pixel_map[which]] = b;
 }
 
+void set_pixel_3color_update_buffer(uint8_t which, uint8_t r, uint8_t g, uint8_t b)
+{
+  neo_anime[which].animation_type = ANIMATION_NONE;
+  set_pixel_3color(which, r, g, b);
+  neo_anime[which].current_color[0] = r;
+  neo_anime[which].current_color[1] = g;
+  neo_anime[which].current_color[2] = b;
+  neo_anime[which].target_color[0] = r;
+  neo_anime[which].target_color[1] = g;
+  neo_anime[which].target_color[2] = b;
+}
+
 void set_pixel_color(uint8_t which, uint8_t dest_color[THREE])
 {
   set_pixel_3color(which, dest_color[0], dest_color[1], dest_color[2]);
