@@ -48,6 +48,7 @@ void reset_key_color(uint8_t which);
 void draw_settings_led(void);
 void get_current_color(uint8_t which, uint8_t* red, uint8_t* green, uint8_t* blue);
 void set_pixel_3color_update_buffer(uint8_t which, uint8_t r, uint8_t g, uint8_t b);
+void halt_all_animations(void);
 
 extern uint8_t brightness_index_to_percent_lookup[BRIGHTNESS_LEVEL_SIZE];
 

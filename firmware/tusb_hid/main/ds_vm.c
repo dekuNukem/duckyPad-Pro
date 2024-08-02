@@ -251,6 +251,7 @@ void parse_swcc(uint8_t opcode, uint8_t key_id_0_indexed)
     this_index--;
   if(this_index >= NEOPIXEL_COUNT)
     return;
+  halt_all_animations();
   set_pixel_3color(this_index, red, green, blue);
   neopixel_draw_current_buffer();
 }
@@ -260,6 +261,7 @@ void parse_swcf(void)
   stack_pop(&arithmetic_stack, &blue);
   stack_pop(&arithmetic_stack, &green);
   stack_pop(&arithmetic_stack, &red);
+  halt_all_animations();
   for (int i = 0; i < NEOPIXEL_COUNT; ++i)
     set_pixel_3color(i, red, green, blue);
   neopixel_draw_current_buffer();

@@ -150,6 +150,7 @@ void play_keyup_animation(uint8_t profile_number, uint8_t sw_number)
   led_start_animation(&neo_anime[sw_number], all_profile_info[profile_number].sw_color[sw_number], ANIMATION_CROSS_FADE, 50);
 }
 
+// this runs every frame
 void led_animation_handler(void)
 {
   frame_counter++;
@@ -225,4 +226,10 @@ void get_current_color(uint8_t which, uint8_t* red, uint8_t* green, uint8_t* blu
   *red = red_buf[pixel_map[which]];
   *green = green_buf[pixel_map[which]];
   *blue = blue_buf[pixel_map[which]];
+}
+
+void halt_all_animations(void)
+{
+  for (size_t i = 0; i < NEOPIXEL_COUNT; i++)
+    neo_anime[i].animation_type = ANIMATION_NONE;  
 }
