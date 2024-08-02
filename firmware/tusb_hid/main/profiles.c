@@ -563,19 +563,19 @@ void save_persistent_state(uint8_t epilogue_value)
   
   memset(temp_buf, 0, TEMP_BUFSIZE);
   sprintf(temp_buf, "/sdcard/%s/state.sps", all_profile_info[current_profile_number].dir_path);
-  printf("%s\n", temp_buf);
+  // printf("%s\n", temp_buf);
   remove(temp_buf);
 
   memset(temp_buf, 0, TEMP_BUFSIZE);
   sprintf(temp_buf, "/sdcard/%s/state_dpp.sps", all_profile_info[current_profile_number].dir_path);
-  printf("%s\n", temp_buf);
+  // printf("%s\n", temp_buf);
 
   FILE *file = fopen(temp_buf, "wb");
   if (file == NULL)
     return;
   fwrite(sps_bin_buf, 1, SPS_BIN_SIZE, file);
   fclose(file);
-  for (uint8_t i = 0; i < MAX_TOTAL_SW_COUNT; i++)
-    printf("%d ", key_press_count[i]);
-  printf("\ndone???\n");
+  // for (uint8_t i = 0; i < MAX_TOTAL_SW_COUNT; i++)
+  //   printf("%d ", key_press_count[i]);
+  // printf("\ndone???\n");
 }

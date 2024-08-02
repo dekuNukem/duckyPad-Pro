@@ -98,22 +98,14 @@ uint8_t run_once(uint8_t swid, char* dsb_path)
     goto_profile(this_exe.data);
     return DSB_DONT_PLAY_KEYUP_ANIMATION_RETURN_IMMEDIATELY;
   }
-  else if(this_exe.epilogue_actions)
-  {
-    return DSB_DONT_PLAY_KEYUP_ANIMATION_RETURN_IMMEDIATELY;
-  }
   return what_to_do;
 }
 
-void handle_onboard_mappable_switch_keydown(uint8_t swid)
+void onboard_switch_press(uint8_t swid, char* press_path, char* release_path)
 {
   if(strlen(all_profile_info[current_profile_number].sw_name_firstline[swid]) == 0)
     return;
-  memset(temp_buf, 0, TEMP_BUFSIZE);
-  sprintf(temp_buf, "/sdcard/%s/key%d.dsb", all_profile_info[current_profile_number].dir_path, swid+1);
-  memset(filename_buf, 0, FILENAME_BUFSIZE);
-  sprintf(filename_buf, "/sdcard/%s/key%d-release.dsb", all_profile_info[current_profile_number].dir_path, swid+1);
-  if(access(temp_buf, F_OK))
+  if(access(press_path, F_OK))
   {
     draw_red();
     draw_nodsb(swid);
@@ -124,7 +116,7 @@ void handle_onboard_mappable_switch_keydown(uint8_t swid)
   play_keydown_animation(current_profile_number, swid);
   key_press_count[swid]++;
   //-------------
-  if(run_once(swid, temp_buf) == DSB_DONT_PLAY_KEYUP_ANIMATION_RETURN_IMMEDIATELY)
+  if(run_once(swid, press_path) == DSB_DONT_PLAY_KEYUP_ANIMATION_RETURN_IMMEDIATELY)
     return;
   //--------------
 
@@ -140,13 +132,14 @@ void handle_onboard_mappable_switch_keydown(uint8_t swid)
   {
     if(poll_sw_state(swid) == 0)
       break;
-    if(run_once(swid, temp_buf) == DSB_DONT_PLAY_KEYUP_ANIMATION_RETURN_IMMEDIATELY)
+    key_press_count[swid]++;
+    if(run_once(swid, press_path) == DSB_DONT_PLAY_KEYUP_ANIMATION_RETURN_IMMEDIATELY)
       return;
   }
 
   handle_obsw_keydown_end:
   // play keyup animation only if there is no on-release DSB file 
-  if(access(filename_buf, F_OK))
+  if(access(release_path, F_OK))
     play_keyup_animation(current_profile_number, swid);
 }
 
@@ -195,6 +188,10 @@ void settings_menu(void)
   }
 }
 
+#define PATH_BUF_SIZE 128
+char dsb_on_press_path_buf[PATH_BUF_SIZE];
+char dsb_on_release_path_buf[PATH_BUF_SIZE];
+
 void process_keyevent(uint8_t swid, uint8_t event_type)
 {
   ssd1306_SetContrast(OLED_CONTRAST_BRIGHT);
@@ -215,11 +212,17 @@ void process_keyevent(uint8_t swid, uint8_t event_type)
     return;
   }
 
+  memset(dsb_on_press_path_buf, 0, PATH_BUF_SIZE);
+  sprintf(dsb_on_press_path_buf, "/sdcard/%s/key%d.dsb", all_profile_info[current_profile_number].dir_path, swid+1);
+
+  memset(dsb_on_release_path_buf, 0, PATH_BUF_SIZE);
+  sprintf(dsb_on_release_path_buf, "/sdcard/%s/key%d-release.dsb", all_profile_info[current_profile_number].dir_path, swid+1);
+
   if(swid >= MSW_0 && swid <= MAX_MSW)
   {
     if(event_type == SW_EVENT_SHORT_PRESS)
     {
-      handle_onboard_mappable_switch_keydown(swid);
+      onboard_switch_press(swid, dsb_on_press_path_buf, dsb_on_release_path_buf);
     }
     else if(event_type == SW_EVENT_RELEASE)
     {

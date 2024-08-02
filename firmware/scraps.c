@@ -1,3 +1,22 @@
+      printf("%s %s\n", dsb_on_press_path_buf, dsb_on_release_path_buf);
+printf("what_to_do: %d\n", what_to_do);
+#define PATH_BUF_SIZE 128
+char dsb_path_buf[PATH_BUF_SIZE];
+char dsb_on_release_path_buf[PATH_BUF_SIZE];
+
+
+char dsb_on_release_path_buf[PATH_BUF_SIZE];
+
+memset(dsb_path_buf, 0, PATH_BUF_SIZE);
+  sprintf(dsb_path_buf, "/sdcard/%s/key%d.dsb", all_profile_info[current_profile_number].dir_path, swid+1);
+
+memset(dsb_on_release_path_buf, 0, PATH_BUF_SIZE);
+sprintf(dsb_on_release_path_buf, "/sdcard/%s/key%d-release.dsb", all_profile_info[current_profile_number].dir_path, swid+1);
+
+
+
+
+
 MY_UNIMPLEMENTED
 
 void redraw_bg(uint8_t profile_number)
