@@ -45,7 +45,6 @@ extern uint8_t current_profile_number;
 extern char temp_buf[TEMP_BUFSIZE];
 extern char filename_buf[FILENAME_BUFSIZE];
 
-
 uint8_t load_settings(dp_global_settings* dps);
 uint8_t scan_profiles();
 void error_loop(void);

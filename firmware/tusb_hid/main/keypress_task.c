@@ -106,6 +106,7 @@ void handle_onboard_mappable_switch_keydown(uint8_t swid)
     return;
   }
   play_keydown_animation(current_profile_number, swid);
+  key_press_count[swid]++;
   //-------------
   if(run_once(swid, temp_buf) == DSB_RETURN_IMMEDIATELY)
     return;
