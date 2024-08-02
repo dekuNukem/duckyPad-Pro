@@ -53,7 +53,7 @@ uint8_t run_once(uint8_t swid, char* dsb_path)
 {
   der_init(&this_exe);
   run_dsb(&this_exe, swid, dsb_path);
-  printf("---\nexecution finished:\nresult: %d\ndata: %d\nepilogue: 0x%x\n---\n", this_exe.result, this_exe.data, this_exe.epilogue_actions);
+  // printf("---\nexecution finished:\nresult: %d\ndata: %d\nepilogue: 0x%x\n---\n", this_exe.result, this_exe.data, this_exe.epilogue_actions);
 
   uint8_t what_to_do = DSB_ALLOW_AUTOREPEAT;
   if(this_exe.epilogue_actions & EPILOGUE_SAVE_LOOP_STATE)
@@ -118,6 +118,9 @@ void onboard_switch_press(uint8_t swid, char* press_path, char* release_path)
   //-------------
   if(run_once(swid, press_path) == DSB_DONT_PLAY_KEYUP_ANIMATION_RETURN_IMMEDIATELY)
     return;
+  // don't repeat if on_release script exists
+  if(access(release_path, F_OK) == 0)
+    return;
   //--------------
 
   uint32_t hold_start = pdTICKS_TO_MS(xTaskGetTickCount());
@@ -142,11 +145,6 @@ void onboard_switch_press(uint8_t swid, char* press_path, char* release_path)
   if(access(release_path, F_OK))
     play_keyup_animation(current_profile_number, swid);
 }
-
-// void handle_keyup(uint8_t swid)
-// {
-//   play_keyup_animation(current_profile_number, swid);
-// }
 
 void settings_menu(void)
 {
@@ -188,6 +186,14 @@ void settings_menu(void)
   }
 }
 
+void onboard_offboard_switch_release(uint8_t swid, char* release_path)
+{
+  if(access(release_path, F_OK))
+    return;
+  run_once(swid, release_path);
+  play_keyup_animation(current_profile_number, swid);
+}
+
 #define PATH_BUF_SIZE 128
 char dsb_on_press_path_buf[PATH_BUF_SIZE];
 char dsb_on_release_path_buf[PATH_BUF_SIZE];
@@ -226,7 +232,7 @@ void process_keyevent(uint8_t swid, uint8_t event_type)
     }
     else if(event_type == SW_EVENT_RELEASE)
     {
-      // handle_keyup(swid);
+      onboard_offboard_switch_release(swid, dsb_on_release_path_buf);
     }
   }
 }
@@ -265,17 +271,35 @@ void wakeup_from_sleep_and_load_profile(uint8_t profile_to_load)
 void handle_rotary_encoder_event(rotary_encoder_event_t* this_re_event)
 {
   update_last_keypress();
-  printf("reid: %d pos: %ld, dir: %d\n", this_re_event->state.id, this_re_event->state.position, this_re_event->state.direction);
   if(is_sleeping)
   {
     wakeup_from_sleep_and_load_profile(current_profile_number);
     return;
   }
   ssd1306_SetContrast(OLED_CONTRAST_BRIGHT);
-  if(this_re_event->state.direction == ROTARY_ENCODER_DIRECTION_CLOCKWISE)
-    goto_next_profile();
-  else if(this_re_event->state.direction == ROTARY_ENCODER_DIRECTION_COUNTER_CLOCKWISE)
-    goto_prev_profile();
+
+  uint8_t re_swid = 0;
+  if(this_re_event->state.id == 1 && this_re_event->state.direction == ROTARY_ENCODER_DIRECTION_CLOCKWISE)
+  {
+    re_swid = RE1_CW;
+  }
+  else if(this_re_event->state.id == 1 && this_re_event->state.direction == ROTARY_ENCODER_DIRECTION_COUNTER_CLOCKWISE)
+  {
+    re_swid = RE1_CCW;
+  }
+  else if(this_re_event->state.id == 2 && this_re_event->state.direction == ROTARY_ENCODER_DIRECTION_CLOCKWISE)
+  {
+    re_swid = RE2_CW;
+  }
+  else if(this_re_event->state.id == 2 && this_re_event->state.direction == ROTARY_ENCODER_DIRECTION_COUNTER_CLOCKWISE)
+  {
+    re_swid = RE2_CCW;
+  }
+  printf("re_swid: %d\n", re_swid);
+  if(re_swid == 0)
+    return;
+  memset(dsb_on_press_path_buf, 0, PATH_BUF_SIZE);
+  // sprintf(dsb_on_press_path_buf, "/sdcard/%s/key%d.dsb", all_profile_info[current_profile_number].dir_path, swid+1);
 }
 
 void handle_sw_event(switch_event_t* this_sw_event)
@@ -291,7 +315,7 @@ void handle_sw_event(switch_event_t* this_sw_event)
   is_busy = 1;
   process_keyevent(this_sw_event->id, this_sw_event->type);
   is_busy = 0;
-  xQueueReset(switch_event_queue);
+  // xQueueReset(switch_event_queue);
 }
 
 void keypress_task(void *dummy)

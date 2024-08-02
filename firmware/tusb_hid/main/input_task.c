@@ -106,8 +106,8 @@ void sw_scan(void)
 
 	this_sw_state[SW_PLUS] = 1 - gpio_get_level(SW_PLUS_GPIO);
 	this_sw_state[SW_MINUS] = 1 - gpio_get_level(SW_MINUS_GPIO);
-	this_sw_state[SW_RE1] = 1 - gpio_get_level(SW_RE1_GPIO);
-	this_sw_state[SW_RE2] = 1 - gpio_get_level(SW_RE2_GPIO);
+	this_sw_state[RE1_SW] = 1 - gpio_get_level(SW_RE1_GPIO);
+	this_sw_state[RE2_SW] = 1 - gpio_get_level(SW_RE2_GPIO);
 
 	xSemaphoreGive(kbscan_mutex);
 }

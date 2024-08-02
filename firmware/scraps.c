@@ -1,3 +1,49 @@
+  printf("reid: %d pos: %ld, dir: %d\n", this_re_event->state.id, this_re_event->state.position, this_re_event->state.direction);
+
+
+void onboard_switch_press(uint8_t swid, char* press_path, char* release_path)
+{
+  if(strlen(all_profile_info[current_profile_number].sw_name_firstline[swid]) == 0)
+    return;
+  if(access(press_path, F_OK))
+  {
+    draw_red();
+    draw_nodsb(swid);
+    block_until_anykey();
+    goto_profile(current_profile_number);
+    return;
+  }
+  play_keydown_animation(current_profile_number, swid);
+  key_press_count[swid]++;
+  //-------------
+  if(run_once(swid, press_path) == DSB_DONT_PLAY_KEYUP_ANIMATION_RETURN_IMMEDIATELY)
+    return;
+  //--------------
+
+  uint32_t hold_start = pdTICKS_TO_MS(xTaskGetTickCount());
+  while(1)
+  {
+    if(poll_sw_state(swid) == 0)
+      goto handle_obsw_keydown_end;
+    if(pdTICKS_TO_MS(xTaskGetTickCount())- hold_start > 500)
+      break;
+  }
+  while(1)
+  {
+    if(poll_sw_state(swid) == 0)
+      break;
+    key_press_count[swid]++;
+    if(run_once(swid, press_path) == DSB_DONT_PLAY_KEYUP_ANIMATION_RETURN_IMMEDIATELY)
+      return;
+  }
+
+  handle_obsw_keydown_end:
+  // play keyup animation only if there is no on-release DSB file 
+  if(access(release_path, F_OK))
+    play_keyup_animation(current_profile_number, swid);
+}
+
+
 if(epilogue_value & EPILOGUE_SAVE_COLOR_STATE)
     {
       get_current_color(i, &red, &green, &blue);

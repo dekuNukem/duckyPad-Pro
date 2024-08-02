@@ -14,8 +14,7 @@
 
 // OB = onboard
 #define MECH_OBSW_COUNT (SW_MATRIX_NUM_COLS * SW_MATRIX_NUM_ROWS)
-// 20 mechanical switches, + and - button, 1 for each rotary encoder
-#define TOTAL_OBSW_COUNT (MECH_OBSW_COUNT + 4)
+#define TOTAL_OBSW_COUNT (28)
 
 #define MAX_TOTAL_SW_COUNT 64
 
@@ -71,11 +70,14 @@
 #define MSW_18  18
 #define MSW_19  19
 #define MAX_MSW MSW_19
-
-#define SW_MINUS 20
-#define SW_PLUS 21
-#define SW_RE1 22
-#define SW_RE2 23
+#define RE1_CW 20
+#define RE1_CCW 21
+#define RE1_SW 22
+#define RE2_CW 23
+#define RE2_CCW 24
+#define RE2_SW 25
+#define SW_MINUS 26
+#define SW_PLUS 27
 
 typedef struct
 {
@@ -95,7 +97,6 @@ extern QueueHandle_t rotary_encoder_event_queue;
 extern QueueHandle_t switch_event_queue;
 
 void clear_sw_re_queue(void);
-
 
 #define KBSCAN_MUTEX_TIMEOUT_MS 100
 
