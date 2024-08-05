@@ -26,7 +26,7 @@ dp_global_settings dp_settings;
 char temp_buf[TEMP_BUFSIZE];
 char filename_buf[FILENAME_BUFSIZE];
 
-const char config_sleep_after_min[] = "sleep_after_min ";
+const char config_sleep_after_min[] = "sleep_after_ms ";
 const char config_brightness_index[] = "brightness_index ";
 const char config_keyboard_layout[] = "kb_layout ";
 const char config_last_used_profile[] = "last_profile ";
@@ -67,9 +67,11 @@ uint8_t load_settings(dp_global_settings* dps)
   while(fgets(temp_buf, TEMP_BUFSIZE, sd_file))
   {
     if(strncmp(temp_buf, config_sleep_after_min, strlen(config_sleep_after_min)) == 0)
-      dps->sleep_after_ms = atoi(temp_buf + strlen(config_sleep_after_min)) * 60000;
+      dps->sleep_after_ms = atoi(temp_buf + strlen(config_sleep_after_min));
     if(strncmp(temp_buf, config_brightness_index, strlen(config_brightness_index)) == 0)
       dps->brightness_index = atoi(temp_buf + strlen(config_brightness_index));
+    if(strncmp(temp_buf, config_last_used_profile, strlen(config_last_used_profile)) == 0)
+      dps->last_used_profile = atoi(temp_buf + strlen(config_last_used_profile));
     if(dps->brightness_index >= BRIGHTNESS_LEVEL_SIZE)
       dps->brightness_index = BRIGHTNESS_LEVEL_SIZE - 1;
     if(strncmp(temp_buf, config_keyboard_layout, strlen(config_keyboard_layout)) == 0)
@@ -89,25 +91,22 @@ uint8_t save_settings(dp_global_settings* dps)
   FILE *sd_file = fopen(settings_file_path, "w");
   if(sd_file == NULL)
     return 2;
-  // fprintf(sd_file, "%s%ld\n%s%d\n%s%s\n", config_sleep_after_min, dps->sleep_after_ms/60000, config_brightness_index, dps->brightness_index, config_keyboard_layout, dps->current_kb_layout);
   fprintf(
     sd_file,
     "%s%ld\n"
     "%s%d\n"
     "%s%d\n"
+    "fw_ver %d.%d.%d\n"
+    "serial_number DP24_%02X%02X%02X\n"
     "%s%s\n",
-    config_sleep_after_min, dps->sleep_after_ms / 60000,
+    config_sleep_after_min, dps->sleep_after_ms,
     config_brightness_index, dps->brightness_index,
     config_last_used_profile, current_profile_number,
+    fw_version_major, fw_version_minor, fw_version_patch,
+    esp_mac_addr[3], esp_mac_addr[4], esp_mac_addr[5],
     config_keyboard_layout, dps->current_kb_layout
   );
   fclose(sd_file);
-  return 0;
-}
-
-// 0 = error?
-int8_t get_last_used_profile(void)
-{
   return 0;
 }
 
@@ -386,9 +385,8 @@ void goto_prev_profile(void)
 
 void profile_init(void)
 {
-  int8_t last_profile = get_last_used_profile();
-  if(is_valid_profile_number(last_profile))
-    goto_profile(last_profile);
+  if(is_valid_profile_number(dp_settings.last_used_profile))
+    goto_profile(dp_settings.last_used_profile);
   else
     goto_next_profile();
 }
