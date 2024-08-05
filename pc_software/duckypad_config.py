@@ -150,7 +150,6 @@ PADDING = scaled_size(10)
 HEIGHT_ROOT_FOLDER_LF = scaled_size(50)
 INVALID_ROOT_FOLDER_STRING = "<-- Press to connect to duckyPad"
 last_rgb = (238,130,238)
-dp_settings = duck_objs.dp_global_settings()
 discord_link_url = "https://raw.githubusercontent.com/dekuNukem/duckyPad/master/resources/discord_link.txt"
 
 def open_discord_link():
@@ -158,28 +157,6 @@ def open_discord_link():
         webbrowser.open(str(urllib.request.urlopen(discord_link_url).read().decode('latin-1')).split('\n')[0])
     except Exception as e:
         messagebox.showerror("Error", "I can't find the discord link...\n"+str(e))
-
-def create_help_window():
-    help_window = Toplevel(root)
-    help_window.title("duckyPad help")
-    help_window.geometry(str(scaled_size(280)) + "x" + str(scaled_size(180)))
-    help_window.resizable(width=FALSE, height=FALSE)
-    help_window.grab_set()
-
-    user_manual_label = Label(master=help_window, text="Not sure what to do?")
-    user_manual_label.place(x=scaled_size(80), y=scaled_size(5))
-    user_manual_button = Button(help_window, text="User Manual", command=open_duckypad_user_manual_url)
-    user_manual_button.place(x=scaled_size(60), y=scaled_size(30), width=scaled_size(160))
-
-    troubleshoot_label = Label(master=help_window, text="Problems?")
-    troubleshoot_label.place(x=scaled_size(110), y=scaled_size(60))
-    troubleshoot_button = Button(help_window, text="Troubleshooting Guides", command=open_duckypad_troubleshooting_url)
-    troubleshoot_button.place(x=scaled_size(50), y=scaled_size(85), width=scaled_size(180))
-
-    discord_label = Label(master=help_window, text="Questions or comments?")
-    discord_label.place(x=scaled_size(70), y=scaled_size(60 + 55))
-    discord_button = Button(help_window, text="Official Discord Chatroom", command=open_discord_link)
-    discord_button.place(x=scaled_size(50), y=scaled_size(85 + 55), width=scaled_size(180))
 
 def open_duckypad_user_manual_url():
     webbrowser.open('https://github.com/dekuNukem/duckyPad/blob/master/getting_started.md')
@@ -233,7 +210,6 @@ def ui_reset():
     script_textbox.delete(1.0, 'end')
     profile_lstbox.delete(0, 'end')
     check_syntax_label.config(text="", fg="green")
-    sleepmode_slider.config(state=DISABLED)
     profile_import_button.config(state=DISABLED)
 
 def check_firmware_update(current_fw_str=None):
@@ -304,7 +280,6 @@ def select_root_folder(root_path=None, check_fw=True, is_msc=False):
     dp_root_folder_display.set("Selected: " + root_path)
     root_folder_path_label.config(foreground='navy')
     profile_list = duck_objs.build_profile(root_path)
-    dp_settings.load_from_path(dp_root_folder_path)
 
     if check_fw:
         duckypad_fw_ver = print_fw_update_label()
@@ -438,8 +413,6 @@ def enable_buttons():
     key_name_label.config(fg='black')
     key_char_limit_label.config(fg='black')
     key_color_text.config(fg='black')
-    sleepmode_slider.config(state=NORMAL)
-    sleepmode_slider.set(dp_settings.sleep_after_minutes)
     profile_import_button.config(state=NORMAL)
 
 def profile_shift_up():
@@ -781,21 +754,6 @@ def save_everything(save_path):
                     config_file.write('SWCOLOR_%d %d %d %d\n' % (this_key.index, this_key.color[0], this_key.color[1], this_key.color[2]))
             config_file.close()
 
-        dps_path = os.path.join(save_path, 'dp_settings.txt')
-        try:
-            found = False
-            for index, line in enumerate(dp_settings.list_of_lines):
-                if 'sleep_after_min' in line:
-                    found = True
-                    dp_settings.list_of_lines[index] = "sleep_after_min " + str(sleepmode_slider.get()) + "\n"
-            if found is False:
-                dp_settings.list_of_lines.append("sleep_after_min " + str(sleepmode_slider.get()) + "\n")
-        except Exception as e:
-            print("dps", e)
-
-        with open(dps_path, 'w+', encoding='utf8', newline='') as setting_file:
-            setting_file.writelines(dp_settings.list_of_lines)
-
         copy_keymaps(save_path)
 
         return True
@@ -912,14 +870,11 @@ root_folder_lf = LabelFrame(root, text="Files", width=scaled_size(1050), height=
 root_folder_lf.place(x=PADDING, y=0)
 root.update()
 
-help_button = Button(root_folder_lf, text="Help!", command=create_help_window)
-help_button.place(x=scaled_size(5), y=0, width=scaled_size(65), height=scaled_size(25))
-
 root_folder_select_button = Button(root_folder_lf, text="Connect", command=connect_button_click)
-root_folder_select_button.place(x=scaled_size(75), y=0, width=scaled_size(75), height=scaled_size(25))
+root_folder_select_button.place(x=scaled_size(5), y=0, width=scaled_size(75), height=scaled_size(25))
 
 root_folder_path_label = Label(master=root_folder_lf, textvariable=dp_root_folder_display, foreground='red')
-root_folder_path_label.place(x=scaled_size(155), y=0)
+root_folder_path_label.place(x=scaled_size(90), y=0)
 
 save_button = Button(root_folder_lf, text="Save", command=save_click, state=DISABLED)
 save_button.place(x=scaled_size(630+270), y=0, width=scaled_size(65), height=scaled_size(25))
@@ -1422,19 +1377,9 @@ def minutes_to_str(value):
     result += " " + str(this_minutes) + add_s(" minute", this_minutes)
     return result
 
-def slider_adjust_sleepmode(value):
-    enter_sleep_mode_label.config(text="Sleep after: " + minutes_to_str(value))
 
-settings_lf = LabelFrame(root, text="Settings", width=scaled_size(516+214), height=scaled_size(70))
-settings_lf.place(x=scaled_size(10), y=scaled_size(525))
-enter_sleep_mode_label = Label(master=settings_lf, text="Sleep after: Never")
-enter_sleep_mode_label.place(x=scaled_size(10), y=0)
-
-sleepmode_slider = Scale(settings_lf)
-sleepmode_slider.config(from_=0, to=360, length=190, showvalue=0, sliderlength=20, orient=HORIZONTAL, command=slider_adjust_sleepmode)
-sleepmode_slider.set(0)
-sleepmode_slider.place(x=scaled_size(10), y=scaled_size(20))
-sleepmode_slider.config(state=DISABLED)
+resources_lf = LabelFrame(root, text="Resources", width=scaled_size(516+214), height=scaled_size(70))
+resources_lf.place(x=scaled_size(10), y=scaled_size(525))
 
 updates_lf = LabelFrame(root, text="Updates", width=scaled_size(310), height=scaled_size(70))
 updates_lf.place(x=scaled_size(750), y=scaled_size(525))
@@ -1472,8 +1417,23 @@ def import_profile_click():
     profile_list += content
     update_profile_display()
 
-autoswitch_button = Button(settings_lf, text="Profile Autoswitcher", command=open_profile_autoswitcher_url)
-autoswitch_button.place(x=scaled_size(250), y=0, width=scaled_size(200), height=scaled_size(40))
+def open_tindie_store():
+    messagebox.showinfo("Oops", "not implemented yet! main product, expansion module, accessories?")
+
+user_manual_button = Button(resources_lf, text="User\nManual", command=open_duckypad_user_manual_url)
+user_manual_button.place(x=scaled_size(10), y=scaled_size(0), width=scaled_size(100))
+
+autoswitch_button = Button(resources_lf, text="Profile\nAutoswitcher", command=open_profile_autoswitcher_url)
+autoswitch_button.place(x=scaled_size(150), y=scaled_size(0), width=scaled_size(100))
+
+troubleshoot_button = Button(resources_lf, text="Troubleshooting\nGuide", command=open_duckypad_troubleshooting_url)
+troubleshoot_button.place(x=scaled_size(300), y=scaled_size(0), width=scaled_size(100))
+
+discord_button = Button(resources_lf, text="Discord\nChatroom", command=open_discord_link)
+discord_button.place(x=scaled_size(450), y=scaled_size(0), width=scaled_size(100))
+
+tindie_button = Button(resources_lf, text="Accessories &\nUpgrades", command=open_tindie_store)
+tindie_button.place(x=scaled_size(600), y=scaled_size(0), width=scaled_size(100))
 
 profile_import_button = Button(profiles_lf, text="Import", command=import_profile_click, state=DISABLED)
 profile_import_button.place(x=PADDING * 2, y=BUTTON_Y_POS + BUTTON_HEIGHT + int(PADDING/2), width=BUTTON_WIDTH, height=BUTTON_HEIGHT)

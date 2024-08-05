@@ -1,4 +1,29 @@
 
+help_button = Button(root_folder_lf, text="Help!", command=create_help_window)
+help_button.place(x=scaled_size(5), y=0, width=scaled_size(65), height=scaled_size(25))
+
+def create_help_window():
+    help_window = Toplevel(root)
+    help_window.title("duckyPad help")
+    help_window.geometry(str(scaled_size(280)) + "x" + str(scaled_size(180)))
+    help_window.resizable(width=FALSE, height=FALSE)
+    help_window.grab_set()
+
+    user_manual_label = Label(master=help_window, text="Not sure what to do?")
+    user_manual_label.place(x=scaled_size(80), y=scaled_size(5))
+    user_manual_button = Button(help_window, text="User Manual", command=open_duckypad_user_manual_url)
+    user_manual_button.place(x=scaled_size(60), y=scaled_size(30), width=scaled_size(160))
+
+    troubleshoot_label = Label(master=help_window, text="Problems?")
+    troubleshoot_label.place(x=scaled_size(110), y=scaled_size(60))
+    troubleshoot_button = Button(help_window, text="Troubleshooting Guides", command=open_duckypad_troubleshooting_url)
+    troubleshoot_button.place(x=scaled_size(50), y=scaled_size(85), width=scaled_size(180))
+
+    discord_label = Label(master=help_window, text="Questions or comments?")
+    discord_label.place(x=scaled_size(70), y=scaled_size(60 + 55))
+    discord_button = Button(help_window, text="Official Discord Chatroom", command=open_discord_link)
+    discord_button.place(x=scaled_size(50), y=scaled_size(85 + 55), width=scaled_size(180))
+
 script_common_commands_lf = LabelFrame(scripts_lf, text="Common commands", width=script_textbox.winfo_width(), height=scaled_size(105))
 script_common_commands_lf.place(x=PADDING, y=scaled_size(300))
 root.update()
