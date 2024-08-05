@@ -35,8 +35,6 @@ const char cmd_KD_COLOR[] = "KEYDOWN_COLOR ";
 const char cmd_SWCOLOR[] = "SWCOLOR_";
 const char cmd_DIM_UNUSED_KEYS[] = "DIM_UNUSED_KEYS ";
 
-const char* default_keymap_name = "English(US)";
-
 uint8_t is_profile_load_complete;
 uint8_t current_profile_number;
 profile_info all_profile_info[MAX_PROFILES];

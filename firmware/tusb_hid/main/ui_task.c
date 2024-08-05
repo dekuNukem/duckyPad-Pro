@@ -228,7 +228,7 @@ void draw_settings(dp_global_settings *dps)
 //------------------------------
 
   memset(oled_line_buf, 0, OLED_LINE_BUF_SIZE);
-  sprintf(oled_line_buf, "1:Brightness %d%%", brightness_index_to_percent_lookup[dps->brightness_index]);
+  sprintf(oled_line_buf, "1-Brightness %d%%", brightness_index_to_percent_lookup[dps->brightness_index]);
   ssd1306_SetCursor(0, 14);
   ssd1306_WriteString(oled_line_buf, Font_7x10, White);
 
@@ -247,7 +247,7 @@ void draw_settings(dp_global_settings *dps)
 //------------------------------
 
   memset(oled_line_buf, 0, OLED_LINE_BUF_SIZE);
-  sprintf(oled_line_buf, "3:Keyboard Region");
+  sprintf(oled_line_buf, "3-Keyboard Region");
   ssd1306_SetCursor(0, 58);
   ssd1306_WriteString(oled_line_buf, Font_7x10, White);
 
@@ -259,6 +259,7 @@ void draw_settings(dp_global_settings *dps)
   }
   ssd1306_SetCursor(center_line(strlen(oled_line_buf), 7, SSD1306_WIDTH), 70);
   ssd1306_WriteString(oled_line_buf, Font_7x10, White);
+  load_keymap_by_name(dp_settings.current_kb_layout);
 
 //------------------------------
 
