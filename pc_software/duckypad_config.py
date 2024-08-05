@@ -1323,10 +1323,16 @@ def on_press_rb_click():
     script_textbox.tag_remove("error", '1.0', 'end')
     script_textbox.insert(1.0, profile_list[profile_index].keylist[selected_key].script.strip())
 
+is_onrelease_warning_shown = 0
+
 def on_release_rb_click():
+    global is_onrelease_warning_shown
     profile_index = profile_lstbox.curselection()[0]
     if profile_list[profile_index].keylist[selected_key] is None:
         return
+    if is_onrelease_warning_shown == 0:
+        messagebox.showinfo("howdy!", "For advanced users only!\n\nLeave blank if unsure\n\nRead guide for more info")
+        is_onrelease_warning_shown = 1
     script_textbox.delete(1.0, 'end')
     script_textbox.tag_remove("error", '1.0', 'end')
     script_textbox.insert(1.0, profile_list[profile_index].keylist[selected_key].script_on_release.strip())
