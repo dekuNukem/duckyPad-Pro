@@ -217,6 +217,8 @@ void process_keyevent(uint8_t swid, uint8_t event_type)
     goto_profile(current_profile_number);
     return;
   }
+  if(event_type == SW_EVENT_LONG_PRESS)
+    return; // just in case lol
 
   memset(dsb_on_press_path_buf, 0, PATH_BUF_SIZE);
   sprintf(dsb_on_press_path_buf, "/sdcard/%s/key%d.dsb", all_profile_info[current_profile_number].dir_path, swid+1);

@@ -225,19 +225,30 @@ void draw_settings(dp_global_settings *dps)
 
   ssd1306_Line(0,10,128,10,White);
 
-  memset(oled_line_buf, 0, OLED_LINE_BUF_SIZE);
-  sprintf(oled_line_buf, "1:Brightness %d%%", brightness_index_to_percent_lookup[dps->brightness_index]);
-  ssd1306_SetCursor(0, 15);
-  ssd1306_WriteString(oled_line_buf, Font_7x10, White);
+//------------------------------
 
   memset(oled_line_buf, 0, OLED_LINE_BUF_SIZE);
-  sprintf(oled_line_buf, "2:Orientation");
+  sprintf(oled_line_buf, "1:Brightness %d%%", brightness_index_to_percent_lookup[dps->brightness_index]);
+  ssd1306_SetCursor(0, 14);
+  ssd1306_WriteString(oled_line_buf, Font_7x10, White);
+
+//------------------------------
+
+  memset(oled_line_buf, 0, OLED_LINE_BUF_SIZE);
+  sprintf(oled_line_buf, "2-Sleep After:");
   ssd1306_SetCursor(0, 30);
   ssd1306_WriteString(oled_line_buf, Font_7x10, White);
 
   memset(oled_line_buf, 0, OLED_LINE_BUF_SIZE);
+  sprintf(oled_line_buf, "30 minutes");
+  ssd1306_SetCursor(center_line(strlen(oled_line_buf), 7, SSD1306_WIDTH), 42);
+  ssd1306_WriteString(oled_line_buf, Font_7x10, White);
+
+//------------------------------
+
+  memset(oled_line_buf, 0, OLED_LINE_BUF_SIZE);
   sprintf(oled_line_buf, "3:Keyboard Region");
-  ssd1306_SetCursor(0, 45);
+  ssd1306_SetCursor(0, 58);
   ssd1306_WriteString(oled_line_buf, Font_7x10, White);
 
   memset(oled_line_buf, 0, OLED_LINE_BUF_SIZE);
@@ -246,13 +257,24 @@ void draw_settings(dp_global_settings *dps)
     strcpy(oled_line_buf, dps->current_kb_layout+5);
     oled_line_buf[strlen(oled_line_buf)-4] = 0; // don't print .txt extension
   }
-  ssd1306_SetCursor(center_line(strlen(oled_line_buf), 7, SSD1306_WIDTH), 60);
+  ssd1306_SetCursor(center_line(strlen(oled_line_buf), 7, SSD1306_WIDTH), 70);
   ssd1306_WriteString(oled_line_buf, Font_7x10, White);
 
+//------------------------------
+
   memset(oled_line_buf, 0, OLED_LINE_BUF_SIZE);
-  sprintf(oled_line_buf, "17-20:Exit");
-  ssd1306_SetCursor(0, 102);
+  sprintf(oled_line_buf, "4-Use BT:Auto");
+  ssd1306_SetCursor(0, 86);
   ssd1306_WriteString(oled_line_buf, Font_7x10, White);
+
+//------------------------------
+
+  memset(oled_line_buf, 0, OLED_LINE_BUF_SIZE);
+  sprintf(oled_line_buf, "5-Unpair BT");
+  ssd1306_SetCursor(0, 101);
+  ssd1306_WriteString(oled_line_buf, Font_7x10, White);
+
+//------------------------------
 
   ssd1306_Line(0,115,128,115,White);
 
