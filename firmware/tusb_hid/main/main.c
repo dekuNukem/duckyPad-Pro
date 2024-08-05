@@ -75,7 +75,6 @@ void app_main(void)
     profile_init();
     is_profile_load_complete = 1;
 
-    dp_settings.sleep_after_ms = 120000;
     xTaskCreate(keypress_task, "keypress_task", KEYPRESS_TASK_STACK_SIZE, NULL, 2, NULL);
 
     // bt_test();
@@ -88,7 +87,7 @@ void app_main(void)
 
         uint32_t ms_since_last_keypress = pdTICKS_TO_MS(xTaskGetTickCount()) - last_keypress;
 
-        if(is_busy == 0 && dp_settings.sleep_after_ms != 0 && ms_since_last_keypress > dp_settings.sleep_after_ms)
+        if(is_busy == 0 && ms_since_last_keypress > sleep_after_ms_index_to_time_lookup[dp_settings.sleep_index])
             start_sleeping();
 
         if(is_busy == 0 && ms_since_last_keypress > OLED_DIM_AFTER_MS)

@@ -26,7 +26,7 @@ dp_global_settings dp_settings;
 char temp_buf[TEMP_BUFSIZE];
 char filename_buf[FILENAME_BUFSIZE];
 
-const char config_sleep_after_min[] = "sleep_after_ms ";
+const char config_sleep_after_index[] = "sleep_index ";
 const char config_brightness_index[] = "brightness_index ";
 const char config_keyboard_layout[] = "kb_layout ";
 const char config_last_used_profile[] = "last_profile ";
@@ -55,7 +55,6 @@ uint8_t load_settings(dp_global_settings* dps)
 
   memset(dps, 0, sizeof(*dps));
   dps->brightness_index = BRIGHTNESS_LEVEL_SIZE - 1;
-  dps->sleep_after_ms = 300*1000;
 
   FILE *sd_file = fopen(settings_file_path, "r");
   if(sd_file == NULL)
@@ -66,8 +65,8 @@ uint8_t load_settings(dp_global_settings* dps)
 
   while(fgets(temp_buf, TEMP_BUFSIZE, sd_file))
   {
-    if(strncmp(temp_buf, config_sleep_after_min, strlen(config_sleep_after_min)) == 0)
-      dps->sleep_after_ms = atoi(temp_buf + strlen(config_sleep_after_min));
+    if(strncmp(temp_buf, config_sleep_after_index, strlen(config_sleep_after_index)) == 0)
+      dps->sleep_index = atoi(temp_buf + strlen(config_sleep_after_index));
     if(strncmp(temp_buf, config_brightness_index, strlen(config_brightness_index)) == 0)
       dps->brightness_index = atoi(temp_buf + strlen(config_brightness_index));
     if(strncmp(temp_buf, config_last_used_profile, strlen(config_last_used_profile)) == 0)
@@ -93,13 +92,13 @@ uint8_t save_settings(dp_global_settings* dps)
     return 2;
   fprintf(
     sd_file,
-    "%s%ld\n"
+    "%s%d\n"
     "%s%d\n"
     "%s%d\n"
     "fw_ver %d.%d.%d\n"
     "serial_number DP24_%02X%02X%02X\n"
     "%s%s\n",
-    config_sleep_after_min, dps->sleep_after_ms,
+    config_sleep_after_index, dps->sleep_index,
     config_brightness_index, dps->brightness_index,
     config_last_used_profile, current_profile_number,
     fw_version_major, fw_version_minor, fw_version_patch,

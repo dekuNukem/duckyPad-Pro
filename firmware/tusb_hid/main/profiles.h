@@ -17,8 +17,8 @@
 
 typedef struct
 {
-  uint32_t sleep_after_ms;
   uint8_t brightness_index;
+  uint8_t sleep_index;
   // uint8_t screen_orientation;
   uint8_t bluetooth_priority;
   uint8_t last_used_profile;

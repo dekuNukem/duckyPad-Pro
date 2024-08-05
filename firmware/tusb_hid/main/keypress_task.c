@@ -153,37 +153,42 @@ void settings_menu(void)
   while(1)
   {
     switch_event_t sw_event = { 0 };
-    if (xQueueReceive(switch_event_queue, &sw_event, 0) == pdTRUE)
-    {
-      printf("settings_menu id: %d type: %d\n", sw_event.id, sw_event.type);
-      if(sw_event.id == MSW_0 && sw_event.type == SW_EVENT_SHORT_PRESS)
-      {
-        dp_settings.brightness_index = (dp_settings.brightness_index + 1) % BRIGHTNESS_LEVEL_SIZE;
-        draw_settings(&dp_settings);
-        draw_settings_led();
-      }
-      if(sw_event.id == MSW_2 && sw_event.type == SW_EVENT_SHORT_PRESS)
-      {
-        memset(temp_buf, 0, TEMP_BUFSIZE);
-        if(get_next_keymap(dp_settings.current_kb_layout, temp_buf))
-        {
-          memset(dp_settings.current_kb_layout, 0, FILENAME_BUFSIZE);
-          get_first_keymap(dp_settings.current_kb_layout);
-        }
-        else
-        {
-          strcpy(dp_settings.current_kb_layout, temp_buf);
-        }
-        draw_settings(&dp_settings);
-        save_settings(&dp_settings);
-      }
-      if((sw_event.id >= MSW_16 && sw_event.id <= MSW_19) && sw_event.type == SW_EVENT_SHORT_PRESS)
-      {
-        return;
-      }
-    }
     vTaskDelay(pdMS_TO_TICKS(20));
+    if (xQueueReceive(switch_event_queue, &sw_event, 0) == pdFALSE)
+      continue;
+
+    printf("settings_menu id: %d type: %d\n", sw_event.id, sw_event.type);
+    if(sw_event.id == MSW_0 && sw_event.type == SW_EVENT_SHORT_PRESS)
+    {
+      dp_settings.brightness_index = (dp_settings.brightness_index + 1) % BRIGHTNESS_LEVEL_SIZE;
+      draw_settings(&dp_settings);
+      draw_settings_led();
+    }
+    else if(sw_event.id == MSW_1 && sw_event.type == SW_EVENT_SHORT_PRESS)
+    {
+      dp_settings.sleep_index = (dp_settings.sleep_index + 1) % SLEEP_OPTION_SIZE;
+      draw_settings(&dp_settings);
+    }
+    else if(sw_event.id == MSW_2 && sw_event.type == SW_EVENT_SHORT_PRESS)
+    {
+      memset(temp_buf, 0, TEMP_BUFSIZE);
+      if(get_next_keymap(dp_settings.current_kb_layout, temp_buf))
+      {
+        memset(dp_settings.current_kb_layout, 0, FILENAME_BUFSIZE);
+        get_first_keymap(dp_settings.current_kb_layout);
+      }
+      else
+      {
+        strcpy(dp_settings.current_kb_layout, temp_buf);
+      }
+      draw_settings(&dp_settings);
+    }
+    else if(sw_event.type == SW_EVENT_SHORT_PRESS)
+    {
+      break;
+    }
   }
+  save_settings(&dp_settings);
 }
 
 void onboard_offboard_switch_release(uint8_t swid, char* release_path)
