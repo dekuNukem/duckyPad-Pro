@@ -64,7 +64,6 @@ void save_persistent_state(uint8_t epilogue_value, uint8_t swid);
 uint8_t goto_profile_without_updating_rgb_LED(uint8_t profile_number);
 uint8_t load_persistent_state(void);
 
-extern const char* default_keymap_name;
 extern uint8_t is_profile_load_complete;
 
 #define PSCAN_OK 0

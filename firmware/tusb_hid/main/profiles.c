@@ -20,15 +20,16 @@
 #include "keyboard.h"
 #include "ds_vm.h"
 
-const char settings_file_path[] = "/sdcard/dp_settings.txt";
+const char settings_file_path[] = "/sdcard/dpp_config.txt";
 dp_global_settings dp_settings;
 
 char temp_buf[TEMP_BUFSIZE];
 char filename_buf[FILENAME_BUFSIZE];
 
 const char config_sleep_after_min[] = "sleep_after_min ";
-const char config_brightness_index[] = "bi ";
-const char config_keyboard_layout[] = "kbl ";
+const char config_brightness_index[] = "brightness_index ";
+const char config_keyboard_layout[] = "kb_layout ";
+const char config_last_used_profile[] = "last_profile ";
 
 const char cmd_BG_COLOR[] = "BG_COLOR ";
 const char cmd_KD_COLOR[] = "KEYDOWN_COLOR ";
@@ -43,6 +44,14 @@ uint8_t load_settings(dp_global_settings* dps)
 {
   if(dps == NULL)
     return 1;
+
+  // remove incompatible files from old duckyPad
+  memset(temp_buf, 0, TEMP_BUFSIZE);
+  sprintf(temp_buf, "/sdcard/dp_settings.txt");
+  remove(temp_buf);
+  memset(temp_buf, 0, TEMP_BUFSIZE);
+  sprintf(temp_buf, "/sdcard/dp_stats.txt");
+  remove(temp_buf);
 
   memset(dps, 0, sizeof(*dps));
   dps->brightness_index = BRIGHTNESS_LEVEL_SIZE - 1;
@@ -80,33 +89,26 @@ uint8_t save_settings(dp_global_settings* dps)
   FILE *sd_file = fopen(settings_file_path, "w");
   if(sd_file == NULL)
     return 2;
-  fprintf(sd_file, "sleep_after_min %ld\nbi %d\nkbl %s\n", dps->sleep_after_ms/60000, dps->brightness_index, dps->current_kb_layout);
+  // fprintf(sd_file, "%s%ld\n%s%d\n%s%s\n", config_sleep_after_min, dps->sleep_after_ms/60000, config_brightness_index, dps->brightness_index, config_keyboard_layout, dps->current_kb_layout);
+  fprintf(
+    sd_file,
+    "%s%ld\n"
+    "%s%d\n"
+    "%s%d\n"
+    "%s%s\n",
+    config_sleep_after_min, dps->sleep_after_ms / 60000,
+    config_brightness_index, dps->brightness_index,
+    config_last_used_profile, current_profile_number,
+    config_keyboard_layout, dps->current_kb_layout
+  );
   fclose(sd_file);
   return 0;
 }
 
-const char stat_last_used_profile[] = "lp ";
 // 0 = error?
 int8_t get_last_used_profile(void)
 {
-  int8_t ret = 0;
-
-  FILE *sd_file = fopen("/sdcard/dp_stats.txt", "r");
-  if(sd_file == NULL)
-    return -1;
-
-  memset(temp_buf, 0, TEMP_BUFSIZE);
-  while(fgets(temp_buf, TEMP_BUFSIZE, sd_file))
-  {
-    if(strncmp(temp_buf, stat_last_used_profile, strlen(stat_last_used_profile)) == 0)
-      ret = atoi(temp_buf+strlen(stat_last_used_profile));
-  }
-
-  if(ret >= MAX_PROFILES)
-    ret = -2;
-
-  fclose(sd_file);
-  return ret;
+  return 0;
 }
 
 const char* profile_dir_prefix = "profile";
@@ -309,6 +311,13 @@ void load_profile_config(profile_info* this_profile)
   fclose(sd_file);
 }
 
+uint8_t is_valid_profile_number(uint8_t profile_number)
+{
+  if(profile_number >= MAX_PROFILES || all_profile_info[profile_number].is_loaded == 0)
+    return 0;
+  return 1;
+}
+
 uint8_t scan_profiles()
 {
   memset(all_profile_info, 0, sizeof(all_profile_info));
@@ -326,25 +335,11 @@ uint8_t scan_profiles()
   return PSCAN_OK;
 }
 
-void save_current_profile(uint8_t profile_number)
-{
-  if(profile_number >= MAX_PROFILES || all_profile_info[profile_number].is_loaded == 0)
-    return;
-  memset(filename_buf, 0, FILENAME_BUFSIZE);
-  sprintf(filename_buf, "%s/dp_stats.txt", SD_MOUNT_POINT);
-  FILE *sd_file = fopen(filename_buf, "w");
-  if(sd_file == NULL)
-    return;
-  fprintf(sd_file, "lp %d\nfw %d.%d.%d\nser %02x%02x%02x", profile_number, fw_version_major, fw_version_minor, fw_version_patch, esp_mac_addr[3], esp_mac_addr[4], esp_mac_addr[5]);
-  fclose(sd_file);
-}
-
 uint8_t goto_profile_without_updating_rgb_LED(uint8_t profile_number)
 {
-  if(profile_number >= MAX_PROFILES || all_profile_info[profile_number].is_loaded == 0)
+  if(is_valid_profile_number(profile_number) == 0)
     return 1;
   draw_profile(&all_profile_info[profile_number]);
-  save_current_profile(profile_number);
   current_profile_number = profile_number;
   save_settings(&dp_settings);
   return 0;
@@ -392,10 +387,10 @@ void goto_prev_profile(void)
 void profile_init(void)
 {
   int8_t last_profile = get_last_used_profile();
-  if(last_profile < 0)
-    goto_next_profile();
-  else
+  if(is_valid_profile_number(last_profile))
     goto_profile(last_profile);
+  else
+    goto_next_profile();
 }
 
 const char* dk_circumflex = "dk_circumflex";

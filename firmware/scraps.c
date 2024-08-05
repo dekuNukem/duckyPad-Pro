@@ -1,3 +1,11 @@
+dpp_config.txt
+"/sdcard/dp_stats.txt"
+const char old_settings_file_path[] = "/sdcard/dp_settings.txt";
+const char config_sleep_after_min[] = "sleep_after_min ";
+const char config_brightness_index[] = "brightness_index ";
+const char config_keyboard_layout[] = "kb_layout ";
+const char settings_file_path[] = "/sdcard/dpp_config.txt";
+
   printf("swid: %d\n", swid);
 printf("here! %s\n", dsb_on_press_path_buf);
 
