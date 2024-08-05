@@ -5,6 +5,7 @@
 #include "esp_log.h"
 #include "profiles.h"
 #include "freertos/semphr.h"
+#include "ui_task.h"
 
 const char *LED_TAG = "LED_TASK";
 
@@ -22,6 +23,8 @@ SemaphoreHandle_t neopixel_mutex;
 
 void set_pixel_3color(uint8_t which, uint8_t r, uint8_t g, uint8_t b)
 {
+  if(which >= NEOPIXEL_COUNT)
+    return;
   red_buf[pixel_map[which]] = r;
   green_buf[pixel_map[which]] = g;
   blue_buf[pixel_map[which]] = b;
@@ -210,14 +213,9 @@ void draw_settings_led(void)
 {
   neopixel_off();
 
-  set_pixel_3color(0, 0, 0, 255);
-  set_pixel_3color(1, 0, 0, 255);
-  set_pixel_3color(2, 0, 0, 255);
+  for (size_t i = 0; i < SETTINGS_ENTRY_SIZE; i++)
+    set_pixel_3color(i * SW_MATRIX_NUM_COLS, 0, 0, 255);
   
-  set_pixel_3color(16, 0, 255, 0);
-  set_pixel_3color(17, 0, 255, 0);
-  set_pixel_3color(18, 0, 255, 0);
-  set_pixel_3color(19, 0, 255, 0);
   neopixel_draw_current_buffer();
 }
 

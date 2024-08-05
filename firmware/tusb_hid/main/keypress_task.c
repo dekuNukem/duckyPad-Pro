@@ -154,22 +154,24 @@ void settings_menu(void)
   {
     switch_event_t sw_event = { 0 };
     vTaskDelay(pdMS_TO_TICKS(20));
-    if (xQueueReceive(switch_event_queue, &sw_event, 0) == pdFALSE)
+    if(xQueueReceive(switch_event_queue, &sw_event, 0) == pdFALSE)
+      continue;
+    if(sw_event.type != SW_EVENT_SHORT_PRESS)
       continue;
 
-    printf("settings_menu id: %d type: %d\n", sw_event.id, sw_event.type);
-    if(sw_event.id == MSW_0 && sw_event.type == SW_EVENT_SHORT_PRESS)
+    // printf("settings_menu id: %d type: %d\n", sw_event.id, sw_event.type);
+    if(sw_event.id == MSW_0)
     {
       dp_settings.brightness_index = (dp_settings.brightness_index + 1) % BRIGHTNESS_LEVEL_SIZE;
       draw_settings(&dp_settings);
       draw_settings_led();
     }
-    else if(sw_event.id == MSW_1 && sw_event.type == SW_EVENT_SHORT_PRESS)
+    else if(sw_event.id == MSW_1)
     {
       dp_settings.sleep_index = (dp_settings.sleep_index + 1) % SLEEP_OPTION_SIZE;
       draw_settings(&dp_settings);
     }
-    else if(sw_event.id == MSW_2 && sw_event.type == SW_EVENT_SHORT_PRESS)
+    else if(sw_event.id == MSW_2)
     {
       memset(temp_buf, 0, TEMP_BUFSIZE);
       if(get_next_keymap(dp_settings.current_kb_layout, temp_buf))
@@ -183,7 +185,7 @@ void settings_menu(void)
       }
       draw_settings(&dp_settings);
     }
-    else if(sw_event.type == SW_EVENT_SHORT_PRESS)
+    else if(sw_event.id <= MAX_MSW)
     {
       break;
     }

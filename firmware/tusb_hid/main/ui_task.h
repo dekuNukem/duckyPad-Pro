@@ -34,6 +34,8 @@ void draw_exe_error(uint8_t err_code);
 #define OLED_CONTRAST_DIM 100
 #define OLED_CONTRAST_BRIGHT 255
 
+#define SETTINGS_ENTRY_SIZE 5
+
 extern uint32_t sleep_after_ms_index_to_time_lookup[SLEEP_OPTION_SIZE];
 
 #ifdef __cplusplus
