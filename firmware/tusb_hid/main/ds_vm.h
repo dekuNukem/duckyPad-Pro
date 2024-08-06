@@ -5,6 +5,8 @@
 #include <stdint.h>
 #include <string.h>
 
+#include <input_task.h>
+
 #define OP_NOP 0
 #define OP_PUSHC 1
 #define OP_PUSHV 2
@@ -104,9 +106,12 @@ typedef struct
 #define EPILOGUE_SAVE_COLOR_STATE 0x2
 #define EPILOGUE_NEED_OLED_RESTORE 0x4
 
+#define BIN_BUF_SIZE 65536
+#define VAR_BUF_SIZE 128
+
+extern uint8_t bin_buf[BIN_BUF_SIZE];
 extern uint8_t key_press_count[MAX_TOTAL_SW_COUNT];
 
 void run_dsb(ds3_exe_result* er, uint8_t this_key_id, char* dsb_path);
-
 #endif
 

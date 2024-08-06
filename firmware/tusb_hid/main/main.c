@@ -79,6 +79,14 @@ void app_main(void)
 
     // bt_test();
 
+    if(find_firmware_file(temp_buf, TEMP_BUFSIZE))
+    {
+        printf("FIRMWARE FOUND: %s\n", temp_buf);
+        uint32_t crc32 = calculate_crc32(temp_buf);
+        printf("CRC32: %lx\n", crc32);
+        // update_firmware(fw_filename_buf);
+    }
+
     mount_hid_only();
 
     while(1)

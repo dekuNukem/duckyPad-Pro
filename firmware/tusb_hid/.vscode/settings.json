@@ -59,6 +59,9 @@
     "new": "c",
     "esp_mac.h": "c",
     "bluetooth_task.h": "c",
-    "semphr.h": "c"
+    "semphr.h": "c",
+    "sstream": "c",
+    "regex": "c",
+    "keyboard.h": "c"
   }
 }

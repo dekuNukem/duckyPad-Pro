@@ -15,9 +15,7 @@
 #include "keyboard.h"
 #include "ds_vm.h"
 
-#define BIN_BUF_SIZE 65536
 uint8_t bin_buf[BIN_BUF_SIZE];
-#define VAR_BUF_SIZE 128
 uint8_t var_buf[VAR_BUF_SIZE];
 uint16_t defaultdelay_value;
 uint16_t defaultchardelay_value;
