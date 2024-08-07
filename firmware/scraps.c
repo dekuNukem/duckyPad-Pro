@@ -1,3 +1,27 @@
+void fw_update_check(void)
+{
+  if(find_firmware_file(filename_buf, FILENAME_BUFSIZE))
+  {
+    printf("FIRMWARE FOUND: %s\n", filename_buf);
+    uint32_t crc32 = calculate_crc32(filename_buf);
+    printf("CRC32: %lx\n", crc32);
+    
+    sprintf(temp_buf, "%lx", crc32);
+    if(strstr(filename_buf, temp_buf) == NULL)
+    {
+      // CRC mismatch, print error
+      neopixel_fill(128, 0, 0);
+      draw_fw_crc_error(filename_buf);
+      return;
+    }
+    else
+    {
+      neopixel_fill(64, 64, 64);
+      draw_fw_update_ask(filename_buf);
+    }
+  }
+}
+
 dpp_config.txt
 "/sdcard/dp_stats.txt"
 const char old_settings_file_path[] = "/sdcard/dp_settings.txt";

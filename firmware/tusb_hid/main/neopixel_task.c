@@ -67,12 +67,12 @@ void neopixel_draw_current_buffer(void)
   xSemaphoreGive(neopixel_mutex);
 }
 
-void draw_red(void)
+void neopixel_fill(uint8_t rr, uint8_t gg, uint8_t bb)
 {
   for (int i = 0; i < NEOPIXEL_COUNT; ++i)
   {
     neo_anime[i].animation_type = ANIMATION_NONE;
-    set_pixel_3color(i, 255, 0, 0);
+    set_pixel_3color(i, rr, gg, bb);
   }
   neopixel_draw_current_buffer();
 }

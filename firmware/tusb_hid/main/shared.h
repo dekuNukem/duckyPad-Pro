@@ -23,8 +23,7 @@ extern uint8_t dsvm_version;
 void strip_newline(char* line, uint8_t size);
 uint8_t how_many_digits(uint8_t number);
 char* goto_next_arg(char* buf, char* buf_end);
-uint8_t find_firmware_file(char* name_buf, uint32_t name_buf_size);
-uint32_t calculate_crc32(const char *filename);
+void fw_update_check(void);
 
 #define MY_UINT32_MAX 0xffffffff
 

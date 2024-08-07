@@ -62,6 +62,10 @@ void app_main(void)
         delete_msc_flag_file();
         error_loop();
     }
+
+    is_busy = 1;
+    fw_update_check();
+    is_busy = 0;
     
     load_settings(&dp_settings);
     uint8_t pscan_result = scan_profiles();
@@ -78,14 +82,6 @@ void app_main(void)
     xTaskCreate(keypress_task, "keypress_task", KEYPRESS_TASK_STACK_SIZE, NULL, 2, NULL);
 
     // bt_test();
-
-    if(find_firmware_file(temp_buf, TEMP_BUFSIZE))
-    {
-        printf("FIRMWARE FOUND: %s\n", temp_buf);
-        uint32_t crc32 = calculate_crc32(temp_buf);
-        printf("CRC32: %lx\n", crc32);
-        // update_firmware(fw_filename_buf);
-    }
 
     mount_hid_only();
 

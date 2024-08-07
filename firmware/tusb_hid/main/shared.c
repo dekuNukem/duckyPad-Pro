@@ -3,7 +3,14 @@
 #include <sys/stat.h>
 #include <dirent.h>
 #include <ds_vm.h>
+#include "profiles.h"
 #include "shared.h"
+#include "input_task.h"
+#include "ui_task.h"
+#include "neopixel_task.h"
+#include "keyboard.h"
+#include "ds_vm.h"
+#include "keypress_task.h"
 
 uint8_t esp_mac_addr[ESP_MAC_ADDR_SIZE];
 
@@ -106,4 +113,29 @@ uint32_t calculate_crc32(const char *filename)
   fclose(file);
   memset(bin_buf, 0, BIN_BUF_SIZE);
   return crc;
+}
+
+void fw_update_check(void)
+{
+  if(find_firmware_file(filename_buf, FILENAME_BUFSIZE) == 0)
+    return;
+  
+  printf("FIRMWARE FOUND: %s\n", filename_buf);
+  uint32_t crc32 = calculate_crc32(filename_buf);
+  printf("CRC32: %lx\n", crc32);
+  
+  sprintf(temp_buf, "%lx", crc32);
+  if(strstr(filename_buf, temp_buf) == NULL)
+  {
+    neopixel_fill(128, 0, 0);
+    draw_fw_crc_error(filename_buf);
+    block_until_anykey();
+  }
+  else
+  {
+    neopixel_fill(64, 64, 64);
+    draw_fw_update_ask(filename_buf);
+    block_until_anykey();
+  }
+  goto_profile(current_profile_number);
 }

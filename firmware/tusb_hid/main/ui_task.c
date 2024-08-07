@@ -402,3 +402,93 @@ void draw_msc_mode(void)
 
   ssd1306_UpdateScreen();
 }
+
+void get_clean_fw_name(char* fw_str, char* result_buf, uint8_t result_buf_size)
+{
+  const char* fw_prefix = "/sdcard/DPP_FW_";
+  const char* suffix = "_";
+
+  char* start = strstr(fw_str, fw_prefix);
+  if (start == NULL)
+    return;
+
+  start += strlen(fw_prefix);
+
+  char* end = strstr(start, suffix);
+  if (end == NULL)
+    return;
+
+  memset(result_buf, 0, result_buf_size);
+  strncpy(result_buf, start, end - start);
+}
+
+void draw_fw_update_ask(char* fw_path_str)
+{
+  ssd1306_Fill(Black);
+
+  memset(oled_line_buf, 0, OLED_LINE_BUF_SIZE);
+  sprintf(oled_line_buf, "Firmware Found");
+  ssd1306_SetCursor(center_line(strlen(oled_line_buf), 7, SSD1306_WIDTH), 0);
+  ssd1306_WriteString(oled_line_buf, Font_7x10, White);
+
+  ssd1306_Line(0,10,128,10,White);
+
+  memset(oled_line_buf, 0, OLED_LINE_BUF_SIZE);
+  sprintf(oled_line_buf, "Current FW:");
+  ssd1306_SetCursor(center_line(strlen(oled_line_buf), 7, SSD1306_WIDTH), 20);
+  ssd1306_WriteString(oled_line_buf, Font_7x10, White);
+
+  memset(oled_line_buf, 0, OLED_LINE_BUF_SIZE);
+  sprintf(oled_line_buf, "%d.%d.%d", fw_version_major, fw_version_minor, fw_version_patch);
+  ssd1306_SetCursor(center_line(strlen(oled_line_buf), 7, SSD1306_WIDTH), 32);
+  ssd1306_WriteString(oled_line_buf, Font_7x10, White);
+
+  memset(oled_line_buf, 0, OLED_LINE_BUF_SIZE);
+  sprintf(oled_line_buf, "New FW:");
+  ssd1306_SetCursor(center_line(strlen(oled_line_buf), 7, SSD1306_WIDTH), 60);
+  ssd1306_WriteString(oled_line_buf, Font_7x10, White);
+
+  get_clean_fw_name(fw_path_str, oled_line_buf, OLED_LINE_BUF_SIZE);
+  ssd1306_SetCursor(center_line(strlen(oled_line_buf), 7, SSD1306_WIDTH), 72);
+  ssd1306_WriteString(oled_line_buf, Font_7x10, White);
+
+  memset(oled_line_buf, 0, OLED_LINE_BUF_SIZE);
+  sprintf(oled_line_buf, "Press Any Key");
+  ssd1306_SetCursor(center_line(strlen(oled_line_buf), 7, SSD1306_WIDTH), 100);
+  ssd1306_WriteString(oled_line_buf, Font_7x10, White);
+
+  memset(oled_line_buf, 0, OLED_LINE_BUF_SIZE);
+  sprintf(oled_line_buf, "to Update");
+  ssd1306_SetCursor(center_line(strlen(oled_line_buf), 7, SSD1306_WIDTH), 112);
+  ssd1306_WriteString(oled_line_buf, Font_7x10, White);
+  
+  ssd1306_UpdateScreen();
+}
+
+
+void draw_fw_crc_error(char* fw_path_str)
+{
+  ssd1306_Fill(Black);
+
+  memset(oled_line_buf, 0, OLED_LINE_BUF_SIZE);
+  sprintf(oled_line_buf, "FW File CRC ERROR:");
+  ssd1306_SetCursor(center_line(strlen(oled_line_buf), 7, SSD1306_WIDTH), 20);
+  ssd1306_WriteString(oled_line_buf, Font_7x10, White);
+
+  get_clean_fw_name(fw_path_str, temp_buf, TEMP_BUFSIZE);
+  sprintf(oled_line_buf, "FW_%s.bin", temp_buf);
+  ssd1306_SetCursor(center_line(strlen(oled_line_buf), 7, SSD1306_WIDTH), 50);
+  ssd1306_WriteString(oled_line_buf, Font_7x10, White);
+
+  memset(oled_line_buf, 0, OLED_LINE_BUF_SIZE);
+  sprintf(oled_line_buf, "Press Any Key");
+  ssd1306_SetCursor(center_line(strlen(oled_line_buf), 7, SSD1306_WIDTH), 80);
+  ssd1306_WriteString(oled_line_buf, Font_7x10, White);
+
+  memset(oled_line_buf, 0, OLED_LINE_BUF_SIZE);
+  sprintf(oled_line_buf, "to Continue");
+  ssd1306_SetCursor(center_line(strlen(oled_line_buf), 7, SSD1306_WIDTH), 95);
+  ssd1306_WriteString(oled_line_buf, Font_7x10, White);
+  
+  ssd1306_UpdateScreen();
+}

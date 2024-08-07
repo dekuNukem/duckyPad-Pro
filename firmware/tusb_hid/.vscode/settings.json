@@ -62,6 +62,7 @@
     "semphr.h": "c",
     "sstream": "c",
     "regex": "c",
-    "keyboard.h": "c"
+    "keyboard.h": "c",
+    "dirent.h": "c"
   }
 }

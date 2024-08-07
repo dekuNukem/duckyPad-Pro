@@ -41,7 +41,7 @@ void redraw_bg(uint8_t profile_number);
 void play_keydown_animation(uint8_t profile_number, uint8_t sw_number);
 void play_keyup_animation(uint8_t profile_number, uint8_t sw_number);
 void neopixel_draw_current_buffer(void);
-void draw_red(void);
+void neopixel_fill(uint8_t rr, uint8_t gg, uint8_t bb);
 void neopixel_off(void);
 void set_pixel_3color(uint8_t which, uint8_t r, uint8_t g, uint8_t b);
 void reset_key_color(uint8_t which);

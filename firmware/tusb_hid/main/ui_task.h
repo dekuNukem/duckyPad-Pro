@@ -24,6 +24,8 @@ void draw_settings(dp_global_settings *dps);
 void draw_nodsb(uint8_t swid);
 void draw_msc_mode(void);
 void draw_exe_error(uint8_t err_code);
+void draw_fw_update_ask(char* fw_path_str);
+void draw_fw_crc_error(char* fw_path_str);
 
 #define ONE_MINUTE_IN_MS (60*1000)
 #define ONE_HOUR_IN_MS (60*ONE_MINUTE_IN_MS)

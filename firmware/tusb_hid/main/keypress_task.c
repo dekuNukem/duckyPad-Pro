@@ -72,7 +72,7 @@ uint8_t run_once(uint8_t swid, char* dsb_path)
 
   if(this_exe.result >= EXE_ERROR_CODE_START)
   {
-    draw_red();
+    neopixel_fill(128, 0, 0);
     draw_exe_error(this_exe.result);
     block_until_anykey();
     goto_profile(current_profile_number);
@@ -107,7 +107,7 @@ void onboard_switch_press(uint8_t swid, char* press_path, char* release_path)
     return;
   if(access(press_path, F_OK))
   {
-    draw_red();
+    neopixel_fill(128, 0, 0);
     draw_nodsb(swid);
     block_until_anykey();
     goto_profile(current_profile_number);
