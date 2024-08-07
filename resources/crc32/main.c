@@ -34,10 +34,34 @@ uint32_t calculate_crc32(const char *filename)
   return crc;
 }
 
+// int main(int argc, char *argv[])
+// {
+//   uint32_t result = calculate_crc32("DPP_FW_2.3.4.bin");
+//   printf("crc: 0x%x\n", result);
+//   return 0;
+// }
+
 int main(int argc, char *argv[])
 {
-  uint32_t result = calculate_crc32("DPP_FW_2.3.4.bin");
-  printf("crc: 0x%x\n", result);
+  if (argc <= 1)
+    return 1;
+
+  const char *filename = argv[1];
+  uint32_t crc32 = calculate_crc32(filename);
+  if(crc32 == 0)
+    return 2;
+  
+  printf("crc: 0x%x\n", crc32);
+
+  char new_filename[256];
+  char *dot_position = strrchr(filename, '.'); // Find the last dot for extension
+
+  
+  size_t base_length = dot_position - filename;
+  snprintf(new_filename, sizeof(new_filename), "%.*s_%08x%s", (int)base_length, filename, crc32, dot_position);
+  printf("new_filename %s\n", new_filename);
+  rename(filename, new_filename);
   return 0;
 }
+
 
