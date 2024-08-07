@@ -18,7 +18,7 @@ uint8_t green_buf[NEOPIXEL_COUNT];
 uint8_t blue_buf[NEOPIXEL_COUNT];
 led_animation neo_anime[NEOPIXEL_COUNT];
 uint8_t color_red[THREE] = {64 , 0, 0};
-uint8_t brightness_index_to_percent_lookup[BRIGHTNESS_LEVEL_SIZE] = {0, 20, 50, 70, 100};
+uint8_t brightness_index_to_percent_lookup[BRIGHTNESS_LEVEL_SIZE] = {100, 70, 50, 20, 0};
 SemaphoreHandle_t neopixel_mutex;
 
 void set_pixel_3color(uint8_t which, uint8_t r, uint8_t g, uint8_t b)
