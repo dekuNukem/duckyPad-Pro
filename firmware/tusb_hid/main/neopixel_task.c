@@ -214,7 +214,7 @@ void draw_settings_led(void)
   neopixel_off();
 
   for (size_t i = 0; i < SETTINGS_ENTRY_SIZE; i++)
-    set_pixel_3color(i * SW_MATRIX_NUM_COLS, 0, 0, 255);
+    set_pixel_3color(i, 0, 0, 255);
   
   neopixel_draw_current_buffer();
 }

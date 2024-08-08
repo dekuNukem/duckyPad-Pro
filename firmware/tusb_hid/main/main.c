@@ -65,6 +65,7 @@ void app_main(void)
 
     is_busy = 1;
     fw_update_check();
+    esp_ota_mark_app_valid_cancel_rollback();
     is_busy = 0;
     
     load_settings(&dp_settings);
