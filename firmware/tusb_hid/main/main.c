@@ -69,8 +69,7 @@ void app_main(void)
     is_busy = 0;
     
     load_settings(&dp_settings);
-    uint8_t pscan_result = scan_profiles();
-    if(pscan_result == PSCAN_ERROR_NO_PROFILE)
+    if(scan_profiles() == PSCAN_ERROR_NO_PROFILE)
     {
         draw_noprofile();
         error_loop();
