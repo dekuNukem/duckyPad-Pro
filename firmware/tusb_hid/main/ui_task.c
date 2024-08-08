@@ -465,7 +465,6 @@ void draw_fw_update_ask(char* fw_path_str)
   ssd1306_UpdateScreen();
 }
 
-
 void draw_fw_crc_error(char* fw_path_str)
 {
   ssd1306_Fill(Black);
@@ -490,5 +489,15 @@ void draw_fw_crc_error(char* fw_path_str)
   ssd1306_SetCursor(center_line(strlen(oled_line_buf), 7, SSD1306_WIDTH), 95);
   ssd1306_WriteString(oled_line_buf, Font_7x10, White);
   
+  ssd1306_UpdateScreen();
+}
+
+void oled_say(char* what)
+{
+  ssd1306_Fill(Black);
+
+  ssd1306_SetCursor(center_line(strlen(what), 7, SSD1306_WIDTH), 60);
+  ssd1306_WriteString(what, Font_7x10, White);
+
   ssd1306_UpdateScreen();
 }
