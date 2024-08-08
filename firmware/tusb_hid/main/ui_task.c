@@ -9,6 +9,7 @@
 #include "freertos/task.h"
 #include "input_task.h"
 #include "neopixel_task.h"
+#include "bluetooth_task.h"
 
 static const char *TAG = "UI";
 spi_device_handle_t my_spi_handle;
@@ -502,8 +503,13 @@ void oled_say(char* what)
   ssd1306_UpdateScreen();
 }
 
-void draw_bluetooth_icon(uint8_t origx, uint8_t origy)
+uint8_t last_bt_status = 255;
+void draw_bluetooth_icon(uint8_t origx, uint8_t origy, uint8_t bt_stat)
 {
+  if(bt_stat == last_bt_status)
+    return;
+  if(bt_stat == BT_DISABLED)
+    return;
   ssd1306_DrawPixel(origx+2, origy+0, White);
   ssd1306_DrawPixel(origx+2, origy+1, White);
   ssd1306_DrawPixel(origx+3, origy+1, White);
@@ -530,7 +536,12 @@ void draw_bluetooth_icon(uint8_t origx, uint8_t origy)
   ssd1306_DrawPixel(origx+2, origy+10, White);
 
   ssd1306_SetCursor(origx+7, origy+2);
-  ssd1306_WriteString("?", Font_6x8, White);
+  if(bt_stat == BT_DISCOVERABLE)
+    ssd1306_WriteString("?", Font_6x8, White);
+  else
+    ssd1306_WriteString(" ", Font_6x8, White);
 
   ssd1306_UpdateScreen();
+  last_bt_status = bt_stat;
+  printf("bt draw!!!!\n");
 }

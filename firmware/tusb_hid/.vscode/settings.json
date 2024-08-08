@@ -63,6 +63,7 @@
     "sstream": "c",
     "regex": "c",
     "keyboard.h": "c",
-    "dirent.h": "c"
+    "dirent.h": "c",
+    "esp_hid_gap.h": "c"
   }
 }

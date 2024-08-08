@@ -27,6 +27,10 @@
 #include "esp_hidd.h"
 #include "esp_hid_gap.h"
 
+#include "ui_task.h"
+
+volatile uint8_t bluetooth_status;
+
 static const char *TAG = "HID_DEV_DEMO";
 
 typedef struct
@@ -180,6 +184,7 @@ static void ble_hidd_event_callback(void *handler_args, esp_event_base_t base, i
     }
     case ESP_HIDD_CONNECT_EVENT: {
         ESP_LOGI(TAG, "CONNECT");
+        bluetooth_status = BT_CONNECTED;
         break;
     }
     case ESP_HIDD_PROTOCOL_MODE_EVENT: {
@@ -211,10 +216,12 @@ static void ble_hidd_event_callback(void *handler_args, esp_event_base_t base, i
     case ESP_HIDD_DISCONNECT_EVENT: {
         ESP_LOGI(TAG, "DISCONNECT: %s", esp_hid_disconnect_reason_str(esp_hidd_dev_transport_get(param->disconnect.dev), param->disconnect.reason));
         esp_hid_ble_gap_adv_start();
+        bluetooth_status = BT_DISCOVERABLE;
         break;
     }
     case ESP_HIDD_STOP_EVENT: {
         ESP_LOGI(TAG, "STOP");
+        bluetooth_status = BT_DISCOVERABLE;
         break;
     }
     default:
@@ -284,18 +291,18 @@ void bt_test(void)
     ESP_LOGI(TAG, "setting ble device");
     ESP_ERROR_CHECK(esp_hidd_dev_init(&ble_hid_config, ESP_HID_TRANSPORT_BLE, ble_hidd_event_callback, &s_ble_hid_param.hid_dev));
 
-    while(1)
-    {
-        vTaskDelay(pdMS_TO_TICKS(33));
-        switch_event_t sw_event = { 0 };
-        if(xQueueReceive(switch_event_queue, &sw_event, 0) == pdFALSE)
-            continue;
-        if(sw_event.type == SW_EVENT_SHORT_PRESS)
-        {
-            printf("!!!! key pressed\n");
-            my_kb_test();
-            my_mk_test();
-            my_mouse_test();
-        }
-    }
+    // while(1)
+    // {
+    //     vTaskDelay(pdMS_TO_TICKS(33));
+    //     switch_event_t sw_event = { 0 };
+    //     if(xQueueReceive(switch_event_queue, &sw_event, 0) == pdFALSE)
+    //         continue;
+    //     if(sw_event.type == SW_EVENT_SHORT_PRESS)
+    //     {
+    //         printf("!!!! key pressed\n");
+    //         my_kb_test();
+    //         my_mk_test();
+    //         my_mouse_test();
+    //     }
+    // }
 }

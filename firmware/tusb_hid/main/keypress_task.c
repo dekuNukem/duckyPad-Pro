@@ -316,9 +316,7 @@ void handle_sw_event(switch_event_t* this_sw_event)
     return;
   }
   ssd1306_SetContrast(OLED_CONTRAST_BRIGHT);
-  is_busy = 1;
   process_keyevent(this_sw_event->id, this_sw_event->type);
-  is_busy = 0;
   // xQueueReset(switch_event_queue);
 }
 
@@ -329,11 +327,20 @@ void keypress_task(void *dummy)
   {
     rotary_encoder_event_t re_event = { 0 };
     if (xQueueReceive(rotary_encoder_event_queue, &re_event, 0) == pdTRUE)
+    {
+      is_busy = 1;
       handle_rotary_encoder_event(&re_event);
+      is_busy = 0;
+    }
 
     switch_event_t sw_event = { 0 };
     if (xQueueReceive(switch_event_queue, &sw_event, 0) == pdTRUE)
+    {
+      is_busy = 1;
       handle_sw_event(&sw_event);
+      is_busy = 0;
+    }
+      
     vTaskDelay(pdMS_TO_TICKS(25));
   }
 }

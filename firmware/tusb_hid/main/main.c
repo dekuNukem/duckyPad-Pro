@@ -90,22 +90,25 @@ void app_main(void)
     //     bt_test();
 
     // oled_say("Bluetooth Mode");
-    // bt_test();
-
-    draw_bluetooth_icon(0, -1);
-
+    bt_test();
+    
     while(1)
     {
         led_animation_handler();
 
         uint32_t ms_since_last_keypress = pdTICKS_TO_MS(xTaskGetTickCount()) - last_keypress;
 
-        if(is_busy == 0 && ms_since_last_keypress > sleep_after_ms_index_to_time_lookup[dp_settings.sleep_index])
+        vTaskDelay(pdMS_TO_TICKS(ANIMATION_FREQ_MS));
+
+        if(is_busy)
+            continue;
+
+        if(ms_since_last_keypress > sleep_after_ms_index_to_time_lookup[dp_settings.sleep_index])
             start_sleeping();
 
-        if(is_busy == 0 && ms_since_last_keypress > OLED_DIM_AFTER_MS)
+        if(ms_since_last_keypress > OLED_DIM_AFTER_MS)
             ssd1306_SetContrast(OLED_CONTRAST_DIM);
 
-        vTaskDelay(pdMS_TO_TICKS(ANIMATION_FREQ_MS));
+        draw_bluetooth_icon(0, -1, bluetooth_status);
     }
 }

@@ -10,6 +10,12 @@
 
 void bt_test(void);
 
+#define BT_DISABLED 0
+#define BT_DISCOVERABLE 1
+#define BT_CONNECTED 2
+
+extern volatile uint8_t bluetooth_status;
+
 #ifdef __cplusplus
 }
 #endif
