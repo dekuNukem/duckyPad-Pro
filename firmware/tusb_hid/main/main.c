@@ -81,7 +81,7 @@ void app_main(void)
 
     xTaskCreate(keypress_task, "keypress_task", KEYPRESS_TASK_STACK_SIZE, NULL, 2, NULL);
 
-    // bt_test();
+    bt_test();
 
     mount_hid_only();
 
