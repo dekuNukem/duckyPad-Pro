@@ -30,6 +30,7 @@
 #include "ui_task.h"
 
 volatile uint8_t bluetooth_status;
+volatile uint32_t bt_pin_code;
 
 static const char *TAG = "HID_DEV_DEMO";
 
@@ -291,6 +292,7 @@ void bt_test(void)
     ESP_LOGI(TAG, "setting ble device");
     ESP_ERROR_CHECK(esp_hidd_dev_init(&ble_hid_config, ESP_HID_TRANSPORT_BLE, ble_hidd_event_callback, &s_ble_hid_param.hid_dev));
 
+    bluetooth_status = BT_DISCOVERABLE;
     // while(1)
     // {
     //     vTaskDelay(pdMS_TO_TICKS(33));

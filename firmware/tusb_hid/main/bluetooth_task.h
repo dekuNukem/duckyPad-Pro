@@ -15,6 +15,7 @@ void bt_test(void);
 #define BT_CONNECTED 2
 
 extern volatile uint8_t bluetooth_status;
+extern volatile uint32_t bt_pin_code;
 
 #ifdef __cplusplus
 }

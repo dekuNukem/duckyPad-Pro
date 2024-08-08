@@ -109,6 +109,8 @@ void app_main(void)
         if(ms_since_last_keypress > OLED_DIM_AFTER_MS)
             ssd1306_SetContrast(OLED_CONTRAST_DIM);
 
-        draw_bluetooth_icon(0, -1, bluetooth_status);
+        if(is_sleeping == 0)
+            draw_bluetooth_icon(0, -1, bluetooth_status);
+        draw_bt_pin(bt_pin_code);
     }
 }

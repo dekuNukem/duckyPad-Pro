@@ -503,10 +503,11 @@ void oled_say(char* what)
   ssd1306_UpdateScreen();
 }
 
-uint8_t last_bt_status = 255;
+uint32_t last_bt_draw = 0;
 void draw_bluetooth_icon(uint8_t origx, uint8_t origy, uint8_t bt_stat)
 {
-  if(bt_stat == last_bt_status)
+  uint32_t now = pdTICKS_TO_MS(xTaskGetTickCount());
+  if(now - last_bt_draw < 1000)
     return;
   if(bt_stat == BT_DISABLED)
     return;
@@ -542,6 +543,37 @@ void draw_bluetooth_icon(uint8_t origx, uint8_t origy, uint8_t bt_stat)
     ssd1306_WriteString(" ", Font_6x8, White);
 
   ssd1306_UpdateScreen();
-  last_bt_status = bt_stat;
-  printf("bt draw!!!!\n");
+  last_bt_draw = now;
+  // printf("bt draw!!!!\n");
+}
+
+uint32_t last_bt_pin;
+void draw_bt_pin(uint32_t this_bt_pin)
+{
+  if(this_bt_pin == last_bt_pin)
+    return;
+
+  ssd1306_Fill(Black);
+
+  memset(oled_line_buf, 0, OLED_LINE_BUF_SIZE);
+  sprintf(oled_line_buf, "Bluetooth PIN:");
+  ssd1306_SetCursor(center_line(strlen(oled_line_buf), 7, SSD1306_WIDTH), 20);
+  ssd1306_WriteString(oled_line_buf, Font_7x10, White);
+
+  memset(oled_line_buf, 0, OLED_LINE_BUF_SIZE);
+  sprintf(oled_line_buf, "%06ld", this_bt_pin);
+  ssd1306_SetCursor(center_line(strlen(oled_line_buf), 7, SSD1306_WIDTH), 50);
+  ssd1306_WriteString(oled_line_buf, Font_7x10, White);
+
+  // memset(temp_buf, 0, TEMP_BUFSIZE);
+  // sprintf(oled_line_buf, "Press Any Key");
+  // ssd1306_SetCursor(center_line(strlen(oled_line_buf), 7, SSD1306_WIDTH), 100);
+  // ssd1306_WriteString(oled_line_buf, Font_7x10, White);
+
+  ssd1306_UpdateScreen();
+  last_bt_pin = this_bt_pin;
+
+  neopixel_fill(0, 0, 128);
+  vTaskDelay(pdMS_TO_TICKS(5000));
+  goto_profile(current_profile_number);
 }

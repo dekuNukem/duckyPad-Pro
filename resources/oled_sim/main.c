@@ -55,42 +55,18 @@ int main(int argc, char *argv[])
   ssd1306_Fill(Black);
 
   memset(oled_line_buf, 0, OLED_LINE_BUF_SIZE);
-  sprintf(oled_line_buf, "Firmware Found");
-  ssd1306_SetCursor(center_line(strlen(oled_line_buf), 7, SSD1306_WIDTH), 0);
-  ssd1306_WriteString(oled_line_buf, Font_7x10, White);
-
-  ssd1306_Line(0,10,128,10,White);
-
-  memset(oled_line_buf, 0, OLED_LINE_BUF_SIZE);
-  sprintf(oled_line_buf, "Current FW:", fw_version_major, fw_version_minor, fw_version_patch);
+  sprintf(oled_line_buf, "Bluetooth PIN:", fw_version_major, fw_version_minor, fw_version_patch);
   ssd1306_SetCursor(center_line(strlen(oled_line_buf), 7, SSD1306_WIDTH), 20);
   ssd1306_WriteString(oled_line_buf, Font_7x10, White);
 
   memset(oled_line_buf, 0, OLED_LINE_BUF_SIZE);
-  sprintf(oled_line_buf, "%d.%d.%d", fw_version_major, fw_version_minor, fw_version_patch);
-  ssd1306_SetCursor(center_line(strlen(oled_line_buf), 7, SSD1306_WIDTH), 32);
-  ssd1306_WriteString(oled_line_buf, Font_7x10, White);
-
-
-  memset(oled_line_buf, 0, OLED_LINE_BUF_SIZE);
-  sprintf(oled_line_buf, "New FW:");
-  ssd1306_SetCursor(center_line(strlen(oled_line_buf), 7, SSD1306_WIDTH), 60);
-  ssd1306_WriteString(oled_line_buf, Font_7x10, White);
-
-  memset(temp_buf, 0, TEMP_BUFSIZE);
-  get_clean_fw_name(fw_path_str, temp_buf, TEMP_BUFSIZE);
-  sprintf(oled_line_buf, "FW_%s.bin", temp_buf);
-  ssd1306_SetCursor(center_line(strlen(oled_line_buf), 7, SSD1306_WIDTH), 72);
+  sprintf(oled_line_buf, "%06ld", 7119845);
+  ssd1306_SetCursor(center_line(strlen(oled_line_buf), 7, SSD1306_WIDTH), 40);
   ssd1306_WriteString(oled_line_buf, Font_7x10, White);
 
   memset(temp_buf, 0, TEMP_BUFSIZE);
   sprintf(oled_line_buf, "Press Any Key");
   ssd1306_SetCursor(center_line(strlen(oled_line_buf), 7, SSD1306_WIDTH), 100);
-  ssd1306_WriteString(oled_line_buf, Font_7x10, White);
-
-  memset(temp_buf, 0, TEMP_BUFSIZE);
-  sprintf(oled_line_buf, "to Update");
-  ssd1306_SetCursor(center_line(strlen(oled_line_buf), 7, SSD1306_WIDTH), 112);
   ssd1306_WriteString(oled_line_buf, Font_7x10, White);
 
   // ------------------------------
