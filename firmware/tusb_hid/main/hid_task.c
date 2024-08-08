@@ -31,6 +31,8 @@
 
 static const char *TAG = "USBHID";
 
+volatile uint8_t is_hid_connected;
+
 #define TUSB_DESC_TOTAL_LEN      (TUD_CONFIG_DESC_LEN + CFG_TUD_HID * TUD_HID_DESC_LEN)
 #define CUSTOM_HID_EPIN_SIZE 63
 #define USBD_CUSTOMHID_OUTREPORT_BUF_SIZE CUSTOM_HID_EPIN_SIZE
@@ -141,8 +143,7 @@ const uint8_t hid_report_descriptor[] = {
 
 uint8_t const *tud_hid_descriptor_report_cb(uint8_t instance)
 {
-    // printf("&&&&&&&&\n");
-    // check for USB activity here, if nothing after 5 seconds, ask for bluetooth instead?
+    is_hid_connected = 1;
     return hid_report_descriptor;
 }
 
@@ -521,5 +522,18 @@ void handle_hid_command(const uint8_t* hid_rx_buf, uint8_t rx_buf_size)
     {
         hid_tx_buf[1] = HID_RESPONSE_UNKNOWN_CMD;
         send_hid_cmd_response(hid_tx_buf);
+    }
+}
+
+uint8_t wait_for_hid_connect(uint32_t how_long_ms)
+{
+    uint32_t start_ts = pdTICKS_TO_MS(xTaskGetTickCount());
+    while(1)
+    {
+        if(pdTICKS_TO_MS(xTaskGetTickCount()) - start_ts > how_long_ms)
+            return 0;
+        if(is_hid_connected)
+            return 1;
+        vTaskDelay(pdMS_TO_TICKS(50));
     }
 }

@@ -479,7 +479,7 @@ uint8_t get_first_keymap(char* keymap_filename)
   return ERROR_KEYMAP_NOT_FOUND;
 }
 
-void error_loop(void)
+void idle_loop(void)
 {
   while(1)
   {

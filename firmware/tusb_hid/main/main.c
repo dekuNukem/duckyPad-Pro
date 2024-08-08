@@ -44,7 +44,7 @@ void app_main(void)
     if(sd_init())
     {
         draw_nosd();
-        error_loop();
+        idle_loop();
     }
     
     memset(temp_buf, 0, TEMP_BUFSIZE);
@@ -60,7 +60,7 @@ void app_main(void)
         mount_usb_msc();
         draw_msc_mode();
         delete_msc_flag_file();
-        error_loop();
+        idle_loop();
     }
 
     is_busy = 1;
@@ -72,7 +72,7 @@ void app_main(void)
     if(scan_profiles() == PSCAN_ERROR_NO_PROFILE)
     {
         draw_noprofile();
-        error_loop();
+        idle_loop();
     }
 
     load_keymap_by_name(dp_settings.current_kb_layout);
@@ -81,9 +81,18 @@ void app_main(void)
 
     xTaskCreate(keypress_task, "keypress_task", KEYPRESS_TASK_STACK_SIZE, NULL, 2, NULL);
 
-    bt_test();
+    // mount_hid_only();
+    // printf("waiting for HID connect...\n");
+    // uint8_t is_usb_connected = wait_for_hid_connect(1500);
+    // printf("hid_connected: %d\n", is_usb_connected);
 
-    mount_hid_only();
+    // if(is_usb_connected == 0)
+    //     bt_test();
+
+    // oled_say("Bluetooth Mode");
+    // bt_test();
+
+    draw_bluetooth_icon(0, -1);
 
     while(1)
     {

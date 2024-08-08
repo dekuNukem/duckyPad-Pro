@@ -49,7 +49,7 @@ extern char filename_buf[FILENAME_BUFSIZE];
 
 uint8_t load_settings(dp_global_settings* dps);
 uint8_t scan_profiles();
-void error_loop(void);
+void idle_loop(void);
 void goto_next_profile(void);
 void goto_prev_profile(void);
 void profile_init(void);

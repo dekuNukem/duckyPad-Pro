@@ -316,6 +316,7 @@ static void ble_gap_event_handler(esp_gap_ble_cb_event_t event, esp_ble_gap_cb_p
     case ESP_GAP_BLE_NC_REQ_EVT: // ESP_IO_CAP_IO
         // The app will receive this event when the IO has DisplayYesNO capability and the peer device IO also has DisplayYesNo capability.
         // show the passkey number to the user to confirm it with the number displayed by peer device.
+        // this is the one!!!!!!!!!!!!
         ESP_LOGI(TAG, "BLE GAP NC_REQ passkey:%"PRIu32, param->ble_security.key_notif.passkey);
         esp_ble_confirm_reply(param->ble_security.key_notif.bd_addr, true);
         break;

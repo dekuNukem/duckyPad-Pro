@@ -1,3 +1,7 @@
+E (14659) BT_SMP: Value for numeric comparison = 793431
+I (14661) ESP_HID_GAP: BLE GAP NC_REQ passkey:793431
+
+
 void fw_update_check(void)
 {
   if(find_firmware_file(filename_buf, FILENAME_BUFSIZE))
