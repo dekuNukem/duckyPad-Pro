@@ -1,7 +1,31 @@
+void ble_kb_send(uint8_t* hid_buf, uint8_t bufsize)
+{
+    for (size_t i = 0; i < bufsize; i++)
+        printf("%02d ", hid_buf[i]);
+    printf("\n");
+    int result = esp_hidd_dev_input_set(s_ble_hid_param.hid_dev, 0, HID_RPT_ID_CC_IN, hid_buf, HID_CC_IN_RPT_LEN);
+    printf("send result: %d\n", result);
+    result = esp_hidd_dev_battery_set(s_ble_hid_param.hid_dev, 50);
+    printf("battery result: %d\n", result);
+}
+
 E (14659) BT_SMP: Value for numeric comparison = 793431
 I (14661) ESP_HID_GAP: BLE GAP NC_REQ passkey:793431
-
-
+draw_bluetooth_icon(0, -1, bluetooth_status);
+    // while(1)
+    // {
+    //     vTaskDelay(pdMS_TO_TICKS(33));
+    //     switch_event_t sw_event = { 0 };
+    //     if(xQueueReceive(switch_event_queue, &sw_event, 0) == pdFALSE)
+    //         continue;
+    //     if(sw_event.type == SW_EVENT_SHORT_PRESS)
+    //     {
+    //         printf("!!!! key pressed\n");
+    //         my_kb_test();
+    //         my_mk_test();
+    //         my_mouse_test();
+    //     }
+    // }
 void fw_update_check(void)
 {
   if(find_firmware_file(filename_buf, FILENAME_BUFSIZE))

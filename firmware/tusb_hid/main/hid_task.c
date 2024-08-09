@@ -27,6 +27,7 @@
 #include "esp_mac.h"
 
 #include <dirent.h> 
+#include "bluetooth_task.h"
 
 
 static const char *TAG = "USBHID";
@@ -165,26 +166,48 @@ void tud_hid_set_report_cb(uint8_t instance, uint8_t report_id, hid_report_type_
 #define SIX 6
 #define EIGHT 8
 uint8_t esp_hid_msg[EIGHT];
+uint8_t bt_hid_buf[SIX];
+
+void hid_send_bluetooth(uint8_t* hid_buf, uint8_t bufsize)
+{
+    uint8_t hid_usage_type = hid_buf[0];
+    memset(bt_hid_buf, 0, SIX);
+    if(hid_usage_type == HID_USAGE_ID_KEYBOARD)
+    {
+        bt_hid_buf[0] = hid_buf[1]; // modifier
+        bt_hid_buf[1] = 0; // reserved
+        bt_hid_buf[2] = hid_buf[2];
+        bt_hid_buf[3] = hid_buf[3];
+        bt_hid_buf[4] = hid_buf[4];
+        bt_hid_buf[5] = hid_buf[5];
+        ble_kb_send(bt_hid_buf, SIX);
+    }
+}
 
 void USBD_CUSTOM_HID_SendReport(uint8_t* hid_buf)
 {
-    uint8_t hid_usage_type = hid_buf[0];
-    memset(esp_hid_msg, 0, EIGHT);
-    if(hid_usage_type == HID_USAGE_ID_KEYBOARD)
+    if(bluetooth_status == BT_CONNECTED)
     {
-        memcpy(esp_hid_msg, hid_buf, SIX);
-        esp_hid_msg[0] = hid_buf[1]; // modifier
-        esp_hid_msg[1] = 0; // reserved
+        hid_send_bluetooth(hid_buf, DP_HID_MSG_SIZE);
+        return;
     }
-    else if(hid_usage_type == HID_USAGE_ID_MOUSE)
-    {
-        memcpy(esp_hid_msg, hid_buf+1, SIX-1);
-    }
-    else if(hid_usage_type == HID_USAGE_ID_MEDIA_KEY)
-    {
-        esp_hid_msg[0] = hid_buf[1];
-    }
-    tud_hid_report(hid_usage_type, esp_hid_msg, sizeof(esp_hid_msg));
+    // uint8_t hid_usage_type = hid_buf[0];
+    // memset(esp_hid_msg, 0, EIGHT);
+    // if(hid_usage_type == HID_USAGE_ID_KEYBOARD)
+    // {
+    //     memcpy(esp_hid_msg, hid_buf, SIX);
+    //     esp_hid_msg[0] = hid_buf[1]; // modifier
+    //     esp_hid_msg[1] = 0; // reserved
+    // }
+    // else if(hid_usage_type == HID_USAGE_ID_MOUSE)
+    // {
+    //     memcpy(esp_hid_msg, hid_buf+1, SIX-1);
+    // }
+    // else if(hid_usage_type == HID_USAGE_ID_MEDIA_KEY)
+    // {
+    //     esp_hid_msg[0] = hid_buf[1];
+    // }
+    // tud_hid_report(hid_usage_type, esp_hid_msg, sizeof(esp_hid_msg));
 }
 
 // ---------------- USB MSC --------------------

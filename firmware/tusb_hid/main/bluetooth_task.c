@@ -162,13 +162,7 @@ void ble_hid_task_shut_down(void)
 
 void ble_kb_send(uint8_t* hid_buf, uint8_t bufsize)
 {
-    for (size_t i = 0; i < bufsize; i++)
-        printf("%02d ", hid_buf[i]);
-    printf("\n");
-    int result = esp_hidd_dev_input_set(s_ble_hid_param.hid_dev, 0, HID_RPT_ID_CC_IN, hid_buf, HID_CC_IN_RPT_LEN);
-    printf("send result: %d\n", result);
-    result = esp_hidd_dev_battery_set(s_ble_hid_param.hid_dev, 50);
-    printf("battery result: %d\n", result);
+    esp_hidd_dev_input_set(s_ble_hid_param.hid_dev, 0, HID_RPT_ID_CC_IN, hid_buf, HID_CC_IN_RPT_LEN);
 }
 
 static void ble_hidd_event_callback(void *handler_args, esp_event_base_t base, int32_t id, void *event_data)
@@ -291,20 +285,6 @@ void bt_test(void)
     }
     ESP_LOGI(TAG, "setting ble device");
     ESP_ERROR_CHECK(esp_hidd_dev_init(&ble_hid_config, ESP_HID_TRANSPORT_BLE, ble_hidd_event_callback, &s_ble_hid_param.hid_dev));
-
+    // esp_hidd_dev_battery_set(s_ble_hid_param.hid_dev, 100);
     bluetooth_status = BT_DISCOVERABLE;
-    // while(1)
-    // {
-    //     vTaskDelay(pdMS_TO_TICKS(33));
-    //     switch_event_t sw_event = { 0 };
-    //     if(xQueueReceive(switch_event_queue, &sw_event, 0) == pdFALSE)
-    //         continue;
-    //     if(sw_event.type == SW_EVENT_SHORT_PRESS)
-    //     {
-    //         printf("!!!! key pressed\n");
-    //         my_kb_test();
-    //         my_mk_test();
-    //         my_mouse_test();
-    //     }
-    // }
 }
