@@ -1,3 +1,9 @@
+  memset(oled_line_buf, 0, OLED_LINE_BUF_SIZE);
+  sprintf(oled_line_buf, "4-Use BT:Auto");
+  ssd1306_SetCursor(0, 84);
+  ssd1306_WriteString(oled_line_buf, Font_7x10, White);
+
+
 void ble_kb_send(uint8_t* hid_buf, uint8_t bufsize)
 {
     for (size_t i = 0; i < bufsize; i++)

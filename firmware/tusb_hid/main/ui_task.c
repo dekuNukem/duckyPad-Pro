@@ -10,6 +10,7 @@
 #include "input_task.h"
 #include "neopixel_task.h"
 #include "bluetooth_task.h"
+#include "keypress_task.h"
 
 static const char *TAG = "UI";
 spi_device_handle_t my_spi_handle;
@@ -285,15 +286,8 @@ void draw_settings(dp_global_settings *dps)
 //------------------------------
 
   memset(oled_line_buf, 0, OLED_LINE_BUF_SIZE);
-  sprintf(oled_line_buf, "4-Use BT:Auto");
+  sprintf(oled_line_buf, "4-BT Unpair All");
   ssd1306_SetCursor(0, 84);
-  ssd1306_WriteString(oled_line_buf, Font_7x10, White);
-
-//------------------------------
-
-  memset(oled_line_buf, 0, OLED_LINE_BUF_SIZE);
-  sprintf(oled_line_buf, "5-Unpair BT");
-  ssd1306_SetCursor(0, 100);
   ssd1306_WriteString(oled_line_buf, Font_7x10, White);
 
 //------------------------------
@@ -562,8 +556,8 @@ void draw_bt_pin(uint32_t this_bt_pin)
 
   memset(oled_line_buf, 0, OLED_LINE_BUF_SIZE);
   sprintf(oled_line_buf, "%06ld", this_bt_pin);
-  ssd1306_SetCursor(center_line(strlen(oled_line_buf), 7, SSD1306_WIDTH), 50);
-  ssd1306_WriteString(oled_line_buf, Font_7x10, White);
+  ssd1306_SetCursor(center_line(strlen(oled_line_buf), 11, SSD1306_WIDTH), 50);
+  ssd1306_WriteString(oled_line_buf, Font_11x18, White);
 
   // memset(temp_buf, 0, TEMP_BUFSIZE);
   // sprintf(oled_line_buf, "Press Any Key");
@@ -573,7 +567,13 @@ void draw_bt_pin(uint32_t this_bt_pin)
   ssd1306_UpdateScreen();
   last_bt_pin = this_bt_pin;
 
-  neopixel_fill(0, 0, 128);
+  for (size_t i = 0; i < 10; i++)
+  {
+    neopixel_off();
+    vTaskDelay(pdMS_TO_TICKS(200));
+    neopixel_fill(0, 0, 255);
+    vTaskDelay(pdMS_TO_TICKS(200));
+  }
   vTaskDelay(pdMS_TO_TICKS(5000));
   goto_profile(current_profile_number);
 }

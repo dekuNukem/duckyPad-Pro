@@ -149,12 +149,12 @@ static esp_hid_device_config_t ble_hid_config = {
 
 void ble_hid_task_start_up(void)
 {
-    ;
+    printf("STARTUP!!!!!!!!!\n");
 }
 
 void ble_hid_task_shut_down(void)
 {
-    ;
+    printf("SHUTDOWN!!!!!!!!!!!");
 }
 
 #define HID_RPT_ID_CC_IN        1   // Consumer Control input report ID
@@ -287,4 +287,12 @@ void bt_test(void)
     ESP_ERROR_CHECK(esp_hidd_dev_init(&ble_hid_config, ESP_HID_TRANSPORT_BLE, ble_hidd_event_callback, &s_ble_hid_param.hid_dev));
     // esp_hidd_dev_battery_set(s_ble_hid_param.hid_dev, 100);
     bluetooth_status = BT_DISCOVERABLE;
+}
+
+void erase_nvm(void)
+{
+    printf("erasing NVM...\n");
+    ESP_ERROR_CHECK(nvs_flash_erase());
+    vTaskDelay(pdMS_TO_TICKS(5000));
+    esp_restart();
 }

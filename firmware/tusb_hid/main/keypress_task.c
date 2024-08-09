@@ -20,6 +20,7 @@
 #include "ds_vm.h"
 #include <dirent.h>
 #include "hid_task.h"
+#include "bluetooth_task.h"
 
 volatile uint32_t last_keypress;
 
@@ -184,6 +185,10 @@ void settings_menu(void)
         strcpy(dp_settings.current_kb_layout, temp_buf);
       }
       draw_settings(&dp_settings);
+    }
+    else if(sw_event.id == MSW_3)
+    {
+      erase_nvm();
     }
     else if(sw_event.id <= MAX_MSW)
     {
