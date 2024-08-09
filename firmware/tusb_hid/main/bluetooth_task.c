@@ -149,12 +149,12 @@ static esp_hid_device_config_t ble_hid_config = {
 
 void ble_hid_task_start_up(void)
 {
-    printf("STARTUP!!!!!!!!!\n");
+    bluetooth_status = BT_CONNECTED;
 }
 
 void ble_hid_task_shut_down(void)
 {
-    printf("SHUTDOWN!!!!!!!!!!!");
+    ;
 }
 
 #define HID_RPT_ID_CC_IN        1   // Consumer Control input report ID
@@ -179,7 +179,6 @@ static void ble_hidd_event_callback(void *handler_args, esp_event_base_t base, i
     }
     case ESP_HIDD_CONNECT_EVENT: {
         ESP_LOGI(TAG, "CONNECT");
-        bluetooth_status = BT_CONNECTED;
         break;
     }
     case ESP_HIDD_PROTOCOL_MODE_EVENT: {

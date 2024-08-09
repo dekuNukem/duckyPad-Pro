@@ -302,9 +302,7 @@ static void ble_gap_event_handler(esp_gap_ble_cb_event_t event, esp_ble_gap_cb_p
         }
         else
         {
-            printf("WTF!!!!!!!!!!!!!!!\n");
-            ESP_LOGI(TAG, "BLE GAP AUTH SsssssUCCESS");
-            
+            ESP_LOGI(TAG, "BLE GAP AUTH SUCCESS");
             ble_hid_task_start_up();
         }
         break;
