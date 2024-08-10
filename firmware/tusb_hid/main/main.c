@@ -80,16 +80,14 @@ void app_main(void)
 
     load_keymap_by_name(dp_settings.current_kb_layout);
 
-    // mount_hid_only();
-    // if(wait_for_hid_connect(1500) == 0)
-    // {
-    //     draw_no_usb_activity();
-    //     vTaskDelay(pdMS_TO_TICKS(2000));
-    //     my_bt_init();
-    //     goto_profile(current_profile_number);
-    // }
-
-    my_bt_init();
+    mount_hid_only();
+    if(wait_for_hid_connect(1500) == 0)
+    {
+        draw_no_usb_activity();
+        vTaskDelay(pdMS_TO_TICKS(2000));
+        my_bt_init();
+        goto_profile(current_profile_number);
+    }
 
     profile_init();
     is_profile_load_complete = 1;

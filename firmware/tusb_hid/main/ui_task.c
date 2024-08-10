@@ -552,7 +552,6 @@ void update_bluetooth_icon(uint8_t origx, uint8_t origy, uint8_t this_bt_stat)
   draw_bluetooth_icon(origx, origy, this_bt_stat, 1);
   
   last_bt_stat = this_bt_stat;
-  printf("bt draw!!!!\n");
 }
 
 uint32_t last_bt_pin;

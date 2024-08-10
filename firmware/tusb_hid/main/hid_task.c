@@ -163,13 +163,13 @@ void tud_hid_set_report_cb(uint8_t instance, uint8_t report_id, hid_report_type_
     handle_hid_command(buffer, bufsize);
 }
 
-#define SIX 6
-uint8_t bt_hid_buf[SIX];
+#define BT_HID_BUF_SIZE 6
+uint8_t bt_hid_buf[BT_HID_BUF_SIZE];
 
 void hid_send_bluetooth(uint8_t* usb_hid_buf)
 {
     uint8_t hid_usage_type = usb_hid_buf[0];
-    memset(bt_hid_buf, 0, SIX);
+    memset(bt_hid_buf, 0, BT_HID_BUF_SIZE);
     if(hid_usage_type == HID_USAGE_ID_KEYBOARD)
     {
         bt_hid_buf[0] = usb_hid_buf[1]; // modifier
@@ -182,13 +182,11 @@ void hid_send_bluetooth(uint8_t* usb_hid_buf)
     }
     else if(hid_usage_type == HID_USAGE_ID_MOUSE)
     {
-        // bt_hid_buf[1] = usb_hid_buf[1];
-        // bt_hid_buf[2] = usb_hid_buf[2];
-        // bt_hid_buf[3] = usb_hid_buf[3];
-        // bt_hid_buf[4] = usb_hid_buf[4];
-        // bt_hid_buf[1] = 16;
-        // ble_mouse_send(bt_hid_buf);
-        ;
+        bt_hid_buf[0] = usb_hid_buf[1];
+        bt_hid_buf[1] = usb_hid_buf[2];
+        bt_hid_buf[2] = usb_hid_buf[3];
+        bt_hid_buf[3] = usb_hid_buf[4];
+        ble_mouse_send(bt_hid_buf);
     }
     else if(hid_usage_type == HID_USAGE_ID_MEDIA_KEY)
     {
@@ -198,27 +196,28 @@ void hid_send_bluetooth(uint8_t* usb_hid_buf)
     }
 }
 
-#define EIGHT 8
-uint8_t esp_hid_msg[EIGHT];
-void hid_send_usb(uint8_t* hid_buf)
+#define USB_HID_BUF_SIZE 8
+uint8_t esp_hid_buf[USB_HID_BUF_SIZE];
+void hid_send_usb(uint8_t* usb_hid_buf)
 {
-    uint8_t hid_usage_type = hid_buf[0];
-    memset(esp_hid_msg, 0, EIGHT);
+    uint8_t hid_usage_type = usb_hid_buf[0];
+    memset(esp_hid_buf, 0, USB_HID_BUF_SIZE);
     if(hid_usage_type == HID_USAGE_ID_KEYBOARD)
     {
-        memcpy(esp_hid_msg, hid_buf, SIX);
-        esp_hid_msg[0] = hid_buf[1]; // modifier
-        esp_hid_msg[1] = 0; // reserved
+        memcpy(esp_hid_buf, usb_hid_buf, BT_HID_BUF_SIZE);
+        esp_hid_buf[0] = usb_hid_buf[1]; // modifier
+        esp_hid_buf[1] = 0; // reserved
     }
     else if(hid_usage_type == HID_USAGE_ID_MOUSE)
     {
-        memcpy(esp_hid_msg, hid_buf+1, SIX-1);
+        memcpy(esp_hid_buf, usb_hid_buf+1, BT_HID_BUF_SIZE-1);
     }
     else if(hid_usage_type == HID_USAGE_ID_MEDIA_KEY)
     {
-        esp_hid_msg[0] = hid_buf[1];
+        esp_hid_buf[0] = usb_hid_buf[1];
+        esp_hid_buf[1] = usb_hid_buf[2];
     }
-    tud_hid_report(hid_usage_type, esp_hid_msg, sizeof(esp_hid_msg));
+    tud_hid_report(hid_usage_type, esp_hid_buf, sizeof(esp_hid_buf));
 }
 
 void USBD_CUSTOM_HID_SendReport(uint8_t* hid_buf)
