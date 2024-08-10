@@ -32,7 +32,7 @@
 
 static const char *TAG = "USBHID";
 
-volatile uint8_t is_hid_connected;
+volatile uint8_t is_usb_hid_connected;
 
 #define TUSB_DESC_TOTAL_LEN      (TUD_CONFIG_DESC_LEN + CFG_TUD_HID * TUD_HID_DESC_LEN)
 #define CUSTOM_HID_EPIN_SIZE 63
@@ -144,7 +144,7 @@ const uint8_t hid_report_descriptor[] = {
 
 uint8_t const *tud_hid_descriptor_report_cb(uint8_t instance)
 {
-    is_hid_connected = 1;
+    is_usb_hid_connected = 1;
     return hid_report_descriptor;
 }
 
@@ -164,8 +164,7 @@ void tud_hid_set_report_cb(uint8_t instance, uint8_t report_id, hid_report_type_
 }
 
 #define SIX 6
-#define EIGHT 8
-uint8_t esp_hid_msg[EIGHT];
+
 uint8_t bt_hid_buf[SIX];
 
 void hid_send_bluetooth(uint8_t* hid_buf, uint8_t bufsize)
@@ -184,30 +183,38 @@ void hid_send_bluetooth(uint8_t* hid_buf, uint8_t bufsize)
     }
 }
 
+#define EIGHT 8
+uint8_t esp_hid_msg[EIGHT];
+void usb_hid_send(uint8_t* hid_buf)
+{
+    uint8_t hid_usage_type = hid_buf[0];
+    memset(esp_hid_msg, 0, EIGHT);
+    if(hid_usage_type == HID_USAGE_ID_KEYBOARD)
+    {
+        memcpy(esp_hid_msg, hid_buf, SIX);
+        esp_hid_msg[0] = hid_buf[1]; // modifier
+        esp_hid_msg[1] = 0; // reserved
+    }
+    else if(hid_usage_type == HID_USAGE_ID_MOUSE)
+    {
+        memcpy(esp_hid_msg, hid_buf+1, SIX-1);
+    }
+    else if(hid_usage_type == HID_USAGE_ID_MEDIA_KEY)
+    {
+        esp_hid_msg[0] = hid_buf[1];
+    }
+    tud_hid_report(hid_usage_type, esp_hid_msg, sizeof(esp_hid_msg));
+}
+
 void USBD_CUSTOM_HID_SendReport(uint8_t* hid_buf)
 {
-    if(bluetooth_status == BT_CONNECTED)
-    {
-        hid_send_bluetooth(hid_buf, DP_HID_MSG_SIZE);
-        return;
-    }
-    // uint8_t hid_usage_type = hid_buf[0];
-    // memset(esp_hid_msg, 0, EIGHT);
-    // if(hid_usage_type == HID_USAGE_ID_KEYBOARD)
+    if(is_usb_hid_connected)
+        usb_hid_send(hid_buf);
+    // if(bluetooth_status == BT_CONNECTED)
     // {
-    //     memcpy(esp_hid_msg, hid_buf, SIX);
-    //     esp_hid_msg[0] = hid_buf[1]; // modifier
-    //     esp_hid_msg[1] = 0; // reserved
+    //     hid_send_bluetooth(hid_buf, DP_HID_MSG_SIZE);
+    //     return;
     // }
-    // else if(hid_usage_type == HID_USAGE_ID_MOUSE)
-    // {
-    //     memcpy(esp_hid_msg, hid_buf+1, SIX-1);
-    // }
-    // else if(hid_usage_type == HID_USAGE_ID_MEDIA_KEY)
-    // {
-    //     esp_hid_msg[0] = hid_buf[1];
-    // }
-    // tud_hid_report(hid_usage_type, esp_hid_msg, sizeof(esp_hid_msg));
 }
 
 // ---------------- USB MSC --------------------
@@ -555,7 +562,7 @@ uint8_t wait_for_hid_connect(uint32_t how_long_ms)
     {
         if(pdTICKS_TO_MS(xTaskGetTickCount()) - start_ts > how_long_ms)
             return 0;
-        if(is_hid_connected)
+        if(is_usb_hid_connected)
             return 1;
         vTaskDelay(pdMS_TO_TICKS(50));
     }

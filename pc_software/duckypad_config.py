@@ -331,7 +331,7 @@ def put_duckypad_in_msc_mode_and_get_drive_path(reset_ui=True):
         time_elapsed = time.time() - entry_time
         if time_elapsed > seconds_to_wait:
             break
-        dp_root_folder_display.set(f"duckyPad Pro detected! Waiting for storage to show up... {int(seconds_to_wait - time_elapsed)}")
+        dp_root_folder_display.set(f"duckyPad Pro detected! Waiting for storage... {int(seconds_to_wait - time_elapsed)}")
         root.update()
         time.sleep(0.5)
     dp_root_folder_display.set("")

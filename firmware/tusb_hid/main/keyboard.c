@@ -284,7 +284,7 @@ uint16_t ascii_map[ASCII_MAP_SIZE] =
   0x00,// ü
   0x00,// ý
   0x00,// þ
-  0x00// ÿ
+  0x00,// ÿ
 };
 
 void delay_wrapper(int32_t amount, int32_t fuzz)

@@ -506,6 +506,8 @@ void oled_say(char* what)
 
 void draw_bluetooth_icon(uint8_t origx, uint8_t origy, uint8_t this_bt_stat, uint8_t update_screen)
 {
+  if(this_bt_stat == BT_DISABLED)
+    return;
   ssd1306_DrawPixel(origx+2, origy+0, White);
   ssd1306_DrawPixel(origx+2, origy+1, White);
   ssd1306_DrawPixel(origx+3, origy+1, White);
@@ -544,8 +546,6 @@ void draw_bluetooth_icon(uint8_t origx, uint8_t origy, uint8_t this_bt_stat, uin
 uint32_t last_bt_stat = 255;
 void update_bluetooth_icon(uint8_t origx, uint8_t origy, uint8_t this_bt_stat)
 {
-  if(this_bt_stat == BT_DISABLED)
-    return;
   if(this_bt_stat == last_bt_stat)
     return;
   
@@ -619,6 +619,24 @@ void draw_nvm_erase()
   memset(temp_buf, 0, TEMP_BUFSIZE);
   sprintf(oled_line_buf, "Press Any Key");
   ssd1306_SetCursor(center_line(strlen(oled_line_buf), 7, SSD1306_WIDTH), 100);
+  ssd1306_WriteString(oled_line_buf, Font_7x10, White);
+
+  ssd1306_UpdateScreen();
+}
+
+
+void draw_no_usb_activity()
+{
+  ssd1306_Fill(Black);
+
+  memset(oled_line_buf, 0, OLED_LINE_BUF_SIZE);
+  sprintf(oled_line_buf, "No USB Activity!");
+  ssd1306_SetCursor(center_line(strlen(oled_line_buf), 7, SSD1306_WIDTH), 50);
+  ssd1306_WriteString(oled_line_buf, Font_7x10, White);
+
+  memset(oled_line_buf, 0, OLED_LINE_BUF_SIZE);
+  sprintf(oled_line_buf, "Using Bluetooth");
+  ssd1306_SetCursor(center_line(strlen(oled_line_buf), 7, SSD1306_WIDTH), 65);
   ssd1306_WriteString(oled_line_buf, Font_7x10, White);
 
   ssd1306_UpdateScreen();

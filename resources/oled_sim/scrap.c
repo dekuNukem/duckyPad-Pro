@@ -1,3 +1,5 @@
+USBD_CUSTOM_HID_SendReport
+
 void get_clean_fw_name(char* fw_str, char* result_buf, uint8_t result_buf_size)
 {
   const char* fw_prefix = "/sdcard/DPP_FW_";

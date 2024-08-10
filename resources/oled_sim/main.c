@@ -26,32 +26,19 @@ uint8_t center_line(uint8_t line_len, uint8_t char_width_pixels, uint8_t oled_wi
 
 int main(int argc, char *argv[])
 {
-
-  // ----------------------------------------
   ssd1306_Fill(Black);
+  // ----------------------------------------
 
   memset(oled_line_buf, 0, OLED_LINE_BUF_SIZE);
-  sprintf(oled_line_buf, "3-Keyboard Region");
-  ssd1306_SetCursor(0, 56);
+  sprintf(oled_line_buf, "No USB Activity!");
+  ssd1306_SetCursor(center_line(strlen(oled_line_buf), 7, SSD1306_WIDTH), 50);
   ssd1306_WriteString(oled_line_buf, Font_7x10, White);
 
   memset(oled_line_buf, 0, OLED_LINE_BUF_SIZE);
-  sprintf(oled_line_buf, "English (US)");
-  ssd1306_SetCursor(0, 68);
+  sprintf(oled_line_buf, "Using Bluetooth");
+  ssd1306_SetCursor(center_line(strlen(oled_line_buf), 7, SSD1306_WIDTH), 65);
   ssd1306_WriteString(oled_line_buf, Font_7x10, White);
-
-  memset(oled_line_buf, 0, OLED_LINE_BUF_SIZE);
-  sprintf(oled_line_buf, "4-BT Unpair All");
-  ssd1306_SetCursor(0, 84);
-  ssd1306_WriteString(oled_line_buf, Font_7x10, White);
-
-  memset(oled_line_buf, 0, OLED_LINE_BUF_SIZE);
-  sprintf(oled_line_buf, "5-Mount USB");
-  ssd1306_SetCursor(0, 100);
-  ssd1306_WriteString(oled_line_buf, Font_7x10, White);
-
-  ssd1306_Line(0,115,128,115,White);
-
+  
   // ------------------------------
 
 	sprintf(filename_buf, "OLED_%d_%d.bin", SSD1306_WIDTH, SSD1306_HEIGHT);

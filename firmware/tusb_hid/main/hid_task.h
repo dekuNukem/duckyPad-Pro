@@ -43,7 +43,7 @@ void handle_hid_command(const uint8_t* hid_rx_buf, uint8_t rx_buf_size);
 #define HID_USAGE_ID_MOUSE 3
 #define HID_USAGE_ID_NAMED_PIPE 4
 
-extern volatile uint8_t is_hid_connected;
+extern volatile uint8_t is_usb_hid_connected;
 uint8_t wait_for_hid_connect(uint32_t how_long_ms);
 
 #ifdef __cplusplus

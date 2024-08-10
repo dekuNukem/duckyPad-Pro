@@ -8,7 +8,7 @@
 #include <stdint.h>
 #include <string.h>
 
-void bt_test(void);
+void my_bt_init(void);
 
 #define BT_DISABLED 0
 #define BT_DISCOVERABLE 1

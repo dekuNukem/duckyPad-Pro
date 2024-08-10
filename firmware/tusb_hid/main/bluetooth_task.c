@@ -261,7 +261,7 @@ void my_mouse_test(void)
     vTaskDelay(100 / portTICK_PERIOD_MS);
 }
 
-void bt_test(void)
+void my_bt_init(void)
 {
     esp_err_t ret;
 
