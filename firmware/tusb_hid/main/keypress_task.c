@@ -33,7 +33,7 @@ void block_until_anykey(void)
     switch_event_t sw_event = { 0 };
     if(xQueueReceive(switch_event_queue, &sw_event, 0) == pdFALSE)
       continue;
-    if(sw_event.type == SW_EVENT_SHORT_PRESS)
+    if(sw_event.type == SW_EVENT_RELEASE)
       return;
   }
 }
@@ -345,7 +345,10 @@ void keypress_task(void *dummy)
       handle_sw_event(&sw_event);
       is_busy = 0;
     }
-      
+    
+    if(is_sleeping == 0)
+      update_bluetooth_icon(0, -1, bluetooth_status);
+    draw_bt_pin(bt_pin_code);
     vTaskDelay(pdMS_TO_TICKS(25));
   }
 }

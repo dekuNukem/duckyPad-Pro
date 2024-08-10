@@ -497,14 +497,8 @@ void oled_say(char* what)
   ssd1306_UpdateScreen();
 }
 
-uint32_t last_bt_draw = 0;
-void draw_bluetooth_icon(uint8_t origx, uint8_t origy, uint8_t bt_stat)
+void draw_bluetooth_icon(uint8_t origx, uint8_t origy, uint8_t this_bt_stat)
 {
-  uint32_t now = pdTICKS_TO_MS(xTaskGetTickCount());
-  if(now - last_bt_draw < 1000)
-    return;
-  if(bt_stat == BT_DISABLED)
-    return;
   ssd1306_DrawPixel(origx+2, origy+0, White);
   ssd1306_DrawPixel(origx+2, origy+1, White);
   ssd1306_DrawPixel(origx+3, origy+1, White);
@@ -531,14 +525,26 @@ void draw_bluetooth_icon(uint8_t origx, uint8_t origy, uint8_t bt_stat)
   ssd1306_DrawPixel(origx+2, origy+10, White);
 
   ssd1306_SetCursor(origx+7, origy+2);
-  if(bt_stat == BT_DISCOVERABLE)
+  if(this_bt_stat == BT_DISCOVERABLE)
     ssd1306_WriteString("?", Font_6x8, White);
   else
     ssd1306_WriteString(" ", Font_6x8, White);
 
   ssd1306_UpdateScreen();
-  last_bt_draw = now;
-  // printf("bt draw!!!!\n");
+}
+
+uint32_t last_bt_stat = 255;
+void update_bluetooth_icon(uint8_t origx, uint8_t origy, uint8_t this_bt_stat)
+{
+  if(this_bt_stat == BT_DISABLED)
+    return;
+  if(this_bt_stat == last_bt_stat)
+    return;
+  
+  draw_bluetooth_icon(origx, origy, this_bt_stat);
+  
+  last_bt_stat = this_bt_stat;
+  printf("bt draw!!!!\n");
 }
 
 uint32_t last_bt_pin;
@@ -559,21 +565,21 @@ void draw_bt_pin(uint32_t this_bt_pin)
   ssd1306_SetCursor(center_line(strlen(oled_line_buf), 11, SSD1306_WIDTH), 50);
   ssd1306_WriteString(oled_line_buf, Font_11x18, White);
 
-  // memset(temp_buf, 0, TEMP_BUFSIZE);
-  // sprintf(oled_line_buf, "Press Any Key");
-  // ssd1306_SetCursor(center_line(strlen(oled_line_buf), 7, SSD1306_WIDTH), 100);
-  // ssd1306_WriteString(oled_line_buf, Font_7x10, White);
+  memset(temp_buf, 0, TEMP_BUFSIZE);
+  sprintf(oled_line_buf, "Press Any Key");
+  ssd1306_SetCursor(center_line(strlen(oled_line_buf), 7, SSD1306_WIDTH), 100);
+  ssd1306_WriteString(oled_line_buf, Font_7x10, White);
 
   ssd1306_UpdateScreen();
   last_bt_pin = this_bt_pin;
 
-  for (size_t i = 0; i < 10; i++)
+  for (size_t i = 0; i < 5; i++)
   {
     neopixel_off();
     vTaskDelay(pdMS_TO_TICKS(200));
     neopixel_fill(0, 0, 255);
     vTaskDelay(pdMS_TO_TICKS(200));
   }
-  vTaskDelay(pdMS_TO_TICKS(5000));
+  block_until_anykey();
   goto_profile(current_profile_number);
 }

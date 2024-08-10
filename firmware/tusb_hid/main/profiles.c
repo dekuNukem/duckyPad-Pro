@@ -19,6 +19,7 @@
 #include "neopixel_task.h"
 #include "keyboard.h"
 #include "ds_vm.h"
+#include "bluetooth_task.h"
 
 const char settings_file_path[] = "/sdcard/dpp_config.txt";
 dp_global_settings dp_settings;
@@ -351,6 +352,7 @@ void goto_profile(uint8_t profile_number)
     redraw_bg(profile_number);
   else
     neopixel_draw_current_buffer();
+  draw_bluetooth_icon(0, -1, bluetooth_status);
 }
 
 void goto_next_profile(void)

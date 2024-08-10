@@ -3,6 +3,49 @@
   ssd1306_SetCursor(0, 84);
   ssd1306_WriteString(oled_line_buf, Font_7x10, White);
 
+uint32_t last_bt_draw = 0;
+void draw_bluetooth_icon(uint8_t origx, uint8_t origy, uint8_t bt_stat)
+{
+  uint32_t now = pdTICKS_TO_MS(xTaskGetTickCount());
+  if(now - last_bt_draw < 1000)
+    return;
+  if(bt_stat == BT_DISABLED)
+    return;
+  ssd1306_DrawPixel(origx+2, origy+0, White);
+  ssd1306_DrawPixel(origx+2, origy+1, White);
+  ssd1306_DrawPixel(origx+3, origy+1, White);
+  ssd1306_DrawPixel(origx+2, origy+2, White);
+  ssd1306_DrawPixel(origx+4, origy+2, White);
+  ssd1306_DrawPixel(origx+0, origy+3, White);
+  ssd1306_DrawPixel(origx+2, origy+3, White);
+  ssd1306_DrawPixel(origx+5, origy+3, White);
+  ssd1306_DrawPixel(origx+1, origy+4, White);
+  ssd1306_DrawPixel(origx+2, origy+4, White);
+  ssd1306_DrawPixel(origx+4, origy+4, White);
+  ssd1306_DrawPixel(origx+2, origy+5, White);
+  ssd1306_DrawPixel(origx+3, origy+5, White);
+  ssd1306_DrawPixel(origx+1, origy+6, White);
+  ssd1306_DrawPixel(origx+2, origy+6, White);
+  ssd1306_DrawPixel(origx+4, origy+6, White);
+  ssd1306_DrawPixel(origx+0, origy+7, White);
+  ssd1306_DrawPixel(origx+2, origy+7, White);
+  ssd1306_DrawPixel(origx+5, origy+7, White);
+  ssd1306_DrawPixel(origx+2, origy+8, White);
+  ssd1306_DrawPixel(origx+4, origy+8, White);
+  ssd1306_DrawPixel(origx+2, origy+9, White);
+  ssd1306_DrawPixel(origx+3, origy+9, White);
+  ssd1306_DrawPixel(origx+2, origy+10, White);
+
+  ssd1306_SetCursor(origx+7, origy+2);
+  if(bt_stat == BT_DISCOVERABLE)
+    ssd1306_WriteString("?", Font_6x8, White);
+  else
+    ssd1306_WriteString(" ", Font_6x8, White);
+
+  ssd1306_UpdateScreen();
+  last_bt_draw = now;
+  // printf("bt draw!!!!\n");
+}
 
 void ble_kb_send(uint8_t* hid_buf, uint8_t bufsize)
 {
