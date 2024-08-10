@@ -1,3 +1,28 @@
+
+
+
+
+
+printf("usb: ");
+        for (size_t i = 0; i < 8; i++)
+            printf("%x ", usb_hid_buf[i]);
+        printf("\n");
+
+        bt_hid_buf[0] = usb_hid_buf[1];
+        bt_hid_buf[1] = usb_hid_buf[2];
+        ble_mk_send(bt_hid_buf);
+
+        printf("bt: ");
+        for (size_t i = 0; i < 6; i++)
+            printf("%x ", bt_hid_buf[i]);
+        printf("\n");
+print("---------")
+
+
+
+
+
+
   memset(oled_line_buf, 0, OLED_LINE_BUF_SIZE);
   sprintf(oled_line_buf, "4-Use BT:Auto");
   ssd1306_SetCursor(0, 84);
