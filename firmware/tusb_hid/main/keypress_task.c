@@ -209,6 +209,11 @@ void settings_menu(void)
       block_until_anykey();
       esp_restart();
     }
+    else if(sw_event.id == MSW_4)
+    {
+      generate_msc_flag_file();
+      esp_restart();
+    }
     else if(sw_event.id <= MAX_MSW)
     {
       break;

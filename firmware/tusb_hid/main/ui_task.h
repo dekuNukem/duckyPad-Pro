@@ -41,7 +41,7 @@ void draw_nvm_erase();
 #define OLED_CONTRAST_DIM 100
 #define OLED_CONTRAST_BRIGHT 255
 
-#define SETTINGS_ENTRY_SIZE 4
+#define SETTINGS_ENTRY_SIZE 5
 
 extern uint32_t sleep_after_ms_index_to_time_lookup[SLEEP_OPTION_SIZE];
 

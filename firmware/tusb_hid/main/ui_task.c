@@ -293,6 +293,11 @@ void draw_settings(dp_global_settings *dps)
   ssd1306_WriteString(oled_line_buf, Font_7x10, White);
 
 //------------------------------
+  memset(oled_line_buf, 0, OLED_LINE_BUF_SIZE);
+  sprintf(oled_line_buf, "5-Mount USB");
+  ssd1306_SetCursor(0, 100);
+  ssd1306_WriteString(oled_line_buf, Font_7x10, White);
+//---------------
 
   ssd1306_Line(0,115,128,115,White);
 

@@ -31,29 +31,26 @@ int main(int argc, char *argv[])
   ssd1306_Fill(Black);
 
   memset(oled_line_buf, 0, OLED_LINE_BUF_SIZE);
-  sprintf(oled_line_buf, "All BT Pairing");
-  ssd1306_SetCursor(center_line(strlen(oled_line_buf), 7, SSD1306_WIDTH), 15);
+  sprintf(oled_line_buf, "3-Keyboard Region");
+  ssd1306_SetCursor(0, 56);
   ssd1306_WriteString(oled_line_buf, Font_7x10, White);
 
   memset(oled_line_buf, 0, OLED_LINE_BUF_SIZE);
-  sprintf(oled_line_buf, "has been forgotten");
-  ssd1306_SetCursor(center_line(strlen(oled_line_buf), 7, SSD1306_WIDTH), 27);
+  sprintf(oled_line_buf, "English (US)");
+  ssd1306_SetCursor(0, 68);
   ssd1306_WriteString(oled_line_buf, Font_7x10, White);
 
   memset(oled_line_buf, 0, OLED_LINE_BUF_SIZE);
-  sprintf(oled_line_buf, "Remember to unpair");
-  ssd1306_SetCursor(center_line(strlen(oled_line_buf), 7, SSD1306_WIDTH), 55);
+  sprintf(oled_line_buf, "4-BT Unpair All");
+  ssd1306_SetCursor(0, 84);
   ssd1306_WriteString(oled_line_buf, Font_7x10, White);
 
   memset(oled_line_buf, 0, OLED_LINE_BUF_SIZE);
-  sprintf(oled_line_buf, "on PC side too");
-  ssd1306_SetCursor(center_line(strlen(oled_line_buf), 7, SSD1306_WIDTH), 67);
+  sprintf(oled_line_buf, "5-Mount USB");
+  ssd1306_SetCursor(0, 100);
   ssd1306_WriteString(oled_line_buf, Font_7x10, White);
 
-  memset(temp_buf, 0, TEMP_BUFSIZE);
-  sprintf(oled_line_buf, "Press Any Key");
-  ssd1306_SetCursor(center_line(strlen(oled_line_buf), 7, SSD1306_WIDTH), 100);
-  ssd1306_WriteString(oled_line_buf, Font_7x10, White);
+  ssd1306_Line(0,115,128,115,White);
 
   // ------------------------------
 
