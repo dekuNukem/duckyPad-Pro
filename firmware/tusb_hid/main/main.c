@@ -58,9 +58,11 @@ void app_main(void)
     if(should_mount_usb_msc())
     {
         mount_usb_msc();
-        draw_msc_mode();
         delete_msc_flag_file();
-        idle_loop();
+        neopixel_fill(32,32,32);
+        draw_msc_mode();
+        block_until_plus_minus_long_press();
+        esp_restart();
     }
 
     is_busy = 1;
@@ -81,16 +83,16 @@ void app_main(void)
 
     xTaskCreate(keypress_task, "keypress_task", KEYPRESS_TASK_STACK_SIZE, NULL, 2, NULL);
 
-    // mount_hid_only();
-    // printf("waiting for HID connect...\n");
-    // uint8_t is_usb_connected = wait_for_hid_connect(1500);
-    // printf("hid_connected: %d\n", is_usb_connected);
+    mount_hid_only();
+    printf("waiting for HID connect...\n");
+    uint8_t is_usb_connected = wait_for_hid_connect(1500);
+    printf("hid_connected: %d\n", is_usb_connected);
 
     // if(is_usb_connected == 0)
     //     bt_test();
 
     // oled_say("Bluetooth Mode");
-    bt_test();
+    // bt_test();
     
     while(1)
     {

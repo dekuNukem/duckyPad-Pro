@@ -388,13 +388,13 @@ void draw_msc_mode(void)
   ssd1306_WriteString(oled_line_buf, Font_7x10, White);
 
   memset(oled_line_buf, 0, OLED_LINE_BUF_SIZE);
-  sprintf(oled_line_buf, "Press Any Key");
-  ssd1306_SetCursor(center_line(strlen(oled_line_buf), 7, SSD1306_WIDTH), 60);
+  sprintf(oled_line_buf, "Long Press +/-");
+  ssd1306_SetCursor(center_line(strlen(oled_line_buf), 7, SSD1306_WIDTH), 70);
   ssd1306_WriteString(oled_line_buf, Font_7x10, White);
 
   memset(oled_line_buf, 0, OLED_LINE_BUF_SIZE);
-  sprintf(oled_line_buf, "To Reboot");
-  ssd1306_SetCursor(center_line(strlen(oled_line_buf), 7, SSD1306_WIDTH), 80);
+  sprintf(oled_line_buf, "To Exit");
+  ssd1306_SetCursor(center_line(strlen(oled_line_buf), 7, SSD1306_WIDTH), 85);
   ssd1306_WriteString(oled_line_buf, Font_7x10, White);
 
   ssd1306_UpdateScreen();
@@ -585,4 +585,36 @@ void draw_bt_pin(uint32_t this_bt_pin)
   }
   block_until_anykey();
   goto_profile(current_profile_number);
+}
+
+void draw_nvm_erase()
+{
+  ssd1306_Fill(Black);
+
+  memset(oled_line_buf, 0, OLED_LINE_BUF_SIZE);
+  sprintf(oled_line_buf, "All BT pairings");
+  ssd1306_SetCursor(center_line(strlen(oled_line_buf), 7, SSD1306_WIDTH), 15);
+  ssd1306_WriteString(oled_line_buf, Font_7x10, White);
+
+  memset(oled_line_buf, 0, OLED_LINE_BUF_SIZE);
+  sprintf(oled_line_buf, "has been forgotten");
+  ssd1306_SetCursor(center_line(strlen(oled_line_buf), 7, SSD1306_WIDTH), 27);
+  ssd1306_WriteString(oled_line_buf, Font_7x10, White);
+
+  memset(oled_line_buf, 0, OLED_LINE_BUF_SIZE);
+  sprintf(oled_line_buf, "Remember to unpair");
+  ssd1306_SetCursor(center_line(strlen(oled_line_buf), 7, SSD1306_WIDTH), 55);
+  ssd1306_WriteString(oled_line_buf, Font_7x10, White);
+
+  memset(oled_line_buf, 0, OLED_LINE_BUF_SIZE);
+  sprintf(oled_line_buf, "on PC side too");
+  ssd1306_SetCursor(center_line(strlen(oled_line_buf), 7, SSD1306_WIDTH), 67);
+  ssd1306_WriteString(oled_line_buf, Font_7x10, White);
+
+  memset(temp_buf, 0, TEMP_BUFSIZE);
+  sprintf(oled_line_buf, "Press Any Key");
+  ssd1306_SetCursor(center_line(strlen(oled_line_buf), 7, SSD1306_WIDTH), 100);
+  ssd1306_WriteString(oled_line_buf, Font_7x10, White);
+
+  ssd1306_UpdateScreen();
 }

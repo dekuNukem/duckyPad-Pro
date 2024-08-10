@@ -287,11 +287,3 @@ void bt_test(void)
     // esp_hidd_dev_battery_set(s_ble_hid_param.hid_dev, 100);
     bluetooth_status = BT_DISCOVERABLE;
 }
-
-void erase_nvm(void)
-{
-    printf("erasing NVM...\n");
-    ESP_ERROR_CHECK(nvs_flash_erase());
-    vTaskDelay(pdMS_TO_TICKS(5000));
-    esp_restart();
-}

@@ -17,7 +17,6 @@ void bt_test(void);
 extern volatile uint8_t bluetooth_status;
 extern volatile uint32_t bt_pin_code;
 void ble_kb_send(uint8_t* hid_buf, uint8_t bufsize);
-void erase_nvm(void);
 
 #ifdef __cplusplus
 }

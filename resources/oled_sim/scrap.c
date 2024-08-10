@@ -1,3 +1,23 @@
+void get_clean_fw_name(char* fw_str, char* result_buf, uint8_t result_buf_size)
+{
+  const char* fw_prefix = "/sdcard/DPP_FW_";
+  const char* suffix = "_";
+
+  char* start = strstr(fw_str, fw_prefix);
+  if (start == NULL)
+    return;
+
+  start += strlen(fw_prefix);
+
+  char* end = strstr(start, suffix);
+  if (end == NULL)
+    return;
+
+  memset(result_buf, 0, result_buf_size);
+  strncpy(result_buf, start, end - start);
+}
+
+
 #include <stdio.h>
 #include <string.h>
 #include "ssd1306.h"

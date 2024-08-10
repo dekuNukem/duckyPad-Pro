@@ -65,6 +65,7 @@
     "keyboard.h": "c",
     "dirent.h": "c",
     "esp_hid_gap.h": "c",
-    "esp_bt_device.h": "c"
+    "esp_bt_device.h": "c",
+    "nvs_flash.h": "c"
   }
 }

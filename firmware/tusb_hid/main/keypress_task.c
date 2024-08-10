@@ -21,6 +21,7 @@
 #include <dirent.h>
 #include "hid_task.h"
 #include "bluetooth_task.h"
+#include "nvs_flash.h"
 
 volatile uint32_t last_keypress;
 
@@ -34,6 +35,20 @@ void block_until_anykey(void)
     if(xQueueReceive(switch_event_queue, &sw_event, 0) == pdFALSE)
       continue;
     if(sw_event.type == SW_EVENT_RELEASE)
+      return;
+  }
+}
+
+void block_until_plus_minus_long_press(void)
+{
+  xQueueReset(switch_event_queue);
+  while(1)
+  {
+    vTaskDelay(pdMS_TO_TICKS(33));
+    switch_event_t sw_event = { 0 };
+    if(xQueueReceive(switch_event_queue, &sw_event, 0) == pdFALSE)
+      continue;
+    if((sw_event.id == SW_PLUS || sw_event.id == SW_MINUS) && sw_event.type == SW_EVENT_LONG_PRESS)
       return;
   }
 }
@@ -188,7 +203,11 @@ void settings_menu(void)
     }
     else if(sw_event.id == MSW_3)
     {
-      erase_nvm();
+      neopixel_fill(0, 0, 128);
+      nvs_flash_erase();
+      draw_nvm_erase();
+      block_until_anykey();
+      esp_restart();
     }
     else if(sw_event.id <= MAX_MSW)
     {
