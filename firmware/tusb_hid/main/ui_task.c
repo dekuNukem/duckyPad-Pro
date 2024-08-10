@@ -233,6 +233,8 @@ void draw_profile(profile_info* this_profile)
   ssd1306_Line(64,10,64,127,White);
   ssd1306_Line(96,10,96,127,White);
 
+  draw_bluetooth_icon(0, -1, bluetooth_status, 0);
+
   ssd1306_UpdateScreen();
 }
 
@@ -497,7 +499,7 @@ void oled_say(char* what)
   ssd1306_UpdateScreen();
 }
 
-void draw_bluetooth_icon(uint8_t origx, uint8_t origy, uint8_t this_bt_stat)
+void draw_bluetooth_icon(uint8_t origx, uint8_t origy, uint8_t this_bt_stat, uint8_t update_screen)
 {
   ssd1306_DrawPixel(origx+2, origy+0, White);
   ssd1306_DrawPixel(origx+2, origy+1, White);
@@ -530,7 +532,8 @@ void draw_bluetooth_icon(uint8_t origx, uint8_t origy, uint8_t this_bt_stat)
   else
     ssd1306_WriteString(" ", Font_6x8, White);
 
-  ssd1306_UpdateScreen();
+  if(update_screen)
+    ssd1306_UpdateScreen();
 }
 
 uint32_t last_bt_stat = 255;
@@ -541,7 +544,7 @@ void update_bluetooth_icon(uint8_t origx, uint8_t origy, uint8_t this_bt_stat)
   if(this_bt_stat == last_bt_stat)
     return;
   
-  draw_bluetooth_icon(origx, origy, this_bt_stat);
+  draw_bluetooth_icon(origx, origy, this_bt_stat, 1);
   
   last_bt_stat = this_bt_stat;
   printf("bt draw!!!!\n");

@@ -352,7 +352,6 @@ void goto_profile(uint8_t profile_number)
     redraw_bg(profile_number);
   else
     neopixel_draw_current_buffer();
-  draw_bluetooth_icon(0, -1, bluetooth_status);
 }
 
 void goto_next_profile(void)
