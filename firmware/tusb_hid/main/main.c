@@ -83,6 +83,7 @@ void app_main(void)
     mount_hid_only();
     if(wait_for_hid_connect(1500) == 0)
     {
+        tinyusb_driver_uninstall();
         draw_no_usb_activity();
         vTaskDelay(pdMS_TO_TICKS(2000));
         my_bt_init();
