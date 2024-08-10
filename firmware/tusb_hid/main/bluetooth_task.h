@@ -16,7 +16,9 @@ void my_bt_init(void);
 
 extern volatile uint8_t bluetooth_status;
 extern volatile uint32_t bt_pin_code;
-void ble_kb_send(uint8_t* hid_buf, uint8_t bufsize);
+void ble_kb_send(uint8_t* hid_buf);
+void ble_mouse_send(uint8_t* hid_buf);
+void ble_mk_send(uint8_t* hid_buf);
 
 #ifdef __cplusplus
 }

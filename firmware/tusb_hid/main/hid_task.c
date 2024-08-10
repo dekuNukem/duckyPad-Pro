@@ -164,10 +164,9 @@ void tud_hid_set_report_cb(uint8_t instance, uint8_t report_id, hid_report_type_
 }
 
 #define SIX 6
-
 uint8_t bt_hid_buf[SIX];
 
-void hid_send_bluetooth(uint8_t* hid_buf, uint8_t bufsize)
+void hid_send_bluetooth(uint8_t* hid_buf)
 {
     uint8_t hid_usage_type = hid_buf[0];
     memset(bt_hid_buf, 0, SIX);
@@ -179,13 +178,29 @@ void hid_send_bluetooth(uint8_t* hid_buf, uint8_t bufsize)
         bt_hid_buf[3] = hid_buf[3];
         bt_hid_buf[4] = hid_buf[4];
         bt_hid_buf[5] = hid_buf[5];
-        ble_kb_send(bt_hid_buf, SIX);
+        ble_kb_send(bt_hid_buf);
     }
+    else if(hid_usage_type == HID_USAGE_ID_MOUSE)
+    {
+        // bt_hid_buf[1] = hid_buf[1];
+        // bt_hid_buf[2] = hid_buf[2];
+        // bt_hid_buf[3] = hid_buf[3];
+        // bt_hid_buf[4] = hid_buf[4];
+        bt_hid_buf[1] = 16;
+        ble_mouse_send(bt_hid_buf);
+    }
+    else if(hid_usage_type == HID_USAGE_ID_MEDIA_KEY)
+    {
+        ;
+    }
+    for (size_t i = 0; i < SIX; i++)
+        printf("%x ", bt_hid_buf[i]);
+    printf("\n");
 }
 
 #define EIGHT 8
 uint8_t esp_hid_msg[EIGHT];
-void usb_hid_send(uint8_t* hid_buf)
+void hid_send_usb(uint8_t* hid_buf)
 {
     uint8_t hid_usage_type = hid_buf[0];
     memset(esp_hid_msg, 0, EIGHT);
@@ -209,12 +224,9 @@ void usb_hid_send(uint8_t* hid_buf)
 void USBD_CUSTOM_HID_SendReport(uint8_t* hid_buf)
 {
     if(is_usb_hid_connected)
-        usb_hid_send(hid_buf);
-    // if(bluetooth_status == BT_CONNECTED)
-    // {
-    //     hid_send_bluetooth(hid_buf, DP_HID_MSG_SIZE);
-    //     return;
-    // }
+        hid_send_usb(hid_buf);
+    else if(bluetooth_status == BT_CONNECTED)
+        hid_send_bluetooth(hid_buf);
 }
 
 // ---------------- USB MSC --------------------
