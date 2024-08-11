@@ -172,7 +172,7 @@ void settings_menu(void)
     vTaskDelay(pdMS_TO_TICKS(20));
     if(xQueueReceive(switch_event_queue, &sw_event, 0) == pdFALSE)
       continue;
-    if(sw_event.type != SW_EVENT_SHORT_PRESS)
+    if(sw_event.type != SW_EVENT_RELEASE)
       continue;
 
     // printf("settings_menu id: %d type: %d\n", sw_event.id, sw_event.type);
