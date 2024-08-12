@@ -41,6 +41,7 @@ void app_main(void)
     switch_init();
     oled_init();
     neopixel_init();
+    expansion_uart_init();
     oled_say("Booting...");
     if(sd_init())
     {

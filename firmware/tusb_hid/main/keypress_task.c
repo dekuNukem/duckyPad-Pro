@@ -22,8 +22,36 @@
 #include "hid_task.h"
 #include "bluetooth_task.h"
 #include "nvs_flash.h"
+#include "driver/uart.h"
+#include "driver/gpio.h"
 
 volatile uint32_t last_keypress;
+
+#define RADIO_UART_PORT_NUM 1
+#define RADIO_BUF_SIZE 256
+uint8_t radio_rx_buf[RADIO_BUF_SIZE];
+uint8_t radio_tx_buf[RADIO_BUF_SIZE];
+#define RADIO_UART_BAUD_RATE 115200
+#define RADIO_UART_TX_PIN 16
+#define RADIO_UART_RX_PIN 15
+
+void expansion_uart_init(void)
+{
+  uart_config_t uart_config = {
+    .baud_rate = RADIO_UART_BAUD_RATE,
+    .data_bits = UART_DATA_8_BITS,
+    .parity    = UART_PARITY_DISABLE,
+    .stop_bits = UART_STOP_BITS_1,
+    .flow_ctrl = UART_HW_FLOWCTRL_DISABLE,
+    .source_clk = UART_SCLK_DEFAULT,
+  };
+
+  int radio_intr_alloc_flags = 0; //ESP_INTR_FLAG_IRAM
+
+  ESP_ERROR_CHECK(uart_driver_install(RADIO_UART_PORT_NUM, RADIO_BUF_SIZE, 0, 0, NULL, radio_intr_alloc_flags));
+  ESP_ERROR_CHECK(uart_param_config(RADIO_UART_PORT_NUM, &uart_config));
+  ESP_ERROR_CHECK(uart_set_pin(RADIO_UART_PORT_NUM, RADIO_UART_TX_PIN, RADIO_UART_RX_PIN, -1, -1));
+}
 
 void block_until_anykey(void)
 {
@@ -354,6 +382,8 @@ void keypress_task(void *dummy)
   update_last_keypress();
   while(1)
   {
+    vTaskDelay(pdMS_TO_TICKS(25));
+
     rotary_encoder_event_t re_event = { 0 };
     if (xQueueReceive(rotary_encoder_event_queue, &re_event, 0) == pdTRUE)
     {
@@ -373,7 +403,11 @@ void keypress_task(void *dummy)
     if(is_sleeping == 0)
       update_bluetooth_icon(0, -1, bluetooth_status);
     draw_bt_pin(bt_pin_code);
-    vTaskDelay(pdMS_TO_TICKS(25));
+
+    memset(radio_rx_buf, 0, RADIO_BUF_SIZE);
+    if(uart_read_bytes(RADIO_UART_PORT_NUM, radio_rx_buf, 1, pdMS_TO_TICKS(10)) == 0)
+      continue;
+    printf("radio: %s\n", radio_rx_buf);
   }
 }
 

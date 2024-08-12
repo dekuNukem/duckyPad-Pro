@@ -23,6 +23,8 @@
 /* USER CODE BEGIN Includes */
 #include <stdio.h>
 #include <string.h>
+#include <stdlib.h>
+#include <time.h>
 /* USER CODE END Includes */
 
 /* Private typedef -----------------------------------------------------------*/
@@ -44,13 +46,9 @@ void ttywrch (int ch) {
 /* USER CODE BEGIN PD */
 
 /*
-2023 11 27 0.2.0
-removed OLED dimming
-no display fraction when > 600ms when single source
-blank out result screen during a new measurement
-
-2023 11 30 0.2.1
-skipped blanking out at first measurement
+2024 08 12
+0.0.1
+first commit
 */
 uint8_t fw_version_major = 0;
 uint8_t fw_version_minor = 0;
@@ -76,8 +74,13 @@ UART_HandleTypeDef huart2;
 
 int fputc(int ch, FILE *f)
 {
-    HAL_UART_Transmit(&huart2, (unsigned char *)&ch, 1, 100);
-    return ch;
+  HAL_UART_Transmit(&huart2, (unsigned char *)&ch, 1, 100);
+  return ch;
+}
+
+void towards_duckypad_send(uint8_t data)
+{
+  HAL_UART_Transmit(&huart1, &data, 1, 10);
 }
 
 /* USER CODE END PV */
@@ -98,9 +101,21 @@ static void MX_USART1_UART_Init(void);
 
 void HAL_TIM_PeriodElapsedCallback(TIM_HandleTypeDef *htim)
 {
-  HAL_GPIO_TogglePin(USER_LED_GPIO_Port, USER_LED_Pin);
+  // happens every 25ms
+  // HAL_GPIO_TogglePin(USER_LED_GPIO_Port, USER_LED_Pin);
 }
 
+uint32_t get_rand_delay_ms(void)
+{
+  srand(micros());
+  return 50 + (rand() % 16) * 10;
+}
+
+#define STATE_UNINITIALIZED 0
+#define STATE_READY 1
+uint8_t current_state;
+
+#define CMD_ASK_STARTID_TOWARDS_DUCKYPAD 0x3f
 /* USER CODE END 0 */
 
 /**
@@ -138,6 +153,7 @@ int main(void)
   /* USER CODE BEGIN 2 */
   HAL_TIM_Base_Start(&htim2);
   HAL_TIM_Base_Start_IT(&htim16);
+  current_state = STATE_UNINITIALIZED;
 
   /* USER CODE END 2 */
 
@@ -149,8 +165,13 @@ int main(void)
     /* USER CODE END WHILE */
 
     /* USER CODE BEGIN 3 */
-		printf("hello world!\n");
-    HAL_Delay(500);
+
+    if(current_state == STATE_UNINITIALIZED)
+    {
+      HAL_Delay(get_rand_delay_ms());
+      towards_duckypad_send(CMD_ASK_STARTID_TOWARDS_DUCKYPAD);
+      HAL_GPIO_TogglePin(USER_LED_GPIO_Port, USER_LED_Pin);
+    }
   }
   /* USER CODE END 3 */
 }

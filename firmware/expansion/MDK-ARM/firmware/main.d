@@ -34,3 +34,5 @@ firmware\main.o: ../Drivers/STM32F0xx_HAL_Driver/Inc/stm32f0xx_hal_uart.h
 firmware\main.o: ../Drivers/STM32F0xx_HAL_Driver/Inc/stm32f0xx_hal_uart_ex.h
 firmware\main.o: C:\Keil_v5\ARM\ARMCC\Bin\..\include\stdio.h
 firmware\main.o: C:\Keil_v5\ARM\ARMCC\Bin\..\include\string.h
+firmware\main.o: C:\Keil_v5\ARM\ARMCC\Bin\..\include\stdlib.h
+firmware\main.o: C:\Keil_v5\ARM\ARMCC\Bin\..\include\time.h
