@@ -26,6 +26,7 @@
 #include <stdlib.h>
 #include <time.h>
 #include "buttons.h"
+#include "cQueue.h"
 
 /* USER CODE END Includes */
 
@@ -177,10 +178,10 @@ int main(void)
   MX_TIM16_Init();
   MX_USART1_UART_Init();
   /* USER CODE BEGIN 2 */
+  sw_event_queue_init();
   HAL_TIM_Base_Start(&htim2);
   HAL_TIM_Base_Start_IT(&htim16);
   current_state = STATE_UNINITIALIZED;
-
   /* USER CODE END 2 */
 
   /* Infinite loop */
@@ -201,8 +202,15 @@ int main(void)
     }
     else
     {
-      printf("READY. ID: %d\n", starting_id);
+      // printf("READY. ID: %d\n", starting_id);
       HAL_Delay(500);
+      uint8_t qsize = q_getCount(&switch_event_queue);
+      if(qsize == 0)
+        continue;
+      printf("qsize: %d\n", qsize);
+      switch_event_t this_sw_event = { 0 };
+      q_pop(&switch_event_queue, &this_sw_event);
+      printf("swe: %d %d\n", this_sw_event.id, this_sw_event.type);
     }
   }
   /* USER CODE END 3 */

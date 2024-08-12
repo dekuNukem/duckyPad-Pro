@@ -4,6 +4,7 @@
 "firmware\stm32f0xx_it.o"
 "firmware\stm32f0xx_hal_msp.o"
 "firmware\buttons.o"
+"firmware\cqueue.o"
 "firmware\stm32f0xx_hal_tim.o"
 "firmware\stm32f0xx_hal_tim_ex.o"
 "firmware\stm32f0xx_hal_rcc.o"

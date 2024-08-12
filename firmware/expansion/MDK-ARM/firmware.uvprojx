@@ -417,6 +417,16 @@
               <FileType>5</FileType>
               <FilePath>..\Core\Inc\buttons.h</FilePath>
             </File>
+            <File>
+              <FileName>cQueue.h</FileName>
+              <FileType>5</FileType>
+              <FilePath>..\Core\Inc\cQueue.h</FilePath>
+            </File>
+            <File>
+              <FileName>cQueue.c</FileName>
+              <FileType>1</FileType>
+              <FilePath>..\Core\Src\cQueue.c</FilePath>
+            </File>
           </Files>
         </Group>
         <Group>
