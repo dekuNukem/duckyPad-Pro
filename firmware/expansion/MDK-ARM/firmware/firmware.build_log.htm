@@ -27,6 +27,10 @@ Project File Date:  08/12/2024
 <h2>Output:</h2>
 *** Using Compiler 'V5.06 update 6 (build 750)', folder: 'C:\Keil_v5\ARM\ARMCC\Bin'
 Build target 'firmware'
+compiling main.c...
+linking...
+Program Size: Code=10226 RO-data=306 RW-data=28 ZI-data=2300  
+FromELF: creating hex file...
 "firmware\firmware.axf" - 0 Error(s), 0 Warning(s).
 
 <h2>Software Packages used:</h2>
@@ -64,16 +68,16 @@ Package Vendor: Keil
       Source file:   Source\retarget_io.c
 
    * Component: Keil.ARM Compiler::Compiler:I/O:STDIN:User:1.2.0
-      Source file:   Template\stdin_user.c
       Source file:   Source\retarget_io.c
-      Source file:   Template\stdin_USART.c
       Source file:   Template\stdin_keyboard.c
+      Source file:   Template\stdin_user.c
+      Source file:   Template\stdin_USART.c
 
    * Component: Keil.ARM Compiler::Compiler:I/O:STDOUT:User:1.2.0
-      Source file:   Source\retarget_io.c
       Source file:   Template\stdout_user.c
-      Source file:   Template\stdout_display.c
+      Source file:   Source\retarget_io.c
       Source file:   Template\stdout_USART.c
+      Source file:   Template\stdout_display.c
 
    * Component: Keil.ARM Compiler::Compiler:I/O:TTY:User:1.2.0
       Source file:   Source\retarget_io.c

@@ -56,14 +56,10 @@ uint8_t fw_version_major = 0;
 uint8_t fw_version_minor = 0;
 uint8_t fw_version_patch = 1;
 
-
-
-
 /* USER CODE END PD */
 
 /* Private macro -------------------------------------------------------------*/
 /* USER CODE BEGIN PM */
-
 
 #define micros() (htim2.Instance->CNT)
 
@@ -100,6 +96,11 @@ static void MX_USART1_UART_Init(void);
 /* Private user code ---------------------------------------------------------*/
 /* USER CODE BEGIN 0 */
 
+void HAL_TIM_PeriodElapsedCallback(TIM_HandleTypeDef *htim)
+{
+  HAL_GPIO_TogglePin(USER_LED_GPIO_Port, USER_LED_Pin);
+}
+
 /* USER CODE END 0 */
 
 /**
@@ -135,7 +136,8 @@ int main(void)
   MX_TIM16_Init();
   MX_USART1_UART_Init();
   /* USER CODE BEGIN 2 */
-  // HAL_TIM_Base_Start(&htim2);
+  HAL_TIM_Base_Start(&htim2);
+  HAL_TIM_Base_Start_IT(&htim16);
 
   /* USER CODE END 2 */
 
@@ -148,7 +150,6 @@ int main(void)
 
     /* USER CODE BEGIN 3 */
 		printf("hello world!\n");
-    HAL_GPIO_TogglePin(USER_LED_GPIO_Port, USER_LED_Pin);
     HAL_Delay(500);
   }
   /* USER CODE END 3 */
@@ -355,16 +356,29 @@ static void MX_GPIO_Init(void)
 
   /* GPIO Ports Clock Enable */
   __HAL_RCC_GPIOB_CLK_ENABLE();
+  __HAL_RCC_GPIOF_CLK_ENABLE();
   __HAL_RCC_GPIOA_CLK_ENABLE();
 
   /*Configure GPIO pin Output Level */
   HAL_GPIO_WritePin(USER_LED_GPIO_Port, USER_LED_Pin, GPIO_PIN_RESET);
 
-  /*Configure GPIO pin : USER_BUTTON_Pin */
-  GPIO_InitStruct.Pin = USER_BUTTON_Pin;
+  /*Configure GPIO pins : USER_BUTTON_Pin CH4_Pin */
+  GPIO_InitStruct.Pin = USER_BUTTON_Pin|CH4_Pin;
   GPIO_InitStruct.Mode = GPIO_MODE_INPUT;
   GPIO_InitStruct.Pull = GPIO_NOPULL;
-  HAL_GPIO_Init(USER_BUTTON_GPIO_Port, &GPIO_InitStruct);
+  HAL_GPIO_Init(GPIOB, &GPIO_InitStruct);
+
+  /*Configure GPIO pins : CH5_Pin CH6_Pin */
+  GPIO_InitStruct.Pin = CH5_Pin|CH6_Pin;
+  GPIO_InitStruct.Mode = GPIO_MODE_INPUT;
+  GPIO_InitStruct.Pull = GPIO_NOPULL;
+  HAL_GPIO_Init(GPIOF, &GPIO_InitStruct);
+
+  /*Configure GPIO pins : CH1_Pin CH2_Pin CH3_Pin */
+  GPIO_InitStruct.Pin = CH1_Pin|CH2_Pin|CH3_Pin;
+  GPIO_InitStruct.Mode = GPIO_MODE_INPUT;
+  GPIO_InitStruct.Pull = GPIO_NOPULL;
+  HAL_GPIO_Init(GPIOA, &GPIO_InitStruct);
 
   /*Configure GPIO pin : USER_LED_Pin */
   GPIO_InitStruct.Pin = USER_LED_Pin;
