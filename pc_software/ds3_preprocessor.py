@@ -778,8 +778,15 @@ def split_str_cmd(cmd_type, this_line):
         cmd_list[-1] = cmd_list[-1].replace(cmd_STRING, cmd_STRINGLN, 1)
     return cmd_list
 
-def run_all(program_listing):
+def search_profile_index_from_name(query, profile_list):
+    if profile_list is None:
+        return None
+    for index, item in enumerate(profile_list):
+        if query.lower().strip() == item.name.lower().strip():
+            return index
+    return None
 
+def run_all(program_listing, profile_list=None):
     new_program_listing = []
     for index, this_line in enumerate(program_listing):
         # remove leading space and tabs
@@ -794,8 +801,20 @@ def run_all(program_listing):
         if first_word == cmd_INJECT_MOD:
             this_line = this_line.replace(cmd_INJECT_MOD, "", 1)
 
+        if first_word == cmd_GOTO_PROFILE_NAME:
+            this_line = this_line.replace(cmd_GOTO_PROFILE_NAME, cmd_GOTO_PROFILE)
+            first_word = this_line.split(" ")[0]
+
+        if first_word == cmd_GOTO_PROFILE:
+            target_profile_name = this_line.split(cmd_GOTO_PROFILE)[-1].strip()
+            target_profile_index = search_profile_index_from_name(target_profile_name, profile_list)
+            if target_profile_index is not None:
+                this_line = cmd_GOTO_PROFILE + " " + str(target_profile_index)
+
         this_line = this_line.lstrip(" ").lstrip("\t")
         new_program_listing.append(this_line)
+
+    # print("4444444444", new_program_listing)
     program_listing = new_program_listing
 
     # ----------- expand MOUSE_MOVE ----------

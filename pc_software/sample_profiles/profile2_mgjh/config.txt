@@ -1,2 +1,0 @@
-z1 dsf
-BG_COLOR 84 22 180

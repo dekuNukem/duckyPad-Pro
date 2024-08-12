@@ -458,7 +458,7 @@ def make_dsb(program_listing, profile_list=None):
     global func_lookup
     global str_lookup
     # result_dict should at least contain is_success and comments
-    result_dict = ds3_preprocessor.run_all(program_listing)
+    result_dict = ds3_preprocessor.run_all(program_listing, profile_list)
     if result_dict["is_success"] is False:
         print("\n\n\n>>>>>>>>>> ERROR FOUND\n\n")
         for key in result_dict:

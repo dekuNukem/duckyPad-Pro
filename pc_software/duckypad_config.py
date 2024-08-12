@@ -1353,7 +1353,7 @@ def check_syntax():
     program_listing = profile_list[profile_index].keylist[selected_key].script.split('\n')
     if on_press_release_rb_var.get() == 1:
         program_listing = profile_list[profile_index].keylist[selected_key].script_on_release.split('\n')
-    result_dict = ds3_preprocessor.run_all(program_listing)
+    result_dict = ds3_preprocessor.run_all(program_listing, profile_list)
     if result_dict["is_success"]:
         script_textbox.tag_remove("error", '1.0', 'end')
         check_syntax_label.config(text="Code seems OK..", fg="green")
