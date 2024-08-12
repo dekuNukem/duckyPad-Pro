@@ -1,6 +1,0 @@
-source "C:/Users/allen/esp/v5.3/esp-idf/components/bootloader/Kconfig.projbuild"
-source "C:/Users/allen/esp/v5.3/esp-idf/components/esp_app_format/Kconfig.projbuild"
-source "C:/Users/allen/esp/v5.3/esp-idf/components/esp_rom/Kconfig.projbuild"
-source "C:/Users/allen/esp/v5.3/esp-idf/components/esptool_py/Kconfig.projbuild"
-source "C:/Users/allen/esp/v5.3/esp-idf/components/partition_table/Kconfig.projbuild"
-source "C:/Users/allen/Desktop/repos/duckyPad2/firmware/btt_working/main/Kconfig.projbuild"
