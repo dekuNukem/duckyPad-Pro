@@ -4155,7 +4155,11 @@ by exp-lbrs.ulp</description>
 <pinref part="GND13" gate="1" pin="GND"/>
 <pinref part="JP2" gate="A" pin="3"/>
 <wire x1="12.7" y1="-111.76" x2="12.7" y2="-106.68" width="0.1524" layer="91"/>
-<wire x1="12.7" y1="-106.68" x2="-2.54" y2="-106.68" width="0.1524" layer="91"/>
+<wire x1="12.7" y1="-106.68" x2="5.08" y2="-106.68" width="0.1524" layer="91"/>
+<pinref part="J5" gate="G$1" pin="SLEEVE"/>
+<wire x1="5.08" y1="-106.68" x2="-2.54" y2="-106.68" width="0.1524" layer="91"/>
+<wire x1="5.08" y1="-116.84" x2="5.08" y2="-106.68" width="0.1524" layer="91"/>
+<junction x="5.08" y="-106.68"/>
 </segment>
 <segment>
 <pinref part="J6" gate="G$1" pin="SLEEVE"/>
@@ -4524,7 +4528,7 @@ by exp-lbrs.ulp</description>
 <wire x1="205.74" y1="-10.16" x2="200.66" y2="-10.16" width="0.1524" layer="91"/>
 </segment>
 </net>
-<net name="N$3" class="0">
+<net name="CH1" class="0">
 <segment>
 <pinref part="J1" gate="G$1" pin="TIP"/>
 <pinref part="JP1" gate="A" pin="2"/>
@@ -4544,7 +4548,7 @@ by exp-lbrs.ulp</description>
 <junction x="-50.8" y="-109.22"/>
 </segment>
 </net>
-<net name="N$4" class="0">
+<net name="CH2" class="0">
 <segment>
 <pinref part="R8" gate="G$1" pin="1"/>
 <wire x1="-5.08" y1="-99.06" x2="-5.08" y2="-106.68" width="0.1524" layer="91"/>
@@ -4565,7 +4569,7 @@ by exp-lbrs.ulp</description>
 <junction x="-12.7" y="-114.3"/>
 </segment>
 </net>
-<net name="N$6" class="0">
+<net name="CH3" class="0">
 <segment>
 <pinref part="R9" gate="G$1" pin="1"/>
 <wire x1="45.72" y1="-96.52" x2="45.72" y2="-104.14" width="0.1524" layer="91"/>
@@ -4587,7 +4591,7 @@ by exp-lbrs.ulp</description>
 <junction x="35.56" y="-111.76"/>
 </segment>
 </net>
-<net name="N$7" class="0">
+<net name="CH4" class="0">
 <segment>
 <pinref part="R10" gate="G$1" pin="1"/>
 <wire x1="86.36" y1="-96.52" x2="86.36" y2="-104.14" width="0.1524" layer="91"/>
@@ -4609,7 +4613,7 @@ by exp-lbrs.ulp</description>
 <junction x="76.2" y="-149.86"/>
 </segment>
 </net>
-<net name="N$8" class="0">
+<net name="CH5" class="0">
 <segment>
 <pinref part="R11" gate="G$1" pin="1"/>
 <wire x1="134.62" y1="-96.52" x2="134.62" y2="-104.14" width="0.1524" layer="91"/>
@@ -4628,7 +4632,7 @@ by exp-lbrs.ulp</description>
 <junction x="124.46" y="-114.3"/>
 </segment>
 </net>
-<net name="N$9" class="0">
+<net name="CH6" class="0">
 <segment>
 <pinref part="R12" gate="G$1" pin="1"/>
 <wire x1="170.18" y1="-96.52" x2="170.18" y2="-104.14" width="0.1524" layer="91"/>
