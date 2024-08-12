@@ -36,3 +36,4 @@ firmware\main.o: C:\Keil_v5\ARM\ARMCC\Bin\..\include\stdio.h
 firmware\main.o: C:\Keil_v5\ARM\ARMCC\Bin\..\include\string.h
 firmware\main.o: C:\Keil_v5\ARM\ARMCC\Bin\..\include\stdlib.h
 firmware\main.o: C:\Keil_v5\ARM\ARMCC\Bin\..\include\time.h
+firmware\main.o: ../Core/Inc/buttons.h

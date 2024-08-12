@@ -27,18 +27,18 @@
 
 volatile uint32_t last_keypress;
 
-#define RADIO_UART_PORT_NUM 1
-#define RADIO_BUF_SIZE 256
-uint8_t radio_rx_buf[RADIO_BUF_SIZE];
-uint8_t radio_tx_buf[RADIO_BUF_SIZE];
-#define RADIO_UART_BAUD_RATE 115200
-#define RADIO_UART_TX_PIN 16
-#define RADIO_UART_RX_PIN 15
+#define EXPANSION_UART_PORT_NUM 1
+#define EXPANSION_BUF_SIZE 256
+uint8_t expansion_rx_buf[EXPANSION_BUF_SIZE];
+uint8_t expansion_tx_buf[EXPANSION_BUF_SIZE];
+#define EXPANSION_UART_BAUD_RATE 115200
+#define EXPANSION_UART_TX_PIN 16
+#define EXPANSION_UART_RX_PIN 15
 
 void expansion_uart_init(void)
 {
   uart_config_t uart_config = {
-    .baud_rate = RADIO_UART_BAUD_RATE,
+    .baud_rate = EXPANSION_UART_BAUD_RATE,
     .data_bits = UART_DATA_8_BITS,
     .parity    = UART_PARITY_DISABLE,
     .stop_bits = UART_STOP_BITS_1,
@@ -46,11 +46,11 @@ void expansion_uart_init(void)
     .source_clk = UART_SCLK_DEFAULT,
   };
 
-  int radio_intr_alloc_flags = 0; //ESP_INTR_FLAG_IRAM
+  int expansion_intr_alloc_flags = 0; //ESP_INTR_FLAG_IRAM
 
-  ESP_ERROR_CHECK(uart_driver_install(RADIO_UART_PORT_NUM, RADIO_BUF_SIZE, 0, 0, NULL, radio_intr_alloc_flags));
-  ESP_ERROR_CHECK(uart_param_config(RADIO_UART_PORT_NUM, &uart_config));
-  ESP_ERROR_CHECK(uart_set_pin(RADIO_UART_PORT_NUM, RADIO_UART_TX_PIN, RADIO_UART_RX_PIN, -1, -1));
+  ESP_ERROR_CHECK(uart_driver_install(EXPANSION_UART_PORT_NUM, EXPANSION_BUF_SIZE, 0, 0, NULL, expansion_intr_alloc_flags));
+  ESP_ERROR_CHECK(uart_param_config(EXPANSION_UART_PORT_NUM, &uart_config));
+  ESP_ERROR_CHECK(uart_set_pin(EXPANSION_UART_PORT_NUM, EXPANSION_UART_TX_PIN, EXPANSION_UART_RX_PIN, -1, -1));
 }
 
 void block_until_anykey(void)
@@ -377,6 +377,17 @@ void handle_sw_event(switch_event_t* this_sw_event)
   // xQueueReset(switch_event_queue);
 }
 
+void parse_expansion_data(uint8_t exp_data)
+{
+  if((exp_data & 0xc0) == 0)
+  {
+    printf("EXP: Ask start ID\n");
+    memset(expansion_tx_buf, 0, EXPANSION_BUF_SIZE);
+    expansion_tx_buf[0] = 0x40;
+    uart_write_bytes(EXPANSION_UART_PORT_NUM, expansion_tx_buf, 1);
+  }
+}
+
 void keypress_task(void *dummy)
 {
   update_last_keypress();
@@ -404,10 +415,11 @@ void keypress_task(void *dummy)
       update_bluetooth_icon(0, -1, bluetooth_status);
     draw_bt_pin(bt_pin_code);
 
-    memset(radio_rx_buf, 0, RADIO_BUF_SIZE);
-    if(uart_read_bytes(RADIO_UART_PORT_NUM, radio_rx_buf, 1, pdMS_TO_TICKS(10)) == 0)
+    memset(expansion_rx_buf, 0, EXPANSION_BUF_SIZE);
+    if(uart_read_bytes(EXPANSION_UART_PORT_NUM, expansion_rx_buf, 1, pdMS_TO_TICKS(10)) == 0)
       continue;
-    printf("radio: %s\n", radio_rx_buf);
+    // printf("radio: %s\n", expansion_rx_buf);
+    parse_expansion_data(expansion_rx_buf[0]);
   }
 }
 

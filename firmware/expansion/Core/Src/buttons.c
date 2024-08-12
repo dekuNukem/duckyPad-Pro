@@ -1,6 +1,12 @@
-		printf("rand: %d\n", get_rand_delay_ms());
-    towards_duckypad_send(0xab);
-    HAL_Delay(500);
+#include <stdio.h>
+#include <stdint.h>
+#include <string.h>
+#include <stdlib.h>
+#include "buttons.h"
+#include "main.h"
+
+uint8_t last_channel_status[CHANNEL_COUNT];
+
 void channel_update(void)
 {
   uint8_t this_channel_status[CHANNEL_COUNT];
@@ -14,12 +20,10 @@ void channel_update(void)
 
   for (int i = 0; i < CHANNEL_COUNT; ++i)
   {
-    // if(button_status[i].prev_state == BUTTON_RELEASED && button_status[i].button_state == BUTTON_PRESSED)
-    //   mark_as_pressed(i);
-    // else if(button_status[i].prev_state == BUTTON_PRESSED && button_status[i].button_state == BUTTON_RELEASED)
-    //   mark_as_released(i);
-    // button_status[i].prev_state = button_status[i].button_state;
-    printf("%d ", this_channel_status[i]);
+    if(this_channel_status[i] == 0 && last_channel_status[i] == 1)
+      printf("channel %d pressed!\n", i);
+    if(this_channel_status[i] == 1 && last_channel_status[i] == 0)
+      printf("channel %d released!\n", i);
   }
-  printf("\n");
+  memcpy(last_channel_status, this_channel_status, CHANNEL_COUNT);
 }

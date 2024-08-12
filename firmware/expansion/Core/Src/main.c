@@ -25,6 +25,8 @@
 #include <string.h>
 #include <stdlib.h>
 #include <time.h>
+#include "buttons.h"
+
 /* USER CODE END Includes */
 
 /* Private typedef -----------------------------------------------------------*/
@@ -54,6 +56,12 @@ uint8_t fw_version_major = 0;
 uint8_t fw_version_minor = 0;
 uint8_t fw_version_patch = 1;
 
+#define UART_BUF_SIZE 8
+
+uint8_t towards_duckypad_tx_buf[UART_BUF_SIZE];
+uint8_t towards_duckypad_rx_buf[UART_BUF_SIZE];
+
+uint8_t starting_id;
 /* USER CODE END PD */
 
 /* Private macro -------------------------------------------------------------*/
@@ -72,15 +80,18 @@ UART_HandleTypeDef huart2;
 
 /* USER CODE BEGIN PV */
 
+#define towards_duckypad_uart (huart1)
+#define away_from_duckypad_uart (huart2)
+
 int fputc(int ch, FILE *f)
 {
-  HAL_UART_Transmit(&huart2, (unsigned char *)&ch, 1, 100);
+  HAL_UART_Transmit(&away_from_duckypad_uart, (unsigned char *)&ch, 1, 100);
   return ch;
 }
 
 void towards_duckypad_send(uint8_t data)
 {
-  HAL_UART_Transmit(&huart1, &data, 1, 10);
+  HAL_UART_Transmit(&towards_duckypad_uart, &data, 1, 10);
 }
 
 /* USER CODE END PV */
@@ -103,6 +114,7 @@ void HAL_TIM_PeriodElapsedCallback(TIM_HandleTypeDef *htim)
 {
   // happens every 25ms
   // HAL_GPIO_TogglePin(USER_LED_GPIO_Port, USER_LED_Pin);
+  channel_update();
 }
 
 uint32_t get_rand_delay_ms(void)
@@ -113,9 +125,23 @@ uint32_t get_rand_delay_ms(void)
 
 #define STATE_UNINITIALIZED 0
 #define STATE_READY 1
-uint8_t current_state;
+volatile uint8_t current_state;
 
 #define CMD_ASK_STARTID_TOWARDS_DUCKYPAD 0x3f
+
+void HAL_UART_RxCpltCallback(UART_HandleTypeDef *huart)
+{
+  if(huart == &towards_duckypad_uart)
+  {
+    starting_id = towards_duckypad_rx_buf[0] & 0x3f;
+    current_state = STATE_READY;
+  }
+  else
+  {
+    ;
+  }
+}
+
 /* USER CODE END 0 */
 
 /**
@@ -162,6 +188,7 @@ int main(void)
   
   while (1)
   {
+    HAL_UART_Receive_IT(&towards_duckypad_uart, towards_duckypad_rx_buf, 1);
     /* USER CODE END WHILE */
 
     /* USER CODE BEGIN 3 */
@@ -171,6 +198,11 @@ int main(void)
       HAL_Delay(get_rand_delay_ms());
       towards_duckypad_send(CMD_ASK_STARTID_TOWARDS_DUCKYPAD);
       HAL_GPIO_TogglePin(USER_LED_GPIO_Port, USER_LED_Pin);
+    }
+    else
+    {
+      printf("READY. ID: %d\n", starting_id);
+      HAL_Delay(500);
     }
   }
   /* USER CODE END 3 */
