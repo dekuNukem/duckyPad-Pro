@@ -214,14 +214,15 @@ GPIO3 must have pull resistor, pull to high to  free up JTAG pins?
 
 double check RESET jumper has NO PASTE</text>
 <text x="86.818" y="79.629" size="1.778" layer="26" rot="MR180" align="center">duckyPad Pro
-PT4
+PD1
 dekuNukem
-JULY2024</text>
+AUG2024</text>
 <rectangle x1="80.534" y1="-2.286" x2="112.792" y2="7.62" layer="41"/>
 <rectangle x1="80.28" y1="-2.286" x2="112.538" y2="7.62" layer="42"/>
 <rectangle x1="76.184" y1="89.662" x2="81.772" y2="92.964" layer="41"/>
 <rectangle x1="75.938" y1="89.662" x2="81.526" y2="92.964" layer="42"/>
-<rectangle x1="76.057" y1="90.424" x2="81.645" y2="93.726" layer="41"/>
+<rectangle x1="76.184" y1="90.6018" x2="81.772" y2="93.9038" layer="41"/>
+<text x="87.1482" y="1.4732" size="1.9304" layer="26" rot="MR180" align="center">*</text>
 </plain>
 <libraries>
 <library name="clock">
@@ -1393,10 +1394,8 @@ These are the free and generally easy to produce 4-layer PCB design rules. You c
 <element name="R18" library="joyAnalog" package="0805" value="5K1" x="99.33" y="20.066" smashed="yes" rot="MR90">
 <attribute name="NAME" x="100.1555" y="19.304" size="0.8128" layer="26" rot="MR90"/>
 </element>
-<element name="R19" library="joyAnalog" package="0805" value="DNP" x="90.567" y="74.168" smashed="yes" rot="R180">
-<attribute name="NAME" x="91.583" y="75.7555" size="0.8128" layer="25" rot="R180"/>
-</element>
 <element name="JP1" library="SparkFun-Jumpers" package="SMT-JUMPER_2_NO_NO-SILK" value="JUMPER-SMT_2_NO_NO-SILK" x="78.756" y="93.091" smashed="yes" rot="R180"/>
+<element name="JP4" library="SparkFun-Jumpers" package="SMT-JUMPER_2_NO_NO-SILK" value="JUMPER-SMT_2_NO_NO-SILK" x="92.2782" y="71.6026" smashed="yes" rot="R270"/>
 </elements>
 <signals>
 <signal name="GND">
@@ -2278,15 +2277,11 @@ These are the free and generally easy to produce 4-layer PCB design rules. You c
 <wire x1="94.25" y1="58.354" x2="94.25" y2="54.041" width="0.2032" layer="16"/>
 <wire x1="90.567" y1="71.948" x2="88.927" y2="71.948" width="0.2032" layer="16"/>
 <wire x1="90.567" y1="71.948" x2="90.628" y2="72.009" width="0.2032" layer="16"/>
-<contactref element="R19" pad="2"/>
-<wire x1="89.667" y1="74.168" x2="89.667" y2="72.97" width="0.2032" layer="1"/>
-<wire x1="89.667" y1="72.97" x2="90.628" y2="72.009" width="0.2032" layer="1"/>
-<wire x1="89.667" y1="74.168" x2="89.667" y2="75.427" width="0.2032" layer="1"/>
-<wire x1="89.667" y1="75.427" x2="90.186" y2="75.946" width="0.2032" layer="1"/>
-<wire x1="90.186" y1="75.946" x2="92.472" y2="75.946" width="0.2032" layer="1"/>
-<wire x1="92.472" y1="75.946" x2="95.012" y2="73.406" width="0.2032" layer="1"/>
-<wire x1="95.012" y1="73.406" x2="102.704" y2="73.406" width="0.2032" layer="1"/>
-<wire x1="102.704" y1="73.406" x2="103.582" y2="74.284" width="0.2032" layer="1"/>
+<wire x1="103.582" y1="74.284" x2="102.704" y2="73.406" width="0.2032" layer="1"/>
+<contactref element="JP4" pad="1"/>
+<wire x1="102.704" y1="73.406" x2="93.6752" y2="73.406" width="0.2032" layer="1"/>
+<wire x1="93.6752" y1="73.406" x2="92.2782" y2="72.009" width="0.2032" layer="1"/>
+<wire x1="92.2782" y1="72.009" x2="90.628" y2="72.009" width="0.2032" layer="1"/>
 </signal>
 <signal name="N$38">
 <contactref element="U3" pad="6"/>
@@ -2331,9 +2326,9 @@ These are the free and generally easy to produce 4-layer PCB design rules. You c
 <contactref element="R16" pad="1"/>
 <wire x1="96.42" y1="70.993" x2="96.427" y2="71" width="0.2032" layer="16"/>
 <wire x1="96.427" y1="71" x2="98.5" y2="71" width="0.2032" layer="16"/>
-<contactref element="R19" pad="1"/>
-<wire x1="91.467" y1="74.168" x2="94.635" y2="71" width="0.2032" layer="1"/>
-<wire x1="94.635" y1="71" x2="98.5" y2="71" width="0.2032" layer="1"/>
+<contactref element="JP4" pad="2"/>
+<wire x1="92.4744" y1="71" x2="92.2782" y2="71.1962" width="0.2032" layer="1"/>
+<wire x1="98.5" y1="71" x2="92.4744" y2="71" width="0.2032" layer="1"/>
 </signal>
 <signal name="CARD_DET">
 <contactref element="SD1" pad="9"/>
@@ -3125,8 +3120,6 @@ These are the free and generally easy to produce 4-layer PCB design rules. You c
 <approved hash="8,16,4e43c98574761f8d"/>
 <approved hash="4,1,c051a71d170ce58d"/>
 <approved hash="4,1,c408911eb8984ed5"/>
-<approved hash="4,16,1688e8b90f03f10c"/>
-<approved hash="4,16,51e9af9a447cba6d"/>
 <approved hash="4,16,6cda39ea7071ebff"/>
 <approved hash="4,16,fc38d59b78380096"/>
 <approved hash="4,16,5d7b77e63eeb50e2"/>
@@ -3159,10 +3152,8 @@ These are the free and generally easy to produce 4-layer PCB design rules. You c
 <approved hash="6,1,eaedea09d83bd8df"/>
 <approved hash="6,1,0aea0af038c238d8"/>
 <approved hash="6,1,919f64d8612a20ac"/>
-<approved hash="6,1,a3fd6e932bed9563"/>
 <approved hash="6,1,8043e8401d304f32"/>
 <approved hash="6,1,672567a4555655d7"/>
-<approved hash="6,1,dc69bd2291e1955b"/>
 <approved hash="6,1,4ccc4d92df60de3e"/>
 <approved hash="6,1,9db49f25c7cbf780"/>
 <approved hash="6,1,0a630aacdd50dd9f"/>
@@ -3176,21 +3167,9 @@ These are the free and generally easy to produce 4-layer PCB design rules. You c
 <approved hash="6,16,b555b536a94aa929"/>
 <approved hash="6,16,2b102b18c3e4c3ec"/>
 <approved hash="6,16,3b113b19cbe5cbed"/>
-<approved hash="6,16,d8f0d891336d330c"/>
-<approved hash="6,16,000c00631e9f1ef0"/>
-<approved hash="6,16,72796291828186b2"/>
 <approved hash="6,16,ac55ac72ccb6cc63"/>
-<approved hash="6,16,ae41ae166b566b01"/>
-<approved hash="6,16,d38c5b0ca1ccc75f"/>
-<approved hash="6,16,e9dc4ee995fbffdf"/>
-<approved hash="6,16,8053879ed7ded013"/>
-<approved hash="6,16,930f9bf72a54dccb"/>
-<approved hash="6,16,f07de028daec3eda"/>
 <approved hash="6,16,820bbd32c348fc71"/>
-<approved hash="6,16,833a09e9666d89da"/>
-<approved hash="6,16,fed9fee93c293c19"/>
 <approved hash="6,16,362f36ac546c54ef"/>
-<approved hash="6,16,a6a6a7469b869a66"/>
 <approved hash="6,16,7297c98b48a21f83"/>
 <approved hash="6,16,e69ef9a424756c82"/>
 <approved hash="6,16,1fb61d74936291a0"/>
@@ -3236,6 +3215,21 @@ These are the free and generally easy to produce 4-layer PCB design rules. You c
 <approved hash="19,16,a5f8a06d147b11ee"/>
 <approved hash="19,16,f4eef49d7c8b7cf8"/>
 <approved hash="19,16,9ff89e5d2a4b2bee"/>
+<approved hash="6,16,305a31b872f8731a"/>
+<approved hash="6,16,977c8d96fe9120b5"/>
+<approved hash="6,16,8c0a8f6d91ad92ca"/>
+<approved hash="6,16,00f000927d6e7d0c"/>
+<approved hash="6,16,040d0463de9fdef1"/>
+<approved hash="6,16,5d39c0e461ed8edc"/>
+<approved hash="6,16,cedac99a0d5a0a1a"/>
+<approved hash="6,16,30abffdf49373863"/>
+<approved hash="6,16,f7953beec2aa3aff"/>
+<approved hash="6,16,895e2d97da3d0add"/>
+<approved hash="6,16,36bce565982d77d6"/>
+<approved hash="6,16,78047827bae7bac4"/>
+<approved hash="6,1,8da1c76fdf556d90"/>
+<approved hash="6,1,71a3a7624f519190"/>
+<approved hash="6,1,dc69bec0d203d55b"/>
 </errors>
 </board>
 </drawing>
