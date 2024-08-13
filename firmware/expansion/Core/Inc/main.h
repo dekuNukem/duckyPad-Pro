@@ -69,6 +69,8 @@ void Error_Handler(void);
 #define CH2_GPIO_Port GPIOA
 #define CH3_Pin GPIO_PIN_4
 #define CH3_GPIO_Port GPIOA
+#define SOFTSERIAL_TX_Pin GPIO_PIN_6
+#define SOFTSERIAL_TX_GPIO_Port GPIOA
 #define USER_LED_Pin GPIO_PIN_7
 #define USER_LED_GPIO_Port GPIOA
 #define CH4_Pin GPIO_PIN_1

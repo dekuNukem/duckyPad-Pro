@@ -1,8 +1,58 @@
 Dependencies for Project 'firmware', Target 'firmware': (DO NOT MODIFY !)
 CompilerVersion: 5060750::V5.06 update 6 (build 750)::ARMCC
-F (startup_stm32f042x6.s)(0x66BA1A88)(--cpu Cortex-M0 -g --apcs=interwork -I.\RTE\_firmware-IC:\Users\allen\AppData\Local\Arm\Packs\ARM\CMSIS\5.6.0\CMSIS\Core\Include-IC:\Users\allen\AppData\Local\Arm\Packs\Keil\STM32F0xx_DFP\2.1.1\Drivers\CMSIS\Device\ST\STM32F0xx\Include--pd "__UVISION_VERSION SETA 529" --pd "_RTE_ SETA 1" --pd "STM32F042x6 SETA 1"--list startup_stm32f042x6.lst --xref -o firmware\startup_stm32f042x6.o --depend firmware\startup_stm32f042x6.d)
-F (../Core/Src/main.c)(0x66BB23DF)(--c99 -c --cpu Cortex-M0 -g -O3 --apcs=interwork --split_sections -I ../Core/Inc -I ../Drivers/STM32F0xx_HAL_Driver/Inc -I ../Drivers/STM32F0xx_HAL_Driver/Inc/Legacy -I ../Drivers/CMSIS/Device/ST/STM32F0xx/Include -I ../Drivers/CMSIS/Include-I.\RTE\_firmware-IC:\Users\allen\AppData\Local\Arm\Packs\ARM\CMSIS\5.6.0\CMSIS\Core\Include-IC:\Users\allen\AppData\Local\Arm\Packs\Keil\STM32F0xx_DFP\2.1.1\Drivers\CMSIS\Device\ST\STM32F0xx\Include-D__UVISION_VERSION="529" -D_RTE_ -DSTM32F042x6 -DUSE_HAL_DRIVER -DSTM32F042x6-o firmware\main.o --omf_browse firmware\main.crf --depend firmware\main.d)
-I (../Core/Inc/main.h)(0x66BA924E)
+F (startup_stm32f042x6.s)(0x66BB27FE)(--cpu Cortex-M0 -g --apcs=interwork -I.\RTE\_firmware-IC:\Users\allen\AppData\Local\Arm\Packs\ARM\CMSIS\5.6.0\CMSIS\Core\Include-IC:\Users\allen\AppData\Local\Arm\Packs\Keil\STM32F0xx_DFP\2.1.1\Drivers\CMSIS\Device\ST\STM32F0xx\Include--pd "__UVISION_VERSION SETA 529" --pd "_RTE_ SETA 1" --pd "STM32F042x6 SETA 1"--list startup_stm32f042x6.lst --xref -o firmware\startup_stm32f042x6.o --depend firmware\startup_stm32f042x6.d)
+F (..\Core\Src\buttons.c)(0x66BB2734)(--c99 -c --cpu Cortex-M0 -g -O3 --apcs=interwork --split_sections -I ../Core/Inc -I ../Drivers/STM32F0xx_HAL_Driver/Inc -I ../Drivers/STM32F0xx_HAL_Driver/Inc/Legacy -I ../Drivers/CMSIS/Device/ST/STM32F0xx/Include -I ../Drivers/CMSIS/Include-I.\RTE\_firmware-IC:\Users\allen\AppData\Local\Arm\Packs\ARM\CMSIS\5.6.0\CMSIS\Core\Include-IC:\Users\allen\AppData\Local\Arm\Packs\Keil\STM32F0xx_DFP\2.1.1\Drivers\CMSIS\Device\ST\STM32F0xx\Include-D__UVISION_VERSION="529" -D_RTE_ -DSTM32F042x6 -DUSE_HAL_DRIVER -DSTM32F042x6-o firmware\buttons.o --omf_browse firmware\buttons.crf --depend firmware\buttons.d)
+I (C:\Keil_v5\ARM\ARMCC\include\stdio.h)(0x5D9B348A)
+I (C:\Keil_v5\ARM\ARMCC\include\stdint.h)(0x5D9B3488)
+I (C:\Keil_v5\ARM\ARMCC\include\string.h)(0x5D9B3488)
+I (C:\Keil_v5\ARM\ARMCC\include\stdlib.h)(0x5D9B348A)
+I (../Core/Inc/buttons.h)(0x66BB22F8)
+I (../Drivers/STM32F0xx_HAL_Driver/Inc/stm32f0xx_hal.h)(0x651EAEAB)
+I (../Core/Inc/stm32f0xx_hal_conf.h)(0x66BA14FC)
+I (../Drivers/STM32F0xx_HAL_Driver/Inc/stm32f0xx_hal_rcc.h)(0x651EAEAB)
+I (../Drivers/STM32F0xx_HAL_Driver/Inc/stm32f0xx_hal_def.h)(0x651EAEAB)
+I (../Drivers/CMSIS/Device/ST/STM32F0xx/Include/stm32f0xx.h)(0x651EAEAB)
+I (../Drivers/CMSIS/Device/ST/STM32F0xx/Include/stm32f042x6.h)(0x651EAEAB)
+I (../Drivers/CMSIS/Include/core_cm0.h)(0x651EAE9A)
+I (../Drivers/CMSIS/Include/cmsis_version.h)(0x651EAE9A)
+I (../Drivers/CMSIS/Include/cmsis_compiler.h)(0x651EAE9A)
+I (../Drivers/CMSIS/Include/cmsis_armcc.h)(0x651EAE9A)
+I (../Drivers/CMSIS/Device/ST/STM32F0xx/Include/system_stm32f0xx.h)(0x651EAEAB)
+I (../Drivers/STM32F0xx_HAL_Driver/Inc/Legacy/stm32_hal_legacy.h)(0x651EAEAB)
+I (C:\Keil_v5\ARM\ARMCC\include\stddef.h)(0x5D9B3488)
+I (../Drivers/STM32F0xx_HAL_Driver/Inc/stm32f0xx_hal_rcc_ex.h)(0x651EAEAB)
+I (../Drivers/STM32F0xx_HAL_Driver/Inc/stm32f0xx_hal_gpio.h)(0x651EAEAB)
+I (../Drivers/STM32F0xx_HAL_Driver/Inc/stm32f0xx_hal_gpio_ex.h)(0x651EAEAB)
+I (../Drivers/STM32F0xx_HAL_Driver/Inc/stm32f0xx_hal_exti.h)(0x651EAEAB)
+I (../Drivers/STM32F0xx_HAL_Driver/Inc/stm32f0xx_hal_dma.h)(0x651EAEAB)
+I (../Drivers/STM32F0xx_HAL_Driver/Inc/stm32f0xx_hal_dma_ex.h)(0x651EAEAB)
+I (../Drivers/STM32F0xx_HAL_Driver/Inc/stm32f0xx_hal_cortex.h)(0x651EAEAB)
+I (../Drivers/STM32F0xx_HAL_Driver/Inc/stm32f0xx_hal_flash.h)(0x651EAEAB)
+I (../Drivers/STM32F0xx_HAL_Driver/Inc/stm32f0xx_hal_flash_ex.h)(0x651EAEAB)
+I (../Drivers/STM32F0xx_HAL_Driver/Inc/stm32f0xx_hal_i2c.h)(0x651EAEAB)
+I (../Drivers/STM32F0xx_HAL_Driver/Inc/stm32f0xx_hal_i2c_ex.h)(0x651EAEAB)
+I (../Drivers/STM32F0xx_HAL_Driver/Inc/stm32f0xx_hal_pwr.h)(0x651EAEAB)
+I (../Drivers/STM32F0xx_HAL_Driver/Inc/stm32f0xx_hal_pwr_ex.h)(0x651EAEAB)
+I (../Drivers/STM32F0xx_HAL_Driver/Inc/stm32f0xx_hal_tim.h)(0x651EAEAB)
+I (../Drivers/STM32F0xx_HAL_Driver/Inc/stm32f0xx_hal_tim_ex.h)(0x651EAEAB)
+I (../Drivers/STM32F0xx_HAL_Driver/Inc/stm32f0xx_hal_uart.h)(0x651EAEAB)
+I (../Drivers/STM32F0xx_HAL_Driver/Inc/stm32f0xx_hal_uart_ex.h)(0x651EAEAB)
+I (../Core/Inc/cQueue.h)(0x66BA8E84)
+I (C:\Keil_v5\ARM\ARMCC\include\inttypes.h)(0x5D9B3488)
+I (C:\Keil_v5\ARM\ARMCC\include\stdbool.h)(0x5D9B3488)
+I (../Core/Inc/main.h)(0x66BB27FB)
+F (..\Core\Inc\buttons.h)(0x66BB22F8)()
+F (..\Core\Inc\cQueue.h)(0x66BA8E84)()
+F (..\Core\Src\cQueue.c)(0x66BA8E86)(--c99 -c --cpu Cortex-M0 -g -O3 --apcs=interwork --split_sections -I ../Core/Inc -I ../Drivers/STM32F0xx_HAL_Driver/Inc -I ../Drivers/STM32F0xx_HAL_Driver/Inc/Legacy -I ../Drivers/CMSIS/Device/ST/STM32F0xx/Include -I ../Drivers/CMSIS/Include-I.\RTE\_firmware-IC:\Users\allen\AppData\Local\Arm\Packs\ARM\CMSIS\5.6.0\CMSIS\Core\Include-IC:\Users\allen\AppData\Local\Arm\Packs\Keil\STM32F0xx_DFP\2.1.1\Drivers\CMSIS\Device\ST\STM32F0xx\Include-D__UVISION_VERSION="529" -D_RTE_ -DSTM32F042x6 -DUSE_HAL_DRIVER -DSTM32F042x6-o firmware\cqueue.o --omf_browse firmware\cqueue.crf --depend firmware\cqueue.d)
+I (C:\Keil_v5\ARM\ARMCC\include\string.h)(0x5D9B3488)
+I (C:\Keil_v5\ARM\ARMCC\include\stdlib.h)(0x5D9B348A)
+I (../Core/Inc/cQueue.h)(0x66BA8E84)
+I (C:\Keil_v5\ARM\ARMCC\include\inttypes.h)(0x5D9B3488)
+I (C:\Keil_v5\ARM\ARMCC\include\stdint.h)(0x5D9B3488)
+I (C:\Keil_v5\ARM\ARMCC\include\stdbool.h)(0x5D9B3488)
+I (C:\Keil_v5\ARM\ARMCC\include\stddef.h)(0x5D9B3488)
+F (../Core/Src/main.c)(0x66BB2A8F)(--c99 -c --cpu Cortex-M0 -g -O3 --apcs=interwork --split_sections -I ../Core/Inc -I ../Drivers/STM32F0xx_HAL_Driver/Inc -I ../Drivers/STM32F0xx_HAL_Driver/Inc/Legacy -I ../Drivers/CMSIS/Device/ST/STM32F0xx/Include -I ../Drivers/CMSIS/Include-I.\RTE\_firmware-IC:\Users\allen\AppData\Local\Arm\Packs\ARM\CMSIS\5.6.0\CMSIS\Core\Include-IC:\Users\allen\AppData\Local\Arm\Packs\Keil\STM32F0xx_DFP\2.1.1\Drivers\CMSIS\Device\ST\STM32F0xx\Include-D__UVISION_VERSION="529" -D_RTE_ -DSTM32F042x6 -DUSE_HAL_DRIVER -DSTM32F042x6-o firmware\main.o --omf_browse firmware\main.crf --depend firmware\main.d)
+I (../Core/Inc/main.h)(0x66BB27FB)
 I (../Drivers/STM32F0xx_HAL_Driver/Inc/stm32f0xx_hal.h)(0x651EAEAB)
 I (../Core/Inc/stm32f0xx_hal_conf.h)(0x66BA14FC)
 I (../Drivers/STM32F0xx_HAL_Driver/Inc/stm32f0xx_hal_rcc.h)(0x651EAEAB)
@@ -42,8 +92,10 @@ I (../Core/Inc/buttons.h)(0x66BB22F8)
 I (../Core/Inc/cQueue.h)(0x66BA8E84)
 I (C:\Keil_v5\ARM\ARMCC\include\inttypes.h)(0x5D9B3488)
 I (C:\Keil_v5\ARM\ARMCC\include\stdbool.h)(0x5D9B3488)
+I (../Core/Inc/softserial.h)(0x66BB29C3)
+I (../Core/Inc/delay_us.h)(0x66BB2941)
 F (../Core/Src/stm32f0xx_it.c)(0x66BA14FB)(--c99 -c --cpu Cortex-M0 -g -O3 --apcs=interwork --split_sections -I ../Core/Inc -I ../Drivers/STM32F0xx_HAL_Driver/Inc -I ../Drivers/STM32F0xx_HAL_Driver/Inc/Legacy -I ../Drivers/CMSIS/Device/ST/STM32F0xx/Include -I ../Drivers/CMSIS/Include-I.\RTE\_firmware-IC:\Users\allen\AppData\Local\Arm\Packs\ARM\CMSIS\5.6.0\CMSIS\Core\Include-IC:\Users\allen\AppData\Local\Arm\Packs\Keil\STM32F0xx_DFP\2.1.1\Drivers\CMSIS\Device\ST\STM32F0xx\Include-D__UVISION_VERSION="529" -D_RTE_ -DSTM32F042x6 -DUSE_HAL_DRIVER -DSTM32F042x6-o firmware\stm32f0xx_it.o --omf_browse firmware\stm32f0xx_it.crf --depend firmware\stm32f0xx_it.d)
-I (../Core/Inc/main.h)(0x66BA924E)
+I (../Core/Inc/main.h)(0x66BB27FB)
 I (../Drivers/STM32F0xx_HAL_Driver/Inc/stm32f0xx_hal.h)(0x651EAEAB)
 I (../Core/Inc/stm32f0xx_hal_conf.h)(0x66BA14FC)
 I (../Drivers/STM32F0xx_HAL_Driver/Inc/stm32f0xx_hal_rcc.h)(0x651EAEAB)
@@ -77,7 +129,7 @@ I (../Drivers/STM32F0xx_HAL_Driver/Inc/stm32f0xx_hal_uart.h)(0x651EAEAB)
 I (../Drivers/STM32F0xx_HAL_Driver/Inc/stm32f0xx_hal_uart_ex.h)(0x651EAEAB)
 I (../Core/Inc/stm32f0xx_it.h)(0x66BA14FB)
 F (../Core/Src/stm32f0xx_hal_msp.c)(0x66BA14FB)(--c99 -c --cpu Cortex-M0 -g -O3 --apcs=interwork --split_sections -I ../Core/Inc -I ../Drivers/STM32F0xx_HAL_Driver/Inc -I ../Drivers/STM32F0xx_HAL_Driver/Inc/Legacy -I ../Drivers/CMSIS/Device/ST/STM32F0xx/Include -I ../Drivers/CMSIS/Include-I.\RTE\_firmware-IC:\Users\allen\AppData\Local\Arm\Packs\ARM\CMSIS\5.6.0\CMSIS\Core\Include-IC:\Users\allen\AppData\Local\Arm\Packs\Keil\STM32F0xx_DFP\2.1.1\Drivers\CMSIS\Device\ST\STM32F0xx\Include-D__UVISION_VERSION="529" -D_RTE_ -DSTM32F042x6 -DUSE_HAL_DRIVER -DSTM32F042x6-o firmware\stm32f0xx_hal_msp.o --omf_browse firmware\stm32f0xx_hal_msp.crf --depend firmware\stm32f0xx_hal_msp.d)
-I (../Core/Inc/main.h)(0x66BA924E)
+I (../Core/Inc/main.h)(0x66BB27FB)
 I (../Drivers/STM32F0xx_HAL_Driver/Inc/stm32f0xx_hal.h)(0x651EAEAB)
 I (../Core/Inc/stm32f0xx_hal_conf.h)(0x66BA14FC)
 I (../Drivers/STM32F0xx_HAL_Driver/Inc/stm32f0xx_hal_rcc.h)(0x651EAEAB)
@@ -109,12 +161,7 @@ I (../Drivers/STM32F0xx_HAL_Driver/Inc/stm32f0xx_hal_tim.h)(0x651EAEAB)
 I (../Drivers/STM32F0xx_HAL_Driver/Inc/stm32f0xx_hal_tim_ex.h)(0x651EAEAB)
 I (../Drivers/STM32F0xx_HAL_Driver/Inc/stm32f0xx_hal_uart.h)(0x651EAEAB)
 I (../Drivers/STM32F0xx_HAL_Driver/Inc/stm32f0xx_hal_uart_ex.h)(0x651EAEAB)
-F (..\Core\Src\buttons.c)(0x66BB23C3)(--c99 -c --cpu Cortex-M0 -g -O3 --apcs=interwork --split_sections -I ../Core/Inc -I ../Drivers/STM32F0xx_HAL_Driver/Inc -I ../Drivers/STM32F0xx_HAL_Driver/Inc/Legacy -I ../Drivers/CMSIS/Device/ST/STM32F0xx/Include -I ../Drivers/CMSIS/Include-I.\RTE\_firmware-IC:\Users\allen\AppData\Local\Arm\Packs\ARM\CMSIS\5.6.0\CMSIS\Core\Include-IC:\Users\allen\AppData\Local\Arm\Packs\Keil\STM32F0xx_DFP\2.1.1\Drivers\CMSIS\Device\ST\STM32F0xx\Include-D__UVISION_VERSION="529" -D_RTE_ -DSTM32F042x6 -DUSE_HAL_DRIVER -DSTM32F042x6-o firmware\buttons.o --omf_browse firmware\buttons.crf --depend firmware\buttons.d)
-I (C:\Keil_v5\ARM\ARMCC\include\stdio.h)(0x5D9B348A)
-I (C:\Keil_v5\ARM\ARMCC\include\stdint.h)(0x5D9B3488)
-I (C:\Keil_v5\ARM\ARMCC\include\string.h)(0x5D9B3488)
-I (C:\Keil_v5\ARM\ARMCC\include\stdlib.h)(0x5D9B348A)
-I (../Core/Inc/buttons.h)(0x66BB22F8)
+F (..\Core\Src\delay_us.c)(0x66BB2990)(--c99 -c --cpu Cortex-M0 -g -O3 --apcs=interwork --split_sections -I ../Core/Inc -I ../Drivers/STM32F0xx_HAL_Driver/Inc -I ../Drivers/STM32F0xx_HAL_Driver/Inc/Legacy -I ../Drivers/CMSIS/Device/ST/STM32F0xx/Include -I ../Drivers/CMSIS/Include-I.\RTE\_firmware-IC:\Users\allen\AppData\Local\Arm\Packs\ARM\CMSIS\5.6.0\CMSIS\Core\Include-IC:\Users\allen\AppData\Local\Arm\Packs\Keil\STM32F0xx_DFP\2.1.1\Drivers\CMSIS\Device\ST\STM32F0xx\Include-D__UVISION_VERSION="529" -D_RTE_ -DSTM32F042x6 -DUSE_HAL_DRIVER -DSTM32F042x6-o firmware\delay_us.o --omf_browse firmware\delay_us.crf --depend firmware\delay_us.d)
 I (../Drivers/STM32F0xx_HAL_Driver/Inc/stm32f0xx_hal.h)(0x651EAEAB)
 I (../Core/Inc/stm32f0xx_hal_conf.h)(0x66BA14FC)
 I (../Drivers/STM32F0xx_HAL_Driver/Inc/stm32f0xx_hal_rcc.h)(0x651EAEAB)
@@ -122,6 +169,7 @@ I (../Drivers/STM32F0xx_HAL_Driver/Inc/stm32f0xx_hal_def.h)(0x651EAEAB)
 I (../Drivers/CMSIS/Device/ST/STM32F0xx/Include/stm32f0xx.h)(0x651EAEAB)
 I (../Drivers/CMSIS/Device/ST/STM32F0xx/Include/stm32f042x6.h)(0x651EAEAB)
 I (../Drivers/CMSIS/Include/core_cm0.h)(0x651EAE9A)
+I (C:\Keil_v5\ARM\ARMCC\include\stdint.h)(0x5D9B3488)
 I (../Drivers/CMSIS/Include/cmsis_version.h)(0x651EAE9A)
 I (../Drivers/CMSIS/Include/cmsis_compiler.h)(0x651EAE9A)
 I (../Drivers/CMSIS/Include/cmsis_armcc.h)(0x651EAE9A)
@@ -145,20 +193,43 @@ I (../Drivers/STM32F0xx_HAL_Driver/Inc/stm32f0xx_hal_tim.h)(0x651EAEAB)
 I (../Drivers/STM32F0xx_HAL_Driver/Inc/stm32f0xx_hal_tim_ex.h)(0x651EAEAB)
 I (../Drivers/STM32F0xx_HAL_Driver/Inc/stm32f0xx_hal_uart.h)(0x651EAEAB)
 I (../Drivers/STM32F0xx_HAL_Driver/Inc/stm32f0xx_hal_uart_ex.h)(0x651EAEAB)
-I (../Core/Inc/cQueue.h)(0x66BA8E84)
-I (C:\Keil_v5\ARM\ARMCC\include\inttypes.h)(0x5D9B3488)
-I (C:\Keil_v5\ARM\ARMCC\include\stdbool.h)(0x5D9B3488)
-I (../Core/Inc/main.h)(0x66BA924E)
-F (..\Core\Inc\buttons.h)(0x66BB22F8)()
-F (..\Core\Inc\cQueue.h)(0x66BA8E84)()
-F (..\Core\Src\cQueue.c)(0x66BA8E86)(--c99 -c --cpu Cortex-M0 -g -O3 --apcs=interwork --split_sections -I ../Core/Inc -I ../Drivers/STM32F0xx_HAL_Driver/Inc -I ../Drivers/STM32F0xx_HAL_Driver/Inc/Legacy -I ../Drivers/CMSIS/Device/ST/STM32F0xx/Include -I ../Drivers/CMSIS/Include-I.\RTE\_firmware-IC:\Users\allen\AppData\Local\Arm\Packs\ARM\CMSIS\5.6.0\CMSIS\Core\Include-IC:\Users\allen\AppData\Local\Arm\Packs\Keil\STM32F0xx_DFP\2.1.1\Drivers\CMSIS\Device\ST\STM32F0xx\Include-D__UVISION_VERSION="529" -D_RTE_ -DSTM32F042x6 -DUSE_HAL_DRIVER -DSTM32F042x6-o firmware\cqueue.o --omf_browse firmware\cqueue.crf --depend firmware\cqueue.d)
-I (C:\Keil_v5\ARM\ARMCC\include\string.h)(0x5D9B3488)
-I (C:\Keil_v5\ARM\ARMCC\include\stdlib.h)(0x5D9B348A)
-I (../Core/Inc/cQueue.h)(0x66BA8E84)
-I (C:\Keil_v5\ARM\ARMCC\include\inttypes.h)(0x5D9B3488)
+I (../Core/Inc/delay_us.h)(0x66BB2941)
+F (..\Core\Src\softserial.c)(0x66BB2AB5)(--c99 -c --cpu Cortex-M0 -g -O3 --apcs=interwork --split_sections -I ../Core/Inc -I ../Drivers/STM32F0xx_HAL_Driver/Inc -I ../Drivers/STM32F0xx_HAL_Driver/Inc/Legacy -I ../Drivers/CMSIS/Device/ST/STM32F0xx/Include -I ../Drivers/CMSIS/Include-I.\RTE\_firmware-IC:\Users\allen\AppData\Local\Arm\Packs\ARM\CMSIS\5.6.0\CMSIS\Core\Include-IC:\Users\allen\AppData\Local\Arm\Packs\Keil\STM32F0xx_DFP\2.1.1\Drivers\CMSIS\Device\ST\STM32F0xx\Include-D__UVISION_VERSION="529" -D_RTE_ -DSTM32F042x6 -DUSE_HAL_DRIVER -DSTM32F042x6-o firmware\softserial.o --omf_browse firmware\softserial.crf --depend firmware\softserial.d)
+I (../Core/Inc/softserial.h)(0x66BB29C3)
+I (../Drivers/STM32F0xx_HAL_Driver/Inc/stm32f0xx_hal.h)(0x651EAEAB)
+I (../Core/Inc/stm32f0xx_hal_conf.h)(0x66BA14FC)
+I (../Drivers/STM32F0xx_HAL_Driver/Inc/stm32f0xx_hal_rcc.h)(0x651EAEAB)
+I (../Drivers/STM32F0xx_HAL_Driver/Inc/stm32f0xx_hal_def.h)(0x651EAEAB)
+I (../Drivers/CMSIS/Device/ST/STM32F0xx/Include/stm32f0xx.h)(0x651EAEAB)
+I (../Drivers/CMSIS/Device/ST/STM32F0xx/Include/stm32f042x6.h)(0x651EAEAB)
+I (../Drivers/CMSIS/Include/core_cm0.h)(0x651EAE9A)
 I (C:\Keil_v5\ARM\ARMCC\include\stdint.h)(0x5D9B3488)
-I (C:\Keil_v5\ARM\ARMCC\include\stdbool.h)(0x5D9B3488)
+I (../Drivers/CMSIS/Include/cmsis_version.h)(0x651EAE9A)
+I (../Drivers/CMSIS/Include/cmsis_compiler.h)(0x651EAE9A)
+I (../Drivers/CMSIS/Include/cmsis_armcc.h)(0x651EAE9A)
+I (../Drivers/CMSIS/Device/ST/STM32F0xx/Include/system_stm32f0xx.h)(0x651EAEAB)
+I (../Drivers/STM32F0xx_HAL_Driver/Inc/Legacy/stm32_hal_legacy.h)(0x651EAEAB)
 I (C:\Keil_v5\ARM\ARMCC\include\stddef.h)(0x5D9B3488)
+I (../Drivers/STM32F0xx_HAL_Driver/Inc/stm32f0xx_hal_rcc_ex.h)(0x651EAEAB)
+I (../Drivers/STM32F0xx_HAL_Driver/Inc/stm32f0xx_hal_gpio.h)(0x651EAEAB)
+I (../Drivers/STM32F0xx_HAL_Driver/Inc/stm32f0xx_hal_gpio_ex.h)(0x651EAEAB)
+I (../Drivers/STM32F0xx_HAL_Driver/Inc/stm32f0xx_hal_exti.h)(0x651EAEAB)
+I (../Drivers/STM32F0xx_HAL_Driver/Inc/stm32f0xx_hal_dma.h)(0x651EAEAB)
+I (../Drivers/STM32F0xx_HAL_Driver/Inc/stm32f0xx_hal_dma_ex.h)(0x651EAEAB)
+I (../Drivers/STM32F0xx_HAL_Driver/Inc/stm32f0xx_hal_cortex.h)(0x651EAEAB)
+I (../Drivers/STM32F0xx_HAL_Driver/Inc/stm32f0xx_hal_flash.h)(0x651EAEAB)
+I (../Drivers/STM32F0xx_HAL_Driver/Inc/stm32f0xx_hal_flash_ex.h)(0x651EAEAB)
+I (../Drivers/STM32F0xx_HAL_Driver/Inc/stm32f0xx_hal_i2c.h)(0x651EAEAB)
+I (../Drivers/STM32F0xx_HAL_Driver/Inc/stm32f0xx_hal_i2c_ex.h)(0x651EAEAB)
+I (../Drivers/STM32F0xx_HAL_Driver/Inc/stm32f0xx_hal_pwr.h)(0x651EAEAB)
+I (../Drivers/STM32F0xx_HAL_Driver/Inc/stm32f0xx_hal_pwr_ex.h)(0x651EAEAB)
+I (../Drivers/STM32F0xx_HAL_Driver/Inc/stm32f0xx_hal_tim.h)(0x651EAEAB)
+I (../Drivers/STM32F0xx_HAL_Driver/Inc/stm32f0xx_hal_tim_ex.h)(0x651EAEAB)
+I (../Drivers/STM32F0xx_HAL_Driver/Inc/stm32f0xx_hal_uart.h)(0x651EAEAB)
+I (../Drivers/STM32F0xx_HAL_Driver/Inc/stm32f0xx_hal_uart_ex.h)(0x651EAEAB)
+I (../Core/Inc/delay_us.h)(0x66BB2941)
+F (..\Core\Inc\softserial.h)(0x66BB29C3)()
+F (..\Core\Inc\delay_us.h)(0x66BB2941)()
 F (../Drivers/STM32F0xx_HAL_Driver/Src/stm32f0xx_hal_tim.c)(0x651EAEAB)(--c99 -c --cpu Cortex-M0 -g -O3 --apcs=interwork --split_sections -I ../Core/Inc -I ../Drivers/STM32F0xx_HAL_Driver/Inc -I ../Drivers/STM32F0xx_HAL_Driver/Inc/Legacy -I ../Drivers/CMSIS/Device/ST/STM32F0xx/Include -I ../Drivers/CMSIS/Include-I.\RTE\_firmware-IC:\Users\allen\AppData\Local\Arm\Packs\ARM\CMSIS\5.6.0\CMSIS\Core\Include-IC:\Users\allen\AppData\Local\Arm\Packs\Keil\STM32F0xx_DFP\2.1.1\Drivers\CMSIS\Device\ST\STM32F0xx\Include-D__UVISION_VERSION="529" -D_RTE_ -DSTM32F042x6 -DUSE_HAL_DRIVER -DSTM32F042x6-o firmware\stm32f0xx_hal_tim.o --omf_browse firmware\stm32f0xx_hal_tim.crf --depend firmware\stm32f0xx_hal_tim.d)
 I (../Drivers/STM32F0xx_HAL_Driver/Inc/stm32f0xx_hal.h)(0x651EAEAB)
 I (../Core/Inc/stm32f0xx_hal_conf.h)(0x66BA14FC)

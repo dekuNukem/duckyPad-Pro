@@ -40,3 +40,5 @@ firmware\main.o: ../Core/Inc/buttons.h
 firmware\main.o: ../Core/Inc/cQueue.h
 firmware\main.o: C:\Keil_v5\ARM\ARMCC\Bin\..\include\inttypes.h
 firmware\main.o: C:\Keil_v5\ARM\ARMCC\Bin\..\include\stdbool.h
+firmware\main.o: ../Core/Inc/softserial.h
+firmware\main.o: ../Core/Inc/delay_us.h

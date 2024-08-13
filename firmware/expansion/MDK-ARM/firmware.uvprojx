@@ -393,21 +393,6 @@
           <GroupName>Application/User/Core</GroupName>
           <Files>
             <File>
-              <FileName>main.c</FileName>
-              <FileType>1</FileType>
-              <FilePath>../Core/Src/main.c</FilePath>
-            </File>
-            <File>
-              <FileName>stm32f0xx_it.c</FileName>
-              <FileType>1</FileType>
-              <FilePath>../Core/Src/stm32f0xx_it.c</FilePath>
-            </File>
-            <File>
-              <FileName>stm32f0xx_hal_msp.c</FileName>
-              <FileType>1</FileType>
-              <FilePath>../Core/Src/stm32f0xx_hal_msp.c</FilePath>
-            </File>
-            <File>
               <FileName>buttons.c</FileName>
               <FileType>1</FileType>
               <FilePath>..\Core\Src\buttons.c</FilePath>
@@ -426,6 +411,41 @@
               <FileName>cQueue.c</FileName>
               <FileType>1</FileType>
               <FilePath>..\Core\Src\cQueue.c</FilePath>
+            </File>
+            <File>
+              <FileName>main.c</FileName>
+              <FileType>1</FileType>
+              <FilePath>../Core/Src/main.c</FilePath>
+            </File>
+            <File>
+              <FileName>stm32f0xx_it.c</FileName>
+              <FileType>1</FileType>
+              <FilePath>../Core/Src/stm32f0xx_it.c</FilePath>
+            </File>
+            <File>
+              <FileName>stm32f0xx_hal_msp.c</FileName>
+              <FileType>1</FileType>
+              <FilePath>../Core/Src/stm32f0xx_hal_msp.c</FilePath>
+            </File>
+            <File>
+              <FileName>delay_us.c</FileName>
+              <FileType>1</FileType>
+              <FilePath>..\Core\Src\delay_us.c</FilePath>
+            </File>
+            <File>
+              <FileName>softserial.c</FileName>
+              <FileType>1</FileType>
+              <FilePath>..\Core\Src\softserial.c</FilePath>
+            </File>
+            <File>
+              <FileName>softserial.h</FileName>
+              <FileType>5</FileType>
+              <FilePath>..\Core\Inc\softserial.h</FilePath>
+            </File>
+            <File>
+              <FileName>delay_us.h</FileName>
+              <FileType>5</FileType>
+              <FilePath>..\Core\Inc\delay_us.h</FilePath>
             </File>
           </Files>
         </Group>

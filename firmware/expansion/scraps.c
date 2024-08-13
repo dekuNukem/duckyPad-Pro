@@ -1,6 +1,13 @@
+void HAL_TIM_PeriodElapsedCallback(TIM_HandleTypeDef *htim)
+{
+  // happens every 25ms
+  // HAL_GPIO_TogglePin(USER_LED_GPIO_Port, USER_LED_Pin);
+  // channel_update(starting_id);
+  printf("%d\n", micros());
+}
 // printf("channel %d pressed!\n", i);
 // printf("channel %d released!\n", i);
-
+// HAL_UART_Transmit(&away_from_duckypad_uart, (unsigned char *)&ch, 1, 100);
     else
     {
       // printf("READY. ID: %d\n", starting_id);

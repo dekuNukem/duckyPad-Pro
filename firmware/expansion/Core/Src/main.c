@@ -27,6 +27,8 @@
 #include <time.h>
 #include "buttons.h"
 #include "cQueue.h"
+#include "softserial.h"
+#include "delay_us.h"
 
 /* USER CODE END Includes */
 
@@ -68,8 +70,6 @@ uint8_t starting_id;
 /* Private macro -------------------------------------------------------------*/
 /* USER CODE BEGIN PM */
 
-#define micros() (htim2.Instance->CNT)
-
 /* USER CODE END PM */
 
 /* Private variables ---------------------------------------------------------*/
@@ -86,7 +86,7 @@ UART_HandleTypeDef huart2;
 
 int fputc(int ch, FILE *f)
 {
-  HAL_UART_Transmit(&away_from_duckypad_uart, (unsigned char *)&ch, 1, 100);
+  softserial_putc(ch);
   return ch;
 }
 
@@ -111,10 +111,9 @@ static void MX_USART1_UART_Init(void);
 /* Private user code ---------------------------------------------------------*/
 /* USER CODE BEGIN 0 */
 
+// happens every 25ms
 void HAL_TIM_PeriodElapsedCallback(TIM_HandleTypeDef *htim)
 {
-  // happens every 25ms
-  // HAL_GPIO_TogglePin(USER_LED_GPIO_Port, USER_LED_Pin);
   channel_update(starting_id);
 }
 
@@ -178,14 +177,16 @@ int main(void)
   MX_TIM16_Init();
   MX_USART1_UART_Init();
   /* USER CODE BEGIN 2 */
+  delay_us_init(&htim2);
+  softserial_init(SOFTSERIAL_TX_GPIO_Port, SOFTSERIAL_TX_Pin);
   sw_event_queue_init();
-  HAL_TIM_Base_Start(&htim2);
   HAL_TIM_Base_Start_IT(&htim16);
   current_state = STATE_UNINITIALIZED;
   /* USER CODE END 2 */
 
   /* Infinite loop */
   /* USER CODE BEGIN WHILE */
+  printf("hello world!\n");
   
   while (1)
   {
@@ -276,7 +277,7 @@ static void MX_TIM2_Init(void)
 
   /* USER CODE END TIM2_Init 1 */
   htim2.Instance = TIM2;
-  htim2.Init.Prescaler = 7;
+  htim2.Init.Prescaler = 47;
   htim2.Init.CounterMode = TIM_COUNTERMODE_UP;
   htim2.Init.Period = 4294967295;
   htim2.Init.ClockDivision = TIM_CLOCKDIVISION_DIV1;
@@ -421,6 +422,9 @@ static void MX_GPIO_Init(void)
   __HAL_RCC_GPIOA_CLK_ENABLE();
 
   /*Configure GPIO pin Output Level */
+  HAL_GPIO_WritePin(SOFTSERIAL_TX_GPIO_Port, SOFTSERIAL_TX_Pin, GPIO_PIN_SET);
+
+  /*Configure GPIO pin Output Level */
   HAL_GPIO_WritePin(USER_LED_GPIO_Port, USER_LED_Pin, GPIO_PIN_RESET);
 
   /*Configure GPIO pins : USER_BUTTON_Pin CH4_Pin */
@@ -441,12 +445,12 @@ static void MX_GPIO_Init(void)
   GPIO_InitStruct.Pull = GPIO_NOPULL;
   HAL_GPIO_Init(GPIOA, &GPIO_InitStruct);
 
-  /*Configure GPIO pin : USER_LED_Pin */
-  GPIO_InitStruct.Pin = USER_LED_Pin;
+  /*Configure GPIO pins : SOFTSERIAL_TX_Pin USER_LED_Pin */
+  GPIO_InitStruct.Pin = SOFTSERIAL_TX_Pin|USER_LED_Pin;
   GPIO_InitStruct.Mode = GPIO_MODE_OUTPUT_PP;
   GPIO_InitStruct.Pull = GPIO_NOPULL;
   GPIO_InitStruct.Speed = GPIO_SPEED_FREQ_LOW;
-  HAL_GPIO_Init(USER_LED_GPIO_Port, &GPIO_InitStruct);
+  HAL_GPIO_Init(GPIOA, &GPIO_InitStruct);
 
 /* USER CODE BEGIN MX_GPIO_Init_2 */
 /* USER CODE END MX_GPIO_Init_2 */
