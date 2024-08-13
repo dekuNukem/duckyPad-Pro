@@ -1,3 +1,5 @@
+      printf("unsupported remote fw: %d\n", remote_fw_ver_major);
+  
   printf("tdpR: %x\n", this_cmd);
       printf("Asking: %02x\n", cmd_ask_starting_id_towards_duckypad);
 

@@ -8,6 +8,7 @@
 #include "stm32f0xx_hal.h"
 #include "cQueue.h"
 
+#define MAX_CHANNELS 64
 #define CHANNEL_COUNT 6
 #define CHANNEL_1 0
 #define CHANNEL_2 1
@@ -20,6 +21,9 @@
 #define SW_EVENT_SHORT_PRESS 1
 
 #define SW_EVENT_QUEUE_SIZE 16
+
+#define CMD_SW_PRESS_BITMASK 0x80
+#define CMD_SW_RELEASE_BITMASK 0xc0
 
 void channel_update(uint8_t start_id);
 void sw_event_queue_init(void);

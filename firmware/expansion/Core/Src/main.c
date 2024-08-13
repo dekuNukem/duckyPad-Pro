@@ -63,6 +63,8 @@ uint8_t fw_version_patch = 1;
 
 uint8_t towards_duckypad_tx_buf[UART_BUF_SIZE];
 uint8_t towards_duckypad_rx_buf[UART_BUF_SIZE];
+uint8_t away_from_duckypad_tx_buf[UART_BUF_SIZE];
+uint8_t away_from_duckypad_rx_buf[UART_BUF_SIZE];
 
 uint8_t starting_id;
 /* USER CODE END PD */
@@ -98,6 +100,12 @@ void towards_duckypad_send(uint8_t data)
   printf("TDS:%02x\n", data);
 }
 
+void away_from_duckypad_send(uint8_t data)
+{
+  HAL_UART_Transmit(&away_from_duckypad_uart, &data, 1, 100);
+  printf("AFDS:%02x\n", data);
+}
+
 /* USER CODE END PV */
 
 /* Private function prototypes -----------------------------------------------*/
@@ -130,10 +138,14 @@ uint32_t get_rand_delay_ms(void)
 #define STATE_READY 1
 volatile uint8_t current_state;
 
-#define CMD_ASSIGN_STARTING_ID_BITMASK 0x40
+#define TOP_TWO_BITS 0xc0
+#define CMD_ASK_START_ID_BITMASK 0x0
+#define CMD_ASSIGN_START_ID_BITMASK 0x40
+
 void towards_duckypad_receive_parse(uint8_t this_cmd)
 {
-  if(this_cmd & CMD_ASSIGN_STARTING_ID_BITMASK)
+  printf("TDR:%02x\n", this_cmd);
+  if(this_cmd & CMD_ASSIGN_START_ID_BITMASK)
   {
     starting_id = towards_duckypad_rx_buf[0] & 0x3f;
     HAL_GPIO_WritePin(USER_LED_GPIO_Port, USER_LED_Pin, GPIO_PIN_RESET);
@@ -142,12 +154,33 @@ void towards_duckypad_receive_parse(uint8_t this_cmd)
   }
 }
 
+void away_from_duckypad_receive_parse(uint8_t this_cmd)
+{
+  printf("AFDR:%02x\n", this_cmd);
+  uint8_t cmd_type = this_cmd & TOP_TWO_BITS;
+  if(cmd_type == CMD_ASK_START_ID_BITMASK)
+  {
+    if(this_cmd & 0x7 != fw_version_major)
+      return;
+    if(current_state == STATE_UNINITIALIZED)
+      return;
+    uint8_t next_start_id = starting_id + CHANNEL_COUNT;
+    if(next_start_id >= MAX_CHANNELS)
+      return;
+    away_from_duckypad_send(next_start_id | CMD_ASSIGN_START_ID_BITMASK);
+  }
+  else if(cmd_type == CMD_SW_PRESS_BITMASK || cmd_type == CMD_SW_RELEASE_BITMASK)
+  {
+    away_from_duckypad_send(this_cmd);
+  }
+}
+
 void HAL_UART_RxCpltCallback(UART_HandleTypeDef *huart)
 {
   if(huart == &towards_duckypad_uart)
     towards_duckypad_receive_parse(towards_duckypad_rx_buf[0]);
   else
-    ;
+    away_from_duckypad_receive_parse(away_from_duckypad_rx_buf[0]);
 }
 
 #define UART_QUEUE_SEND_FREQ_MS 30
@@ -201,6 +234,7 @@ int main(void)
   while (1)
   {
     HAL_UART_Receive_IT(&towards_duckypad_uart, towards_duckypad_rx_buf, 1);
+    HAL_UART_Receive_IT(&away_from_duckypad_uart, away_from_duckypad_rx_buf, 1);
     /* USER CODE END WHILE */
 
     /* USER CODE BEGIN 3 */

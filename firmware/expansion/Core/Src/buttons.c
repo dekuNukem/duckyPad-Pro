@@ -24,12 +24,18 @@ void channel_update(uint8_t start_id)
   {
     if(this_channel_status[i] == 0 && last_channel_status[i] == 1)
     {
-      uint8_t this_cmd = ((start_id + i) & 0x3f) | 0x80;
+      uint8_t this_id = start_id + i;
+      if(this_id >= MAX_CHANNELS)
+        continue;
+      uint8_t this_cmd = (this_id & 0x3f) | CMD_SW_PRESS_BITMASK;
       q_push(&switch_event_queue, &this_cmd);
     }
     if(this_channel_status[i] == 1 && last_channel_status[i] == 0)
     {
-      uint8_t this_cmd = ((start_id + i) & 0x3f) | 0xc0;
+      uint8_t this_id = start_id + i;
+      if(this_id >= MAX_CHANNELS)
+        continue;
+      uint8_t this_cmd = (this_id & 0x3f) | CMD_SW_RELEASE_BITMASK;
       q_push(&switch_event_queue, &this_cmd);
     }
   }
