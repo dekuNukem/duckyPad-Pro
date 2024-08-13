@@ -2,6 +2,7 @@
 #include "delay_us.h"
 
 #define BIT_DELAY_9600 104
+#define BIT_DELAY_38400 26
 #define BIT_DELAY_57600 16
 
 #define SOFT_UART_SPEED BIT_DELAY_57600

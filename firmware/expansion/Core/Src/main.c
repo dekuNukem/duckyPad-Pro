@@ -86,13 +86,15 @@ UART_HandleTypeDef huart2;
 
 int fputc(int ch, FILE *f)
 {
+  __disable_irq();
   softserial_putc(ch);
+  __enable_irq();
   return ch;
 }
 
 void towards_duckypad_send(uint8_t data)
 {
-  HAL_UART_Transmit(&towards_duckypad_uart, &data, 1, 10);
+  HAL_UART_Transmit(&towards_duckypad_uart, &data, 1, 100);
 }
 
 /* USER CODE END PV */
@@ -132,6 +134,8 @@ void HAL_UART_RxCpltCallback(UART_HandleTypeDef *huart)
   if(huart == &towards_duckypad_uart)
   {
     starting_id = towards_duckypad_rx_buf[0] & 0x3f;
+    printf("Got: %d\n", starting_id);
+    HAL_GPIO_WritePin(USER_LED_GPIO_Port, USER_LED_Pin, GPIO_PIN_RESET);
     current_state = STATE_READY;
   }
   else
@@ -139,6 +143,8 @@ void HAL_UART_RxCpltCallback(UART_HandleTypeDef *huart)
     ;
   }
 }
+
+#define UART_QUEUE_SEND_FREQ_MS 30
 
 /* USER CODE END 0 */
 
@@ -198,20 +204,17 @@ int main(void)
       HAL_Delay(get_rand_delay_ms());
       uint8_t cmd_ask_starting_id_towards_duckypad = fw_version_major & 0x3f;
       towards_duckypad_send(cmd_ask_starting_id_towards_duckypad);
-      printf("ask%02x\n", cmd_ask_starting_id_towards_duckypad);
+      printf("Asking: %02x\n", cmd_ask_starting_id_towards_duckypad);
       HAL_GPIO_TogglePin(USER_LED_GPIO_Port, USER_LED_Pin);
     }
     else
     {
-      // printf("READY. ID: %d\n", starting_id);
-      HAL_Delay(500);
-      uint8_t qsize = q_getCount(&switch_event_queue);
-      if(qsize == 0)
-        continue;
-      printf("qsize: %d\n", qsize);
+      HAL_Delay(UART_QUEUE_SEND_FREQ_MS);
       uint8_t this_cmd;
-      q_pop(&switch_event_queue, &this_cmd);
-      printf("swe: %02x\n", this_cmd);
+      if(q_pop(&switch_event_queue, &this_cmd) == 0)
+        continue;
+      towards_duckypad_send(this_cmd);
+      printf("tdp:%x\n", this_cmd);
     }
   }
   /* USER CODE END 3 */
