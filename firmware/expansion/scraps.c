@@ -2,7 +2,9 @@
   
   printf("tdpR: %x\n", this_cmd);
       printf("Asking: %02x\n", cmd_ask_starting_id_towards_duckypad);
-
+__disable_irq();
+  softserial_putc(ch);
+  __enable_irq();
 void HAL_TIM_PeriodElapsedCallback(TIM_HandleTypeDef *htim)
 {
   // happens every 25ms

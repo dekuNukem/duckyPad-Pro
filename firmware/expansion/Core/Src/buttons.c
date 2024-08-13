@@ -28,7 +28,9 @@ void channel_update(uint8_t start_id)
       if(this_id >= MAX_CHANNELS)
         continue;
       uint8_t this_cmd = (this_id & 0x3f) | CMD_SW_PRESS_BITMASK;
+      __disable_irq();
       q_push(&switch_event_queue, &this_cmd);
+      __enable_irq();
     }
     if(this_channel_status[i] == 1 && last_channel_status[i] == 0)
     {
@@ -36,7 +38,9 @@ void channel_update(uint8_t start_id)
       if(this_id >= MAX_CHANNELS)
         continue;
       uint8_t this_cmd = (this_id & 0x3f) | CMD_SW_RELEASE_BITMASK;
+      __disable_irq();
       q_push(&switch_event_queue, &this_cmd);
+      __enable_irq();
     }
   }
   memcpy(last_channel_status, this_channel_status, CHANNEL_COUNT);

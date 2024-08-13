@@ -171,7 +171,7 @@ void away_from_duckypad_receive_parse(uint8_t this_cmd)
   }
   else if(cmd_type == CMD_SW_PRESS_BITMASK || cmd_type == CMD_SW_RELEASE_BITMASK)
   {
-    towards_duckypad_send(this_cmd);
+    q_push(&switch_event_queue, &this_cmd);
   }
 }
 
@@ -183,7 +183,7 @@ void HAL_UART_RxCpltCallback(UART_HandleTypeDef *huart)
     away_from_duckypad_receive_parse(away_from_duckypad_rx_buf[0]);
 }
 
-#define UART_QUEUE_SEND_FREQ_MS 30
+#define UART_QUEUE_SEND_FREQ_MS 10
 
 /* USER CODE END 0 */
 
