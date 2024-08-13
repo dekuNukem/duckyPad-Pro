@@ -1,3 +1,6 @@
+  printf("tdpR: %x\n", this_cmd);
+      printf("Asking: %02x\n", cmd_ask_starting_id_towards_duckypad);
+
 void HAL_TIM_PeriodElapsedCallback(TIM_HandleTypeDef *htim)
 {
   // happens every 25ms

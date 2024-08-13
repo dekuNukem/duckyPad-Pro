@@ -95,6 +95,7 @@ int fputc(int ch, FILE *f)
 void towards_duckypad_send(uint8_t data)
 {
   HAL_UART_Transmit(&towards_duckypad_uart, &data, 1, 100);
+  printf("TDS:%02x\n", data);
 }
 
 /* USER CODE END PV */
@@ -129,19 +130,24 @@ uint32_t get_rand_delay_ms(void)
 #define STATE_READY 1
 volatile uint8_t current_state;
 
+#define CMD_ASSIGN_STARTING_ID_BITMASK 0x40
+void towards_duckypad_receive_parse(uint8_t this_cmd)
+{
+  if(this_cmd & CMD_ASSIGN_STARTING_ID_BITMASK)
+  {
+    starting_id = towards_duckypad_rx_buf[0] & 0x3f;
+    HAL_GPIO_WritePin(USER_LED_GPIO_Port, USER_LED_Pin, GPIO_PIN_RESET);
+    current_state = STATE_READY;
+    printf("Got ID: %x\n", starting_id);
+  }
+}
+
 void HAL_UART_RxCpltCallback(UART_HandleTypeDef *huart)
 {
   if(huart == &towards_duckypad_uart)
-  {
-    starting_id = towards_duckypad_rx_buf[0] & 0x3f;
-    printf("Got: %d\n", starting_id);
-    HAL_GPIO_WritePin(USER_LED_GPIO_Port, USER_LED_Pin, GPIO_PIN_RESET);
-    current_state = STATE_READY;
-  }
+    towards_duckypad_receive_parse(towards_duckypad_rx_buf[0]);
   else
-  {
     ;
-  }
 }
 
 #define UART_QUEUE_SEND_FREQ_MS 30
@@ -204,7 +210,6 @@ int main(void)
       HAL_Delay(get_rand_delay_ms());
       uint8_t cmd_ask_starting_id_towards_duckypad = fw_version_major & 0x3f;
       towards_duckypad_send(cmd_ask_starting_id_towards_duckypad);
-      printf("Asking: %02x\n", cmd_ask_starting_id_towards_duckypad);
       HAL_GPIO_TogglePin(USER_LED_GPIO_Port, USER_LED_Pin);
     }
     else
@@ -214,7 +219,6 @@ int main(void)
       if(q_pop(&switch_event_queue, &this_cmd) == 0)
         continue;
       towards_duckypad_send(this_cmd);
-      printf("tdp:%x\n", this_cmd);
     }
   }
   /* USER CODE END 3 */
