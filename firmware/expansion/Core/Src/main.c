@@ -148,7 +148,7 @@ void towards_duckypad_receive_parse(uint8_t this_cmd)
   if(this_cmd & CMD_ASSIGN_START_ID_BITMASK)
   {
     starting_id = towards_duckypad_rx_buf[0] & 0x3f;
-    HAL_GPIO_WritePin(USER_LED_GPIO_Port, USER_LED_Pin, GPIO_PIN_RESET);
+    HAL_GPIO_WritePin(USER_LED_GPIO_Port, USER_LED_Pin, GPIO_PIN_SET);
     current_state = STATE_READY;
     printf("Got ID: %x\n", starting_id);
   }
