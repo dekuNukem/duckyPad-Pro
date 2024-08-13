@@ -378,14 +378,14 @@ void handle_sw_event(switch_event_t* this_sw_event)
 }
 
 #define CMD_ASSIGN_START_ID_BITMASK 0x40
-
+#define EXPANSION_START_ID 0
 void parse_expansion_data(uint8_t exp_data)
 {
   if((exp_data & 0xc0) == 0)
   {
     printf("EXP: Ask start ID\n");
     memset(expansion_tx_buf, 0, EXPANSION_BUF_SIZE);
-    expansion_tx_buf[0] = 60 | CMD_ASSIGN_START_ID_BITMASK;
+    expansion_tx_buf[0] = EXPANSION_START_ID | CMD_ASSIGN_START_ID_BITMASK;
     uart_write_bytes(EXPANSION_UART_PORT_NUM, expansion_tx_buf, 1);
   }
 }

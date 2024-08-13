@@ -171,7 +171,7 @@ void away_from_duckypad_receive_parse(uint8_t this_cmd)
   }
   else if(cmd_type == CMD_SW_PRESS_BITMASK || cmd_type == CMD_SW_RELEASE_BITMASK)
   {
-    away_from_duckypad_send(this_cmd);
+    towards_duckypad_send(this_cmd);
   }
 }
 
