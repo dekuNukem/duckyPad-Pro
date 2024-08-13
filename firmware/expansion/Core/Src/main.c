@@ -127,8 +127,6 @@ uint32_t get_rand_delay_ms(void)
 #define STATE_READY 1
 volatile uint8_t current_state;
 
-#define CMD_ASK_STARTID_TOWARDS_DUCKYPAD 0x3f
-
 void HAL_UART_RxCpltCallback(UART_HandleTypeDef *huart)
 {
   if(huart == &towards_duckypad_uart)
@@ -186,7 +184,7 @@ int main(void)
 
   /* Infinite loop */
   /* USER CODE BEGIN WHILE */
-  printf("hello world!\n");
+  printf("duckyPad Pro Expansion Module v%d.%d.%d\n", fw_version_major, fw_version_minor, fw_version_patch);
   
   while (1)
   {
@@ -198,7 +196,9 @@ int main(void)
     if(current_state == STATE_UNINITIALIZED)
     {
       HAL_Delay(get_rand_delay_ms());
-      towards_duckypad_send(CMD_ASK_STARTID_TOWARDS_DUCKYPAD);
+      uint8_t cmd_ask_starting_id_towards_duckypad = fw_version_major & 0x3f;
+      towards_duckypad_send(cmd_ask_starting_id_towards_duckypad);
+      printf("ask%02x\n", cmd_ask_starting_id_towards_duckypad);
       HAL_GPIO_TogglePin(USER_LED_GPIO_Port, USER_LED_Pin);
     }
     else
