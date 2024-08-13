@@ -21,13 +21,7 @@
 
 #define SW_EVENT_QUEUE_SIZE 16
 
-typedef struct
-{
-  uint8_t id;
-  uint8_t type;
-} switch_event_t;
-
-void channel_update(void);
+void channel_update(uint8_t start_id);
 void sw_event_queue_init(void);
 
 extern Queue_t switch_event_queue;

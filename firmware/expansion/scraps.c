@@ -1,3 +1,18 @@
+// printf("channel %d pressed!\n", i);
+// printf("channel %d released!\n", i);
+
+    else
+    {
+      // printf("READY. ID: %d\n", starting_id);
+      HAL_Delay(500);
+      uint8_t qsize = q_getCount(&switch_event_queue);
+      if(qsize == 0)
+        continue;
+      printf("qsize: %d\n", qsize);
+      uint8_t this_cmd;
+      q_pop(&switch_event_queue, &this_cmd);
+      printf("swe: %02x\n", this_cmd);
+    }
 		printf("rand: %d\n", get_rand_delay_ms());
     towards_duckypad_send(0xab);
     HAL_Delay(500);

@@ -57,7 +57,7 @@ uint8_t fw_version_major = 0;
 uint8_t fw_version_minor = 0;
 uint8_t fw_version_patch = 1;
 
-#define UART_BUF_SIZE 8
+#define UART_BUF_SIZE 16
 
 uint8_t towards_duckypad_tx_buf[UART_BUF_SIZE];
 uint8_t towards_duckypad_rx_buf[UART_BUF_SIZE];
@@ -115,7 +115,7 @@ void HAL_TIM_PeriodElapsedCallback(TIM_HandleTypeDef *htim)
 {
   // happens every 25ms
   // HAL_GPIO_TogglePin(USER_LED_GPIO_Port, USER_LED_Pin);
-  channel_update();
+  channel_update(starting_id);
 }
 
 uint32_t get_rand_delay_ms(void)
@@ -208,9 +208,9 @@ int main(void)
       if(qsize == 0)
         continue;
       printf("qsize: %d\n", qsize);
-      switch_event_t this_sw_event = { 0 };
-      q_pop(&switch_event_queue, &this_sw_event);
-      printf("swe: %d %d\n", this_sw_event.id, this_sw_event.type);
+      uint8_t this_cmd;
+      q_pop(&switch_event_queue, &this_cmd);
+      printf("swe: %02x\n", this_cmd);
     }
   }
   /* USER CODE END 3 */

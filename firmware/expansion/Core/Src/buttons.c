@@ -9,7 +9,7 @@
 uint8_t last_channel_status[CHANNEL_COUNT];
 Queue_t switch_event_queue;
 
-void channel_update(void)
+void channel_update(uint8_t start_id)
 {
   uint8_t this_channel_status[CHANNEL_COUNT];
 
@@ -24,23 +24,13 @@ void channel_update(void)
   {
     if(this_channel_status[i] == 0 && last_channel_status[i] == 1)
     {
-      // printf("channel %d pressed!\n", i);
-      switch_event_t sw_event = 
-      {
-        .id = i,
-        .type = SW_EVENT_SHORT_PRESS,
-      };
-      q_push(&switch_event_queue, &sw_event);
+      uint8_t this_cmd = ((start_id + i) & 0x3f) | 0x80;
+      q_push(&switch_event_queue, &this_cmd);
     }
     if(this_channel_status[i] == 1 && last_channel_status[i] == 0)
     {
-      // printf("channel %d released!\n", i);
-      switch_event_t sw_event = 
-      {
-        .id = i,
-        .type = SW_EVENT_RELEASE,
-      };
-      q_push(&switch_event_queue, &sw_event);
+      uint8_t this_cmd = ((start_id + i) & 0x3f) | 0xc0;
+      q_push(&switch_event_queue, &this_cmd);
     }
   }
   memcpy(last_channel_status, this_channel_status, CHANNEL_COUNT);
@@ -48,7 +38,7 @@ void channel_update(void)
 
 void sw_event_queue_init(void)
 {
-  q_init(&switch_event_queue, sizeof(switch_event_t), SW_EVENT_QUEUE_SIZE, FIFO, false);
+  q_init(&switch_event_queue, sizeof(uint8_t), SW_EVENT_QUEUE_SIZE, FIFO, false);
   memset(last_channel_status, 1, CHANNEL_COUNT);
 }
 
