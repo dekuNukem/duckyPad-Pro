@@ -1,3 +1,7 @@
+    printf("EXP: Ask start ID\n");
+    // printf("radio: %s\n", expansion_rx_buf);
+
+
       printf("unsupported remote fw: %d\n", remote_fw_ver_major);
   
   printf("tdpR: %x\n", this_cmd);

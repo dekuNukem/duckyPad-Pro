@@ -366,7 +366,7 @@ void handle_rotary_encoder_event(rotary_encoder_event_t* this_re_event)
 void handle_sw_event(switch_event_t* this_sw_event)
 {
   update_last_keypress();
-  // printf("swid: %d type: %d\n", this_sw_event->id, this_sw_event->type);
+  printf("swid: %d type: %d\n", this_sw_event->id, this_sw_event->type);
   if(is_sleeping && this_sw_event->type == SW_EVENT_SHORT_PRESS)
   {
     wakeup_from_sleep_and_load_profile(current_profile_number);
@@ -377,16 +377,40 @@ void handle_sw_event(switch_event_t* this_sw_event)
   // xQueueReset(switch_event_queue);
 }
 
+#define TOP_TWO_BITS 0xc0
+#define CMD_ASK_START_ID_BITMASK 0x00
 #define CMD_ASSIGN_START_ID_BITMASK 0x40
+#define CMD_SW_PRESSED_BITMASK 0x80
+#define CMD_SW_RELEASED_BITMASK 0xc0
 #define EXPANSION_START_ID 0
 void parse_expansion_data(uint8_t exp_data)
 {
-  if((exp_data & 0xc0) == 0)
+  uint8_t cmd_type = exp_data & TOP_TWO_BITS;
+  if(cmd_type == CMD_ASK_START_ID_BITMASK)
   {
-    printf("EXP: Ask start ID\n");
     memset(expansion_tx_buf, 0, EXPANSION_BUF_SIZE);
     expansion_tx_buf[0] = EXPANSION_START_ID | CMD_ASSIGN_START_ID_BITMASK;
     uart_write_bytes(EXPANSION_UART_PORT_NUM, expansion_tx_buf, 1);
+  }
+  else if(cmd_type == CMD_SW_PRESSED_BITMASK)
+  {
+    uint8_t swid = exp_data & 0x3f;
+    switch_event_t sw_event = 
+    {
+      .id = swid + EXP_BUTTON_START,
+      .type = SW_EVENT_SHORT_PRESS,
+    };
+    is_busy = 1;handle_sw_event(&sw_event);is_busy = 0;
+  }
+  else if(cmd_type == CMD_SW_RELEASED_BITMASK)
+  {
+    uint8_t swid = exp_data & 0x3f;
+    switch_event_t sw_event = 
+    {
+      .id = swid + EXP_BUTTON_START,
+      .type = SW_EVENT_RELEASE,
+    };
+    is_busy = 1;handle_sw_event(&sw_event);is_busy = 0;
   }
 }
 
@@ -408,9 +432,7 @@ void keypress_task(void *dummy)
     switch_event_t sw_event = { 0 };
     if (xQueueReceive(switch_event_queue, &sw_event, 0) == pdTRUE)
     {
-      is_busy = 1;
-      handle_sw_event(&sw_event);
-      is_busy = 0;
+      is_busy = 1;handle_sw_event(&sw_event);is_busy = 0;
     }
     
     if(is_sleeping == 0)
@@ -420,7 +442,6 @@ void keypress_task(void *dummy)
     memset(expansion_rx_buf, 0, EXPANSION_BUF_SIZE);
     if(uart_read_bytes(EXPANSION_UART_PORT_NUM, expansion_rx_buf, 1, pdMS_TO_TICKS(10)) == 0)
       continue;
-    // printf("radio: %s\n", expansion_rx_buf);
     parse_expansion_data(expansion_rx_buf[0]);
   }
 }

@@ -16,7 +16,7 @@
 #define MECH_OBSW_COUNT (SW_MATRIX_NUM_COLS * SW_MATRIX_NUM_ROWS)
 #define TOTAL_OBSW_COUNT (28)
 
-#define MAX_TOTAL_SW_COUNT 64
+#define MAX_TOTAL_SW_COUNT 100
 
 #define SW_PLUS_GPIO GPIO_NUM_17
 #define SW_MINUS_GPIO GPIO_NUM_18
@@ -78,6 +78,15 @@
 #define RE2_SW 25
 #define SW_MINUS 26
 #define SW_PLUS 27
+
+#define EXP_BUTTON_START 36
+
+/*
+0 to 19: mechanical switches
+20 to 25: rotary encoders
+26 to 35: spare gpio pins, unused
+36 to 99: expansion channels
+*/
 
 typedef struct
 {

@@ -1265,7 +1265,7 @@ def exp_module_button_click():
     exp_module_button.config(text=f"Exp Module {current_selected_expansion_module}")
     for index,item in enumerate(key_button_list):
         if is_expansion_button(index):
-            item.place(x=scaled_size(999), y=scaled_size(999))
+            item.place(x=scaled_size(999), y=scaled_size(999)) # place_forget doesnt seem to work
             item.config(relief="solid")
             item.config(borderwidth=1)
             root.update()
