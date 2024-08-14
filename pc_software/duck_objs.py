@@ -1,15 +1,12 @@
 import os
 import sys
-import json
-import socket
-import urllib.request
 from shared import *
 
 MAX_PROFILE_COUNT = 64
 
 class dp_key(object):
 	def load_script(self, path):
-		print("load_script:", path)
+		# print("load_script:", path)
 		if path is None or os.path.exists(path) is False:
 			return ""
 		try:
