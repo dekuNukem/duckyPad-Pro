@@ -1260,7 +1260,15 @@ def exp_module_button_click():
     exp_module_button.config(text=f"Exp Module {current_selected_expansion_module}")
     for index,item in enumerate(key_button_list):
         if is_expansion_button(index):
-            print(index, item)
+            item.place_forget()
+    this_module_start = EXP_BUTTON_START + current_selected_expansion_module * CHANNELS_PER_EXPANSION_MODULE
+    key_button_list[this_module_start+0].place(x=scaled_size(ch_button_x), y=scaled_size(chy_start + chy_step * 0 - 2), width=CH_BUTTON_WIDTH, height=25)
+    key_button_list[this_module_start+1].place(x=scaled_size(ch_button_x), y=scaled_size(chy_start + chy_step * 1 - 2), width=CH_BUTTON_WIDTH, height=25)
+    key_button_list[this_module_start+2].place(x=scaled_size(ch_button_x), y=scaled_size(chy_start + chy_step * 2 - 2), width=CH_BUTTON_WIDTH, height=25)
+    key_button_list[this_module_start+3].place(x=scaled_size(ch_button_x), y=scaled_size(chy_start + chy_step * 3 - 2), width=CH_BUTTON_WIDTH, height=25)
+    key_button_list[this_module_start+4].place(x=scaled_size(ch_button_x), y=scaled_size(chy_start + chy_step * 4 - 2), width=CH_BUTTON_WIDTH, height=25)
+    key_button_list[this_module_start+5].place(x=scaled_size(ch_button_x), y=scaled_size(chy_start + chy_step * 5 - 2), width=CH_BUTTON_WIDTH, height=25)
+    root.update()
 
 def open_expansion_instruction(event):
     messagebox.showinfo("oops", f"not implemented yet!!!")
@@ -1306,7 +1314,7 @@ CH_BUTTON_WIDTH = 85
 # expansion module buttons
 for mmm in range(MAX_EXPANSION_MODULE_COUNT):
     for ccc in range(CHANNELS_PER_EXPANSION_MODULE):
-        this_ch_button = Label(expansion_lf, text=f"M{mmm}CH{ccc}", relief="solid")
+        this_ch_button = Label(expansion_lf, text=f"M{mmm}CH{ccc}", relief="solid", bg='red')
         key_button_list.append(this_ch_button)
 
 print(key_button_list)

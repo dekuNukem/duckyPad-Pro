@@ -1,3 +1,5 @@
+update_key_button_appearances, disable to see expansion button default labels
+
 ch_button_x = 45
 CH_BUTTON_WIDTH = 85
 
