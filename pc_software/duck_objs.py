@@ -145,7 +145,7 @@ class dp_profile(object):
 		super(dp_profile, self).__init__()
 		self.path = None
 		self.name = None
-		self.keylist = [None] * (MECH_OBSW_COUNT + ROTARY_ENCODER_SW_COUNT)
+		self.keylist = [None] * (MECH_OBSW_COUNT + ROTARY_ENCODER_SW_COUNT + ONBOARD_SPARE_GPIO_COUNT + MAX_EXPANSION_CHANNEL)
 		self.bg_color = (84,22,180)
 		self.kd_color = None
 		self.dim_unused = True

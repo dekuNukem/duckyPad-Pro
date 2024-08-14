@@ -1248,11 +1248,15 @@ key_color_button.bind("<Button-1>", key_color_button_click)
 
 # ------------- Expansion frame ------------
 
+current_selected_expansion_module = 0
+
+def exp_module_button_click():
+    global current_selected_expansion_module
+    current_selected_expansion_module = (current_selected_expansion_module + 1) % MAX_EXPANSION_MODULE_COUNT
+    exp_module_button.config(text=f"Exp Module {current_selected_expansion_module}")
+
 def open_expansion_instruction(event):
     messagebox.showinfo("oops", f"not implemented yet!!!")
-
-def exp_module_button_click(event):
-    pass
 
 expansion_lf = LabelFrame(root, text="Expansion Modules", width=scaled_size(150), height=scaled_size(263))
 expansion_lf.place(x=scaled_size(590), y=scaled_size(260))
@@ -1263,10 +1267,10 @@ root.update()
 expansion_instruction.place(x=scaled_size(35), y=scaled_size(0))
 expansion_instruction.bind("<Button-1>", open_expansion_instruction)
 
-exp_module_button = Button(expansion_lf, text="Exp Module 0", command=exp_module_button_click, state=DISABLED)
+exp_module_button = Button(expansion_lf, text="Exp Module 0", command=exp_module_button_click) #, state=DISABLED
 exp_module_button.place(x=scaled_size(20), y=scaled_size(20), width=BUTTON_WIDTH, height=22)
 root.update()
-
+    
 ch_label_x = 5
 chy_start = 55
 chy_step = 32
@@ -1289,27 +1293,26 @@ EXPCH4_label.place(x=scaled_size(ch_label_x), y=scaled_size(chy_start + chy_step
 EXPCH5_label = Label(master=expansion_lf, text="CH5")
 EXPCH5_label.place(x=scaled_size(ch_label_x), y=scaled_size(chy_start + chy_step * 5))
 
-ch_button_x = 50
-CH_BUTTON_WIDTH = 80
+ch_button_x = 45
+CH_BUTTON_WIDTH = 85
 
-EXPCH0_button = Button(expansion_lf, text="CH0")
+EXPCH0_button = Button(expansion_lf, text="CH0", relief="solid")
 EXPCH0_button.place(x=scaled_size(ch_button_x), y=scaled_size(chy_start + chy_step * 0 - 2), width=CH_BUTTON_WIDTH, height=25)
 
-EXPCH1_button = Button(expansion_lf, text="CH1")
+EXPCH1_button = Button(expansion_lf, text="CH1", relief="solid")
 EXPCH1_button.place(x=scaled_size(ch_button_x), y=scaled_size(chy_start + chy_step * 1 - 2), width=CH_BUTTON_WIDTH, height=25)
 
-EXPCH2_button = Button(expansion_lf, text="CH2")
+EXPCH2_button = Button(expansion_lf, text="CH2", relief="solid")
 EXPCH2_button.place(x=scaled_size(ch_button_x), y=scaled_size(chy_start + chy_step * 2 - 2), width=CH_BUTTON_WIDTH, height=25)
 
-EXPCH3_button = Button(expansion_lf, text="CH3")
+EXPCH3_button = Button(expansion_lf, text="CH3", relief="solid")
 EXPCH3_button.place(x=scaled_size(ch_button_x), y=scaled_size(chy_start + chy_step * 3 - 2), width=CH_BUTTON_WIDTH, height=25)
 
-EXPCH4_button = Button(expansion_lf, text="CH4")
+EXPCH4_button = Button(expansion_lf, text="CH4", relief="solid")
 EXPCH4_button.place(x=scaled_size(ch_button_x), y=scaled_size(chy_start + chy_step * 4 - 2), width=CH_BUTTON_WIDTH, height=25)
 
-EXPCH5_button = Button(expansion_lf, text="CH5")
+EXPCH5_button = Button(expansion_lf, text="CH5", relief="solid")
 EXPCH5_button.place(x=scaled_size(ch_button_x), y=scaled_size(chy_start + chy_step * 5 - 2), width=CH_BUTTON_WIDTH, height=25)
-
 
 root.update()
 # ------------- Scripts frame -------------
