@@ -107,6 +107,8 @@ extern QueueHandle_t switch_event_queue;
 
 void clear_sw_re_queue(void);
 
+void expansion_uart_init(void);
+
 #define KBSCAN_MUTEX_TIMEOUT_MS 100
 
 #define INPUT_TASK_FREQ_MS 20

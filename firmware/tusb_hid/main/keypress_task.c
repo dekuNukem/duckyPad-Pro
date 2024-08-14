@@ -22,36 +22,9 @@
 #include "hid_task.h"
 #include "bluetooth_task.h"
 #include "nvs_flash.h"
-#include "driver/uart.h"
-#include "driver/gpio.h"
+
 
 volatile uint32_t last_keypress;
-
-#define EXPANSION_UART_PORT_NUM 1
-#define EXPANSION_BUF_SIZE 256
-uint8_t expansion_rx_buf[EXPANSION_BUF_SIZE];
-uint8_t expansion_tx_buf[EXPANSION_BUF_SIZE];
-#define EXPANSION_UART_BAUD_RATE 115200
-#define EXPANSION_UART_TX_PIN 16
-#define EXPANSION_UART_RX_PIN 15
-
-void expansion_uart_init(void)
-{
-  uart_config_t uart_config = {
-    .baud_rate = EXPANSION_UART_BAUD_RATE,
-    .data_bits = UART_DATA_8_BITS,
-    .parity    = UART_PARITY_DISABLE,
-    .stop_bits = UART_STOP_BITS_1,
-    .flow_ctrl = UART_HW_FLOWCTRL_DISABLE,
-    .source_clk = UART_SCLK_DEFAULT,
-  };
-
-  int expansion_intr_alloc_flags = 0; //ESP_INTR_FLAG_IRAM
-
-  ESP_ERROR_CHECK(uart_driver_install(EXPANSION_UART_PORT_NUM, EXPANSION_BUF_SIZE, 0, 0, NULL, expansion_intr_alloc_flags));
-  ESP_ERROR_CHECK(uart_param_config(EXPANSION_UART_PORT_NUM, &uart_config));
-  ESP_ERROR_CHECK(uart_set_pin(EXPANSION_UART_PORT_NUM, EXPANSION_UART_TX_PIN, EXPANSION_UART_RX_PIN, -1, -1));
-}
 
 void block_until_anykey(void)
 {
@@ -377,43 +350,6 @@ void handle_sw_event(switch_event_t* this_sw_event)
   // xQueueReset(switch_event_queue);
 }
 
-#define TOP_TWO_BITS 0xc0
-#define CMD_ASK_START_ID_BITMASK 0x00
-#define CMD_ASSIGN_START_ID_BITMASK 0x40
-#define CMD_SW_PRESSED_BITMASK 0x80
-#define CMD_SW_RELEASED_BITMASK 0xc0
-#define EXPANSION_START_ID 0
-void parse_expansion_data(uint8_t exp_data)
-{
-  uint8_t cmd_type = exp_data & TOP_TWO_BITS;
-  if(cmd_type == CMD_ASK_START_ID_BITMASK)
-  {
-    memset(expansion_tx_buf, 0, EXPANSION_BUF_SIZE);
-    expansion_tx_buf[0] = EXPANSION_START_ID | CMD_ASSIGN_START_ID_BITMASK;
-    uart_write_bytes(EXPANSION_UART_PORT_NUM, expansion_tx_buf, 1);
-  }
-  else if(cmd_type == CMD_SW_PRESSED_BITMASK)
-  {
-    uint8_t swid = exp_data & 0x3f;
-    switch_event_t sw_event = 
-    {
-      .id = swid + EXP_BUTTON_START,
-      .type = SW_EVENT_SHORT_PRESS,
-    };
-    is_busy = 1;handle_sw_event(&sw_event);is_busy = 0;
-  }
-  else if(cmd_type == CMD_SW_RELEASED_BITMASK)
-  {
-    uint8_t swid = exp_data & 0x3f;
-    switch_event_t sw_event = 
-    {
-      .id = swid + EXP_BUTTON_START,
-      .type = SW_EVENT_RELEASE,
-    };
-    is_busy = 1;handle_sw_event(&sw_event);is_busy = 0;
-  }
-}
-
 void keypress_task(void *dummy)
 {
   update_last_keypress();
@@ -438,11 +374,6 @@ void keypress_task(void *dummy)
     if(is_sleeping == 0)
       update_bluetooth_icon(0, -1, bluetooth_status);
     draw_bt_pin(bt_pin_code);
-
-    memset(expansion_rx_buf, 0, EXPANSION_BUF_SIZE);
-    if(uart_read_bytes(EXPANSION_UART_PORT_NUM, expansion_rx_buf, 1, pdMS_TO_TICKS(10)) == 0)
-      continue;
-    parse_expansion_data(expansion_rx_buf[0]);
   }
 }
 
