@@ -539,10 +539,7 @@ def on_profile_lstbox_select(event):
     global current_selected_expansion_module
     current_selected_expansion_module = 0
     exp_module_button_click()
-    scripts_lf.place_forget()
-    empty_script_label.place(x=scaled_size(800), y=scaled_size(200))
-    key_name_textbox.delete('1.0', 'end')
-    key_name_textbox.config(state=DISABLED)
+    clear_script_lf()
     update_profile_display()
 
 def bg_color_click(event):
@@ -815,6 +812,16 @@ def get_correct_script_text(key_obj):
         return key_obj.script_on_release.strip()
     return key_obj.script.strip()
 
+def clear_script_lf():
+    scripts_lf.place_forget()
+    empty_script_label.place(x=scaled_size(800), y=scaled_size(200))
+    key_color_button.config(background=default_button_color)
+    key_color_rb1.config(state=DISABLED)
+    key_color_rb2.config(state=DISABLED)
+    key_name_textbox.delete('1.0', 'end')
+    key_name_textbox.config(state=DISABLED)
+    script_textbox.delete(1.0, 'end')
+
 def key_button_click(button_widget):
     global last_rgb
     global selected_key
@@ -846,12 +853,7 @@ def key_button_click(button_widget):
         else:
             on_release_rb.configure(fg='gray20')
     else:
-        scripts_lf.place_forget()
-        empty_script_label.place(x=scaled_size(800), y=scaled_size(200))
-        key_color_button.config(background=default_button_color)
-        key_color_rb1.config(state=DISABLED)
-        key_color_rb2.config(state=DISABLED)
-        script_textbox.delete(1.0, 'end')
+        clear_script_lf()
         return
 
     key_color_rb1.config(state=NORMAL)
@@ -1255,82 +1257,6 @@ key_color_button = Label(master=name_editor_lf, borderwidth=1, relief="solid")
 key_color_button.place(x=scaled_size(140), y=scaled_size(95), width=scaled_size(60), height=scaled_size(20))
 key_color_button.bind("<Button-1>", key_color_button_click)
 
-# ------------- Expansion frame ------------
-
-current_selected_expansion_module = 0
-
-def exp_module_button_click():
-    global current_selected_expansion_module
-    current_selected_expansion_module = (current_selected_expansion_module + 1) % MAX_EXPANSION_MODULE_COUNT
-    exp_module_button.config(text=f"Exp Module {current_selected_expansion_module}")
-    for index,item in enumerate(key_button_list):
-        if is_expansion_button(index):
-            item.place_forget()
-            item.config(relief="solid")
-            item.config(borderwidth=1)
-
-    this_module_start = EXP_BUTTON_START + current_selected_expansion_module * CHANNELS_PER_EXPANSION_MODULE
-    key_button_list[this_module_start+0].place(x=scaled_size(ch_button_x), y=scaled_size(chy_start + chy_step * 0 - 2), width=CH_BUTTON_WIDTH, height=25)
-    key_button_list[this_module_start+1].place(x=scaled_size(ch_button_x), y=scaled_size(chy_start + chy_step * 1 - 2), width=CH_BUTTON_WIDTH, height=25)
-    key_button_list[this_module_start+2].place(x=scaled_size(ch_button_x), y=scaled_size(chy_start + chy_step * 2 - 2), width=CH_BUTTON_WIDTH, height=25)
-    key_button_list[this_module_start+3].place(x=scaled_size(ch_button_x), y=scaled_size(chy_start + chy_step * 3 - 2), width=CH_BUTTON_WIDTH, height=25)
-    key_button_list[this_module_start+4].place(x=scaled_size(ch_button_x), y=scaled_size(chy_start + chy_step * 4 - 2), width=CH_BUTTON_WIDTH, height=25)
-    key_button_list[this_module_start+5].place(x=scaled_size(ch_button_x), y=scaled_size(chy_start + chy_step * 5 - 2), width=CH_BUTTON_WIDTH, height=25)
-    root.update()
-
-def open_expansion_instruction(event):
-    messagebox.showinfo("oops", f"not implemented yet!!!")
-
-expansion_lf = LabelFrame(root, text="Expansion Modules", width=scaled_size(150), height=scaled_size(263))
-expansion_lf.place(x=scaled_size(590), y=scaled_size(260))
-root.update()
-
-expansion_instruction = Label(master=expansion_lf, text="Whats this??", fg="blue", cursor="hand2")
-root.update()
-expansion_instruction.place(x=scaled_size(35), y=scaled_size(0))
-expansion_instruction.bind("<Button-1>", open_expansion_instruction)
-
-exp_module_button = Button(expansion_lf, text="Exp Module 0", command=exp_module_button_click, state=DISABLED)
-exp_module_button.place(x=scaled_size(20), y=scaled_size(20), width=BUTTON_WIDTH, height=22)
-root.update()
-    
-ch_label_x = 5
-chy_start = 55
-chy_step = 32
-
-EXPCH0_label = Label(master=expansion_lf, text="CH0")
-EXPCH0_label.place(x=scaled_size(ch_label_x), y=scaled_size(chy_start + chy_step * 0))
-
-EXPCH1_label = Label(master=expansion_lf, text="CH1")
-EXPCH1_label.place(x=scaled_size(ch_label_x), y=scaled_size(chy_start + chy_step * 1))
-
-EXPCH2_label = Label(master=expansion_lf, text="CH2")
-EXPCH2_label.place(x=scaled_size(ch_label_x), y=scaled_size(chy_start + chy_step * 2))
-
-EXPCH3_label = Label(master=expansion_lf, text="CH3")
-EXPCH3_label.place(x=scaled_size(ch_label_x), y=scaled_size(chy_start + chy_step * 3))
-
-EXPCH4_label = Label(master=expansion_lf, text="CH4")
-EXPCH4_label.place(x=scaled_size(ch_label_x), y=scaled_size(chy_start + chy_step * 4))
-
-EXPCH5_label = Label(master=expansion_lf, text="CH5")
-EXPCH5_label.place(x=scaled_size(ch_label_x), y=scaled_size(chy_start + chy_step * 5))
-
-ch_button_x = 45
-CH_BUTTON_WIDTH = 85
-
-# expansion module buttons
-for mmm in range(MAX_EXPANSION_MODULE_COUNT):
-    for ccc in range(CHANNELS_PER_EXPANSION_MODULE):
-        this_ch_button = Label(expansion_lf, text=f"M{mmm}CH{ccc}", relief="solid")
-        this_ch_button.bind("<Button-1>", key_button_click_event)
-        this_ch_button.bind("<B1-Motion>", button_drag_start)
-        this_ch_button.bind("<ButtonRelease-1>", button_drag_release)
-        key_button_list.append(this_ch_button)
-
-exp_module_button_click()
-
-root.update()
 # ------------- Scripts frame -------------
 scripts_lf = LabelFrame(root, text="Scripts", width=scaled_size(310), height=scaled_size(473))
 
@@ -1517,6 +1443,83 @@ profile_import_button.place(x=PADDING * 2, y=BUTTON_Y_POS + BUTTON_HEIGHT + int(
 
 empty_script_label = Label(root, text="<-- Select a key")
 empty_script_label.place(x=scaled_size(800), y=scaled_size(200))
+root.update()
+
+# ------------- Expansion frame ------------
+
+current_selected_expansion_module = 0
+
+def exp_module_button_click():
+    global current_selected_expansion_module
+    current_selected_expansion_module = (current_selected_expansion_module + 1) % MAX_EXPANSION_MODULE_COUNT
+    exp_module_button.config(text=f"Exp Module {current_selected_expansion_module}")
+    for index,item in enumerate(key_button_list):
+        if is_expansion_button(index):
+            item.place_forget()
+            item.config(relief="solid")
+            item.config(borderwidth=1)
+    this_module_start = EXP_BUTTON_START + current_selected_expansion_module * CHANNELS_PER_EXPANSION_MODULE
+    key_button_list[this_module_start+0].place(x=scaled_size(ch_button_x), y=scaled_size(chy_start + chy_step * 0 - 2), width=CH_BUTTON_WIDTH, height=25)
+    key_button_list[this_module_start+1].place(x=scaled_size(ch_button_x), y=scaled_size(chy_start + chy_step * 1 - 2), width=CH_BUTTON_WIDTH, height=25)
+    key_button_list[this_module_start+2].place(x=scaled_size(ch_button_x), y=scaled_size(chy_start + chy_step * 2 - 2), width=CH_BUTTON_WIDTH, height=25)
+    key_button_list[this_module_start+3].place(x=scaled_size(ch_button_x), y=scaled_size(chy_start + chy_step * 3 - 2), width=CH_BUTTON_WIDTH, height=25)
+    key_button_list[this_module_start+4].place(x=scaled_size(ch_button_x), y=scaled_size(chy_start + chy_step * 4 - 2), width=CH_BUTTON_WIDTH, height=25)
+    key_button_list[this_module_start+5].place(x=scaled_size(ch_button_x), y=scaled_size(chy_start + chy_step * 5 - 2), width=CH_BUTTON_WIDTH, height=25)
+    clear_script_lf()
+    root.update()
+
+def open_expansion_instruction(event):
+    messagebox.showinfo("oops", f"not implemented yet!!!")
+
+expansion_lf = LabelFrame(root, text="Expansion Modules", width=scaled_size(150), height=scaled_size(263))
+expansion_lf.place(x=scaled_size(590), y=scaled_size(260))
+root.update()
+
+expansion_instruction = Label(master=expansion_lf, text="Whats this??", fg="blue", cursor="hand2")
+root.update()
+expansion_instruction.place(x=scaled_size(35), y=scaled_size(0))
+expansion_instruction.bind("<Button-1>", open_expansion_instruction)
+
+exp_module_button = Button(expansion_lf, text="Exp Module 0", command=exp_module_button_click, state=DISABLED)
+exp_module_button.place(x=scaled_size(20), y=scaled_size(20), width=BUTTON_WIDTH, height=22)
+root.update()
+    
+ch_label_x = 5
+chy_start = 55
+chy_step = 32
+
+EXPCH0_label = Label(master=expansion_lf, text="CH0")
+EXPCH0_label.place(x=scaled_size(ch_label_x), y=scaled_size(chy_start + chy_step * 0))
+
+EXPCH1_label = Label(master=expansion_lf, text="CH1")
+EXPCH1_label.place(x=scaled_size(ch_label_x), y=scaled_size(chy_start + chy_step * 1))
+
+EXPCH2_label = Label(master=expansion_lf, text="CH2")
+EXPCH2_label.place(x=scaled_size(ch_label_x), y=scaled_size(chy_start + chy_step * 2))
+
+EXPCH3_label = Label(master=expansion_lf, text="CH3")
+EXPCH3_label.place(x=scaled_size(ch_label_x), y=scaled_size(chy_start + chy_step * 3))
+
+EXPCH4_label = Label(master=expansion_lf, text="CH4")
+EXPCH4_label.place(x=scaled_size(ch_label_x), y=scaled_size(chy_start + chy_step * 4))
+
+EXPCH5_label = Label(master=expansion_lf, text="CH5")
+EXPCH5_label.place(x=scaled_size(ch_label_x), y=scaled_size(chy_start + chy_step * 5))
+
+ch_button_x = 45
+CH_BUTTON_WIDTH = 85
+
+# expansion module buttons
+for mmm in range(MAX_EXPANSION_MODULE_COUNT):
+    for ccc in range(CHANNELS_PER_EXPANSION_MODULE):
+        this_ch_button = Label(expansion_lf, text=f"M{mmm}CH{ccc}", relief="solid")
+        this_ch_button.bind("<Button-1>", key_button_click_event)
+        this_ch_button.bind("<B1-Motion>", button_drag_start)
+        this_ch_button.bind("<ButtonRelease-1>", button_drag_release)
+        key_button_list.append(this_ch_button)
+
+exp_module_button_click()
+
 root.update()
 
 def repeat_func():
