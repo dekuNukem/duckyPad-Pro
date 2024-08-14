@@ -1126,6 +1126,10 @@ key_button_list.append(lower_re_sw)
 r2btn_label = Label(master=re_lf, text="RE2 Push")
 r2btn_label.place(x=scaled_size(0), y=scaled_size(157))
 
+# unused, just to pad it out
+for x in range(ONBOARD_SPARE_GPIO_COUNT):
+    this_button = Label(master=keys_lf)
+    key_button_list.append(this_button)
 
 name_editor_lf = LabelFrame(root, text="Editor", width=scaled_size(300), height=scaled_size(143))
 name_editor_lf.place(x=profiles_lf.winfo_x() + profiles_lf.winfo_width() + PADDING, y=380)
@@ -1254,6 +1258,9 @@ def exp_module_button_click():
     global current_selected_expansion_module
     current_selected_expansion_module = (current_selected_expansion_module + 1) % MAX_EXPANSION_MODULE_COUNT
     exp_module_button.config(text=f"Exp Module {current_selected_expansion_module}")
+    for index,item in enumerate(key_button_list):
+        if is_expansion_button(index):
+            print(index, item)
 
 def open_expansion_instruction(event):
     messagebox.showinfo("oops", f"not implemented yet!!!")
@@ -1296,23 +1303,14 @@ EXPCH5_label.place(x=scaled_size(ch_label_x), y=scaled_size(chy_start + chy_step
 ch_button_x = 45
 CH_BUTTON_WIDTH = 85
 
-EXPCH0_button = Button(expansion_lf, text="CH0", relief="solid")
-EXPCH0_button.place(x=scaled_size(ch_button_x), y=scaled_size(chy_start + chy_step * 0 - 2), width=CH_BUTTON_WIDTH, height=25)
+# expansion module buttons
+for mmm in range(MAX_EXPANSION_MODULE_COUNT):
+    for ccc in range(CHANNELS_PER_EXPANSION_MODULE):
+        this_ch_button = Label(expansion_lf, text=f"M{mmm}CH{ccc}", relief="solid")
+        key_button_list.append(this_ch_button)
 
-EXPCH1_button = Button(expansion_lf, text="CH1", relief="solid")
-EXPCH1_button.place(x=scaled_size(ch_button_x), y=scaled_size(chy_start + chy_step * 1 - 2), width=CH_BUTTON_WIDTH, height=25)
-
-EXPCH2_button = Button(expansion_lf, text="CH2", relief="solid")
-EXPCH2_button.place(x=scaled_size(ch_button_x), y=scaled_size(chy_start + chy_step * 2 - 2), width=CH_BUTTON_WIDTH, height=25)
-
-EXPCH3_button = Button(expansion_lf, text="CH3", relief="solid")
-EXPCH3_button.place(x=scaled_size(ch_button_x), y=scaled_size(chy_start + chy_step * 3 - 2), width=CH_BUTTON_WIDTH, height=25)
-
-EXPCH4_button = Button(expansion_lf, text="CH4", relief="solid")
-EXPCH4_button.place(x=scaled_size(ch_button_x), y=scaled_size(chy_start + chy_step * 4 - 2), width=CH_BUTTON_WIDTH, height=25)
-
-EXPCH5_button = Button(expansion_lf, text="CH5", relief="solid")
-EXPCH5_button.place(x=scaled_size(ch_button_x), y=scaled_size(chy_start + chy_step * 5 - 2), width=CH_BUTTON_WIDTH, height=25)
+print(key_button_list)
+print("*********", len(key_button_list))
 
 root.update()
 # ------------- Scripts frame -------------

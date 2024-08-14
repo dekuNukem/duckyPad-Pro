@@ -1,4 +1,31 @@
+ch_button_x = 45
+CH_BUTTON_WIDTH = 85
 
+EXPCH0_button = Button(expansion_lf, text="CH0", relief="solid")
+EXPCH0_button.place(x=scaled_size(ch_button_x), y=scaled_size(chy_start + chy_step * 0 - 2), width=CH_BUTTON_WIDTH, height=25)
+
+EXPCH1_button = Button(expansion_lf, text="CH1", relief="solid")
+EXPCH1_button.place(x=scaled_size(ch_button_x), y=scaled_size(chy_start + chy_step * 1 - 2), width=CH_BUTTON_WIDTH, height=25)
+
+EXPCH2_button = Button(expansion_lf, text="CH2", relief="solid")
+EXPCH2_button.place(x=scaled_size(ch_button_x), y=scaled_size(chy_start + chy_step * 2 - 2), width=CH_BUTTON_WIDTH, height=25)
+
+EXPCH3_button = Button(expansion_lf, text="CH3", relief="solid")
+EXPCH3_button.place(x=scaled_size(ch_button_x), y=scaled_size(chy_start + chy_step * 3 - 2), width=CH_BUTTON_WIDTH, height=25)
+
+EXPCH4_button = Button(expansion_lf, text="CH4", relief="solid")
+EXPCH4_button.place(x=scaled_size(ch_button_x), y=scaled_size(chy_start + chy_step * 4 - 2), width=CH_BUTTON_WIDTH, height=25)
+
+EXPCH5_button = Button(expansion_lf, text="CH5", relief="solid")
+EXPCH5_button.place(x=scaled_size(ch_button_x), y=scaled_size(chy_start + chy_step * 5 - 2), width=CH_BUTTON_WIDTH, height=25)
+
+
+
+
+# expansion module buttons
+for mmm in range(MAX_EXPANSION_MODULE_COUNT):
+    for ccc in range(CHANNELS_PER_EXPANSION_MODULE):
+        print(f"module {mmm}, channel {ccc}")
 help_button = Button(root_folder_lf, text="Help!", command=create_help_window)
 help_button.place(x=scaled_size(5), y=0, width=scaled_size(65), height=scaled_size(25))
 
