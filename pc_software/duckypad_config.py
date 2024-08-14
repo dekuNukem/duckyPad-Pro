@@ -211,6 +211,7 @@ def ui_reset():
     profile_lstbox.delete(0, 'end')
     check_syntax_label.config(text="", fg="green")
     profile_import_button.config(state=DISABLED)
+    exp_module_button.config(state=DISABLED)
 
 def check_firmware_update(current_fw_str=None):
     if current_fw_str is not None:
@@ -414,6 +415,7 @@ def enable_buttons():
     key_char_limit_label.config(fg='black')
     key_color_text.config(fg='black')
     profile_import_button.config(state=NORMAL)
+    exp_module_button.config(state=NORMAL)
 
 def profile_shift_up():
     global profile_var
@@ -534,6 +536,9 @@ def dim_unused_keys_click():
     update_profile_display()
 
 def on_profile_lstbox_select(event):
+    global current_selected_expansion_module
+    current_selected_expansion_module = 0
+    exp_module_button_click()
     scripts_lf.place_forget()
     empty_script_label.place(x=scaled_size(800), y=scaled_size(200))
     key_name_textbox.delete('1.0', 'end')
@@ -821,7 +826,7 @@ def key_button_click(button_widget):
     selected_key = key_button_list.index(button_widget)
     reset_key_button_relief()
     this_borderwidth = scaled_size(7)
-    if is_rotary_encoder_button(selected_key):
+    if is_rotary_encoder_button(selected_key) or is_expansion_button(selected_key):
         this_borderwidth = scaled_size(5)
     button_widget.config(borderwidth=this_borderwidth, relief='sunken')
     key_name_textbox.delete('1.0', 'end')
@@ -991,7 +996,7 @@ def button_drag_start(event):
 
     if drag_source_button_index is not None and drag_destination_button_index is not None and drag_destination_button_index != drag_source_button_index:
         move_here_text = "move\nhere"
-        if is_rotary_encoder_button(drag_destination_button_index):
+        if is_rotary_encoder_button(drag_destination_button_index) or is_expansion_button(drag_destination_button_index):
             move_here_text = "move"
         key_button_list[drag_destination_button_index].config(text=move_here_text, background='white', foreground='black', borderwidth=4)
     else:
@@ -1261,6 +1266,9 @@ def exp_module_button_click():
     for index,item in enumerate(key_button_list):
         if is_expansion_button(index):
             item.place_forget()
+            item.config(relief="solid")
+            item.config(borderwidth=1)
+
     this_module_start = EXP_BUTTON_START + current_selected_expansion_module * CHANNELS_PER_EXPANSION_MODULE
     key_button_list[this_module_start+0].place(x=scaled_size(ch_button_x), y=scaled_size(chy_start + chy_step * 0 - 2), width=CH_BUTTON_WIDTH, height=25)
     key_button_list[this_module_start+1].place(x=scaled_size(ch_button_x), y=scaled_size(chy_start + chy_step * 1 - 2), width=CH_BUTTON_WIDTH, height=25)
@@ -1282,7 +1290,7 @@ root.update()
 expansion_instruction.place(x=scaled_size(35), y=scaled_size(0))
 expansion_instruction.bind("<Button-1>", open_expansion_instruction)
 
-exp_module_button = Button(expansion_lf, text="Exp Module 0", command=exp_module_button_click) #, state=DISABLED
+exp_module_button = Button(expansion_lf, text="Exp Module 0", command=exp_module_button_click, state=DISABLED)
 exp_module_button.place(x=scaled_size(20), y=scaled_size(20), width=BUTTON_WIDTH, height=22)
 root.update()
     
@@ -1314,11 +1322,13 @@ CH_BUTTON_WIDTH = 85
 # expansion module buttons
 for mmm in range(MAX_EXPANSION_MODULE_COUNT):
     for ccc in range(CHANNELS_PER_EXPANSION_MODULE):
-        this_ch_button = Label(expansion_lf, text=f"M{mmm}CH{ccc}", relief="solid", bg='red')
+        this_ch_button = Label(expansion_lf, text=f"M{mmm}CH{ccc}", relief="solid")
+        this_ch_button.bind("<Button-1>", key_button_click_event)
+        this_ch_button.bind("<B1-Motion>", button_drag_start)
+        this_ch_button.bind("<ButtonRelease-1>", button_drag_release)
         key_button_list.append(this_ch_button)
 
-print(key_button_list)
-print("*********", len(key_button_list))
+exp_module_button_click()
 
 root.update()
 # ------------- Scripts frame -------------
