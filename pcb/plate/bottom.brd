@@ -197,7 +197,16 @@
 </layers>
 <board>
 <plain>
-<wire x1="0" y1="3.5" x2="0" y2="92.5" width="0" layer="20"/>
+<wire x1="96" y1="4" x2="96" y2="1" width="0" layer="20"/>
+<wire x1="96" y1="1" x2="97" y2="0" width="0" layer="20" curve="90"/>
+<wire x1="97" y1="0" x2="108" y2="0" width="0" layer="20"/>
+<wire x1="108" y1="0" x2="109" y2="1" width="0" layer="20" curve="90"/>
+<wire x1="109" y1="1" x2="109" y2="3.877" width="0" layer="20"/>
+<wire x1="0" y1="92.5" x2="0" y2="3.5" width="0" layer="20"/>
+<wire x1="0" y1="3.5" x2="3.5" y2="0" width="0" layer="20" curve="90"/>
+<wire x1="3.5" y1="0" x2="84.5" y2="0" width="0" layer="20"/>
+<wire x1="84.5" y1="0" x2="85.5" y2="1" width="0" layer="20" curve="90"/>
+<wire x1="85.5" y1="1" x2="85.5" y2="4" width="0" layer="20"/>
 <wire x1="0" y1="92.5" x2="3.5" y2="96" width="0" layer="20" curve="-90"/>
 <wire x1="3.5" y1="96" x2="70.5" y2="96" width="0" layer="20"/>
 <wire x1="70.5" y1="96" x2="72" y2="94.5" width="0" layer="20" curve="-90"/>
@@ -208,7 +217,6 @@
 <wire x1="83" y1="91" x2="83" y2="94.5" width="0" layer="20"/>
 <wire x1="83" y1="94.5" x2="84.5" y2="96" width="0" layer="20" curve="-90"/>
 <wire x1="84.5" y1="96" x2="105.5" y2="96" width="0" layer="20"/>
-<wire x1="0" y1="3.5" x2="3.5" y2="0" width="0" layer="20" curve="90"/>
 <wire x1="100" y1="30.75" x2="100" y2="22.25" width="0" layer="20"/>
 <wire x1="100" y1="22.25" x2="101" y2="21.25" width="0" layer="20" curve="90"/>
 <wire x1="101" y1="21.25" x2="108" y2="21.25" width="0" layer="20"/>
@@ -221,9 +229,6 @@
 <wire x1="104" y1="5.877" x2="105" y2="4.877" width="0" layer="20" curve="90"/>
 <wire x1="105" y1="4.877" x2="108" y2="4.877" width="0" layer="20"/>
 <wire x1="108" y1="4.877" x2="109" y2="3.877" width="0" layer="20" curve="-90"/>
-<wire x1="109" y1="3.877" x2="109" y2="1.5" width="0" layer="20"/>
-<wire x1="109" y1="1.5" x2="107.5" y2="0" width="0" layer="20" curve="-90"/>
-<wire x1="107.5" y1="0" x2="3.5" y2="0" width="0" layer="20"/>
 <text x="67.843" y="65.197" size="3.175" layer="26" rot="MR0" align="center">duckyPad Pro</text>
 <text x="67.843" y="58.315" size="2.1844" layer="26" rot="MR0" align="center">dekuNukem
 2024</text>
@@ -235,6 +240,9 @@
 <text x="107.843" y="44.315" size="2.1844" layer="26" rot="MR0" align="center-left">PUSH
 TO
 EJECT</text>
+<wire x1="85.5" y1="4" x2="86.5" y2="5" width="0" layer="20" curve="-90"/>
+<wire x1="86.5" y1="5" x2="95" y2="5" width="0" layer="20"/>
+<wire x1="95" y1="5" x2="96" y2="4" width="0" layer="20" curve="-90"/>
 </plain>
 <libraries>
 <library name="duckypad">
