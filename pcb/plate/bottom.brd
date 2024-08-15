@@ -229,8 +229,8 @@
 <wire x1="104" y1="5.877" x2="105" y2="4.877" width="0" layer="20" curve="90"/>
 <wire x1="105" y1="4.877" x2="108" y2="4.877" width="0" layer="20"/>
 <wire x1="108" y1="4.877" x2="109" y2="3.877" width="0" layer="20" curve="-90"/>
-<text x="67.843" y="65.197" size="3.175" layer="26" rot="MR0" align="center">duckyPad Pro</text>
-<text x="67.843" y="58.315" size="2.1844" layer="26" rot="MR0" align="center">dekuNukem
+<text x="18.843" y="49.697" size="3.175" layer="26" rot="MR0" align="center">duckyPad Pro</text>
+<text x="19.343" y="42.815" size="2.1844" layer="26" rot="MR0" align="center">dekuNukem
 2024</text>
 <wire x1="105.5" y1="96" x2="109" y2="92.5" width="0" layer="20" curve="-90"/>
 <wire x1="109" y1="92.5" x2="109" y2="32.75" width="0" layer="20"/>
@@ -243,6 +243,12 @@ EJECT</text>
 <wire x1="85.5" y1="4" x2="86.5" y2="5" width="0" layer="20" curve="-90"/>
 <wire x1="86.5" y1="5" x2="95" y2="5" width="0" layer="20"/>
 <wire x1="95" y1="5" x2="96" y2="4" width="0" layer="20" curve="-90"/>
+<text x="89.343" y="92.315" size="3" layer="26" rot="MR0" align="center-left">ON</text>
+<text x="70.343" y="92.315" size="3" layer="26" rot="MR0" align="center-left">OFF</text>
+<text x="98.843" y="26.315" size="2.54" layer="26" rot="MR0" align="center-left">Expansion</text>
+<text x="103.343" y="14.315" size="2.1844" layer="26" rot="MR0" align="center-left">GPIO</text>
+<text x="107.843" y="78.815" size="2.1844" layer="26" rot="MR0" align="center-left">DFU</text>
+<text x="107.843" y="72.315" size="2.1844" layer="26" rot="MR0" align="center-left">RESET</text>
 </plain>
 <libraries>
 <library name="duckypad">
