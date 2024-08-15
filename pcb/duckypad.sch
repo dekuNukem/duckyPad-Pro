@@ -8255,8 +8255,8 @@ You are welcome to use this library for commercial purposes. For attribution, we
 <part name="GND31" library="supply1" library_urn="urn:adsk.eagle:library:371" deviceset="GND" device=""/>
 <part name="U2" library="my_usbc_16p" deviceset="USBC_16P" device=""/>
 <part name="GND6" library="supply1" deviceset="GND" device=""/>
-<part name="R1" library="joyAnalog" deviceset="RESISTOR" device="0805-RES" value="5.1K"/>
-<part name="R9" library="joyAnalog" deviceset="RESISTOR" device="0805-RES" value="5.1K"/>
+<part name="R1" library="joyAnalog" deviceset="RESISTOR" device="0805-RES" value="5K1"/>
+<part name="R9" library="joyAnalog" deviceset="RESISTOR" device="0805-RES" value="5K1"/>
 <part name="C29" library="clock" deviceset="CAP" device="0805" value="4.7uF"/>
 <part name="GND16" library="supply1" library_urn="urn:adsk.eagle:library:371" deviceset="GND" device=""/>
 <part name="SWR1C2" library="lul" deviceset="KAILH_SWITCH_SOCKET_KAILH_SWITCH_SOCKET" device=""/>
@@ -8323,11 +8323,11 @@ You are welcome to use this library for commercial purposes. For attribution, we
 <part name="GND34" library="clock" deviceset="GND" device=""/>
 <part name="GND35" library="supply1" deviceset="GND" device=""/>
 <part name="C5" library="clock" deviceset="CAP" device="0805" value="100nF"/>
-<part name="C6" library="clock" deviceset="CAP" device="0805" value="1uF"/>
+<part name="C6" library="clock" deviceset="CAP" device="0805" value="4.7uF"/>
 <part name="GND36" library="supply1" library_urn="urn:adsk.eagle:library:371" deviceset="GND" device=""/>
 <part name="GND37" library="supply1" library_urn="urn:adsk.eagle:library:371" deviceset="GND" device=""/>
 <part name="C7" library="clock" deviceset="CAP" device="0805" value="100nF"/>
-<part name="C26" library="clock" deviceset="CAP" device="0805" value="1uF"/>
+<part name="C26" library="clock" deviceset="CAP" device="0805" value="4.7uF"/>
 <part name="GND38" library="supply1" library_urn="urn:adsk.eagle:library:371" deviceset="GND" device=""/>
 <part name="GND39" library="supply1" library_urn="urn:adsk.eagle:library:371" deviceset="GND" device=""/>
 <part name="C28" library="clock" deviceset="CAP" device="0805" value="100nF"/>
@@ -8358,13 +8358,13 @@ You are welcome to use this library for commercial purposes. For attribution, we
 <part name="GND49" library="supply1" library_urn="urn:adsk.eagle:library:371" deviceset="GND" device=""/>
 <part name="GND50" library="supply1" library_urn="urn:adsk.eagle:library:371" deviceset="GND" device=""/>
 <part name="GND51" library="supply1" library_urn="urn:adsk.eagle:library:371" deviceset="GND" device=""/>
-<part name="R11" library="joyAnalog" deviceset="RESISTOR" device="0805-RES" value="10K"/>
+<part name="R11" library="joyAnalog" deviceset="RESISTOR" device="0805-RES" value="5K1"/>
 <part name="+3V31" library="supply1" library_urn="urn:adsk.eagle:library:371" deviceset="+3V3" device=""/>
 <part name="C38" library="clock" deviceset="CAP" device="0805" value="4.7uF"/>
 <part name="C39" library="clock" deviceset="CAP" device="0805" value="100nF"/>
 <part name="GND52" library="supply1" library_urn="urn:adsk.eagle:library:371" deviceset="GND" device=""/>
 <part name="GND53" library="supply1" library_urn="urn:adsk.eagle:library:371" deviceset="GND" device=""/>
-<part name="R12" library="joyAnalog" deviceset="RESISTOR" device="0805-RES" value="10K"/>
+<part name="R12" library="joyAnalog" deviceset="RESISTOR" device="0805-RES" value="5K1"/>
 <part name="+3V33" library="supply1" library_urn="urn:adsk.eagle:library:371" deviceset="+3V3" device=""/>
 <part name="C40" library="clock" deviceset="CAP" device="0805" value="100nF"/>
 <part name="U$14" library="duckypad" deviceset="M2_SCREW_DEV" device=""/>
@@ -8392,7 +8392,7 @@ You are welcome to use this library for commercial purposes. For attribution, we
 <part name="R15" library="joyAnalog" deviceset="RESISTOR" device="0805-RES" value="5K1"/>
 <part name="C10" library="clock" deviceset="CAP" device="0805" value="100nF"/>
 <part name="GND60" library="supply1" library_urn="urn:adsk.eagle:library:371" deviceset="GND" device=""/>
-<part name="R16" library="joyAnalog" deviceset="RESISTOR" device="0805-RES" value="10K"/>
+<part name="R16" library="joyAnalog" deviceset="RESISTOR" device="0805-RES" value="5K1"/>
 <part name="+3V35" library="supply1" library_urn="urn:adsk.eagle:library:371" deviceset="+3V3" device=""/>
 <part name="L2" library="Discrete" deviceset="L*" device="-4030" value="4.7uH"/>
 <part name="C46" library="clock" deviceset="CAP" device="0805" value="4.7uF"/>

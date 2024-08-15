@@ -1093,10 +1093,10 @@ These are the free and generally easy to produce 4-layer PCB design rules. You c
 <element name="U$15" library="duckypad" package="M2_SCREW_FOOT" value="M2_SCREW_DEV" x="57.5" y="57.5" smashed="yes"/>
 <element name="U$16" library="duckypad" package="M2_SCREW_FOOT" value="M2_SCREW_DEV" x="57.5" y="38.5" smashed="yes"/>
 <element name="U2" library="my_usbc_16p" package="USBC_16P_FOOT" value="USBC_16P" x="87" y="92.127" smashed="yes" rot="R180"/>
-<element name="R1" library="joyAnalog" package="0805" value="5.1K" x="93.676" y="93.218" smashed="yes" rot="R270">
+<element name="R1" library="joyAnalog" package="0805" value="5K1" x="93.676" y="93.218" smashed="yes" rot="R270">
 <attribute name="NAME" x="92.964" y="90.6407" size="0.8128" layer="25"/>
 </element>
-<element name="R9" library="joyAnalog" package="0805" value="5.1K" x="92.853" y="83.932" smashed="yes" rot="R270">
+<element name="R9" library="joyAnalog" package="0805" value="5K1" x="92.853" y="83.932" smashed="yes" rot="R270">
 <attribute name="NAME" x="92.4593" y="82.4334" size="0.8128" layer="25" rot="R270"/>
 </element>
 <element name="C29" library="clock" package="0805" value="4.7uF" x="81.87" y="84.3788" smashed="yes" rot="R90">
@@ -1184,13 +1184,13 @@ These are the free and generally easy to produce 4-layer PCB design rules. You c
 <element name="C5" library="clock" package="0805" value="100nF" x="87.326" y="59.309" smashed="yes" rot="MR0">
 <attribute name="NAME" x="88.85" y="59.7535" size="0.8128" layer="26" rot="MR180"/>
 </element>
-<element name="C6" library="clock" package="0805" value="1uF" x="87.326" y="61.087" smashed="yes" rot="MR0">
+<element name="C6" library="clock" package="0805" value="4.7uF" x="87.326" y="61.087" smashed="yes" rot="MR0">
 <attribute name="NAME" x="87.326" y="62.8015" size="0.8128" layer="26" rot="MR180"/>
 </element>
 <element name="C7" library="clock" package="0805" value="100nF" x="91.39" y="56.769" smashed="yes" rot="MR270">
 <attribute name="NAME" x="91.8345" y="59.817" size="0.8128" layer="26" rot="MR270"/>
 </element>
-<element name="C26" library="clock" package="0805" value="1uF" x="93.168" y="56.769" smashed="yes" rot="MR270">
+<element name="C26" library="clock" package="0805" value="4.7uF" x="93.168" y="56.769" smashed="yes" rot="MR270">
 <attribute name="NAME" x="93.4855" y="60.452" size="0.8128" layer="26" rot="MR270"/>
 </element>
 <element name="C28" library="clock" package="0805" value="100nF" x="78.248" y="60.64" smashed="yes" rot="MR180">
@@ -1224,7 +1224,7 @@ These are the free and generally easy to produce 4-layer PCB design rules. You c
 <element name="C37" library="clock" package="0805" value="100nF" x="86.63" y="36.703" smashed="yes" rot="MR180">
 <attribute name="NAME" x="85.106" y="36.3855" size="0.8128" layer="26" rot="MR0"/>
 </element>
-<element name="R11" library="joyAnalog" package="0805" value="10K" x="90.882" y="42.418" smashed="yes" rot="MR270">
+<element name="R11" library="joyAnalog" package="0805" value="5K1" x="90.882" y="42.418" smashed="yes" rot="MR270">
 <attribute name="NAME" x="90.5645" y="44.196" size="0.8128" layer="26" rot="MR90"/>
 </element>
 <element name="C38" library="clock" package="0805" value="4.7uF" x="87.326" y="42.418" smashed="yes" rot="MR90">
@@ -1233,7 +1233,7 @@ These are the free and generally easy to produce 4-layer PCB design rules. You c
 <element name="C39" library="clock" package="0805" value="100nF" x="89.104" y="42.418" smashed="yes" rot="MR90">
 <attribute name="NAME" x="88.7865" y="44.196" size="0.8128" layer="26" rot="MR90"/>
 </element>
-<element name="R12" library="joyAnalog" package="0805" value="10K" x="88.789" y="35.052" smashed="yes" rot="MR0">
+<element name="R12" library="joyAnalog" package="0805" value="5K1" x="88.789" y="35.052" smashed="yes" rot="MR0">
 <attribute name="NAME" x="87.265" y="34.7345" size="0.8128" layer="26" rot="MR0"/>
 </element>
 <element name="C40" library="clock" package="0805" value="100nF" x="88.662" y="21.336" smashed="yes" rot="MR180">
@@ -1282,7 +1282,7 @@ These are the free and generally easy to produce 4-layer PCB design rules. You c
 <element name="C10" library="clock" package="0805" value="100nF" x="102.185" y="60.325" smashed="yes" rot="MR0">
 <attribute name="NAME" x="103.709" y="60.6425" size="0.8128" layer="26" rot="MR180"/>
 </element>
-<element name="R16" library="joyAnalog" package="0805" value="10K" x="95.52" y="70.993" smashed="yes" rot="MR0">
+<element name="R16" library="joyAnalog" package="0805" value="5K1" x="95.52" y="70.993" smashed="yes" rot="MR0">
 <attribute name="NAME" x="94.3008" y="72.7329" size="0.8128" layer="26" rot="MR180"/>
 </element>
 <element name="L2" library="Discrete" package="L4030" value="4.7uH" x="83.963" y="20.066" smashed="yes" rot="MR180"/>
