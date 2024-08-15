@@ -10,7 +10,7 @@
 <grid distance="5" unitdist="mil" unit="mil" style="lines" multiple="1" display="yes" altdistance="1" altunitdist="mil" altunit="mil"/>
 <layers>
 <layer number="1" name="Top" color="4" fill="1" visible="yes" active="yes"/>
-<layer number="2" name="pwr" color="49" fill="1" visible="no" active="yes"/>
+<layer number="2" name="pwr" color="49" fill="1" visible="yes" active="yes"/>
 <layer number="3" name="Route3" color="4" fill="3" visible="no" active="no"/>
 <layer number="4" name="Route4" color="1" fill="4" visible="no" active="no"/>
 <layer number="5" name="Route5" color="4" fill="4" visible="no" active="no"/>
@@ -23,7 +23,7 @@
 <layer number="12" name="Route12" color="1" fill="5" visible="no" active="no"/>
 <layer number="13" name="Route13" color="4" fill="5" visible="no" active="no"/>
 <layer number="14" name="Route14" color="1" fill="6" visible="no" active="no"/>
-<layer number="15" name="gnd" color="23" fill="1" visible="no" active="yes"/>
+<layer number="15" name="gnd" color="23" fill="1" visible="yes" active="yes"/>
 <layer number="16" name="Bottom" color="1" fill="1" visible="yes" active="yes"/>
 <layer number="17" name="Pads" color="2" fill="1" visible="yes" active="yes"/>
 <layer number="18" name="Vias" color="2" fill="1" visible="yes" active="yes"/>
@@ -1297,88 +1297,67 @@ These are the free and generally easy to produce 4-layer PCB design rules. You c
 </element>
 <element name="D1" library="duckypad" package="ADAFRUIT_CHANGED_SOD-123" value="1N4148" x="89.17" y="19.05" smashed="yes" rot="MR0">
 <attribute name="NAME" x="87.943" y="20.717" size="0.8128" layer="26" rot="MR180"/>
-<attribute name="VALUE" x="90.27" y="17.766" size="0.4064" layer="28" rot="MR0"/>
 </element>
 <element name="SW4" library="3pos_slide_switch" package="342_SWICH_FOOT_HOLE" value="324_SW324_SWITCH_FOOT_HOLE" x="107.331" y="78.994" smashed="yes" rot="R90"/>
 <element name="D2" library="duckypad" package="ADAFRUIT_CHANGED_SOD-123" value="1N4148" x="20.59" y="85.344" smashed="yes" rot="MR270">
 <attribute name="NAME" x="19.59" y="86.444" size="0.8128" layer="26" rot="MR270"/>
-<attribute name="VALUE" x="21.874" y="86.444" size="0.4064" layer="28" rot="MR270"/>
 </element>
 <element name="D3" library="duckypad" package="ADAFRUIT_CHANGED_SOD-123" value="1N4148" x="39.894" y="85.217" smashed="yes" rot="MR270">
 <attribute name="NAME" x="38.894" y="86.317" size="0.8128" layer="26" rot="MR270"/>
-<attribute name="VALUE" x="41.178" y="86.317" size="0.4064" layer="28" rot="MR270"/>
 </element>
 <element name="D4" library="duckypad" package="ADAFRUIT_CHANGED_SOD-123" value="1N4148" x="58.944" y="85.344" smashed="yes" rot="MR270">
 <attribute name="NAME" x="57.944" y="86.444" size="0.8128" layer="26" rot="MR270"/>
-<attribute name="VALUE" x="60.228" y="86.444" size="0.4064" layer="28" rot="MR270"/>
 </element>
 <element name="D5" library="duckypad" package="ADAFRUIT_CHANGED_SOD-123" value="1N4148" x="76.47" y="86.614" smashed="yes" rot="MR0">
 <attribute name="NAME" x="77.57" y="87.614" size="0.8128" layer="26" rot="MR0"/>
-<attribute name="VALUE" x="77.57" y="85.33" size="0.4064" layer="28" rot="MR0"/>
 </element>
 <element name="D6" library="duckypad" package="ADAFRUIT_CHANGED_SOD-123" value="1N4148" x="19.447" y="67.31" smashed="yes" rot="MR0">
 <attribute name="NAME" x="20.547" y="68.31" size="0.8128" layer="26" rot="MR0"/>
-<attribute name="VALUE" x="20.547" y="66.026" size="0.4064" layer="28" rot="MR0"/>
 </element>
 <element name="D7" library="duckypad" package="ADAFRUIT_CHANGED_SOD-123" value="1N4148" x="38.37" y="67.31" smashed="yes" rot="MR0">
 <attribute name="NAME" x="39.47" y="68.31" size="0.8128" layer="26" rot="MR0"/>
-<attribute name="VALUE" x="39.47" y="66.026" size="0.4064" layer="28" rot="MR0"/>
 </element>
 <element name="D8" library="duckypad" package="ADAFRUIT_CHANGED_SOD-123" value="1N4148" x="57.42" y="67.31" smashed="yes" rot="MR0">
 <attribute name="NAME" x="58.52" y="68.31" size="0.8128" layer="26" rot="MR0"/>
-<attribute name="VALUE" x="58.52" y="66.026" size="0.4064" layer="28" rot="MR0"/>
 </element>
 <element name="D9" library="duckypad" package="ADAFRUIT_CHANGED_SOD-123" value="1N4148" x="76.47" y="67.31" smashed="yes" rot="MR0">
 <attribute name="NAME" x="77.57" y="68.31" size="0.8128" layer="26" rot="MR0"/>
-<attribute name="VALUE" x="77.57" y="66.026" size="0.4064" layer="28" rot="MR0"/>
 </element>
 <element name="D10" library="duckypad" package="ADAFRUIT_CHANGED_SOD-123" value="1N4148" x="73.041" y="52.451" smashed="yes" rot="MR270">
 <attribute name="NAME" x="72.041" y="53.551" size="0.8128" layer="26" rot="MR270"/>
-<attribute name="VALUE" x="74.325" y="53.551" size="0.4064" layer="28" rot="MR270"/>
 </element>
 <element name="D11" library="duckypad" package="ADAFRUIT_CHANGED_SOD-123" value="1N4148" x="57.42" y="48.514" smashed="yes" rot="MR0">
 <attribute name="NAME" x="58.52" y="49.514" size="0.8128" layer="26" rot="MR0"/>
-<attribute name="VALUE" x="58.52" y="47.23" size="0.4064" layer="28" rot="MR0"/>
 </element>
 <element name="D12" library="duckypad" package="ADAFRUIT_CHANGED_SOD-123" value="1N4148" x="38.497" y="48.514" smashed="yes" rot="MR0">
 <attribute name="NAME" x="39.597" y="49.514" size="0.8128" layer="26" rot="MR0"/>
-<attribute name="VALUE" x="39.597" y="47.23" size="0.4064" layer="28" rot="MR0"/>
 </element>
 <element name="D13" library="duckypad" package="ADAFRUIT_CHANGED_SOD-123" value="1N4148" x="19.447" y="48.514" smashed="yes" rot="MR0">
 <attribute name="NAME" x="20.547" y="49.514" size="0.8128" layer="26" rot="MR0"/>
-<attribute name="VALUE" x="20.547" y="47.23" size="0.4064" layer="28" rot="MR0"/>
 </element>
 <element name="D14" library="duckypad" package="ADAFRUIT_CHANGED_SOD-123" value="1N4148" x="19.447" y="29.083" smashed="yes" rot="MR0">
 <attribute name="NAME" x="20.547" y="30.083" size="0.8128" layer="26" rot="MR0"/>
-<attribute name="VALUE" x="20.547" y="27.799" size="0.4064" layer="28" rot="MR0"/>
 </element>
 <element name="D15" library="duckypad" package="ADAFRUIT_CHANGED_SOD-123" value="1N4148" x="38.497" y="29.083" smashed="yes" rot="MR0">
 <attribute name="NAME" x="39.597" y="30.083" size="0.8128" layer="26" rot="MR0"/>
-<attribute name="VALUE" x="39.597" y="27.799" size="0.4064" layer="28" rot="MR0"/>
 </element>
 <element name="D16" library="duckypad" package="ADAFRUIT_CHANGED_SOD-123" value="1N4148" x="57.293" y="29.083" smashed="yes" rot="MR0">
 <attribute name="NAME" x="58.393" y="30.083" size="0.8128" layer="26" rot="MR0"/>
-<attribute name="VALUE" x="58.393" y="27.799" size="0.4064" layer="28" rot="MR0"/>
 </element>
 <element name="D17" library="duckypad" package="ADAFRUIT_CHANGED_SOD-123" value="1N4148" x="69.485" y="20.32" smashed="yes" rot="MR180">
 <attribute name="NAME" x="68.385" y="19.32" size="0.8128" layer="26" rot="MR180"/>
-<attribute name="VALUE" x="68.385" y="21.604" size="0.4064" layer="28" rot="MR180"/>
 </element>
 <element name="D18" library="duckypad" package="ADAFRUIT_CHANGED_SOD-123" value="1N4148" x="74.946" y="11.43" smashed="yes" rot="MR270">
 <attribute name="NAME" x="73.946" y="12.53" size="0.8128" layer="26" rot="MR270"/>
-<attribute name="VALUE" x="76.23" y="12.53" size="0.4064" layer="28" rot="MR270"/>
 </element>
 <element name="D19" library="duckypad" package="ADAFRUIT_CHANGED_SOD-123" value="1N4148" x="57.547" y="10.922" smashed="yes" rot="MR0">
 <attribute name="NAME" x="58.647" y="11.922" size="0.8128" layer="26" rot="MR0"/>
-<attribute name="VALUE" x="58.647" y="9.638" size="0.4064" layer="28" rot="MR0"/>
 </element>
 <element name="D20" library="duckypad" package="ADAFRUIT_CHANGED_SOD-123" value="1N4148" x="38.497" y="10.541" smashed="yes" rot="MR0">
 <attribute name="NAME" x="39.597" y="11.541" size="0.8128" layer="26" rot="MR0"/>
-<attribute name="VALUE" x="39.597" y="9.257" size="0.4064" layer="28" rot="MR0"/>
 </element>
 <element name="D21" library="duckypad" package="ADAFRUIT_CHANGED_SOD-123" value="1N4148" x="19.447" y="10.795" smashed="yes" rot="MR0">
 <attribute name="NAME" x="20.547" y="11.795" size="0.8128" layer="26" rot="MR0"/>
-<attribute name="VALUE" x="20.547" y="9.511" size="0.4064" layer="28" rot="MR0"/>
 </element>
 <element name="X2" library="adafruit_changed" package="U.FL" value="" x="79.518" y="2.54" smashed="yes" rot="MR180">
 <attribute name="VALUE" x="78.248" y="5.715" size="0.8128" layer="28" ratio="10" rot="MR180"/>
@@ -1598,7 +1577,7 @@ These are the free and generally easy to produce 4-layer PCB design rules. You c
 <via x="49.48" y="38.735" extent="1-16" drill="0.5"/>
 <via x="65.228" y="38.227" extent="1-16" drill="0.5"/>
 <via x="69.546" y="22.479" extent="1-16" drill="0.5"/>
-<via x="49.988" y="21.971" extent="1-16" drill="0.5"/>
+<via x="49.861" y="20.574" extent="1-16" drill="0.5"/>
 <via x="31.446" y="21.209" extent="1-16" drill="0.5"/>
 <via x="11.126" y="20.955" extent="1-16" drill="0.5"/>
 <via x="15.698" y="2.667" extent="1-16" drill="0.5"/>
@@ -2518,11 +2497,10 @@ These are the free and generally easy to produce 4-layer PCB design rules. You c
 <wire x1="22.606" y1="87.233" x2="22.606" y2="80.899" width="0.2032" layer="1"/>
 <wire x1="22.606" y1="80.899" x2="22.606" y2="61.976" width="0.2032" layer="1"/>
 <wire x1="22.5975" y1="61.9675" x2="22.606" y2="61.976" width="0.2032" layer="1"/>
-<wire x1="22.5975" y1="61.9675" x2="22.5975" y2="44.8395" width="0.2032" layer="1"/>
-<wire x1="22.645" y1="44.792" x2="22.645" y2="42.92" width="0.2032" layer="1"/>
-<wire x1="22.5975" y1="44.8395" x2="22.645" y2="44.792" width="0.2032" layer="1"/>
 <wire x1="22.645" y1="42.92" x2="22.645" y2="23.92" width="0.2032" layer="1"/>
 <wire x1="22.645" y1="23.92" x2="22.645" y2="4.92" width="0.2032" layer="1"/>
+<wire x1="22.5975" y1="42.9675" x2="22.645" y2="42.92" width="0.2032" layer="1"/>
+<wire x1="22.5975" y1="61.9675" x2="22.5975" y2="42.9675" width="0.2032" layer="1"/>
 </signal>
 <signal name="COL2">
 <contactref element="SWR5C3" pad="1"/>
@@ -3122,24 +3100,12 @@ These are the free and generally easy to produce 4-layer PCB design rules. You c
 <approved hash="6,1,820bbd32c348fc71"/>
 <approved hash="6,1,1fb61d74936291a0"/>
 <approved hash="6,1,2db72f77c161c3a1"/>
-<approved hash="6,1,40b96d2f415a453b"/>
-<approved hash="6,1,40416d2d595fadc3"/>
 <approved hash="6,1,919f64d8612a20ac"/>
 <approved hash="6,1,a3fd6e92c4ac7a23"/>
-<approved hash="6,1,d9667c77f4d6c9e2"/>
-<approved hash="6,1,672567a4555655d7"/>
 <approved hash="6,1,dc69b1691daa155b"/>
-<approved hash="6,1,4ccc4d92df60de3e"/>
-<approved hash="6,1,c771a5c82b181d5f"/>
 <approved hash="6,1,1fb61d74936291a0"/>
 <approved hash="6,1,2db72f77c161c3a1"/>
-<approved hash="6,1,eaedea09d83bd8df"/>
-<approved hash="6,1,0aea0af038c238d8"/>
 <approved hash="6,1,919f64d8612a20ac"/>
-<approved hash="6,1,8043e8401d304f32"/>
-<approved hash="6,1,672567a4555655d7"/>
-<approved hash="6,1,4ccc4d92df60de3e"/>
-<approved hash="6,1,9db49f25c7cbf780"/>
 <approved hash="6,1,6e11604d0e31006d"/>
 <approved hash="6,16,2de8ac104b55b71e"/>
 <approved hash="6,16,6e11604d0e31006d"/>
@@ -3198,9 +3164,6 @@ These are the free and generally easy to produce 4-layer PCB design rules. You c
 <approved hash="6,16,00f000927d6e7d0c"/>
 <approved hash="6,16,040d0463de9fdef1"/>
 <approved hash="6,16,78047827bae7bac4"/>
-<approved hash="6,1,8da1c76fdf556d90"/>
-<approved hash="6,1,71a3a7624f519190"/>
-<approved hash="6,1,dc69bec0d203d55b"/>
 <approved hash="8,1,860a801b1e00e818"/>
 <approved hash="6,1,a402a59a637c62e4"/>
 <approved hash="6,1,069a09117ff7707c"/>
@@ -3213,7 +3176,6 @@ These are the free and generally easy to produce 4-layer PCB design rules. You c
 <approved hash="6,1,020001c2dc3edffc"/>
 <approved hash="6,1,6109f5cd0cfa69a0"/>
 <approved hash="6,1,020101c3dc3fdffd"/>
-<approved hash="6,1,0a0109c3de3fddfd"/>
 <approved hash="6,1,0209039d0d7b0cef"/>
 <approved hash="6,1,1e0a801e8600e81d"/>
 <approved hash="6,1,8403859be67de7e5"/>
@@ -3221,6 +3183,22 @@ These are the free and generally easy to produce 4-layer PCB design rules. You c
 <approved hash="6,16,3bf50a66c2e1cff5"/>
 <approved hash="6,16,b02e68c5a17e439f"/>
 <approved hash="6,16,e564f57190260780"/>
+<approved hash="6,1,25b264ccff85dd26"/>
+<approved hash="6,1,04f3e78d04493cca"/>
+<approved hash="6,1,8d0060804e44c635"/>
+<approved hash="6,1,af4474dd6c7705fb"/>
+<approved hash="6,1,ea6dea0ad838d85f"/>
+<approved hash="6,1,f62de4121ea3c70a"/>
+<approved hash="6,1,13d1fd1bdca21bfc"/>
+<approved hash="6,1,8835e23016c04444"/>
+<approved hash="6,1,0a6a0af338c13858"/>
+<approved hash="6,1,8912302142f092b2"/>
+<approved hash="6,1,5297948af58a86de"/>
+<approved hash="6,1,b9c50fe470e81d34"/>
+<approved hash="6,1,dc69bab8567b555b"/>
+<approved hash="6,1,645f828e6f92ecb2"/>
+<approved hash="6,1,9458962dcc5bffec"/>
+<approved hash="6,1,0a0109c3de3fddfd"/>
 </errors>
 </board>
 </drawing>
