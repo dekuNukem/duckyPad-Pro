@@ -80,6 +80,7 @@
 #define SW_PLUS 27
 
 #define EXP_BUTTON_START 36
+#define EXP_BUTTON_END 99
 
 /*
 0 to 19: mechanical switches

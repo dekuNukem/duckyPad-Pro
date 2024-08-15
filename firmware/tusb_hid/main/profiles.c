@@ -523,7 +523,7 @@ void generate_msc_flag_file(void)
 }
 
 #define COLOR_START_ADDR MAX_TOTAL_SW_COUNT
-#define SPS_BIN_SIZE 128
+#define SPS_BIN_SIZE 256
 uint8_t sps_bin_buf[SPS_BIN_SIZE];
 
 void save_persistent_state(uint8_t epilogue_value, uint8_t swid)
@@ -537,7 +537,7 @@ void save_persistent_state(uint8_t epilogue_value, uint8_t swid)
     uint8_t b_addr = g_addr + 1;
     uint8_t red, green, blue;
     get_current_color(i, &red, &green, &blue);
-    // is not asking to save color state, save the current key color with assigned switch color, instead of keydown color
+    // if not asking to save color state, save the current key color with assigned switch color, instead of keydown color
     if((epilogue_value & EPILOGUE_SAVE_COLOR_STATE) == 0 && i == swid)
     {
       red = all_profile_info[current_profile_number].sw_color[i][0];
@@ -558,8 +558,6 @@ void save_persistent_state(uint8_t epilogue_value, uint8_t swid)
   sprintf(temp_buf, "/sdcard/%s/state_dpp.sps", all_profile_info[current_profile_number].dir_path);
 
   FILE *file = fopen(temp_buf, "wb");
-  if (file == NULL)
-    return;
   fwrite(sps_bin_buf, 1, SPS_BIN_SIZE, file);
   fclose(file);
 }

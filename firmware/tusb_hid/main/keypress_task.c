@@ -118,18 +118,8 @@ uint8_t run_once(uint8_t swid, char* dsb_path)
   return what_to_do;
 }
 
-void onboard_switch_press(uint8_t swid, char* press_path, char* release_path)
+void switch_press_nocheck(uint8_t swid, char* press_path, char* release_path)
 {
-  if(strlen(all_profile_info[current_profile_number].sw_name_firstline[swid]) == 0)
-    return;
-  if(access(press_path, F_OK))
-  {
-    neopixel_fill(128, 0, 0);
-    draw_nodsb(swid);
-    block_until_anykey();
-    goto_profile(current_profile_number);
-    return;
-  }
   play_keydown_animation(current_profile_number, swid);
   key_press_count[swid]++;
   //-------------
@@ -156,11 +146,25 @@ void onboard_switch_press(uint8_t swid, char* press_path, char* release_path)
     if(run_once(swid, press_path) == DSB_DONT_PLAY_KEYUP_ANIMATION_RETURN_IMMEDIATELY)
       return;
   }
-
   handle_obsw_keydown_end:
   // play keyup animation only if there is no on-release DSB file 
   if(access(release_path, F_OK))
     play_keyup_animation(current_profile_number, swid);
+}
+
+void onboard_offboard_switch_press(uint8_t swid, char* press_path, char* release_path)
+{
+  if(strlen(all_profile_info[current_profile_number].sw_name_firstline[swid]) == 0)
+    return;
+  if(access(press_path, F_OK))
+  {
+    neopixel_fill(128, 0, 0);
+    draw_nodsb(swid);
+    block_until_anykey();
+    goto_profile(current_profile_number);
+    return;
+  }
+  switch_press_nocheck(swid, press_path, release_path);  
 }
 
 void settings_menu(void)
@@ -266,7 +270,14 @@ void process_keyevent(uint8_t swid, uint8_t event_type)
   if((swid >= MSW_0 && swid <= MAX_MSW) || swid == RE1_SW || swid == RE2_SW)
   {
     if(event_type == SW_EVENT_SHORT_PRESS)
-      onboard_switch_press(swid, dsb_on_press_path_buf, dsb_on_release_path_buf);
+      onboard_offboard_switch_press(swid, dsb_on_press_path_buf, dsb_on_release_path_buf);
+    else if(event_type == SW_EVENT_RELEASE)
+      onboard_offboard_switch_release(swid, dsb_on_release_path_buf);
+  }
+  else if(swid >= EXP_BUTTON_START && swid <= EXP_BUTTON_END)
+  {
+    if(event_type == SW_EVENT_SHORT_PRESS)
+      switch_press_nocheck(swid, dsb_on_press_path_buf, dsb_on_release_path_buf);
     else if(event_type == SW_EVENT_RELEASE)
       onboard_offboard_switch_release(swid, dsb_on_release_path_buf);
   }
@@ -303,7 +314,7 @@ void wakeup_from_sleep_and_load_profile(uint8_t profile_to_load)
   goto_profile(profile_to_load);
 }
 
-void switch_press_no_additional_check(uint8_t swid)
+void rotary_encoder_activity(uint8_t swid)
 {
   memset(dsb_on_press_path_buf, 0, PATH_BUF_SIZE);
   sprintf(dsb_on_press_path_buf, "/sdcard/%s/key%d.dsb", all_profile_info[current_profile_number].dir_path, swid+1);
@@ -333,7 +344,7 @@ void handle_rotary_encoder_event(rotary_encoder_event_t* this_re_event)
     swid = RE2_CCW;
   if(swid == 0)
     return;
-  switch_press_no_additional_check(swid);
+  rotary_encoder_activity(swid);
 }
 
 void handle_sw_event(switch_event_t* this_sw_event)
@@ -368,7 +379,9 @@ void keypress_task(void *dummy)
     switch_event_t sw_event = { 0 };
     if (xQueueReceive(switch_event_queue, &sw_event, 0) == pdTRUE)
     {
-      is_busy = 1;handle_sw_event(&sw_event);is_busy = 0;
+      is_busy = 1;
+      handle_sw_event(&sw_event);
+      is_busy = 0;
     }
     
     if(is_sleeping == 0)

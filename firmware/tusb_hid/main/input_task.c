@@ -69,9 +69,9 @@ void my_rotary_encoder_init(void)
 	ESP_ERROR_CHECK(rotary_encoder_set_queue(&lower_rc_info, rotary_encoder_event_queue));
 }
 
-uint8_t this_sw_state[TOTAL_OBSW_COUNT];
-uint8_t last_sw_state[TOTAL_OBSW_COUNT];
-uint32_t last_press_ts[TOTAL_OBSW_COUNT];
+uint8_t this_sw_state[MAX_TOTAL_SW_COUNT];
+uint8_t last_sw_state[MAX_TOTAL_SW_COUNT];
+uint32_t last_press_ts[MAX_TOTAL_SW_COUNT];
 
 uint8_t rowcol_to_index(uint8_t row, uint8_t col)
 {
@@ -101,7 +101,7 @@ void sw_scan(void)
 {
 	if(xSemaphoreTake(kbscan_mutex, pdMS_TO_TICKS(KBSCAN_MUTEX_TIMEOUT_MS)) == pdFALSE)
     	return;
-	memset(this_sw_state, 0, TOTAL_OBSW_COUNT);
+
 	gpio_set_level(SWM_COL0_GPIO, 1);
 	gpio_set_level(SWM_COL1_GPIO, 0);
 	gpio_set_level(SWM_COL2_GPIO, 0);
@@ -165,6 +165,7 @@ void parse_expansion_data(uint8_t exp_data)
 			.type = SW_EVENT_SHORT_PRESS,
 		};
 		xQueueSend(switch_event_queue, &sw_event, NULL);
+		this_sw_state[sw_event.id] = 1;
 	}
 	else if(cmd_type == CMD_SW_RELEASED_BITMASK)
 	{
@@ -175,6 +176,7 @@ void parse_expansion_data(uint8_t exp_data)
 			.type = SW_EVENT_RELEASE,
 		};
 		xQueueSend(switch_event_queue, &sw_event, NULL);
+		this_sw_state[sw_event.id] = 0;
 	}
 	printf("got data: %x\n", exp_data);
 }
@@ -219,13 +221,13 @@ void kb_scan_task(void *dummy)
 				xQueueSend(switch_event_queue, &sw_event, NULL);
 			}
 		}
-		memcpy(last_sw_state, this_sw_state, TOTAL_OBSW_COUNT);
-
-		//---------------
+		
+		//-------expansion parsing--------
 		memset(expansion_rx_buf, 0, EXPANSION_BUF_SIZE);
-		if(uart_read_bytes(EXPANSION_UART_PORT_NUM, expansion_rx_buf, 1, pdMS_TO_TICKS(10)) == 0)
-			continue;
-		parse_expansion_data(expansion_rx_buf[0]);
+		if(uart_read_bytes(EXPANSION_UART_PORT_NUM, expansion_rx_buf, 1, pdMS_TO_TICKS(10)))
+			parse_expansion_data(expansion_rx_buf[0]);
+		// --------------
+		memcpy(last_sw_state, this_sw_state, MAX_TOTAL_SW_COUNT);
 	}
 }
 
@@ -289,7 +291,7 @@ void switch_init(void)
 
 uint8_t poll_sw_state(uint8_t swid_zero_indexed)
 {
-	if(swid_zero_indexed >= TOTAL_OBSW_COUNT)
+	if(swid_zero_indexed >= MAX_TOTAL_SW_COUNT)
 		return 0;
 	sw_scan();
 	return this_sw_state[swid_zero_indexed];
