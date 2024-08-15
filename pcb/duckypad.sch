@@ -8274,7 +8274,7 @@ You are welcome to use this library for commercial purposes. For attribution, we
 <part name="C25" library="clock" deviceset="CAP" device="0805" value="100nF"/>
 <part name="U$6" library="supply1" library_urn="urn:adsk.eagle:library:371" deviceset="GND" device=""/>
 <part name="+3V30" library="supply1" library_urn="urn:adsk.eagle:library:371" deviceset="+3V3" device=""/>
-<part name="R5" library="clock" deviceset="RESISTOR" device="0805-RES" value="10K"/>
+<part name="R5" library="clock" deviceset="RESISTOR" device="0805-RES" value="5K1"/>
 <part name="C27" library="clock" deviceset="C-US" device="C1210" value="100uF"/>
 <part name="U$7" library="duckypad" deviceset="M2_SCREW_DEV" device=""/>
 <part name="U$9" library="duckypad" deviceset="M2_SCREW_DEV" device=""/>
@@ -8352,12 +8352,12 @@ You are welcome to use this library for commercial purposes. For attribution, we
 <part name="GND33" library="clock" deviceset="GND" device=""/>
 <part name="GND34" library="clock" deviceset="GND" device=""/>
 <part name="GND35" library="supply1" deviceset="GND" device=""/>
-<part name="C5" library="clock" deviceset="CAP" device="0805" value="1uF"/>
-<part name="C6" library="clock" deviceset="CAP" device="0805" value="100nF"/>
+<part name="C5" library="clock" deviceset="CAP" device="0805" value="100nF"/>
+<part name="C6" library="clock" deviceset="CAP" device="0805" value="1uF"/>
 <part name="GND36" library="supply1" library_urn="urn:adsk.eagle:library:371" deviceset="GND" device=""/>
 <part name="GND37" library="supply1" library_urn="urn:adsk.eagle:library:371" deviceset="GND" device=""/>
-<part name="C7" library="clock" deviceset="CAP" device="0805" value="1uF"/>
-<part name="C26" library="clock" deviceset="CAP" device="0805" value="100nF"/>
+<part name="C7" library="clock" deviceset="CAP" device="0805" value="100nF"/>
+<part name="C26" library="clock" deviceset="CAP" device="0805" value="1uF"/>
 <part name="GND38" library="supply1" library_urn="urn:adsk.eagle:library:371" deviceset="GND" device=""/>
 <part name="GND39" library="supply1" library_urn="urn:adsk.eagle:library:371" deviceset="GND" device=""/>
 <part name="C28" library="clock" deviceset="CAP" device="0805" value="100nF"/>
@@ -8426,7 +8426,7 @@ You are welcome to use this library for commercial purposes. For attribution, we
 <part name="+3V35" library="supply1" library_urn="urn:adsk.eagle:library:371" deviceset="+3V3" device=""/>
 <part name="L2" library="Discrete" deviceset="L*" device="-4030" value="4.7uH"/>
 <part name="C46" library="clock" deviceset="CAP" device="0805" value="4.7uF"/>
-<part name="R17" library="joyAnalog" deviceset="RESISTOR" device="0805-RES" value="10K"/>
+<part name="R17" library="joyAnalog" deviceset="RESISTOR" device="0805-RES" value="5K1"/>
 <part name="GND62" library="supply1" library_urn="urn:adsk.eagle:library:371" deviceset="GND" device=""/>
 <part name="JP3" library="adafruit_changed" deviceset="PINHD-1X1" device="CB"/>
 <part name="D1" library="duckypad" deviceset="ADAFRUIT_CHANGED_DIODE" device="SOD-123" value="1N4148"/>
