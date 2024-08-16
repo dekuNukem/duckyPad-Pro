@@ -53,7 +53,7 @@ void halt_all_animations(void);
 extern uint8_t brightness_index_to_percent_lookup[BRIGHTNESS_LEVEL_SIZE];
 
 #define ANIMATION_FREQ_MS 20
-#define NEOPIXEL_MUTEX_TIMEOUT_MS 100
+#define NEOPIXEL_MUTEX_TIMEOUT_MS 8
 
 #ifdef __cplusplus
 }
