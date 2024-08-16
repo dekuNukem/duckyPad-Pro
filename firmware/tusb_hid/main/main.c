@@ -55,7 +55,7 @@ void app_main(void)
 
     led_animation_init();
 
-    xTaskCreate(kb_scan_task, "kb_scan_task", SW_SCAN_TASK_STACK_SIZE, NULL, 2, NULL);
+    xTaskCreate(kb_scan_task, "kb_scan_task", SW_SCAN_TASK_STACK_SIZE, NULL, 5, NULL);
 
     if(should_mount_usb_msc())
     {
@@ -94,7 +94,7 @@ void app_main(void)
     profile_init();
     is_profile_load_complete = 1;
 
-    xTaskCreate(keypress_task, "keypress_task", KEYPRESS_TASK_STACK_SIZE, NULL, 2, NULL);
+    xTaskCreate(keypress_task, "keypress_task", KEYPRESS_TASK_STACK_SIZE, NULL, 6, NULL);
 
     while(1)
     {

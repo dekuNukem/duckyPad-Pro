@@ -366,7 +366,7 @@ void keypress_task(void *dummy)
   update_last_keypress();
   while(1)
   {
-    vTaskDelay(pdMS_TO_TICKS(25));
+    vTaskDelay(pdMS_TO_TICKS(10));
 
     rotary_encoder_event_t re_event = { 0 };
     if (xQueueReceive(rotary_encoder_event_queue, &re_event, 0) == pdTRUE)

@@ -112,7 +112,7 @@ void expansion_uart_init(void);
 
 #define KBSCAN_MUTEX_TIMEOUT_MS 100
 
-#define INPUT_TASK_FREQ_MS 20
+#define INPUT_TASK_FREQ_MS 13
 
 #ifdef __cplusplus
 }
