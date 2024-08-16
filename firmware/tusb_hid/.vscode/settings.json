@@ -5,7 +5,7 @@
     "board/esp32s3-builtin.cfg"
   ],
   "idf.flashType": "UART",
-  "idf.portWin": "COM43",
+  "idf.portWin": "COM36",
   "files.associations": {
     "gpio.h": "c",
     "string.h": "c",
@@ -67,6 +67,7 @@
     "esp_hid_gap.h": "c",
     "esp_bt_device.h": "c",
     "nvs_flash.h": "c",
-    "esp_gatt_defs.h": "c"
+    "esp_gatt_defs.h": "c",
+    "ds_vm.h": "c"
   }
 }

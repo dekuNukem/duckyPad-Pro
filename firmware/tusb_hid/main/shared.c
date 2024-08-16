@@ -193,14 +193,14 @@ void fw_update_check(void)
   {
     neopixel_fill(128, 0, 0);
     draw_fw_crc_error(filename_buf);
-    block_until_anykey();
+    block_until_anykey(SW_EVENT_SHORT_PRESS);
     goto_profile(current_profile_number);
     return;
   }
 
   neopixel_fill(64, 64, 64);
   draw_fw_update_ask(filename_buf);
-  block_until_anykey();
+  block_until_anykey(SW_EVENT_SHORT_PRESS);
 
   oled_say("Updating...");
 

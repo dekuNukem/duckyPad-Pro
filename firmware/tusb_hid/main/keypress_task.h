@@ -16,7 +16,7 @@ void start_sleeping(void);
 void wakeup_from_sleep_and_load_profile(uint8_t profile_to_load);
 void wakeup_from_sleep_no_load(void);
 void update_last_keypress(void);
-void block_until_anykey(void);
+void block_until_anykey(uint8_t event_type);
 void block_until_plus_minus_long_press(void);
 
 extern volatile uint32_t last_keypress;

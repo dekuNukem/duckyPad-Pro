@@ -26,7 +26,7 @@
 
 volatile uint32_t last_keypress;
 
-void block_until_anykey(void)
+void block_until_anykey(uint8_t event_type)
 {
   xQueueReset(switch_event_queue);
   while(1)
@@ -35,7 +35,7 @@ void block_until_anykey(void)
     switch_event_t sw_event = { 0 };
     if(xQueueReceive(switch_event_queue, &sw_event, 0) == pdFALSE)
       continue;
-    if(sw_event.type == SW_EVENT_RELEASE)
+    if(sw_event.type == event_type)
       return;
   }
 }
@@ -91,7 +91,7 @@ uint8_t run_once(uint8_t swid, char* dsb_path)
   {
     neopixel_fill(128, 0, 0);
     draw_exe_error(this_exe.result);
-    block_until_anykey();
+    block_until_anykey(SW_EVENT_SHORT_PRESS);
     goto_profile(current_profile_number);
     return DSB_DONT_PLAY_KEYUP_ANIMATION_RETURN_IMMEDIATELY;
   }
@@ -160,7 +160,7 @@ void onboard_offboard_switch_press(uint8_t swid, char* press_path, char* release
   {
     neopixel_fill(128, 0, 0);
     draw_nodsb(swid);
-    block_until_anykey();
+    block_until_anykey(SW_EVENT_RELEASE);
     goto_profile(current_profile_number);
     return;
   }
@@ -211,7 +211,7 @@ void settings_menu(void)
       neopixel_fill(0, 0, 128);
       nvs_flash_erase();
       draw_nvm_erase();
-      block_until_anykey();
+      block_until_anykey(SW_EVENT_SHORT_PRESS);
       esp_restart();
     }
     else if(sw_event.id == MSW_4)

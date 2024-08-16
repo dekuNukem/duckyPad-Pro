@@ -587,7 +587,7 @@ void draw_bt_pin(uint32_t this_bt_pin)
     neopixel_fill(0, 0, 255);
     vTaskDelay(pdMS_TO_TICKS(200));
   }
-  block_until_anykey();
+  block_until_anykey(SW_EVENT_SHORT_PRESS);
   goto_profile(current_profile_number);
 }
 

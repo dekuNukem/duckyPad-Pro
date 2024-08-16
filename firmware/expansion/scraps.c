@@ -1,7 +1,11 @@
     printf("EXP: Ask start ID\n");
     // printf("radio: %s\n", expansion_rx_buf);
-
-
+is_busy = 1;
+      uint32_t start = pdTICKS_TO_MS(xTaskGetTickCount());
+      handle_sw_event(&sw_event);
+      printf("took %ldms\n", pdTICKS_TO_MS(xTaskGetTickCount())-start);
+      is_busy = 0;
+SW_EVENT_RELEASE
       printf("unsupported remote fw: %d\n", remote_fw_ver_major);
   
   printf("tdpR: %x\n", this_cmd);
