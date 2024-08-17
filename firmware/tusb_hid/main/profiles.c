@@ -22,6 +22,7 @@
 #include "bluetooth_task.h"
 
 const char settings_file_path[] = "/sdcard/dpp_config.txt";
+const char default_settings_file[] = "sleep_index 0\nbrightness_index 0\nlast_profile 1\nfw_ver 0.0.0\nserial_number DP24_000000\nkb_layout dpkm_English (US).txt\n";
 dp_global_settings dp_settings;
 
 char temp_buf[TEMP_BUFSIZE];
@@ -55,11 +56,20 @@ uint8_t load_settings(dp_global_settings* dps)
   remove(temp_buf);
 
   memset(dps, 0, sizeof(*dps));
-  dps->brightness_index = BRIGHTNESS_LEVEL_SIZE - 1;
+  FILE *sd_file;
 
-  FILE *sd_file = fopen(settings_file_path, "r");
+  if(access(settings_file_path, F_OK))
+  {
+    sd_file = fopen(settings_file_path, "w");
+    if(sd_file == NULL)
+      return 2;
+    fprintf(sd_file, "%s", default_settings_file);
+    fclose(sd_file);
+  }
+
+  sd_file = fopen(settings_file_path, "r");
   if(sd_file == NULL)
-    return 2;
+    return 3;
 
   memset(temp_buf, 0, TEMP_BUFSIZE);
   memset(dps->current_kb_layout, 0, FILENAME_BUFSIZE);

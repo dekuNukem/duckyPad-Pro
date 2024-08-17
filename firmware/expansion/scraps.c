@@ -1,3 +1,6 @@
+    printf("settings file not found! creating a new one...");
+
+
 uint8_t is_expansion_switch(uint8_t swid);
 uint8_t is_onboard_mappable_switch(uint8_t swid);
 uint8_t is_expansion_switch(uint8_t swid)
