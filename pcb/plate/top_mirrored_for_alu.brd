@@ -201,20 +201,22 @@
 <wire x1="82" y1="92.5" x2="78.5" y2="96" width="0" layer="20" curve="90"/>
 <wire x1="78.5" y1="96" x2="1.5" y2="96" width="0" layer="20"/>
 <wire x1="1.5" y1="96" x2="0" y2="94.5" width="0" layer="20" curve="90"/>
-<wire x1="0" y1="94.5" x2="0" y2="92" width="0" layer="20"/>
-<wire x1="0" y1="92" x2="-1.5" y2="90.5" width="0" layer="20" curve="-90"/>
-<wire x1="-1.5" y1="90.5" x2="-8.5" y2="90.5" width="0" layer="20"/>
-<wire x1="-8.5" y1="90.5" x2="-10" y2="92" width="0" layer="20" curve="-90"/>
-<wire x1="-10" y1="92" x2="-10" y2="95" width="0" layer="20"/>
+<wire x1="0" y1="94.5" x2="0" y2="94" width="0" layer="20"/>
+<wire x1="0" y1="94" x2="-1.5" y2="92.5" width="0" layer="20" curve="-90"/>
+<wire x1="-1.5" y1="92.5" x2="-8.5" y2="92.5" width="0" layer="20"/>
+<wire x1="-8.5" y1="92.5" x2="-10" y2="94" width="0" layer="20" curve="-90"/>
+<wire x1="-10" y1="94" x2="-10" y2="95" width="0" layer="20"/>
 <wire x1="9.5" y1="0" x2="78.5" y2="0" width="0" layer="20"/>
 <wire x1="78.5" y1="0" x2="82" y2="3.5" width="0" layer="20" curve="90"/>
 <wire x1="-8.5" y1="55" x2="4" y2="55" width="0" layer="20"/>
 <wire x1="4" y1="55" x2="6" y2="53" width="0" layer="20" curve="-90"/>
 <wire x1="6" y1="53" x2="6" y2="3.5" width="0" layer="20"/>
 <wire x1="6" y1="3.5" x2="9.5" y2="0" width="0" layer="20" curve="90"/>
-<wire x1="-13.5" y1="79.5" x2="-25.5" y2="79.5" width="0" layer="20"/>
-<wire x1="-25.5" y1="79.5" x2="-27" y2="78" width="0" layer="20" curve="90"/>
-<wire x1="-27" y1="78" x2="-27" y2="73.5" width="0" layer="20"/>
+<wire x1="-12" y1="95" x2="-12" y2="81.5" width="0" layer="20"/>
+<wire x1="-12" y1="81.5" x2="-13.5" y2="80" width="0" layer="20" curve="-90"/>
+<wire x1="-13.5" y1="80" x2="-25.5" y2="80" width="0" layer="20"/>
+<wire x1="-25.5" y1="80" x2="-27" y2="78.5" width="0" layer="20" curve="90"/>
+<wire x1="-27" y1="78.5" x2="-27" y2="73.5" width="0" layer="20"/>
 <wire x1="-27" y1="73.5" x2="-25.5" y2="72" width="0" layer="20" curve="90"/>
 <wire x1="-25.5" y1="72" x2="-13.5" y2="72" width="0" layer="20"/>
 <wire x1="-13.5" y1="72" x2="-12" y2="70.5" width="0" layer="20" curve="-90"/>
@@ -222,8 +224,6 @@
 <wire x1="-12" y1="58.5" x2="-8.5" y2="55" width="0" layer="20" curve="90"/>
 <wire x1="-10" y1="95" x2="-11" y2="96" width="0" layer="20" curve="90"/>
 <wire x1="-11" y1="96" x2="-12" y2="95" width="0" layer="20" curve="90"/>
-<wire x1="-12" y1="95" x2="-12" y2="81" width="0" layer="20"/>
-<wire x1="-12" y1="81" x2="-13.5" y2="79.5" width="0" layer="20" curve="-90"/>
 <text x="157" y="50" size="1.778" layer="51">big round corner 3.5mm</text>
 </plain>
 <libraries>
@@ -439,7 +439,6 @@ These are the free and generally easy to produce 4-layer PCB design rules. You c
 <element name="U$8" library="duckypad" package="M2_SCREW_FOOT" value="M2_SCREW_DEV" x="43.5" y="57.5" smashed="yes" rot="MR0"/>
 <element name="U$12" library="duckypad" package="M2_SCREW_FOOT" value="M2_SCREW_DEV" x="43.5" y="38.5" smashed="yes" rot="MR0"/>
 <element name="U$13" library="duckypad" package="M2_SCREW_FOOT" value="M2_SCREW_DEV" x="24.5" y="19.5" smashed="yes" rot="MR0"/>
-<element name="U$17" library="duckypad" package="M2_SCREW_FOOT" value="M2_SCREW_DEV" x="-17" y="76.5" smashed="yes" rot="MR0"/>
 <element name="U$14" library="duckypad" package="M2_SCREW_FOOT" value="M2_SCREW_DEV" x="62.5" y="76.5" smashed="yes" rot="MR0"/>
 <element name="U$22" library="duckypad" package="M2_SCREW_FOOT" value="M2_SCREW_DEV" x="62.5" y="19.5" smashed="yes" rot="MR0"/>
 <element name="U$1" library="duckypad" package="SW_OPENING" value="SW_OPENM" x="72" y="10" smashed="yes" rot="MR0"/>

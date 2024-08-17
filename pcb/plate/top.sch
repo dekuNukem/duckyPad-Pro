@@ -272,7 +272,6 @@ by exp-lbrs.ulp</description>
 <part name="U$8" library="duckypad" deviceset="M2_SCREW_DEV" device=""/>
 <part name="U$12" library="duckypad" deviceset="M2_SCREW_DEV" device=""/>
 <part name="U$13" library="duckypad" deviceset="M2_SCREW_DEV" device=""/>
-<part name="U$17" library="duckypad" deviceset="M2_SCREW_DEV" device=""/>
 <part name="U$14" library="duckypad" deviceset="M2_SCREW_DEV" device=""/>
 <part name="U$22" library="duckypad" deviceset="M2_SCREW_DEV" device=""/>
 <part name="U$1" library="duckypad" deviceset="SW_OPENM" device=""/>
@@ -305,7 +304,6 @@ by exp-lbrs.ulp</description>
 <instance part="U$8" gate="G$1" x="182.88" y="292.1" smashed="yes"/>
 <instance part="U$12" gate="G$1" x="127" y="292.1" smashed="yes"/>
 <instance part="U$13" gate="G$1" x="154.94" y="292.1" smashed="yes"/>
-<instance part="U$17" gate="G$1" x="182.88" y="307.34" smashed="yes"/>
 <instance part="U$14" gate="G$1" x="208.28" y="322.58" smashed="yes"/>
 <instance part="U$22" gate="G$1" x="208.28" y="307.34" smashed="yes"/>
 <instance part="U$1" gate="G$1" x="86.36" y="195.58" smashed="yes"/>
