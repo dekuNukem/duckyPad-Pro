@@ -100,18 +100,15 @@ void my_rotary_encoder_init(void);
 void kb_scan_task(void *dummy);
 uint8_t rowcol_to_index(uint8_t row, uint8_t col);
 uint8_t poll_sw_state(uint8_t swid_zero_indexed);
+void clear_sw_re_queue(void);
+void expansion_uart_init(void);
 
 #define SW_SCAN_TASK_STACK_SIZE 2048
 
 extern QueueHandle_t rotary_encoder_event_queue;
 extern QueueHandle_t switch_event_queue;
 
-void clear_sw_re_queue(void);
-
-void expansion_uart_init(void);
-
 #define KBSCAN_MUTEX_TIMEOUT_MS 100
-
 #define INPUT_TASK_FREQ_MS 13
 
 #ifdef __cplusplus

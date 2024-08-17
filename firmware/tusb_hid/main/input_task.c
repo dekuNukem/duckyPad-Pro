@@ -149,7 +149,6 @@ void sw_scan(void)
 #define EXPANSION_START_ID 0
 void parse_expansion_data(uint8_t exp_data)
 {
-	printf("got data: %x\n", exp_data);
 	uint8_t cmd_type = exp_data & TOP_TWO_BITS;
 	if(cmd_type == CMD_ASK_START_ID_BITMASK)
 	{
