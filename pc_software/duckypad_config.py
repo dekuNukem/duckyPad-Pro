@@ -1068,6 +1068,9 @@ key_button_xy_list = [
 (KEY_BUTTON_GAP*4+KEY_BUTTON_WIDTH*3,KEY_BUTTON_HEADROOM+COL_GAP*5+KEY_BUTTON_HEIGHT*4)
 ]
 
+def place_obsw_buttons():
+    pass
+
 key_button_list = []
 for x in range(MECH_OBSW_COUNT):
     this_button = Label(master=keys_lf, borderwidth=1, relief="solid", background=default_button_color, font=(None, 13))
