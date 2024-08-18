@@ -1,3 +1,22 @@
+update_key_button_appearances
+
+if profile_list[index].dim_unused:
+        dim_unused_keys_checkbox.select()
+    else:
+        dim_unused_keys_checkbox.deselect()
+
+    if profile_list[index].is_landscape:
+        rotate_keys_checkbox.select()
+    else:
+        rotate_keys_checkbox.deselect()
+
+if bool(is_in_landscape_var.get()):
+        place_obsw_buttons_landscape()
+    else:
+        place_obsw_buttons_portrait()
+
+rotate_keys_click
+
 update_key_button_appearances, disable to see expansion button default labels
 
 ch_button_x = 45

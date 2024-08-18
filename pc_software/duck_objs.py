@@ -149,6 +149,7 @@ class dp_profile(object):
 		self.bg_color = (84,22,180)
 		self.kd_color = None
 		self.dim_unused = True
+		self.is_landscape = False
 
 def build_profile(root_dir_path):
 	my_dirs = [d for d in os.listdir(root_dir_path) if os.path.isdir(os.path.join(root_dir_path, d))]

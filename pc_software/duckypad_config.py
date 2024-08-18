@@ -190,6 +190,7 @@ def ui_reset():
     kd_R1.config(state=DISABLED)
     kd_R2.config(state=DISABLED)
     dim_unused_keys_checkbox.config(state=DISABLED)
+    rotate_keys_checkbox.config(state=DISABLED)
     key_rename_button.config(state=DISABLED)
     key_remove_button.config(state=DISABLED)
     key_name_textbox.config(state=DISABLED)
@@ -407,6 +408,7 @@ def enable_buttons():
     kd_R1.config(state=NORMAL)
     kd_R2.config(state=NORMAL)
     dim_unused_keys_checkbox.config(state=NORMAL)
+    rotate_keys_checkbox.config(state=NORMAL)
     key_rename_button.config(state=NORMAL)
     key_remove_button.config(state=NORMAL)
     bg_color_label.config(fg='black')
@@ -471,6 +473,11 @@ def update_profile_display():
     else:
         dim_unused_keys_checkbox.deselect()
 
+    if profile_list[index].is_landscape:
+        rotate_keys_checkbox.select()
+    else:
+        rotate_keys_checkbox.deselect()
+
     update_key_button_appearances(index)
     reset_key_button_relief()
     key_name_textbox.delete('1.0', 'end')
@@ -490,9 +497,14 @@ def make_key_button_text_from_two_lines(line1, line2):
 
 def update_key_button_appearances(profile_index):
     if profile_index is None:
+        place_obsw_buttons_portrait()
         for x in range(MECH_OBSW_COUNT):
             key_button_list[x].config(background=default_button_color, text='')
         return
+    if profile_list[profile_index].is_landscape:
+        place_obsw_buttons_landscape()
+    else:
+        place_obsw_buttons_portrait()
     for key_index, item in enumerate(profile_list[profile_index].keylist):
         if item is not None:
             this_color = None
@@ -963,20 +975,18 @@ def rotate_keys_click():
     selection = profile_lstbox.curselection()
     if len(selection) <= 0:
         return
-    # profile_list[selection[0]].dim_unused = bool(dim_unused_keys_checkbox_var.get())
-    # update_profile_display()
-    if bool(is_in_landscape_var.get()):
-        place_obsw_buttons_landscape()
-    else:
-        place_obsw_buttons_portrait()
+    profile_list[selection[0]].is_landscape = bool(is_in_landscape_var.get())
+    update_key_button_appearances(selection[0])
+    if(is_key_selected()):
+        key_button_click(key_button_list[selected_key])
 
 is_in_landscape_var = IntVar()
-rotate_keys_checkbox = Checkbutton(keys_lf, text="Rotate", variable=is_in_landscape_var, command=rotate_keys_click) #, state=DISABLED
+rotate_keys_checkbox = Checkbutton(keys_lf, text="Rotate", variable=is_in_landscape_var, command=rotate_keys_click, state=DISABLED)
 rotate_keys_checkbox.place(x=scaled_size(10), y=scaled_size(0))
 
 key_instruction_label = Label(master=keys_lf, text="click to edit, drag to rearrange")
 root.update()
-key_instruction_label.place(x=scaled_size(110), y=scaled_size(0))
+key_instruction_label.place(x=scaled_size(100), y=scaled_size(0))
 
 def search_button(rootx, rooty):
     for index, item in enumerate(key_button_list):
