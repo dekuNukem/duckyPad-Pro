@@ -204,7 +204,76 @@ void draw_cell_content(uint8_t cell_col, uint8_t cell_row, char* first_line, cha
   }
 }
 
-void draw_profile(profile_info* this_profile)
+#define ROTATED_DISPLAY_ROWS 4
+#define ROTATED_DISPLAY_COLS 5
+#define ROTATED_CELL_WIDTH 25
+#define ROTATED_CELL_HEIGHT 29
+
+uint8_t cell_pixel_x_lookup_rotated_5cols[ROTATED_DISPLAY_COLS] =
+{0, 26, 52, 77, 103};
+uint8_t cell_pixel_y_lookup_rotated_4rows[ROTATED_DISPLAY_ROWS] =
+{12, 41, 70, 99};
+
+void draw_cell_content_rotated(uint8_t cell_col, uint8_t cell_row, char* first_line, char* second_line)
+{
+  if(cell_col >= ROTATED_DISPLAY_COLS || cell_row >= ROTATED_DISPLAY_ROWS)
+    return;
+  uint8_t cell_pixel_x = cell_pixel_x_lookup_rotated_5cols[cell_col];
+  uint8_t cell_pixel_y = cell_pixel_y_lookup_rotated_4rows[cell_row];
+
+  uint8_t first_line_size = strlen(first_line);
+  uint8_t second_line_size = strlen(second_line);
+
+  if(first_line_size == 0)
+    return;
+  // 4 char per line max
+  first_line[4] = 0;
+  second_line[4] = 0;
+
+  uint8_t str_pixel_x, str_pixel_y;
+  if(first_line_size <= 3 && second_line_size == 0)
+  {
+    str_pixel_x = cell_pixel_x + (ROTATED_CELL_WIDTH - (first_line_size * 7)) / 2;
+    str_pixel_y = cell_pixel_y + 8;
+    ssd1306_SetCursor(str_pixel_x, str_pixel_y);
+    ssd1306_WriteString(first_line, Font_7x10, White);
+  }
+  else if(first_line_size > 3 && second_line_size == 0)
+  {
+    str_pixel_x = cell_pixel_x + 1;
+    str_pixel_y = cell_pixel_y + 8;
+    ssd1306_SetCursor(str_pixel_x, str_pixel_y);
+    ssd1306_WriteString(first_line, Font_6x8, White);
+  }
+  else if(first_line_size <= 3 && second_line_size <= 3)
+  {
+    // first line
+    str_pixel_x = cell_pixel_x + (ROTATED_CELL_WIDTH - (first_line_size * 7)) / 2;
+    str_pixel_y = cell_pixel_y + 4;
+    ssd1306_SetCursor(str_pixel_x, str_pixel_y);
+    ssd1306_WriteString(first_line, Font_7x10, White);
+    // second line
+    str_pixel_x = cell_pixel_x + (ROTATED_CELL_WIDTH - (second_line_size * 7)) / 2;
+    str_pixel_y = cell_pixel_y + 4 + 10;
+    ssd1306_SetCursor(str_pixel_x, str_pixel_y);
+    ssd1306_WriteString(second_line, Font_7x10, White);
+  }
+  else
+  {
+    // first line
+    str_pixel_x = cell_pixel_x + 1 + (ROTATED_CELL_WIDTH - (first_line_size * 6)) / 2;
+    str_pixel_y = cell_pixel_y + 4;
+    ssd1306_SetCursor(str_pixel_x, str_pixel_y);
+    ssd1306_WriteString(first_line, Font_6x8, White);
+    // second line
+    str_pixel_x = cell_pixel_x + 1 + (ROTATED_CELL_WIDTH - (second_line_size * 6)) / 2;
+    str_pixel_y = cell_pixel_y + 4 + 10;
+    ssd1306_SetCursor(str_pixel_x, str_pixel_y);
+    ssd1306_WriteString(second_line, Font_6x8, White);
+  }
+}
+
+void draw_profile_normal(profile_info* this_profile)
 {
   ssd1306_Fill(Black);
   memset(oled_line_buf, 0, OLED_LINE_BUF_SIZE);
@@ -236,6 +305,48 @@ void draw_profile(profile_info* this_profile)
   draw_bluetooth_icon(0, -1, bluetooth_status, 0);
 
   ssd1306_UpdateScreen();
+}
+
+void draw_profile_rotated(profile_info* this_profile)
+{
+  ssd1306_Fill(Black);
+  memset(oled_line_buf, 0, OLED_LINE_BUF_SIZE);
+  sprintf(oled_line_buf, "P%d:%s", this_profile->pf_number, this_profile->pf_name);
+	ssd1306_SetCursor(center_line(strlen(oled_line_buf), 7, SSD1306_WIDTH), 0);
+	ssd1306_WriteString(oled_line_buf, Font_7x10, White);
+	
+  ssd1306_Line(0,10,127,10,White); // title solid line
+
+  // uint8_t cell_col, uint8_t cell_row, char* first_line, char* second_line
+  draw_cell_content_rotated(0, 0, this_profile->sw_name_firstline[3], this_profile->sw_name_secondline[3]);
+  draw_cell_content_rotated(1, 0, this_profile->sw_name_firstline[7], this_profile->sw_name_secondline[7]);
+  draw_cell_content_rotated(2, 0, this_profile->sw_name_firstline[11], this_profile->sw_name_secondline[11]);
+  draw_cell_content_rotated(3, 0, this_profile->sw_name_firstline[15], this_profile->sw_name_secondline[15]);
+  draw_cell_content_rotated(4, 0, this_profile->sw_name_firstline[19], this_profile->sw_name_secondline[19]);
+
+  draw_cell_content_rotated(0, 1, this_profile->sw_name_firstline[3-1], this_profile->sw_name_secondline[3-1]);
+  draw_cell_content_rotated(1, 1, this_profile->sw_name_firstline[7-1], this_profile->sw_name_secondline[7-1]);
+  draw_cell_content_rotated(2, 1, this_profile->sw_name_firstline[11-1], this_profile->sw_name_secondline[11-1]);
+  draw_cell_content_rotated(3, 1, this_profile->sw_name_firstline[15-1], this_profile->sw_name_secondline[15-1]);
+  draw_cell_content_rotated(4, 1, this_profile->sw_name_firstline[19-1], this_profile->sw_name_secondline[19-1]);
+
+  ssd1306_Line(0,39,127,39,White); // horizontal lines
+  ssd1306_Line(0,68,127,68,White);
+  ssd1306_Line(0,97,127,97,White);
+  ssd1306_Line(25,10,25,127,White); // vertical lines
+  ssd1306_Line(51,10,51,127,White);
+  ssd1306_Line(76,10,76,127,White);
+  ssd1306_Line(102,10,102,127,White);
+
+  draw_bluetooth_icon(0, -1, bluetooth_status, 0);
+
+  ssd1306_UpdateScreen();
+}
+
+
+void draw_profile(profile_info* this_profile)
+{
+  draw_profile_rotated(this_profile);
 }
 
 void draw_settings(dp_global_settings *dps)

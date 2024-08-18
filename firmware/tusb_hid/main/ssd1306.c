@@ -158,7 +158,7 @@ void ssd1306_UpdateScreen(void)
     }
 }
 
-uint8_t ssd1306_current_rotation;
+uint8_t ssd1306_current_rotation = SSD1306_ROTATE_CW90;
 void ssd1306_set_rotation_only_for_128x128_do_not_use_for_anything_else(uint8_t rot)
 {
     ssd1306_current_rotation = rot;
