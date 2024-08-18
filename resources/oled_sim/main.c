@@ -24,129 +24,144 @@ uint8_t center_line(uint8_t line_len, uint8_t char_width_pixels, uint8_t oled_wi
   return start_pixel;
 }
 
-#define SW_MATRIX_NUM_COLS 4
-#define SW_MATRIX_NUM_ROWS 5
-#define CELL_LONG_SIDE 32
-#define CELL_SHORT_SIDE 23
 #define TITLE_BAR_HEIGHT 11
+// #define SW_MATRIX_NUM_COLS 4
+// #define SW_MATRIX_NUM_ROWS 5
+// #define CELL_LONG_SIDE 32
+// #define CELL_SHORT_SIDE 23
 
-uint8_t rowcol_to_index(uint8_t row, uint8_t col)
-{
-  if(row >= SW_MATRIX_NUM_ROWS || col >= SW_MATRIX_NUM_COLS)
-    return 0;
-  return row*SW_MATRIX_NUM_COLS + col;
-}
+// uint8_t rowcol_to_index(uint8_t row, uint8_t col)
+// {
+//   if(row >= SW_MATRIX_NUM_ROWS || col >= SW_MATRIX_NUM_COLS)
+//     return 0;
+//   return row*SW_MATRIX_NUM_COLS + col;
+// }
 
-void draw_cell_content(uint8_t cell_col, uint8_t cell_row, char* first_line, char* second_line)
-{
-    if(cell_col >= SW_MATRIX_NUM_COLS || cell_row >= SW_MATRIX_NUM_ROWS)
-        return;
-    uint8_t cell_pixel_x = cell_col * CELL_LONG_SIDE;
-    uint8_t cell_pixel_y = cell_row * CELL_SHORT_SIDE + TITLE_BAR_HEIGHT + 1;
+// void draw_cell_content(uint8_t cell_col, uint8_t cell_row, char* first_line, char* second_line)
+// {
+//     if(cell_col >= SW_MATRIX_NUM_COLS || cell_row >= SW_MATRIX_NUM_ROWS)
+//         return;
+//     uint8_t cell_pixel_x = cell_col * CELL_LONG_SIDE;
+//     uint8_t cell_pixel_y = cell_row * CELL_SHORT_SIDE + TITLE_BAR_HEIGHT + 1;
     
-    uint8_t first_line_size = strlen(first_line);
-    uint8_t second_line_size = strlen(second_line);
+//     uint8_t first_line_size = strlen(first_line);
+//     uint8_t second_line_size = strlen(second_line);
 
-    if(first_line_size == 0)
-        return;
+//     if(first_line_size == 0)
+//         return;
 
-    uint8_t str_pixel_x, str_pixel_y;
-    if(first_line_size <= 4 && second_line_size == 0)
-    {
-        str_pixel_x = cell_pixel_x + (CELL_LONG_SIDE - (first_line_size * 7)) / 2;
-        str_pixel_y = cell_pixel_y + 6;
-        ssd1306_SetCursor(str_pixel_x, str_pixel_y);
-        ssd1306_WriteString(first_line, Font_7x10, White);
-    }
-    else if(first_line_size == 5 && second_line_size == 0)
-    {
-        str_pixel_x = cell_pixel_x + 2;
-        str_pixel_y = cell_pixel_y + 7;
-        ssd1306_SetCursor(str_pixel_x, str_pixel_y);
-        ssd1306_WriteString(first_line, Font_6x8, White);
-    }
-    else if(first_line_size <= 4 && second_line_size <= 4)
-    {
-        // first line
-        str_pixel_x = cell_pixel_x + (CELL_LONG_SIDE - (first_line_size * 7)) / 2;
-        str_pixel_y = cell_pixel_y + 1;
-        ssd1306_SetCursor(str_pixel_x, str_pixel_y);
-        ssd1306_WriteString(first_line, Font_7x10, White);
-        // second line
-        str_pixel_x = cell_pixel_x + (CELL_LONG_SIDE - (second_line_size * 7)) / 2;
-        str_pixel_y = cell_pixel_y + 1 + 10;
-        ssd1306_SetCursor(str_pixel_x, str_pixel_y);
-        ssd1306_WriteString(second_line, Font_7x10, White);
-    }
-    else
-    {
-        // first line
-        str_pixel_x = cell_pixel_x + 1 + (CELL_LONG_SIDE - (first_line_size * 6)) / 2;
-        str_pixel_y = cell_pixel_y + 2;
-        ssd1306_SetCursor(str_pixel_x, str_pixel_y);
-        ssd1306_WriteString(first_line, Font_6x8, White);
-        // second line
-        str_pixel_x = cell_pixel_x + 1 + (CELL_LONG_SIDE - (second_line_size * 6)) / 2;
-        str_pixel_y = cell_pixel_y + 3 + 8;
-        ssd1306_SetCursor(str_pixel_x, str_pixel_y);
-        ssd1306_WriteString(second_line, Font_6x8, White);
-    }
-}
+//     uint8_t str_pixel_x, str_pixel_y;
+//     if(first_line_size <= 4 && second_line_size == 0)
+//     {
+//         str_pixel_x = cell_pixel_x + (CELL_LONG_SIDE - (first_line_size * 7)) / 2;
+//         str_pixel_y = cell_pixel_y + 6;
+//         ssd1306_SetCursor(str_pixel_x, str_pixel_y);
+//         ssd1306_WriteString(first_line, Font_7x10, White);
+//     }
+//     else if(first_line_size == 5 && second_line_size == 0)
+//     {
+//         str_pixel_x = cell_pixel_x + 2;
+//         str_pixel_y = cell_pixel_y + 7;
+//         ssd1306_SetCursor(str_pixel_x, str_pixel_y);
+//         ssd1306_WriteString(first_line, Font_6x8, White);
+//     }
+//     else if(first_line_size <= 4 && second_line_size <= 4)
+//     {
+//         // first line
+//         str_pixel_x = cell_pixel_x + (CELL_LONG_SIDE - (first_line_size * 7)) / 2;
+//         str_pixel_y = cell_pixel_y + 1;
+//         ssd1306_SetCursor(str_pixel_x, str_pixel_y);
+//         ssd1306_WriteString(first_line, Font_7x10, White);
+//         // second line
+//         str_pixel_x = cell_pixel_x + (CELL_LONG_SIDE - (second_line_size * 7)) / 2;
+//         str_pixel_y = cell_pixel_y + 1 + 10;
+//         ssd1306_SetCursor(str_pixel_x, str_pixel_y);
+//         ssd1306_WriteString(second_line, Font_7x10, White);
+//     }
+//     else
+//     {
+//         // first line
+//         str_pixel_x = cell_pixel_x + 1 + (CELL_LONG_SIDE - (first_line_size * 6)) / 2;
+//         str_pixel_y = cell_pixel_y + 2;
+//         ssd1306_SetCursor(str_pixel_x, str_pixel_y);
+//         ssd1306_WriteString(first_line, Font_6x8, White);
+//         // second line
+//         str_pixel_x = cell_pixel_x + 1 + (CELL_LONG_SIDE - (second_line_size * 6)) / 2;
+//         str_pixel_y = cell_pixel_y + 3 + 8;
+//         ssd1306_SetCursor(str_pixel_x, str_pixel_y);
+//         ssd1306_WriteString(second_line, Font_6x8, White);
+//     }
+// }
+
+#define ROTATED_DISPLAY_ROWS 4
+#define ROTATED_DISPLAY_COLS 5
+#define ROTATED_CELL_WIDTH 25
+#define ROTATED_CELL_HEIGHT 29
+
+uint8_t cell_pixel_x_lookup_rotated_5cols[ROTATED_DISPLAY_COLS] =
+{0, 26, 52, 77, 103};
+uint8_t cell_pixel_y_lookup_rotated_4rows[ROTATED_DISPLAY_ROWS] =
+{12, 41, 70, 99};
 
 void draw_cell_content_rotated(uint8_t cell_col, uint8_t cell_row, char* first_line, char* second_line)
 {
-    if(cell_col >= SW_MATRIX_NUM_COLS || cell_row >= SW_MATRIX_NUM_ROWS)
-        return;
-    uint8_t cell_pixel_x = cell_col * CELL_LONG_SIDE;
-    uint8_t cell_pixel_y = cell_row * CELL_SHORT_SIDE + TITLE_BAR_HEIGHT + 1;
-    
-    uint8_t first_line_size = strlen(first_line);
-    uint8_t second_line_size = strlen(second_line);
+  if(cell_col >= ROTATED_DISPLAY_COLS || cell_row >= ROTATED_DISPLAY_ROWS)
+    return;
+  uint8_t cell_pixel_x = cell_pixel_x_lookup_rotated_5cols[cell_col];
+  uint8_t cell_pixel_y = cell_pixel_y_lookup_rotated_4rows[cell_row];
+  // ssd1306_DrawPixel(cell_pixel_x, cell_pixel_y, White);
 
-    if(first_line_size == 0)
-        return;
+  uint8_t first_line_size = strlen(first_line);
+  uint8_t second_line_size = strlen(second_line);
 
-    uint8_t str_pixel_x, str_pixel_y;
-    if(first_line_size <= 4 && second_line_size == 0)
-    {
-        str_pixel_x = cell_pixel_x + (CELL_LONG_SIDE - (first_line_size * 7)) / 2;
-        str_pixel_y = cell_pixel_y + 6;
-        ssd1306_SetCursor(str_pixel_x, str_pixel_y);
-        ssd1306_WriteString(first_line, Font_7x10, White);
-    }
-    else if(first_line_size == 5 && second_line_size == 0)
-    {
-        str_pixel_x = cell_pixel_x + 2;
-        str_pixel_y = cell_pixel_y + 7;
-        ssd1306_SetCursor(str_pixel_x, str_pixel_y);
-        ssd1306_WriteString(first_line, Font_6x8, White);
-    }
-    else if(first_line_size <= 4 && second_line_size <= 4)
-    {
-        // first line
-        str_pixel_x = cell_pixel_x + (CELL_LONG_SIDE - (first_line_size * 7)) / 2;
-        str_pixel_y = cell_pixel_y + 1;
-        ssd1306_SetCursor(str_pixel_x, str_pixel_y);
-        ssd1306_WriteString(first_line, Font_7x10, White);
-        // second line
-        str_pixel_x = cell_pixel_x + (CELL_LONG_SIDE - (second_line_size * 7)) / 2;
-        str_pixel_y = cell_pixel_y + 1 + 10;
-        ssd1306_SetCursor(str_pixel_x, str_pixel_y);
-        ssd1306_WriteString(second_line, Font_7x10, White);
-    }
-    else
-    {
-        // first line
-        str_pixel_x = cell_pixel_x + 1 + (CELL_LONG_SIDE - (first_line_size * 6)) / 2;
-        str_pixel_y = cell_pixel_y + 2;
-        ssd1306_SetCursor(str_pixel_x, str_pixel_y);
-        ssd1306_WriteString(first_line, Font_6x8, White);
-        // second line
-        str_pixel_x = cell_pixel_x + 1 + (CELL_LONG_SIDE - (second_line_size * 6)) / 2;
-        str_pixel_y = cell_pixel_y + 3 + 8;
-        ssd1306_SetCursor(str_pixel_x, str_pixel_y);
-        ssd1306_WriteString(second_line, Font_6x8, White);
-    }
+  if(first_line_size == 0)
+    return;
+  // 4 char per line max
+  first_line[4] = 0;
+  second_line[4] = 0;
+
+  uint8_t str_pixel_x, str_pixel_y;
+  if(first_line_size <= 3 && second_line_size == 0)
+  {
+    str_pixel_x = cell_pixel_x + (ROTATED_CELL_WIDTH - (first_line_size * 7)) / 2;
+    str_pixel_y = cell_pixel_y + 8;
+    ssd1306_SetCursor(str_pixel_x, str_pixel_y);
+    ssd1306_WriteString(first_line, Font_7x10, White);
+  }
+  else if(first_line_size > 3 && second_line_size == 0)
+  {
+    str_pixel_x = cell_pixel_x + 1;
+    str_pixel_y = cell_pixel_y + 8;
+    ssd1306_SetCursor(str_pixel_x, str_pixel_y);
+    ssd1306_WriteString(first_line, Font_6x8, White);
+  }
+  else if(first_line_size <= 3 && second_line_size <= 3)
+  {
+    // first line
+    str_pixel_x = cell_pixel_x + (ROTATED_CELL_WIDTH - (first_line_size * 7)) / 2;
+    str_pixel_y = cell_pixel_y + 4;
+    ssd1306_SetCursor(str_pixel_x, str_pixel_y);
+    ssd1306_WriteString(first_line, Font_7x10, White);
+    // second line
+    str_pixel_x = cell_pixel_x + (ROTATED_CELL_WIDTH - (second_line_size * 7)) / 2;
+    str_pixel_y = cell_pixel_y + 4 + 10;
+    ssd1306_SetCursor(str_pixel_x, str_pixel_y);
+    ssd1306_WriteString(second_line, Font_7x10, White);
+  }
+  else
+  {
+    printf("HERE!!!!!!!!!!!!\n");
+    // first line
+    str_pixel_x = cell_pixel_x + 1 + (ROTATED_CELL_WIDTH - (first_line_size * 6)) / 2;
+    str_pixel_y = cell_pixel_y + 4;
+    ssd1306_SetCursor(str_pixel_x, str_pixel_y);
+    ssd1306_WriteString(first_line, Font_6x8, White);
+    // second line
+    str_pixel_x = cell_pixel_x + 1 + (ROTATED_CELL_WIDTH - (second_line_size * 6)) / 2;
+    str_pixel_y = cell_pixel_y + 4 + 10;
+    ssd1306_SetCursor(str_pixel_x, str_pixel_y);
+    ssd1306_WriteString(second_line, Font_6x8, White);
+  }
 }
 
 #define TEMP_BUFSIZE 64
@@ -163,26 +178,27 @@ void draw_profile()
   
   ssd1306_Line(0,10,127,10,White); // title solid line
 
-  for (int8_t ccc = SW_MATRIX_NUM_COLS-1; ccc >= 0; ccc--)
+  for (uint8_t rrr = 0; rrr < ROTATED_DISPLAY_ROWS; rrr++)
   {
-    for (int8_t rrr = 0; rrr < SW_MATRIX_NUM_ROWS; rrr++)
+    for (uint8_t ccc = 0; ccc < ROTATED_DISPLAY_COLS; ccc++)
     {
-      printf("x%dy%d ", ccc, rrr);
+      memset(line1_buf, 0, TEMP_BUFSIZE);
+      memset(line2_buf, 0, TEMP_BUFSIZE);
+      printf("x%dy%d ", rrr, ccc);
+      sprintf(line1_buf, "ROW%d", rrr);
+      sprintf(line2_buf, "COL%d", ccc);
+      draw_cell_content_rotated(ccc, rrr, line1_buf, line2_buf);
     }
     printf("\n");
   }
 
-  
-  // // horizontal lines
-  // ssd1306_Line(0,39,127,39,White);
-  // ssd1306_Line(0,68,127,68,White);
-  // ssd1306_Line(0,97,127,97,White);
-
-  // // vertical lines
-  // ssd1306_Line(25,10,25,127,White); 
-  // ssd1306_Line(51,10,51,127,White);
-  // ssd1306_Line(76,10,76,127,White);
-  // ssd1306_Line(102,10,102,127,White);
+  ssd1306_Line(0,39,127,39,White); // horizontal lines
+  ssd1306_Line(0,68,127,68,White);
+  ssd1306_Line(0,97,127,97,White);
+  ssd1306_Line(25,10,25,127,White); // vertical lines
+  ssd1306_Line(51,10,51,127,White);
+  ssd1306_Line(76,10,76,127,White);
+  ssd1306_Line(102,10,102,127,White);
 }
 
 int main(int argc, char *argv[])

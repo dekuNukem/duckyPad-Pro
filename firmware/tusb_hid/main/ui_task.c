@@ -150,58 +150,58 @@ void draw_noprofile(void)
 
 void draw_cell_content(uint8_t cell_col, uint8_t cell_row, char* first_line, char* second_line)
 {
-    if(cell_col >= SW_MATRIX_NUM_COLS || cell_row >= SW_MATRIX_NUM_ROWS)
-        return;
-    uint8_t cell_pixel_x = cell_col * CELL_LONG_SIDE;
-    uint8_t cell_pixel_y = cell_row * CELL_SHORT_SIDE + TITLE_BAR_HEIGHT + 1;
-    
-    uint8_t first_line_size = strlen(first_line);
-    uint8_t second_line_size = strlen(second_line);
+  if(cell_col >= SW_MATRIX_NUM_COLS || cell_row >= SW_MATRIX_NUM_ROWS)
+    return;
+  uint8_t cell_pixel_x = cell_col * CELL_LONG_SIDE;
+  uint8_t cell_pixel_y = cell_row * CELL_SHORT_SIDE + TITLE_BAR_HEIGHT + 1;
+  
+  uint8_t first_line_size = strlen(first_line);
+  uint8_t second_line_size = strlen(second_line);
 
-    if(first_line_size == 0)
-        return;
+  if(first_line_size == 0)
+      return;
 
-    uint8_t str_pixel_x, str_pixel_y;
-    if(first_line_size <= 4 && second_line_size == 0)
-    {
-        str_pixel_x = cell_pixel_x + (CELL_LONG_SIDE - (first_line_size * 7)) / 2;
-        str_pixel_y = cell_pixel_y + 6;
-        ssd1306_SetCursor(str_pixel_x, str_pixel_y);
-        ssd1306_WriteString(first_line, Font_7x10, White);
-    }
-    else if(first_line_size == 5 && second_line_size == 0)
-    {
-        str_pixel_x = cell_pixel_x + 2;
-        str_pixel_y = cell_pixel_y + 7;
-        ssd1306_SetCursor(str_pixel_x, str_pixel_y);
-        ssd1306_WriteString(first_line, Font_6x8, White);
-    }
-    else if(first_line_size <= 4 && second_line_size <= 4)
-    {
-        // first line
-        str_pixel_x = cell_pixel_x + (CELL_LONG_SIDE - (first_line_size * 7)) / 2;
-        str_pixel_y = cell_pixel_y + 1;
-        ssd1306_SetCursor(str_pixel_x, str_pixel_y);
-        ssd1306_WriteString(first_line, Font_7x10, White);
-        // second line
-        str_pixel_x = cell_pixel_x + (CELL_LONG_SIDE - (second_line_size * 7)) / 2;
-        str_pixel_y = cell_pixel_y + 1 + 10;
-        ssd1306_SetCursor(str_pixel_x, str_pixel_y);
-        ssd1306_WriteString(second_line, Font_7x10, White);
-    }
-    else
-    {
-        // first line
-        str_pixel_x = cell_pixel_x + 1 + (CELL_LONG_SIDE - (first_line_size * 6)) / 2;
-        str_pixel_y = cell_pixel_y + 2;
-        ssd1306_SetCursor(str_pixel_x, str_pixel_y);
-        ssd1306_WriteString(first_line, Font_6x8, White);
-        // second line
-        str_pixel_x = cell_pixel_x + 1 + (CELL_LONG_SIDE - (second_line_size * 6)) / 2;
-        str_pixel_y = cell_pixel_y + 3 + 8;
-        ssd1306_SetCursor(str_pixel_x, str_pixel_y);
-        ssd1306_WriteString(second_line, Font_6x8, White);
-    }
+  uint8_t str_pixel_x, str_pixel_y;
+  if(first_line_size <= 4 && second_line_size == 0)
+  {
+    str_pixel_x = cell_pixel_x + (CELL_LONG_SIDE - (first_line_size * 7)) / 2;
+    str_pixel_y = cell_pixel_y + 6;
+    ssd1306_SetCursor(str_pixel_x, str_pixel_y);
+    ssd1306_WriteString(first_line, Font_7x10, White);
+  }
+  else if(first_line_size == 5 && second_line_size == 0)
+  {
+    str_pixel_x = cell_pixel_x + 2;
+    str_pixel_y = cell_pixel_y + 7;
+    ssd1306_SetCursor(str_pixel_x, str_pixel_y);
+    ssd1306_WriteString(first_line, Font_6x8, White);
+  }
+  else if(first_line_size <= 4 && second_line_size <= 4)
+  {
+    // first line
+    str_pixel_x = cell_pixel_x + (CELL_LONG_SIDE - (first_line_size * 7)) / 2;
+    str_pixel_y = cell_pixel_y + 1;
+    ssd1306_SetCursor(str_pixel_x, str_pixel_y);
+    ssd1306_WriteString(first_line, Font_7x10, White);
+    // second line
+    str_pixel_x = cell_pixel_x + (CELL_LONG_SIDE - (second_line_size * 7)) / 2;
+    str_pixel_y = cell_pixel_y + 1 + 10;
+    ssd1306_SetCursor(str_pixel_x, str_pixel_y);
+    ssd1306_WriteString(second_line, Font_7x10, White);
+  }
+  else
+  {
+    // first line
+    str_pixel_x = cell_pixel_x + 1 + (CELL_LONG_SIDE - (first_line_size * 6)) / 2;
+    str_pixel_y = cell_pixel_y + 2;
+    ssd1306_SetCursor(str_pixel_x, str_pixel_y);
+    ssd1306_WriteString(first_line, Font_6x8, White);
+    // second line
+    str_pixel_x = cell_pixel_x + 1 + (CELL_LONG_SIDE - (second_line_size * 6)) / 2;
+    str_pixel_y = cell_pixel_y + 3 + 8;
+    ssd1306_SetCursor(str_pixel_x, str_pixel_y);
+    ssd1306_WriteString(second_line, Font_6x8, White);
+  }
 }
 
 void draw_profile(profile_info* this_profile)

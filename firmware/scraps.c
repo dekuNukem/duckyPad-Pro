@@ -11,6 +11,19 @@ for (uint8_t rrr = 0; rrr < SW_MATRIX_NUM_ROWS; rrr++)
     printf("\n");
   }
 
+  for (int8_t ccc = SW_MATRIX_NUM_COLS-1; ccc >= 0; ccc--)
+  {
+    for (int8_t rrr = 0; rrr < SW_MATRIX_NUM_ROWS; rrr++)
+    {
+      memset(line1_buf, 0, TEMP_BUFSIZE);
+      memset(line2_buf, 0, TEMP_BUFSIZE);
+      sprintf(line1_buf, "r%d", rrr);
+      printf("x%dy%d ", ccc, rrr);
+      draw_cell_content_rotated(ccc, rrr, line1_buf, line2_buf);
+    }
+    printf("\n");
+  }
+
 
 void ssd1306_dashed_line(uint8_t x1, uint8_t y1, uint8_t x2, uint8_t y2, SSD1306_COLOR color) {
     int32_t deltaX = abs(x2 - x1);
