@@ -1,4 +1,4 @@
-update_key_button_appearances
+update_key_button_appearances(profile_index)
 
 if profile_list[index].dim_unused:
         dim_unused_keys_checkbox.select()
@@ -14,7 +14,12 @@ if bool(is_in_landscape_var.get()):
         place_obsw_buttons_landscape()
     else:
         place_obsw_buttons_portrait()
+key_char_limit_portrait = "max 2 lines\n5 char per line"
+key_char_limit_landscape = "max 2 lines\n4 char per line"
 
+key_char_limit_label = Label(master=name_editor_lf, fg='grey')
+key_char_limit_label.place(x=scaled_size(200), y=scaled_size(0))
+root.update()
 rotate_keys_click
 
 update_key_button_appearances, disable to see expansion button default labels

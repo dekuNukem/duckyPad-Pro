@@ -745,6 +745,8 @@ def save_everything(save_path):
                 config_file.write('KEYDOWN_COLOR %d %d %d\n' % (this_profile.kd_color))
             if this_profile.dim_unused is False:
                 config_file.write('DIM_UNUSED_KEYS 0\n')
+            if this_profile.is_landscape:
+                config_file.write('IS_LANDSCAPE 1\n')
             for key_index, this_key in enumerate(this_profile.keylist):
                 if this_key is None:
                     continue
@@ -1103,6 +1105,7 @@ for x in range(MECH_OBSW_COUNT):
     key_button_list.append(this_button)
 
 def place_obsw_buttons_portrait():
+    key_char_limit_label.config(text=key_char_limit_portrait)
     for index in range(MECH_OBSW_COUNT):
         key_button_list[index].place(x=key_button_xy_list[index][0], y=key_button_xy_list[index][1], width=KEY_BUTTON_WIDTH, height=KEY_BUTTON_HEIGHT)
 
@@ -1110,6 +1113,8 @@ def place_obsw_buttons_landscape():
     ROTATED_BUTTON_WIDTH_HEIGHT = 53
     ROTATED_BUTTON_GAP = 5
     ROTATED_BUTTON_Y_START = 45
+
+    key_char_limit_label.config(text=key_char_limit_landscape)
 
     key_button_list[3].place(x=scaled_size(ROTATED_BUTTON_GAP), y=scaled_size(ROTATED_BUTTON_Y_START), width=ROTATED_BUTTON_WIDTH_HEIGHT, height=ROTATED_BUTTON_WIDTH_HEIGHT)
     key_button_list[7].place(x=scaled_size(ROTATED_BUTTON_GAP*2 + ROTATED_BUTTON_WIDTH_HEIGHT), y=scaled_size(ROTATED_BUTTON_Y_START), width=ROTATED_BUTTON_WIDTH_HEIGHT, height=ROTATED_BUTTON_WIDTH_HEIGHT)
@@ -1202,7 +1207,10 @@ key_name_label = Label(master=name_editor_lf, text="Key name:", fg='grey')
 key_name_label.place(x=scaled_size(15), y=scaled_size(10))
 root.update()
 
-key_char_limit_label = Label(master=name_editor_lf, text="max 2 lines\n5 char per line", fg='grey')
+key_char_limit_portrait = "max 2 lines\n5 char per line"
+key_char_limit_landscape = "max 2 lines\n4 char per line"
+
+key_char_limit_label = Label(master=name_editor_lf, fg='grey')
 key_char_limit_label.place(x=scaled_size(200), y=scaled_size(0))
 root.update()
 

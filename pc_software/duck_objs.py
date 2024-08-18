@@ -112,6 +112,8 @@ class dp_profile(object):
 						self.kd_color = (int(temp_split[1]), int(temp_split[2]), int(temp_split[3]))
 					if line.startswith("DIM_UNUSED_KEYS 0"):
 						self.dim_unused = False
+					if line.startswith("IS_LANDSCAPE 1"):
+						self.is_landscape = True
 		except Exception as e:
 			print('>>>>> read_config:', path, e)
 			pass
