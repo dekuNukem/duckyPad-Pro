@@ -1,5 +1,5 @@
 update_key_button_appearances(profile_index)
-
+, font=(None, 13)
 if profile_list[index].dim_unused:
         dim_unused_keys_checkbox.select()
     else:
