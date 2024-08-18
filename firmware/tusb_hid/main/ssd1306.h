@@ -112,6 +112,11 @@ SSD1306_Error_t ssd1306_FillBuffer(uint8_t* buf, uint32_t len);
 
 #define SSD1306_SETCONTRAST 0x81
 
-void ssd1306_dashed_line(uint8_t x1, uint8_t y1, uint8_t x2, uint8_t y2, SSD1306_COLOR color);
+
+#define SSD1306_NO_ROTATION 0
+#define SSD1306_ROTATE_CW90 1
+#define SSD1306_ROTATE_180 2
+#define SSD1306_ROTATE_CCW90 3
+void ssd1306_set_rotation_only_for_128x128_do_not_use_for_anything_else(uint8_t rot);
 
 #endif // __SSD1306_H__

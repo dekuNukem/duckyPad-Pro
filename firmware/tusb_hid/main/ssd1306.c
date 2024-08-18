@@ -158,23 +158,51 @@ void ssd1306_UpdateScreen(void)
     }
 }
 
+uint8_t ssd1306_current_rotation;
+void ssd1306_set_rotation_only_for_128x128_do_not_use_for_anything_else(uint8_t rot)
+{
+    ssd1306_current_rotation = rot;
+    ssd1306_UpdateScreen();
+}
 /*
  * Draw one pixel in the screenbuffer
  * X => X Coordinate
  * Y => Y Coordinate
  * color => Pixel color
  */
-void ssd1306_DrawPixel(uint8_t x, uint8_t y, SSD1306_COLOR color) {
-    if(x >= SSD1306_WIDTH || y >= SSD1306_HEIGHT) {
+void ssd1306_DrawPixel(uint8_t x, uint8_t y, SSD1306_COLOR color)
+{
+    // only for 128x128!!!!!!!!!!!!!!!!
+    // other sizes needs additional checks!!!
+    uint8_t newx = x;
+    uint8_t newy = y;
+
+    if(ssd1306_current_rotation == SSD1306_ROTATE_CW90)
+    {
+        newx = 127 - y;
+        newy = x;
+    }
+    else if(ssd1306_current_rotation == SSD1306_ROTATE_180)
+    {
+        newx = 127 - x;
+        newy = 127 - y;
+    }
+    if(ssd1306_current_rotation == SSD1306_ROTATE_CCW90)
+    {
+        newx = y;
+        newy = 127 - x;
+    }
+    
+    if(newx >= SSD1306_WIDTH || newy >= SSD1306_HEIGHT) {
         // Don't write outside the buffer
         return;
     }
    
     // Draw in the right color
     if(color == White) {
-        SSD1306_Buffer[x + (y / 8) * SSD1306_WIDTH] |= 1 << (y % 8);
+        SSD1306_Buffer[newx + (newy / 8) * SSD1306_WIDTH] |= 1 << (newy % 8);
     } else { 
-        SSD1306_Buffer[x + (y / 8) * SSD1306_WIDTH] &= ~(1 << (y % 8));
+        SSD1306_Buffer[newx + (newy / 8) * SSD1306_WIDTH] &= ~(1 << (newy % 8));
     }
 }
 
@@ -261,34 +289,6 @@ void ssd1306_Line(uint8_t x1, uint8_t y1, uint8_t x2, uint8_t y2, SSD1306_COLOR 
             error += deltaX;
             y1 += signY;
         }
-    }
-    return;
-}
-
-void ssd1306_dashed_line(uint8_t x1, uint8_t y1, uint8_t x2, uint8_t y2, SSD1306_COLOR color) {
-    int32_t deltaX = abs(x2 - x1);
-    int32_t deltaY = abs(y2 - y1);
-    int32_t signX = ((x1 < x2) ? 1 : -1);
-    int32_t signY = ((y1 < y2) ? 1 : -1);
-    int32_t error = deltaX - deltaY;
-    int32_t error2;
-    
-    ssd1306_DrawPixel(x2, y2, color);
-    uint8_t counter = 1;
-    while((x1 != x2) || (y1 != y2)) {
-        if(counter % 4 == 0)
-            ssd1306_DrawPixel(x1, y1, color);
-        error2 = error * 2;
-        if(error2 > -deltaY) {
-            error -= deltaY;
-            x1 += signX;
-        }
-        
-        if(error2 < deltaX) {
-            error += deltaX;
-            y1 += signY;
-        }
-        counter++;
     }
     return;
 }
