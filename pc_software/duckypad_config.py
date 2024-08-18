@@ -958,9 +958,25 @@ keys_lf = LabelFrame(root, text="Onboard Switches", width=scaled_size(300), heig
 keys_lf.place(x=profiles_lf.winfo_x() + profiles_lf.winfo_width() + PADDING, y=profiles_lf.winfo_y())
 root.update()
 
+def rotate_keys_click():
+    global profile_list
+    selection = profile_lstbox.curselection()
+    if len(selection) <= 0:
+        return
+    # profile_list[selection[0]].dim_unused = bool(dim_unused_keys_checkbox_var.get())
+    # update_profile_display()
+    if bool(is_in_landscape_var.get()):
+        place_obsw_buttons_landscape()
+    else:
+        place_obsw_buttons_portrait()
+
+is_in_landscape_var = IntVar()
+rotate_keys_checkbox = Checkbutton(keys_lf, text="Rotate", variable=is_in_landscape_var, command=rotate_keys_click) #, state=DISABLED
+rotate_keys_checkbox.place(x=scaled_size(10), y=scaled_size(0))
+
 key_instruction_label = Label(master=keys_lf, text="click to edit, drag to rearrange")
 root.update()
-key_instruction_label.place(x=scaled_size(60), y=scaled_size(0))
+key_instruction_label.place(x=scaled_size(110), y=scaled_size(0))
 
 def search_button(rootx, rooty):
     for index, item in enumerate(key_button_list):
@@ -1068,17 +1084,46 @@ key_button_xy_list = [
 (KEY_BUTTON_GAP*4+KEY_BUTTON_WIDTH*3,KEY_BUTTON_HEADROOM+COL_GAP*5+KEY_BUTTON_HEIGHT*4)
 ]
 
-def place_obsw_buttons():
-    pass
-
 key_button_list = []
 for x in range(MECH_OBSW_COUNT):
     this_button = Label(master=keys_lf, borderwidth=1, relief="solid", background=default_button_color, font=(None, 13))
-    this_button.place(x=key_button_xy_list[x][0], y=key_button_xy_list[x][1], width=KEY_BUTTON_WIDTH, height=KEY_BUTTON_HEIGHT)
     this_button.bind("<Button-1>", key_button_click_event)
     this_button.bind("<B1-Motion>", button_drag_start)
     this_button.bind("<ButtonRelease-1>", button_drag_release)
     key_button_list.append(this_button)
+
+def place_obsw_buttons_portrait():
+    for index in range(MECH_OBSW_COUNT):
+        key_button_list[index].place(x=key_button_xy_list[index][0], y=key_button_xy_list[index][1], width=KEY_BUTTON_WIDTH, height=KEY_BUTTON_HEIGHT)
+
+def place_obsw_buttons_landscape():
+    ROTATED_BUTTON_WIDTH_HEIGHT = 53
+    ROTATED_BUTTON_GAP = 5
+    ROTATED_BUTTON_Y_START = 45
+
+    key_button_list[3].place(x=scaled_size(ROTATED_BUTTON_GAP), y=scaled_size(ROTATED_BUTTON_Y_START), width=ROTATED_BUTTON_WIDTH_HEIGHT, height=ROTATED_BUTTON_WIDTH_HEIGHT)
+    key_button_list[7].place(x=scaled_size(ROTATED_BUTTON_GAP*2 + ROTATED_BUTTON_WIDTH_HEIGHT), y=scaled_size(ROTATED_BUTTON_Y_START), width=ROTATED_BUTTON_WIDTH_HEIGHT, height=ROTATED_BUTTON_WIDTH_HEIGHT)
+    key_button_list[11].place(x=scaled_size(ROTATED_BUTTON_GAP*3 + ROTATED_BUTTON_WIDTH_HEIGHT*2), y=scaled_size(ROTATED_BUTTON_Y_START), width=ROTATED_BUTTON_WIDTH_HEIGHT, height=ROTATED_BUTTON_WIDTH_HEIGHT)
+    key_button_list[15].place(x=scaled_size(ROTATED_BUTTON_GAP*4 + ROTATED_BUTTON_WIDTH_HEIGHT*3), y=scaled_size(ROTATED_BUTTON_Y_START), width=ROTATED_BUTTON_WIDTH_HEIGHT, height=ROTATED_BUTTON_WIDTH_HEIGHT)
+    key_button_list[19].place(x=scaled_size(ROTATED_BUTTON_GAP*5 + ROTATED_BUTTON_WIDTH_HEIGHT*4), y=scaled_size(ROTATED_BUTTON_Y_START), width=ROTATED_BUTTON_WIDTH_HEIGHT, height=ROTATED_BUTTON_WIDTH_HEIGHT)
+
+    key_button_list[2].place(x=scaled_size(ROTATED_BUTTON_GAP), y=scaled_size(ROTATED_BUTTON_Y_START+ROTATED_BUTTON_GAP + ROTATED_BUTTON_WIDTH_HEIGHT), width=ROTATED_BUTTON_WIDTH_HEIGHT, height=ROTATED_BUTTON_WIDTH_HEIGHT)
+    key_button_list[6].place(x=scaled_size(ROTATED_BUTTON_GAP*2 + ROTATED_BUTTON_WIDTH_HEIGHT), y=scaled_size(ROTATED_BUTTON_Y_START+ROTATED_BUTTON_GAP + ROTATED_BUTTON_WIDTH_HEIGHT), width=ROTATED_BUTTON_WIDTH_HEIGHT, height=ROTATED_BUTTON_WIDTH_HEIGHT)
+    key_button_list[10].place(x=scaled_size(ROTATED_BUTTON_GAP*3 + ROTATED_BUTTON_WIDTH_HEIGHT*2), y=scaled_size(ROTATED_BUTTON_Y_START+ROTATED_BUTTON_GAP + ROTATED_BUTTON_WIDTH_HEIGHT), width=ROTATED_BUTTON_WIDTH_HEIGHT, height=ROTATED_BUTTON_WIDTH_HEIGHT)
+    key_button_list[14].place(x=scaled_size(ROTATED_BUTTON_GAP*4 + ROTATED_BUTTON_WIDTH_HEIGHT*3), y=scaled_size(ROTATED_BUTTON_Y_START+ROTATED_BUTTON_GAP + ROTATED_BUTTON_WIDTH_HEIGHT), width=ROTATED_BUTTON_WIDTH_HEIGHT, height=ROTATED_BUTTON_WIDTH_HEIGHT)
+    key_button_list[18].place(x=scaled_size(ROTATED_BUTTON_GAP*5 + ROTATED_BUTTON_WIDTH_HEIGHT*4), y=scaled_size(ROTATED_BUTTON_Y_START+ROTATED_BUTTON_GAP + ROTATED_BUTTON_WIDTH_HEIGHT), width=ROTATED_BUTTON_WIDTH_HEIGHT, height=ROTATED_BUTTON_WIDTH_HEIGHT)
+
+    key_button_list[1].place(x=scaled_size(ROTATED_BUTTON_GAP), y=scaled_size(ROTATED_BUTTON_Y_START+ROTATED_BUTTON_GAP*2 + ROTATED_BUTTON_WIDTH_HEIGHT*2), width=ROTATED_BUTTON_WIDTH_HEIGHT, height=ROTATED_BUTTON_WIDTH_HEIGHT)
+    key_button_list[5].place(x=scaled_size(ROTATED_BUTTON_GAP*2 + ROTATED_BUTTON_WIDTH_HEIGHT), y=scaled_size(ROTATED_BUTTON_Y_START+ROTATED_BUTTON_GAP*2 + ROTATED_BUTTON_WIDTH_HEIGHT*2), width=ROTATED_BUTTON_WIDTH_HEIGHT, height=ROTATED_BUTTON_WIDTH_HEIGHT)
+    key_button_list[9].place(x=scaled_size(ROTATED_BUTTON_GAP*3 + ROTATED_BUTTON_WIDTH_HEIGHT*2), y=scaled_size(ROTATED_BUTTON_Y_START+ROTATED_BUTTON_GAP*2 + ROTATED_BUTTON_WIDTH_HEIGHT*2), width=ROTATED_BUTTON_WIDTH_HEIGHT, height=ROTATED_BUTTON_WIDTH_HEIGHT)
+    key_button_list[13].place(x=scaled_size(ROTATED_BUTTON_GAP*4 + ROTATED_BUTTON_WIDTH_HEIGHT*3), y=scaled_size(ROTATED_BUTTON_Y_START+ROTATED_BUTTON_GAP*2 + ROTATED_BUTTON_WIDTH_HEIGHT*2), width=ROTATED_BUTTON_WIDTH_HEIGHT, height=ROTATED_BUTTON_WIDTH_HEIGHT)
+    key_button_list[17].place(x=scaled_size(ROTATED_BUTTON_GAP*5 + ROTATED_BUTTON_WIDTH_HEIGHT*4), y=scaled_size(ROTATED_BUTTON_Y_START+ROTATED_BUTTON_GAP*2 + ROTATED_BUTTON_WIDTH_HEIGHT*2), width=ROTATED_BUTTON_WIDTH_HEIGHT, height=ROTATED_BUTTON_WIDTH_HEIGHT)
+
+    key_button_list[0].place(x=scaled_size(ROTATED_BUTTON_GAP), y=scaled_size(ROTATED_BUTTON_Y_START+ROTATED_BUTTON_GAP*3 + ROTATED_BUTTON_WIDTH_HEIGHT*3), width=ROTATED_BUTTON_WIDTH_HEIGHT, height=ROTATED_BUTTON_WIDTH_HEIGHT)
+    key_button_list[4].place(x=scaled_size(ROTATED_BUTTON_GAP*2 + ROTATED_BUTTON_WIDTH_HEIGHT), y=scaled_size(ROTATED_BUTTON_Y_START+ROTATED_BUTTON_GAP*3 + ROTATED_BUTTON_WIDTH_HEIGHT*3), width=ROTATED_BUTTON_WIDTH_HEIGHT, height=ROTATED_BUTTON_WIDTH_HEIGHT)
+    key_button_list[8].place(x=scaled_size(ROTATED_BUTTON_GAP*3 + ROTATED_BUTTON_WIDTH_HEIGHT*2), y=scaled_size(ROTATED_BUTTON_Y_START+ROTATED_BUTTON_GAP*3 + ROTATED_BUTTON_WIDTH_HEIGHT*3), width=ROTATED_BUTTON_WIDTH_HEIGHT, height=ROTATED_BUTTON_WIDTH_HEIGHT)
+    key_button_list[12].place(x=scaled_size(ROTATED_BUTTON_GAP*4 + ROTATED_BUTTON_WIDTH_HEIGHT*3), y=scaled_size(ROTATED_BUTTON_Y_START+ROTATED_BUTTON_GAP*3 + ROTATED_BUTTON_WIDTH_HEIGHT*3), width=ROTATED_BUTTON_WIDTH_HEIGHT, height=ROTATED_BUTTON_WIDTH_HEIGHT)
+    key_button_list[16].place(x=scaled_size(ROTATED_BUTTON_GAP*5 + ROTATED_BUTTON_WIDTH_HEIGHT*4), y=scaled_size(ROTATED_BUTTON_Y_START+ROTATED_BUTTON_GAP*3 + ROTATED_BUTTON_WIDTH_HEIGHT*3), width=ROTATED_BUTTON_WIDTH_HEIGHT, height=ROTATED_BUTTON_WIDTH_HEIGHT)
 
 upper_re_cw = Label(master=re_lf, borderwidth=1, relief="solid", background=default_button_color, font=(None, 13))
 upper_re_cw.place(x=scaled_size(60), y=scaled_size(5), width=RE_BUTTON_WIDTH, height=RE_BUTTON_HEIGHT)
