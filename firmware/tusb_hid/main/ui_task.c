@@ -330,6 +330,18 @@ void draw_profile_rotated(profile_info* this_profile)
   draw_cell_content_rotated(3, 1, this_profile->sw_name_firstline[15-1], this_profile->sw_name_secondline[15-1]);
   draw_cell_content_rotated(4, 1, this_profile->sw_name_firstline[19-1], this_profile->sw_name_secondline[19-1]);
 
+  draw_cell_content_rotated(0, 2, this_profile->sw_name_firstline[3-2], this_profile->sw_name_secondline[3-2]);
+  draw_cell_content_rotated(1, 2, this_profile->sw_name_firstline[7-2], this_profile->sw_name_secondline[7-2]);
+  draw_cell_content_rotated(2, 2, this_profile->sw_name_firstline[11-2], this_profile->sw_name_secondline[11-2]);
+  draw_cell_content_rotated(3, 2, this_profile->sw_name_firstline[15-2], this_profile->sw_name_secondline[15-2]);
+  draw_cell_content_rotated(4, 2, this_profile->sw_name_firstline[19-2], this_profile->sw_name_secondline[19-2]);
+
+  draw_cell_content_rotated(0, 3, this_profile->sw_name_firstline[3-3], this_profile->sw_name_secondline[3-3]);
+  draw_cell_content_rotated(1, 3, this_profile->sw_name_firstline[7-3], this_profile->sw_name_secondline[7-3]);
+  draw_cell_content_rotated(2, 3, this_profile->sw_name_firstline[11-3], this_profile->sw_name_secondline[11-3]);
+  draw_cell_content_rotated(3, 3, this_profile->sw_name_firstline[15-3], this_profile->sw_name_secondline[15-3]);
+  draw_cell_content_rotated(4, 3, this_profile->sw_name_firstline[19-3], this_profile->sw_name_secondline[19-3]);
+
   ssd1306_Line(0,39,127,39,White); // horizontal lines
   ssd1306_Line(0,68,127,68,White);
   ssd1306_Line(0,97,127,97,White);
