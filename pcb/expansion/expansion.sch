@@ -4623,6 +4623,10 @@ by exp-lbrs.ulp</description>
 <pinref part="IC3" gate="G$1" pin="PA5"/>
 <pinref part="JP7" gate="G$1" pin="1"/>
 <wire x1="-17.78" y1="27.94" x2="-27.94" y2="27.94" width="0.1524" layer="91"/>
+<pinref part="J1" gate="G$1" pin="RING"/>
+<wire x1="-33.02" y1="-111.76" x2="-33.02" y2="27.94" width="0.1524" layer="91"/>
+<wire x1="-33.02" y1="27.94" x2="-27.94" y2="27.94" width="0.1524" layer="91"/>
+<junction x="-27.94" y="27.94"/>
 </segment>
 </net>
 <net name="N$14" class="0">
