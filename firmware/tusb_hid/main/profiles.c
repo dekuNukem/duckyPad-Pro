@@ -36,7 +36,8 @@ const char config_last_used_profile[] = "last_profile ";
 const char cmd_BG_COLOR[] = "BG_COLOR ";
 const char cmd_KD_COLOR[] = "KEYDOWN_COLOR ";
 const char cmd_SWCOLOR[] = "SWCOLOR_";
-const char cmd_DIM_UNUSED_KEYS[] = "DIM_UNUSED_KEYS ";
+const char cmd_DIM_UNUSED_KEYS[] = "DIM_UNUSED_KEYS 1";
+const char cmd_IS_LANDSCAPE[] = "IS_LANDSCAPE 1";
 
 uint8_t is_profile_load_complete;
 uint8_t current_profile_number;
@@ -280,8 +281,11 @@ void parse_profile_config_line(char* this_line, profile_info* this_profile)
   }
   else if(strncmp(cmd_DIM_UNUSED_KEYS, this_line, strlen(cmd_DIM_UNUSED_KEYS)) == 0)
   {
-    char* curr = goto_next_arg(this_line, msg_end);
-    this_profile->dim_unused_keys = atoi(curr);
+    this_profile->dim_unused_keys = 1;
+  }
+  else if(strncmp(cmd_IS_LANDSCAPE, this_line, strlen(cmd_IS_LANDSCAPE)) == 0)
+  {
+    this_profile->is_landscape = 1;
   }
 }
 

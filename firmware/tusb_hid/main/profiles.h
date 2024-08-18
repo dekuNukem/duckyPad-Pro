@@ -39,6 +39,7 @@ typedef struct
   uint8_t sw_color[MECH_OBSW_COUNT][THREE]; // only mechanical keys have RGB LEDs
   uint8_t sw_activation_color[MECH_OBSW_COUNT][THREE];
   uint8_t dim_unused_keys;
+  uint8_t is_landscape;
 } profile_info;
 
 extern profile_info all_profile_info[MAX_PROFILES];

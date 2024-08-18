@@ -355,10 +355,18 @@ void draw_profile_rotated(profile_info* this_profile)
   ssd1306_UpdateScreen();
 }
 
-
 void draw_profile(profile_info* this_profile)
 {
-  draw_profile_rotated(this_profile);
+  if(this_profile->is_landscape)
+  {
+    ssd1306_set_rotation_only_for_128x128_do_not_use_for_anything_else(SSD1306_ROTATE_CW90);
+    draw_profile_rotated(this_profile);
+  }
+  else
+  {
+    ssd1306_set_rotation_only_for_128x128_do_not_use_for_anything_else(SSD1306_NO_ROTATION);
+    draw_profile_normal(this_profile);
+  }
 }
 
 void draw_settings(dp_global_settings *dps)
