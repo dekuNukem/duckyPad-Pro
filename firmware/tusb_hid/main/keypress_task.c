@@ -156,6 +156,7 @@ void onboard_offboard_switch_press(uint8_t swid, char* press_path, char* release
 
 void settings_menu(void)
 {
+  ssd1306_set_rotation_only_for_128x128_do_not_use_for_anything_else(SSD1306_NO_ROTATION);
   draw_settings(&dp_settings);
   draw_settings_led();
   while(1)
