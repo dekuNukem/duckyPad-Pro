@@ -213,6 +213,7 @@ def ui_reset():
     check_syntax_label.config(text="", fg="green")
     profile_import_button.config(state=DISABLED)
     exp_page_plus_button.config(state=DISABLED)
+    exp_page_minus_button.config(state=DISABLED)
 
 def check_firmware_update(current_fw_str=None):
     if current_fw_str is not None:
@@ -418,6 +419,7 @@ def enable_buttons():
     key_color_text.config(fg='black')
     profile_import_button.config(state=NORMAL)
     exp_page_plus_button.config(state=NORMAL)
+    exp_page_minus_button.config(state=NORMAL)
 
 def profile_shift_up():
     global profile_var
@@ -550,7 +552,7 @@ def dim_unused_keys_click():
 def on_profile_lstbox_select(event):
     global current_selected_expansion_module
     current_selected_expansion_module = 0
-    exp_page_plus_button_click()
+    exp_page_update()
     scripts_lf.place_forget()
     empty_script_label.place(x=scaled_size(800), y=scaled_size(200))
     key_name_textbox.delete('1.0', 'end')
@@ -1513,10 +1515,8 @@ root.update()
 
 current_selected_expansion_module = 0
 
-def exp_page_plus_button_click():
-    global current_selected_expansion_module
-    current_selected_expansion_module = (current_selected_expansion_module + 1) % MAX_EXPANSION_MODULE_COUNT
-    # exp_page_plus_button.config(text=f"Exp Module {current_selected_expansion_module}")
+def exp_page_update():
+    current_module_label.config(text=f"Module {current_selected_expansion_module}")
     for index,item in enumerate(key_button_list):
         if is_expansion_button(index):
             item.place(x=scaled_size(999), y=scaled_size(999)) # place_forget doesnt seem to work
@@ -1540,11 +1540,18 @@ def exp_page_plus_button_click():
     update_profile_display()
     root.update()
 
-def open_expansion_instruction(event):
-    messagebox.showinfo("oops", f"not implemented yet!!!")
+def exp_page_plus_button_click():
+    global current_selected_expansion_module
+    current_selected_expansion_module = (current_selected_expansion_module + 1) % MAX_EXPANSION_MODULE_COUNT
+    exp_page_update()
 
 def exp_page_minus_button_click():
-    print("exp_page_minus_button_click")
+    global current_selected_expansion_module
+    current_selected_expansion_module = (current_selected_expansion_module - 1) % MAX_EXPANSION_MODULE_COUNT
+    exp_page_update()
+
+def open_expansion_instruction(event):
+    messagebox.showinfo("oops", f"not implemented yet!!!")
 
 expansion_lf = LabelFrame(root, text="Expansion Modules", width=scaled_size(150), height=scaled_size(263))
 expansion_lf.place(x=scaled_size(590), y=scaled_size(260))
@@ -1561,7 +1568,7 @@ exp_page_minus_button.place(x=scaled_size(10), y=scaled_size(20), width=25, heig
 exp_page_plus_button = Button(expansion_lf, text="+", command=exp_page_plus_button_click, state=DISABLED)
 exp_page_plus_button.place(x=scaled_size(110), y=scaled_size(20), width=25, height=22)
 
-current_module_label = Label(master=expansion_lf, text="Module 2")
+current_module_label = Label(master=expansion_lf)
 current_module_label.place(x=scaled_size(45), y=scaled_size(20))
 
 root.update()
@@ -1600,7 +1607,8 @@ for mmm in range(MAX_EXPANSION_MODULE_COUNT):
         this_ch_button.bind("<ButtonRelease-1>", button_drag_release)
         key_button_list.append(this_ch_button)
 
-exp_page_plus_button_click()
+current_selected_expansion_module = 0
+exp_page_update()
 
 root.update()
 
