@@ -11544,9 +11544,9 @@
      inkscape:pagecheckerboard="0"
      inkscape:deskcolor="#d1d1d1"
      showgrid="false"
-     inkscape:zoom="1"
-     inkscape:cx="710"
-     inkscape:cy="292"
+     inkscape:zoom="2"
+     inkscape:cx="833.5"
+     inkscape:cy="382"
      inkscape:window-width="1920"
      inkscape:window-height="1017"
      inkscape:window-x="1072"
@@ -11558,7 +11558,10 @@
        y="0"
        id="page2605"
        width="1122.6667"
-       height="793.33331" />
+       height="793.33331"
+       inkscape:export-filename="Page 1.png"
+       inkscape:export-xdpi="200"
+       inkscape:export-ydpi="200" />
   </sodipodi:namedview>
   <g
      inkscape:groupmode="layer"
@@ -17512,34 +17515,24 @@
        ry="0" />
   </g>
   <rect
-     style="fill:none;stroke:#000000;stroke-width:3;stroke-dasharray:none;stroke-opacity:1"
+     style="fill:none;stroke:#000000;stroke-width:6;stroke-dasharray:none;stroke-opacity:1"
      id="rect35544"
      width="133.11562"
      height="71.471466"
      x="874.18542"
      y="269.80481" />
-  <rect
-     style="fill:none;stroke:#000000;stroke-width:3;stroke-dasharray:none;stroke-opacity:1"
-     id="rect35754"
-     width="26.008301"
-     height="24.953125"
-     x="848.01984"
-     y="293.064" />
-  <rect
-     style="fill:none;stroke:#000000;stroke-width:3;stroke-dasharray:none;stroke-opacity:1"
-     id="rect35756"
-     width="26.758301"
-     height="24.953125"
-     x="1007.3882"
-     y="293.064" />
   <path
-     style="fill:none;stroke:#ff0000;stroke-width:3;stroke-dasharray:none;stroke-opacity:1"
-     d="m 970.89525,271.30574 v 68.34459"
+     style="fill:none;stroke:#ff0000;stroke-width:7;stroke-dasharray:none;stroke-opacity:1"
+     d="m 970.89525,272.80834 0,65.42778"
      id="path39967"
      sodipodi:nodetypes="cc" />
   <path
-     style="fill:none;stroke:#ff0000;stroke-width:3;stroke-dasharray:none;stroke-opacity:1"
-     d="m 980.89525,271.30574 v 68.34459"
+     style="fill:none;stroke:#ff0000;stroke-width:7;stroke-dasharray:none;stroke-opacity:1"
+     d="m 980.89525,272.80574 0,65.47457"
      id="path44480"
      sodipodi:nodetypes="cc" />
+  <path
+     style="fill:none;stroke:#ff0000;stroke-width:7;stroke-dasharray:none;stroke-opacity:1"
+     d="m 927.5,399 v 65 h 67 v -40 l -24.75,-24.75 z"
+     id="path57841" />
 </svg>
