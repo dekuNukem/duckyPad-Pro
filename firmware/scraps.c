@@ -1,38 +1,25 @@
+/*
+ESP32 bare chip
+4x5 20 keys in standard numpad shape
+128x128 OLED screen
+one or two EC11 rotary encoders
+extra USB-C connectors for external accessories? like big red button or additional encoder
+optional battery kit and battery management PCB?
+sloped case design for battery kit?
 
-void draw_profile(profile_info* this_profile)
-{
-  ssd1306_Fill(Black);
-  memset(oled_line_buf, 0, OLED_LINE_BUF_SIZE);
-  sprintf(oled_line_buf, "P%d:%s", this_profile->pf_number, this_profile->pf_name);
-  ssd1306_SetCursor(center_line(strlen(oled_line_buf), 7, SSD1306_WIDTH), 0);
-  ssd1306_WriteString(oled_line_buf, Font_7x10, White);
-  
-  ssd1306_Line(0,10,127,10,White); // title solid line
+new features:
 
-  for (size_t rrr = 0; rrr < SW_MATRIX_NUM_ROWS; rrr++)
-  {
-    for (size_t ccc = 0; ccc < SW_MATRIX_NUM_COLS; ccc++)
-    {
-      uint8_t this_sw_index = rowcol_to_index(rrr, ccc);
-      // draw_cell_content(ccc, rrr, this_profile->sw_name_firstline[this_sw_index], this_profile->sw_name_secondline[this_sw_index]);
-      draw_cell_content_rotated(rrr, ccc, this_profile->sw_name_firstline[this_sw_index], this_profile->sw_name_secondline[this_sw_index]);
-    }
-  }
-  
-  ssd1306_Line(0,33,127,33,White); // horizontal lines
-  ssd1306_Line(0,57,127,57,White);
-  ssd1306_Line(0,80,127,80,White);
-  ssd1306_Line(0,103,127,103,White);
-  ssd1306_Line(0,127,127,127,White);
+more keys
+rotary encoders
+larger OLED
+expansion module (custom buttons / foot pedal, etc)
+bluetooth / wifi
+much faster UI
+more profiles
+more sturdy +- button
+easier to develop (esp-idf)
 
-  ssd1306_Line(32,10,32,127,White); // vertical lines
-  ssd1306_Line(64,10,64,127,White);
-  ssd1306_Line(96,10,96,127,White);
-
-  draw_bluetooth_icon(0, -1, bluetooth_status, 0);
-
-  ssd1306_UpdateScreen();
-}
+*/
 
 for (uint8_t rrr = 0; rrr < SW_MATRIX_NUM_ROWS; rrr++)
   {

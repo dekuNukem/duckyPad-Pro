@@ -1,21 +1,29 @@
-# duckyPad2
+# duckyPad Pro
 
-ESP32 bare chip
-4x5 20 keys in standard numpad shape
-128x128 OLED screen
-one or two EC11 rotary encoders
-extra USB-C connectors for external accessories? like big red button or additional encoder
-optional battery kit and battery management PCB?
-sloped case design for battery kit?
+duckyPad is a 20-key mechanical macropad designed from ground up for sophysitcated expansion
 
-new features:
+ that helps **consolidate & speed up workflow** by automating keyboard (and mouse!) inputs. 
 
-more keys
-rotary encoders
-larger OLED
-expansion module (custom buttons / foot pedal, etc)
-bluetooth / wifi
-much faster UI
-more profiles
-more sturdy +- button
-easier to develop (esp-idf)
+![Alt text](resources/pics/title_jpg.jpg)
+
+Basics:
+
+* **Hot-swap** mechanical switches
+* RGB
+* USB-C
+* 100% Open-source
+
+Unique Features:
+
+* **OLED** screen showing what each key does
+* Sophisticated **multi-line scripting** with [duckyScript](duckyscript_info.md)
+* **32 profiles** of 15 keys, 480 macros total.
+* [Automatic profile switching](https://github.com/dekuNukem/duckyPad-profile-autoswitcher) based on active window.
+* microSD storage, move between devices without losing macros.
+* No proprietary drivers, works out-of-box.
+
+![Alt text](resources/pics/teaser.gif)
+
+When pressed, each key execute [duckyScript](duckyscript_info.md) to automate keyboard actions.
+
+It can be as simple as shortcuts like `Control + C`, or as complex as launching applications, managing livestreams, or even [creating root backdoors](https://shop.hak5.org/blogs/usb-rubber-ducky/the-3-second-reverse-shell-with-a-usb-rubber-ducky) or [grabbing passwords](https://shop.hak5.org/blogs/usb-rubber-ducky/15-second-password-hack-mr-robot-style). It's all up to you!
