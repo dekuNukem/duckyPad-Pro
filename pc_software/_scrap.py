@@ -1,5 +1,11 @@
     for i in range(HOW_MANY_NOP_AFTER_VMVAR):
         assembly_listing.append(get_empty_instruction())
+def abort_allowed_click():
+    print('hello!')
+
+is_abort_allowed_var = IntVar()
+abort_allowed_checkbox = Checkbutton(scripts_lf, text="Press key\nto abort", variable=is_abort_allowed_var, command=abort_allowed_click)
+abort_allowed_checkbox.place(x=scaled_size(220), y=scaled_size(410))
 
 update_key_button_appearances(profile_index)
 , font=(None, 13)
