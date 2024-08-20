@@ -1,1 +1,1 @@
-STRINGLN hello world
+$_ALLOW_ABORT = 3

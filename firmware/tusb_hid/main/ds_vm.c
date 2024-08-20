@@ -23,7 +23,7 @@ uint16_t charjitter_value;
 uint32_t rand_min, rand_max;
 uint16_t loop_size;
 uint8_t epilogue_actions;
-uint8_t allow_abort = 1;
+uint8_t allow_abort;
 uint8_t key_press_count[MAX_TOTAL_SW_COUNT];
 
 typedef struct
@@ -152,7 +152,9 @@ void write_var(uint16_t addr, uint16_t value)
   else if (addr == _KEYPRESS_COUNT)
     ; // this is read only, so do nothing
   else if (addr == _NEEDS_EPILOGUE)
-    epilogue_actions = value; // this is read only, so do nothing
+    epilogue_actions = value;
+  else if (addr == _ALLOW_ABORT)
+    allow_abort = value;
   else if(addr < VAR_BUF_SIZE)
     store_uint16_as_two_bytes_at(addr, value);
 }
@@ -193,6 +195,8 @@ uint16_t read_var(uint16_t addr, uint8_t this_key_id)
     return key_press_count[this_key_id];
   else if (addr == _NEEDS_EPILOGUE)
     return epilogue_actions;
+  else if (addr == _ALLOW_ABORT)
+    return allow_abort;
   else if(addr < VAR_BUF_SIZE)
     return make_uint16(var_buf[addr], var_buf[addr+1]);
   return 0;
