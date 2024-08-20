@@ -102,6 +102,7 @@ uint8_t rowcol_to_index(uint8_t row, uint8_t col);
 uint8_t poll_sw_state(uint8_t swid_zero_indexed);
 void clear_sw_re_queue(void);
 void expansion_uart_init(void);
+uint8_t sw_queue_has_keydown_event(void);
 
 #define SW_SCAN_TASK_STACK_SIZE 2048
 

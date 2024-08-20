@@ -101,7 +101,7 @@ typedef struct
   uint8_t code2;
 } my_key;
 
-void kb_print(char* msg, int32_t chardelay, int32_t char_delay_fuzz);
+uint8_t kb_print(char* msg, int32_t chardelay, int32_t charjitter);
 void keyboard_release(my_key* this_key);
 void keyboard_press(my_key* this_key, uint8_t use_shift);
 void keyboard_release_all(void);

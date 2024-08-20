@@ -302,3 +302,13 @@ void clear_sw_re_queue(void)
 	xQueueReset(switch_event_queue);
 	xQueueReset(rotary_encoder_event_queue);
 }
+
+uint8_t sw_queue_has_keydown_event(void)
+{
+  switch_event_t sw_event = { 0 };
+  if(xQueueReceive(switch_event_queue, &sw_event, 0) == pdFALSE)
+    return 0;
+  if(sw_event.type == SW_EVENT_SHORT_PRESS)
+    return 1;
+  return 0;
+}

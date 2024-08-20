@@ -112,6 +112,7 @@ typedef struct
 
 extern uint8_t bin_buf[BIN_BUF_SIZE];
 extern uint8_t key_press_count[MAX_TOTAL_SW_COUNT];
+extern uint8_t allow_abort;
 
 void run_dsb(ds3_exe_result* er, uint8_t this_key_id, char* dsb_path);
 #endif

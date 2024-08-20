@@ -292,16 +292,6 @@ void parse_olc(void)
   ssd1306_SetCursor(xxx, yyy);
 }
 
-uint8_t sw_queue_has_keydown_event(void)
-{
-  switch_event_t sw_event = { 0 };
-  if(xQueueReceive(switch_event_queue, &sw_event, 0) == pdFALSE)
-    return 0;
-  if(sw_event.type == SW_EVENT_SHORT_PRESS)
-    return 1;
-  return 0;
-}
-
 void execute_instruction(uint16_t curr_pc, ds3_exe_result* exe, uint8_t this_key_id)
 {
   uint8_t this_opcode = read_byte(curr_pc);
@@ -469,7 +459,11 @@ void execute_instruction(uint16_t curr_pc, ds3_exe_result* exe, uint8_t this_key
   else if(this_opcode == OP_STR || this_opcode == OP_STRLN)
   {
     char* str_buf = make_str(op_data, this_key_id);
-    kb_print(str_buf, defaultchardelay_value, charjitter_value);
+    if(kb_print(str_buf, defaultchardelay_value, charjitter_value))
+    {
+      exe->result = EXE_ABORTED;
+      return;
+    }
     if(this_opcode == OP_STRLN)
     {
     	press_key(0x28, 0x03); // ENTER key

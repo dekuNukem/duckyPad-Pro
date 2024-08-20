@@ -11,7 +11,7 @@
 #include "keypress_task.h"
 #include "freertos/FreeRTOS.h"
 #include "freertos/task.h"
-
+#include "ds_vm.h"
 #include "hid_task.h"
 
 #define SHIFT 0x100
@@ -572,17 +572,20 @@ void kb_print_char(my_key *kk, int32_t chardelay, int32_t charjitter)
   }
 }
 
-void kb_print(char* msg, int32_t chardelay, int32_t charjitter)
+uint8_t kb_print(char* msg, int32_t chardelay, int32_t charjitter)
 {
   my_key kk;
   for (int i = 0; i < strlen(msg); ++i)
   {
+    if(allow_abort && sw_queue_has_keydown_event())
+      return 1;
     kk.type = KEY_TYPE_CHAR;
     kk.code = utf8ascii(msg[i]);
     if(kk.code == 0)
       continue;
     kb_print_char(&kk, chardelay, charjitter);
   }
+  return 0;
 }
 
 void init_my_key(my_key* kk)
