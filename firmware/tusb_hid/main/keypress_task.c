@@ -79,10 +79,12 @@ uint8_t run_once(uint8_t swid, char* dsb_path)
   {
     neopixel_fill(128, 128, 128);
     oled_say("Aborted");
+    vTaskDelay(pdMS_TO_TICKS(20));
+    media_key_release();
+    vTaskDelay(pdMS_TO_TICKS(20));
+    keyboard_release_all();
     vTaskDelay(pdMS_TO_TICKS(1000));
     goto_profile(current_profile_number);
-    keyboard_release_all();
-    media_key_release();
     return DSB_DONT_PLAY_KEYUP_ANIMATION_RETURN_IMMEDIATELY;
   }
 
