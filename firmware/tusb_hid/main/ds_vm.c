@@ -617,6 +617,7 @@ void run_dsb(ds3_exe_result* er, uint8_t this_key_id, char* dsb_path)
   rand_min = 0;
   loop_size = 0;
   epilogue_actions = 0;
+  allow_abort = 0;
   srand(xTaskGetTickCount());
 
   while(1)

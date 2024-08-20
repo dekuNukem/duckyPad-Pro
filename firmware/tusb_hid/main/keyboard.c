@@ -376,6 +376,13 @@ void mouse_release(my_key* this_key)
   USBD_CUSTOM_HID_SendReport(kb_buf);
 }
 
+void mouse_release_all(void)
+{
+  memset(kb_buf, 0, DP_HID_MSG_SIZE);
+  kb_buf[0] = HID_USAGE_ID_MOUSE;
+  USBD_CUSTOM_HID_SendReport(kb_buf);
+}
+
 void keyboard_press(my_key* this_key, uint8_t use_mod)
 {
   uint16_t duckcode;
