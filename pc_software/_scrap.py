@@ -1,3 +1,6 @@
+    for i in range(HOW_MANY_NOP_AFTER_VMVAR):
+        assembly_listing.append(get_empty_instruction())
+
 update_key_button_appearances(profile_index)
 , font=(None, 13)
 if profile_list[index].dim_unused:

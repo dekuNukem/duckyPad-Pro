@@ -23,6 +23,7 @@ uint16_t charjitter_value;
 uint32_t rand_min, rand_max;
 uint16_t loop_size;
 uint8_t epilogue_actions;
+uint8_t allow_abort = 1;
 uint8_t key_press_count[MAX_TOTAL_SW_COUNT];
 
 typedef struct
@@ -291,6 +292,16 @@ void parse_olc(void)
   ssd1306_SetCursor(xxx, yyy);
 }
 
+uint8_t sw_queue_has_keydown_event(void)
+{
+  switch_event_t sw_event = { 0 };
+  if(xQueueReceive(switch_event_queue, &sw_event, 0) == pdFALSE)
+    return 0;
+  if(sw_event.type == SW_EVENT_SHORT_PRESS)
+    return 1;
+  return 0;
+}
+
 void execute_instruction(uint16_t curr_pc, ds3_exe_result* exe, uint8_t this_key_id)
 {
   uint8_t this_opcode = read_byte(curr_pc);
@@ -303,14 +314,15 @@ void execute_instruction(uint16_t curr_pc, ds3_exe_result* exe, uint8_t this_key
   exe->result = EXE_OK;
   exe->next_pc = curr_pc + INSTRUCTION_SIZE_BYTES;
   exe->data = 0;
-
-  if(this_opcode == OP_NOP)
+  
+  if(allow_abort && sw_queue_has_keydown_event())
   {
+    exe->result = EXE_ABORTED;
     return;
   }
-  else if(this_opcode == OP_VMVER)
+  else if(this_opcode == OP_NOP || this_opcode == OP_VMINFO)
   {
-    exe->next_pc = (byte0 + 1) * INSTRUCTION_SIZE_BYTES;
+    return;
   }
   else if(this_opcode == OP_PUSHC)
   {
@@ -581,7 +593,7 @@ uint8_t load_dsb(char* dsb_path)
   if(fread(bin_buf, 1, BIN_BUF_SIZE, sd_file) == 0)
     return EXE_DSB_FREAD_ERROR;
   fclose(sd_file);
-  if(bin_buf[0] != OP_VMVER)
+  if(bin_buf[0] != OP_VMINFO)
     return EXE_DSB_INCOMPATIBLE_VERSION;
   if(bin_buf[2] != dsvm_version)
     return EXE_DSB_INCOMPATIBLE_VERSION;

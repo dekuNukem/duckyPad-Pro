@@ -68,11 +68,22 @@ void der_init(ds3_exe_result* der)
 #define DSB_DONT_PLAY_KEYUP_ANIMATION_RETURN_IMMEDIATELY 1
 uint8_t run_once(uint8_t swid, char* dsb_path)
 {
+  clear_sw_re_queue();
   der_init(&this_exe);
   run_dsb(&this_exe, swid, dsb_path);
   // printf("---\nexecution finished:\nresult: %d\ndata: %d\nepilogue: 0x%x\n---\n", this_exe.result, this_exe.data, this_exe.epilogue_actions);
 
   uint8_t what_to_do = DSB_ALLOW_AUTOREPEAT;
+
+  if(this_exe.result == EXE_ABORTED)
+  {
+    neopixel_fill(128, 128, 128);
+    oled_say("Aborted");
+    vTaskDelay(pdMS_TO_TICKS(1000));
+    goto_profile(current_profile_number);
+    return DSB_DONT_PLAY_KEYUP_ANIMATION_RETURN_IMMEDIATELY;
+  }
+
   if(this_exe.epilogue_actions & EPILOGUE_SAVE_LOOP_STATE)
   {
     save_persistent_state(this_exe.epilogue_actions, swid);
@@ -336,7 +347,7 @@ void handle_sw_event(switch_event_t* this_sw_event)
   }
   ssd1306_SetContrast(OLED_CONTRAST_BRIGHT);
   process_keyevent(this_sw_event->id, this_sw_event->type);
-  // xQueueReset(switch_event_queue);
+  clear_sw_re_queue();
 }
 
 void keypress_task(void *dummy)

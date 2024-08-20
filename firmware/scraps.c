@@ -1,3 +1,11 @@
+uint8_t sw_queue_has_keydown_event(void)
+
+
+  else if(this_opcode == OP_VMINFO)
+  {
+    exe->next_pc = (byte0 + 1) * INSTRUCTION_SIZE_BYTES;
+  }
+
 /*
 ESP32 bare chip
 4x5 20 keys in standard numpad shape

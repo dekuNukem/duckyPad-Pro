@@ -21,7 +21,6 @@ remove BCLR command as it's no longer needed?
 """
 
 DS_VM_VERSION = 1
-HOW_MANY_NOP_AFTER_VMVAR = 3
 
 # CPU instructions
 OP_NOP = ("NOP", 0)
@@ -84,7 +83,7 @@ OP_NEXTP = ("NEXTP", 45)
 OP_GOTOP = ("GOTOP", 46)
 OP_SLEEP = ("SLEEP", 47)
 
-OP_VMVAR = ("VMVAR", 255)
+OP_VMINFO = ("VMINFO", 255)
 
 arith_lookup = {
     "Eq" : OP_EQ,
@@ -486,11 +485,9 @@ def make_dsb(program_listing, profile_list=None):
     assembly_listing = []
 
     first_instruction = get_empty_instruction()
-    first_instruction['opcode'] = OP_VMVAR
-    first_instruction['oparg'] = ((DS_VM_VERSION % 0xff) << 8) | (HOW_MANY_NOP_AFTER_VMVAR % 0xff)
+    first_instruction['opcode'] = OP_VMINFO
+    first_instruction['oparg'] = ((DS_VM_VERSION % 0xf) << 8)
     assembly_listing.append(first_instruction)
-    for i in range(HOW_MANY_NOP_AFTER_VMVAR):
-        assembly_listing.append(get_empty_instruction())
 
     for lnum, this_line in enumerate(compact_program_listing):
         lnum += 1
