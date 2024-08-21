@@ -471,20 +471,20 @@ void execute_instruction(uint16_t curr_pc, ds3_exe_result* exe, uint8_t this_key
     if(this_opcode == OP_STRLN)
     {
     	press_key(0x28, 0x03); // ENTER key
-    	vTaskDelay(pdMS_TO_TICKS(defaultdelay_value));
+    	delay_ms(defaultdelay_value);
     	release_key(0x28, 0x03);
-    	vTaskDelay(pdMS_TO_TICKS(defaultdelay_value));
+    	delay_ms(defaultdelay_value);
     }
   }
   else if(this_opcode == OP_KDOWN)
   {
   	press_key(byte0, byte1);
-  	vTaskDelay(pdMS_TO_TICKS(defaultdelay_value));
+  	delay_ms(defaultdelay_value);
   }
   else if(this_opcode == OP_KUP)
   {
   	release_key(byte0, byte1);
-  	vTaskDelay(pdMS_TO_TICKS(defaultdelay_value));
+  	delay_ms(defaultdelay_value);
   }
   else if(this_opcode == OP_MMOV)
   {
@@ -493,7 +493,7 @@ void execute_instruction(uint16_t curr_pc, ds3_exe_result* exe, uint8_t this_key
     kk.code2 = byte0;
     kk.type = KEY_TYPE_MOUSE_MOVEMENT;
     keyboard_press(&kk, 0);
-    vTaskDelay(pdMS_TO_TICKS(defaultdelay_value));
+    delay_ms(defaultdelay_value);
   }
   else if(this_opcode == OP_DELAY)
   {
@@ -504,7 +504,7 @@ void execute_instruction(uint16_t curr_pc, ds3_exe_result* exe, uint8_t this_key
       exe->result = op_result;
       return;
     }
-    vTaskDelay(pdMS_TO_TICKS(delay_amount));
+    delay_ms(delay_amount);
   }
   else if(this_opcode == OP_MSCL)
   {
@@ -513,7 +513,7 @@ void execute_instruction(uint16_t curr_pc, ds3_exe_result* exe, uint8_t this_key
     kk.code2 = 0;
     kk.type = KEY_TYPE_MOUSE_WHEEL;
     keyboard_press(&kk, 0);
-    vTaskDelay(pdMS_TO_TICKS(defaultdelay_value));
+    delay_ms(defaultdelay_value);
   }
   else if(this_opcode == OP_SWCC)
   {

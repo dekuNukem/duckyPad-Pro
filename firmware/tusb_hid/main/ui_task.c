@@ -62,9 +62,9 @@ void oled_init(void)
     ESP_ERROR_CHECK(spi_bus_add_device(SPI2_HOST, &devcfg, &my_spi_handle));
 
     gpio_set_level(OLED_RESET, 0);
-    vTaskDelay(pdMS_TO_TICKS(25));
+    delay_ms(25);
     gpio_set_level(OLED_RESET, 1);
-    vTaskDelay(pdMS_TO_TICKS(25));
+    delay_ms(25);
 
     ssd1306_init();
 }
@@ -674,9 +674,9 @@ void draw_bt_pin(uint32_t this_bt_pin)
   for (size_t i = 0; i < 5; i++)
   {
     neopixel_off();
-    vTaskDelay(pdMS_TO_TICKS(200));
+    delay_ms(200);
     neopixel_fill(0, 0, 255);
-    vTaskDelay(pdMS_TO_TICKS(200));
+    delay_ms(200);
   }
   block_until_anykey(SW_EVENT_SHORT_PRESS);
   goto_profile(current_profile_number);

@@ -31,7 +31,7 @@ void block_until_anykey(uint8_t event_type)
   xQueueReset(switch_event_queue);
   while(1)
   {
-    vTaskDelay(pdMS_TO_TICKS(33));
+    delay_ms(33);
     switch_event_t sw_event = { 0 };
     if(xQueueReceive(switch_event_queue, &sw_event, 0) == pdFALSE)
       continue;
@@ -45,7 +45,7 @@ void block_until_plus_minus_long_press(void)
   xQueueReset(switch_event_queue);
   while(1)
   {
-    vTaskDelay(pdMS_TO_TICKS(33));
+    delay_ms(33);
     switch_event_t sw_event = { 0 };
     if(xQueueReceive(switch_event_queue, &sw_event, 0) == pdFALSE)
       continue;
@@ -78,13 +78,13 @@ uint8_t run_once(uint8_t swid, char* dsb_path)
   {
     neopixel_fill(128, 128, 128);
     oled_say("Aborted");
-    vTaskDelay(pdMS_TO_TICKS(100));
+    delay_ms(100);
     media_key_release();
-    vTaskDelay(pdMS_TO_TICKS(100));
+    delay_ms(100);
     keyboard_release_all();
-    vTaskDelay(pdMS_TO_TICKS(100));
+    delay_ms(100);
     mouse_release_all();
-    vTaskDelay(pdMS_TO_TICKS(1000));
+    delay_ms(1000);
     goto_profile(current_profile_number);
     return DSB_DONT_PLAY_KEYUP_ANIMATION_RETURN_IMMEDIATELY;
   }
@@ -178,7 +178,7 @@ void settings_menu(void)
   while(1)
   {
     switch_event_t sw_event = { 0 };
-    vTaskDelay(pdMS_TO_TICKS(20));
+    delay_ms(20);
     if(xQueueReceive(switch_event_queue, &sw_event, 0) == pdFALSE)
       continue;
     if(sw_event.type != SW_EVENT_RELEASE)
@@ -363,7 +363,7 @@ void keypress_task(void *dummy)
   update_last_keypress();
   while(1)
   {
-    vTaskDelay(pdMS_TO_TICKS(10));
+    delay_ms(10);
 
     rotary_encoder_event_t re_event = { 0 };
     if (xQueueReceive(rotary_encoder_event_queue, &re_event, 0) == pdTRUE)

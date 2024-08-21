@@ -497,8 +497,7 @@ void idle_loop(void)
 {
   while(1)
   {
-    // printf("idle loop\n");
-    vTaskDelay(pdMS_TO_TICKS(1000));
+    delay_ms(1000);
   }
 }
 

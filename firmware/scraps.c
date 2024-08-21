@@ -1,3 +1,42 @@
+#define HID_TX_BUF_SIZE HID_CC_IN_RPT_LEN-1
+uint8_t test_buf[HID_TX_BUF_SIZE];
+void my_kb_test(void)
+{
+    memset(test_buf, 0, HID_TX_BUF_SIZE);
+    test_buf[2] = 0x21;
+    ble_kb_send(test_buf);
+    vTaskDelay(100 / portTICK_PERIOD_MS);
+
+    memset(test_buf, 0, HID_TX_BUF_SIZE);
+    ble_kb_send(test_buf);
+    vTaskDelay(100 / portTICK_PERIOD_MS);
+}
+
+void my_mk_test(void)
+{
+    memset(test_buf, 0, HID_TX_BUF_SIZE);
+    test_buf[0] = 64;
+    int result = esp_hidd_dev_input_set(s_ble_hid_param.hid_dev, 0, 2, test_buf, 2);
+    printf("MK result: %d\n", result);
+    vTaskDelay(100 / portTICK_PERIOD_MS);
+
+    memset(test_buf, 0, HID_TX_BUF_SIZE);
+    result = esp_hidd_dev_input_set(s_ble_hid_param.hid_dev, 0, 2, test_buf, 2);
+    printf("MK result: %d\n", result);
+    vTaskDelay(100 / portTICK_PERIOD_MS);
+}
+
+void my_mouse_test(void)
+{
+    memset(test_buf, 0, HID_TX_BUF_SIZE);
+    test_buf[1] = 16;
+    int result = esp_hidd_dev_input_set(s_ble_hid_param.hid_dev, 0, 3, test_buf, 4);
+    printf("MOUSE result: %d\n", result);
+    vTaskDelay(100 / portTICK_PERIOD_MS);
+}
+uint32_t start = pdTICKS_TO_MS(xTaskGetTickCount());
+printf("took %ldms\n", pdTICKS_TO_MS(xTaskGetTickCount()) - start);
+
 uint8_t sw_queue_has_keydown_event(void)
 
 

@@ -34,7 +34,8 @@ static const char *TAG = "MAIN";
 
 void app_main(void)
 {
-    vTaskDelay(pdMS_TO_TICKS(250)); // brief delay in case of SD card removal reboot
+    // brief delay in case of SD card removal reboot
+    delay_ms(250);
     gpio_install_isr_service(0); // BEFORE GPIO INIT
     esp_read_mac(esp_mac_addr, ESP_MAC_ADDR_SIZE);
     my_rotary_encoder_init();
@@ -86,7 +87,7 @@ void app_main(void)
     {
         tinyusb_driver_uninstall();
         draw_no_usb_activity();
-        vTaskDelay(pdMS_TO_TICKS(2000));
+        delay_ms(2000);
         my_bt_init();
         goto_profile(current_profile_number);
     }
@@ -103,7 +104,7 @@ void app_main(void)
 
         uint32_t ms_since_last_keypress = pdTICKS_TO_MS(xTaskGetTickCount()) - last_keypress;
 
-        vTaskDelay(pdMS_TO_TICKS(ANIMATION_FREQ_MS));
+        delay_ms(ANIMATION_FREQ_MS);
 
         if(is_busy)
             continue;

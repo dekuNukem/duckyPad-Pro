@@ -289,7 +289,7 @@ uint16_t ascii_map[ASCII_MAP_SIZE] =
 
 void delay_wrapper(int32_t amount, int32_t fuzz)
 {
-  vTaskDelay(pdMS_TO_TICKS((fuzz == 0 ? amount : amount + rand() % fuzz)));
+  delay_ms(fuzz == 0 ? amount : amount + rand() % fuzz);
 }
 
 uint8_t kb_buf[DP_HID_MSG_SIZE];

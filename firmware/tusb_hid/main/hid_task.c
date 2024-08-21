@@ -596,6 +596,6 @@ uint8_t wait_for_hid_connect(uint32_t how_long_ms)
             return 0;
         if(is_usb_hid_connected)
             return 1;
-        vTaskDelay(pdMS_TO_TICKS(50));
+        delay_ms(50);
     }
 }

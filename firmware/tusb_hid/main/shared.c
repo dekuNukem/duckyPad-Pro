@@ -215,7 +215,13 @@ void fw_update_check(void)
   {
     oled_say("Success!");
   }
-
-  vTaskDelay(2000 / portTICK_PERIOD_MS);
+  delay_ms(2000);
   esp_restart();
+}
+
+void delay_ms(uint32_t amount)
+{
+  if(amount == 0)
+    return;
+  vTaskDelay(pdMS_TO_TICKS(amount));
 }
