@@ -419,7 +419,6 @@ uint8_t load_keymap_by_name(char* km_name)
     return 1;
   memset(temp_buf, 0, TEMP_BUFSIZE);
   sprintf(temp_buf, "/sdcard/keymaps/%s", km_name);
-  printf("load_keymap_by_name: %s\n", temp_buf);
   FILE *sd_file = fopen(temp_buf, "r");
   if(sd_file == NULL)
     return ERROR_KEYMAP_NOT_FOUND;

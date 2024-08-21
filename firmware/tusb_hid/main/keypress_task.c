@@ -68,7 +68,7 @@ void der_init(ds3_exe_result* der)
 #define DSB_DONT_PLAY_KEYUP_ANIMATION_RETURN_IMMEDIATELY 1
 uint8_t run_once(uint8_t swid, char* dsb_path)
 {
-  clear_sw_re_queue();
+  // clear_sw_re_queue();
   der_init(&this_exe);
   run_dsb(&this_exe, swid, dsb_path);
   // printf("---\nexecution finished:\nresult: %d\ndata: %d\nepilogue: 0x%x\n---\n", this_exe.result, this_exe.data, this_exe.epilogue_actions);
@@ -352,8 +352,12 @@ void handle_sw_event(switch_event_t* this_sw_event)
     return;
   }
   ssd1306_SetContrast(OLED_CONTRAST_BRIGHT);
+  uint32_t ke_start = pdTICKS_TO_MS(xTaskGetTickCount());
   process_keyevent(this_sw_event->id, this_sw_event->type);
-  clear_sw_re_queue();
+  uint32_t ke_duration = pdTICKS_TO_MS(xTaskGetTickCount()) - ke_start;
+  printf("took %ldms\n", ke_duration);
+  if(ke_duration > 200)
+    clear_sw_re_queue();
 }
 
 void keypress_task(void *dummy)
@@ -375,9 +379,7 @@ void keypress_task(void *dummy)
     if (xQueueReceive(switch_event_queue, &sw_event, 0) == pdTRUE)
     {
       is_busy = 1;
-      uint32_t start = pdTICKS_TO_MS(xTaskGetTickCount());
       handle_sw_event(&sw_event);
-      printf("took %ldms\n", pdTICKS_TO_MS(xTaskGetTickCount()) - start);
       is_busy = 0;
     }
     
