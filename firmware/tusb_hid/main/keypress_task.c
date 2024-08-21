@@ -375,7 +375,9 @@ void keypress_task(void *dummy)
     if (xQueueReceive(switch_event_queue, &sw_event, 0) == pdTRUE)
     {
       is_busy = 1;
+      uint32_t start = pdTICKS_TO_MS(xTaskGetTickCount());
       handle_sw_event(&sw_event);
+      printf("took %ldms\n", pdTICKS_TO_MS(xTaskGetTickCount()) - start);
       is_busy = 0;
     }
     

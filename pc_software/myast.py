@@ -31,7 +31,7 @@ def postorder_walk(node, action, instruction_list, expr):
 			postorder_walk(item, action, instruction_list, expr)
 	if is_leaf(node):
 		action(node, instruction_list)
-		return;
+		return
 	postorder_walk(node.left, action, instruction_list, expr)
 	postorder_walk(get_right(node), action, instruction_list, expr)
 	action(node, instruction_list)

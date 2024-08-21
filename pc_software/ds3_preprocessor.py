@@ -133,14 +133,14 @@ def new_rem_block_check(pgm_line, lnum, rbss, rbdict):
     if len(rbss) != 0:
         return PARSE_ERROR, "unmatched END_REM"
     rbss.append(lnum)
-    rbdict[lnum] = None;
+    rbdict[lnum] = None
     return PARSE_OK, ''
 
 def new_stringln_block_check(pgm_line, lnum, slbss, slbdict):
     if len(slbss) != 0:
         return PARSE_ERROR, "unmatched END_STRINGLN"
     slbss.append(lnum)
-    slbdict[lnum] = None;
+    slbdict[lnum] = None
     # print("new_stringln_block_check:", slbss, slbdict)
     return PARSE_OK, ''
 
@@ -148,7 +148,7 @@ def new_string_block_check(pgm_line, lnum, sbss, sbdict):
     if len(sbss) != 0:
         return PARSE_ERROR, "unmatched END_STRING"
     sbss.append(lnum)
-    sbdict[lnum] = None;
+    sbdict[lnum] = None
     return PARSE_OK, ''
 
 def new_func_check(pgm_line, lnum, fss, fdict):
@@ -301,7 +301,7 @@ def end_while_check(pgm_line, lnum, wss, wdict):
     if len(wss) == 0:
         return PARSE_ERROR, "orphan END_WHILE"
     while_start_line = wss.pop()
-    wdict[while_start_line] = lnum;
+    wdict[while_start_line] = lnum
     return PARSE_OK, '' 
 
 def break_check(pgm_line, lnum, wss, bdict):
@@ -310,7 +310,7 @@ def break_check(pgm_line, lnum, wss, bdict):
         return PARSE_ERROR, "extra stuff at end"
     if len(wss) == 0:
         return PARSE_ERROR, "BREAK outside WHILE"
-    bdict[lnum] = wss[-1];
+    bdict[lnum] = wss[-1]
     return PARSE_OK, '' 
 
 def continue_check(pgm_line, lnum, wss, cdict):
@@ -319,7 +319,7 @@ def continue_check(pgm_line, lnum, wss, cdict):
         return PARSE_ERROR, "extra stuff at end"
     if len(wss) == 0:
         return PARSE_ERROR, "CONTINUE outside WHILE"
-    cdict[lnum] = wss[-1];
+    cdict[lnum] = wss[-1]
     return PARSE_OK, '' 
 
 whitespace_chars = [' ', '\t']
@@ -369,7 +369,7 @@ def replace_delay_statements(pgm_line):
 
 def is_valid_swc_arg(name, vt):
     try:
-        return 0 <= int(name) <= 255;
+        return 0 <= int(name) <= 255
     except:
         pass
     if name[0] != '$':
@@ -512,7 +512,7 @@ def run_once(program_listing):
     loop_numbers = set()
 
     for line_number_starting_from_1, this_line in enumerate(program_listing):
-        line_number_starting_from_1 += 1;
+        line_number_starting_from_1 += 1
         this_line = this_line.lstrip(' \t')
         if len(this_line) == 0:
             continue

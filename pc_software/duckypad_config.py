@@ -690,8 +690,8 @@ def compile_all_scripts():
             for this_key in this_profile.keylist:
                 if this_key is not None:
                     this_key.binary_array = make_bytecode.make_dsb(this_key.script.split('\n'), profile_list)
-                    if len(this_key.script_on_release.strip()) > 0:
-                        this_key.binary_array_on_release = make_bytecode.make_dsb(this_key.script_on_release.strip().split('\n'), profile_list)
+                    if len(this_key.script_on_release.lstrip()) > 0:
+                        this_key.binary_array_on_release = make_bytecode.make_dsb(this_key.script_on_release.lstrip().split('\n'), profile_list)
                     if len(this_key.binary_array) >= 65530 or (this_key.binary_array_on_release is not None and len(this_key.binary_array_on_release) >= 65530):
                         messagebox.showerror("Error", f'Script size too large!\n\nProfile: {this_profile.name}\nKey: {this_key.name}')
                         return False
@@ -828,8 +828,8 @@ on_press_release_rb_var.set(0)
 
 def get_correct_script_text(key_obj):
     if on_press_release_rb_var.get() == 1:
-        return key_obj.script_on_release.strip()
-    return key_obj.script.strip()
+        return key_obj.script_on_release.lstrip()
+    return key_obj.script.lstrip()
 
 def key_button_click(button_widget):
     global last_rgb
@@ -1359,9 +1359,9 @@ def script_textbox_modified():
         checking_status_str = "Checking..."
         check_syntax_label.config(text=checking_status_str, fg="black")
     if on_press_release_rb_var.get():
-        thissss_key.script_on_release = script_textbox.get(1.0, END).strip()
+        thissss_key.script_on_release = script_textbox.get(1.0, END).lstrip()
     else:
-        thissss_key.script = script_textbox.get(1.0, END).strip()
+        thissss_key.script = script_textbox.get(1.0, END).lstrip()
     modification_checked = 0
     if len(thissss_key.script_on_release) > 0:
         on_release_rb.configure(fg='green4')
@@ -1384,7 +1384,7 @@ def on_press_rb_click():
         return
     script_textbox.delete(1.0, 'end')
     script_textbox.tag_remove("error", '1.0', 'end')
-    script_textbox.insert(1.0, profile_list[profile_index].keylist[selected_key].script.strip())
+    script_textbox.insert(1.0, profile_list[profile_index].keylist[selected_key].script.lstrip())
 
 is_onrelease_warning_shown = 0
 
@@ -1398,7 +1398,7 @@ def on_release_rb_click():
         is_onrelease_warning_shown = 1
     script_textbox.delete(1.0, 'end')
     script_textbox.tag_remove("error", '1.0', 'end')
-    script_textbox.insert(1.0, profile_list[profile_index].keylist[selected_key].script_on_release.strip())
+    script_textbox.insert(1.0, profile_list[profile_index].keylist[selected_key].script_on_release.lstrip())
 
 on_press_rb = Radiobutton(scripts_lf, text="On Press", variable=on_press_release_rb_var, value=0, command=on_press_rb_click)
 on_press_rb.place(x=scaled_size(50), y=scaled_size(20))
