@@ -11,6 +11,7 @@ end_color_hex = "fb8500"
 start_color = struct.unpack('BBB', bytes.fromhex(start_color_hex))
 end_color = struct.unpack('BBB', bytes.fromhex(end_color_hex))
 
+# green to blue, works really well
 start_color = (0, 255, 0)
 end_color = (16, 16, 255)
 
@@ -56,5 +57,10 @@ draw.rectangle(((300, 400), (400, 500)), fill=(already_done[19][0], already_done
 
 im.save("image.png", "PNG")
 
+import time
+
+now = time.time()
 for x in range(20):
 	dp_rgb.set_duckypad_key_color(x, already_done[x][0], already_done[x][1], already_done[x][2])
+
+print(time.time() - now)
