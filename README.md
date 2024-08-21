@@ -106,3 +106,38 @@ While QMK/VIA are great for regular keyboards, they are rather hopeless at even 
 
 duckyScript is a no-brainer for power users with more demanding scripting needs.
 
+## Showcase
+
+and pressing shortcuts
+
+![gif_alt_text](gif_here)
+
+autoswitcher
+
+![gif_alt_text](gif_here)
+
+security search
+
+![gif_alt_text](gif_here)
+
+fun with expansion modules
+
+foot panel, emergency shutoff, turnkey switch?
+
+![gif_alt_text](gif_here)
+
+## Features
+
+### Mechanical Switches
+
+### Keycaps
+
+### Hot-swap Sockets
+
+### Per-key RGB
+
+### OLED screen
+
+### duckyScript
+
+### Companion App
