@@ -99,6 +99,7 @@ void app_main(void)
     while(1)
     {
         led_animation_handler();
+        ssd1306_SetContrast(oled_brightness);
 
         uint32_t ms_since_last_keypress = pdTICKS_TO_MS(xTaskGetTickCount()) - last_keypress;
 
@@ -111,6 +112,6 @@ void app_main(void)
             start_sleeping();
 
         if(ms_since_last_keypress > OLED_DIM_AFTER_MS)
-            ssd1306_SetContrast(OLED_CONTRAST_DIM);
+            oled_brightness = OLED_CONTRAST_DIM;
     }
 }

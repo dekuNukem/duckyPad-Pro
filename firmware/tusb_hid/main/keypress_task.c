@@ -23,7 +23,7 @@
 #include "bluetooth_task.h"
 #include "nvs_flash.h"
 
-
+volatile uint8_t oled_brightness = OLED_CONTRAST_BRIGHT;
 volatile uint32_t last_keypress;
 
 void block_until_anykey(uint8_t event_type)
@@ -68,7 +68,6 @@ void der_init(ds3_exe_result* der)
 #define DSB_DONT_PLAY_KEYUP_ANIMATION_RETURN_IMMEDIATELY 1
 uint8_t run_once(uint8_t swid, char* dsb_path)
 {
-  // clear_sw_re_queue();
   der_init(&this_exe);
   run_dsb(&this_exe, swid, dsb_path);
   // printf("---\nexecution finished:\nresult: %d\ndata: %d\nepilogue: 0x%x\n---\n", this_exe.result, this_exe.data, this_exe.epilogue_actions);
@@ -246,7 +245,7 @@ char dsb_on_release_path_buf[PATH_BUF_SIZE];
 
 void process_keyevent(uint8_t swid, uint8_t event_type)
 {
-  ssd1306_SetContrast(OLED_CONTRAST_BRIGHT);
+  oled_brightness = OLED_CONTRAST_BRIGHT;
   if(swid == SW_PLUS && event_type == SW_EVENT_RELEASE)
   {
     goto_next_profile();
@@ -299,7 +298,7 @@ void update_last_keypress(void)
 void wakeup_from_sleep_no_load(void)
 {
   is_sleeping = 0;
-  ssd1306_SetContrast(OLED_CONTRAST_BRIGHT);
+  oled_brightness = OLED_CONTRAST_BRIGHT;
   update_last_keypress();
 }
 
@@ -327,7 +326,7 @@ void handle_rotary_encoder_event(rotary_encoder_event_t* this_re_event)
     wakeup_from_sleep_and_load_profile(current_profile_number);
     return;
   }
-  ssd1306_SetContrast(OLED_CONTRAST_BRIGHT);
+  oled_brightness = OLED_CONTRAST_BRIGHT;
   uint8_t swid = 0;
   if(this_re_event->state.id == 1 && this_re_event->state.direction == ROTARY_ENCODER_DIRECTION_CLOCKWISE)
     swid = RE1_CW;
@@ -351,7 +350,6 @@ void handle_sw_event(switch_event_t* this_sw_event)
     wakeup_from_sleep_and_load_profile(current_profile_number);
     return;
   }
-  ssd1306_SetContrast(OLED_CONTRAST_BRIGHT);
   uint32_t ke_start = pdTICKS_TO_MS(xTaskGetTickCount());
   process_keyevent(this_sw_event->id, this_sw_event->type);
   uint32_t ke_duration = pdTICKS_TO_MS(xTaskGetTickCount()) - ke_start;
