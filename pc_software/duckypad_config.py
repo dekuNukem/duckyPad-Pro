@@ -828,8 +828,8 @@ on_press_release_rb_var.set(0)
 
 def get_correct_script_text(key_obj):
     if on_press_release_rb_var.get() == 1:
-        return key_obj.script_on_release.lstrip()
-    return key_obj.script.lstrip()
+        return key_obj.script_on_release.lstrip().rstrip('\r\n')
+    return key_obj.script.lstrip().rstrip('\r\n')
 
 def key_button_click(button_widget):
     global last_rgb
@@ -1384,7 +1384,7 @@ def on_press_rb_click():
         return
     script_textbox.delete(1.0, 'end')
     script_textbox.tag_remove("error", '1.0', 'end')
-    script_textbox.insert(1.0, profile_list[profile_index].keylist[selected_key].script.lstrip())
+    script_textbox.insert(1.0, profile_list[profile_index].keylist[selected_key].script.lstrip().rstrip('\r\n'))
 
 is_onrelease_warning_shown = 0
 
@@ -1398,7 +1398,7 @@ def on_release_rb_click():
         is_onrelease_warning_shown = 1
     script_textbox.delete(1.0, 'end')
     script_textbox.tag_remove("error", '1.0', 'end')
-    script_textbox.insert(1.0, profile_list[profile_index].keylist[selected_key].script_on_release.lstrip())
+    script_textbox.insert(1.0, profile_list[profile_index].keylist[selected_key].script_on_release.lstrip().rstrip('\r\n'))
 
 on_press_rb = Radiobutton(scripts_lf, text="On Press", variable=on_press_release_rb_var, value=0, command=on_press_rb_click)
 on_press_rb.place(x=scaled_size(50), y=scaled_size(20))
