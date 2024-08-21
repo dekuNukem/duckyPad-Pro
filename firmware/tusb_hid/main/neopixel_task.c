@@ -32,6 +32,8 @@ void set_pixel_3color(uint8_t which, uint8_t r, uint8_t g, uint8_t b)
 
 void set_pixel_3color_update_buffer(uint8_t which, uint8_t r, uint8_t g, uint8_t b)
 {
+  if(which >= NEOPIXEL_COUNT)
+    return;
   neo_anime[which].animation_type = ANIMATION_NONE;
   set_pixel_3color(which, r, g, b);
   neo_anime[which].current_color[0] = r;

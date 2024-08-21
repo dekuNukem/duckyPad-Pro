@@ -509,6 +509,27 @@ void handle_hid_command(const uint8_t* hid_rx_buf, uint8_t rx_buf_size)
         send_hid_cmd_response(hid_tx_buf);
     }
     /*
+        SET LED SINGLE
+        -----------
+        PC to duckyPad:
+        [0] seq number (not used)
+        [1] command
+        [2] LED index, 0 to 19
+        [3] red
+        [4] green
+        [5] blue
+        -----------
+        duckyPad to PC
+        [0]   seq number (not used)
+        [1]   0 = OK
+    */
+    else if(command_type == HID_COMMAND_SET_LED_SINGLE)
+    {
+        set_pixel_3color_update_buffer(hid_rx_buf[2], hid_rx_buf[3], hid_rx_buf[4], hid_rx_buf[5]);
+        neopixel_draw_current_buffer();
+        send_hid_cmd_response(hid_tx_buf);
+    }
+    /*
         SOFTWARE RESET
         -----------
         PC to duckyPad:

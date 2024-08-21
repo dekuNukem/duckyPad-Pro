@@ -138,6 +138,42 @@ Jump to a particular profile.
 
 -----------
 
+### Set RGB Colour: Single (0x04)
+
+Change color of a single LED.
+
+* PC to duckyPad:
+
+|   Byte#  |   Description   |
+|:--------:|:---------------:|
+|     0    |        0x05        |
+|     1    | Reserved |
+|     2    |        0x04        |
+|     3    |LED index, 0 to 19  |
+|     4    |Red  |
+|     5    |Green  |
+|     6    |Blue  |
+| 7 ... 63 |        0x00        |
+
+### Set RGB Colour: Bulk (0x05)
+
+Change color of ALL LEDs at once.
+
+|   Byte#  |   Description   |
+|:--------:|:---------------:|
+|     0    |        0x05        |
+|     1    | Reserved |
+|     2    |        0x05        |
+|     3    |LED 0 Red  |
+|     4    |LED 0 Green  |
+|     5    |LED 0 Blue  |
+|     6    |LED 1 Red  |
+|     7    |LED 1 Green  |
+|     8    |LED 1 Blue  |
+|     ....    |....  |
+
+-----------
+
 ### Software reset (0x14) (20)
 
 Perform a software reset.
