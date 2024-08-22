@@ -8,6 +8,7 @@
 #include "freertos/FreeRTOS.h"
 #include "freertos/task.h"
 #include "freertos/queue.h"
+#include "rotary_encoder.h"
 
 #define SW_MATRIX_NUM_COLS 4
 #define SW_MATRIX_NUM_ROWS 5
@@ -103,6 +104,7 @@ uint8_t poll_sw_state(uint8_t swid_zero_indexed, uint8_t perform_new_scan);
 void clear_sw_re_queue(void);
 void expansion_uart_init(void);
 uint8_t sw_queue_has_keydown_event(void);
+uint8_t re_event_to_swid(rotary_encoder_event_t* re_event);
 
 #define SW_SCAN_TASK_STACK_SIZE 2048
 

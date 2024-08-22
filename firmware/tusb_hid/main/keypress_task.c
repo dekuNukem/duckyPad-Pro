@@ -327,15 +327,7 @@ void handle_rotary_encoder_event(rotary_encoder_event_t* this_re_event)
     return;
   }
   oled_brightness = OLED_CONTRAST_BRIGHT;
-  uint8_t swid = 0;
-  if(this_re_event->state.id == 1 && this_re_event->state.direction == ROTARY_ENCODER_DIRECTION_CLOCKWISE)
-    swid = RE1_CW;
-  else if(this_re_event->state.id == 1 && this_re_event->state.direction == ROTARY_ENCODER_DIRECTION_COUNTER_CLOCKWISE)
-    swid = RE1_CCW;
-  else if(this_re_event->state.id == 2 && this_re_event->state.direction == ROTARY_ENCODER_DIRECTION_CLOCKWISE)
-    swid = RE2_CW;
-  else if(this_re_event->state.id == 2 && this_re_event->state.direction == ROTARY_ENCODER_DIRECTION_COUNTER_CLOCKWISE)
-    swid = RE2_CCW;
+  uint8_t swid = re_event_to_swid(this_re_event);
   if(swid == 0)
     return;
   rotary_encoder_activity(swid);

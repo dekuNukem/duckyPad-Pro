@@ -312,3 +312,16 @@ uint8_t sw_queue_has_keydown_event(void)
     return 1;
   return 0;
 }
+
+uint8_t re_event_to_swid(rotary_encoder_event_t* re_event)
+{
+  if(re_event->state.id == 1 && re_event->state.direction == ROTARY_ENCODER_DIRECTION_CLOCKWISE)
+    return RE1_CW;
+  else if(re_event->state.id == 1 && re_event->state.direction == ROTARY_ENCODER_DIRECTION_COUNTER_CLOCKWISE)
+    return RE1_CCW;
+  else if(re_event->state.id == 2 && re_event->state.direction == ROTARY_ENCODER_DIRECTION_CLOCKWISE)
+    return RE2_CW;
+  else if(re_event->state.id == 2 && re_event->state.direction == ROTARY_ENCODER_DIRECTION_COUNTER_CLOCKWISE)
+    return RE2_CCW;
+  return 0;
+}

@@ -174,13 +174,14 @@ uint8_t readkey_nonblocking(void)
 uint8_t readkey_blocking(void)
 {
   switch_event_t sw_event;
+  rotary_encoder_event_t re_event;
   clear_sw_re_queue();
   while(1)
   {
     delay_ms(50);
-    if(xQueueReceive(switch_event_queue, &sw_event, 0) == pdFALSE)
-      continue;
-    if(sw_event.type == SW_EVENT_SHORT_PRESS)
+    if(xQueueReceive(rotary_encoder_event_queue, &re_event, 0))
+      return re_event_to_swid(&re_event);
+    if(xQueueReceive(switch_event_queue, &sw_event, 0) && sw_event.type == SW_EVENT_SHORT_PRESS)
       return sw_event.id;
   }
 }
