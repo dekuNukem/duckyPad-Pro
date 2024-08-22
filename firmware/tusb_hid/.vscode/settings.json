@@ -68,6 +68,11 @@
     "esp_bt_device.h": "c",
     "nvs_flash.h": "c",
     "esp_gatt_defs.h": "c",
-    "ds_vm.h": "c"
+    "ds_vm.h": "c",
+    "*.tcc": "c",
+    "ratio": "c",
+    "system_error": "c",
+    "tuple": "c",
+    "utility": "c"
   }
 }

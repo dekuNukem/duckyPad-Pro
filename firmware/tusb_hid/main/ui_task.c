@@ -11,6 +11,7 @@
 #include "neopixel_task.h"
 #include "bluetooth_task.h"
 #include "keypress_task.h"
+#include "ds_vm.h"
 
 static const char *TAG = "UI";
 spi_device_handle_t my_spi_handle;
@@ -277,7 +278,8 @@ void draw_profile_normal(profile_info* this_profile)
 {
   ssd1306_Fill(Black);
   memset(oled_line_buf, 0, OLED_LINE_BUF_SIZE);
-  sprintf(oled_line_buf, "P%d:%s", this_profile->pf_number, this_profile->pf_name);
+  // sprintf(oled_line_buf, "P%d:%s", this_profile->pf_number, this_profile->pf_name);
+  sprintf(oled_line_buf, "%s", this_profile->pf_name);
 	ssd1306_SetCursor(center_line(strlen(oled_line_buf), 7, SSD1306_WIDTH), 0);
 	ssd1306_WriteString(oled_line_buf, Font_7x10, White);
 	
@@ -303,6 +305,7 @@ void draw_profile_normal(profile_info* this_profile)
   ssd1306_Line(96,10,96,127,White);
 
   draw_bluetooth_icon(0, -1, bluetooth_status, 0);
+  draw_kbled_icon(kb_led_status, 0);
 
   ssd1306_UpdateScreen();
 }
@@ -311,7 +314,8 @@ void draw_profile_rotated(profile_info* this_profile)
 {
   ssd1306_Fill(Black);
   memset(oled_line_buf, 0, OLED_LINE_BUF_SIZE);
-  sprintf(oled_line_buf, "P%d:%s", this_profile->pf_number, this_profile->pf_name);
+  // sprintf(oled_line_buf, "P%d:%s", this_profile->pf_number, this_profile->pf_name);
+  sprintf(oled_line_buf, "%s", this_profile->pf_name);
 	ssd1306_SetCursor(center_line(strlen(oled_line_buf), 7, SSD1306_WIDTH), 0);
 	ssd1306_WriteString(oled_line_buf, Font_7x10, White);
 	
@@ -351,6 +355,7 @@ void draw_profile_rotated(profile_info* this_profile)
   ssd1306_Line(102,10,102,127,White);
 
   draw_bluetooth_icon(0, -1, bluetooth_status, 0);
+  draw_kbled_icon(kb_led_status, 0);
 
   ssd1306_UpdateScreen();
 }
@@ -634,15 +639,41 @@ void draw_bluetooth_icon(uint8_t origx, uint8_t origy, uint8_t this_bt_stat, uin
     ssd1306_UpdateScreen();
 }
 
-uint32_t last_bt_stat = 255;
+uint8_t last_bt_stat = 255;
 void update_bluetooth_icon(uint8_t origx, uint8_t origy, uint8_t this_bt_stat)
 {
   if(this_bt_stat == last_bt_stat)
     return;
-  
   draw_bluetooth_icon(origx, origy, this_bt_stat, 1);
-  
   last_bt_stat = this_bt_stat;
+}
+
+void draw_kbled_icon(uint8_t this_led_state, uint8_t update_screen)
+{
+  uint8_t color;
+  // numlock
+  color = (this_led_state & 0x1) ? White : Black;
+  ssd1306_FillCircle(118, 4, 1, color);
+  // caps lock
+  color = (this_led_state & 0x2) ? White : Black;
+  ssd1306_FillCircle(122, 4, 1, color);
+  // scroll lock
+  color = (this_led_state & 0x4) ? White : Black;
+  ssd1306_FillCircle(126, 4, 1, color);
+  ssd1306_Line(117, 0, 119, 0, White);
+  ssd1306_Line(121, 0, 123, 0, White);
+  ssd1306_Line(125, 0, 127, 0, White);
+  if(update_screen)
+    ssd1306_UpdateScreen();
+}
+
+uint8_t last_led_state = 255;
+void update_kbled_icon(uint8_t this_led_state)
+{
+  if(this_led_state == last_led_state)
+    return;
+  draw_kbled_icon(this_led_state, 1);
+  last_led_state = this_led_state;
 }
 
 uint32_t last_bt_pin;

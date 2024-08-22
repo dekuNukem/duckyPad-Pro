@@ -25,6 +25,7 @@ uint16_t loop_size;
 uint8_t epilogue_actions;
 uint8_t allow_abort;
 uint8_t key_press_count[MAX_TOTAL_SW_COUNT];
+uint8_t kb_led_status;
 
 typedef struct
 {

@@ -31,6 +31,8 @@ void draw_bluetooth_icon(uint8_t origx, uint8_t origy, uint8_t this_bt_stat, uin
 void draw_bt_pin(uint32_t this_bt_pin);
 void draw_nvm_erase();
 void draw_no_usb_activity();
+void update_kbled_icon(uint8_t this_led_state);
+void draw_kbled_icon(uint8_t this_led_state, uint8_t update_screen);
 
 #define ONE_MINUTE_IN_MS (60*1000)
 #define ONE_HOUR_IN_MS (60*ONE_MINUTE_IN_MS)

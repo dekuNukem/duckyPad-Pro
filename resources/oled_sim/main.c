@@ -24,6 +24,37 @@ uint8_t center_line(uint8_t line_len, uint8_t char_width_pixels, uint8_t oled_wi
   return start_pixel;
 }
 
+void draw_bluetooth_icon(uint8_t origx, uint8_t origy)
+{
+  ssd1306_DrawPixel(origx+2, origy+0, White);
+  ssd1306_DrawPixel(origx+2, origy+1, White);
+  ssd1306_DrawPixel(origx+3, origy+1, White);
+  ssd1306_DrawPixel(origx+2, origy+2, White);
+  ssd1306_DrawPixel(origx+4, origy+2, White);
+  ssd1306_DrawPixel(origx+0, origy+3, White);
+  ssd1306_DrawPixel(origx+2, origy+3, White);
+  ssd1306_DrawPixel(origx+5, origy+3, White);
+  ssd1306_DrawPixel(origx+1, origy+4, White);
+  ssd1306_DrawPixel(origx+2, origy+4, White);
+  ssd1306_DrawPixel(origx+4, origy+4, White);
+  ssd1306_DrawPixel(origx+2, origy+5, White);
+  ssd1306_DrawPixel(origx+3, origy+5, White);
+  ssd1306_DrawPixel(origx+1, origy+6, White);
+  ssd1306_DrawPixel(origx+2, origy+6, White);
+  ssd1306_DrawPixel(origx+4, origy+6, White);
+  ssd1306_DrawPixel(origx+0, origy+7, White);
+  ssd1306_DrawPixel(origx+2, origy+7, White);
+  ssd1306_DrawPixel(origx+5, origy+7, White);
+  ssd1306_DrawPixel(origx+2, origy+8, White);
+  ssd1306_DrawPixel(origx+4, origy+8, White);
+  ssd1306_DrawPixel(origx+2, origy+9, White);
+  ssd1306_DrawPixel(origx+3, origy+9, White);
+  ssd1306_DrawPixel(origx+2, origy+10, White);
+  ssd1306_SetCursor(origx+7, origy+2);
+  ssd1306_WriteString("?", Font_6x8, White);
+}
+
+
 #define TITLE_BAR_HEIGHT 11
 // #define SW_MATRIX_NUM_COLS 4
 // #define SW_MATRIX_NUM_ROWS 5
@@ -206,6 +237,17 @@ int main(int argc, char *argv[])
   ssd1306_Fill(Black);
   // ----------------------------------------
   draw_profile();
+  draw_bluetooth_icon(0,-1);
+  
+  
+
+  ssd1306_FillCircle(118, 5, 1, White);
+  ssd1306_FillCircle(122, 5, 1, White);
+  ssd1306_FillCircle(126, 5, 1, White);
+
+  ssd1306_Line(117, 0, 119, 0, White);
+  ssd1306_Line(121, 0, 123, 0, White);
+  ssd1306_Line(125, 0, 127, 0, White);
   // ------------------------------
 
 	sprintf(filename_buf, "OLED_%d_%d.bin", SSD1306_WIDTH, SSD1306_HEIGHT);

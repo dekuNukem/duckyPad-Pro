@@ -1,3 +1,18 @@
+uint8_t is_numlock_on, is_capslock_on, is_scrolllock_on;    
+draw_kbled_icon(kb_led_status, 0);
+void update_keyboard_led_status(uint8_t value)
+{
+  is_numlock_on = value & 0x1;
+  is_capslock_on = value & 0x2;
+  is_scrolllock_on = value & 0x4;
+}
+    printf("set %d %d %d %d\n", instance, report_id, report_type, bufsize);
+    for (uint8_t i = 0; i < bufsize; i++)
+      printf("%d ", buffer[i]);
+    printf("\n");
+  printf("%d %d %d\n", is_numlock_on, is_capslock_on, is_scrolllock_on);
+
+
 #define HID_TX_BUF_SIZE HID_CC_IN_RPT_LEN-1
 uint8_t test_buf[HID_TX_BUF_SIZE];
 void my_kb_test(void)

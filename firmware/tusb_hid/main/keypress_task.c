@@ -374,7 +374,10 @@ void keypress_task(void *dummy)
     }
     
     if(is_sleeping == 0)
+    {
       update_bluetooth_icon(0, -1, bluetooth_status);
+      update_kbled_icon(kb_led_status);
+    }
     draw_bt_pin(bt_pin_code);
   }
 }

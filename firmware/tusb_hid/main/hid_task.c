@@ -162,7 +162,6 @@ uint8_t const *tud_hid_descriptor_report_cb(uint8_t instance)
 
 uint16_t tud_hid_get_report_cb(uint8_t instance, uint8_t report_id, hid_report_type_t report_type, uint8_t* buffer, uint16_t reqlen)
 {
-    printf("get %d %d %d\n", instance, report_id, report_type);
   (void) instance;
   (void) report_id;
   (void) report_type;
@@ -173,8 +172,11 @@ uint16_t tud_hid_get_report_cb(uint8_t instance, uint8_t report_id, hid_report_t
 
 void tud_hid_set_report_cb(uint8_t instance, uint8_t report_id, hid_report_type_t report_type, uint8_t const* buffer, uint16_t bufsize)
 {
-    printf("set %d %d %d\n", instance, report_id, report_type);
-    handle_hid_command(buffer, bufsize);
+    // KB LED, 1 byte, numlock bit 0, caps lock bit 1, scroll lock bit 2
+    if(report_id == 1)
+      kb_led_status = buffer[0];
+    else if(report_id == 5)
+      handle_hid_command(buffer, bufsize);
 }
 
 #define BT_HID_BUF_SIZE 6
