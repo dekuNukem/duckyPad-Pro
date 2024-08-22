@@ -406,4 +406,5 @@ reserved_variable_dict = {
 	"_NEEDS_EPILOGUE": (0xffff - 10),
 	"_TIME_S": (0xffff - 11),
 	"_ALLOW_ABORT": (0xffff - 12),
+	"_BLOCKING_READKEY": (0xffff - 13),
 }

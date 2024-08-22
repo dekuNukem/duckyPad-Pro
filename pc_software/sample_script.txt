@@ -1,1 +1,1 @@
-$_ALLOW_ABORT = 3
+STRINGLN I pressed key $_BLOCKING_READKEY!

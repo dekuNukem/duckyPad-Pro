@@ -151,14 +151,14 @@ void onboard_offboard_switch_press(uint8_t swid, char* press_path, char* release
   uint32_t hold_start = pdTICKS_TO_MS(xTaskGetTickCount());
   while(1)
   {
-    if(poll_sw_state(swid) == 0)
+    if(poll_sw_state(swid, 1) == 0)
       goto handle_obsw_keydown_end;
     if(pdTICKS_TO_MS(xTaskGetTickCount())- hold_start > 500)
       break;
   }
   while(1)
   {
-    if(poll_sw_state(swid) == 0)
+    if(poll_sw_state(swid, 1) == 0)
       break;
     key_press_count[swid]++;
     if(run_once(swid, press_path) == DSB_DONT_PLAY_KEYUP_ANIMATION_RETURN_IMMEDIATELY)

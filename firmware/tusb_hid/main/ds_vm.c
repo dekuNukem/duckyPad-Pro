@@ -147,6 +147,8 @@ void write_var(uint16_t addr, uint16_t value)
     ; // this is read only, so do nothing
   else if (addr == _READKEY)
     ; // this is read only, so do nothing
+  else if (addr == _BLOCKING_READKEY)
+    ; // this is read only, so do nothing
   else if (addr == _LOOP_SIZE)
     loop_size = value;
   else if (addr == _KEYPRESS_COUNT)
@@ -159,14 +161,28 @@ void write_var(uint16_t addr, uint16_t value)
     store_uint16_as_two_bytes_at(addr, value);
 }
 
-uint8_t get_first_active_key(void)
+uint8_t readkey_nonblocking(void)
 {
-  switch_event_t sw_event = {0};
-  if(xQueueReceive(switch_event_queue, &sw_event, 0) == pdFALSE)
-    return 0;
-  if(sw_event.type == SW_EVENT_SHORT_PRESS)
-    return sw_event.id;
-  return 0;
+  for (uint8_t i = 0; i < MAX_TOTAL_SW_COUNT; i++)
+  {
+    if(poll_sw_state(i, 0))
+      return i;
+  }
+  return 255;
+}
+
+uint8_t readkey_blocking(void)
+{
+  switch_event_t sw_event;
+  clear_sw_re_queue();
+  while(1)
+  {
+    delay_ms(50);
+    if(xQueueReceive(switch_event_queue, &sw_event, 0) == pdFALSE)
+      continue;
+    if(sw_event.type == SW_EVENT_SHORT_PRESS)
+      return sw_event.id;
+  }
 }
 
 uint16_t read_var(uint16_t addr, uint8_t this_key_id)
@@ -190,7 +206,7 @@ uint16_t read_var(uint16_t addr, uint8_t this_key_id)
   else if (addr == _LOOP_SIZE)
     return loop_size;
   else if (addr == _READKEY)
-    return get_first_active_key();
+    return readkey_nonblocking();
   else if (addr == _KEYPRESS_COUNT)
     return key_press_count[this_key_id];
   else if (addr == _NEEDS_EPILOGUE)
@@ -199,6 +215,8 @@ uint16_t read_var(uint16_t addr, uint8_t this_key_id)
     return allow_abort;
   else if(addr < VAR_BUF_SIZE)
     return make_uint16(var_buf[addr], var_buf[addr+1]);
+  else if (addr == _BLOCKING_READKEY)
+    return readkey_blocking();
   return 0;
 }
 

@@ -288,11 +288,12 @@ void switch_init(void)
 	kbscan_mutex = xSemaphoreCreateMutex();
 }
 
-uint8_t poll_sw_state(uint8_t swid_zero_indexed)
+uint8_t poll_sw_state(uint8_t swid_zero_indexed, uint8_t perform_new_scan)
 {
 	if(swid_zero_indexed >= MAX_TOTAL_SW_COUNT)
 		return 0;
-	sw_scan();
+	if(perform_new_scan)
+		sw_scan();
 	return this_sw_state[swid_zero_indexed];
 }
 
