@@ -66,7 +66,8 @@ Compared to [original duckyPad](https://github.com/dekuNukem/duckyPad/), DPP now
 
 * **duckyScript Engine**
 	* Separate script for **on press** and **on release**
-	* **Abort execution** with any key (optional)
+	* **Abort execution** with any key
+	* Blocking READKEY
 
 * **QoL Updates**
 	* Mount SD as USB Storage
