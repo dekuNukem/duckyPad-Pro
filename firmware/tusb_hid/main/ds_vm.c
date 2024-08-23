@@ -160,6 +160,12 @@ void write_var(uint16_t addr, uint16_t value)
     allow_abort = value;
   else if(addr < VAR_BUF_SIZE)
     store_uint16_as_two_bytes_at(addr, value);
+  else if (addr == _IS_NUMLOCK_ON)
+    ; // this is read only, so do nothing
+  else if (addr == _IS_CAPSLOCK_ON)
+    ; // this is read only, so do nothing
+  else if (addr == _IS_SCROLLLOCK_ON)
+    ; // this is read only, so do nothing
 }
 
 uint8_t readkey_nonblocking(void)
@@ -219,6 +225,12 @@ uint16_t read_var(uint16_t addr, uint8_t this_key_id)
     return make_uint16(var_buf[addr], var_buf[addr+1]);
   else if (addr == _BLOCKING_READKEY)
     return readkey_blocking();
+  else if (addr == _IS_NUMLOCK_ON)
+    return (kb_led_status & 0x1) ? 1 : 0;
+  else if (addr == _IS_CAPSLOCK_ON)
+    return (kb_led_status & 0x2) ? 1 : 0;
+  else if (addr == _IS_SCROLLLOCK_ON)
+    return (kb_led_status & 0x4) ? 1 : 0;
   return 0;
 }
 

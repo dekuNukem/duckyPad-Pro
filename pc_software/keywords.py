@@ -407,4 +407,7 @@ reserved_variable_dict = {
 	"_TIME_S": (0xffff - 11),
 	"_ALLOW_ABORT": (0xffff - 12),
 	"_BLOCKING_READKEY": (0xffff - 13),
+	"_IS_NUMLOCK_ON": (0xffff - 14),
+	"_IS_CAPSLOCK_ON": (0xffff - 15),
+	"_IS_SCROLLLOCK_ON": (0xffff - 16),
 }

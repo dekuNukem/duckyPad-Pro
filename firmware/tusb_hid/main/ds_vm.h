@@ -93,6 +93,9 @@
 #define _TIME_S  (0xffff - 11)
 #define _ALLOW_ABORT (0xffff - 12)
 #define _BLOCKING_READKEY (0xffff - 13)
+#define _IS_NUMLOCK_ON (0xffff - 14)
+#define _IS_CAPSLOCK_ON (0xffff - 15)
+#define _IS_SCROLLLOCK_ON (0xffff - 16)
 
 typedef struct
 {
