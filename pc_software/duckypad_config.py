@@ -710,8 +710,13 @@ def copy_keymaps(dest_path):
         return
     ensure_dir(destination_keymap_folder)
     for item in [str(x.path) for x in os.scandir(source_keymap_folder) if 'dpkm_' in x.path.lower() and x.path.lower().endswith('.txt')]:
-        # print("copying:", item, destination_keymap_folder)
-        shutil.copy2(item, destination_keymap_folder)
+        destination_file = os.path.join(destination_keymap_folder, os.path.basename(item))
+
+        if not os.path.exists(destination_file):
+            print("Copying keymap:", item, destination_keymap_folder)
+            shutil.copy2(item, destination_keymap_folder)
+        else:
+            print(f"keymap already exists: {destination_file}")
 
 def save_everything(save_path):
     if compile_all_scripts() is False:
@@ -726,6 +731,10 @@ def save_everything(save_path):
         my_dirs = [os.path.join(save_path, d) for d in my_dirs if d.startswith("profile")]
         for item in my_dirs:
             try:
+                status_message = f"Deleting {item}..."
+                print(status_message)
+                dp_root_folder_display.set(status_message)
+                root.update()
                 shutil.rmtree(item)
                 time.sleep(0.05)
             except FileNotFoundError:
@@ -755,10 +764,18 @@ def save_everything(save_path):
                 # newline='' is important, it forces python to not write \r, only \n
                 # otherwise it will read back as double \n
                 with open(this_key.path, 'w', encoding='utf8', newline='') as key_file:
+                    status_message = f"Writing {this_key.path}..."
+                    print(status_message)
+                    dp_root_folder_display.set(status_message)
+                    root.update()
                     key_file.write(this_key.script)
                 
                 if this_key.path_on_release is not None and len(this_key.script_on_release) > 0:
                     with open(this_key.path_on_release, 'w', encoding='utf8', newline='') as key_file:
+                        status_message = "Writing {this_key.path_on_release}..."
+                        print(status_message)
+                        dp_root_folder_display.set(status_message)
+                        root.update()
                         key_file.write(this_key.script_on_release)
 
                 dsb_path = this_key.path
@@ -767,14 +784,22 @@ def save_everything(save_path):
                 dsb_path_onrelease = pre + "-release.dsb"
 
                 with open(dsb_path, 'wb') as dsb_file:
+                    status_message = f"Writing {dsb_path}..."
+                    print(status_message)
+                    dp_root_folder_display.set(status_message)
+                    root.update()
                     dsb_file.write(this_key.binary_array)
                 if this_key.binary_array_on_release is not None:
                     with open(dsb_path_onrelease, 'wb') as dsb_file:
+                        status_message = f"Writing {dsb_path_onrelease}..."
+                        print(status_message)
+                        dp_root_folder_display.set(status_message)
+                        root.update()
                         dsb_file.write(this_key.binary_array_on_release)
                 if this_key.color is not None:
                     config_file.write('SWCOLOR_%d %d %d %d\n' % (this_key.index, this_key.color[0], this_key.color[1], this_key.color[2]))
             config_file.close()
-
+        
         copy_keymaps(save_path)
 
         return True

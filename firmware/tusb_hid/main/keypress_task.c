@@ -344,9 +344,9 @@ void handle_sw_event(switch_event_t* this_sw_event)
   }
   uint32_t ke_start = pdTICKS_TO_MS(xTaskGetTickCount());
   process_keyevent(this_sw_event->id, this_sw_event->type);
-  uint32_t ke_duration = pdTICKS_TO_MS(xTaskGetTickCount()) - ke_start;
-  printf("took %ldms\n", ke_duration);
-  if(ke_duration > 200)
+  uint32_t execution_duration = pdTICKS_TO_MS(xTaskGetTickCount()) - ke_start;
+  printf("took %ldms\n", execution_duration);
+  if(execution_duration > 500)
     clear_sw_re_queue();
 }
 
