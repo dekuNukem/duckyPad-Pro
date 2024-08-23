@@ -1,3 +1,21 @@
+
+def print_both(text):
+    short_path = Path(*filepath.parts[-2:])
+    print(text)
+    print(short_path)
+    # tk_strvar.set(short_path)
+    # tk_root.update()
+
+# if len(sys.argv) != 3:
+#     print(__file__, "sd_dir modified_dir")
+#     exit()
+
+# sd_dir = sys.argv[1]
+# modified_dir = sys.argv[2]
+
+# duckypad_file_sync(sd_dir, modified_dir)
+
+
 [-50:]
 [-50:]
 [-50:]

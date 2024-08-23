@@ -821,7 +821,7 @@ def save_click():
     try:
         if os.path.isdir(dp_root_folder_path) is False:
             put_duckypad_in_msc_mode_and_get_drive_path(reset_ui=False)
-        my_compare.duckypad_file_sync(dp_root_folder_path, this_backup_path, dp_root_folder_display, root)
+        my_compare.duckypad_file_sync(dp_root_folder_path, this_backup_path)
         if is_root_folder_duckypad_msc:
             dp_root_folder_display.set("Ejecting...")
             root.update()
@@ -1654,4 +1654,6 @@ root.after(500, repeat_func)
 
 # select_root_folder("sample_profiles")
 # select_root_folder("D:")
+my_compare.tk_root = root
+my_compare.tk_strvar = dp_root_folder_display
 root.mainloop()
