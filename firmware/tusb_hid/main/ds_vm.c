@@ -236,7 +236,7 @@ uint16_t read_var(uint16_t addr, uint8_t this_key_id)
 
 #define STR_BUF_SIZE 8
 char make_str_buf[STR_BUF_SIZE];
-#define READ_BUF_SIZE 256
+#define READ_BUF_SIZE 256 * 5
 char read_buffer[READ_BUF_SIZE];
 char* make_str(uint16_t str_start_addr, uint8_t this_key_id)
 {

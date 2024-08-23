@@ -760,7 +760,7 @@ def expand_mousemove(xtotal, ytotal):
 
     return result_listing
 
-STRING_MAX_SIZE = 240
+STRING_MAX_SIZE = 256
 
 def split_string(input_string, max_length=STRING_MAX_SIZE):
     if len(input_string) <= max_length:
