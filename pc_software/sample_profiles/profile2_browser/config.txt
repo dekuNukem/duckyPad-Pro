@@ -1,22 +1,24 @@
-z1 vol-
-z2 mute
-z3 vol+
-z4 <<
-z5 ||
-z6 >>
-z7 zoom-
-z8 reset
-z9 zoom+
-z10 prev
-z11 bookmrk
-z12 next
-z13 close
-z14 reopen
-z15 save
+z1 <<
+z2 ||
+z3 >>
+z13 prev
+z14 book
+x14 mark
+z15 next
+z17 close
+z18 re
+x18 open
+z19 save
+z21 vol+
+z22 vol-
+z23 mute
+z24 zoom+
+z25 zoom-
+z26 reset
 BG_COLOR 255 80 0
 SWCOLOR_1 160 0 255
 SWCOLOR_2 160 0 255
 SWCOLOR_3 160 0 255
-SWCOLOR_4 160 0 255
-SWCOLOR_5 160 0 255
-SWCOLOR_6 160 0 255
+SWCOLOR_21 160 0 255
+SWCOLOR_22 160 0 255
+SWCOLOR_23 160 0 255

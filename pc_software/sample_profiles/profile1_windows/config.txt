@@ -1,0 +1,22 @@
+z1 intro
+z8 hide
+z9 dev
+z10 taskMgr
+z11 files
+z12 sysInfo
+z13 taskViw
+z14 DS3
+z15 ???
+z21 vol+
+z22 vol-
+z23 mute
+z38 <<
+z39 ||
+z40 >>
+BG_COLOR 64 53 255
+SWCOLOR_21 160 0 255
+SWCOLOR_22 160 0 255
+SWCOLOR_23 160 0 255
+SWCOLOR_38 160 0 255
+SWCOLOR_39 160 0 255
+SWCOLOR_40 160 0 255
