@@ -1,4 +1,8 @@
-
+[-50:]
+[-50:]
+[-50:]
+[-50:]
+[-50:]
 duckypad_file_whitelist = [
     "profile",
     "config",
