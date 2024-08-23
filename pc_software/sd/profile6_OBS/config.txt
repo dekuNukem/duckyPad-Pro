@@ -1,0 +1,33 @@
+z1 read
+x1 me
+z9 start
+x9 strem
+z10 end
+x10 strem
+z11 start
+x11 recod
+z12 end
+x12 recod
+z13 scene
+x13 1
+z14 scene
+x14 2
+z15 scene
+x15 3
+z16 scene
+x16 4
+z17 mute
+z18 umute
+z19 push
+x19 mute
+z20 push
+x20 talk
+z21 vol+
+z22 vol-
+z23 mute
+BG_COLOR 128 128 128
+SWCOLOR_1 0 0 255
+SWCOLOR_9 0 255 0
+SWCOLOR_10 255 0 0
+SWCOLOR_11 0 255 0
+SWCOLOR_12 255 0 0

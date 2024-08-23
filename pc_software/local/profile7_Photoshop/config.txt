@@ -1,0 +1,31 @@
+z1 read
+x1 me
+z2 mar
+x2 quee
+z3 lasso
+z4 hand
+z5 wand
+z6 eye
+x6 drop
+z7 crop
+z8 eraser
+z9 heal
+z10 brush
+z11 stamp
+z12 dodge
+z13 disp
+x13 mode
+z14 level
+z15 curve
+z16 layer
+z17 esc
+z18 undo
+z19 redo
+z20 save
+z21 zoom+
+z22 zoom-
+z23 reset
+z24 brsh+
+z25 brsh-
+BG_COLOR 128 0 64
+KEYDOWN_COLOR 255 255 255

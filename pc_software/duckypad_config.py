@@ -18,6 +18,7 @@ import hid_op
 import ds3_preprocessor
 import make_bytecode
 from shared import *
+import my_compare
 
 """
 0.13.5
@@ -813,7 +814,12 @@ def make_default_backup_dir_name():
     return 'duckyPad_backup_' + datetime.now().strftime("%Y-%m-%dT%H-%M-%S")
 
 def save_click():
-    save_everything(os.path.join(backup_path, make_default_backup_dir_name()))
+    this_backup_path = os.path.join(backup_path, make_default_backup_dir_name())
+    if save_everything(this_backup_path) is False:
+        messagebox.showerror("Error", "Backup save failed")
+        return
+    print(f"OLD PATH{dp_root_folder_path}\nNEW PATH{this_backup_path}")
+    exit()
     try:
         if os.path.isdir(dp_root_folder_path) is False:
             put_duckypad_in_msc_mode_and_get_drive_path(reset_ui=False)

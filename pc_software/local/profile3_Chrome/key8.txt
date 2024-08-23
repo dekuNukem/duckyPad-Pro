@@ -1,0 +1,3 @@
+CTRL t
+DELAY 500
+STRINGLN chrome://settings
