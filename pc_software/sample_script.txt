@@ -1,1 +1,0 @@
-STRINGLN I pressed key $_BLOCKING_READKEY!

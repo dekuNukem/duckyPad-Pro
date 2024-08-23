@@ -141,31 +141,31 @@ void write_var(uint16_t addr, uint16_t value)
   else if (addr == _RANDOM_MAX)
     rand_max = value;
   else if (addr == _RANDOM_INT)
-    ; // this is read only, so do nothing
+    ; // read only
   else if (addr == _TIME_MS)
-    ; // this is read only, so do nothing
+    ; // read only
   else if (addr == _TIME_S)
-    ; // this is read only, so do nothing
+    ; // read only
   else if (addr == _READKEY)
-    ; // this is read only, so do nothing
+    ; // read only
   else if (addr == _BLOCKING_READKEY)
-    ; // this is read only, so do nothing
+    ; // read only
   else if (addr == _LOOP_SIZE)
     loop_size = value;
   else if (addr == _KEYPRESS_COUNT)
-    ; // this is read only, so do nothing
+    ; // read only
   else if (addr == _NEEDS_EPILOGUE)
     epilogue_actions = value;
   else if (addr == _ALLOW_ABORT)
     allow_abort = value;
+  else if (addr == _IS_NUMLOCK_ON)
+    ; // read only
+  else if (addr == _IS_CAPSLOCK_ON)
+    ; // read only
+  else if (addr == _IS_SCROLLLOCK_ON)
+    ; // read only
   else if(addr < VAR_BUF_SIZE)
     store_uint16_as_two_bytes_at(addr, value);
-  else if (addr == _IS_NUMLOCK_ON)
-    ; // this is read only, so do nothing
-  else if (addr == _IS_CAPSLOCK_ON)
-    ; // this is read only, so do nothing
-  else if (addr == _IS_SCROLLLOCK_ON)
-    ; // this is read only, so do nothing
 }
 
 uint8_t readkey_nonblocking(void)
@@ -221,8 +221,6 @@ uint16_t read_var(uint16_t addr, uint8_t this_key_id)
     return epilogue_actions;
   else if (addr == _ALLOW_ABORT)
     return allow_abort;
-  else if(addr < VAR_BUF_SIZE)
-    return make_uint16(var_buf[addr], var_buf[addr+1]);
   else if (addr == _BLOCKING_READKEY)
     return readkey_blocking();
   else if (addr == _IS_NUMLOCK_ON)
@@ -231,6 +229,8 @@ uint16_t read_var(uint16_t addr, uint8_t this_key_id)
     return (kb_led_status & 0x2) ? 1 : 0;
   else if (addr == _IS_SCROLLLOCK_ON)
     return (kb_led_status & 0x4) ? 1 : 0;
+  else if(addr < VAR_BUF_SIZE)
+    return make_uint16(var_buf[addr], var_buf[addr+1]);
   return 0;
 }
 
