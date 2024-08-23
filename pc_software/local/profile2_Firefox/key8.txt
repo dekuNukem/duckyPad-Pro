@@ -1,3 +1,0 @@
-CTRL t
-DELAY 500
-STRINGLN about:preferences
