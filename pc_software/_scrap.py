@@ -1,4 +1,25 @@
-    for i in range(HOW_MANY_NOP_AFTER_VMVAR):
+
+duckypad_file_whitelist = [
+    "profile",
+    "config",
+    "key",
+]
+
+duckypad_file_blacklist = [
+    "keymaps",
+]
+
+def is_duckypad_file(name):
+    return True
+    for item in duckypad_file_blacklist:
+        if item.lower().strip() in name.lower().strip():
+            return False
+    for item in duckypad_file_whitelist:
+        if item.lower().strip() in name.lower().strip():
+            return True
+    return False
+
+for i in range(HOW_MANY_NOP_AFTER_VMVAR):
         assembly_listing.append(get_empty_instruction())
 def abort_allowed_click():
     print('hello!')
