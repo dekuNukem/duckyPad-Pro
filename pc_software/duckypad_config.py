@@ -1601,7 +1601,7 @@ CH_BUTTON_WIDTH = 85
 # expansion module buttons
 for mmm in range(MAX_EXPANSION_MODULE_COUNT):
     for ccc in range(CHANNELS_PER_EXPANSION_MODULE):
-        this_ch_button = Label(expansion_lf, text=f"M{mmm}CH{ccc}", relief="solid")
+        this_ch_button = Label(expansion_lf, relief="solid") #text=f"M{mmm}CH{ccc}"
         this_ch_button.bind("<Button-1>", key_button_click_event)
         this_ch_button.bind("<B1-Motion>", button_drag_start)
         this_ch_button.bind("<ButtonRelease-1>", button_drag_release)
@@ -1623,6 +1623,6 @@ def repeat_func():
 
 root.after(500, repeat_func)
 
-select_root_folder("sample_profiles")
+# select_root_folder("sample_profiles")
 # select_root_folder("D:")
 root.mainloop()
