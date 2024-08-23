@@ -1,0 +1,19 @@
+z1 LUL
+z2 Tri
+x2 Hard
+z3 4Head
+z4 Kappa
+z5 PJSalt
+z6 KEKW
+z7 monka
+x7 S
+z8 PogU
+z9 cat
+x9 JAM
+z10 Sadge
+z11 KKona
+z12 D:
+z17 copy
+z18 paste
+z19 enter
+BG_COLOR 64 16 255
