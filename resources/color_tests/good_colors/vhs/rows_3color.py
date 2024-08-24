@@ -3,27 +3,43 @@ import random
 from PIL import Image, ImageDraw
 import struct
 import dp_rgb
+import colorsys
 
-start_color_hex = "937aff"
-end_color_hex = "fb8500"
+def adjust_color(rgb):
+	# return rgb
+    r, g, b = [x / 255.0 for x in rgb]
+    h, l, s = colorsys.rgb_to_hls(r, g, b)
+    print(h,l,s)
+    l = l * 0.75
+    if l > 1:
+    	l = 1
+    brightened_r, brightened_g, brightened_b = colorsys.hls_to_rgb(h, l, s)
+    brightened_rgb = tuple(int(x * 255) for x in (brightened_r, brightened_g, brightened_b))
+    return brightened_rgb
 
-start_color = struct.unpack('BBB', bytes.fromhex(start_color_hex))
-end_color = struct.unpack('BBB', bytes.fromhex(end_color_hex))
+def average_color(color1, color2):
+    return tuple((c1 + c2) // 2 for c1, c2 in zip(color1, color2))
 
 # green to blue, works really well
-start_color = (0, 255, 0)
-end_color = (16, 16, 255)
+start_color = (255, 0, 0)
+middle_color = (240, 187, 51)
+end_color = (64, 107, 162)
 
-rstep = (end_color[0] - start_color[0]) / 4
-gstep = (end_color[1] - start_color[1]) / 4
-bstep = (end_color[2] - start_color[2]) / 4
+start_color = struct.unpack('BBB', bytes.fromhex("f77479"))
+middle_color = struct.unpack('BBB', bytes.fromhex("efeb68"))
+end_color = struct.unpack('BBB', bytes.fromhex("8a3bc0"))
+
+startmiddle_color = average_color(start_color, middle_color)
+middleend_color = average_color(middle_color, end_color)
+
+row_color_array = [adjust_color(start_color), adjust_color(startmiddle_color), adjust_color(middle_color), adjust_color(middleend_color), adjust_color(end_color)]
 
 already_done = []
 
 for x in range(20):
 	current_row = int(x/4)
-	print(x, current_row)
-	this_color = (int(start_color[0] + rstep * current_row), int(start_color[1] + gstep * current_row), int(start_color[2] + bstep * current_row))
+	# print(x, current_row)
+	this_color = (row_color_array[current_row][0], row_color_array[current_row][1], row_color_array[current_row][2])
 	print("SWCOLOR_" + str(x+1), this_color[0], this_color[1], this_color[2])
 	already_done.append(this_color)
 

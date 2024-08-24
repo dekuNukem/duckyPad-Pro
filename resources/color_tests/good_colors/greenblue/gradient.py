@@ -4,6 +4,7 @@ from PIL import Image, ImageDraw
 import struct
 import dp_rgb
 
+
 start_color_hex = "937aff"
 end_color_hex = "fb8500"
 
@@ -14,17 +15,15 @@ end_color = struct.unpack('BBB', bytes.fromhex(end_color_hex))
 start_color = (0, 255, 0)
 end_color = (16, 16, 255)
 
-rstep = (end_color[0] - start_color[0]) / 4
-gstep = (end_color[1] - start_color[1]) / 4
-bstep = (end_color[2] - start_color[2]) / 4
+rstep = (end_color[0] - start_color[0]) / 19
+gstep = (end_color[1] - start_color[1]) / 19
+bstep = (end_color[2] - start_color[2]) / 19
 
 already_done = []
 
 for x in range(20):
-	current_row = int(x/4)
-	print(x, current_row)
-	this_color = (int(start_color[0] + rstep * current_row), int(start_color[1] + gstep * current_row), int(start_color[2] + bstep * current_row))
-	print("SWCOLOR_" + str(x+1), this_color[0], this_color[1], this_color[2])
+	this_color = (int(start_color[0] + rstep * x), int(start_color[1] + gstep * x), int(start_color[2] + bstep * x))
+	# print("SWCOLOR_" + str(x+1), this_color[0], this_color[1], this_color[2])
 	already_done.append(this_color)
 
 im = Image.new('RGB', (400,500), (255, 255, 255))
