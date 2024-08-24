@@ -20,9 +20,15 @@
 #include "bluetooth_task.h"
 #include "esp_vfs_fat.h"
 
-uint8_t fw_version_major = 2;
-uint8_t fw_version_minor = 3;
-uint8_t fw_version_patch = 4;
+/*
+1.0.0
+2024 08 24
+initial release
+*/
+
+uint8_t fw_version_major = 1;
+uint8_t fw_version_minor = 0;
+uint8_t fw_version_patch = 0;
 uint8_t dsvm_version = 1;
 
 static const char *TAG = "MAIN";

@@ -1,4 +1,1 @@
-firmware/tusb_hid/build
-firmware/btt_mediakeyworks/build
-firmware/btt_notworking/build
-firmware/expansion/MDK-ARM/firmware
+firmware/dpp_fw/build
