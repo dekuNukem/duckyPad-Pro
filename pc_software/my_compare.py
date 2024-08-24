@@ -7,6 +7,28 @@ from pathlib import Path
 tk_root = None
 tk_strvar = None
 
+
+duckypad_file_whitelist = [
+	"profile",
+	"dpp_config",
+	"dpkm_",
+	"config",
+	"key",
+]
+
+duckypad_file_blacklist = [
+	"keymaps",
+]
+
+def is_duckypad_file(name):
+	for item in duckypad_file_blacklist:
+		if item.lower().strip() in name.lower().strip():
+			return False
+	for item in duckypad_file_whitelist:
+		if item.lower().strip() in name.lower().strip():
+			return True
+	return False
+
 def get_short_path(text):
     if len(str(text)) <= 70:
         return text
@@ -19,8 +41,8 @@ def is_file_different(file1, file2):
     return hash1 != hash2
 
 def compare(old_path, new_path):
-    old_files = set([x for x in os.listdir(old_path)])
-    new_files = set([x for x in os.listdir(new_path)])
+    old_files = set([x for x in os.listdir(old_path) if is_duckypad_file(x)])
+    new_files = set([x for x in os.listdir(new_path) if is_duckypad_file(x)])
 
     # files in new but not old
     files_to_add = new_files - old_files
