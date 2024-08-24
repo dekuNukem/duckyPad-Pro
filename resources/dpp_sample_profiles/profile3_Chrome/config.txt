@@ -11,6 +11,10 @@ x7 bar
 z8 sett
 x8 ings
 z9 find
+z10 re
+x10 fresh
+z11 addr
+x11 bar
 z12 full
 x12 scren
 z13 prev
@@ -32,7 +36,7 @@ z24 zoom+
 z25 zoom-
 z26 reset
 BG_COLOR 32 255 0
-
+DIM_UNUSED_KEYS 0
 SWCOLOR_1 7 242 121
 SWCOLOR_2 7 242 121
 SWCOLOR_3 7 242 121
@@ -53,5 +57,3 @@ SWCOLOR_17 7 242 121
 SWCOLOR_18 7 242 121
 SWCOLOR_19 7 242 121
 SWCOLOR_20 7 242 121
-
-DIM_UNUSED_KEYS 0
