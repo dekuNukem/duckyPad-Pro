@@ -6,28 +6,28 @@ import dp_rgb
 import colorsys
 
 def adjust_color(rgb):
-	return rgb
-    # r, g, b = [x / 255.0 for x in rgb]
-    # h, l, s = colorsys.rgb_to_hls(r, g, b)
-    # print(h,l,s)
-    # l = l * 1
-    # if l > 1:
-    # 	l = 1
-    # brightened_r, brightened_g, brightened_b = colorsys.hls_to_rgb(h, l, s)
-    # brightened_rgb = tuple(int(x * 255) for x in (brightened_r, brightened_g, brightened_b))
-    # return brightened_rgb
+	# return rgb
+    r, g, b = [x / 255.0 for x in rgb]
+    h, l, s = colorsys.rgb_to_hls(r, g, b)
+    print(h,l,s)
+    l = l * 0.75
+    if l > 1:
+    	l = 1
+    brightened_r, brightened_g, brightened_b = colorsys.hls_to_rgb(h, l, s)
+    brightened_rgb = tuple(int(x * 255) for x in (brightened_r, brightened_g, brightened_b))
+    return brightened_rgb
 
 def average_color(color1, color2):
     return tuple((c1 + c2) // 2 for c1, c2 in zip(color1, color2))
 
 # green to blue, works really well
-start_color = (0, 255, 0)
-middle_color = (255, 255, 0)
-end_color = (16, 16, 255)
+start_color = (255, 0, 0)
+middle_color = (240, 187, 51)
+end_color = (64, 107, 162)
 
-start_color = struct.unpack('BBB', bytes.fromhex("07f279"))
-middle_color = struct.unpack('BBB', bytes.fromhex("ffab42")) #5656c6
-end_color = struct.unpack('BBB', bytes.fromhex("07f279"))
+start_color = struct.unpack('BBB', bytes.fromhex("f77479"))
+middle_color = struct.unpack('BBB', bytes.fromhex("efeb68"))
+end_color = struct.unpack('BBB', bytes.fromhex("8a3bc0"))
 
 startmiddle_color = average_color(start_color, middle_color)
 middleend_color = average_color(middle_color, end_color)

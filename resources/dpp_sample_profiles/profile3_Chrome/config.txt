@@ -6,16 +6,16 @@ z5 hist
 x5 ory
 z6 exten
 x6 sion
+z7 bkmk
+x7 bar
 z8 sett
 x8 ings
 z9 find
-z10 bkmk
-x10 bar
 z12 full
 x12 scren
 z13 prev
-z14 book
-x14 mark
+z14 new
+x14 tab
 z15 next
 z16 incog
 x16 nito
@@ -23,8 +23,8 @@ z17 close
 z18 re
 x18 open
 z19 save
-z20 new
-x20 tab
+z20 book
+x20 mark
 z21 vol+
 z22 vol-
 z23 mute
@@ -32,3 +32,26 @@ z24 zoom+
 z25 zoom-
 z26 reset
 BG_COLOR 32 255 0
+
+SWCOLOR_1 7 242 121
+SWCOLOR_2 7 242 121
+SWCOLOR_3 7 242 121
+SWCOLOR_4 7 242 121
+SWCOLOR_5 131 206 93
+SWCOLOR_6 131 206 93
+SWCOLOR_7 131 206 93
+SWCOLOR_8 131 206 93
+SWCOLOR_9 255 171 66
+SWCOLOR_10 255 171 66
+SWCOLOR_11 255 171 66
+SWCOLOR_12 255 171 66
+SWCOLOR_13 131 206 93
+SWCOLOR_14 131 206 93
+SWCOLOR_15 131 206 93
+SWCOLOR_16 131 206 93
+SWCOLOR_17 7 242 121
+SWCOLOR_18 7 242 121
+SWCOLOR_19 7 242 121
+SWCOLOR_20 7 242 121
+
+DIM_UNUSED_KEYS 0

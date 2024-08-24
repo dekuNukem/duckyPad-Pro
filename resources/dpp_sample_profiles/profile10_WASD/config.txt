@@ -1,0 +1,25 @@
+z1 Ctrl
+z2 Shift
+z3 Caps
+z4 Tab
+z6 Z
+z7 A
+z8 Q
+z9 Alt
+z10 X
+z11 S
+z12 W
+z13 Space
+z14 C
+z15 D
+z16 E
+z17 Space
+z18 V
+z19 F
+z20 R
+BG_COLOR 84 22 180
+IS_LANDSCAPE 1
+SWCOLOR_7 255 0 6
+SWCOLOR_11 255 0 6
+SWCOLOR_12 255 0 6
+SWCOLOR_15 255 0 6

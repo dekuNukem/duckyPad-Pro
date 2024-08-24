@@ -23,7 +23,7 @@ already_done = []
 
 for x in range(20):
 	this_color = (int(start_color[0] + rstep * x), int(start_color[1] + gstep * x), int(start_color[2] + bstep * x))
-	# print("SWCOLOR_" + str(x+1), this_color[0], this_color[1], this_color[2])
+	print("SWCOLOR_" + str(x+1), this_color[0], this_color[1], this_color[2])
 	already_done.append(this_color)
 
 im = Image.new('RGB', (400,500), (255, 255, 255))
