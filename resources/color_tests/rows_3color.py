@@ -10,7 +10,7 @@ def adjust_color(rgb):
     # r, g, b = [x / 255.0 for x in rgb]
     # h, l, s = colorsys.rgb_to_hls(r, g, b)
     # print(h,l,s)
-    # l = l * 0.75
+    # l = l * 1
     # if l > 1:
     # 	l = 1
     # brightened_r, brightened_g, brightened_b = colorsys.hls_to_rgb(h, l, s)
@@ -21,13 +21,13 @@ def average_color(color1, color2):
     return tuple((c1 + c2) // 2 for c1, c2 in zip(color1, color2))
 
 # green to blue, works really well
-# start_color = (255, 0, 0)
-# middle_color = (255, 255, 255)
-# end_color = (0, 0, 255)
+start_color = (0, 255, 0)
+middle_color = (255, 255, 0)
+end_color = (16, 16, 255)
 
-start_color = struct.unpack('BBB', bytes.fromhex("2ECC71"))
-middle_color = struct.unpack('BBB', bytes.fromhex("8E44AD"))
-end_color = struct.unpack('BBB', bytes.fromhex("F39C12"))
+start_color = struct.unpack('BBB', bytes.fromhex("07f279"))
+middle_color = struct.unpack('BBB', bytes.fromhex("ffab42")) #5656c6
+end_color = struct.unpack('BBB', bytes.fromhex("07f279"))
 
 startmiddle_color = average_color(start_color, middle_color)
 middleend_color = average_color(middle_color, end_color)
