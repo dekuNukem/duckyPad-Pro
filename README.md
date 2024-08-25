@@ -1,4 +1,4 @@
-# duckyPad Pro: Expandable Input Automation
+# duckyPad Pro: Expandable Input Automation for Power Users
 
 -----------
 
@@ -6,7 +6,7 @@ duckyPad Pro is a 20-key mechanical macropad with unrivaled input automation cap
 
 Incorporating 4 years worth of feedback from the [original duckyPad](link_here), now with **Rotary Encoders**, **Bluetooth**, **Expansion Modules**, and more!
 
-duckyPad Pro is designed for power users who demand advanced macro scripting and customization way beyond QMK/VIA.
+duckyPad Pro is designed for power users who demand advanced macro scripting and customization beyond the shackles of QMK/VIA.
 
 ![alt_text](resources/photos/title.jpeg)
 
@@ -29,7 +29,7 @@ Along with features **unlike any other**:
 * **64 profiles**, 3712 macros total.
 * [Automatic profile switching](https://github.com/dekuNukem/duckyPad-profile-autoswitcher) based on active window.
 * No proprietary drivers, works out-of-box.
-* **Hacker friendly** with tinkering guide!
+* **Hacker friendly** with tinkering guide
 
 The macros can be as simple as `Ctrl + C`, or as complex as filling forms, launching applications, or even [creating root backdoors](https://shop.hak5.org/blogs/usb-rubber-ducky/the-3-second-reverse-shell-with-a-usb-rubber-ducky) or [grabbing passwords](https://shop.hak5.org/blogs/usb-rubber-ducky/15-second-password-hack-mr-robot-style). It's all up to you!
 
