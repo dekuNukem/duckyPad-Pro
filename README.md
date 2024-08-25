@@ -39,16 +39,16 @@ Compared to [original duckyPad](https://github.com/dekuNukem/duckyPad/), DPP now
 
 * **Rotary Encoders**
 	* Two encoders
-	* Built-in tactile switch
+	* With tactile switch
 
 * **More Keys**
 	* 20 Switches
 	* 4x5 Grid
 
 * **Expansion Modules**
-	* **6 Channels** per module
 	* Wire up any switch you want
 	* Foot pedal, emergency shutoff, toggle switch, etc
+	* **6 Channels** per module
 	* **Daisy chain** up to **5 Modules** with regular USB-C cable
 
 * **Bigger OLED Screen**
@@ -62,7 +62,7 @@ Compared to [original duckyPad](https://github.com/dekuNukem/duckyPad/), DPP now
 
 * **Wireless Communication**
 	* **Bluetooth** (fully working, add your own battery)
-	* Wi-Fi (Capable but unimplemented for now)
+	* Wi-Fi (Capable but currently unimplemented)
 
 * **duckyScript Engine**
 	* Separate scripts for **on press** and **on release**

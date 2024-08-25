@@ -1,5 +1,6 @@
 z1 Ctrl
-z2 Shift
+z2 Shi
+x2 ft
 z3 Caps
 z4 Tab
 z6 Z
@@ -9,15 +10,17 @@ z9 Alt
 z10 X
 z11 S
 z12 W
-z13 Space
+z13 Spa
+x13 ce
 z14 C
 z15 D
 z16 E
-z17 Space
+z17 Spa
+x17 ce
 z18 V
 z19 F
 z20 R
-BG_COLOR 84 22 180
+BG_COLOR 128 0 255
 IS_LANDSCAPE 1
 SWCOLOR_7 255 0 6
 SWCOLOR_11 255 0 6
