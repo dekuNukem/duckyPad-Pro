@@ -1,14 +1,14 @@
-# duckyPad Pro: Unrivaled Input Automation, 
+# duckyPad Pro: Expandable Input Automation
 
 -----------
 
-mention expansion here
+duckyPad Pro is a 20-key mechanical macropad with unrivaled input automation capability using **duckyScript**.
 
-duckyPad Pro is a 20-key mechanical macropad with unrivaled input automation capability using duckyScript.
+Incorporating 4 years worth of feedback from the [original duckyPad](link_here), now with **Rotary Encoders**, **Bluetooth**, **Expansion Modules**, and more!
 
-Incorporating 4 years worth of feedback from the [original duckyPad](link_here), with a deluge of new features, duckyPad Pro is designed for power users who demand sophisticated macro scripting way beyond QMK/VIA.
+duckyPad Pro is designed for power users who demand advanced macro scripting and customization way beyond QMK/VIA.
 
-![photo_alt_text](photo_here)
+![alt_text](resources/photos/title.jpeg)
 
 duckyPad Pro has all the basics:
 
@@ -18,18 +18,18 @@ duckyPad Pro has all the basics:
 * USB-C
 * 100% **Open-source**
 
-But also has features **unlike any other**:
+Along with features **unlike any other**:
 
 * Custom **[duckyScript](duckyscript_info.md)** engine, **NOT QMK/VIA**.
 * Much **longer and sophisticated** macros
 * Configurable **OLED** screen
-* **Bluetooth** capable
-* **Expansion Modules**: Up to 32 external switches.
+* **Expansion Modules** to wire up to 32 external switches
+* **Bluetooth**
 * microSD storage
 * **64 profiles**, 3712 macros total.
 * [Automatic profile switching](https://github.com/dekuNukem/duckyPad-profile-autoswitcher) based on active window.
 * No proprietary drivers, works out-of-box.
-* Hacker friendly, tinkering guide.
+* **Hacker friendly** with tinkering guide!
 
 The macros can be as simple as `Ctrl + C`, or as complex as filling forms, launching applications, or even [creating root backdoors](https://shop.hak5.org/blogs/usb-rubber-ducky/the-3-second-reverse-shell-with-a-usb-rubber-ducky) or [grabbing passwords](https://shop.hak5.org/blogs/usb-rubber-ducky/15-second-password-hack-mr-robot-style). It's all up to you!
 
@@ -49,7 +49,7 @@ Compared to [original duckyPad](https://github.com/dekuNukem/duckyPad/), DPP now
 	* **6 Channels** per module
 	* Wire up any switch you want
 	* Foot pedal, emergency shutoff, toggle switch, etc
-	* **Daisy chain** up to **5 Modules**
+	* **Daisy chain** up to **5 Modules** with regular USB-C cable
 
 * **Bigger OLED Screen**
 	* 128x128
@@ -62,23 +62,23 @@ Compared to [original duckyPad](https://github.com/dekuNukem/duckyPad/), DPP now
 
 * **Wireless Communication**
 	* **Bluetooth** (fully working, add your own battery)
-	* Wi-Fi (Capable, but unimplemented)
+	* Wi-Fi (Capable but unimplemented for now)
 
 * **duckyScript Engine**
-	* Separate script for **on press** and **on release**
+	* Separate scripts for **on press** and **on release**
 	* **Abort execution** with any key
-	* Blocking READKEY
+	* Many small improvements (migration guide?)
 
 * **QoL Updates**
-	* Mount SD as USB Storage
+	* Mount SD as **USB Storage**
 	* Faster configurator load/save
-	* Drag&Drop firmware update
+	* **Drag & drop** firmware update
 	* More sturdy +/- button
-	* Reinforced HS socket solder pads
+	* Reinforced hotswap socket solder pads
 
 ## duckyScript vs QMK/VIA
 
-duckyPad Pro uses a custom implementation of **duckyScript**, originally designed for [USB Rubber Ducky](https://shop.hak5.org/products/usb-rubber-ducky-deluxe).
+duckyPad Pro runs **duckyScript**, originally designed for [USB Rubber Ducky](https://shop.hak5.org/products/usb-rubber-ducky-deluxe).
 
 Compared to QMK/VIA, you get:
 
@@ -86,7 +86,7 @@ Compared to QMK/VIA, you get:
 	* [Entire Bee Movie](resources/beemovie.txt) in one macro? Yes please!
 	* Up to 3712 macros in total
 
-* **Sophisticated Interactive Scripting**
+* **Advanced Interactive Scripting**
 	* Variables, `IF` statements, loops, functions, etc.
 	* Reading Buttons
 	* Print to OLED screen
