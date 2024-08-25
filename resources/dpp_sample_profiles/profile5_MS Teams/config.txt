@@ -10,7 +10,7 @@ x17 video
 z18 togle
 x18 mute
 z19 push
-x19 speak
+x19 talk
 z20 raise
 x20 hand
 z21 vol+
