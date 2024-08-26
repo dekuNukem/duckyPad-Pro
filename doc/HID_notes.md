@@ -12,16 +12,12 @@ duckyPad expects a **fixed 64-byte** packet from PC:
 |:--------:|:--------------------------:|
 |     0    | HID Usage ID (always 0x05) |
 |     1    |       Reserved      |
-|     2    |        Command        |
+|     2    |        Command Type      |
 | 3 ... 63 |          Payloads          |
-
-* Byte 2 is command type, [introduced below](#hid-commands).
-
-* The rest of the buffer is **payload**, set to 0 for unused portion.
 
 ### duckyPad-to-PC
 
-Once received a packet from PC, duckyPad will reply with a **fixed 64-byte** response:
+duckyPad will respond with a **fixed 64-byte** response:
 
 |   Byte#  |            Description           |
 |:--------:|:--------------------------------:|
@@ -32,8 +28,6 @@ Once received a packet from PC, duckyPad will reply with a **fixed 64-byte** res
 
 
 * `BUSY` is returned if duckyPad is executing a script, or in a menu.
-
-* The rest of the buffer is **payload**, will be 0 if unused.
 
 ## HID Commands
 
@@ -155,7 +149,11 @@ Change color of a single LED.
 |     6    |Blue  |
 | 7 ... 63 |        0x00        |
 
+-----------
+
 ### Set RGB Colour: Bulk (0x05)
+
+**NOT IMPLEMENTED YET**
 
 Change color of ALL LEDs at once.
 
@@ -190,9 +188,9 @@ Perform a software reset.
 
 💬 duckyPad to PC:
 
-No response because it's rebooting!
+Nothing because it will be rebooting!
 
-Wait at least 3 seconds before trying to talk to it again.
+Wait at least 5 seconds before trying to talk to it again.
 
 -----------
 
