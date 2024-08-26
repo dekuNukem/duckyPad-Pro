@@ -16,8 +16,6 @@ Added VMVER to aid version checking
 
 TODO:
 mouse move and mouse scroll arguments on stack
-EMUK command 3 keys
-remove BCLR command as it's no longer needed?
 """
 
 DS_VM_VERSION = 1
@@ -71,7 +69,6 @@ OP_SWCC = ("SWCC", 33)
 OP_SWCR = ("SWCR", 34)
 OP_STR = ("STR", 35)
 OP_STRLN = ("STRLN", 36)
-OP_EMUK = ("EMUK", 37)
 OP_OLC = ("OLC", 38)
 OP_OLP = ("OLP", 39)
 OP_OLU = ("OLU", 40)
@@ -573,10 +570,6 @@ def make_dsb(program_listing, profile_list=None):
             assembly_listing.append(make_delay_instruction(this_line))
         elif first_word == cmd_KEYDOWN:
             this_instruction['opcode'] = OP_KDOWN
-            this_instruction['oparg'] = get_key_combined_value(this_line.split(' ')[-1])
-            assembly_listing.append(this_instruction)
-        elif first_word == cmd_EMUK:
-            this_instruction['opcode'] = OP_EMUK
             this_instruction['oparg'] = get_key_combined_value(this_line.split(' ')[-1])
             assembly_listing.append(this_instruction)
         elif first_word == cmd_KEYUP:
