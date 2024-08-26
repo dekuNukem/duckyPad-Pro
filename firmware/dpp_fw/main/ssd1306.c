@@ -545,3 +545,19 @@ void ssd1306_SetContrast(const uint8_t value)
     current_contrast = value;
     // printf("OLED SC: %d\n", value);
 }
+
+#define SCREENSHOT_NAME_BUF_SIZE 32
+
+void ssd1306_take_screenshot(void)
+{
+    int random_number = rand() % 90000 + 10000;
+    char filename[SCREENSHOT_NAME_BUF_SIZE];
+    memset(filename, 0, SCREENSHOT_NAME_BUF_SIZE);
+    snprintf(filename, sizeof(filename), "/sdcard/%05d.bin", random_number);
+    FILE *file = fopen(filename, "wb");
+    if(file == NULL)
+        return;
+    fwrite(SSD1306_Buffer, sizeof(uint8_t), SSD1306_BUFFER_SIZE, file);
+    fclose(file);
+    printf("screenshot: %s\n", filename);
+}

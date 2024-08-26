@@ -372,6 +372,7 @@ void draw_profile(profile_info* this_profile)
     ssd1306_set_rotation_only_for_128x128_do_not_use_for_anything_else(SSD1306_NO_ROTATION);
     draw_profile_normal(this_profile);
   }
+  // ssd1306_take_screenshot();
 }
 
 void draw_settings(dp_global_settings *dps)
@@ -443,6 +444,7 @@ void draw_settings(dp_global_settings *dps)
   ssd1306_WriteString(oled_line_buf, Font_7x10, White);
 
   ssd1306_UpdateScreen();
+  // ssd1306_take_screenshot();
 }
 
 void draw_exe_error(uint8_t err_code)
@@ -744,7 +746,6 @@ void draw_nvm_erase()
 
   ssd1306_UpdateScreen();
 }
-
 
 void draw_no_usb_activity()
 {
