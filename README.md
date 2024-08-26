@@ -127,7 +127,11 @@ autoswitcher
 
 * 128x128
 * **Configurable orientation**
+* Shows what each key does
 * Print-to-screen in duckyScript
+
+screenshots here
+
 
 #### Microcontroller
 
