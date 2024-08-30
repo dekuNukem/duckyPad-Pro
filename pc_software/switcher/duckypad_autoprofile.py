@@ -44,9 +44,18 @@ added HID busy check
 
 0.1.0 2023 10 12
 added queue to prevent dropping requests when duckypad is busy
+
+0.2.0
+updated window refresh method from pull request?
+seems a bit laggy tho
+
+0.3.0
+quick edit to work on duckypad pro
+switch profile by name instead of number
+changed timing to make it less laggy, still feels roughly the same tho
 """
 
-THIS_VERSION_NUMBER = '0.2.0'
+THIS_VERSION_NUMBER = '0.3.0'
 MAIN_WINDOW_WIDTH = 640
 MAIN_WINDOW_HEIGHT = 660
 PADDING = 10
@@ -253,16 +262,15 @@ current_app_name_var.set("Current app name:")
 current_window_title_var = StringVar()
 current_window_title_var.set("Current Window Title:")
 
-def duckypad_goto_profile(profile_number):
-    if profile_number is None:
-        return DP_WRITE_OK
-    if not (1 <= profile_number <= 31):
-        return DP_WRITE_OK
-    # print("def duckypad_goto_profile(profile_number):")
-    buffff = [0] * 64
+PC_TO_DUCKYPAD_HID_BUF_SIZE = 64
+
+def duckypad_goto_profile(profile_target_name):
+    # print("def duckypad_goto_profile(profile_target_name):")
+    buffff = [0] * PC_TO_DUCKYPAD_HID_BUF_SIZE
     buffff[0] = 5
     buffff[2] = 1
-    buffff[3] = profile_number
+    for index, item in enumerate(profile_target_name):
+        buffff[index+3] = ord(item)
     return duckypad_write_with_retry(buffff)
 
 profile_switch_queue = []
@@ -284,22 +292,21 @@ def t1_worker():
             profile_switch_queue.pop(0)
             last_switch = queue_head
             print(profile_switch_queue)
-            time.sleep(0.2)
         
-def switch_queue_add(profile_number):
+def switch_queue_add(profile_target_name):
     global last_switch
-    if profile_number is None:
+    if profile_target_name is None or len(profile_target_name) == 0:
         return
-    if profile_number == last_switch:
+    if profile_target_name == last_switch:
         return
-    if len(profile_switch_queue) > 0 and profile_switch_queue[-1] == profile_number:
+    if len(profile_switch_queue) > 0 and profile_switch_queue[-1] == profile_target_name:
         return
-    profile_switch_queue.append(profile_number)
+    profile_switch_queue.append(profile_target_name)
 
 def update_current_app_and_title():
     # print("def update_current_app_and_title():")
 
-    root.after(250, update_current_app_and_title)
+    root.after(151, update_current_app_and_title)
 
     # if hid_rw.is_hid_open is False and button_pressed is True:
     #     connection_info_str.set("duckyPad not found")
@@ -348,15 +355,18 @@ def clean_input(str_input):
     # print("def clean_input(str_input):")
     return str_input.strip()
 
-def check_profile_number(raw_str):
-    # print("def check_profile_number(raw_str):")
-    try:
-        profile_number = int(clean_input(raw_str))
-    except Exception:
-        return None
-    if 1 <= profile_number <= 31:
-        return profile_number
-    return None
+invalid_filename_characters = ['<', '>', ':', '"', '/', '\\', '|', '?', '*']
+
+def clean_input(str_input, len_limit=None):
+    result = ''.join([x for x in str_input if 32 <= ord(x) <= 126 and x not in invalid_filename_characters])
+    while('  ' in result):
+        result = result.replace('  ', ' ')
+    if len_limit is not None:
+        result = result[:len_limit]
+    return result.strip()
+
+def check_profile_name_or_number(raw_str):
+    return clean_input(raw_str)
 
 def make_rule_str(rule_dict):
     # print("def make_rule_str(rule_dict):")
@@ -373,10 +383,10 @@ def make_rule_str(rule_dict):
     next_item = rule_dict['window_title']
     if len(next_item) <= 0:
         next_item = "[Any]"
-    gap = 29 - len(rule_str)
+    gap = 26 - len(rule_str)
     rule_str += ' '*gap + next_item
 
-    gap = 58 - len(rule_str)
+    gap = 50 - len(rule_str)
     rule_str += ' '*gap + str(rule_dict['switch_to'])
 
     return rule_str
@@ -390,7 +400,7 @@ def save_config():
     try:
         ensure_dir(save_path)
         with open(save_filename, 'w', encoding='utf8') as save_file:
-                save_file.write(json.dumps(config_dict, sort_keys=True))
+            save_file.write(json.dumps(config_dict, sort_keys=True))
     except Exception as e:
         messagebox.showerror("Error", "Save failed!\n\n"+str(traceback.format_exc()))
 
@@ -400,7 +410,7 @@ def save_rule_click(window, this_rule):
         rule_dict = {}
         rule_dict["app_name"] = clean_input(app_name_entrybox.get())
         rule_dict["window_title"] = clean_input(window_name_entrybox.get())
-        rule_dict["switch_to"] = check_profile_number(switch_to_entrybox.get())
+        rule_dict["switch_to"] = check_profile_name_or_number(switch_to_entrybox.get())
         rule_dict["enabled"] = True
         if rule_dict not in config_dict['rules_list']:
             config_dict['rules_list'].append(rule_dict)
@@ -410,7 +420,7 @@ def save_rule_click(window, this_rule):
     elif this_rule is not None:
         this_rule["app_name"] = clean_input(app_name_entrybox.get())
         this_rule["window_title"] = clean_input(window_name_entrybox.get())
-        this_rule["switch_to"] = check_profile_number(switch_to_entrybox.get())
+        this_rule["switch_to"] = check_profile_name_or_number(switch_to_entrybox.get())
         update_rule_list_display()
         save_config()
         window.destroy()
@@ -546,7 +556,7 @@ profile_lstbox.place(x=PADDING, y=30, width=500)
 profile_lstbox.config(font='TkFixedFont')
 profile_lstbox.bind('<FocusOut>', lambda e: profile_lstbox.selection_clear(0, END))
 
-rule_header_label = Label(master=rules_lf, text="Enabled   App name          Window Title                Profile", font='TkFixedFont')
+rule_header_label = Label(master=rules_lf, text="Enabled   App              Window                 Profile", font='TkFixedFont')
 rule_header_label.place(x=5, y=5)
 
 new_rule_button = Button(rules_lf, text="New rule...", command=create_rule_window)
@@ -637,5 +647,5 @@ duckypad_connect()
 t1 = threading.Thread(target=t1_worker, daemon=True)
 t1.start()
 
-root.after(250, update_current_app_and_title)
+root.after(151, update_current_app_and_title)
 root.mainloop()

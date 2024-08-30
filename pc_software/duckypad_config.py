@@ -611,10 +611,7 @@ def profile_add_click():
         # print('insert:', e)
         pass
 
-    if insert_point >= 9:
-        answer = clean_input(answer, 12)
-    else:
-        answer = clean_input(answer, 13)
+    answer = clean_input(answer, 16)
 
     if len(answer) <= 0:# or answer in [x.name for x in profile_list]:
         return

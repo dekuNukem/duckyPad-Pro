@@ -1,3 +1,24 @@
+def duckypad_goto_profile(profile_target_name):
+    if profile_target_name is None:
+        return DP_WRITE_OK
+    if not (1 <= profile_target_name <= 31):
+        return DP_WRITE_OK
+    # print("def duckypad_goto_profile(profile_target_name):")
+    buffff = [0] * 64
+    buffff[0] = 5
+    buffff[2] = 1
+    buffff[3] = profile_target_name
+    return duckypad_write_with_retry(buffff)
+
+# def check_profile_number(raw_str):
+#     # print("def check_profile_number(raw_str):")
+#     try:
+#         profile_number = int(clean_input(raw_str))
+#     except Exception:
+#         return None
+#     if 1 <= profile_number <= 31:
+#         return profile_number
+#     return None
 
 def print_both(text):
     short_path = Path(*filepath.parts[-2:])
