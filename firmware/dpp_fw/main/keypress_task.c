@@ -297,9 +297,10 @@ void update_last_keypress(void)
 
 void wakeup_from_sleep_no_load(void)
 {
+  update_last_keypress();
+  delay_ms(20);
   is_sleeping = 0;
   oled_brightness = OLED_CONTRAST_BRIGHT;
-  update_last_keypress();
 }
 
 void wakeup_from_sleep_and_load_profile(uint8_t profile_to_load)

@@ -23,11 +23,16 @@ def get_duckypad_path():
 
 pc_to_duckypad_buf = [0] * PC_TO_DUCKYPAD_HID_BUF_SIZE
 pc_to_duckypad_buf[0] = 5   # HID Usage ID, always 5
-pc_to_duckypad_buf[2] = 4   # Command type
+pc_to_duckypad_buf[2] = 1   # Command type
 
-pc_to_duckypad_buf[3] = 1
-pc_to_duckypad_buf[4] = 255
-pc_to_duckypad_buf[5] = 128
+# pc_to_duckypad_buf[3] = 1
+
+profile_name = 'num'
+
+for index, item in enumerate(profile_name):
+    pc_to_duckypad_buf[index+3] = ord(item)
+
+print(pc_to_duckypad_buf)
 
 # print("----\nsudo is needed on Linux!\n----")
 

@@ -405,6 +405,23 @@ void send_hid_cmd_response(uint8_t* hid_cmdbuf)
     tud_hid_report(HID_USAGE_ID_NAMED_PIPE, hid_cmdbuf, HID_TX_BUF_SIZE-1);
 }
 
+uint8_t parse_hid_goto_profile(uint8_t* this_buf)
+{
+    if(this_buf == NULL)
+        return 255;
+    if(this_buf[2] <= 32)
+        return this_buf[2];
+    char* pf_name_start = (char*)this_buf + 2;
+    for (uint8_t i = 0; i < MAX_PROFILES; i++)
+    {
+        if(all_profile_info[i].is_loaded == 0)
+            continue;
+        if(strcmp(all_profile_info[i].pf_name, pf_name_start) == 0)
+            return i;
+    }
+    return 255;
+}
+
 void handle_hid_command(const uint8_t* hid_rx_buf, uint8_t rx_buf_size)
 {
     uint8_t command_type = hid_rx_buf[1];
@@ -478,15 +495,15 @@ void handle_hid_command(const uint8_t* hid_rx_buf, uint8_t rx_buf_size)
     */
     else if(command_type == HID_COMMAND_GOTO_PROFILE)
     {
-        uint8_t target_profile = hid_rx_buf[2];
-        if(all_profile_info[target_profile].is_loaded)
+        uint8_t target_profile = parse_hid_goto_profile(hid_rx_buf);
+        if(target_profile >= MAX_PROFILES || all_profile_info[target_profile].is_loaded == 0)
         {
-            wakeup_from_sleep_and_load_profile(target_profile);
+            hid_tx_buf[1] = HID_RESPONSE_INVALID_ARG;
             send_hid_cmd_response(hid_tx_buf);
         }
         else
         {
-            hid_tx_buf[1] = HID_RESPONSE_INVALID_ARG;
+            wakeup_from_sleep_and_load_profile(target_profile);
             send_hid_cmd_response(hid_tx_buf);
         }
     }

@@ -1,3 +1,7 @@
+    printf("new data!\n");
+    for (int i = 0; i < 16; ++i)
+        printf("%x ", this_buf[i]);
+    printf("\ndone\n");
 uint8_t is_numlock_on, is_capslock_on, is_scrolllock_on;    
 draw_kbled_icon(kb_led_status, 0);
 void update_keyboard_led_status(uint8_t value)

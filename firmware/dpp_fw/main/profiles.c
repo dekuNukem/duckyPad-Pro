@@ -144,7 +144,6 @@ void print_profile_info(profile_info *pinfo)
   if(pinfo == NULL)
     return;
   printf("--------\n");
-  printf("pf_number: %d\n", pinfo->pf_number);
   printf("is_loaded: %d\n", pinfo->is_loaded);
   printf("dir_path: %s\n", pinfo->dir_path);
   printf("pf_name: %s\n", pinfo->pf_name);
@@ -177,7 +176,6 @@ void load_profile_info(void)
       if(this_profile_number >= MAX_PROFILES)
         continue;
 
-      all_profile_info[this_profile_number].pf_number = this_profile_number;
       all_profile_info[this_profile_number].is_loaded = 1;
       memset(all_profile_info[this_profile_number].dir_path, 0, FILENAME_BUFSIZE);
       strcpy(all_profile_info[this_profile_number].dir_path, dir->d_name);

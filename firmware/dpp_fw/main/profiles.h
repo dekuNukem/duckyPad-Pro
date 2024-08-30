@@ -30,7 +30,6 @@ typedef struct
 */
 typedef struct
 {
-  uint8_t pf_number;
   uint8_t is_loaded;
   char dir_path[FILENAME_BUFSIZE];
   char* pf_name;

@@ -73,7 +73,7 @@ Jump to a particular profile.
 |     0    |        0x05        |
 |     1    | Reserved |
 |     2    |        0x01        |
-|     3    |   Profile number<br>1-indexed    |
+|     3    |   Profile Name String<br>OR<br>Profile number<br>1-indexed    |
 | 4 ... 63 |        0x00        |
 
 💬 duckyPad to PC:
