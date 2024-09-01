@@ -111,7 +111,7 @@ Next Tab: CTRL SHIFT TAB
 
 * Change RGB colors
 
-a mini text adventure here?
+![alt_text](resources/photos/maze.jpeg)
 
 ### Hackerman!
 
@@ -139,13 +139,13 @@ duckyPad Pro also supports optional **expansion modules**!
 
 ## Bluetooth
 
-duckyPad Pro fully functions as a **Bluetooth Keyboard & Mouse**!
+duckyPad Pro also fully works as a **Bluetooth Keyboard & Mouse**!
 
 * Bluetooth 4.2 BLE
 
 * Built-in Antenna
 
-photo here next to iphone
+![alt_text](resources/photos/bt.jpeg)
 
 gif here
 
