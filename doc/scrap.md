@@ -1,6 +1,31 @@
 The macros can be as simple as `Ctrl + C`, or as complex as filling forms, launching applications, or even [creating root backdoors](https://shop.hak5.org/blogs/usb-rubber-ducky/the-3-second-reverse-shell-with-a-usb-rubber-ducky) or [grabbing passwords](https://shop.hak5.org/blogs/usb-rubber-ducky/15-second-password-hack-mr-robot-style). It's all up to you!
 
 
+Zoom In: `CTRL +`
+
+Next Tab: `CTRL SHIFT TAB`
+
+
+## Wi-Fi
+
+* The hardware for BT also works for Wi-Fi
+
+* But the code is unimplemented right now
+
+* But 
+
+
+#### Expansion Module
+
+* Wire up any switch you want
+* Foot pedal, emergency shutoff, toggle switch, etc
+* **6 Channels** per module
+* **Daisy chain** up to **5 Modules** with regular USB-C cable
+
+
+----------
+
+
 ## How It Works / Showcase
 
 write duckyscript
