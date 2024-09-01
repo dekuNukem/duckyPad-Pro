@@ -64,9 +64,13 @@ duckyScript is a no-brainer for power users with more demanding scripting needs.
 
 ## How It Works / Showcase
 
-* 64 Profiles, typically one for each app, samples on SD card
+* Create a **profile**, typically one for each application.
 
-* 58 Key per profile (20 on-board switches + 6 rotary encoder actions + 32 external switches)
+* Assign up to **58 keys** per profile (20 on-board + 6 rotary encoder actions + 32 external)
+
+* Key functions are shown on OLED screen
+
+![alt_text](resources/photos/sample_profiles_screenshot.png)
 
 * Write duckyScript for each key
 
@@ -101,6 +105,8 @@ autoswitcher
 * 4x5 Grid
 * Cherry-MX style
 * Kailh hot-swap socket
+
+![alt_text](resources/photos/keyside.jpeg)
 
 #### RGB Backlight
 
