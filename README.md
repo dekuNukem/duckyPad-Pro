@@ -68,24 +68,24 @@ duckyScript is a no-brainer for power users with more demanding scripting needs.
 
 * Assign up to **58 keys** per profile (20 on-board + 6 rotary encoder actions + 32 external)
 
-* Key functions are shown on OLED screen
+* Key names are shown on OLED screen
 
-![alt_text](resources/photos/sample_profiles_screenshot.png)
+![alt_text](resources/photos/ps.jpeg)
 
-* Write duckyScript for each key
+* Write a **duckyScript** for each key
 
-The macros can be as simple as `Ctrl + C`, or as complex as filling forms, launching applications, or even [creating root backdoors](https://shop.hak5.org/blogs/usb-rubber-ducky/the-3-second-reverse-shell-with-a-usb-rubber-ducky) or [grabbing passwords](https://shop.hak5.org/blogs/usb-rubber-ducky/15-second-password-hack-mr-robot-style). It's all up to you!
+* You can start simple by consolidating all the shortcuts:
 
+```
+Zoom In: CTRL +
+Next Tab: CTRL SHIFT TAB
+```
 
-* Shown on OLED screen, show a few screenshots
+![alt_text](resources/photos/firefox.gif)
 
-Starting simple, you can consolidate all the shortcuts to speedup your workflow.
+* up a notch to fill forms, type boilerplate text emails
 
-* discord, firefox, photoshop
-
-up a notch to fill forms, type boilerplate text emails
-
-* DHL, email shipped
+![alt_text](resources/photos/addr.gif)
 
 with expansion module, wire up own switch / foot pedals
 
