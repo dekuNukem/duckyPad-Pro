@@ -1,4 +1,4 @@
-# duckyPad Pro: Input Automation for Power Users
+# duckyPad Pro: Macro Scripting Beyond QMK/VIA
 
 -----------
 
@@ -21,19 +21,19 @@ But also features **unlike any other**:
 * Custom **[duckyScript](duckyscript_info.md)** engine, **NOT QMK/VIA**.
 * Much **longer and sophisticated** macros
 * Configurable **OLED** screen
-* **Expansion Modules** for external switches / foot pedals
 * **Bluetooth**
+* **Expansion Modules** for external switches / foot pedals
 * **64 profiles**, 3712 macros total.
 * [Automatic profile switching](https://github.com/dekuNukem/duckyPad-profile-autoswitcher) based on active window.
 * microSD storage
 * No proprietary drivers, works out-of-box.
 * **Hacker friendly** with tinkering guide
 
-The macros can be as simple as `Ctrl + C`, or as complex as filling forms, launching applications, or even [creating root backdoors](https://shop.hak5.org/blogs/usb-rubber-ducky/the-3-second-reverse-shell-with-a-usb-rubber-ducky) or [grabbing passwords](https://shop.hak5.org/blogs/usb-rubber-ducky/15-second-password-hack-mr-robot-style). It's all up to you!
+![alt_text](resources/photos/quarter.jpeg)
 
 ## duckyScript vs QMK/VIA
 
-duckyPad Pro runs **duckyScript**, originally designed for [USB Rubber Ducky](https://shop.hak5.org/products/usb-rubber-ducky-deluxe).
+duckyPad Pro runs a custom implementation of **duckyScript**, originally designed for [USB Rubber Ducky](https://shop.hak5.org/products/usb-rubber-ducky-deluxe).
 
 Compared to QMK/VIA, you get:
 
@@ -42,7 +42,7 @@ Compared to QMK/VIA, you get:
 	* Up to 3712 macros in total
 
 * **Advanced Interactive Scripting**
-	* Variables, `IF` statements, loops, functions, etc.
+	* Variables, conditionals, loops, functions, etc.
 	* Reading Buttons
 	* Print to OLED screen
 	* Change RGB Color
@@ -51,7 +51,7 @@ Compared to QMK/VIA, you get:
 
 * **Local Storage**
 	* Everything stored on SD card
-	* Quick Configuration / Backup / Duplication
+	* Quick Configuration / Backup / Deployment
 	* No sketchy drivers or apps
 
 * **Existing Resources**
@@ -64,11 +64,14 @@ duckyScript is a no-brainer for power users with more demanding scripting needs.
 
 ## How It Works / Showcase
 
-* 64 Profiles, typically one for each app
+* 64 Profiles, typically one for each app, samples on SD card
 
 * 58 Key per profile (20 on-board switches + 6 rotary encoder actions + 32 external switches)
 
 * Write duckyScript for each key
+
+The macros can be as simple as `Ctrl + C`, or as complex as filling forms, launching applications, or even [creating root backdoors](https://shop.hak5.org/blogs/usb-rubber-ducky/the-3-second-reverse-shell-with-a-usb-rubber-ducky) or [grabbing passwords](https://shop.hak5.org/blogs/usb-rubber-ducky/15-second-password-hack-mr-robot-style). It's all up to you!
+
 
 * Shown on OLED screen, show a few screenshots
 
