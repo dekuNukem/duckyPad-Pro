@@ -30,34 +30,23 @@ int main(int argc, char *argv[])
   ssd1306_Fill(Black);
   // ----------------------------------------
   memset(oled_line_buf, 0, OLED_LINE_BUF_SIZE);
-  sprintf(oled_line_buf, "For windows");
-  ssd1306_SetCursor(center_line(strlen(oled_line_buf), 7, SSD1306_WIDTH), 0);
-  ssd1306_WriteString(oled_line_buf, Font_7x10, White);
-
-
-  memset(oled_line_buf, 0, OLED_LINE_BUF_SIZE);
-  sprintf(oled_line_buf, "Knob1:Zoom");
-  ssd1306_SetCursor(0, 30);
+  sprintf(oled_line_buf, "You reach a");
+  ssd1306_SetCursor(0, 10);
   ssd1306_WriteString(oled_line_buf, Font_7x10, White);
 
   memset(oled_line_buf, 0, OLED_LINE_BUF_SIZE);
-  sprintf(oled_line_buf, "Knob2:Brush Size");
-  ssd1306_SetCursor(0, 40);
+  sprintf(oled_line_buf, "forked path.");
+  ssd1306_SetCursor(0, 25);
   ssd1306_WriteString(oled_line_buf, Font_7x10, White);
 
   memset(oled_line_buf, 0, OLED_LINE_BUF_SIZE);
-  sprintf(oled_line_buf, "Press key to");
+  sprintf(oled_line_buf, "Both ways are");
+  ssd1306_SetCursor(0, 45);
+  ssd1306_WriteString(oled_line_buf, Font_7x10, White);
+
+  memset(oled_line_buf, 0, OLED_LINE_BUF_SIZE);
+  sprintf(oled_line_buf, "dark.");
   ssd1306_SetCursor(0, 60);
-  ssd1306_WriteString(oled_line_buf, Font_7x10, White);
-
-  memset(oled_line_buf, 0, OLED_LINE_BUF_SIZE);
-  sprintf(oled_line_buf, "cycle functions");
-  ssd1306_SetCursor(0, 70);
-  ssd1306_WriteString(oled_line_buf, Font_7x10, White);
-
-  memset(oled_line_buf, 0, OLED_LINE_BUF_SIZE);
-  sprintf(oled_line_buf, "Anykey to exit");
-  ssd1306_SetCursor(center_line(strlen(oled_line_buf), 7, SSD1306_WIDTH), 116);
   ssd1306_WriteString(oled_line_buf, Font_7x10, White);
   // ------------------------------
 
