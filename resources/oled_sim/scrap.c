@@ -1,3 +1,154 @@
+memset(oled_line_buf, 0, OLED_LINE_BUF_SIZE);
+  sprintf(oled_line_buf, "You reach a");
+  ssd1306_SetCursor(0, 10);
+  ssd1306_WriteString(oled_line_buf, Font_7x10, White);
+
+  memset(oled_line_buf, 0, OLED_LINE_BUF_SIZE);
+  sprintf(oled_line_buf, "forked path.");
+  ssd1306_SetCursor(0, 25);
+  ssd1306_WriteString(oled_line_buf, Font_7x10, White);
+
+  memset(oled_line_buf, 0, OLED_LINE_BUF_SIZE);
+  sprintf(oled_line_buf, "Both ways are");
+  ssd1306_SetCursor(0, 45);
+  ssd1306_WriteString(oled_line_buf, Font_7x10, White);
+
+  memset(oled_line_buf, 0, OLED_LINE_BUF_SIZE);
+  sprintf(oled_line_buf, "dark.");
+  ssd1306_SetCursor(0, 60);
+  ssd1306_WriteString(oled_line_buf, Font_7x10, White);
+
+// ----------------------------------------
+  memset(oled_line_buf, 0, OLED_LINE_BUF_SIZE);
+  sprintf(oled_line_buf, "It is a dead end.");
+  ssd1306_SetCursor(0, 10);
+  ssd1306_WriteString(oled_line_buf, Font_7x10, White);
+
+  memset(oled_line_buf, 0, OLED_LINE_BUF_SIZE);
+  sprintf(oled_line_buf, "Something moves");
+  ssd1306_SetCursor(0, 40);
+  ssd1306_WriteString(oled_line_buf, Font_7x10, White);
+
+  memset(oled_line_buf, 0, OLED_LINE_BUF_SIZE);
+  sprintf(oled_line_buf, "behind you.");
+  ssd1306_SetCursor(0, 55);
+  ssd1306_WriteString(oled_line_buf, Font_7x10, White);
+  // ------------------------------
+    // ----------------------------------------
+  memset(oled_line_buf, 0, OLED_LINE_BUF_SIZE);
+  sprintf(oled_line_buf, "You step into");
+  ssd1306_SetCursor(0, 10);
+  ssd1306_WriteString(oled_line_buf, Font_7x10, White);
+
+  memset(oled_line_buf, 0, OLED_LINE_BUF_SIZE);
+  sprintf(oled_line_buf, "quicksand, and");
+  ssd1306_SetCursor(0, 25);
+  ssd1306_WriteString(oled_line_buf, Font_7x10, White);
+
+  memset(oled_line_buf, 0, OLED_LINE_BUF_SIZE);
+  sprintf(oled_line_buf, "slowly start to");
+  ssd1306_SetCursor(0, 40);
+  ssd1306_WriteString(oled_line_buf, Font_7x10, White);
+
+  memset(oled_line_buf, 0, OLED_LINE_BUF_SIZE);
+  sprintf(oled_line_buf, "sink.");
+  ssd1306_SetCursor(0, 55);
+  ssd1306_WriteString(oled_line_buf, Font_7x10, White);
+  // ------------------------------
+
+// ----------------------------------------
+  memset(oled_line_buf, 0, OLED_LINE_BUF_SIZE);
+  sprintf(oled_line_buf, "A dragon blocks");
+  ssd1306_SetCursor(0, 10);
+  ssd1306_WriteString(oled_line_buf, Font_7x10, White);
+
+  memset(oled_line_buf, 0, OLED_LINE_BUF_SIZE);
+  sprintf(oled_line_buf, "your path,");
+  ssd1306_SetCursor(0, 25);
+  ssd1306_WriteString(oled_line_buf, Font_7x10, White);
+
+  memset(oled_line_buf, 0, OLED_LINE_BUF_SIZE);
+  sprintf(oled_line_buf, "breathing fire.");
+  ssd1306_SetCursor(0, 40);
+  ssd1306_WriteString(oled_line_buf, Font_7x10, White);
+  // ------------------------------
+
+  // ----------------------------------------
+  memset(oled_line_buf, 0, OLED_LINE_BUF_SIZE);
+  sprintf(oled_line_buf, "you are in a maze");
+  ssd1306_SetCursor(0, 10);
+  ssd1306_WriteString(oled_line_buf, Font_7x10, White);
+
+  memset(oled_line_buf, 0, OLED_LINE_BUF_SIZE);
+  sprintf(oled_line_buf, "of twisty little");
+  ssd1306_SetCursor(0, 20);
+  ssd1306_WriteString(oled_line_buf, Font_7x10, White);
+
+  memset(oled_line_buf, 0, OLED_LINE_BUF_SIZE);
+  sprintf(oled_line_buf, "passages,");
+  ssd1306_SetCursor(0, 30);
+  ssd1306_WriteString(oled_line_buf, Font_7x10, White);
+
+  memset(oled_line_buf, 0, OLED_LINE_BUF_SIZE);
+  sprintf(oled_line_buf, "all alike.");
+  ssd1306_SetCursor(0, 50);
+  ssd1306_WriteString(oled_line_buf, Font_7x10, White);
+
+  memset(oled_line_buf, 0, OLED_LINE_BUF_SIZE);
+  sprintf(oled_line_buf, "1: Go North");
+  ssd1306_SetCursor(0, 87);
+  ssd1306_WriteString(oled_line_buf, Font_7x10, White);
+
+  memset(oled_line_buf, 0, OLED_LINE_BUF_SIZE);
+  sprintf(oled_line_buf, "2: Go South");
+  ssd1306_SetCursor(0, 97);
+  ssd1306_WriteString(oled_line_buf, Font_7x10, White);
+
+  memset(oled_line_buf, 0, OLED_LINE_BUF_SIZE);
+  sprintf(oled_line_buf, "3: Go East");
+  ssd1306_SetCursor(0, 107);
+  ssd1306_WriteString(oled_line_buf, Font_7x10, White);
+
+  memset(oled_line_buf, 0, OLED_LINE_BUF_SIZE);
+  sprintf(oled_line_buf, "4: Go West");
+  ssd1306_SetCursor(0, 117);
+  ssd1306_WriteString(oled_line_buf, Font_7x10, White);
+
+  // ------------------------------
+
+  // ----------------------------------------
+  memset(oled_line_buf, 0, OLED_LINE_BUF_SIZE);
+  sprintf(oled_line_buf, "For windows");
+  ssd1306_SetCursor(center_line(strlen(oled_line_buf), 7, SSD1306_WIDTH), 0);
+  ssd1306_WriteString(oled_line_buf, Font_7x10, White);
+
+
+  memset(oled_line_buf, 0, OLED_LINE_BUF_SIZE);
+  sprintf(oled_line_buf, "Knob1:Zoom");
+  ssd1306_SetCursor(0, 30);
+  ssd1306_WriteString(oled_line_buf, Font_7x10, White);
+
+  memset(oled_line_buf, 0, OLED_LINE_BUF_SIZE);
+  sprintf(oled_line_buf, "Knob2:Brush Size");
+  ssd1306_SetCursor(0, 40);
+  ssd1306_WriteString(oled_line_buf, Font_7x10, White);
+
+  memset(oled_line_buf, 0, OLED_LINE_BUF_SIZE);
+  sprintf(oled_line_buf, "Press key to");
+  ssd1306_SetCursor(0, 60);
+  ssd1306_WriteString(oled_line_buf, Font_7x10, White);
+
+  memset(oled_line_buf, 0, OLED_LINE_BUF_SIZE);
+  sprintf(oled_line_buf, "cycle functions");
+  ssd1306_SetCursor(0, 70);
+  ssd1306_WriteString(oled_line_buf, Font_7x10, White);
+
+  memset(oled_line_buf, 0, OLED_LINE_BUF_SIZE);
+  sprintf(oled_line_buf, "Anykey to exit");
+  ssd1306_SetCursor(center_line(strlen(oled_line_buf), 7, SSD1306_WIDTH), 116);
+  ssd1306_WriteString(oled_line_buf, Font_7x10, White);
+  // ------------------------------
+
 USBD_CUSTOM_HID_SendReport
 
 void get_clean_fw_name(char* fw_str, char* result_buf, uint8_t result_buf_size)
