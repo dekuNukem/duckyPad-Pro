@@ -1,3 +1,30 @@
+
+
+Switches & Keycaps
+
+gat green
+box navy
+milky white
+
+photo here
+
+RGB Backlight
+north
+
+Mounting plate
+
+Rotary encoder
+
+shaft length
+knob diameter
+D shaped
+copy spec sheet here
+
+
+
+aimed simply to be the most capable macropad, bar none.
+
+
 The macros can be as simple as `Ctrl + C`, or as complex as filling forms, launching applications, or even [creating root backdoors](https://shop.hak5.org/blogs/usb-rubber-ducky/the-3-second-reverse-shell-with-a-usb-rubber-ducky) or [grabbing passwords](https://shop.hak5.org/blogs/usb-rubber-ducky/15-second-password-hack-mr-robot-style). It's all up to you!
 
 
@@ -26,53 +53,48 @@ Next Tab: `CTRL SHIFT TAB`
 ----------
 
 
-## How It Works / Showcase
 
-write duckyscript
+## Specifications
 
-At most basic level, consolidate all shortcuts to speed up workflow, switching apps, shortcuts
+#### Keys
 
-You can consolidate 
+20 Mechanical Switches
+4x5 Grid
+Cherry-MX style
+Kailh hot-swap socket
 
-up a notch to fill forms, type boilerplate text emails
+![alt_text](resources/photos/keyside.jpeg)
 
-with expansion module, wire up own switch / foot pedals
+#### RGB Backlight
 
-of course, hacking pentest
+* Per-key configurable
+* Adjustable brightness
 
-autoswitcher
+#### Rotary Encoder
 
+Two encoders
+Bourns Inc. PEC12R-4215F-S0024
+24 Detents
+Built-in tactile switch
 
-and pressing shortcuts
+#### Mounting Plate
 
-![gif_alt_text](gif_here)
+* Standard: 1.6mm Pure White FR4 (same material as PCB)
+* Optional: 1.6mm Brushed Aluminum
 
-autoswitcher
+#### OLED screen
 
-![gif_alt_text](gif_here)
+* 128x128
+* **Configurable orientation**
+* Shows what each key does
+* Print-to-screen in duckyScript
 
-security search
+#### Microcontroller
 
-![gif_alt_text](gif_here)
+ESP32-S3
+Dual-Core @ 240 MHz 
+4MB Flash Memory
+512KB RAM
+2MB PSRAM
 
-fun with expansion modules
-
-foot panel, emergency shutoff, turnkey switch?
-
-![gif_alt_text](gif_here)
-
-## Features
-
-### Mechanical Switches
-
-### Keycaps
-
-### Hot-swap Sockets
-
-### Per-key RGB
-
-### OLED screen
-
-### duckyScript
-
-### Companion App
+mention show up as USB drive!
