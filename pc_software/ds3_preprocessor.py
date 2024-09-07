@@ -727,39 +727,6 @@ def run_once(program_listing):
         return_dict['loop_size'] = max(loop_numbers)
     return return_dict
 
-def expand_mousemove(xtotal, ytotal):
-    result_listing = []
-    x_actions = []
-    y_actions = []
-
-    x_sign = 1
-    if xtotal < 0:
-        x_sign = -1
-    y_sign = 1
-    if ytotal < 0:
-        y_sign = -1
-
-    xtotal = abs(xtotal)
-    ytotal = abs(ytotal)
-
-    while xtotal > 0 or ytotal > 0:
-        this_step_x = 127
-        if xtotal < 127:
-            this_step_x = xtotal
-        x_actions.append(x_sign * this_step_x)
-        xtotal -= this_step_x
-
-        this_step_y = 127
-        if ytotal < 127:
-            this_step_y = ytotal
-        y_actions.append(y_sign * this_step_y)
-        ytotal -= this_step_y
-
-    for index, item in enumerate(x_actions):
-        result_listing.append(f"MOUSE_MOVE {x_actions[index]} {y_actions[index]}")
-
-    return result_listing
-
 STRING_MAX_SIZE = 256
 
 def split_string(input_string, max_length=STRING_MAX_SIZE):
@@ -816,27 +783,6 @@ def run_all(program_listing, profile_list=None):
 
     # print("4444444444", new_program_listing)
     program_listing = new_program_listing
-
-    # ----------- expand MOUSE_MOVE ----------
-    # new_program_listing = []
-    # for index, this_line in enumerate(program_listing):
-    #     if ds_syntax_check.is_mouse_move(this_line) is False:
-    #         new_program_listing.append(this_line)
-    #         continue
-    #     mm_result, mmx, mmy = ds_syntax_check.get_mousemove_xy(this_line)
-    #     if mm_result == PARSE_ERROR:
-    #         error_dict = {}
-    #         error_dict['is_success'] = False
-    #         error_dict['comments'] = "invalid value"
-    #         error_dict['error_line_number_starting_from_1'] = index+1
-    #         error_dict['error_line_str'] = this_line
-    #         return error_dict
-
-    #     new_program_listing += expand_mousemove(mmx, mmy)
-
-    # program_listing = new_program_listing
-
-    # ----------- Do a pass ---------------
 
     rdict = run_once(program_listing)
     if rdict['is_success'] is False:

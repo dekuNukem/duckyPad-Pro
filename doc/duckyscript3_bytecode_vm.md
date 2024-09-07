@@ -215,3 +215,12 @@ All reference to **"stack"** refers to **Arithmetic Stack**. Unless noted otherw
 [Build a duckyPad Yourself](build_it_yourself.md)
 
 [Kickstarter Backer Acknowledgments](kickstarter_backers.md)
+
+
+## DSVM changelog
+
+2024 09 07
+MOUSE_WHEEL argument on stack
+MOUSE_MOVE argument on stack
+removed MOUSE_MOVE preprocessor expansion, to be done at instruction level
+

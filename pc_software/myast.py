@@ -2,7 +2,7 @@ import sys
 import ast
 
 def is_walkable(node):
-	return isinstance(node, ast.BinOp) or isinstance(node, ast.BoolOp) or isinstance(node, ast.Compare)
+	return isinstance(node, ast.BinOp) or isinstance(node, ast.BoolOp) or isinstance(node, ast.Compare) or isinstance(node, ast.UnaryOp)
 
 def get_right(node):
 	try:

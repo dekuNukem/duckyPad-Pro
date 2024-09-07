@@ -1,5 +1,4 @@
-VAR $spam = 12
+VAR $spam = -1 
 
-MOUSE_WHEEL $spam
-
-MOUSE_MOVE 44 $spam
+//MOUSE_WHEEL $spam
+MOUSE_MOVE 6 $spam

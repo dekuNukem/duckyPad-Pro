@@ -28,16 +28,6 @@ def parse_combo(combo_line):
 			return PARSE_ERROR, 'Invalid combo character'
 	return PARSE_OK, 'Success'
 
-def get_mousemove_xy(ducky_line):
-	try:
-		ducky_line = ducky_line.replace('\t', '').replace('\n', '').replace('\r', '')
-		x_amount = int([x for x in ducky_line.split(' ') if len(x) > 0][1])
-		y_amount = int([x for x in ducky_line.split(' ') if len(x) > 0][2])
-		return PARSE_OK, x_amount, y_amount
-	except:
-		pass
-	return PARSE_ERROR, 0, 0
-
 def parse_mouse(ducky_line):
 	mouse_command_list = [x for x in mouse_commands if x in ducky_line]
 	if len(mouse_command_list) != 1:
@@ -66,10 +56,6 @@ def check_one_arg(pgm_line):
 	if value < 0:
 		return PARSE_ERROR, "value can't be negative"
 	return PARSE_OK, ""
-
-def is_mouse_move(ducky_line):
-	split = [x for x in ducky_line.split(' ') if len(x) > 0]
-	return len(split) > 0 and split[0] == cmd_MOUSE_MOVE
 
 def parse_line(ducky_line):
 	parse_result = PARSE_OK

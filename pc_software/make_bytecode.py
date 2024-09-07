@@ -3,6 +3,7 @@ import ds3_preprocessor
 import ast
 import myast
 from keywords import *
+import traceback
 
 """
 duckyscript VM changelog
@@ -154,6 +155,8 @@ def print_asslist(lll):
         print_instruction(item)
     print()
 
+import wat
+
 def visit_node(node, instruction_list):
     # print(node.__dict__)
     # a node can be Name, Constant, and operations such as ADD, SUB, COMPARE, etc
@@ -163,9 +166,10 @@ def visit_node(node, instruction_list):
         this_instruction['oparg'] = str(node.id)
         instruction_list.append(this_instruction)
     elif isinstance(node, ast.Constant):
+        print("Constant!!!!!!", node)
         this_instruction = get_empty_instruction()
         this_instruction['opcode'] = OP_PUSHC
-        this_instruction['oparg'] = int(node.value)
+        this_instruction['oparg'] = int(node.value) & 0xffff
         instruction_list.append(this_instruction)
     elif isinstance(node, ast.Compare):
         op_name = node.ops[0].__class__.__name__
@@ -190,6 +194,13 @@ def visit_node(node, instruction_list):
         this_instruction = get_empty_instruction()
         this_instruction['opcode'] = arith_lookup[op_name]
         instruction_list.append(this_instruction)
+    elif isinstance(node, ast.UnaryOp) and isinstance(node.op, ast.USub) and isinstance(node.operand, ast.Constant):
+        this_instruction = get_empty_instruction()
+        this_instruction['opcode'] = OP_PUSHC
+        this_instruction['oparg'] = (-1 * node.operand.value) & 0xffff
+        instruction_list.append(this_instruction)
+    else:
+        raise ValueError("Unimplemented AST operation")
 
 """
 this generates a list of instructions to calculate the result of an expression
@@ -200,6 +211,7 @@ def evaluate_expr(expr):
     instruction_list = []
     root = ast.parse(expr).body[0].value
     if myast.is_walkable(root):
+        print("3333333333333333333")
         myast.postorder_walk(root, visit_node, instruction_list, expr)
     elif isinstance(root, ast.Constant):
         this_instruction = get_empty_instruction()
@@ -727,16 +739,19 @@ def make_dsb_with_exception(program_listing, profile_list=None):
             label_to_addr_dict[item['label']] = item['addr']
 
     for item in assembly_listing:
+        this_oparg = item['oparg']
         if item['opcode'] == OP_STR or item['opcode'] == OP_STRLN or item['opcode'] == OP_OLP:
-            str_lnum = int(item['oparg'].replace('STR@', ''))
+            str_lnum = int(this_oparg.replace('STR@', ''))
             for sssss in str_list:
                 if sssss['lnum'] == str_lnum:
-                    item['oparg'] = sssss['addr']
-        if item['oparg'] is None:
+                    this_oparg = sssss['addr']
+        if this_oparg is None:
             continue
-        if isinstance(item['oparg'], str) and "@" in item['oparg']:
-            item['oparg'] = label_to_addr_dict[item['oparg']]
-        item['oparg'] = int(item['oparg'])
+        if isinstance(this_oparg, str) and "@" in this_oparg:
+            this_oparg = label_to_addr_dict[this_oparg]
+        if isinstance(this_oparg, int) is False:
+            raise ValueError("Unknown variable")
+        this_oparg = int(this_oparg)
 
     print("--------- Assembly Listing, Resolved ---------")
 
@@ -773,6 +788,7 @@ def make_dsb_no_exception(program_listing, profile_list=None):
     try:
         return None, make_dsb_with_exception(program_listing, profile_list)
     except Exception as e:
+        print(traceback.format_exc())
         return {'comments':str(e), 'line_number':current_line_number_1_indexed}, None
 
 if __name__ == "__main__":

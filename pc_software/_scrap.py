@@ -1,3 +1,109 @@
+elif isinstance(node, ast.UnaryOp) and isinstance(node.op, ast.USub) and isinstance(node.operand, ast.Constant):
+        print("UnaryOp!!!!!!", node)
+        print(wat(node.operand.value))
+        exit()
+        this_instruction = get_empty_instruction()
+        this_instruction['opcode'] = OP_PUSHC
+        this_instruction['oparg'] = int(node.value)
+        instruction_list.append(this_instruction)
+
+    # print("!!!!!", expr)
+    # print(wat(root.op))
+    # print('----------')
+    # print(wat(root.operand))
+
+def evaluate_expr(expr):
+    print("!!!!!", expr)
+    instruction_list = []
+    root = ast.parse(expr).body[0].value
+    print(wat(root.op))
+    print('----------')
+    print(wat(root.operand))
+    if myast.is_walkable(root):
+        myast.postorder_walk(root, visit_node, instruction_list, expr)
+    elif isinstance(root, ast.Constant):
+        this_instruction = get_empty_instruction()
+        this_instruction['opcode'] = OP_PUSHC
+        this_instruction['oparg'] = root.value
+        instruction_list.append(this_instruction)
+    elif isinstance(root, ast.Name):
+        this_instruction = get_empty_instruction()
+        this_instruction['opcode'] = OP_PUSHI
+        this_instruction['oparg'] = str(root.id)
+        instruction_list.append(this_instruction)
+    elif isinstance(root, ast.UnaryOp) and isinstance(root.op, ast.USub) and isinstance(root.operand, ast.USub):
+        print("222222222222222")
+    else:
+        raise ValueError(f"unknown ast node: {root}")
+    return instruction_list
+def expand_mousemove(xtotal, ytotal):
+    result_listing = []
+    x_actions = []
+    y_actions = []
+
+    x_sign = 1
+    if xtotal < 0:
+        x_sign = -1
+    y_sign = 1
+    if ytotal < 0:
+        y_sign = -1
+
+    xtotal = abs(xtotal)
+    ytotal = abs(ytotal)
+
+    while xtotal > 0 or ytotal > 0:
+        this_step_x = 127
+        if xtotal < 127:
+            this_step_x = xtotal
+        x_actions.append(x_sign * this_step_x)
+        xtotal -= this_step_x
+
+        this_step_y = 127
+        if ytotal < 127:
+            this_step_y = ytotal
+        y_actions.append(y_sign * this_step_y)
+        ytotal -= this_step_y
+
+    for index, item in enumerate(x_actions):
+        result_listing.append(f"MOUSE_MOVE {x_actions[index]} {y_actions[index]}")
+
+    return result_listing
+
+    
+    def is_mouse_move(ducky_line):
+    split = [x for x in ducky_line.split(' ') if len(x) > 0]
+    # has MOUSE_MOVE and only has numbers as arguments
+    return len(split) > 0 and split[0] == cmd_MOUSE_MOVE and ducky_line[len(cmd_MOUSE_MOVE):].replace(' ','').replace('\t','').isdigit()
+
+def get_mousemove_xy(ducky_line):
+    try:
+        ducky_line = ducky_line.replace('\t', '').replace('\n', '').replace('\r', '')
+        x_amount = int([x for x in ducky_line.split(' ') if len(x) > 0][1])
+        y_amount = int([x for x in ducky_line.split(' ') if len(x) > 0][2])
+        return PARSE_OK, x_amount, y_amount
+    except:
+        pass
+    return PARSE_ERROR, 0, 0
+
+    # ----------- expand MOUSE_MOVE ----------
+    new_program_listing = []
+    for index, this_line in enumerate(program_listing):
+        if is_mouse_move(this_line) is False:
+            new_program_listing.append(this_line)
+            continue
+        mm_result, mmx, mmy = get_mousemove_xy(this_line)
+        if mm_result == PARSE_ERROR:
+            error_dict = {}
+            error_dict['is_success'] = False
+            error_dict['comments'] = "invalid value"
+            error_dict['error_line_number_starting_from_1'] = index+1
+            error_dict['error_line_str'] = this_line
+            return error_dict
+        new_program_listing += expand_mousemove(mmx, mmy)
+    program_listing = new_program_listing
+    # ----------- Do a pass ---------------
+
+
 def check_syntax():
     if is_key_selected() == False:
         return
@@ -18,7 +124,7 @@ def check_syntax():
         script_textbox.tag_add("error", str(error_lnum)+".0", str(error_lnum)+".0 lineend")
         check_syntax_label.config(text=result_dict['comments'], fg='red')
 
-        
+
 def check_syntax():
     if is_key_selected() == False:
         return
