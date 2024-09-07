@@ -456,7 +456,7 @@ def parse_olc(pgm_line):
     ins_list.append(this_instruction)
     return ins_list
 
-def make_dsb(program_listing, profile_list=None):
+def make_dsb_with_exception(program_listing, profile_list=None):
     global if_skip_table
     global if_info_list
     global while_lookup
@@ -764,11 +764,11 @@ def make_dsb(program_listing, profile_list=None):
     print(f'Binary Size: {len(output_bin_array)} Bytes')
     return output_bin_array
 
-def make_exception_dsb(program_listing, profile_list=None):
+def make_dsb_no_exception(program_listing, profile_list=None):
     try:
-        return None, make_dsb(program_listing, profile_list)
+        return None, make_dsb_with_exception(program_listing, profile_list)
     except Exception as e:
-        return {'comment':str(e), 'line_number':current_line_number_1_indexed}, None
+        return {'comments':str(e), 'line_number':current_line_number_1_indexed}, None
 
 if __name__ == "__main__":
 
@@ -780,7 +780,7 @@ if __name__ == "__main__":
     program_listing = text_file.read().split('\n')
     text_file.close()
 
-    status, bin_arr = make_exception_dsb(program_listing)
+    status, bin_arr = make_dsb_no_exception(program_listing)
     if bin_arr is None:
         print(status)
         exit()

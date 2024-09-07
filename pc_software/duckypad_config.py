@@ -683,23 +683,24 @@ def validate_data_objs(save_path):
             this_key.index = key_index + 1
 
 def compile_all_scripts():
-    try:
-        for this_profile in profile_list:
-            for this_key in this_profile.keylist:
-                if this_key is not None:
-                    this_key.binary_array = make_bytecode.make_dsb(this_key.script.split('\n'), profile_list)
-                    if len(this_key.script_on_release.lstrip()) > 0:
-                        this_key.binary_array_on_release = make_bytecode.make_dsb(this_key.script_on_release.lstrip().split('\n'), profile_list)
-                    if len(this_key.binary_array) >= 65500 or (this_key.binary_array_on_release is not None and len(this_key.binary_array_on_release) >= 65500):
-                        messagebox.showerror("Error", f'Script size too large!\n\nProfile: {this_profile.name}\nKey: {this_key.name}')
-                        return False
-        return True
-    except Exception as e:
-        error_msg = "Code contains error!\n"
-        error_msg += f"Profile [{this_profile.name}] Key [{this_key.name}]:\n"
-        error_msg += str(e)
-        messagebox.showerror("Error", error_msg)
     return False
+    # try:
+    #     for this_profile in profile_list:
+    #         for this_key in this_profile.keylist:
+    #             if this_key is not None:
+    #                 this_key.binary_array = make_bytecode.make_dsb(this_key.script.split('\n'), profile_list)
+    #                 if len(this_key.script_on_release.lstrip()) > 0:
+    #                     this_key.binary_array_on_release = make_bytecode.make_dsb(this_key.script_on_release.lstrip().split('\n'), profile_list)
+    #                 if len(this_key.binary_array) >= 65500 or (this_key.binary_array_on_release is not None and len(this_key.binary_array_on_release) >= 65500):
+    #                     messagebox.showerror("Error", f'Script size too large!\n\nProfile: {this_profile.name}\nKey: {this_key.name}')
+    #                     return False
+    #     return True
+    # except Exception as e:
+    #     error_msg = "Code contains error!\n"
+    #     error_msg += f"Profile [{this_profile.name}] Key [{this_key.name}]:\n"
+    #     error_msg += str(e)
+    #     messagebox.showerror("Error", error_msg)
+    # return False
 
 def copy_keymaps(dest_path):
     source_keymap_folder = "keymaps"
@@ -1442,13 +1443,15 @@ def check_syntax():
     program_listing = profile_list[profile_index].keylist[selected_key].script.split('\n')
     if on_press_release_rb_var.get() == 1:
         program_listing = profile_list[profile_index].keylist[selected_key].script_on_release.split('\n')
-    result_dict = ds3_preprocessor.run_all(program_listing, profile_list)
-    if result_dict["is_success"] is False:
-        error_lnum = result_dict['error_line_number_starting_from_1']
+
+    result_dict, bin_arr = make_bytecode.make_dsb_no_exception(program_listing, profile_list)
+    if result_dict is None:
+        script_textbox.tag_remove("error", '1.0', 'end')
+        check_syntax_label.config(text="Code seems OK..", fg="green")
+    else:
+        error_lnum = result_dict['line_number']
         script_textbox.tag_add("error", str(error_lnum)+".0", str(error_lnum)+".0 lineend")
         check_syntax_label.config(text=result_dict['comments'], fg='red')
-        return
-    
 
 check_syntax_label = Label(scripts_lf, text="")
 check_syntax_label.place(x=scaled_size(10), y=scaled_size(417))
