@@ -23,8 +23,8 @@ duckyPad will respond with a **fixed 64-byte** response:
 |:--------:|:--------------------------------:|
 |     0    |    HID Usage ID (always 0x04)    |
 |     1    |          Reserved         |
-|     2    | Status<br>0 = SUCCESS<br>1 = ERROR<br>2 = BUSY|
-| 3 ... 63 |             Payloads             |
+|     2    | Status<br>0 = SUCCESS<br>1 = ERROR<br>2 = BUSY||
+| 3 ... 63 |             Payload             |
 
 
 * `BUSY` is returned if duckyPad is executing a script, or in a menu.
@@ -62,7 +62,7 @@ Get device information.
 
 -----------
 
-### Goto Profile (0x01)
+### Goto Profile by **NUMBER** (0x01)
 
 Jump to a particular profile.
 
@@ -73,7 +73,7 @@ Jump to a particular profile.
 |     0    |        0x05        |
 |     1    | Reserved |
 |     2    |        0x01        |
-|     3    |   Profile Name String<br>OR<br>Profile number<br>1-indexed    |
+|     3    |   Profile number<br>(**1-indexed**)    |
 | 4 ... 63 |        0x00        |
 
 💬 duckyPad to PC:
@@ -82,7 +82,31 @@ Jump to a particular profile.
 |:--------:|:--------------------------------:|
 |     0    |    0x04    |
 |     1    |          Reserved         |
-|     2    | 0 = SUCCESS, 1 = ERROR, 2 = BUSY |
+|     2    | Status, 0 = SUCCESS |
+| 3 ... 63 |             0x00             |
+
+-----------
+
+### Goto Profile by **NAME** (0x17 / 23)
+
+Jump to a particular profile.
+
+💬 PC to duckyPad:
+
+|   Byte#  |   Description   |
+|:--------:|:---------------:|
+|     0    |        0x05        |
+|     1    | Reserved |
+|     2    |        0x17        |
+|     3 ... 63    |   Profile Name String<br>**Case Sensitive**<br>Zero terminated  |
+
+💬 duckyPad to PC:
+
+|   Byte#  |            Description           |
+|:--------:|:--------------------------------:|
+|     0    |    0x04    |
+|     1    |          Reserved         |
+|     2    | Status, 0 = SUCCESS |
 | 3 ... 63 |             0x00             |
 
 -----------
@@ -104,7 +128,7 @@ Jump to a particular profile.
 |:--------:|:--------------------------------:|
 |     0    |    0x04    |
 |     1    |          Reserved         |
-|     2    | 0 = SUCCESS, 1 = ERROR, 2 = BUSY |
+|     2    | Status, 0 = SUCCESS |
 | 3 ... 63 |             0x00             |
 
 
@@ -127,7 +151,7 @@ Jump to a particular profile.
 |:--------:|:--------------------------------:|
 |     0    |    0x04    |
 |     1    |          Reserved         |
-|     2    | 0 = SUCCESS, 1 = ERROR, 2 = BUSY |
+|     2    | Status, 0 = SUCCESS |
 | 3 ... 63 |             0x00             |
 
 -----------
@@ -172,7 +196,7 @@ Change color of ALL LEDs at once.
 
 -----------
 
-### Software reset (0x14) (20)
+### Software reset (0x14 / 20)
 
 Perform a software reset.
 
@@ -194,7 +218,7 @@ Wait at least 5 seconds before trying to talk to it again.
 
 -----------
 
-### Sleep (0x15) (21)
+### Sleep (0x15 / 21)
 
 Make duckyPad go to sleep.
 
@@ -215,14 +239,14 @@ Screen and RGB LEDs are turned off.
 |:--------:|:--------------------------------:|
 |     0    |    0x04    |
 |     1    |          Reserved         |
-|     2    | 0 = SUCCESS, 1 = ERROR, 2 = BUSY |
+|     2    | Status, 0 = SUCCESS |
 | 3 ... 63 | 0x00 |
 
 -----------
 
-### Wake up (0x16) (22)
+### Wake up (0x16 / 22)
 
-Wake up and reload the current profile.
+Wake up from sleep
 
 💬 PC to duckyPad:
 
@@ -239,6 +263,6 @@ Wake up and reload the current profile.
 |:--------:|:--------------------------------:|
 |     0    |    0x04    |
 |     1    |          Reserved         |
-|     2    | 0 = SUCCESS, 1 = ERROR, 2 = BUSY |
+|     2    | Status, 0 = SUCCESS |
 | 3 ... 63 | 0x00 |
 

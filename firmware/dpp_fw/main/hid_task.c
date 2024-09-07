@@ -409,8 +409,6 @@ uint8_t parse_hid_goto_profile(uint8_t* this_buf)
 {
     if(this_buf == NULL)
         return 255;
-    if(this_buf[2] <= 32)
-        return this_buf[2];
     char* pf_name_start = (char*)this_buf + 2;
     for (uint8_t i = 0; i < MAX_PROFILES; i++)
     {
@@ -482,18 +480,44 @@ void handle_hid_command(const uint8_t* hid_rx_buf, uint8_t rx_buf_size)
         send_hid_cmd_response(hid_tx_buf);
     }
     /*
-        GOTO PROFILE
+        GOTO PROFILE BY NUMBER
         -----------
         PC to duckyPad:
         [0]   seq number (not used)
         [1]   command
-        [2]   profile number to switch to
+        [2]   profile number
         -----------
         duckyPad to PC
         [0]   seq number (not used)
         [1]   Status
     */
-    else if(command_type == HID_COMMAND_GOTO_PROFILE)
+    else if(command_type == HID_COMMAND_GOTO_PROFILE_BY_NUMBER)
+    {
+        uint8_t target_profile = hid_rx_buf[2];
+        if(target_profile >= MAX_PROFILES || all_profile_info[target_profile].is_loaded == 0)
+        {
+            hid_tx_buf[1] = HID_RESPONSE_INVALID_ARG;
+            send_hid_cmd_response(hid_tx_buf);
+        }
+        else
+        {
+            wakeup_from_sleep_and_load_profile(target_profile);
+            send_hid_cmd_response(hid_tx_buf);
+        }
+    }
+    /*
+        GOTO PROFILE BY NAME
+        -----------
+        PC to duckyPad:
+        [0]   seq number (not used)
+        [1]   command
+        [2]   profile name string, 0 terminated
+        -----------
+        duckyPad to PC
+        [0]   seq number (not used)
+        [1]   Status
+    */
+    else if(command_type == HID_COMMAND_GOTO_PROFILE_BY_NAME)
     {
         uint8_t target_profile = parse_hid_goto_profile(hid_rx_buf);
         if(target_profile >= MAX_PROFILES || all_profile_info[target_profile].is_loaded == 0)

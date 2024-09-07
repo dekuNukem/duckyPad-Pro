@@ -23,14 +23,8 @@ def get_duckypad_path():
 
 pc_to_duckypad_buf = [0] * PC_TO_DUCKYPAD_HID_BUF_SIZE
 pc_to_duckypad_buf[0] = 5   # HID Usage ID, always 5
-pc_to_duckypad_buf[2] = 23   # Command type
-
-# pc_to_duckypad_buf[3] = 1
-
-profile_name = 'Firefox'
-
-for index, item in enumerate(profile_name):
-    pc_to_duckypad_buf[index+3] = ord(item)
+pc_to_duckypad_buf[2] = 1   # Command type
+pc_to_duckypad_buf[3] = 5
 
 print(pc_to_duckypad_buf)
 

@@ -1,3 +1,28 @@
+-----------
+
+### Goto Profile by **NUMBER** (0x01)
+
+Jump to a particular profile.
+
+💬 PC to duckyPad:
+
+|   Byte#  |   Description   |
+|:--------:|:---------------:|
+|     0    |        0x05        |
+|     1    | Reserved |
+|     2    |        0x01        |
+|     3    |   Profile number<br>(**1-indexed**)    |
+| 4 ... 63 |        0x00        |
+
+💬 duckyPad to PC:
+
+|   Byte#  |            Description           |
+|:--------:|:--------------------------------:|
+|     0    |    0x04    |
+|     1    |          Reserved         |
+|     2    | Status, 0 = SUCCESS |
+| 3 ... 63 |             0x00             |
+
 
 
 Switches & Keycaps
