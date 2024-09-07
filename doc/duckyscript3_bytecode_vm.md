@@ -130,7 +130,7 @@ All reference to **"stack"** refers to **Arithmetic Stack**. Unless noted otherw
 |   CALL  |  6  |  0x6 |                                                              Jump to Subroutine<br>Push PC+1 to **call stack**<br>Jump to ADDR                                                             |  ADDR_LSB |  ADDR_MSB |
 |   RET   |  7  |  0x7 |                                                        Return from Subroutine<br>Pop one item off **call stack**<br>Set PC to its value                                                       |           |           |
 |   HALT  |  8  |  0x8 |                                                                                    Stop execution                                                                                    |           |           |
-|   VMVER  |  255  |  0xFF|     VM Version           |     INST OFFSET      |   VM VER        |
+|   VMVER  |  255  |  0xFF|     VM Version         |          |   VM VER        |
 
 
 ## Binary Operator Instructions
@@ -177,23 +177,23 @@ All reference to **"stack"** refers to **Arithmetic Stack**. Unless noted otherw
 |  DELAY  |  27 | 0x1b |                                                             Pop one item off top of stack<br>Delay the amount in milliseconds                                                            |           |           |
 |   KUP   |  28 | 0x1c |                                                                                      Release Key                                                                                     |  KEYCODE  |  KEYTYPE  |
 |  KDOWN  |  29 | 0x1d |                                                                                       Press Key                                                                                      |  KEYCODE  |  KEYTYPE  |
-|   MSCL  |  30 | 0x1e |                                                                                     Mouse Scroll                                                                                     |   Amount  |           |
-|   MMOV  |  31 | 0x1f |                                                                                      Mouse Move                                                                                      |     X     |     Y     |
-|   SWCF  |  32 | 0x20 |                                         Switch Color Fill<br>Pop THREE items off top of stack:<br>Red, Green, Blue<br>Set ALL LED color to the RGB value                                         |           |           |
-|   SWCC  |  33 | 0x21 |                         Switch Color Change<br>Pop FOUR items off top of stack:<br>N, Red, Green, Blue<br>Set N-th switch to the RGB value<br>If N is 0, set current switch.                         |           |           |
-|   SWCR  |  34 | 0x22 | Switch Color Reset<br>Pop one item off top of stack<br>If value is 0, reset color of current key<br>If value is between 1 and 15, reset color of that key<br>If value is 99, reset color of all keys |           |           |
+|   MSCL  |  30 | 0x1e |                                                                                     **Mouse Scroll**<br>Pop ONE item<br>Scroll number of lines                                           |    |           |
+|   MMOV  |  31 | 0x1f |                                                                                      **Mouse Move**<br>Pop TWO items<br>Move X and Y                                                  |          |          |
+|   SWCF  |  32 | 0x20 |                                         **Switch Color Fill**<br>Pop THREE items<br>Red, Green, Blue<br>Set ALL LED color to the RGB value                                         |           |           |
+|   SWCC  |  33 | 0x21 |                         **Switch Color Change**<br>Pop FOUR items<br>N, Red, Green, Blue<br>Set N-th switch to the RGB value<br>If N is 0, set current switch.                         |           |           |
+|   SWCR  |  34 | 0x22 | **Switch Color Reset**<br>Pop one item off top of stack<br>If value is 0, reset color of current key<br>If value is between 1 and 15, reset color of that key<br>If value is 99, reset color of all keys |           |           |
 |   STR   |  35 | 0x23 |                                                                          Print zero-terminated string at ADDR                                                                         |  ADDR_LSB |  ADDR_MSB |
 |  STRLN  |  36 | 0x24 |                                                                          Same as above, presses ENTER at end                                                                         |           |           |
-|   EMUK  |  37 | 0x25 |                                                                                     EMUK command                                                                                     |  KEYCODE  |  KEYTYPE  |
-|   OLC   |  38 | 0x26 |                                                      OLED_CURSOR<br>Pop TWO items off top of stack:<br>X and Y<br>Change OLED cursor to that                                                     |           |           |
+|   ----  |  37 | 0x25 |                                                                                     Deprecated<br>Do not use                                                                                     |    |    |
+|   OLC   |  38 | 0x26 |                                                      **OLED_CURSOR**<br>Pop TWO items<br>X and Y<br>                                                  |           |           |
 |   OLP   |  39 | 0x27 |                                                                      Print zero-terminated string at ADDR to OLED                                                                     |  ADDR_LSB |  ADDR_MSB |
-|   OLU   |  40 | 0x28 |                                                                                      OLED_UPDATE                                                                                     |           |           |
-|   OLB   |  41 | 0x29 |                                                                                      OLED_CLEAR                                                                                      |           |           |
-|   OLR   |  42 | 0x2a |                                                                                     OLED_RESTORE                                                                                     |           |           |
-|   BCLR  |  43 | 0x2b |                                                                              Clears button status buffer                                                                             |           |           |
+|   OLU   |  40 | 0x28 |                                                                                      **OLED_UPDATE**                                                                                     |           |           |
+|   OLB   |  41 | 0x29 |                                                                                      **OLED_CLEAR**                                                                                      |           |           |
+|   OLR   |  42 | 0x2a |                                                                                     **OLED_RESTORE**                                                                                     |           |           |
+|   BCLR  |  43 | 0x2b |                                                                              Clear switch event queue                                                                             |           |           |
 |  PREVP  |  44 | 0x2c |                                                                                   Previous profile                                                                                   |           |           |
 |  NEXTP  |  45 | 0x2d |                                                                                     Next profile                                                                                     |           |           |
-|  GOTOP  |  46 | 0x2e |                                                               Pop one item off top of stack<br>Go to profile of that value                                                               |           |           |
+|  GOTOP  |  46 | 0x2e |                                                               Pop one item<br>Go to profile of its value                                                               |           |           |
 |  SLEEP  |  47 | 0x2f |                                                                       Put duckyPad to sleep<br>Terminates execution                                                                      |           |           |
 
 ## Project Pages
@@ -232,3 +232,5 @@ evaluate_expr handles unary operations such as -1
 need to think about signed or unsigned multiply
 
 probably only signed for mouse?
+
+double check stock pop to argument order
