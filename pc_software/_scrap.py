@@ -1,8 +1,24 @@
-raise dsb_exception({'comment':"wrong number of arguments", 'line_number':line_num})
+def check_syntax():
+    if is_key_selected() == False:
+        return
+    profile_index = profile_lstbox.curselection()[0]
+    if profile_list[profile_index].keylist[selected_key] is None:
+        return
+    script_textbox.tag_remove("error", '1.0', 'end')
+    program_listing = profile_list[profile_index].keylist[selected_key].script.split('\n')
+    if on_press_release_rb_var.get() == 1:
+        program_listing = profile_list[profile_index].keylist[selected_key].script_on_release.split('\n')
 
-class dsb_exception(Exception):
-    pass
+    result_dict, bin_arr = make_bytecode.make_dsb_no_exception(program_listing, profile_list)
+    if result_dict is None:
+        script_textbox.tag_remove("error", '1.0', 'end')
+        check_syntax_label.config(text="Code seems OK..", fg="green")
+    else:
+        error_lnum = result_dict['line_number']
+        script_textbox.tag_add("error", str(error_lnum)+".0", str(error_lnum)+".0 lineend")
+        check_syntax_label.config(text=result_dict['comments'], fg='red')
 
+        
 def check_syntax():
     if is_key_selected() == False:
         return
