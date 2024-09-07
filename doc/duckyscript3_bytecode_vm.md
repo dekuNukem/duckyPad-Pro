@@ -77,7 +77,7 @@ MULT                          ;VAR $spam = 10*7+3
 PUSHC     3     0x3           ;VAR $spam = 10*7+3
 ADD                           ;VAR $spam = 10*7+3
 POP       spam                ;VAR $spam = 10*7+3
-PUSHV     spam                ;DELAY $spam
+PUSHI     spam                ;DELAY $spam
 DELAY                         ;DELAY $spam
 HALT
 
@@ -89,7 +89,7 @@ HALT
 9    PUSHC     3     0x3           ;VAR $spam = 10*7+3
 12   ADD                           ;VAR $spam = 10*7+3
 15   POP       0     0x0           ;VAR $spam = 10*7+3
-18   PUSHV     0     0x0           ;DELAY $spam
+18   PUSHI     0     0x0           ;DELAY $spam
 21   DELAY                         ;DELAY $spam
 24   HALT
 
@@ -123,7 +123,7 @@ All reference to **"stack"** refers to **Arithmetic Stack**. Unless noted otherw
 |:-------:|:---:|:----:|:------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------:|:---------:|:---------:|
 |   NOP   |  0  |  0x0 |                                                                                      Do nothing                                                                                      |           |           |
 |  PUSHC  |  1  |  0x1 |                                                                               Push a constant on stack                                                                               | CONST_LSB | CONST_MSB |
-|  PUSHV  |  2  |  0x2 |                                                                              Push value at ADDR on stack                                                                             |  ADDR_LSB |  ADDR_MSB |
+|  PUSHI  |  2  |  0x2 |                                                                              Push value at ADDR on stack                                                                             |  ADDR_LSB |  ADDR_MSB |
 |   POP   |  3  |  0x3 |                                                                     Pop one item off top of stack<br>Write it to ADDR                                                                    |  ADDR_LSB |  ADDR_MSB |
 |   BRZ   |  4  |  0x4 |                                                              Pop one item off top of stack<br>If value is zero, jump to ADDR                                                             |  ADDR_LSB |  ADDR_MSB |
 |   JMP   |  5  |  0x5 |                                                                                  Unconditional Jump                                                                                  |  ADDR_LSB |  ADDR_MSB |
