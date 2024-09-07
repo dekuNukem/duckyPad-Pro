@@ -212,9 +212,9 @@ Perform a software reset.
 
 💬 duckyPad to PC:
 
-Nothing because it will be rebooting!
+Nothing, because it's rebooting!
 
-Wait at least 5 seconds before trying to talk to it again.
+**Wait at least 5 seconds** before trying to talk to it again.
 
 -----------
 
