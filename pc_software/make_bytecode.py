@@ -23,7 +23,7 @@ DS_VM_VERSION = 1
 # CPU instructions
 OP_NOP = ("NOP", 0)
 OP_PUSHC = ("PUSHC", 1)
-OP_PUSHV = ("PUSHV", 2)
+OP_PUSHI = ("PUSHI", 2)
 OP_POP = ("POP", 3)
 OP_BRZ = ("BRZ", 4)
 OP_JMP = ("JMP", 5)
@@ -157,7 +157,7 @@ def visit_node(node, instruction_list):
     # a node can be Name, Constant, and operations such as ADD, SUB, COMPARE, etc
     if isinstance(node, ast.Name):
         this_instruction = get_empty_instruction()
-        this_instruction['opcode'] = OP_PUSHV
+        this_instruction['opcode'] = OP_PUSHI
         this_instruction['oparg'] = str(node.id)
         instruction_list.append(this_instruction)
     elif isinstance(node, ast.Constant):
@@ -206,7 +206,7 @@ def evaluate_expr(expr):
         instruction_list.append(this_instruction)
     elif isinstance(root, ast.Name):
         this_instruction = get_empty_instruction()
-        this_instruction['opcode'] = OP_PUSHV
+        this_instruction['opcode'] = OP_PUSHI
         this_instruction['oparg'] = str(root.id)
         instruction_list.append(this_instruction)
     else:
@@ -374,7 +374,7 @@ def parse_color(pgm_line):
         if isinstance(value, int):
             this_instruction['opcode'] = OP_PUSHC
         else:
-            this_instruction['opcode'] = OP_PUSHV
+            this_instruction['opcode'] = OP_PUSHI
         this_instruction['oparg'] = value
         this_instruction['comment'] = pgm_line
         ins_list.append(this_instruction)
@@ -394,7 +394,7 @@ def parse_swcf(pgm_line):
         if isinstance(value, int):
             this_instruction['opcode'] = OP_PUSHC
         else:
-            this_instruction['opcode'] = OP_PUSHV
+            this_instruction['opcode'] = OP_PUSHI
         this_instruction['oparg'] = value
         this_instruction['comment'] = pgm_line
         ins_list.append(this_instruction)
@@ -413,7 +413,7 @@ def parse_swcr(pgm_line):
     if isinstance(value, int):
         this_instruction['opcode'] = OP_PUSHC
     else:
-        this_instruction['opcode'] = OP_PUSHV
+        this_instruction['opcode'] = OP_PUSHI
     this_instruction['oparg'] = value
     this_instruction['comment'] = pgm_line
     ins_list.append(this_instruction)
@@ -434,7 +434,7 @@ def parse_olc(pgm_line):
         if isinstance(value, int):
             this_instruction['opcode'] = OP_PUSHC
         else:
-            this_instruction['opcode'] = OP_PUSHV
+            this_instruction['opcode'] = OP_PUSHI
         this_instruction['oparg'] = value
         this_instruction['comment'] = pgm_line
         ins_list.append(this_instruction)

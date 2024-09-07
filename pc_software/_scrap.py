@@ -951,7 +951,7 @@ def make_swcolor_instruction(pgm_line):
 def get_combined_value(b0, b1):
     return ((b0 % 0xff) << 8) | (b1 % 0xff)
 
-  else if(this_opcode == OP_PUSHV)
+  else if(this_opcode == OP_PUSHI)
   {
     
     uint16_t this_value;
@@ -1034,7 +1034,7 @@ void led_animation_handler(void)
 }
 
 
-else if(this_opcode == OP_PUSHV)
+else if(this_opcode == OP_PUSHI)
   {
     uint16_t this_value = make_uint16(pgm_start[op_data], pgm_start[op_data+1]);
     op_result = stack_push(&arithmetic_stack, this_value);

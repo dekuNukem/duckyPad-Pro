@@ -40,8 +40,6 @@ Each DPDS3 instruction has a **fixed-length** of **three bytes**.
 
 * They are treated as one uint16_t or two uint8_t depending on the instruction.
 
-* [Click me to see details](#cpu-instructions)
-
 ## Compiler
 
 The DPDS3 compiler takes a text file and outputs a executable binary file.
