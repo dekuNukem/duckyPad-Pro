@@ -1,3 +1,11 @@
+elif first_word == cmd_DELAY:
+            assembly_listing += parse_expression(this_line)
+            assembly_listing.append(make_delay_instruction(this_line))
+
+
+elif first_word == cmd_MOUSE_WHEEL:
+            this_instruction['opcode'] = OP_MSCL
+            this_instruction['oparg'] = get_mouse_wheel_value(this_line)
 def duckypad_goto_profile(profile_target_name):
     if profile_target_name is None:
         return DP_WRITE_OK

@@ -587,8 +587,8 @@ def make_dsb(program_listing, profile_list=None):
             this_instruction['oparg'] = get_mmov_combined_value(this_line)
             assembly_listing.append(this_instruction)
         elif first_word == cmd_MOUSE_WHEEL:
+            assembly_listing += parse_expression(this_line)
             this_instruction['opcode'] = OP_MSCL
-            this_instruction['oparg'] = get_mouse_wheel_value(this_line)
             assembly_listing.append(this_instruction)
         elif first_word == cmd_SWCC:
             assembly_listing += parse_color(this_line)

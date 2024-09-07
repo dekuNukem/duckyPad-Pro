@@ -49,17 +49,8 @@ def parse_mouse(ducky_line):
 	elif this_mouse_command == cmd_MMOUSE:
 		return PARSE_OK, "Success"
 	elif this_mouse_command == cmd_MOUSE_MOVE:
-		mmresult, x_amount, y_amount = get_mousemove_xy(ducky_line)
-		if mmresult == PARSE_ERROR or x_amount > 127 or x_amount < -127 or y_amount > 127 or y_amount < -127:
-			return PARSE_ERROR, 'should be between -127 to 127'
 		return PARSE_OK, "Success"
 	elif this_mouse_command == cmd_MOUSE_WHEEL:
-		try:
-			amount = int([x for x in ducky_line.split(' ') if len(x) > 0][1])
-			if amount > 127 or amount < -127:
-				raise ValueError
-		except:
-			return PARSE_ERROR, 'should be between -127 to 127'
 		return PARSE_OK, "Success"
 	return PARSE_ERROR, "Invalid mouse command"
 
