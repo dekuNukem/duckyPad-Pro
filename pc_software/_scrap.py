@@ -1,3 +1,117 @@
+def parse_expression(pgm_line):
+    expression = pgm_line.split(' ', 1)[1].strip()
+    return parse_exp_one_item(expression, pgm_line)
+
+def check_color(pgm_line, vt):
+    split = [x for x in pgm_line.split(' ') if len(x) > 0]
+    if len(split) != 5:
+        return PARSE_ERROR, "wrong number of arguments"
+    for item in split[1:]:
+        if is_valid_swc_arg(item, vt) is False:
+            return PARSE_ERROR, "invalid color value"
+    return PARSE_OK, ''
+
+def check_swcolor(pgm_line, first_word):
+    with_underscore = cmd_SWCOLOR+'_'
+    if pgm_line.startswith(with_underscore):
+        new_line = pgm_line.replace(with_underscore, '')
+    else:
+        new_line = pgm_line.replace(cmd_SWCOLOR, '')
+    split = [x for x in new_line.split(' ') if len(x) > 0]
+    if first_word == cmd_SWCOLOR and len(split) != 3:
+        return PARSE_ERROR, "wrong number of arguments", None
+    if pgm_line.startswith(with_underscore) and len(split) != 4:
+        return PARSE_ERROR, "wrong number of arguments", None
+
+    arg_list = []
+    if first_word == cmd_SWCOLOR:
+        arg_list.append("0")
+    arg_list += split
+    return PARSE_OK, '', arg_list
+
+def check_swcr(pgm_line, vt):
+    split = [x for x in pgm_line.split(' ') if len(x) > 0]
+    if len(split) != 2:
+        return PARSE_ERROR, "wrong number of arguments"
+    if is_valid_swc_arg(split[1], vt) is False:
+        return PARSE_ERROR, "invalid color value"
+    return PARSE_OK, ''
+
+def parse_color(pgm_line):
+    ins_list = []
+    split = [x for x in pgm_line.split(' ') if len(x) > 0]
+    for item in split[1:]:
+        value = get_swc_arg(item)
+        this_instruction = get_empty_instruction()
+        if isinstance(value, int):
+            this_instruction['opcode'] = OP_PUSHC
+        else:
+            this_instruction['opcode'] = OP_PUSHI
+        this_instruction['oparg'] = value
+        this_instruction['comment'] = pgm_line
+        ins_list.append(this_instruction)
+
+    this_instruction = get_empty_instruction()
+    this_instruction['opcode'] = OP_SWCC
+    this_instruction['comment'] = pgm_line
+    ins_list.append(this_instruction)
+    return ins_list
+
+def parse_swcr(pgm_line):
+    ins_list = []
+    split = [x for x in pgm_line.split(' ') if len(x) > 0]
+    value = get_swc_arg(split[1])
+    this_instruction = get_empty_instruction()
+    if isinstance(value, int):
+        this_instruction['opcode'] = OP_PUSHC
+    else:
+        this_instruction['opcode'] = OP_PUSHI
+    this_instruction['oparg'] = value
+    this_instruction['comment'] = pgm_line
+    ins_list.append(this_instruction)
+
+    this_instruction = get_empty_instruction()
+    this_instruction['opcode'] = OP_SWCR
+    this_instruction['comment'] = pgm_line
+    ins_list.append(this_instruction)
+    return ins_list
+
+def parse_swcf(pgm_line):
+    ins_list = []
+    split = [x for x in pgm_line.split(' ') if len(x) > 0]
+    for item in split[1:]:
+        value = get_swc_arg(item)
+        this_instruction = get_empty_instruction()
+        if isinstance(value, int):
+            this_instruction['opcode'] = OP_PUSHC
+        else:
+            this_instruction['opcode'] = OP_PUSHI
+        this_instruction['oparg'] = value
+        this_instruction['comment'] = pgm_line
+        ins_list.append(this_instruction)
+
+    this_instruction = get_empty_instruction()
+    this_instruction['opcode'] = OP_SWCF
+    this_instruction['comment'] = pgm_line
+    ins_list.append(this_instruction)
+    return ins_list
+
+elif first_word == cmd_MOUSE_MOVE:
+            assembly_listing += parse_multi_expression(2, this_line)
+            this_instruction['opcode'] = OP_MMOV
+            assembly_listing.append(this_instruction)
+
+parse_swcf
+def check_swcf(pgm_line, vt):
+    return PARSE_OK, ''
+    split = [x for x in pgm_line.split(' ') if len(x) > 0]
+    if len(split) != 4:
+        return PARSE_ERROR, "wrong number of arguments"
+    for item in split[1:]:
+        if is_valid_swc_arg(item, vt) is False:
+            return PARSE_ERROR, "invalid color value"
+    return PARSE_OK, ''
+
 elif isinstance(node, ast.UnaryOp) and isinstance(node.op, ast.USub) and isinstance(node.operand, ast.Constant):
         print("UnaryOp!!!!!!", node)
         print(wat(node.operand.value))

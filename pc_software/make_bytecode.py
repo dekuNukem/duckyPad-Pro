@@ -313,10 +313,6 @@ def parse_exp_one_item(token, pgm_line):
         item['comment'] = pgm_line
     return ins_list
 
-def parse_expression(pgm_line):
-    expression = pgm_line.split(' ', 1)[1].strip()
-    return parse_exp_one_item(expression, pgm_line)
-
 def parse_multi_expression(how_many, pgm_line):
     pgm_line = pgm_line.replace('\t', ' ').replace('\n', '').replace('\r', '')
     # print("parse_multi_expression:", how_many, pgm_line)
@@ -389,65 +385,6 @@ def get_swc_arg(name):
     except:
         pass
     return name[1:]
-
-def parse_color(pgm_line):
-    ins_list = []
-    split = [x for x in pgm_line.split(' ') if len(x) > 0]
-    for item in split[1:]:
-        value = get_swc_arg(item)
-        this_instruction = get_empty_instruction()
-        if isinstance(value, int):
-            this_instruction['opcode'] = OP_PUSHC
-        else:
-            this_instruction['opcode'] = OP_PUSHI
-        this_instruction['oparg'] = value
-        this_instruction['comment'] = pgm_line
-        ins_list.append(this_instruction)
-
-    this_instruction = get_empty_instruction()
-    this_instruction['opcode'] = OP_SWCC
-    this_instruction['comment'] = pgm_line
-    ins_list.append(this_instruction)
-    return ins_list
-
-def parse_swcf(pgm_line):
-    ins_list = []
-    split = [x for x in pgm_line.split(' ') if len(x) > 0]
-    for item in split[1:]:
-        value = get_swc_arg(item)
-        this_instruction = get_empty_instruction()
-        if isinstance(value, int):
-            this_instruction['opcode'] = OP_PUSHC
-        else:
-            this_instruction['opcode'] = OP_PUSHI
-        this_instruction['oparg'] = value
-        this_instruction['comment'] = pgm_line
-        ins_list.append(this_instruction)
-
-    this_instruction = get_empty_instruction()
-    this_instruction['opcode'] = OP_SWCF
-    this_instruction['comment'] = pgm_line
-    ins_list.append(this_instruction)
-    return ins_list
-
-def parse_swcr(pgm_line):
-    ins_list = []
-    split = [x for x in pgm_line.split(' ') if len(x) > 0]
-    value = get_swc_arg(split[1])
-    this_instruction = get_empty_instruction()
-    if isinstance(value, int):
-        this_instruction['opcode'] = OP_PUSHC
-    else:
-        this_instruction['opcode'] = OP_PUSHI
-    this_instruction['oparg'] = value
-    this_instruction['comment'] = pgm_line
-    ins_list.append(this_instruction)
-
-    this_instruction = get_empty_instruction()
-    this_instruction['opcode'] = OP_SWCR
-    this_instruction['comment'] = pgm_line
-    ins_list.append(this_instruction)
-    return ins_list
 
 def parse_olc(pgm_line):
     ins_list = []
@@ -594,7 +531,7 @@ def make_dsb_with_exception(program_listing, profile_list=None):
             this_instruction['oparg'] = f"STR@{str_lookup[str_content]}"
             assembly_listing.append(this_instruction)
         elif first_word == cmd_DELAY:
-            assembly_listing += parse_expression(this_line)
+            assembly_listing += parse_multi_expression(1, this_line)
             assembly_listing.append(make_delay_instruction(this_line))
         elif first_word == cmd_KEYDOWN:
             this_instruction['opcode'] = OP_KDOWN
@@ -615,15 +552,21 @@ def make_dsb_with_exception(program_listing, profile_list=None):
             this_instruction['opcode'] = OP_MMOV
             assembly_listing.append(this_instruction)
         elif first_word == cmd_MOUSE_WHEEL:
-            assembly_listing += parse_expression(this_line)
+            assembly_listing += parse_multi_expression(1, this_line)
             this_instruction['opcode'] = OP_MSCL
             assembly_listing.append(this_instruction)
         elif first_word == cmd_SWCC:
-            assembly_listing += parse_color(this_line)
+            assembly_listing += parse_multi_expression(4, this_line)
+            this_instruction['opcode'] = OP_SWCC
+            assembly_listing.append(this_instruction)
         elif first_word == cmd_SWCF:
-            assembly_listing += parse_swcf(this_line)
+            assembly_listing += parse_multi_expression(3, this_line)
+            this_instruction['opcode'] = OP_SWCF
+            assembly_listing.append(this_instruction)
         elif first_word == cmd_SWCR:
-            assembly_listing += parse_swcr(this_line)
+            assembly_listing += parse_multi_expression(1, this_line)
+            this_instruction['opcode'] = OP_SWCR
+            assembly_listing.append(this_instruction)
         elif first_word == cmd_OLED_CURSOR:
             assembly_listing += parse_olc(this_line)
         elif first_word == cmd_OLED_UPDATE:
@@ -653,7 +596,7 @@ def make_dsb_with_exception(program_listing, profile_list=None):
             this_instruction['opcode'] = OP_PREVP
             assembly_listing.append(this_instruction)
         elif first_word == cmd_GOTO_PROFILE:
-            assembly_listing += parse_expression(this_line)
+            assembly_listing += parse_multi_expression(1, this_line)
             this_instruction['opcode'] = OP_GOTOP
             assembly_listing.append(this_instruction)
         elif first_word == cmd_DP_SLEEP:

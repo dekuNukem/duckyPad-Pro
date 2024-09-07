@@ -376,50 +376,6 @@ def is_valid_swc_arg(name, vt):
         return False
     return name[1:] in vt
 
-def check_color(pgm_line, vt):
-    split = [x for x in pgm_line.split(' ') if len(x) > 0]
-    if len(split) != 5:
-        return PARSE_ERROR, "wrong number of arguments"
-    for item in split[1:]:
-        if is_valid_swc_arg(item, vt) is False:
-            return PARSE_ERROR, "invalid color value"
-    return PARSE_OK, ''
-
-def check_swcf(pgm_line, vt):
-    split = [x for x in pgm_line.split(' ') if len(x) > 0]
-    if len(split) != 4:
-        return PARSE_ERROR, "wrong number of arguments"
-    for item in split[1:]:
-        if is_valid_swc_arg(item, vt) is False:
-            return PARSE_ERROR, "invalid color value"
-    return PARSE_OK, ''
-
-def check_swcolor(pgm_line, first_word):
-    with_underscore = cmd_SWCOLOR+'_'
-    if pgm_line.startswith(with_underscore):
-        new_line = pgm_line.replace(with_underscore, '')
-    else:
-        new_line = pgm_line.replace(cmd_SWCOLOR, '')
-    split = [x for x in new_line.split(' ') if len(x) > 0]
-    if first_word == cmd_SWCOLOR and len(split) != 3:
-        return PARSE_ERROR, "wrong number of arguments", None
-    if pgm_line.startswith(with_underscore) and len(split) != 4:
-        return PARSE_ERROR, "wrong number of arguments", None
-
-    arg_list = []
-    if first_word == cmd_SWCOLOR:
-        arg_list.append("0")
-    arg_list += split
-    return PARSE_OK, '', arg_list
-
-def check_swcr(pgm_line, vt):
-    split = [x for x in pgm_line.split(' ') if len(x) > 0]
-    if len(split) != 2:
-        return PARSE_ERROR, "wrong number of arguments"
-    if is_valid_swc_arg(split[1], vt) is False:
-        return PARSE_ERROR, "invalid color value"
-    return PARSE_OK, ''
-
 def check_olc(pgm_line, vt):
     split = [x for x in pgm_line.split(' ') if len(x) > 0]
     if len(split) != 3:
@@ -602,13 +558,13 @@ def run_once(program_listing):
             presult, pcomment = check_first_arg(this_line, var_table, allow_multi_arg=True)
         elif first_word == cmd_SWCC:
             return_dict['color_state_save_needed'] = True
-            presult, pcomment = check_color(this_line, var_table)
+            presult, pcomment = PARSE_OK, ''
         elif first_word == cmd_SWCF:
             return_dict['color_state_save_needed'] = True
-            presult, pcomment = check_swcf(this_line, var_table)
+            presult, pcomment = PARSE_OK, ''
         elif first_word == cmd_SWCR:
             return_dict['color_state_save_needed'] = True
-            presult, pcomment = check_swcr(this_line, var_table)
+            presult, pcomment = PARSE_OK, ''
         elif first_word == cmd_OLED_CURSOR:
             presult, pcomment = check_olc(this_line, var_table)
         elif first_word == cmd_OLED_UPDATE:
@@ -627,7 +583,7 @@ def run_once(program_listing):
         elif first_word == cmd_DP_SLEEP:
             presult, pcomment = ensure_zero_arg(this_line)
         elif this_line.startswith(cmd_SWCOLOR):
-            presult, pcomment, arg_list = check_swcolor(this_line, first_word)
+            presult, pcomment = PARSE_OK, ''
             return_dict['color_state_save_needed'] = True
         elif this_line.startswith(cmd_LOOP):
             presult, pcomment, value = check_loop(this_line)

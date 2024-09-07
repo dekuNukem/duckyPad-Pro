@@ -229,6 +229,10 @@ removed MOUSE_MOVE preprocessor expansion, to be done at instruction level
 
 evaluate_expr handles unary operations such as -1
 
+SWC_SET SWC_FILL SWC_RESET arguments now on stack
+
+------------
+
 need to think about signed or unsigned multiply
 
 probably only signed for mouse?
