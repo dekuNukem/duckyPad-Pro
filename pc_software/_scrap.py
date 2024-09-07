@@ -1,3 +1,62 @@
+def check_olc(pgm_line, vt):
+    split = [x for x in pgm_line.split(' ') if len(x) > 0]
+    if len(split) != 3:
+        return PARSE_ERROR, "wrong number of arguments"
+    for item in split[1:]:
+        if is_valid_swc_arg(item, vt) is False:
+            return PARSE_ERROR, "invalid cursor value"
+    return PARSE_OK, ''
+
+def is_valid_swc_arg(name, vt):
+    try:
+        return 0 <= int(name) <= 255
+    except:
+        pass
+    if name[0] != '$':
+        return False
+    return name[1:] in vt
+def get_mmov_combined_value(pgm_line):
+    split = [x for x in pgm_line.split(' ') if len(x) > 0]
+    x_value = int(split[1])
+    y_value = int(split[2])
+    if x_value < 0:
+        x_value += 256
+    if y_value < 0:
+        y_value += 256
+    return ((x_value % 0xff) << 8) | (y_value % 0xff)
+
+def get_mouse_wheel_value(pgm_line):
+    split = [x for x in pgm_line.split(' ') if len(x) > 0]
+    amount = int(split[-1])
+    if amount < 0:
+        amount += 256
+    return amount
+def get_swc_arg(name):
+    try:
+        return int(name)
+    except:
+        pass
+    return name[1:]
+def parse_olc(pgm_line):
+    ins_list = []
+    split = [x for x in pgm_line.split(' ') if len(x) > 0]
+    
+    for item in split[1:]:
+        value = get_swc_arg(item)
+        this_instruction = get_empty_instruction()
+        if isinstance(value, int):
+            this_instruction['opcode'] = OP_PUSHC
+        else:
+            this_instruction['opcode'] = OP_PUSHI
+        this_instruction['oparg'] = value
+        this_instruction['comment'] = pgm_line
+        ins_list.append(this_instruction)
+    this_instruction = get_empty_instruction()
+    this_instruction['opcode'] = OP_OLC
+    this_instruction['comment'] = pgm_line
+    ins_list.append(this_instruction)
+    return ins_list
+
 def parse_expression(pgm_line):
     expression = pgm_line.split(' ', 1)[1].strip()
     return parse_exp_one_item(expression, pgm_line)

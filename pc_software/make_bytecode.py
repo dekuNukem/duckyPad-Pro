@@ -334,23 +334,6 @@ def get_key_combined_value(keyname):
         key_type = KEY_TYPE_CHAR
     return ((key_type % 0xff) << 8) | (key_code % 0xff)
 
-def get_mmov_combined_value(pgm_line):
-    split = [x for x in pgm_line.split(' ') if len(x) > 0]
-    x_value = int(split[1])
-    y_value = int(split[2])
-    if x_value < 0:
-        x_value += 256
-    if y_value < 0:
-        y_value += 256
-    return ((x_value % 0xff) << 8) | (y_value % 0xff)
-
-def get_mouse_wheel_value(pgm_line):
-    split = [x for x in pgm_line.split(' ') if len(x) > 0]
-    amount = int(split[-1])
-    if amount < 0:
-        amount += 256
-    return amount
-
 def get_partial_varname_addr(msg, vad):
     if len(msg) == 0:
         return None, None
@@ -378,33 +361,6 @@ def replace_var_in_str(msg, vad):
             bytearr += this_letter.encode()
         curr += 1
     return bytearr
-
-def get_swc_arg(name):
-    try:
-        return int(name)
-    except:
-        pass
-    return name[1:]
-
-def parse_olc(pgm_line):
-    ins_list = []
-    split = [x for x in pgm_line.split(' ') if len(x) > 0]
-    
-    for item in split[1:]:
-        value = get_swc_arg(item)
-        this_instruction = get_empty_instruction()
-        if isinstance(value, int):
-            this_instruction['opcode'] = OP_PUSHC
-        else:
-            this_instruction['opcode'] = OP_PUSHI
-        this_instruction['oparg'] = value
-        this_instruction['comment'] = pgm_line
-        ins_list.append(this_instruction)
-    this_instruction = get_empty_instruction()
-    this_instruction['opcode'] = OP_OLC
-    this_instruction['comment'] = pgm_line
-    ins_list.append(this_instruction)
-    return ins_list
 
 def make_dsb_with_exception(program_listing, profile_list=None):
     global if_skip_table
@@ -568,7 +524,9 @@ def make_dsb_with_exception(program_listing, profile_list=None):
             this_instruction['opcode'] = OP_SWCR
             assembly_listing.append(this_instruction)
         elif first_word == cmd_OLED_CURSOR:
-            assembly_listing += parse_olc(this_line)
+            assembly_listing += parse_multi_expression(2, this_line)
+            this_instruction['opcode'] = OP_OLC
+            assembly_listing.append(this_instruction)
         elif first_word == cmd_OLED_UPDATE:
             this_instruction['opcode'] = OP_OLU
             assembly_listing.append(this_instruction)

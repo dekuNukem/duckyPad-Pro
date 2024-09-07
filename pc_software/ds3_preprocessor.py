@@ -367,24 +367,6 @@ def replace_delay_statements(pgm_line):
         first_word = pgm_line.split()[0]
     return first_word, pgm_line
 
-def is_valid_swc_arg(name, vt):
-    try:
-        return 0 <= int(name) <= 255
-    except:
-        pass
-    if name[0] != '$':
-        return False
-    return name[1:] in vt
-
-def check_olc(pgm_line, vt):
-    split = [x for x in pgm_line.split(' ') if len(x) > 0]
-    if len(split) != 3:
-        return PARSE_ERROR, "wrong number of arguments"
-    for item in split[1:]:
-        if is_valid_swc_arg(item, vt) is False:
-            return PARSE_ERROR, "invalid cursor value"
-    return PARSE_OK, ''
-
 def ensure_zero_arg(pgm_line):
     split = [x for x in pgm_line.split(' ') if len(x) > 0]
     if len(split) != 1:
@@ -566,7 +548,7 @@ def run_once(program_listing):
             return_dict['color_state_save_needed'] = True
             presult, pcomment = PARSE_OK, ''
         elif first_word == cmd_OLED_CURSOR:
-            presult, pcomment = check_olc(this_line, var_table)
+            presult, pcomment = PARSE_OK, ''
         elif first_word == cmd_OLED_UPDATE:
             return_dict['oled_restore_needed'] = True
             presult, pcomment = ensure_zero_arg(this_line)
