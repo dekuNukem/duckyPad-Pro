@@ -18,6 +18,8 @@ TODO:
 mouse move and mouse scroll arguments on stack
 """
 
+current_line_number_1_indexed = 0
+
 DS_VM_VERSION = 1
 
 # CPU instructions
@@ -304,6 +306,16 @@ def parse_expression(pgm_line):
         item['comment'] = pgm_line
     return ins_list
 
+def parse_multi_expression(how_many, pgm_line):
+    pgm_line = pgm_line.replace('\t', ' ').replace('\n', '').replace('\r', '')
+    print("parse_multi_expression:", how_many, pgm_line)
+    all_args = pgm_line.split(' ', 1)[1].strip()
+    arg_list = [x for x in all_args.split(' ') if len(x) > 0]
+    print(arg_list)
+    if len(arg_list) != how_many:
+        raise ValueError("wrong number of arguments")
+    print(arg_list)
+
 def get_key_combined_value(keyname):
     if keyname in ds3_keyname_dict:
         key_code = ds3_keyname_dict[keyname][0]
@@ -453,6 +465,7 @@ def make_dsb(program_listing, profile_list=None):
     global label_dict
     global func_lookup
     global str_lookup
+    global current_line_number_1_indexed
     # result_dict should at least contain is_success and comments
     result_dict = ds3_preprocessor.run_all(program_listing, profile_list)
     if result_dict["is_success"] is False:
@@ -460,7 +473,8 @@ def make_dsb(program_listing, profile_list=None):
         for key in result_dict:
             print(f'{key}: {result_dict[key]}')
         print("\n\n\n>>>>>>>>>> END ERROR REPORT\n\n")
-        raise ValueError(f"{result_dict['comments']}")
+        current_line_number_1_indexed = result_dict['error_line_number_starting_from_1']
+        raise ValueError(result_dict['comments'])
 
     if_skip_table = result_dict['if_skip_table']
     if_info_list = result_dict["if_info"]
@@ -488,6 +502,7 @@ def make_dsb(program_listing, profile_list=None):
 
     for lnum, this_line in enumerate(compact_program_listing):
         lnum += 1
+        current_line_number_1_indexed = lnum
         this_instruction = get_empty_instruction()
         this_instruction['comment'] = this_line
         first_word = this_line.split()[0]
@@ -583,8 +598,8 @@ def make_dsb(program_listing, profile_list=None):
             this_instruction['opcode'] = OP_HALT
             assembly_listing.append(this_instruction)
         elif first_word == cmd_MOUSE_MOVE:
+            parse_multi_expression(2, this_line)
             this_instruction['opcode'] = OP_MMOV
-            this_instruction['oparg'] = get_mmov_combined_value(this_line)
             assembly_listing.append(this_instruction)
         elif first_word == cmd_MOUSE_WHEEL:
             assembly_listing += parse_expression(this_line)
@@ -680,7 +695,7 @@ def make_dsb(program_listing, profile_list=None):
     for item in reserved_variable_dict:
         var_lookup.pop(item, None)
 
-    if len(var_lookup) > 64:
+    if len(var_lookup) > MAX_NUMBER_OF_VARIABLES:
         raise ValueError("Too many variables")
 
     str_list = []
@@ -749,6 +764,12 @@ def make_dsb(program_listing, profile_list=None):
     print(f'Binary Size: {len(output_bin_array)} Bytes')
     return output_bin_array
 
+def make_exception_dsb(program_listing, profile_list=None):
+    try:
+        return None, make_dsb(program_listing, profile_list)
+    except Exception as e:
+        return {'comment':str(e), 'line_number':current_line_number_1_indexed}, None
+
 if __name__ == "__main__":
 
     if len(sys.argv) <= 2:
@@ -759,7 +780,10 @@ if __name__ == "__main__":
     program_listing = text_file.read().split('\n')
     text_file.close()
 
-    bin_arr = make_dsb(program_listing)
+    status, bin_arr = make_exception_dsb(program_listing)
+    if bin_arr is None:
+        print(status)
+        exit()
 
     bin_out = open(sys.argv[2], 'wb')
     bin_out.write(bin_arr)

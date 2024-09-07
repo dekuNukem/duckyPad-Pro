@@ -411,3 +411,5 @@ reserved_variable_dict = {
 	"_IS_CAPSLOCK_ON": (0xffff - 15),
 	"_IS_SCROLLLOCK_ON": (0xffff - 16),
 }
+
+MAX_NUMBER_OF_VARIABLES = 64

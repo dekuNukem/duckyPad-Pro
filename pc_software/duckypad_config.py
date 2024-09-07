@@ -690,7 +690,7 @@ def compile_all_scripts():
                     this_key.binary_array = make_bytecode.make_dsb(this_key.script.split('\n'), profile_list)
                     if len(this_key.script_on_release.lstrip()) > 0:
                         this_key.binary_array_on_release = make_bytecode.make_dsb(this_key.script_on_release.lstrip().split('\n'), profile_list)
-                    if len(this_key.binary_array) >= 65530 or (this_key.binary_array_on_release is not None and len(this_key.binary_array_on_release) >= 65530):
+                    if len(this_key.binary_array) >= 65500 or (this_key.binary_array_on_release is not None and len(this_key.binary_array_on_release) >= 65500):
                         messagebox.showerror("Error", f'Script size too large!\n\nProfile: {this_profile.name}\nKey: {this_key.name}')
                         return False
         return True
@@ -1443,13 +1443,12 @@ def check_syntax():
     if on_press_release_rb_var.get() == 1:
         program_listing = profile_list[profile_index].keylist[selected_key].script_on_release.split('\n')
     result_dict = ds3_preprocessor.run_all(program_listing, profile_list)
-    if result_dict["is_success"]:
-        script_textbox.tag_remove("error", '1.0', 'end')
-        check_syntax_label.config(text="Code seems OK..", fg="green")
-    else:
+    if result_dict["is_success"] is False:
         error_lnum = result_dict['error_line_number_starting_from_1']
         script_textbox.tag_add("error", str(error_lnum)+".0", str(error_lnum)+".0 lineend")
         check_syntax_label.config(text=result_dict['comments'], fg='red')
+        return
+    
 
 check_syntax_label = Label(scripts_lf, text="")
 check_syntax_label.place(x=scaled_size(10), y=scaled_size(417))
@@ -1649,8 +1648,7 @@ def repeat_func():
 
 root.after(500, repeat_func)
 
-# select_root_folder("sample_profiles")
-# select_root_folder("D:")
+select_root_folder("sample_profiles")
 my_compare.tk_root = root
 my_compare.tk_strvar = dp_root_folder_display
 root.mainloop()

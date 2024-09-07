@@ -818,23 +818,23 @@ def run_all(program_listing, profile_list=None):
     program_listing = new_program_listing
 
     # ----------- expand MOUSE_MOVE ----------
-    new_program_listing = []
-    for index, this_line in enumerate(program_listing):
-        if ds_syntax_check.is_mouse_move(this_line) is False:
-            new_program_listing.append(this_line)
-            continue
-        mm_result, mmx, mmy = ds_syntax_check.get_mousemove_xy(this_line)
-        if mm_result == PARSE_ERROR:
-            error_dict = {}
-            error_dict['is_success'] = False
-            error_dict['comments'] = "invalid value"
-            error_dict['error_line_number_starting_from_1'] = index+1
-            error_dict['error_line_str'] = this_line
-            return error_dict
+    # new_program_listing = []
+    # for index, this_line in enumerate(program_listing):
+    #     if ds_syntax_check.is_mouse_move(this_line) is False:
+    #         new_program_listing.append(this_line)
+    #         continue
+    #     mm_result, mmx, mmy = ds_syntax_check.get_mousemove_xy(this_line)
+    #     if mm_result == PARSE_ERROR:
+    #         error_dict = {}
+    #         error_dict['is_success'] = False
+    #         error_dict['comments'] = "invalid value"
+    #         error_dict['error_line_number_starting_from_1'] = index+1
+    #         error_dict['error_line_str'] = this_line
+    #         return error_dict
 
-        new_program_listing += expand_mousemove(mmx, mmy)
+    #     new_program_listing += expand_mousemove(mmx, mmy)
 
-    program_listing = new_program_listing
+    # program_listing = new_program_listing
 
     # ----------- Do a pass ---------------
 

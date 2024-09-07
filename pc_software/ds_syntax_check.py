@@ -30,6 +30,7 @@ def parse_combo(combo_line):
 
 def get_mousemove_xy(ducky_line):
 	try:
+		ducky_line = ducky_line.replace('\t', '').replace('\n', '').replace('\r', '')
 		x_amount = int([x for x in ducky_line.split(' ') if len(x) > 0][1])
 		y_amount = int([x for x in ducky_line.split(' ') if len(x) > 0][2])
 		return PARSE_OK, x_amount, y_amount
@@ -80,8 +81,6 @@ def parse_line(ducky_line):
 		return PARSE_OK, ""
 	if len(ducky_line) == 0:
 		return PARSE_OK, "Empty line"
-	# elif len(ducky_line) >= 250:
-	# 	return PARSE_ERROR, "Line too long, max 250 char"
 	elif is_ignored_but_valid_command(ducky_line):
 		return PARSE_OK, "Success"
 	elif ducky_line.startswith(cmd_KEYDOWN + " "):
@@ -95,6 +94,17 @@ def parse_line(ducky_line):
 	elif split[0] in mouse_commands:
 		parse_result, parse_message = parse_mouse(ducky_line)
 	elif ducky_line.startswith(cmd_EMUK):
+		return PARSE_ERROR, "EMUK not supported"
+	else:
+		parse_result = PARSE_ERROR
+		parse_message = "Invalid command"
+	return parse_result, parse_message
+
+"""
+elif len(ducky_line) >= 250:
+	return PARSE_ERROR, "Line too long, max 250 char"
+
+elif ducky_line.startswith(cmd_EMUK):
 		sssss = [x for x in ducky_line.split(' ') if len(x) > 0]
 		if len(sssss) > 2:
 			return PARSE_ERROR, "EMUK takes 1 key max"
@@ -105,51 +115,4 @@ def parse_line(ducky_line):
 		elif len(sssss[1]) == 1:
 			return PARSE_OK, "Success"
 		return PARSE_ERROR, "EMUK invalid key"
-	else:
-		parse_result = PARSE_ERROR
-		parse_message = "Invalid command"
-	return parse_result, parse_message
-
 """
-	elif ducky_line.startswith(cmd_LOOP) and ducky_line.endswith(':') and len(ducky_line) == 6 and ducky_line[4].isnumeric():
-		return PARSE_OK, "Success"
-	elif ducky_line.startswith(cmd_EMUK):
-		sssss = ducky_line[len(cmd_EMUK):].strip().split(' ')
-		if len(sssss) > 2:
-			return PARSE_ERROR, "EMUK max 2 keys"
-		if sssss[0] in ds3_keyname_dict.keys() or sssss[0] in mouse_commands[:3]:
-			return PARSE_OK, "Success"
-		elif len(sssss[0]) == 1:
-			return PARSE_OK, "Success"
-		return PARSE_ERROR, "EMUK invalid key"
-
-	elif ducky_line.startswith(cmd_SWCOLOR):
-		return check_color(ducky_line)
-
-	def check_color(pgm_line):
-	split = [x for x in pgm_line.split(' ') if len(x) > 0]
-
-	if len(split) != 4:
-		return PARSE_ERROR, "wrong number of arguments"
-
-	cmd = split[0].strip()
-	sw = 0
-	try:
-		if cmd.startswith("SWCOLOR_"):
-			sw = int(cmd.split('_')[1])
-			if not 1 <= sw <= 15:
-				return PARSE_ERROR, "switch index must be between 1 - 15"
-	except Exception as e:
-		return PARSE_ERROR, "switch index must be between 1 - 15"
-
-	try:
-		for x in range(1, 4):
-			if not 0 <= int(split[x]) <= 255:
-				return PARSE_ERROR, "value must be between 0 - 255"
-	except Exception as e:
-		return PARSE_ERROR, "value must be between 0 - 255"
-
-	return PARSE_OK, ""
-"""
-
-

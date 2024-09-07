@@ -1,3 +1,51 @@
+raise dsb_exception({'comment':"wrong number of arguments", 'line_number':line_num})
+
+class dsb_exception(Exception):
+    pass
+
+def check_syntax():
+    if is_key_selected() == False:
+        return
+    profile_index = profile_lstbox.curselection()[0]
+    if profile_list[profile_index].keylist[selected_key] is None:
+        return
+    script_textbox.tag_remove("error", '1.0', 'end')
+    program_listing = profile_list[profile_index].keylist[selected_key].script.split('\n')
+    if on_press_release_rb_var.get() == 1:
+        program_listing = profile_list[profile_index].keylist[selected_key].script_on_release.split('\n')
+    result_dict = ds3_preprocessor.run_all(program_listing, profile_list)
+    if result_dict["is_success"]:
+        script_textbox.tag_remove("error", '1.0', 'end')
+        check_syntax_label.config(text="Code seems OK..", fg="green")
+    else:
+        error_lnum = result_dict['error_line_number_starting_from_1']
+        script_textbox.tag_add("error", str(error_lnum)+".0", str(error_lnum)+".0 lineend")
+        check_syntax_label.config(text=result_dict['comments'], fg='red')
+
+def compile_all_scripts():
+    try:
+        for this_profile in profile_list:
+            for this_key in this_profile.keylist:
+                if this_key is not None:
+                    this_key.binary_array = make_bytecode.make_dsb(this_key.script.split('\n'), profile_list)
+                    if len(this_key.script_on_release.lstrip()) > 0:
+                        this_key.binary_array_on_release = make_bytecode.make_dsb(this_key.script_on_release.lstrip().split('\n'), profile_list)
+                    if len(this_key.binary_array) >= 65500 or (this_key.binary_array_on_release is not None and len(this_key.binary_array_on_release) >= 65500):
+                        messagebox.showerror("Error", f'Script size too large!\n\nProfile: {this_profile.name}\nKey: {this_key.name}')
+                        return False
+        return True
+    except Exception as e:
+        error_msg = "Code contains error!\n"
+        error_msg += f"Profile [{this_profile.name}] Key [{this_key.name}]:\n"
+        error_msg += str(e)
+        messagebox.showerror("Error", error_msg)
+    return False
+
+elif first_word == cmd_MOUSE_MOVE:
+            this_instruction['opcode'] = OP_MMOV
+            this_instruction['oparg'] = get_mmov_combined_value(this_line)
+            assembly_listing.append(this_instruction)
+
 elif first_word == cmd_DELAY:
             assembly_listing += parse_expression(this_line)
             assembly_listing.append(make_delay_instruction(this_line))
@@ -1129,3 +1177,48 @@ pc_app_update_label.place(x=scaled_size(5), y=scaled_size(0))
     final_dict["if_info"] = if_info_list
     print("---------Preprocessing Done!---------\n")
     return final_dict
+
+
+"""
+    elif ducky_line.startswith(cmd_LOOP) and ducky_line.endswith(':') and len(ducky_line) == 6 and ducky_line[4].isnumeric():
+        return PARSE_OK, "Success"
+    elif ducky_line.startswith(cmd_EMUK):
+        sssss = ducky_line[len(cmd_EMUK):].strip().split(' ')
+        if len(sssss) > 2:
+            return PARSE_ERROR, "EMUK max 2 keys"
+        if sssss[0] in ds3_keyname_dict.keys() or sssss[0] in mouse_commands[:3]:
+            return PARSE_OK, "Success"
+        elif len(sssss[0]) == 1:
+            return PARSE_OK, "Success"
+        return PARSE_ERROR, "EMUK invalid key"
+
+    elif ducky_line.startswith(cmd_SWCOLOR):
+        return check_color(ducky_line)
+
+    def check_color(pgm_line):
+    split = [x for x in pgm_line.split(' ') if len(x) > 0]
+
+    if len(split) != 4:
+        return PARSE_ERROR, "wrong number of arguments"
+
+    cmd = split[0].strip()
+    sw = 0
+    try:
+        if cmd.startswith("SWCOLOR_"):
+            sw = int(cmd.split('_')[1])
+            if not 1 <= sw <= 15:
+                return PARSE_ERROR, "switch index must be between 1 - 15"
+    except Exception as e:
+        return PARSE_ERROR, "switch index must be between 1 - 15"
+
+    try:
+        for x in range(1, 4):
+            if not 0 <= int(split[x]) <= 255:
+                return PARSE_ERROR, "value must be between 0 - 255"
+    except Exception as e:
+        return PARSE_ERROR, "value must be between 0 - 255"
+
+    return PARSE_OK, ""
+"""
+
+
