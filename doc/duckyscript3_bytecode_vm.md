@@ -223,4 +223,4 @@ All reference to **"stack"** refers to **Arithmetic Stack**. Unless noted otherw
 MOUSE_WHEEL argument on stack
 MOUSE_MOVE argument on stack
 removed MOUSE_MOVE preprocessor expansion, to be done at instruction level
-
+evaluate_expr handles Unary operations such as -1
