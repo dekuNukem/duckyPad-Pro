@@ -1,1 +1,5 @@
-MOUSE_MOVE 44   	fghf	sdfsd
+VAR $spam = 12
+
+MOUSE_WHEEL $spam
+
+MOUSE_MOVE 44 $spam

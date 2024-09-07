@@ -298,23 +298,28 @@ def make_delay_instruction(comment):
     this_instruction['comment'] = comment
     return this_instruction
 
-def parse_expression(pgm_line):
-    expression = pgm_line.split(' ', 1)[1].strip()
-    expression = replace_operators(expression)
+def parse_exp_one_item(token, pgm_line):
+    expression = replace_operators(token)
     ins_list = evaluate_expr(expression)
     for item in ins_list:
         item['comment'] = pgm_line
     return ins_list
 
+def parse_expression(pgm_line):
+    expression = pgm_line.split(' ', 1)[1].strip()
+    return parse_exp_one_item(expression, pgm_line)
+
 def parse_multi_expression(how_many, pgm_line):
     pgm_line = pgm_line.replace('\t', ' ').replace('\n', '').replace('\r', '')
-    print("parse_multi_expression:", how_many, pgm_line)
+    # print("parse_multi_expression:", how_many, pgm_line)
     all_args = pgm_line.split(' ', 1)[1].strip()
     arg_list = [x for x in all_args.split(' ') if len(x) > 0]
-    print(arg_list)
     if len(arg_list) != how_many:
         raise ValueError("wrong number of arguments")
-    print(arg_list)
+    return_list = []
+    for item in arg_list:
+        return_list += parse_exp_one_item(item, pgm_line)
+    return return_list
 
 def get_key_combined_value(keyname):
     if keyname in ds3_keyname_dict:
@@ -598,7 +603,7 @@ def make_dsb_with_exception(program_listing, profile_list=None):
             this_instruction['opcode'] = OP_HALT
             assembly_listing.append(this_instruction)
         elif first_word == cmd_MOUSE_MOVE:
-            parse_multi_expression(2, this_line)
+            assembly_listing += parse_multi_expression(2, this_line)
             this_instruction['opcode'] = OP_MMOV
             assembly_listing.append(this_instruction)
         elif first_word == cmd_MOUSE_WHEEL:
