@@ -1,4 +1,4 @@
-VAR $spam = -1 
+VAR $spam = 3 + -1 
 
-//MOUSE_WHEEL $spam
-MOUSE_MOVE 6 $spam
+//MOUSE_WHEEL $_RANDOM_INT
+//MOUSE_MOVE -2*$_RANDOM_INT*4 $_RANDOM_INT-5

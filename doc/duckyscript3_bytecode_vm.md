@@ -219,8 +219,16 @@ All reference to **"stack"** refers to **Arithmetic Stack**. Unless noted otherw
 
 ## DSVM changelog
 
-2024 09 07
+### 2024 09 07
+
 MOUSE_WHEEL argument on stack
+
 MOUSE_MOVE argument on stack
+
 removed MOUSE_MOVE preprocessor expansion, to be done at instruction level
-evaluate_expr handles Unary operations such as -1
+
+evaluate_expr handles unary operations such as -1
+
+need to think about signed or unsigned multiply
+
+probably only signed for mouse?

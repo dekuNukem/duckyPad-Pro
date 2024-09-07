@@ -4,6 +4,7 @@ import ast
 import myast
 from keywords import *
 import traceback
+# import wat
 
 """
 duckyscript VM changelog
@@ -14,9 +15,8 @@ version 1:
 duckyPad Pro with duckyScript 3
 Done:
 Added VMVER to aid version checking
-
-TODO:
 mouse move and mouse scroll arguments on stack
+more changes at the end of bytecode_vm.md
 """
 
 current_line_number_1_indexed = 0
@@ -155,8 +155,6 @@ def print_asslist(lll):
         print_instruction(item)
     print()
 
-import wat
-
 def visit_node(node, instruction_list):
     # print(node.__dict__)
     # a node can be Name, Constant, and operations such as ADD, SUB, COMPARE, etc
@@ -166,7 +164,6 @@ def visit_node(node, instruction_list):
         this_instruction['oparg'] = str(node.id)
         instruction_list.append(this_instruction)
     elif isinstance(node, ast.Constant):
-        print("Constant!!!!!!", node)
         this_instruction = get_empty_instruction()
         this_instruction['opcode'] = OP_PUSHC
         this_instruction['oparg'] = int(node.value) & 0xffff
@@ -211,7 +208,6 @@ def evaluate_expr(expr):
     instruction_list = []
     root = ast.parse(expr).body[0].value
     if myast.is_walkable(root):
-        print("3333333333333333333")
         myast.postorder_walk(root, visit_node, instruction_list, expr)
     elif isinstance(root, ast.Constant):
         this_instruction = get_empty_instruction()
