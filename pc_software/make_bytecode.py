@@ -155,6 +155,8 @@ def print_asslist(lll):
         print_instruction(item)
     print()
 
+import wat
+
 def visit_node(node, instruction_list):
     # print(node.__dict__)
     # a node can be Name, Constant, and operations such as ADD, SUB, COMPARE, etc
@@ -191,11 +193,13 @@ def visit_node(node, instruction_list):
         this_instruction = get_empty_instruction()
         this_instruction['opcode'] = arith_lookup[op_name]
         instruction_list.append(this_instruction)
-    elif isinstance(node, ast.UnaryOp) and isinstance(node.op, ast.USub) and isinstance(node.operand, ast.Constant):
+    elif isinstance(node, ast.UnaryOp):
         this_instruction = get_empty_instruction()
-        this_instruction['opcode'] = OP_PUSHC
-        this_instruction['oparg'] = (-1 * node.operand.value) & 0xffff
-        instruction_list.append(this_instruction)
+        print(wat(node))
+        # this_instruction['opcode'] = OP_PUSHC
+        # this_instruction['oparg'] = (-1 * node.operand.value) & 0xffff
+        # instruction_list.append(this_instruction)
+        exit()
     else:
         raise ValueError("Unimplemented AST operation")
 

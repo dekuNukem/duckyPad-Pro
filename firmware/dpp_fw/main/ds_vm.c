@@ -540,8 +540,15 @@ void execute_instruction(uint16_t curr_pc, ds3_exe_result* exe, uint8_t this_key
   }
   else if(this_opcode == OP_MSCL)
   {
+    int8_t scroll_amount;
+    op_result = stack_pop(&arithmetic_stack, &scroll_amount);
+    if(op_result != EXE_OK)
+    {
+      exe->result = op_result;
+      return;
+    }
     my_key kk;
-    kk.code = byte0;
+    kk.code = scroll_amount;
     kk.code2 = 0;
     kk.type = KEY_TYPE_MOUSE_WHEEL;
     keyboard_press(&kk, 0);

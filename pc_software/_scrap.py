@@ -1,3 +1,9 @@
+elif isinstance(node, ast.UnaryOp) and isinstance(node.op, ast.USub) and isinstance(node.operand, ast.Constant):
+        this_instruction = get_empty_instruction()
+        this_instruction['opcode'] = OP_PUSHC
+        this_instruction['oparg'] = (-1 * node.operand.value) & 0xffff
+        instruction_list.append(this_instruction)
+
 key_color_text
 
 allow_abort_checkbox
