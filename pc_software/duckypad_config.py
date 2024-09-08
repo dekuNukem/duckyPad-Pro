@@ -680,14 +680,23 @@ def validate_data_objs(save_path):
             this_key.path_on_release = os.path.join(this_profile.path, 'key'+str(key_index+1)+'-release.txt')
             this_key.index = key_index + 1
 
+def make_final_script(ds_key, pgm_listing):
+    final_listing = []
+    if ds_key.allow_abort:
+        final_listing.append("$_ALLOW_ABORT = 1")
+    if ds_key.dont_repeat:
+        final_listing.append("$_DONT_REPEAT = 1")
+    final_listing += pgm_listing
+    return final_listing
+
 def compile_all_scripts():
     try:
         for this_profile in profile_list:
             for this_key in this_profile.keylist:
                 if this_key is not None:
-                    this_key.binary_array = make_bytecode.make_dsb_with_exception(this_key.script.split('\n'), profile_list)
+                    this_key.binary_array = make_bytecode.make_dsb_with_exception(make_final_script(this_key, this_key.script.lstrip().split('\n')), profile_list)
                     if len(this_key.script_on_release.lstrip()) > 0:
-                        this_key.binary_array_on_release = make_bytecode.make_dsb_with_exception(this_key.script_on_release.lstrip().split('\n'), profile_list)
+                        this_key.binary_array_on_release = make_bytecode.make_dsb_with_exception(make_final_script(this_key, this_key.script_on_release.lstrip().split('\n')), profile_list)
                     if len(this_key.binary_array) >= 65500 or (this_key.binary_array_on_release is not None and len(this_key.binary_array_on_release) >= 65500):
                         messagebox.showerror("Error", f'Script size too large!\n\nProfile: {this_profile.name}\nKey: {this_key.name}')
                         return False
@@ -905,6 +914,16 @@ def key_button_click(button_widget):
         custom_key_color_checkbox.select()
         last_rgb = thissss_key.color
         key_color_button.config(background=rgb_to_hex(thissss_key.color))
+
+    if thissss_key.allow_abort:
+        allow_abort_checkbox.select()
+    else:
+        allow_abort_checkbox.deselect()
+
+    if thissss_key.dont_repeat:
+        dont_repeat_checkbox.select()
+    else:
+        dont_repeat_checkbox.deselect()
     check_syntax()
 
 # ------------- Folder select -------------
