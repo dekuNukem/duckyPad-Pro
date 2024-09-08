@@ -243,4 +243,6 @@ MOUSE_MOVE FW implementation
 
 MOUSE_MOVE FW level expansion
 
+KEYUP KEYDOWN FW level implementation
+
 ------------
