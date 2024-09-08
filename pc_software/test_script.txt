@@ -4,12 +4,8 @@ VAR $spam = 3 + -1
 MOUSE_WHEEL $_RANDOM_INT
 MOUSE_MOVE -2*$_RANDOM_INT*4 $_RANDOM_INT-5
 
--------
-
 SWC_FILL 11 33+22 $spam*6
 SWC_RESET  $spam*9
-END_REM
-// ----------END_REM-------------
 
 KEYDOWN ALT
 TAB
@@ -25,3 +21,8 @@ DEFAULTCHARDELAY 30
 STRINGLN Custom duckyScript Engine
 STRINGLN Longer & More Complex Macros
 STRING SD Card Storage
+// ----------END_REM-------------
+END_REM
+
+VAR $spam = 3 + -1
+SWCOLOR $spam $spam $spam

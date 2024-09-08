@@ -1432,12 +1432,18 @@ on_release_rb = Radiobutton(scripts_lf, text="On Release", variable=on_press_rel
 on_release_rb.place(x=scaled_size(150), y=scaled_size(20))
 root.update()
 
+last_syntax_check = 0
 def check_syntax():
+    global last_syntax_check
+    if time.time() - last_syntax_check <= 1:
+        print("check_syntax: too soon")
+        return
     if is_key_selected() == False:
         return
     profile_index = profile_lstbox.curselection()[0]
     if profile_list[profile_index].keylist[selected_key] is None:
         return
+    last_syntax_check = time.time()
     script_textbox.tag_remove("error", '1.0', 'end')
     program_listing = profile_list[profile_index].keylist[selected_key].script.split('\n')
     if on_press_release_rb_var.get() == 1:

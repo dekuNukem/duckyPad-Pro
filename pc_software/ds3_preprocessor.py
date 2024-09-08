@@ -691,6 +691,24 @@ def search_profile_index_from_name(query, profile_list):
             return index
     return None
 
+def check_swcolor(pgm_line, first_word):
+    with_underscore = cmd_SWCOLOR+'_'
+    if pgm_line.startswith(with_underscore):
+        new_line = pgm_line.replace(with_underscore, '')
+    else:
+        new_line = pgm_line.replace(cmd_SWCOLOR, '')
+    split = [x for x in new_line.split(' ') if len(x) > 0]
+    if first_word == cmd_SWCOLOR and len(split) != 3:
+        return PARSE_ERROR, "wrong number of arguments", None
+    if pgm_line.startswith(with_underscore) and len(split) != 4:
+        return PARSE_ERROR, "wrong number of arguments", None
+
+    arg_list = []
+    if first_word == cmd_SWCOLOR:
+        arg_list.append("0")
+    arg_list += split
+    return PARSE_OK, '', arg_list
+
 def run_all(program_listing, profile_list=None):
     new_program_listing = []
     for index, this_line in enumerate(program_listing):
