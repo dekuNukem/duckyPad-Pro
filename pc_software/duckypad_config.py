@@ -192,12 +192,10 @@ def ui_reset():
     kd_R2.config(state=DISABLED)
     dim_unused_keys_checkbox.config(state=DISABLED)
     rotate_keys_checkbox.config(state=DISABLED)
-    key_rename_button.config(state=DISABLED)
     key_remove_button.config(state=DISABLED)
     key_name_textbox.config(state=DISABLED)
     bg_color_label.config(fg='grey')
     kd_color_label.config(fg='grey')
-    key_name_label.config(fg='grey')
     key_char_limit_label.config(fg='grey')
     key_color_text.config(fg='grey')
     reset_key_button_relief()
@@ -411,11 +409,9 @@ def enable_buttons():
     kd_R2.config(state=NORMAL)
     dim_unused_keys_checkbox.config(state=NORMAL)
     rotate_keys_checkbox.config(state=NORMAL)
-    key_rename_button.config(state=NORMAL)
     key_remove_button.config(state=NORMAL)
     bg_color_label.config(fg='black')
     kd_color_label.config(fg='black')
-    key_name_label.config(fg='black')
     key_char_limit_label.config(fg='black')
     key_color_text.config(fg='black')
     profile_import_button.config(state=NORMAL)
@@ -1231,15 +1227,11 @@ name_editor_lf = LabelFrame(root, text="Editor", width=scaled_size(300), height=
 name_editor_lf.place(x=profiles_lf.winfo_x() + profiles_lf.winfo_width() + PADDING, y=380)
 root.update()
 
-key_name_label = Label(master=name_editor_lf, text="Key name:", fg='grey')
-key_name_label.place(x=scaled_size(15), y=scaled_size(10))
-root.update()
-
-key_char_limit_portrait = "max 2 lines\n5 char per line"
-key_char_limit_landscape = "max 2 lines\n4 char per line"
+key_char_limit_portrait = "Key name\nmax 2 lines\n5 char per line"
+key_char_limit_landscape = "Key name\nmax 2 lines\n4 char per line"
 
 key_char_limit_label = Label(master=name_editor_lf, fg='grey')
-key_char_limit_label.place(x=scaled_size(200), y=scaled_size(0))
+key_char_limit_label.place(x=scaled_size(15), y=scaled_size(0))
 root.update()
 
 def keyname_textbox_modified_event(event):
@@ -1247,7 +1239,7 @@ def keyname_textbox_modified_event(event):
     key_name_textbox.tk.call(key_name_textbox._w, 'edit', 'modified', 0)
 
 key_name_textbox = Text(name_editor_lf, state=DISABLED, wrap="word")
-key_name_textbox.place(x=scaled_size(107), y=scaled_size(0), width=scaled_size(80), height=scaled_size(40))
+key_name_textbox.place(x=scaled_size(107), y=scaled_size(5), width=scaled_size(80), height=scaled_size(40))
 key_name_textbox.bind("<<Modified>>", keyname_textbox_modified_event)
 
 def get_clean_key_name_2lines(user_text):
@@ -1296,15 +1288,20 @@ def key_remove_click():
 
 KEY_NAME_BUTTON_GAP = int((keys_lf.winfo_width() - 2 * BUTTON_WIDTH) / 3.5)
 
-key_rename_button = Button(name_editor_lf, text="Apply", command=key_rename_click, state=DISABLED, fg="green")
-key_rename_button.place(x=scaled_size(30), y=scaled_size(45), width=BUTTON_WIDTH, height=22)
-root.update()
-key_remove_button = Button(name_editor_lf, text="Remove", command=key_remove_click, state=DISABLED, fg="red")
-key_remove_button.place(x=scaled_size(160), y=scaled_size(45), width=BUTTON_WIDTH, height=22)
+key_remove_button = Button(name_editor_lf, text="Remove\nKey", command=key_remove_click, state=DISABLED, fg="red")
+key_remove_button.place(x=scaled_size(200), y=scaled_size(5), width=80, height=40)
 
-key_color_text = Label(master=name_editor_lf, text="Key color:", fg='grey')
-key_color_text.place(x=scaled_size(15), y=scaled_size(70))
+key_color_text = Label(master=name_editor_lf, text="Custom Key Color:", fg='grey')
+key_color_text.place(x=scaled_size(15), y=scaled_size(55))
+
+def custom_key_color_click():
+    pass
+
+custom_key_color_checkbox_var = IntVar()
+custom_key_color_checkbox = Checkbutton(name_editor_lf, text="", variable=custom_key_color_checkbox_var, command=custom_key_color_click) #, state=DISABLED
+custom_key_color_checkbox.place(x=scaled_size(150), y=scaled_size(55))
 root.update()
+
 
 def key_color_rb1_click():
     if is_key_selected() == False:

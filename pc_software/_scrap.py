@@ -1,6 +1,15 @@
 key_rename_click
 key_name_textbox
 
+key_name_label = Label(master=name_editor_lf, text="Key name:", fg='grey')
+key_name_label.place(x=scaled_size(15), y=scaled_size(10))
+root.update()
+
+key_rename_button = Button(name_editor_lf, text="Apply", command=key_rename_click, state=DISABLED, fg="green")
+key_rename_button.place(x=scaled_size(30), y=scaled_size(45), width=BUTTON_WIDTH, height=22)
+root.update()
+
+
 
 last_key_rename = 0
 def key_rename_click():
