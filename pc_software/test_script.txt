@@ -9,7 +9,19 @@ MOUSE_MOVE -2*$_RANDOM_INT*4 $_RANDOM_INT-5
 SWC_FILL 11 33+22 $spam*6
 SWC_RESET  $spam*9
 END_REM
-// ----------start-------------
+// ----------END_REM-------------
 
-VAR $spam = 3 + -1 
-OLED_CURSOR $spam*3 9
+KEYDOWN ALT
+TAB
+TAB
+KEYUP ALT
+DELAY 100
+DELAY 250
+CTRL SHIFT j
+DELAY 250
+SHIFT F12
+DELAY 250
+DEFAULTCHARDELAY 30
+STRINGLN Custom duckyScript Engine
+STRINGLN Longer & More Complex Macros
+STRING SD Card Storage

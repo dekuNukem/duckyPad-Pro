@@ -232,6 +232,10 @@ evaluate_expr handles unary operations such as -1
 SWC_SET SWC_FILL SWC_RESET arguments now on stack
 OLED_CURSOR arguments now on stack
 
+### 2024 09 08
+
+KEYUP KEYDOWN and key combos argument on stack
+
 ------------
 
 need to think about signed or unsigned multiply
@@ -239,3 +243,5 @@ need to think about signed or unsigned multiply
 probably only signed for mouse?
 
 double check stock pop to argument order
+
+

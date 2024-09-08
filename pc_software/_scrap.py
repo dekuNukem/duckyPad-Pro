@@ -1,3 +1,36 @@
+for item in assembly_listing:
+        this_oparg = item['oparg']
+        if item['opcode'] == OP_STR or item['opcode'] == OP_STRLN or item['opcode'] == OP_OLP:
+            str_lnum = int(this_oparg.replace('STR@', ''))
+            for sssss in str_list:
+                if sssss['lnum'] == str_lnum:
+                    this_oparg = sssss['addr']
+        if this_oparg is None:
+            continue
+        if isinstance(this_oparg, str) and "@" in this_oparg:
+            this_oparg = label_to_addr_dict[this_oparg]
+        if isinstance(this_oparg, int) is False:
+            raise ValueError("Unknown variable")
+        this_oparg = int(this_oparg)
+
+
+def push_1_constant_on_stack(value):
+    this_instruction = get_empty_instruction()
+    this_instruction['opcode'] = OP_PUSHC
+    this_instruction['oparg'] = value & 0xffff
+    return this_instruction
+
+elif first_word == cmd_KEYDOWN:
+        assembly_listing.append(push_1_constant_on_stack(get_key_combined_value(this_line.split(' ')[-1])))
+        this_instruction = get_empty_instruction()
+        this_instruction['opcode'] = OP_KDOWN
+        assembly_listing.append(this_instruction)
+
+this_instruction = get_empty_instruction()
+        this_instruction['opcode'] = OP_PUSHC
+        this_instruction['oparg'] = root.value
+        instruction_list.append(this_instruction)
+
 def check_olc(pgm_line, vt):
     split = [x for x in pgm_line.split(' ') if len(x) > 0]
     if len(split) != 3:

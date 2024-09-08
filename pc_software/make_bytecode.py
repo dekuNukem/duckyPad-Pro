@@ -362,6 +362,14 @@ def replace_var_in_str(msg, vad):
         curr += 1
     return bytearr
 
+def push_1_constant_on_stack(value, comment=None):
+    this_instruction = get_empty_instruction()
+    this_instruction['opcode'] = OP_PUSHC
+    this_instruction['oparg'] = value & 0xffff
+    if comment is not None:
+        this_instruction['comment'] = comment
+    return this_instruction
+
 def make_dsb_with_exception(program_listing, profile_list=None):
     global if_skip_table
     global if_info_list
@@ -490,12 +498,13 @@ def make_dsb_with_exception(program_listing, profile_list=None):
             assembly_listing += parse_multi_expression(1, this_line)
             assembly_listing.append(make_delay_instruction(this_line))
         elif first_word == cmd_KEYDOWN:
+            assembly_listing.append(push_1_constant_on_stack(get_key_combined_value(this_line.split(' ')[-1]), comment=this_line))
+            this_instruction = get_empty_instruction()
             this_instruction['opcode'] = OP_KDOWN
-            this_instruction['oparg'] = get_key_combined_value(this_line.split(' ')[-1])
             assembly_listing.append(this_instruction)
         elif first_word == cmd_KEYUP:
+            assembly_listing.append(push_1_constant_on_stack(get_key_combined_value(this_line.split(' ')[-1]), comment=this_line))
             this_instruction['opcode'] = OP_KUP
-            this_instruction['oparg'] = get_key_combined_value(this_line.split(' ')[-1])
             assembly_listing.append(this_instruction)
         elif first_word == cmd_RETURN:
             this_instruction['opcode'] = OP_RET
@@ -564,16 +573,16 @@ def make_dsb_with_exception(program_listing, profile_list=None):
             key_list = [x for x in this_line.split(" ") if len(x) > 0]
             # press, from first to last
             for item in key_list:
+                assembly_listing.append(push_1_constant_on_stack(get_key_combined_value(item), comment=this_line))
                 this_instruction = get_empty_instruction()
                 this_instruction['opcode'] = OP_KDOWN
-                this_instruction['oparg'] = get_key_combined_value(item)
                 this_instruction['comment'] = this_line
                 assembly_listing.append(this_instruction)
             # release, from last to first
             for item in reversed(key_list):
+                assembly_listing.append(push_1_constant_on_stack(get_key_combined_value(item), comment=this_line))
                 this_instruction = get_empty_instruction()
                 this_instruction['opcode'] = OP_KUP
-                this_instruction['oparg'] = get_key_combined_value(item)
                 this_instruction['comment'] = this_line
                 assembly_listing.append(this_instruction)
         else:
@@ -636,19 +645,18 @@ def make_dsb_with_exception(program_listing, profile_list=None):
             label_to_addr_dict[item['label']] = item['addr']
 
     for item in assembly_listing:
-        this_oparg = item['oparg']
         if item['opcode'] == OP_STR or item['opcode'] == OP_STRLN or item['opcode'] == OP_OLP:
-            str_lnum = int(this_oparg.replace('STR@', ''))
+            str_lnum = int(item['oparg'].replace('STR@', ''))
             for sssss in str_list:
                 if sssss['lnum'] == str_lnum:
-                    this_oparg = sssss['addr']
-        if this_oparg is None:
+                    item['oparg'] = sssss['addr']
+        if item['oparg'] is None:
             continue
-        if isinstance(this_oparg, str) and "@" in this_oparg:
-            this_oparg = label_to_addr_dict[this_oparg]
-        if isinstance(this_oparg, int) is False:
+        if isinstance(item['oparg'], str) and "@" in item['oparg']:
+            item['oparg'] = label_to_addr_dict[item['oparg']]
+        if isinstance(item['oparg'], int) is False:
             raise ValueError("Unknown variable")
-        this_oparg = int(this_oparg)
+        item['oparg'] = int(item['oparg'])
 
     print("--------- Assembly Listing, Resolved ---------")
 
