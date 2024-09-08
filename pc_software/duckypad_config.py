@@ -205,8 +205,8 @@ def ui_reset():
     key_color_button.config(background=default_button_color)
     bg_color_button.config(background=default_button_color)
     kd_color_button.config(background=default_button_color)
-    key_color_rb1.config(state=DISABLED)
-    key_color_rb2.config(state=DISABLED)
+    custom_key_color_checkbox.deselect()
+    custom_key_color_checkbox.config(state=DISABLED)
     script_textbox.delete(1.0, 'end')
     profile_lstbox.delete(0, 'end')
     check_syntax_label.config(text="", fg="green")
@@ -482,8 +482,8 @@ def update_profile_display():
     key_name_textbox.delete('1.0', 'end')
     selected_key = None
     key_color_button.config(background=default_button_color)
-    key_color_rb1.config(state=DISABLED)
-    key_color_rb2.config(state=DISABLED)
+    custom_key_color_checkbox.deselect()
+    custom_key_color_checkbox.config(state=DISABLED)
     script_textbox.delete(1.0, 'end')
     check_syntax_label.config(text="", fg="green")
 
@@ -837,7 +837,7 @@ def backup_button_click():
         webbrowser.open(backup_path)
 
 def key_button_click_event(event):
-    key_button_click(event.widget)
+    key_button_click(event.widget, need_to_check_syntax=True)
 
 root = Tk()
 root.title("duckyPad configurator v" + THIS_VERSION_NUMBER)
@@ -853,7 +853,7 @@ def get_correct_script_text(key_obj):
         return key_obj.script_on_release.lstrip().rstrip('\r\n')
     return key_obj.script.lstrip().rstrip('\r\n')
 
-def key_button_click(button_widget):
+def key_button_click(button_widget, need_to_check_syntax=False):
     global last_rgb
     global selected_key
     global key_button_clicked_at
@@ -887,22 +887,24 @@ def key_button_click(button_widget):
         scripts_lf.place_forget()
         empty_script_label.place(x=scaled_size(800), y=scaled_size(200))
         key_color_button.config(background=default_button_color)
-        key_color_rb1.config(state=DISABLED)
-        key_color_rb2.config(state=DISABLED)
+        custom_key_color_checkbox.deselect()
+        custom_key_color_checkbox.config(state=DISABLED)
         script_textbox.delete(1.0, 'end')
         return
 
-    key_color_rb1.config(state=NORMAL)
-    key_color_rb2.config(state=NORMAL)
+    custom_key_color_checkbox.config(state=NORMAL)
     if thissss_key.color is None:
-        key_color_rb1.select()
+        custom_key_color_checkbox.deselect()
         key_color_button.config(background=default_button_color)
     else:
-        key_color_rb2.select()
+        custom_key_color_checkbox.select()
         last_rgb = thissss_key.color
         key_color_button.config(background=rgb_to_hex(thissss_key.color))
     key_button_clicked_at = modified_count
-    check_syntax()
+    if need_to_check_syntax:
+        check_syntax()
+    else:
+        print("no need to check syntax")
 
 # ------------- Folder select -------------
 dp_root_folder_display = StringVar()
@@ -1294,33 +1296,6 @@ key_remove_button.place(x=scaled_size(200), y=scaled_size(5), width=80, height=4
 key_color_text = Label(master=name_editor_lf, text="Custom Key Color:", fg='grey')
 key_color_text.place(x=scaled_size(15), y=scaled_size(55))
 
-def custom_key_color_click():
-    pass
-
-custom_key_color_checkbox_var = IntVar()
-custom_key_color_checkbox = Checkbutton(name_editor_lf, text="", variable=custom_key_color_checkbox_var, command=custom_key_color_click) #, state=DISABLED
-custom_key_color_checkbox.place(x=scaled_size(150), y=scaled_size(55))
-root.update()
-
-
-def key_color_rb1_click():
-    if is_key_selected() == False:
-        return
-    profile_index = profile_lstbox.curselection()[0]
-    if profile_list[profile_index].keylist[selected_key] is not None:
-        profile_list[profile_index].keylist[selected_key].color = None
-    update_key_button_appearances(profile_index)
-    key_button_click(key_button_list[selected_key])
-
-def key_color_rb2_click():
-    if is_key_selected() == False:
-        return
-    profile_index = profile_lstbox.curselection()[0]
-    if profile_list[profile_index].keylist[selected_key] is not None:
-        profile_list[profile_index].keylist[selected_key].color = last_rgb
-    update_key_button_appearances(profile_index)
-    key_button_click(key_button_list[selected_key])
-
 def is_key_selected():
     if len(profile_lstbox.curselection()) <= 0:
         return False
@@ -1344,14 +1319,26 @@ def key_color_button_click(event):
     update_key_button_appearances(profile_index)
     key_button_click(key_button_list[selected_key])
 
+def custom_key_color_click():
+    if is_key_selected() == False:
+        return
+    profile_index = profile_lstbox.curselection()[0]
+    if profile_list[profile_index].keylist[selected_key] is None:
+        return
+    if key_color_type_var.get():
+        profile_list[profile_index].keylist[selected_key].color = last_rgb
+    else:
+        profile_list[profile_index].keylist[selected_key].color = None
+    update_key_button_appearances(profile_index)
+    key_button_click(key_button_list[selected_key])
+
 key_color_type_var = IntVar()
-key_color_rb1 = Radiobutton(name_editor_lf, text="Same as background", variable=key_color_type_var, value=0, command=key_color_rb1_click,state=DISABLED)
-key_color_rb1.place(x=scaled_size(90), y=scaled_size(70))
-key_color_rb2 = Radiobutton(name_editor_lf, text="", variable=key_color_type_var, value=1, command=key_color_rb2_click, state=DISABLED)
-key_color_rb2.place(x=scaled_size(90), y=scaled_size(95))
+custom_key_color_checkbox = Checkbutton(name_editor_lf, text="", variable=key_color_type_var, command=custom_key_color_click) #, state=DISABLED
+custom_key_color_checkbox.place(x=scaled_size(130), y=scaled_size(55))
+root.update()
 
 key_color_button = Label(master=name_editor_lf, borderwidth=1, relief="solid")
-key_color_button.place(x=scaled_size(140), y=scaled_size(95), width=scaled_size(60), height=scaled_size(20))
+key_color_button.place(x=scaled_size(160), y=scaled_size(55), width=scaled_size(60), height=scaled_size(20))
 key_color_button.bind("<Button-1>", key_color_button_click)
 
 # ------------- Scripts frame -------------
@@ -1389,16 +1376,25 @@ def script_textbox_modified():
     if modified_count - key_button_clicked_at > 2:
         checking_status_str = "Checking..."
         check_syntax_label.config(text=checking_status_str, fg="black")
-    if on_press_release_rb_var.get():
-        thissss_key.script_on_release = script_textbox.get(1.0, END).lstrip()
-    else:
-        thissss_key.script = script_textbox.get(1.0, END).lstrip()
-    modification_checked = 0
     if len(thissss_key.script_on_release) > 0:
         on_release_rb.configure(fg='green4')
     else:
         on_release_rb.configure(fg='gray20')
-
+    current_text = script_textbox.get(1.0, END).lstrip()
+    if on_press_release_rb_var.get():
+        if thissss_key.script_on_release == current_text:
+            print("same1")
+            return
+        else:
+            thissss_key.script_on_release = current_text
+    else:
+        if thissss_key.script == current_text:
+            print("same2")
+            return
+        else:
+            thissss_key.script = current_text
+    modification_checked = 0
+    
 def script_textbox_event(event):
     script_textbox_modified()
     script_textbox.tk.call(script_textbox._w, 'edit', 'modified', 0)
@@ -1573,8 +1569,8 @@ def exp_page_update():
     empty_script_label.place(x=scaled_size(800), y=scaled_size(200))
     key_name_textbox.delete('1.0', 'end')
     key_name_textbox.config(state=DISABLED)
-    key_color_rb1.config(state=DISABLED)
-    key_color_rb2.config(state=DISABLED)
+    custom_key_color_checkbox.deselect()
+    custom_key_color_checkbox.config(state=DISABLED)
     update_profile_display()
     root.update()
 

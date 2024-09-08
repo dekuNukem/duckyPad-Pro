@@ -1,3 +1,32 @@
+if on_press_release_rb_var.get():
+        thissss_key.script_on_release = current_text
+    else:
+        thissss_key.script = current_text
+
+def key_color_rb1_click():
+    if is_key_selected() == False:
+        return
+    profile_index = profile_lstbox.curselection()[0]
+    if profile_list[profile_index].keylist[selected_key] is not None:
+        profile_list[profile_index].keylist[selected_key].color = None
+    update_key_button_appearances(profile_index)
+    key_button_click(key_button_list[selected_key])
+
+def key_color_rb2_click():
+    if is_key_selected() == False:
+        return
+    profile_index = profile_lstbox.curselection()[0]
+    if profile_list[profile_index].keylist[selected_key] is not None:
+        profile_list[profile_index].keylist[selected_key].color = last_rgb
+    update_key_button_appearances(profile_index)
+    key_button_click(key_button_list[selected_key])
+
+custom_key_color_checkbox
+# key_color_rb1 = Radiobutton(name_editor_lf, text="Same as background", variable=key_color_type_var, value=0, command=key_color_rb1_click,state=DISABLED)
+# key_color_rb1.place(x=scaled_size(90), y=scaled_size(70))
+# key_color_rb2 = Radiobutton(name_editor_lf, text="", variable=key_color_type_var, value=1, command=key_color_rb2_click, state=DISABLED)
+# key_color_rb2.place(x=scaled_size(90), y=scaled_size(95))
+.deselect()
 key_rename_click
 key_name_textbox
 
