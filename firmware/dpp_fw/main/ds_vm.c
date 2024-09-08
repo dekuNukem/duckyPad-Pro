@@ -164,9 +164,9 @@ uint8_t readkey_nonblocking(void)
   for (uint8_t i = 0; i < MAX_TOTAL_SW_COUNT; i++)
   {
     if(poll_sw_state(i, 0))
-      return i;
+      return i+1;
   }
-  return 255;
+  return 0;
 }
 
 uint8_t readkey_blocking(void)
@@ -178,9 +178,9 @@ uint8_t readkey_blocking(void)
   {
     delay_ms(50);
     if(xQueueReceive(rotary_encoder_event_queue, &re_event, 0))
-      return re_event_to_swid(&re_event);
+      return re_event_to_swid(&re_event)+1;
     if(xQueueReceive(switch_event_queue, &sw_event, 0) && sw_event.type == SW_EVENT_SHORT_PRESS)
-      return sw_event.id;
+      return sw_event.id+1;
   }
 }
 
