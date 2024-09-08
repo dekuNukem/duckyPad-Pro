@@ -837,7 +837,7 @@ def backup_button_click():
         webbrowser.open(backup_path)
 
 def key_button_click_event(event):
-    key_button_click(event.widget, need_to_check_syntax=True)
+    key_button_click(event.widget)
 
 root = Tk()
 root.title("duckyPad configurator v" + THIS_VERSION_NUMBER)
@@ -853,10 +853,9 @@ def get_correct_script_text(key_obj):
         return key_obj.script_on_release.lstrip().rstrip('\r\n')
     return key_obj.script.lstrip().rstrip('\r\n')
 
-def key_button_click(button_widget, need_to_check_syntax=False):
+def key_button_click(button_widget):
     global last_rgb
     global selected_key
-    global key_button_clicked_at
     if len(profile_lstbox.curselection()) <= 0:
         return
     key_name_textbox.config(state=NORMAL)
@@ -900,11 +899,7 @@ def key_button_click(button_widget, need_to_check_syntax=False):
         custom_key_color_checkbox.select()
         last_rgb = thissss_key.color
         key_color_button.config(background=rgb_to_hex(thissss_key.color))
-    key_button_clicked_at = modified_count
-    if need_to_check_syntax:
-        check_syntax()
-    else:
-        print("no need to check syntax")
+    check_syntax()
 
 # ------------- Folder select -------------
 dp_root_folder_display = StringVar()
@@ -1266,9 +1261,6 @@ def key_rename_click():
     if len(keyname_line1) == 0:
         return
     if profile_list[profile_index].keylist[selected_key] is not None:
-        if profile_list[profile_index].keylist[selected_key].name == keyname_line1 and profile_list[profile_index].keylist[selected_key].name_line2 == keyname_line2:
-            print("key_rename_click: no change")
-            return
         profile_list[profile_index].keylist[selected_key].name = keyname_line1
         profile_list[profile_index].keylist[selected_key].name_line2 = keyname_line2
     else:
@@ -1355,45 +1347,25 @@ root.update()
 script_instruction.place(x=scaled_size(60), y=0)
 script_instruction.bind("<Button-1>", script_instruction_click)
 
-modified_count = 0
-key_button_clicked_at = 0
 last_textbox_edit = 0
-modification_checked = 0
-
 def script_textbox_modified():
-    global modified_count
     global last_textbox_edit
-    global modification_checked
     if is_key_selected() == False:
         return
-    modified_count += 1
     last_textbox_edit = time.time()
     profile_index = profile_lstbox.curselection()[0]
-    checking_status_str = ""
     thissss_key = profile_list[profile_index].keylist[selected_key]
     if thissss_key is None:
         return
-    if modified_count - key_button_clicked_at > 2:
-        checking_status_str = "Checking..."
-        check_syntax_label.config(text=checking_status_str, fg="black")
     if len(thissss_key.script_on_release) > 0:
         on_release_rb.configure(fg='green4')
     else:
         on_release_rb.configure(fg='gray20')
     current_text = script_textbox.get(1.0, END).lstrip()
     if on_press_release_rb_var.get():
-        if thissss_key.script_on_release == current_text:
-            print("same1")
-            return
-        else:
-            thissss_key.script_on_release = current_text
+        thissss_key.script_on_release = current_text
     else:
-        if thissss_key.script == current_text:
-            print("same2")
-            return
-        else:
-            thissss_key.script = current_text
-    modification_checked = 0
+        thissss_key.script = current_text
     
 def script_textbox_event(event):
     script_textbox_modified()
@@ -1433,28 +1405,27 @@ on_release_rb = Radiobutton(scripts_lf, text="On Release", variable=on_press_rel
 on_release_rb.place(x=scaled_size(150), y=scaled_size(20))
 root.update()
 
-last_syntax_check = 0
+last_check_syntax_program_listing = []
 def check_syntax():
-    global last_syntax_check
-    if time.time() - last_syntax_check <= 1:
-        print("check_syntax: too soon")
-        return
+    global last_check_syntax_program_listing
     if is_key_selected() == False:
         return
     profile_index = profile_lstbox.curselection()[0]
     if profile_list[profile_index].keylist[selected_key] is None:
         return
-    last_syntax_check = time.time()
-    script_textbox.tag_remove("error", '1.0', 'end')
     program_listing = profile_list[profile_index].keylist[selected_key].script.split('\n')
     if on_press_release_rb_var.get() == 1:
         program_listing = profile_list[profile_index].keylist[selected_key].script_on_release.split('\n')
-
+    if program_listing == last_check_syntax_program_listing:
+        # print("check_syntax: same")
+        return
     result_dict, bin_arr = make_bytecode.make_dsb_no_exception(program_listing, profile_list)
+    last_check_syntax_program_listing = program_listing.copy()
     if result_dict is None:
         script_textbox.tag_remove("error", '1.0', 'end')
         check_syntax_label.config(text="Code seems OK..", fg="green")
     else:
+        script_textbox.tag_remove("error", '1.0', 'end')
         error_lnum = result_dict['line_number']
         script_textbox.tag_add("error", str(error_lnum)+".0", str(error_lnum)+".0 lineend")
         check_syntax_label.config(text=result_dict['comments'], fg='red')
@@ -1462,24 +1433,6 @@ def check_syntax():
 check_syntax_label = Label(scripts_lf, text="")
 check_syntax_label.place(x=scaled_size(10), y=scaled_size(417))
 root.update()
-
-def add_s(word, value):
-    if value == 1:
-        return word
-    return word + 's'
-
-def minutes_to_str(value):
-    value = int(value)
-    if value == 0:
-        return "Never"
-    this_hours = int(value/60)
-    this_minutes = value % 60
-    result = ''
-    if this_hours > 0:
-        result += str(this_hours) + add_s(" hour", this_hours)
-    result += " " + str(this_minutes) + add_s(" minute", this_minutes)
-    return result
-
 
 resources_lf = LabelFrame(root, text="Resources", width=scaled_size(516+214), height=scaled_size(70))
 resources_lf.place(x=scaled_size(10), y=scaled_size(525))
@@ -1649,10 +1602,8 @@ root.update()
 # --------------------
 
 def repeat_func():
-    global modification_checked
-    if time.time() - last_textbox_edit >= 0.5 and modification_checked == 0:
+    if time.time() - last_textbox_edit >= 0.75:
         check_syntax()
-        modification_checked = 1
     root.after(500, repeat_func)
 
 root.after(500, repeat_func)
