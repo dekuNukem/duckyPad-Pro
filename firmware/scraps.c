@@ -1,5 +1,5 @@
     printf("mmov %d %d\n", this_x_amount*xsign, this_y_amount*ysign);
-
+printf("!!! %x %x %x\n", combocode, ktype, kcode);
 
     printf("new data!\n");
     for (int i = 0; i < 16; ++i)

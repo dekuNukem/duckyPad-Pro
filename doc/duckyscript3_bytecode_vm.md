@@ -237,12 +237,10 @@ OLED_CURSOR arguments now on stack
 
 KEYUP KEYDOWN and key combos argument on stack
 
+MOUSE_WHEEL FW implementation
+
+MOUSE_MOVE FW implementation
+
+MOUSE_MOVE FW level expansion
+
 ------------
-
-need to think about signed or unsigned multiply
-
-probably only signed for mouse?
-
-double check stock pop to argument order
-
-

@@ -518,12 +518,20 @@ void execute_instruction(uint16_t curr_pc, ds3_exe_result* exe, uint8_t this_key
   }
   else if(this_opcode == OP_KDOWN)
   {
-  	press_key(byte0, byte1);
+    uint16_t combocode;
+    stack_pop(&arithmetic_stack, &combocode);
+    uint8_t ktype = (combocode >> 8) & 0xff;
+    uint8_t kcode = combocode & 0xff;
+  	press_key(kcode, ktype);
   	delay_ms(defaultdelay_value);
   }
   else if(this_opcode == OP_KUP)
   {
-  	release_key(byte0, byte1);
+    uint16_t combocode;
+    stack_pop(&arithmetic_stack, &combocode);
+    uint8_t ktype = (combocode >> 8) & 0xff;
+    uint8_t kcode = combocode & 0xff;
+  	release_key(kcode, ktype);
   	delay_ms(defaultdelay_value);
   }
   else if(this_opcode == OP_MMOV)
