@@ -67,6 +67,8 @@ class dp_key(object):
 		self.script_on_release = ''
 		self.binary_array = None
 		self.binary_array_on_release = None
+		self.allow_abort = False
+		self.dont_repeat = False
 		if path_on_press is None:
 			return
 		self.index = int(os.path.basename(os.path.normpath(path_on_press)).split("_")[0].split("-")[0].split(".txt")[0].strip('key'))

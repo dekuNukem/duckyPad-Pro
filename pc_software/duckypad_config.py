@@ -206,6 +206,8 @@ def ui_reset():
     kd_color_button.config(background=default_button_color)
     custom_key_color_checkbox.deselect()
     custom_key_color_checkbox.config(state=DISABLED)
+    allow_abort_checkbox.config(state=DISABLED)
+    dont_repeat_checkbox.config(state=DISABLED)
     script_textbox.delete(1.0, 'end')
     profile_lstbox.delete(0, 'end')
     check_syntax_label.config(text="", fg="green")
@@ -482,6 +484,8 @@ def update_profile_display():
     key_color_button.config(background=default_button_color)
     custom_key_color_checkbox.deselect()
     custom_key_color_checkbox.config(state=DISABLED)
+    allow_abort_checkbox.config(state=DISABLED)
+    dont_repeat_checkbox.config(state=DISABLED)
     script_textbox.delete(1.0, 'end')
     check_syntax_label.config(text="", fg="green")
 
@@ -886,10 +890,14 @@ def key_button_click(button_widget):
         key_color_button.config(background=default_button_color)
         custom_key_color_checkbox.deselect()
         custom_key_color_checkbox.config(state=DISABLED)
+        allow_abort_checkbox.config(state=DISABLED)
+        dont_repeat_checkbox.config(state=DISABLED)
         script_textbox.delete(1.0, 'end')
         return
 
     custom_key_color_checkbox.config(state=NORMAL)
+    allow_abort_checkbox.config(state=NORMAL)
+    dont_repeat_checkbox.config(state=NORMAL)
     if thissss_key.color is None:
         custom_key_color_checkbox.deselect()
         key_color_button.config(background=default_button_color)
@@ -1319,16 +1327,34 @@ def custom_key_color_click():
     update_key_button_appearances(profile_index)
     key_button_click(key_button_list[selected_key])
 
+def allow_abort_click():
+    if is_key_selected() == False:
+        return
+    profile_index = profile_lstbox.curselection()[0]
+    if profile_list[profile_index].keylist[selected_key] is None:
+        return
+    profile_list[profile_index].keylist[selected_key].allow_abort = allow_abort_var.get()
+    print(profile_list[profile_index].keylist[selected_key].allow_abort)
+
+def dont_repeat_click():
+    if is_key_selected() == False:
+        return
+    profile_index = profile_lstbox.curselection()[0]
+    if profile_list[profile_index].keylist[selected_key] is None:
+        return
+    profile_list[profile_index].keylist[selected_key].dont_repeat = dont_repeat_var.get()
+    print(profile_list[profile_index].keylist[selected_key].dont_repeat)
+
 key_color_type_var = IntVar()
 custom_key_color_checkbox = Checkbutton(name_editor_lf, text="Custom Key Color", variable=key_color_type_var, command=custom_key_color_click, state=DISABLED)
 custom_key_color_checkbox.place(x=scaled_size(15), y=scaled_size(55))
 
 allow_abort_var = IntVar()
-allow_abort_checkbox = Checkbutton(name_editor_lf, text="Press Any Key to Abort", variable=key_color_type_var, command=allow_abort_var, state=DISABLED)
+allow_abort_checkbox = Checkbutton(name_editor_lf, text="Press Any Key to Abort", variable=allow_abort_var, command=allow_abort_click, state=DISABLED)
 allow_abort_checkbox.place(x=scaled_size(15), y=scaled_size(75))
 
 dont_repeat_var = IntVar()
-dont_repeat_checkbox = Checkbutton(name_editor_lf, text="Disable Auto-Repeat", variable=key_color_type_var, command=dont_repeat_var, state=DISABLED)
+dont_repeat_checkbox = Checkbutton(name_editor_lf, text="Disable Auto-Repeat", variable=dont_repeat_var, command=dont_repeat_click, state=DISABLED)
 dont_repeat_checkbox.place(x=scaled_size(15), y=scaled_size(95))
 
 key_color_button = Label(master=name_editor_lf, borderwidth=1, relief="solid")
@@ -1526,6 +1552,8 @@ def exp_page_update():
     key_name_textbox.config(state=DISABLED)
     custom_key_color_checkbox.deselect()
     custom_key_color_checkbox.config(state=DISABLED)
+    allow_abort_checkbox.config(state=DISABLED)
+    dont_repeat_checkbox.config(state=DISABLED)
     update_profile_display()
     root.update()
 
