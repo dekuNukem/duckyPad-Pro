@@ -15,7 +15,6 @@ import urllib.request
 from appdirs import *
 import subprocess
 import hid_op
-import ds3_preprocessor
 import make_bytecode
 from shared import *
 import my_compare
@@ -137,7 +136,7 @@ backup_path = os.path.join(app_save_path, 'profile_backups')
 ensure_dir(app_save_path)
 ensure_dir(backup_path)
 
-print("This window will print debug information!")
+print("This window prints debug information!")
 print("Used for troubleshooting if it crashes!")
 
 default_button_color = 'SystemButtonFace'
@@ -146,7 +145,6 @@ if 'linux' in sys.platform:
 
 MAIN_WINDOW_WIDTH = scaled_size(1070)
 MAIN_WINDOW_HEIGHT = scaled_size(605)
-MAIN_COLUMN_HEIGHT = scaled_size(533)
 PADDING = scaled_size(10)
 HEIGHT_ROOT_FOLDER_LF = scaled_size(50)
 INVALID_ROOT_FOLDER_STRING = "<-- Press to connect to duckyPad"
@@ -171,10 +169,6 @@ def app_update_click(event):
 def reset_key_button_relief():
     for item in key_button_list:
         item.config(borderwidth=1, relief="solid")
-
-def hex_to_rgb(hex_str):
-    hex_str = hex_str.strip('#')
-    return tuple(int(hex_str[i:i+2], 16) for i in (0, 2, 4))
 
 def rgb_to_hex(rgb_tuple):
     return '#%02x%02x%02x' % rgb_tuple
@@ -1304,8 +1298,6 @@ def key_remove_click():
     profile_list[profile_index].keylist[selected_key] = None
     update_key_button_appearances(profile_index)
     key_button_click(key_button_list[selected_key])
-
-KEY_NAME_BUTTON_GAP = int((keys_lf.winfo_width() - 2 * BUTTON_WIDTH) / 3.5)
 
 key_remove_button = Button(name_editor_lf, text="Remove\nKey", command=key_remove_click, state=DISABLED, fg="red")
 key_remove_button.place(x=scaled_size(200), y=scaled_size(5), width=80, height=40)

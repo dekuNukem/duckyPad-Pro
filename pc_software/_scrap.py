@@ -1,3 +1,9 @@
+def hex_to_rgb(hex_str):
+    hex_str = hex_str.strip('#')
+    return tuple(int(hex_str[i:i+2], 16) for i in (0, 2, 4))
+
+KEY_NAME_BUTTON_GAP = int((keys_lf.winfo_width() - 2 * BUTTON_WIDTH) / 3.5)
+
     if isinstance(node, ast.UnaryOp) and isinstance(node.op, ast.USub):
         print("!!!!!!!!!")
         minus1 = ast.Constant(-1)
