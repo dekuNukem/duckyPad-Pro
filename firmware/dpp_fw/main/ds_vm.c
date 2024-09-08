@@ -321,15 +321,15 @@ void parse_olc(void)
 
 void parse_mmov(void)
 {
-  // int16_t xxx, yyy;
-  // stack_pop(&arithmetic_stack, &yyy);
-  // stack_pop(&arithmetic_stack, &xxx);
-  // my_key kk;
-  // kk.code = byte1;
-  // kk.code2 = byte0;
-  // kk.type = KEY_TYPE_MOUSE_MOVEMENT;
-  // keyboard_press(&kk, 0);
-  // delay_ms(defaultdelay_value);
+  uint16_t tempx, tempy;
+  stack_pop(&arithmetic_stack, &tempy);
+  stack_pop(&arithmetic_stack, &tempx);
+  my_key kk;
+  kk.code = tempx;
+  kk.code2 = tempy;
+  kk.type = KEY_TYPE_MOUSE_MOVEMENT;
+  keyboard_press(&kk, 0);
+  delay_ms(defaultdelay_value);
 }
 
 void execute_instruction(uint16_t curr_pc, ds3_exe_result* exe, uint8_t this_key_id)
@@ -503,7 +503,7 @@ void execute_instruction(uint16_t curr_pc, ds3_exe_result* exe, uint8_t this_key
   }
   else if(this_opcode == OP_MSCL)
   {
-    int8_t scroll_amount;
+    uint16_t scroll_amount;
     stack_pop(&arithmetic_stack, &scroll_amount);
     my_key kk;
     kk.code = scroll_amount;

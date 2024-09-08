@@ -886,7 +886,7 @@ def key_button_click(button_widget):
         this_key_name = make_key_button_text_from_two_lines(thissss_key.name, thissss_key.name_line2)
         key_name_textbox.insert(1.0, this_key_name)
         script_textbox.delete(1.0, 'end')
-        script_textbox.tag_remove("error", '1.0', 'end')
+        # script_textbox.tag_remove("error", '1.0', 'end')
         script_text = get_correct_script_text(thissss_key)
         script_textbox.insert(1.0, script_text)
         if len(thissss_key.script_on_release) > 0:
@@ -1429,7 +1429,7 @@ def on_press_rb_click():
     if profile_list[profile_index].keylist[selected_key] is None:
         return
     script_textbox.delete(1.0, 'end')
-    script_textbox.tag_remove("error", '1.0', 'end')
+    # script_textbox.tag_remove("error", '1.0', 'end')
     script_textbox.insert(1.0, profile_list[profile_index].keylist[selected_key].script.lstrip().rstrip('\r\n'))
 
 is_onrelease_warning_shown = 0
@@ -1443,7 +1443,7 @@ def on_release_rb_click():
         messagebox.showinfo("howdy!", "For advanced users only!\n\nLeave blank if unsure\n\nRead guide for more info")
         is_onrelease_warning_shown = 1
     script_textbox.delete(1.0, 'end')
-    script_textbox.tag_remove("error", '1.0', 'end')
+    # script_textbox.tag_remove("error", '1.0', 'end')
     script_textbox.insert(1.0, profile_list[profile_index].keylist[selected_key].script_on_release.lstrip().rstrip('\r\n'))
 
 on_press_rb = Radiobutton(scripts_lf, text="On Press", variable=on_press_release_rb_var, value=0, command=on_press_rb_click)
@@ -1473,7 +1473,7 @@ def check_syntax():
         check_syntax_label.config(text="Code seems OK..", fg="green")
     else:
         script_textbox.tag_remove("error", '1.0', 'end')
-        error_lnum = result_dict['line_number']
+        error_lnum = result_dict['line_number']-1
         script_textbox.tag_add("error", str(error_lnum)+".0", str(error_lnum)+".0 lineend")
         check_syntax_label.config(text=result_dict['comments'], fg='red')
 
