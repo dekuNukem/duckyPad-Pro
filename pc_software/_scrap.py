@@ -1,3 +1,35 @@
+key_rename_click
+key_name_textbox
+
+
+last_key_rename = 0
+def key_rename_click():
+    global last_key_rename
+    if is_key_selected() == False:
+        return
+    profile_index = profile_lstbox.curselection()[0]
+    keyname_line1, keyname_line2 = get_clean_key_name_2lines(key_name_textbox.get("1.0", END))
+    if len(keyname_line1) == 0:
+        return
+    if profile_list[profile_index].keylist[selected_key] is not None:
+        if profile_list[profile_index].keylist[selected_key].name == keyname_line1 and profile_list[profile_index].keylist[selected_key].name_line2 == keyname_line2:
+            print("key_rename_click: no change")
+            return
+        profile_list[profile_index].keylist[selected_key].name = keyname_line1
+        profile_list[profile_index].keylist[selected_key].name_line2 = keyname_line2
+    else:
+        new_key = duck_objs.dp_key()
+        new_key.name = keyname_line1
+        new_key.name_line2 = keyname_line2
+        profile_list[profile_index].keylist[selected_key] = new_key
+        update_keylist_index()
+    update_key_button_appearances(profile_index)
+    if time.time() - last_key_rename <= 10:
+        print('key_rename: too soon')
+        return
+    key_button_click(key_button_list[selected_key])
+    last_key_rename = time.time()
+
 for item in assembly_listing:
         this_oparg = item['oparg']
         if item['opcode'] == OP_STR or item['opcode'] == OP_STRLN or item['opcode'] == OP_OLP:

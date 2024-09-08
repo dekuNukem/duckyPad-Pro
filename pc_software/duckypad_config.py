@@ -1242,8 +1242,13 @@ key_char_limit_label = Label(master=name_editor_lf, fg='grey')
 key_char_limit_label.place(x=scaled_size(200), y=scaled_size(0))
 root.update()
 
+def keyname_textbox_modified_event(event):
+    key_rename_click()
+    key_name_textbox.tk.call(key_name_textbox._w, 'edit', 'modified', 0)
+
 key_name_textbox = Text(name_editor_lf, state=DISABLED, wrap="word")
 key_name_textbox.place(x=scaled_size(107), y=scaled_size(0), width=scaled_size(80), height=scaled_size(40))
+key_name_textbox.bind("<<Modified>>", keyname_textbox_modified_event)
 
 def get_clean_key_name_2lines(user_text):
     split_line = user_text.replace('\r', '').split('\n')[:2]
@@ -1267,6 +1272,9 @@ def key_rename_click():
     if len(keyname_line1) == 0:
         return
     if profile_list[profile_index].keylist[selected_key] is not None:
+        if profile_list[profile_index].keylist[selected_key].name == keyname_line1 and profile_list[profile_index].keylist[selected_key].name_line2 == keyname_line2:
+            print("key_rename_click: no change")
+            return
         profile_list[profile_index].keylist[selected_key].name = keyname_line1
         profile_list[profile_index].keylist[selected_key].name_line2 = keyname_line2
     else:
@@ -1275,9 +1283,9 @@ def key_rename_click():
         new_key.name_line2 = keyname_line2
         profile_list[profile_index].keylist[selected_key] = new_key
         update_keylist_index()
+        key_button_click(key_button_list[selected_key])
     update_key_button_appearances(profile_index)
-    key_button_click(key_button_list[selected_key])
-
+    
 def key_remove_click():
     if is_key_selected() == False:
         return
