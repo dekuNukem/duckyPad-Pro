@@ -26,6 +26,7 @@ uint8_t epilogue_actions;
 uint8_t allow_abort;
 uint8_t key_press_count[MAX_TOTAL_SW_COUNT];
 uint8_t kb_led_status;
+uint8_t last_stack_op_result;
 
 typedef struct
 {
@@ -46,23 +47,29 @@ void stack_init(my_stack* ms)
   memset(ms->stack, 0, STACK_SIZE*sizeof(uint16_t));
 }
 
-uint8_t stack_push(my_stack* ms, uint16_t value)
+void stack_push(my_stack* ms, uint16_t value)
 {
   if(ms->top >= STACK_SIZE)
-    return EXE_STACK_OVERFLOW;
+  {
+    last_stack_op_result = EXE_STACK_OVERFLOW;
+    return;
+  }
   ms->stack[ms->top] = value;
   ms->top++;
-  return EXE_OK;
+  last_stack_op_result = EXE_OK;
 }
 
-uint8_t stack_pop(my_stack* ms, uint16_t *result)
+void stack_pop(my_stack* ms, uint16_t *result)
 {
   if(ms->top == 0)
-    return EXE_STACK_UNDERFLOW;
+  {
+    last_stack_op_result = EXE_STACK_UNDERFLOW;
+    return;
+  }
   ms->top--;
   *result = ms->stack[ms->top];
   ms->stack[ms->top] = 0;
-  return EXE_OK;
+  last_stack_op_result = EXE_OK;
 }
 
 uint16_t make_uint16(uint8_t b0, uint8_t b1)
@@ -96,28 +103,12 @@ uint16_t binop_power(uint16_t x, uint16_t exponent)
 }
 
 typedef uint16_t (*FUNC_PTR)(uint16_t, uint16_t);
-
-void binop(ds3_exe_result* exe, FUNC_PTR bin_func)
+void binop(FUNC_PTR bin_func)
 {
   uint16_t rhs, lhs;
-  uint8_t op_result = stack_pop(&arithmetic_stack, &rhs);
-  if(op_result != EXE_OK)
-  {
-    exe->result = op_result;
-    return;
-  }
-  op_result = stack_pop(&arithmetic_stack, &lhs);
-  if(op_result != EXE_OK)
-  {
-    exe->result = op_result;
-    return;
-  }
-  op_result = stack_push(&arithmetic_stack, bin_func(lhs, rhs));
-  if(op_result != EXE_OK)
-  {
-    exe->result = op_result;
-    return;
-  }
+  stack_pop(&arithmetic_stack, &rhs);
+  stack_pop(&arithmetic_stack, &lhs);
+  stack_push(&arithmetic_stack, bin_func(lhs, rhs));
 }
 
 #define VAR_BOUNDARY (0x1f)
@@ -328,12 +319,24 @@ void parse_olc(void)
   ssd1306_SetCursor(xxx, yyy);
 }
 
+void parse_mmov(void)
+{
+  // int16_t xxx, yyy;
+  // stack_pop(&arithmetic_stack, &yyy);
+  // stack_pop(&arithmetic_stack, &xxx);
+  // my_key kk;
+  // kk.code = byte1;
+  // kk.code2 = byte0;
+  // kk.type = KEY_TYPE_MOUSE_MOVEMENT;
+  // keyboard_press(&kk, 0);
+  // delay_ms(defaultdelay_value);
+}
+
 void execute_instruction(uint16_t curr_pc, ds3_exe_result* exe, uint8_t this_key_id)
 {
   uint8_t this_opcode = read_byte(curr_pc);
   uint8_t byte0 = read_byte(curr_pc+1);
   uint8_t byte1 = read_byte(curr_pc+2);
-  uint8_t op_result;
   uint16_t op_data = make_uint16(byte0, byte1);
   // printf("PC: %04d | Opcode: %02d | 0x%02x 0x%02x | 0x%04x\n", curr_pc, this_opcode, byte0, byte1, op_data);
   
@@ -352,42 +355,22 @@ void execute_instruction(uint16_t curr_pc, ds3_exe_result* exe, uint8_t this_key
   }
   else if(this_opcode == OP_PUSHC)
   {
-    op_result = stack_push(&arithmetic_stack, op_data);
-    if(op_result != EXE_OK)
-    {
-      exe->result = op_result;
-      return;
-    }
+    stack_push(&arithmetic_stack, op_data);
   }
   else if(this_opcode == OP_PUSHV)
   {
-    op_result = stack_push(&arithmetic_stack, read_var(op_data, this_key_id));
-    if(op_result != EXE_OK)
-    {
-      exe->result = op_result;
-      return;
-    }
+    stack_push(&arithmetic_stack, read_var(op_data, this_key_id));
   }
   else if(this_opcode == OP_POP)
   {
     uint16_t this_item;
-    op_result = stack_pop(&arithmetic_stack, &this_item);
-    if(op_result != EXE_OK)
-    {
-      exe->result = op_result;
-      return;
-    }
+    stack_pop(&arithmetic_stack, &this_item);
     write_var(op_data, this_item);
   }
   else if(this_opcode == OP_BRZ)
   {
     uint16_t this_value;
-    op_result = stack_pop(&arithmetic_stack, &this_value);
-    if(op_result != EXE_OK)
-    {
-      exe->result = op_result;
-      return;
-    }
+    stack_pop(&arithmetic_stack, &this_value);
     if(this_value == 0)
       exe->next_pc = op_data;
   }
@@ -397,23 +380,13 @@ void execute_instruction(uint16_t curr_pc, ds3_exe_result* exe, uint8_t this_key
   }
   else if(this_opcode == OP_CALL)
   {
-    op_result = stack_push(&call_stack, exe->next_pc);
-    if(op_result != EXE_OK)
-    {
-      exe->result = op_result;
-      return;
-    }
+    stack_push(&call_stack, exe->next_pc);
     exe->next_pc = op_data;
   }
   else if(this_opcode == OP_RET)
   {
     uint16_t return_pc;
-    op_result = stack_pop(&call_stack, &return_pc);
-    if(op_result != EXE_OK)
-    {
-      exe->result = op_result;
-      return;
-    }
+    stack_pop(&call_stack, &return_pc);
     exe->next_pc = return_pc;
   }
   else if(this_opcode == OP_HALT)
@@ -422,75 +395,75 @@ void execute_instruction(uint16_t curr_pc, ds3_exe_result* exe, uint8_t this_key
   }
   else if(this_opcode == OP_EQ)
   {
-    binop(exe, binop_equal);
+    binop(binop_equal);
   }
   else if(this_opcode == OP_NOTEQ)
   {
-    binop(exe, binop_not_equal);
+    binop(binop_not_equal);
   }
   else if(this_opcode == OP_LT)
   {
-    binop(exe, binop_lower);
+    binop(binop_lower);
   }
   else if(this_opcode == OP_LTE)
   {
-    binop(exe, binop_lower_eq);
+    binop(binop_lower_eq);
   }
   else if(this_opcode == OP_GT)
   {
-    binop(exe, binop_greater);
+    binop(binop_greater);
   }
   else if(this_opcode == OP_GTE)
   {
-    binop(exe, binop_greater_eq);
+    binop(binop_greater_eq);
   }
   else if(this_opcode == OP_ADD)
   {
-    binop(exe, binop_add);
+    binop(binop_add);
   }
   else if(this_opcode == OP_SUB)
   {
-    binop(exe, binop_sub);
+    binop(binop_sub);
   }
   else if(this_opcode == OP_MULT)
   {
-    binop(exe, binop_mul);
+    binop(binop_mul);
   }
   else if(this_opcode == OP_DIV)
   {
-    binop(exe, binop_divide);
+    binop(binop_divide);
   }
   else if(this_opcode == OP_MOD)
   {
-    binop(exe, binop_mod);
+    binop(binop_mod);
   }
   else if(this_opcode == OP_POW)
   {
-    binop(exe, binop_power);
+    binop(binop_power);
   }
   else if(this_opcode == OP_LSHIFT)
   {
-    binop(exe, binop_lshift);
+    binop(binop_lshift);
   }
   else if(this_opcode == OP_RSHIFT)
   {
-    binop(exe, binop_rshift);
+    binop(binop_rshift);
   }
   else if(this_opcode == OP_BITOR)
   {
-    binop(exe, binop_bitwise_or);
+    binop(binop_bitwise_or);
   }
   else if(this_opcode == OP_BITAND)
   {
-    binop(exe, binop_bitwise_and);
+    binop(binop_bitwise_and);
   }
   else if(this_opcode == OP_LOGIOR)
   {
-    binop(exe, binop_logical_or);
+    binop(binop_logical_or);
   }
   else if(this_opcode == OP_LOGIAND)
   {
-    binop(exe, binop_logical_and);
+    binop(binop_logical_and);
   }
   else if(this_opcode == OP_STR || this_opcode == OP_STRLN)
   {
@@ -520,33 +493,18 @@ void execute_instruction(uint16_t curr_pc, ds3_exe_result* exe, uint8_t this_key
   }
   else if(this_opcode == OP_MMOV)
   {
-    my_key kk;
-    kk.code = byte1;
-    kk.code2 = byte0;
-    kk.type = KEY_TYPE_MOUSE_MOVEMENT;
-    keyboard_press(&kk, 0);
-    delay_ms(defaultdelay_value);
+    parse_mmov();
   }
   else if(this_opcode == OP_DELAY)
   {
     uint16_t delay_amount;
-    op_result = stack_pop(&arithmetic_stack, &delay_amount);
-    if(op_result != EXE_OK)
-    {
-      exe->result = op_result;
-      return;
-    }
+    stack_pop(&arithmetic_stack, &delay_amount);
     delay_ms(delay_amount);
   }
   else if(this_opcode == OP_MSCL)
   {
     int8_t scroll_amount;
-    op_result = stack_pop(&arithmetic_stack, &scroll_amount);
-    if(op_result != EXE_OK)
-    {
-      exe->result = op_result;
-      return;
-    }
+    stack_pop(&arithmetic_stack, &scroll_amount);
     my_key kk;
     kk.code = scroll_amount;
     kk.code2 = 0;
@@ -606,12 +564,7 @@ void execute_instruction(uint16_t curr_pc, ds3_exe_result* exe, uint8_t this_key
   else if(this_opcode == OP_GOTOP)
   {
     uint16_t target_profile;
-    op_result = stack_pop(&arithmetic_stack, &target_profile);
-    if(op_result != EXE_OK)
-    {
-      exe->result = op_result;
-      return;
-    }
+    stack_pop(&arithmetic_stack, &target_profile);
     exe->result = EXE_ACTION_GOTO_PROFILE;
     exe->data = (uint8_t)target_profile;
   }
@@ -657,12 +610,13 @@ void run_dsb(ds3_exe_result* er, uint8_t this_key_id, char* dsb_path)
   loop_size = 0;
   epilogue_actions = 0;
   allow_abort = 0;
+  last_stack_op_result = EXE_OK;
   srand(xTaskGetTickCount());
 
   while(1)
   {
     execute_instruction(current_pc, er, this_key_id);
-    if(er->result != EXE_OK)
+    if(er->result != EXE_OK || last_stack_op_result != EXE_OK)
       break;
     current_pc = er->next_pc;
   }

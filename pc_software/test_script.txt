@@ -10,5 +10,8 @@ MOUSE_WHEEL -(9+2*3)
 // ----------END_REM-------------
 END_REM
 
-VAR $spam = 3
+VAR $spam = 5
+
+WHILE 
+
 MOUSE_WHEEL -($spam+8)
