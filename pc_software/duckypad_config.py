@@ -1220,15 +1220,15 @@ for x in range(ONBOARD_SPARE_GPIO_COUNT):
     this_button = Label(master=keys_lf)
     key_button_list.append(this_button)
 
-name_editor_lf = LabelFrame(root, text="Editor", width=scaled_size(300), height=scaled_size(143))
+name_editor_lf = LabelFrame(root, text="Key Name", width=scaled_size(300), height=scaled_size(143))
 name_editor_lf.place(x=profiles_lf.winfo_x() + profiles_lf.winfo_width() + PADDING, y=380)
 root.update()
 
-key_char_limit_portrait = "Key name\nmax 2 lines\n5 char per line"
-key_char_limit_landscape = "Key name\nmax 2 lines\n4 char per line"
+key_char_limit_portrait = "Max 2 lines\n5 char per line"
+key_char_limit_landscape = "Max 2 lines\n4 char per line"
 
 key_char_limit_label = Label(master=name_editor_lf, fg='grey')
-key_char_limit_label.place(x=scaled_size(15), y=scaled_size(0))
+key_char_limit_label.place(x=scaled_size(17), y=scaled_size(7))
 root.update()
 
 def keyname_textbox_modified_event(event):
