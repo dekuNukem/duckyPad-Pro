@@ -1,3 +1,38 @@
+def expand_mousemove(xtotal, ytotal):
+    result_listing = []
+    x_actions = []
+    y_actions = []
+
+    x_sign = 1
+    if xtotal < 0:
+        x_sign = -1
+    y_sign = 1
+    if ytotal < 0:
+        y_sign = -1
+
+    xtotal = abs(xtotal)
+    ytotal = abs(ytotal)
+
+    while xtotal > 0 or ytotal > 0:
+        this_step_x = 127
+        if xtotal < 127:
+            this_step_x = xtotal
+        x_actions.append(x_sign * this_step_x)
+        xtotal -= this_step_x
+
+        this_step_y = 127
+        if ytotal < 127:
+            this_step_y = ytotal
+        y_actions.append(y_sign * this_step_y)
+        ytotal -= this_step_y
+
+    for index, item in enumerate(x_actions):
+        result_listing.append(f"MOUSE_MOVE {x_actions[index]} {y_actions[index]}")
+
+    return result_listing
+
+
+
 def hex_to_rgb(hex_str):
     hex_str = hex_str.strip('#')
     return tuple(int(hex_str[i:i+2], 16) for i in (0, 2, 4))
@@ -357,39 +392,6 @@ def evaluate_expr(expr):
     else:
         raise ValueError(f"unknown ast node: {root}")
     return instruction_list
-def expand_mousemove(xtotal, ytotal):
-    result_listing = []
-    x_actions = []
-    y_actions = []
-
-    x_sign = 1
-    if xtotal < 0:
-        x_sign = -1
-    y_sign = 1
-    if ytotal < 0:
-        y_sign = -1
-
-    xtotal = abs(xtotal)
-    ytotal = abs(ytotal)
-
-    while xtotal > 0 or ytotal > 0:
-        this_step_x = 127
-        if xtotal < 127:
-            this_step_x = xtotal
-        x_actions.append(x_sign * this_step_x)
-        xtotal -= this_step_x
-
-        this_step_y = 127
-        if ytotal < 127:
-            this_step_y = ytotal
-        y_actions.append(y_sign * this_step_y)
-        ytotal -= this_step_y
-
-    for index, item in enumerate(x_actions):
-        result_listing.append(f"MOUSE_MOVE {x_actions[index]} {y_actions[index]}")
-
-    return result_listing
-
     
     def is_mouse_move(ducky_line):
     split = [x for x in ducky_line.split(' ') if len(x) > 0]

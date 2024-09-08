@@ -105,8 +105,8 @@ typedef struct
   uint8_t epilogue_actions;
 } ds3_exe_result;
 
-#define DEFAULT_CMD_DELAY_MS 18
-#define DEFAULT_CHAR_DELAY_MS 18
+#define DEFAULT_CMD_DELAY_MS 20
+#define DEFAULT_CHAR_DELAY_MS 20
 
 #define EPILOGUE_SAVE_LOOP_STATE 0x1
 #define EPILOGUE_SAVE_COLOR_STATE 0x2

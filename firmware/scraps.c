@@ -1,3 +1,6 @@
+    printf("mmov %d %d\n", this_x_amount*xsign, this_y_amount*ysign);
+
+
     printf("new data!\n");
     for (int i = 0; i < 16; ++i)
         printf("%x ", this_buf[i]);

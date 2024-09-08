@@ -319,17 +319,52 @@ void parse_olc(void)
   ssd1306_SetCursor(xxx, yyy);
 }
 
+#define MAX(a, b) ((a) > (b) ? (a) : (b))
+
+void expand_mmov(int16_t xtotal, int16_t ytotal)
+{
+  int16_t xsign = (xtotal < 0) ? -1 : 1;
+  int16_t ysign = (ytotal < 0) ? -1 : 1;
+
+  xtotal = abs(xtotal);
+  ytotal = abs(ytotal);
+
+  uint8_t loops_needed_x = abs(xtotal) / 128;
+  uint8_t loops_needed_y = abs(ytotal) / 128;
+
+  uint8_t total_loops_needed = MAX(loops_needed_x, loops_needed_y);
+
+  for (int i = 0; i <= total_loops_needed; ++i)
+  {
+    int8_t this_x_amount;
+    if(xtotal > 127)
+      this_x_amount = 127;
+    else
+      this_x_amount = xtotal;
+    xtotal -= this_x_amount;
+
+    int8_t this_y_amount;
+    if(ytotal > 127)
+      this_y_amount = 127;
+    else
+      this_y_amount = ytotal;
+    ytotal -= this_y_amount;
+
+    my_key kk;
+    kk.code = (uint8_t)this_x_amount*xsign;
+    kk.code2 = (uint8_t)this_y_amount*ysign;
+    kk.type = KEY_TYPE_MOUSE_MOVEMENT;
+    keyboard_press(&kk, 0);
+    delay_ms(defaultdelay_value);
+  }
+}
+
 void parse_mmov(void)
 {
   uint16_t tempx, tempy;
   stack_pop(&arithmetic_stack, &tempy);
   stack_pop(&arithmetic_stack, &tempx);
-  my_key kk;
-  kk.code = tempx;
-  kk.code2 = tempy;
-  kk.type = KEY_TYPE_MOUSE_MOVEMENT;
-  keyboard_press(&kk, 0);
-  delay_ms(defaultdelay_value);
+  expand_mmov(tempx, tempy);
 }
 
 void execute_instruction(uint16_t curr_pc, ds3_exe_result* exe, uint8_t this_key_id)
