@@ -197,7 +197,6 @@ def ui_reset():
     bg_color_label.config(fg='grey')
     kd_color_label.config(fg='grey')
     key_char_limit_label.config(fg='grey')
-    key_color_text.config(fg='grey')
     reset_key_button_relief()
     update_key_button_appearances(None)
     key_name_textbox.delete('1.0', 'end')
@@ -413,7 +412,6 @@ def enable_buttons():
     bg_color_label.config(fg='black')
     kd_color_label.config(fg='black')
     key_char_limit_label.config(fg='black')
-    key_color_text.config(fg='black')
     profile_import_button.config(state=NORMAL)
     exp_page_plus_button.config(state=NORMAL)
     exp_page_minus_button.config(state=NORMAL)
@@ -1285,9 +1283,6 @@ KEY_NAME_BUTTON_GAP = int((keys_lf.winfo_width() - 2 * BUTTON_WIDTH) / 3.5)
 key_remove_button = Button(name_editor_lf, text="Remove\nKey", command=key_remove_click, state=DISABLED, fg="red")
 key_remove_button.place(x=scaled_size(200), y=scaled_size(5), width=80, height=40)
 
-key_color_text = Label(master=name_editor_lf, text="Custom Key Color:", fg='grey')
-key_color_text.place(x=scaled_size(15), y=scaled_size(55))
-
 def is_key_selected():
     if len(profile_lstbox.curselection()) <= 0:
         return False
@@ -1325,12 +1320,12 @@ def custom_key_color_click():
     key_button_click(key_button_list[selected_key])
 
 key_color_type_var = IntVar()
-custom_key_color_checkbox = Checkbutton(name_editor_lf, text="", variable=key_color_type_var, command=custom_key_color_click) #, state=DISABLED
-custom_key_color_checkbox.place(x=scaled_size(130), y=scaled_size(55))
+custom_key_color_checkbox = Checkbutton(name_editor_lf, text="Custom Key Color", variable=key_color_type_var, command=custom_key_color_click, state=DISABLED)
+custom_key_color_checkbox.place(x=scaled_size(15), y=scaled_size(55))
 root.update()
 
 key_color_button = Label(master=name_editor_lf, borderwidth=1, relief="solid")
-key_color_button.place(x=scaled_size(160), y=scaled_size(55), width=scaled_size(60), height=scaled_size(20))
+key_color_button.place(x=scaled_size(150), y=scaled_size(57), width=scaled_size(60), height=scaled_size(20))
 key_color_button.bind("<Button-1>", key_color_button_click)
 
 # ------------- Scripts frame -------------

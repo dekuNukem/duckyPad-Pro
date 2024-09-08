@@ -1,3 +1,6 @@
+key_color_text
+
+
 if on_press_release_rb_var.get():
         thissss_key.script_on_release = current_text
     else:
