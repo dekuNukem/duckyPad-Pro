@@ -1218,15 +1218,15 @@ for x in range(ONBOARD_SPARE_GPIO_COUNT):
     this_button = Label(master=keys_lf)
     key_button_list.append(this_button)
 
-name_editor_lf = LabelFrame(root, text="Key Name", width=scaled_size(300), height=scaled_size(143))
+name_editor_lf = LabelFrame(root, text="Key Config", width=scaled_size(300), height=scaled_size(143))
 name_editor_lf.place(x=profiles_lf.winfo_x() + profiles_lf.winfo_width() + PADDING, y=380)
 root.update()
 
-key_char_limit_portrait = "Max 2 lines\n5 char per line"
-key_char_limit_landscape = "Max 2 lines\n4 char per line"
+key_char_limit_portrait = "Name:\nmax 2 lines\n5 char per line"
+key_char_limit_landscape = "Name:\nmax 2 lines\n4 char per line"
 
 key_char_limit_label = Label(master=name_editor_lf, fg='grey')
-key_char_limit_label.place(x=scaled_size(17), y=scaled_size(7))
+key_char_limit_label.place(x=scaled_size(17), y=scaled_size(0))
 root.update()
 
 def keyname_textbox_modified_event(event):
@@ -1322,12 +1322,19 @@ def custom_key_color_click():
 key_color_type_var = IntVar()
 custom_key_color_checkbox = Checkbutton(name_editor_lf, text="Custom Key Color", variable=key_color_type_var, command=custom_key_color_click, state=DISABLED)
 custom_key_color_checkbox.place(x=scaled_size(15), y=scaled_size(55))
-root.update()
+
+allow_abort_var = IntVar()
+allow_abort_checkbox = Checkbutton(name_editor_lf, text="Press Any Key to Abort", variable=key_color_type_var, command=allow_abort_var, state=DISABLED)
+allow_abort_checkbox.place(x=scaled_size(15), y=scaled_size(75))
+
+dont_repeat_var = IntVar()
+dont_repeat_checkbox = Checkbutton(name_editor_lf, text="Disable Auto-Repeat", variable=key_color_type_var, command=dont_repeat_var, state=DISABLED)
+dont_repeat_checkbox.place(x=scaled_size(15), y=scaled_size(95))
 
 key_color_button = Label(master=name_editor_lf, borderwidth=1, relief="solid")
 key_color_button.place(x=scaled_size(150), y=scaled_size(57), width=scaled_size(60), height=scaled_size(20))
 key_color_button.bind("<Button-1>", key_color_button_click)
-
+root.update()
 # ------------- Scripts frame -------------
 scripts_lf = LabelFrame(root, text="Scripts", width=scaled_size(310), height=scaled_size(473))
 
