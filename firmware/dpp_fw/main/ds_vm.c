@@ -89,10 +89,10 @@ uint16_t binop_logical_and(uint16_t a, uint16_t b) {return a && b;}
 uint16_t binop_logical_or(uint16_t a, uint16_t b) {return a || b;}
 uint16_t binop_power(uint16_t x, uint16_t exponent)
 {
-    uint16_t result = 1;
-    for (int i = 0; i < exponent; ++i)
-        result *= x;
-    return result;
+  uint16_t result = 1;
+  for (int i = 0; i < exponent; ++i)
+    result *= x;
+  return result;
 }
 
 typedef uint16_t (*FUNC_PTR)(uint16_t, uint16_t);

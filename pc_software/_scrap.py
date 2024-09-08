@@ -1,3 +1,32 @@
+    if isinstance(node, ast.UnaryOp) and isinstance(node.op, ast.USub):
+        print("!!!!!!!!!")
+        minus1 = ast.Constant(-1)
+        postorder_walk(minus1, action, instruction_list, expr)
+        postorder_walk(node.operand, action, instruction_list, expr)
+# this generates an error 
+    # IF $kc > 12 != 14 THEN
+    # c:\users\allen\appdata\roaming\python\python38\scripts\astboom.exe ast "(kc > 12) != 14"
+        
+def get_left(node):
+    if isinstance(node, ast.UnaryOp):
+        this_const = ast.Constant
+        print("dfs", this_const)
+        exit()
+        return None
+    return node.left
+    elif isinstance(node, ast.UnaryOp):
+        # this_instruction = get_empty_instruction()
+        # print(wat(node))
+        # this_instruction['opcode'] = OP_PUSHC
+        # this_instruction['oparg'] = (-1 * node.operand.value) & 0xffff
+        # instruction_list.append(this_instruction)
+        this_const = ast.Constant(-5)
+        wat(this_const)
+        # this_const.value
+        # print("dddddd", wat(ast.parse('1').body[0]))
+        exit()
+
+
 elif isinstance(node, ast.UnaryOp) and isinstance(node.op, ast.USub) and isinstance(node.operand, ast.Constant):
         this_instruction = get_empty_instruction()
         this_instruction['opcode'] = OP_PUSHC

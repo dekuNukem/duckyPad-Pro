@@ -6,9 +6,9 @@ MOUSE_MOVE -2*$_RANDOM_INT*4 $_RANDOM_INT-5
 
 SWC_FILL 11 33+22 $spam*6
 SWC_RESET  $spam*9
-
+MOUSE_WHEEL -(9+2*3)
 // ----------END_REM-------------
 END_REM
 
-
-MOUSE_WHEEL -(9+2*3)
+VAR $spam = 3
+MOUSE_WHEEL -($spam+8)
