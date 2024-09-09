@@ -183,6 +183,9 @@ void parse_expansion_data(uint8_t exp_data)
 
 void kb_scan_task(void *dummy)
 {
+	// set up initial state so it won't fire if a key is held on power-on
+	sw_scan();
+	memcpy(last_sw_state, this_sw_state, MAX_TOTAL_SW_COUNT);
 	while(1)
 	{
 		delay_ms(INPUT_TASK_FREQ_MS);
