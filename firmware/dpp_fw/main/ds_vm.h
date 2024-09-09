@@ -96,6 +96,7 @@
 #define _IS_NUMLOCK_ON (0xffff - 14)
 #define _IS_CAPSLOCK_ON (0xffff - 15)
 #define _IS_SCROLLLOCK_ON (0xffff - 16)
+#define _DONT_REPEAT (0xffff - 17)
 
 typedef struct
 {
@@ -111,6 +112,7 @@ typedef struct
 #define EPILOGUE_SAVE_LOOP_STATE 0x1
 #define EPILOGUE_SAVE_COLOR_STATE 0x2
 #define EPILOGUE_NEED_OLED_RESTORE 0x4
+#define EPILOGUE_DONT_AUTO_REPEAT 0x8
 
 #define BIN_BUF_SIZE 65536
 #define VAR_BUF_SIZE 128

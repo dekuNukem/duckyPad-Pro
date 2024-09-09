@@ -27,6 +27,7 @@ uint8_t allow_abort;
 uint8_t key_press_count[MAX_TOTAL_SW_COUNT];
 uint8_t kb_led_status;
 uint8_t last_stack_op_result;
+uint8_t disable_autorepeat;
 
 typedef struct
 {
@@ -155,6 +156,8 @@ void write_var(uint16_t addr, uint16_t value)
     ; // read only
   else if (addr == _IS_SCROLLLOCK_ON)
     ; // read only
+  else if (addr == _DONT_REPEAT)
+    disable_autorepeat = value;
   else if(addr < VAR_BUF_SIZE)
     store_uint16_as_two_bytes_at(addr, value);
 }
@@ -220,6 +223,8 @@ uint16_t read_var(uint16_t addr, uint8_t this_key_id)
     return (kb_led_status & 0x2) ? 1 : 0;
   else if (addr == _IS_SCROLLLOCK_ON)
     return (kb_led_status & 0x4) ? 1 : 0;
+  else if (addr == _DONT_REPEAT)
+    return disable_autorepeat;
   else if(addr < VAR_BUF_SIZE)
     return make_uint16(var_buf[addr], var_buf[addr+1]);
   return 0;
@@ -654,6 +659,7 @@ void run_dsb(ds3_exe_result* er, uint8_t this_key_id, char* dsb_path)
   epilogue_actions = 0;
   allow_abort = 0;
   last_stack_op_result = EXE_OK;
+  disable_autorepeat = 0;
   srand(xTaskGetTickCount());
 
   while(1)
@@ -663,5 +669,7 @@ void run_dsb(ds3_exe_result* er, uint8_t this_key_id, char* dsb_path)
       break;
     current_pc = er->next_pc;
   }
+  if(disable_autorepeat)
+    epilogue_actions |= EPILOGUE_DONT_AUTO_REPEAT;
   er->epilogue_actions = epilogue_actions;
 }

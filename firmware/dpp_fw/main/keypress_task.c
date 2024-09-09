@@ -66,6 +66,7 @@ void der_init(ds3_exe_result* der)
 
 #define DSB_ALLOW_AUTOREPEAT 0
 #define DSB_DONT_PLAY_KEYUP_ANIMATION_RETURN_IMMEDIATELY 1
+#define DSB_DONT_REPEAT_RETURN_IMMEDIATELY 2
 uint8_t run_once(uint8_t swid, char* dsb_path)
 {
   der_init(&this_exe);
@@ -101,6 +102,10 @@ uint8_t run_once(uint8_t swid, char* dsb_path)
   if(this_exe.epilogue_actions & EPILOGUE_NEED_OLED_RESTORE)
   {
     goto_profile_without_updating_rgb_LED(current_profile_number);
+  }
+  if(this_exe.epilogue_actions & EPILOGUE_DONT_AUTO_REPEAT)
+  {
+    what_to_do = DSB_DONT_REPEAT_RETURN_IMMEDIATELY;
   }
 
   if(this_exe.result >= EXE_ERROR_CODE_START)
@@ -141,11 +146,14 @@ void onboard_offboard_switch_press(uint8_t swid, char* press_path, char* release
   play_keydown_animation(current_profile_number, swid);
   key_press_count[swid]++;
   //-------------
-  if(run_once(swid, press_path) == DSB_DONT_PLAY_KEYUP_ANIMATION_RETURN_IMMEDIATELY)
+  uint8_t run_result = run_once(swid, press_path);
+  if(run_result == DSB_DONT_PLAY_KEYUP_ANIMATION_RETURN_IMMEDIATELY)
     return;
   // don't repeat if on_release script exists
   if(access(release_path, F_OK) == 0)
     return;
+  if(run_result == DSB_DONT_REPEAT_RETURN_IMMEDIATELY)
+    goto handle_obsw_keydown_end;
   //--------------
 
   uint32_t hold_start = pdTICKS_TO_MS(xTaskGetTickCount());
