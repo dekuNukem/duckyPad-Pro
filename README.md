@@ -1,17 +1,29 @@
-# duckyPad Pro: Macro Scripting Beyond QMK/VIA
+# duckyPad Pro: Advanced Macro Scripting Beyond QMK/VIA
+
+[Get duckyPad](https://www.tindie.com/products/21984/) | [Official Discord](https://discord.gg/4sJCBx5) | [Getting Started](getting_started.md) | [Table of Contents](#table-of-contents)
 
 -----------
 
-duckyPad Pro is a 20-key mechanical macropad for power users who demand **advanced macro scripting and customisation** beyond the shackles of QMK/VIA.
-
-Incorporating 4 years worth of feedback from the [original duckyPad](link_here), now with **Rotary Encoders**, **Bluetooth**, **Expansion Modules**, and more!
+duckyPad Pro is a 20-key **mechanical macropad** for power users who demand **advanced macro scripting and customisation** beyond the shackles of QMK/VIA.
 
 ![alt_text](resources/photos/title.jpeg)
+
+Incorporating 4 years worth of feedback from the [original duckyPad](https://github.com/dekuNukem/duckyPad), duckyPad Pro combines long-requested upgrades with a no-nonsense design, aiming simply to be the **most capable** macropad today.
+
+## Get duckyPad Pro
+
+hi!
+
+## Getting Started / Documentations
+
+hi!
+
+## Highlights
 
 duckyPad Pro has all the basics:
 
 * Hot-Swap
-* Rotary Encoders
+* **Rotary Encoders**
 * Per-key RGB
 * USB-C
 * 100% **Open-source**
@@ -33,13 +45,13 @@ But also features **unlike any other**:
 
 ## duckyScript vs QMK/VIA
 
-duckyPad Pro runs a custom implementation of **duckyScript**, originally for [USB Rubber Ducky](https://shop.hak5.org/products/usb-rubber-ducky-deluxe).
+duckyPad Pro runs **duckyScript**, originally designed for [USB Rubber Ducky](https://shop.hak5.org/products/usb-rubber-ducky-deluxe).
 
 Compared to QMK/VIA, you get:
 
 * **Much Longer Macros**
-	* [Entire Bee Movie](resources/beemovie.txt) in one macro? Yes please!
-	* Up to 3712 macros in total
+	* [Entire Bee Movie](resources/beemovie.txt) in one macro? Sure thing!
+	* Up to 3712 in total
 
 * **Advanced Interactive Scripting**
 	* Variables, conditionals, loops, functions, etc.
@@ -74,42 +86,88 @@ duckyScript is a no-brainer for power users with more demanding scripting needs.
 
 ![alt_text](resources/photos/ps.jpeg)
 
-### duckyScript: Simple Start
+### Easy Start
 
-* **duckyScript** is an easy language for automating inputs
+* **duckyScript** is an simple language for automating inputs
 
-* You basically tell it what keys to press
+* You basically tell it what keys to press!
 
-* Start simple by consolidating shortcuts of your commonly used apps
+* Start simple by **mapping shortcuts** of your favourite app to any key or knob
 
-```
-Zoom In: CTRL +
+**Browsing**
 
-Next Tab: CTRL SHIFT TAB
-```
+Zoom In: `CTRL +`
+
+Next Tab: `CTRL SHIFT TAB`
 
 ![alt_text](resources/photos/firefox.gif)
+
+**OBS**
+
+Switch Scenes: `F13` `F14` `F15` `F16` 
 
 ![alt_text](resources/photos/obs.gif)
 
 
 ### Up a Notch
 
-* Once familiar, you can write **much longer macros** to further speed up everyday task.
+* Once familiar, you can write **longer multi-line macros** to further speed up everyday task.
 
 * Such as **filling forms** and typing **boilerplate text** with one keypress.
 
+```
+STRING Michael Scott
+TAB
+STRING United States
+ENTER
+STRING 5705550100
+TAB
+STRING michael.scott@dundermifflin.com
+TAB
+```
+
 ![alt_text](resources/photos/addr.gif)
 
-### Fancy Stuff
+Or a simple mouse jiggler:
 
-* Finally, realize its full potential with **interactive scripting**!
+```
+WHILE TRUE
+	MOUSE_MOVE $_RANDOM_INT $_RANDOM_INT
+	DELAY 100
+END_WHILE
+```
 
-* Reading button inputs
+![alt_text](resources/photos/jig.gif)
 
-* Writing to OLED screen
+### Even Further
+
+* Explore the full potential with **advanced interactive scripting**
+
+* Read Buttons
+
+* Write to OLED screen
 
 * Change RGB colors
+
+* Conditions and Loops
+
+* Write ultra-specific macros for your exact needs
+
+```
+RGB_SET 1 128 0 255
+
+OLED_PRINT You are in a maze
+OLED_PRINT of twisty little passages
+
+VAR $choice = $_READKEY
+
+IF $choice == 1 THEN
+    OLED_CURSOR 0 10
+    OLED_PRINT It is a dead end.
+    OLED_PRINT Something moves
+    OLED_PRINT behind you.
+END_IF
+```
 
 ![alt_text](resources/photos/maze.jpeg)
 
@@ -121,15 +179,29 @@ Next Tab: CTRL SHIFT TAB
 
 * This is known as [BadUSB attack](https://arstechnica.com/information-technology/2014/07/this-thumbdrive-hacks-computers-badusb-exploit-makes-devices-turn-evil/), which was the original purpose of [USB Rubber Ducky](https://shop.hak5.org/products/usb-rubber-ducky-deluxe).
 
-* It's up to you to decide what to do!
+---------
+
+### Nothing Like It
+
+* Each macro can type over **60,000 characters**
+
+* Store over **3700 macros** in total
+
+* Scripts are compiled and executed on a custom [virtual stack machine](linkhere)
+
+* With the power and flexibility of duckyScript, it is now trivial to achieve what was long considered impossible on QMK/VIA!
 
 ## Expansion Modules
 
-duckyPad Pro also supports optional **expansion modules**!
+duckyPad Pro also supports optional **expansion modules** for even more customisability.
 
 ![alt_text](resources/photos/expdpp.jpeg)
 
-* Wire up your own switches / buttons / foot pedals
+* Wire up your own **switches / buttons / foot pedals**
+
+* **6 channels** per module
+
+* **Daisy-chain** up to 5 modules with regular USB-C cable
 
 ![alt_text](resources/photos/exp.gif)
 
@@ -139,27 +211,55 @@ duckyPad Pro also supports optional **expansion modules**!
 
 ## Bluetooth
 
-duckyPad Pro also fully works as a **Bluetooth Keyboard & Mouse**!
+duckyPad Pro also works as a **Bluetooth Keyboard & Mouse** (with a catch!)
 
 * Bluetooth 4.2 BLE
 
-* Built-in Antenna
+* Built-in Antenna for both BT and Wi-Fi
 
 ![alt_text](resources/photos/bt.jpeg)
 
-gif here
+![alt_text](resources/photos/ipad.gif)
 
-* Add-your-own USB battery pack
+**So what's the catch?**
 
-* Yes I know it's a bit silly having BT without internal battery
+* You need to provide your own USB battery bank
 
-* But it would involve more complicated case design, additional components, and international sourcing & shipping rechargeable batteries
+Yes I know it's a bit silly having BT without internal battery! However, it would involve more complex case design, additional components, and international shipping of rechargeable batteries.
 
-* Which would inflate the overall cost way beyond an off-the-shelf battery pack
+All of which would inflate the cost way beyond just getting an off-the-shelf battery pack. As this is a one-person project, I prefer to keep things simple.
 
-* As this is a one-person project, I'd prefer to keep it simple.
+Also, while the hardware for Wi-Fi is in place, the functionality is currently unimplemented.
 
-## Profile Autoswitcher
+## New CPU
+
+duckyPad Pro now runs a significantly more powerful processor:
+
+* ESP32-S3
+* Dual-Core @ 240 MHz 
+* 4MB Flash Memory
+* 512KB RAM
+* 2MB PSRAM
+
+Switching to ESP32 also allows **much simpler setup for tinkering:**
+
+* VSCode IDE
+* Open-source toolchain
+* USB Flashing, no external programmer needed.
+* Code in Arduino or ESP-IDF
+* Tinkering guide provided
+
+## duckyPad Configurator
+
+Use the open-source configurator to set up your duckyPad Pro.
+
+* Windows / Mac / Linux
+* No account creation
+* No data collection / telemetry
+
+![alt_text](resources/photos/config.png)
+
+## Profile Auto-switching
 
 * Automatically jump to the appropriate profile
 
@@ -168,66 +268,39 @@ gif here
 ![alt_text](resources/photos/autoswitch.gif)
 
 
-## Specifications
+## Mechanical Switches
 
-#### Keys
+duckyPad Pro has **20 Mechanical Switches** in **4x5 Grid.**
 
-* 20 Mechanical Switches
-* 4x5 Grid
-* Cherry-MX style
+![alt_text](resources/photos/numpad.jpeg)
+
 * Kailh hot-swap socket
+* Cherry-MX compatible (Both 3 and 5-Pin)
+* North-facing ARGB LED
+* Configurable colour & brightness
 
-![alt_text](resources/photos/keyside.jpeg)
+## Rotary Encoders
 
-#### RGB Backlight
-
-* Per-key configurable
-* Adjustable brightness
-
-#### Rotary Encoder
-
-* Two encoders
+* Two Encoders
 * Bourns Inc. PEC12R-4215F-S0024
-* 24 Detents
-* Built-in tactile switch
+* Built-in Tactile Switch
+* D-shape 15mm Shaft
+* Max Knob Diameter: 24mm
 
-#### Mounting Plate
+![alt_text](resources/photos/knob.jpeg)
 
-* Standard: 1.6mm Pure White FR4 (same material as PCB)
-* Optional: 1.6mm Brushed Aluminum
-
-#### OLED screen
+## OLED Display
 
 * 128x128
+* 1.5 inch
+* High contrast with true black
 * **Configurable orientation**
-* Shows what each key does
-* Print-to-screen in duckyScript
+* Burn-in Prevention
 
-screenshots here
+![alt_text](resources/photos/oled_sc.png)
 
+![alt_text](resources/photos/oled.jpeg)
 
-#### Microcontroller
+## Table of Contents
 
-* ESP32-S3
-* Dual-Core @ 240 MHz 
-* 4MB Flash Memory
-* 512KB RAM
-* 2MB PSRAM
-
-#### Wireless Communication
-
-* **Bluetooth** (fully working, add your own battery)
-* BLE 4.2
-* Wi-Fi (Capable but currently unimplemented)
-
-#### Configurator
-
-* Fully open-source
-* Windows / Mac / Linux
-* Manage profiles/keys
-* Write/debug duckyScript
-* No need to create an account
-* No data collection whatsoever
-* No internet connection required
-
-
+hi!!

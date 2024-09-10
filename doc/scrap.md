@@ -1,3 +1,72 @@
+Incorporating 4 years worth of feedback from the [original duckyPad](https://github.com/dekuNukem/duckyPad), duckyPad Pro combines long-requested upgrades with a no-nonsense design, aiming simply to be the most capable macropad available today.
+
+ now with **Rotary Encoders**, **Bluetooth**, **Expansion Modules**, and more!
+
+
+## Specifications
+
+#### Keys
+
+* 20 Mechanical Switches
+* 4x5 Grid
+* Cherry-MX style
+* Kailh hot-swap socket
+
+![alt_text](resources/photos/keyside.jpeg)
+
+#### RGB Backlight
+
+* Per-key configurable
+* Adjustable brightness
+
+#### Rotary Encoder
+
+* Two encoders
+* Bourns Inc. PEC12R-4215F-S0024
+* 24 Detents
+* Built-in tactile switch
+
+#### Mounting Plate
+
+* Standard: 1.6mm Pure White FR4 (same material as PCB)
+* Optional: 1.6mm Brushed Aluminum
+
+#### OLED screen
+
+* 128x128
+* **Configurable orientation**
+* Shows what each key does
+* Print-to-screen in duckyScript
+
+screenshots here
+
+
+#### Microcontroller
+
+* ESP32-S3
+* Dual-Core @ 240 MHz 
+* 4MB Flash Memory
+* 512KB RAM
+* 2MB PSRAM
+
+#### Wireless Communication
+
+* **Bluetooth** (fully working, add your own battery)
+* BLE 4.2
+* Wi-Fi (Capable but currently unimplemented)
+
+#### Configurator
+
+* Fully open-source
+* Windows / Mac / Linux
+* Manage profiles/keys
+* Write/debug duckyScript
+* No need to create an account
+* No data collection whatsoever
+* No internet connection required
+
+
+
 -----------
 
 ### Goto Profile by **NUMBER** (0x01)
