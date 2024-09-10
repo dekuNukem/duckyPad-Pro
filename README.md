@@ -301,6 +301,16 @@ duckyPad Pro has **20 Mechanical Switches** in **4x5 Grid.**
 
 ![alt_text](resources/photos/oled.jpeg)
 
+## Disclaimers
+
+* duckyPad has been in active development since 2017. However, it is not designed or certified for safety-critical applications. Use at your own risk.
+
+* Scripts are stored as plain text on the SD card. Keep in mind before including sensitive information.
+
+* duckyScript appears to be a trademark of [Hak5 LLC](https://docs.hak5.org/hak5-usb-rubber-ducky/duckyscript-tm-quick-reference). The duckyPad project is not affiliated with, or endorsed by Hak5 LLC.
+
+* The duckyScript [compiler and virtual machine](./doc/duckyscript3_bytecode_vm.md) used in this project are independently developed from scratch.
+
 ## Table of Contents
 
 hi!!
