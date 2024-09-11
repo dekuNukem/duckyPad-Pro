@@ -166,6 +166,9 @@ esp_err_t rotary_encoder_get_state(const rotary_encoder_info_t * info, rotary_en
  */
 esp_err_t rotary_encoder_reset(rotary_encoder_info_t * info);
 
+#define ROTARY_ENCODER_COUNT 2
+extern volatile uint32_t last_event_ts[ROTARY_ENCODER_COUNT];
+extern volatile uint8_t last_event_dir[ROTARY_ENCODER_COUNT];
 
 #ifdef __cplusplus
 }

@@ -94,6 +94,9 @@
 
 #define TAG "rotary_encoder"
 
+volatile uint32_t last_event_ts[ROTARY_ENCODER_COUNT];
+volatile uint8_t last_event_dir[ROTARY_ENCODER_COUNT];
+
 //#define ROTARY_ENCODER_DEBUG
 
 // Use a single-item queue so that the last value can be easily overwritten by the interrupt handler
@@ -201,6 +204,9 @@ static void _isr_rotenc(void * args)
         };
         BaseType_t task_woken = pdFALSE;
         xQueueSendFromISR(info->queue, &queue_event, &task_woken);
+        // dddddddddddddd
+        last_event_ts[info->id] = pdTICKS_TO_MS(xTaskGetTickCount());
+        last_event_dir[info->id] = info->state.direction;
         if (task_woken)
         {
             portYIELD_FROM_ISR();

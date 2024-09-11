@@ -687,7 +687,12 @@ int16_t ball_velocity_x;
 int16_t ball_velocity_y;
 uint16_t paddle0_pos;
 
-void update_pos(void)
+void update_paddle_pos(void)
+{
+  ;
+}
+
+void update_ball_pos(void)
 {
   ball_pos_x += ball_velocity_x;
   ball_pos_y += ball_velocity_y;
@@ -724,14 +729,29 @@ void pong_test(void)
   ball_pos_y = 30;
   ball_velocity_x = 2;
   ball_velocity_y = 3;
+  paddle0_pos = 64;
   while(1)
   {
-    update_pos();
-    draw_court();
-    draw_ball(); 
-    ssd1306_UpdateScreen();
-    delay_ms(33);
+    // uint8_t key_stat = readkey_nonblocking();
+    // if(key_stat == 5)
+    //   paddle0_pos += 5;
+    // if(key_stat == 1)
+    //   paddle0_pos -= 5;
+    printf("%ld %ld\n", last_event_ts[0], last_event_ts[1]);
+    // update_ball_pos();
+    // draw_court();
+    // draw_ball(); 
+    // ssd1306_UpdateScreen();
+    delay_ms(66);
   }
 }
+
+/*
+dont forget to plus 1!
+#define RE1_CW 20
+#define RE1_CCW 21
+#define RE2_CW 23
+#define RE2_CCW 24
+*/
 
 // ------------- pong ----------
