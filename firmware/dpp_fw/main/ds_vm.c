@@ -673,3 +673,65 @@ void run_dsb(ds3_exe_result* er, uint8_t this_key_id, char* dsb_path)
     epilogue_actions |= EPILOGUE_DONT_AUTO_REPEAT;
   er->epilogue_actions = epilogue_actions;
 }
+
+
+// ------------- pong ----------
+
+// top left is 0,0
+// bottom right is 127, 127
+
+int16_t ball_rad = 2;
+int16_t ball_pos_x;
+int16_t ball_pos_y;
+int16_t ball_velocity_x;
+int16_t ball_velocity_y;
+uint16_t paddle0_pos;
+
+void update_pos(void)
+{
+  ball_pos_x += ball_velocity_x;
+  ball_pos_y += ball_velocity_y;
+
+  if((ball_pos_x >= 127 - ball_rad*2) || (ball_pos_x <= ball_rad*2))
+    ball_velocity_x = ball_velocity_x * -1;
+  
+  if((ball_pos_y >= 127 - ball_rad*2) || (ball_pos_y <= ball_rad*2))
+    ball_velocity_y = ball_velocity_y * -1;
+}
+
+void draw_court(void)
+{
+  ssd1306_Fill(Black);
+  ssd1306_DrawRectangle(0,0,127,127,White);
+  ssd1306_Line(0,0,0,127,Black);
+}
+
+void draw_ball(void)
+{
+  uint8_t drawx = (uint8_t)ball_pos_x;
+  uint8_t drawy = (uint8_t)ball_pos_y;
+  if(drawx >= 127 - ball_rad || drawx <= ball_rad)
+    return;
+  if(drawy >= 127 - ball_rad || drawy <= ball_rad)
+    return;
+  // printf("%d %d\n", drawx, drawy);
+  ssd1306_FillCircle(drawx, drawy, 2, White);
+}
+
+void pong_test(void)
+{
+  ball_pos_x = 20;
+  ball_pos_y = 30;
+  ball_velocity_x = 2;
+  ball_velocity_y = 3;
+  while(1)
+  {
+    update_pos();
+    draw_court();
+    draw_ball(); 
+    ssd1306_UpdateScreen();
+    delay_ms(33);
+  }
+}
+
+// ------------- pong ----------

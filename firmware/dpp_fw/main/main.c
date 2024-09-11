@@ -19,9 +19,10 @@
 #include "hid_task.h"
 #include "bluetooth_task.h"
 #include "esp_vfs_fat.h"
+#include "ds_vm.h"
 
 /*
-1.0.0
+2.0.0
 2024 08 24
 initial release
 */
@@ -63,6 +64,8 @@ void app_main(void)
     led_animation_init();
 
     xTaskCreate(kb_scan_task, "kb_scan_task", SW_SCAN_TASK_STACK_SIZE, NULL, 5, NULL);
+
+    pong_test();
 
     if(should_mount_usb_msc())
     {
