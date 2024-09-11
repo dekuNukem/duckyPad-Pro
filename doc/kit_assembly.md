@@ -48,7 +48,9 @@ Place **something rigid** against the back, and flip over. The screws should sta
 
 Thread on **2.5mm spacers**.
 
-**Moderately** tighten, use pliers if available. It shouldn't rattle when shaken.
+**Moderately** tighten, use pliers if available.
+
+It shouldn't rattle when shaken.
 
 ![Alt text](../resources/photos/instructions/3mm.jpeg)
 
@@ -56,11 +58,13 @@ Install the circuit board, then `4mm spacers`.
 
 * Moderately tighten with a socket bit if available
 
-* If using pliers, avoid scratching the PCB or components.
+* If using pliers, avoid scratching the PCB or nearby components.
 
 ![Alt text](../resources/photos/instructions/4mm.png)
 
-Secure the `top plate` with `3mm screws`.
+Offer up the `top plate`, place the `3mm screws`, **loosely** at first.
+
+Ensure it is **properly aligned**, then tighten all.
 
 ![Alt text](../resources/photos/instructions/top.png)
 
@@ -80,8 +84,6 @@ Time for the switches!
 
 * Match the pins and push in
 
-* **Make sure the pins are straight!** 
-
 ![Alt text](../resources/photos/instructions/pins.png)
 
 Keycaps next!
@@ -92,7 +94,7 @@ Note the orientation ("slope" side pointing left). Just push down.
 
 Peel off OLED screen protector.
 
-Match the `D-Shape` on the knob to the shaft
+Match the `D-Cutout` on the knob to the shaft
 
 Push all the way down, make sure it bottoms out.
 

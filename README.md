@@ -108,7 +108,6 @@ Switch Scenes: `F13` `F14` `F15` `F16`
 
 ![alt_text](resources/photos/obs.gif)
 
-
 ### Up a Notch
 
 * Once familiar, you can write **longer multi-line macros** to further speed up everyday task.
