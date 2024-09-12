@@ -31,7 +31,6 @@ WINDOWS r
 DELAY 500
 STRING https://youtu.be/dQw4w9WgXcQ
 ENTER
-
 ```
 
 ---------
@@ -58,10 +57,62 @@ Of course, people at the [Official Discord](https://discord.gg/4sJCBx5) are alwa
 
 ## List of Commands
 
-it's long, use this table of contents to navigate
-
-include list to go back at each section?
-
+- [Comments](#comments)
+    - [`REM` and `//`](#rem-and-)
+    - [`REM_BLOCK` and `END_REM`](#rem_block-and-end_rem)
+- [Timing](#timing)
+    - [`DELAY`](#delay)
+    - [`DEFAULTDELAY`](#defaultdelay)
+    - [`DEFAULTCHARDELAY`](#defaultchardelay)
+    - [`CHARJITTER X`](#charjitter-x)
+- [Typing](#typing)
+    - [`STRING` and `STRINGLN`](#string-and-stringln)
+    - [`STRINGLN_BLOCK` and `END_STRINGLN`](#stringln_block-and-end_stringln)
+    - [`STRING_BLOCK` and `END_STRING`](#string_block-and-end_string)
+- [Pressing Keys](#pressing-keys)
+    - [Key Combos](#key-combos)
+    - [`KEYDOWN` / `KEYUP`](#keydown--keyup)
+- [Mouse](#mouse)
+    - [Mouse Buttons](#mouse-buttons)
+    - [`MOUSE_MOVE X Y`](#mouse_move-x-y)
+    - [`MOUSE_WHEEL X`](#mouse_wheel-x)
+- [Multiple Actions](#multiple-actions)
+- [Profile Switching](#profile-switching)
+    - [Autoswitcher](#autoswitcher)
+    - [`PREV_PROFILE` / `NEXT_PROFILE`](#prev_profile--next_profile)
+    - [`GOTO_PROFILE`](#goto_profile)
+- [OLED](#oled)
+    - [`OLED_CURSOR x y`](#oled_cursor-x-y)
+    - [`OLED_PRINT`](#oled_print)
+    - [`OLED_CLEAR`](#oled_clear)
+    - [`OLED_UPDATE`](#oled_update)
+    - [`OLED_RESTORE`](#oled_restore)
+- [Per-Key RGB](#per-key-rgb)
+    - [`SWC_SET n r g b`](#swc_set-n-r-g-b)
+    - [`SWC_FILL r g b`](#swc_fill-r-g-b)
+    - [`SWC_RESET n`](#swc_reset-n)
+- [Constants](#constants)
+- [Variables](#variables)
+- [Reserved Variables](#reserved-variables)
+- [Operators](#operators)
+    - [Mathematics](#mathematics)
+    - [Comparison](#comparison)
+    - [Logical](#logical)
+    - [Bitwise](#bitwise)
+- [Arguments](#arguments)
+- [Conditional Statements](#conditional-statements)
+- [Loops](#loops)
+    - [`LBREAK`](#lbreak)
+    - [`CONTINUE`](#continue)
+- [Functions](#functions)
+- [Reading Inputs](#reading-inputs)
+    - [Key ID](#key-id)
+    - [Blocking Read](#blocking-read)
+    - [Non-Blocking Read](#non-blocking-read)
+- [Randomisation](#randomisation)
+- [Miscellaneous](#miscellaneous)
+    - [`DP_SLEEP`](#dp_sleep)
+    - [`HALT`](#halt)
 
 ## Comments
 
@@ -240,6 +291,48 @@ Scroll mouse wheel `X` lines.
 
 * A positive number scrolls UP, negative number scrolls DOWN.
 
+## Multiple Actions
+
+`LOOP` command lets you to **assign multiple actions to one key**.
+
+You can use it to toggle / cycle through several actions like this:
+
+```
+LOOP0:
+STRING first action
+ENTER
+
+LOOP1:
+STRING second action
+ENTER
+
+LOOP2:
+STRING third action
+ENTER
+```
+
+* When pressed, a counter increments, and the script at the corresponding loop is executed.
+
+* Loop and color state should persist through profile switches and reboots
+
+## Profile Switching
+
+### Autoswitcher
+
+Try the [autoswitcher](https://github.com/dekuNukem/duckyPad-profile-autoswitcher) to jump to a profile based on **current window**!
+
+### `PREV_PROFILE` / `NEXT_PROFILE`
+
+Switch to the previous / next profile.
+
+### `GOTO_PROFILE`
+
+Jump to a particular profile by name. **Case sensitive!**
+
+```
+GOTO_PROFILE NumPad
+```
+
 ## OLED
 
 ### `OLED_CURSOR x y`
@@ -299,24 +392,6 @@ Set `n` to 0 for current key.
 Set `n` from 1 to 15 for a particular key.
 
 Set `n` to 99 for all keys.
-
-## Profile Switching
-
-### Autoswitcher
-
-Try the [autoswitcher](https://github.com/dekuNukem/duckyPad-profile-autoswitcher) to jump to a profile based on **current window**!
-
-### `PREV_PROFILE` / `NEXT_PROFILE`
-
-Switch to the previous / next profile.
-
-### `GOTO_PROFILE`
-
-Jump to a particular profile by name. **Case sensitive!**
-
-```
-GOTO_PROFILE NumPad
-```
 
 ## Constants
 
@@ -449,7 +524,7 @@ All comparisons evaluate to **either 0 or 1**.
 >>       Right Shift   
 ```
 
-## Argument Options
+## Arguments
 
 You can use **constant, variable, or expression** as arguments in commands.
 
@@ -701,34 +776,7 @@ Backlight and screen are turned off.
 
 Press any key to wake up.
 
-## `HALT`
+### `HALT`
 
 Stop execution immediately
-
-
----------
-
-### `LOOP`
-
-Allows you to **assign different actions to the same key**.
-
-You can use it to toggle / cycle through several actions like this:
-
-```
-LOOP0:
-STRING first action
-ENTER
-
-LOOP1:
-STRING second action
-ENTER
-
-LOOP2:
-STRING third action
-ENTER
-```
-
-* When you press a key, a counter increments, and the script at the corresponding loop is executed.
-
-* Loop and color state should persist through profile switches and reboots
 

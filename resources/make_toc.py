@@ -13,6 +13,8 @@ while 1:
 		break
 	if 1 <= depth <= 4:
 		break
+
+placeholder = '$%'
 		
 def make_section(text):
 	level = text.split(' ')[0].count('#')
@@ -22,15 +24,19 @@ def make_section(text):
 	link = text.lower().replace('.', '')
 	result = ''
 	for letter in link:
-		if letter.isalnum():
+		if letter.isalnum() or letter == '_':
 			result += letter
+		elif letter == '/':
+			result += placeholder
 		else:
 			result += '-'
+	while '--' in result:
+		result = result.replace('--', '-')
 	result = result.strip('-')
-	print('    '*(level-2) + f'- [{text}](#{result})\n')
+	result = result.replace(placeholder, '')
+	print('    '*(level-2) + f'- [{text}](#{result})')
 
-
-text_file = open(sys.argv[1],   encoding="utf8")
+text_file = open(sys.argv[1], encoding="utf8")
 
 print("## Table of Contents\n")
 
