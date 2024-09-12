@@ -297,7 +297,7 @@ Move mouse cursor `X` pixels horizontally, and `Y` pixels vertically.
 
 * Set `X` or `Y` to 0 if no movement needed.
 
-* **Disable mouse acceleration** for pixel-accurate results!
+* **Disable mouse acceleration** for pixel-accurate results
 
 ### `MOUSE_WHEEL X`
 
@@ -330,7 +330,7 @@ ENTER
 
 * When pressed, a counter increments, and the script at the corresponding loop is executed.
 
-* Loop and color state should persist through profile switches and reboots
+* Keep the code inside simple!
 
 -------
 [⬆️⬆️⬆️⬆️⬆️⬆️ Back to Top ⬆️⬆️⬆️⬆️⬆️⬆️](#list-of-commands)
@@ -745,7 +745,7 @@ A number will be returned for each key.
 1-20:
     * Built-in keys
     * Top left is 1
-    * Bottom right is 20.
+    * Bottom right is 20
 
 21: Upper Rotary Encoder Clockwise
 22: Upper Rotary Encoder Counterclockwise
@@ -788,7 +788,7 @@ Read internal variable `$_READKEY`, returns immediately.
 
 Returns 0 if no key is pressed. Key ID otherwise.
 
-Usually, you check this in a loop to perform some work even when no key is pressed.
+Check this in a loop to perform work even when no key is pressed.
 
 ```
 VAR $this_key = 0
@@ -801,8 +801,6 @@ WHILE TRUE
 
     // otherwise perform work here
 END_WHILE
-
-STRINGLN I pressed key $k!
 ```
 
 -------
@@ -839,3 +837,5 @@ Press any key to wake up.
 
 Stop execution immediately
 
+-------
+[⬆️⬆️⬆️⬆️⬆️⬆️ Back to Top ⬆️⬆️⬆️⬆️⬆️⬆️](#list-of-commands)
