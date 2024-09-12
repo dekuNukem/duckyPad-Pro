@@ -1,3 +1,75 @@
+* Built-in
+	* Comments
+	* Timing and Delay
+	* Typing
+	* Profiles
+	* Sleep
+	* KEYUP KEYDOWN
+
+* Special Keys
+
+* Mouse
+	* Movement
+	* Scroll
+	* Buttons
+
+* OLED
+	* Clear Screen
+	* Set Cursor
+	* Print Text
+	* Draw Line
+	* Draw Rectangle
+	* Draw Circle
+	* Restore Display
+
+* RGB
+	* Fill Color
+	* Set Color
+	* Restore color
+
+* Randomisation
+
+* Calculation
+	* Constants
+	* Variables
+	* Operators
+	* Built-in variables
+
+* Reading Buttons
+	* Blocking
+	* Non-blocking
+
+* Flow control
+	* IF
+	* WHILE
+	* Functions
+	* HALT
+
+
+### `EMUK`
+
+Emulates a regular key.
+
+It holds a key when you press it, and release only when you release it. Makes it behave more like a traditional keyboard.
+
+Possible uses include push-to-talk voice chat, or WASD gamepad.
+
+You should only use `EMUK` command **on its own**, i.e. the script should only have a single line of `EMUK` command and **nothing else**.
+
+### `REPEAT`
+
+Repeats the last line **`n`** times.
+
+```
+STRING Hello world
+REPEAT 10
+// types out "Hello world" 11 times (1 original + 10 repeats)
+```
+
+For more advanced usage, use functions and `WHILE` loops in [duckyScript 3](duckyscript3_instructions.md).
+
+---------
+
 Incorporating 4 years worth of feedback from the [original duckyPad](https://github.com/dekuNukem/duckyPad), duckyPad Pro combines long-requested upgrades with a no-nonsense design, aiming simply to be the most capable macropad available today.
 
  now with **Rotary Encoders**, **Bluetooth**, **Expansion Modules**, and more!

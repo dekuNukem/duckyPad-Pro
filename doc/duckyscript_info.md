@@ -6,7 +6,7 @@
 
 ## Overview
 
-duckyScript is a simple scripting language for automating keyboard/mouse inputs.
+duckyScript is a simple language for automating keyboard/mouse inputs.
 
 It was originally developed for [USB Rubber Ducky](https://shop.hak5.org/products/usb-rubber-ducky-deluxe).
 
@@ -22,7 +22,7 @@ Ideal for key combos:
 
 --------
 
-Once Familiar, you can write **longer multi-line** scripts:
+Once familiar, you can write **longer multi-line** scripts for more complex actions.
 
 ##### Open a Webpage:
 
@@ -36,7 +36,25 @@ ENTER
 
 ---------
 
-Finally, you can 
+At full potential, duckyScript is closer to a **general-purpose language**. You can:
+
+* Read Buttons
+* Write to OLED screen
+* Change RGB colors
+* Variables, Conditions, and Loops.
+* And more!
+
+This allows writing ultra-specific macros for your exact needs.
+
+## First Time?
+
+There are a lot of commands, and it can be a bit daunting.
+
+The `first 2 sections` (`Built-in` and `Special Keys`) is more than enough to get started. Then you can skim through the rest.
+
+Also **playing with sample profiles** is a good way to get a feel of duckyScript.
+
+Of course, people at the [Official Discord](https://discord.gg/4sJCBx5) are always happy to help!
 
 ## List of Commands
 
@@ -44,128 +62,41 @@ it's long, use this table of contents to navigate
 
 include list to go back at each section?
 
-* Built-in
-	* Comments
-	* Timing and Delay
-	* Typing
-	* Profiles
-	* Sleep
 
-* Special Keys
-
-* Mouse
-	* Movement
-	* Scroll
-	* Buttons
-
-* OLED
-	* Clear Screen
-	* Set Cursor
-	* Print Text
-	* Draw Line
-	* Draw Rectangle
-	* Draw Circle
-	* Restore Display
-
-* RGB
-	* Fill Color
-	* Set Color
-	* Restore color
-
-* Randomisation
-
-* Calculation
-	* Constants
-	* Variables
-	* Operators
-	* Built-in variables
-
-* Reading Buttons
-	* Blocking
-	* Non-blocking
-
-* Flow control
-	* IF
-	* WHILE
-	* Functions
-	* HALT
-
-
-- [REM and //](#rem-and-)
-
-- [DEFAULTDELAY](#defaultdelay)
-
-- [DEFAULTCHARDELAY](#defaultchardelay)
-
-- [CHARJITTER](#charjitter-x)
-
-- [DELAY](#delay)
-
-- [STRING and STRINGLN](#string-and-stringln)
-
-- [STRINGLN_BLOCK and END_STRINGLN](#stringln_block-and-end_stringln)
-
-- [REPEAT](#repeat)
-
-- [Special Keys](#special-keys)
-
-- [KEYDOWN / KEYUP](#keydown--keyup)
-
-- [Mouse Buttons](#mouse-buttons)
-
-- [MOUSE_MOVE](#mouse_move-x-y)
-
-- [MOUSE_WHEEL](#mouse_wheel-x)
-
-- [SWC_SET](#swc_set-n-r-g-b)
-
-- [SWC_FILL](#swc_fill-r-g-b)
-
-- [SWC_RESET](#swc_reset-n)
-
-- [DP_SLEEP](#dp_sleep)
-
-- [PREV_PROFILE / NEXT_PROFILE](#prev_profile--next_profile)
-
-- [GOTO_PROFILE](#goto_profile)
-
-- [GOTO_PROFILE_NAME](#goto_profile_name)
-
-- [EMUK](#emuk)
-
-- [LOOP](#loop)
-
-- [duckyScript 3 Advanced Features](#duckyscript-3-advanced-features)
+## Comments
 
 ### `REM` and `//`
 
-Comments. Any line starting with those is ignored.
+Any line starting with those is ignored.
 
 ### `REM_BLOCK` and `END_REM`
 
 Comment block. Everything in-between is ignored.
 
+## Timing
+
+### `DELAY`
+
+Creates a pause (in milliseconds) in execution.
+
+Useful for **waiting for UI to catch up**.
+
+```
+DELAY 1000
+// wait 1000 milliseconds, or 1 second
+```
+
 ### `DEFAULTDELAY`
 
-Specifies how long (in milliseconds) to wait between **`each line of command`**.
+Change how long to wait between **`each line of code`**.
 
-If unspecified, `DEFAULTDELAY` is 18ms.
-
-```
-DEFAULTDELAY 100
-// duckyPad will wait 100ms between each subsequent command
-```
+Default is 20ms.
 
 ### `DEFAULTCHARDELAY`
 
-`DEFAULTCHARDELAY` specifies how long (in milliseconds) to wait between each **`key stroke`**.
+Change how long to wait between each **`key stroke`**.
 
-If unspecified, `DEFAULTCHARDELAY` is 18ms.
-
-```
-DEFAULTCHARDELAY 50
-// duckyPad will wait 50ms between each key stroke
-```
+Default is 20ms.
 
 ### `CHARJITTER X`
 
@@ -175,18 +106,11 @@ Can be used to make typing more human-like.
 
 Set to 0 to disable.
 
-### `DELAY`
-
-`DELAY` creates a pause in script execution. Useful for waiting for UI to catch up.
-
-```
-DELAY 1000
-// waits 1000 milliseconds, or 1 second
-```
+## Typing
 
 ### `STRING` and `STRINGLN`
 
-`STRING` types out whatever after it **`as-is`**.
+`STRING` types out whatever after it **`AS-IS`**.
 
 ```
 STRING Hello world!
@@ -197,7 +121,7 @@ STRING Hello world!
 
 ### `STRINGLN_BLOCK` and `END_STRINGLN`
 
-Type out everything inside the block as-is.
+Type out everything inside as-is.
 
 Also presses **enter key** at the end of each line.
 
@@ -205,122 +129,90 @@ Also presses **enter key** at the end of each line.
 STRINGLN_BLOCK
 
 According to all known laws of aviation,
-
 there is no way a bee should be able to fly.
-
-Its wings are too small to get its fat little body off the ground.
 
 END_STRINGLN
 ```
 
 ### `STRING_BLOCK` and `END_STRING`
 
-Similar to above, but without new line at the end.
+Similar to above, but without new lines.
 
-### `REPEAT`
+## Pressing Keys
 
-Repeats the last line **`n`** times.
+### Key Combos
 
-```
-STRING Hello world
-REPEAT 10
-// types out "Hello world" 11 times (1 original + 10 repeats)
-```
+duckyScript supports many special keys.
 
-For more advanced usage, use functions and `WHILE` loops in [duckyScript 3](duckyscript3_instructions.md).
-
-### Special Keys
-
-duckyScript also supports many special keys:
-
-```
-CTRL / RCTRL
-SHIFT / RSHIFT
-ALT / RALT
-WINDOWS / RWINDOWS
-COMMAND / RCOMMAND (mac)
-OPTION / ROPTION (mac)
-ESC
-ENTER
-UP / DOWN / LEFT / RIGHT
-SPACE
-BACKSPACE
-TAB
-CAPSLOCK
-PRINTSCREEN
-SCROLLLOCK
-PAUSE
-BREAK
-INSERT
-HOME
-PAGEUP / PAGEDOWN
-DELETE
-END
-MENU
-POWER
-
-F1 to F24
-
-(media keys)
-MK_VOLUP
-MK_VOLDOWN
-MK_MUTE
-MK_PREV
-MK_NEXT
-MK_PP (play/pause)
-MK_STOP
-
-(numpad keys)
-NUMLOCK
-KP_SLASH
-KP_ASTERISK
-KP_MINUS
-KP_PLUS
-KP_ENTER
-KP_0 to KP_9
-KP_DOT
-KP_EQUAL
-
-(Japanese input method keys)
-ZENKAKUHANKAKU
-HENKAN
-MUHENKAN
-KATAKANAHIRAGANA
-```
-
-Those special keys can be used on their own:
+They can be used on their own:
 
 `WINDOWS`
 
-...or can be combined with a character to form shortcuts:
+...or combined with a character to form shortcuts:
 
 `WINDOWS s`
 
-...or can be combined with other special keys:
+...or chained even longer:
 
 `WINDOWS SHIFT s`
 
 ------
 
-* Type the key names as-is in **`ALL CAPS`**.
+* Type the key name **as-is** in **`ALL CAPS`**.
 
-* **`UP TO 6 KEYS`** can be pressed simultaneously.
+* Keys are pressed in sequence from **left-to-right**, then released **right-to-left**.
+
+------
+
+Supported Special Keys:
+
+``` 
+  CTRL / RCTRL         |     (media keys)             
+  SHIFT / RSHIFT       |     MK_VOLUP                 
+  ALT / RALT           |     MK_VOLDOWN               
+  WINDOWS / RWINDOWS   |     MK_MUTE                  
+  COMMAND / RCOMMAND   |     MK_PREV                  
+  OPTION / ROPTION     |     MK_NEXT                  
+  ESC                  |     MK_PP (play/pause)       
+  ENTER                |     MK_STOP                  
+  UP/DOWN/LEFT/RIGHT   |                              
+  SPACE                |     (numpad keys)            
+  BACKSPACE            |     NUMLOCK                  
+  TAB                  |     KP_SLASH                 
+  CAPSLOCK             |     KP_ASTERISK              
+  PRINTSCREEN          |     KP_MINUS                 
+  SCROLLLOCK           |     KP_PLUS                  
+  PAUSE                |     KP_ENTER                 
+  BREAK                |     KP_0 to KP_9             
+  INSERT               |     KP_DOT                   
+  HOME                 |     KP_EQUAL                 
+  PAGEUP / PAGEDOWN    |                              
+  DELETE               |     (Japanese input method)  
+  END                  |     ZENKAKUHANKAKU           
+  MENU                 |     HENKAN                   
+  POWER                |     MUHENKAN                 
+  F1 to F24            |     KATAKANAHIRAGANA         
+
+```
 
 ### `KEYDOWN` / `KEYUP`
 
-Holds / Releases a key.
+Hold/release a key on command.
+
+Allows more fine-grained control.
 
 Can be used to input [Alt Codes](https://en.wikipedia.org/wiki/Alt_code) for special characters:
 
 ```
+// types out ¼
 KEYDOWN ALT
 KP_1
 KP_7
 KP_2
 KEYUP ALT
-
-// types out ¼
 ```
+
+## Mouse
 
 ### Mouse Buttons
 
@@ -340,15 +232,47 @@ Move mouse cursor `X` pixels horizontally, and `Y` pixels vertically.
 
 * Set `X` or `Y` to 0 if no movement needed.
 
-* Use `REPEAT` command to move further.
+* **Disable mouse acceleration** for pixel-accurate results!
 
 ### `MOUSE_WHEEL X`
 
 Scroll mouse wheel `X` lines.
 
-* `X` must be between `-127` and `127`
-
 * A positive number scrolls UP, negative number scrolls DOWN.
+
+## OLED
+
+### `OLED_CURSOR x y`
+
+Set where to print on screen.
+
+`x`, `y`: coordinates between `0` and `127`.
+
+Characters print from **top-left** corner.
+
+### `OLED_PRINT`
+
+`OLED_PRINT hello world!` 
+
+Prints the message into display buffer at current cursor location.
+
+### `OLED_CLEAR`
+
+Clears the display buffer.
+
+### `OLED_UPDATE`
+
+Actually update the OLED.
+
+You should use `OLED_CLEAR`, `OLED_CURSOR`, and `OLED_PRINT` to set up the display, then use this to print it.
+
+This is **much faster** than updating the whole screen for every change.
+
+### `OLED_RESTORE`
+
+Restore the default profile/key name display. `OLED_UPDATE` **NOT NEEDED**.
+
+## Per-Key RGB
 
 ### `SWC_SET n r g b`
 
@@ -356,25 +280,418 @@ Change LED color of a switch
 
 Set `n` to 0 for current key.
 
-Set `n` between 1 to 15 for a particular key.
+Set `n` between 1 to 20 for a particular key.
 
-`r, g, b` can be constants or variables between 0 and 255.
+`r, g, b` must be between 0 and 255.
 
 ### `SWC_FILL r g b`
 
 Change color of **ALL** LEDs.
 
-`r, g, b` can be constants or variables between 0 and 255.
+`r, g, b` must be between 0 and 255.
 
 ### `SWC_RESET n`
 
-Resets the key to default background color.
+Reset the key back to default color.
 
 Set `n` to 0 for current key.
 
 Set `n` from 1 to 15 for a particular key.
 
 Set `n` to 99 for all keys.
+
+## Profile Switching
+
+### Autoswitcher
+
+Try the [autoswitcher](https://github.com/dekuNukem/duckyPad-profile-autoswitcher) to jump to a profile based on **current window**!
+
+### `PREV_PROFILE` / `NEXT_PROFILE`
+
+Switch to the previous / next profile.
+
+### `GOTO_PROFILE`
+
+Jump to a particular profile by name. **Case sensitive!**
+
+```
+GOTO_PROFILE NumPad
+```
+
+## Constants
+
+You can use `DEFINE` to, well, define a constant.
+
+It can be either **integer** or **string**.
+
+The content is **replaced AS-IS** during pre-processing, very much like `#define` in C.
+
+```
+DEFINE MY_EMAIL example@gmail.com
+DEFINE MY_AGE 69
+
+STRING My email is MY_EMAIL!
+STRING I'm MY_AGE years old! 
+```
+
+Internally, `TRUE` is `1`, and `FALSE` is `0`.
+
+## Variables
+
+You can declare a variable using `VAR` command:
+
+```
+// Declaration
+VAR $spam = 0
+VAR $eggs = 10
+
+// Assignment
+$spam = 20
+```
+
+Variables must start with dollar sign `$`.
+
+Variables are **unsigned 16-bit integers**, and can hold values from **0 to 65535**.
+
+All variables have **global scope**, and can be referenced anywhere in the script.
+
+They can be printed with `STRING`, `STRINGLN`, and `OLED_PRINT`.
+
+```
+STRING The value is: $spam
+```
+
+## Reserved Variables
+
+There are a few **reserved variables** that are always available.
+
+You can read or write (RW) to adjust settings. Some are read-only (RO).
+
+#### `$_RANDOM_MIN` (RW)
+
+Lower bound of random number generator (RNG).
+
+#### `$_RANDOM_MAX` (RW)
+
+Upper bound of RNG.
+
+#### `$_RANDOM_INT` (RW)
+
+Get a random number between the upper and lower bound (**inclusive**).
+
+#### `$_TIME_S` (RO)
+
+Get current time in **seconds**.
+
+#### `$_TIME_MS` (RO)
+
+Get current time in **milliseconds**.
+
+#### `$_READKEY` (RO)
+
+Returns the first active key number.
+
+Returns 0 if no key is pressed.
+
+#### `$_BLOCKING_READKEY` (RO)
+
+Wait until a key is pressed, then returns its number.
+
+## Operators
+
+You can perform operations on constants and variables.
+
+### Mathematics
+
+```
+=       Assignment
++       Add       
+-       Subtract  
+*       Multiply  
+/       Divide    
+%       Modulus   
+^       Exponent
+```
+
+Example:
+
+```
+$spam = 2+3
+$spam = $eggs * 10
+```
+
+### Comparison
+
+All comparisons evaluate to **either 0 or 1**.
+
+```
+==        Equal                  
+!=        Not equal              
+>         Greater than           
+<         Less than              
+>=        Greater than or equal  
+<=        Less than or equal   
+```
+
+### Logical 
+
+| Operator |          Name         | Comment                                                |
+|:--------:|:---------------------:|--------------------------------------------------------|
+|    &&    |      Logical AND      | Evaluates to 1 if BOTH side are non-zero, otherwise 0. |
+|   \|\|   |       Logical OR      | Evaluates to 1 if ANY side is non-zero, otherwise 0.   |
+
+### Bitwise
+
+```
+&        Bitwise AND   
+|        Bitwise OR    
+<<       Left Shift    
+>>       Right Shift   
+```
+
+## Argument Options
+
+You can use **constant, variable, or expression** as arguments in commands.
+
+```
+VAR $amount = 100
+DELAY $amount*2+5
+```
+
+## Conditional Statements
+
+`IF` statement is used to conditionally execute code.
+
+At simplest, it involves `IF`, `THEN`, and `END_IF`:
+
+```
+IF expression THEN
+    code to execute
+END_IF
+```
+
+The code inside is executed if the **expression evaluates to non-zero**.
+
+Indent doesn't matter, feel free to add them for a cleaner look.
+
+----
+
+You can use `ELSE IF` and `ELSE` for additional checks.
+
+If the first `IF` evaluate to 0, `ELSE IF`s are checked and executed if condition is met.
+
+If none of the conditions are met, then code inside `ELSE` is executed.
+
+```
+VAR $spam = 5
+
+IF $spam == 0 THEN
+    STRING spam is zero!
+ELSE IF $spam == 1 THEN
+    STRING spam is one!
+ELSE
+    STRING spam is none of those!
+END_IF
+```
+
+
+## Loops
+
+You can use `WHILE` loops to repeat instructions until a certain condition is met.
+
+Syntax:
+
+```
+WHILE expression
+    code to repeat
+END_WHILE
+```
+
+If `expression` evaluates to zero, the code is skipped. Otherwise the code inside is repeated.
+
+This simple example loops 3 times.
+
+```
+VAR $i = 0
+WHILE $i < 3
+    STRINGLN Counter is $i!
+    $i = $i + 1
+END_WHILE
+```
+
+```
+Counter is 0!
+Counter is 1!
+Counter is 2!
+```
+
+### `LBREAK`
+
+Use `LBREAK` to **exit a loop** immediately.
+
+```
+VAR $i = 0
+WHILE TRUE
+    STRINGLN Counter is $i!
+    $i = $i + 1
+
+    IF $i == 3 THEN
+        LBREAK
+    END_IF
+END_WHILE
+```
+```
+Counter is 0!
+Counter is 1!
+Counter is 2!
+```
+
+### `CONTINUE`
+
+Use `CONTINUE` to **jump to the start of loop** immediately.
+
+```
+VAR $i = 0
+WHILE $i < 5
+    $i = $i + 1
+
+    IF $i == 3 THEN
+        CONTINUE
+    END_IF
+
+    STRINGLN Counter is $i!
+END_WHILE
+```
+
+Here when `$count` is 3, it skips printing and start from beginning instead.
+
+```
+Counter is 1!
+Counter is 2!
+Counter is 4!
+Counter is 5!
+```
+
+To exit an infinite loop, you can [check button status](#reading-buttons), or turn on `Allow Abort` in the key settings.
+
+
+## Functions
+
+Functions let you run a block of code efficiently.
+
+Syntax:
+
+```
+FUNCTION func_name()
+    code
+END_FUNCTION
+```
+
+You can use **`RETURN`** to exit a function early.
+
+Arguments and return values are NOT supported, use global variables instead.
+
+```
+FUNCTION print_info()
+    STRING My email is example@gmail.com
+    STRING I'm 69 years old!
+END_FUNCTION
+
+// call it
+print_info()
+```
+
+## Reading Inputs
+
+You can read the status of:
+
+* Built-in Switches
+* Rotary Encoders
+* Expansion Module Switches
+
+### Key ID
+
+A number will be returned for each key.
+
+```
+1-20:
+    * Built-in keys
+    * Top left is 1
+    * Bottom right is 20.
+
+21: Upper Rotary Encoder Clockwise
+22: Upper Rotary Encoder Counterclockwise
+23: Upper Rotary Encoder Push-down
+
+24: Lower Rotary Encoder Clockwise
+25: Lower Rotary Encoder Counterclockwise
+26: Lower Rotary Encoder Push-down
+
+27: Plus Button
+28: Minus Button
+
+37-99: External Switches
+```
+
+### Blocking Read
+
+Simplest method.
+
+Just read `$_BLOCKING_READKEY` internal variable.
+
+It will block until a key is pressed.
+
+```
+VAR $this_key = $_BLOCKING_READKEY
+
+IF $this_key == 1 THEN
+    // do something here
+ELSE IF $this_key == 2 THEN
+    // do something else
+ELSE IF $this_key == 3 THEN
+    // etc
+END_IF
+
+```
+
+### Non-Blocking Read
+
+Read internal variable `$_READKEY`, returns immediately.
+
+Returns 0 if no key is pressed. Key ID otherwise.
+
+Usually, you check this in a loop to perform some work even when no key is pressed.
+
+```
+VAR $this_key = 0
+
+WHILE TRUE
+    $this_key = $_READKEY
+    IF $this_key == 1 THEN
+        // handling button press
+    END_IF
+
+    // otherwise perform work here
+END_WHILE
+
+STRINGLN I pressed key $k!
+```
+
+## Randomisation
+
+Read from `$_RANDOM_INT` to get a random number.
+
+By default, it is between 0 and 65535.
+
+You can change the upper and lower bounds (**inclusive**) by writing to `_RANDOM_MAX` and `_RANDOM_MIN`.
+
+```
+$_RANDOM_MIN = 0
+$_RANDOM_MAX = 100
+STRINGLN Random number: $_RANDOM_INT
+```
+
+## Miscellaneous
 
 ### `DP_SLEEP`
 
@@ -384,35 +701,12 @@ Backlight and screen are turned off.
 
 Press any key to wake up.
 
-### `PREV_PROFILE` / `NEXT_PROFILE`
+## `HALT`
 
-Switch to the previous / next profile.
+Stop execution immediately
 
-### `GOTO_PROFILE`
 
-Jump to a particular profile.
-
-```
-GOTO_PROFILE 3
-// jump to profile #3
-```
-### `GOTO_PROFILE_NAME`
-
-Use this command to jump to a particular profile by name.
-
-```
-GOTO_PROFILE_NAME NumPad
-// jump to profile with name "NumPad"
-```
-### `EMUK`
-
-Emulates a regular key.
-
-It holds a key when you press it, and release only when you release it. Makes it behave more like a traditional keyboard.
-
-Possible uses include push-to-talk voice chat, or WASD gamepad.
-
-You should only use `EMUK` command **on its own**, i.e. the script should only have a single line of `EMUK` command and **nothing else**.
+---------
 
 ### `LOOP`
 
@@ -438,38 +732,3 @@ ENTER
 
 * Loop and color state should persist through profile switches and reboots
 
-## duckyScript 3 Advanced Features
-
-duckyScript 3 gives duckyPad a big boost in capability, including:
-
-* Variables, `IF` statements, `WHILE` loops, functions, randomisation, and more!
-
-* Print to OLED screen
-
-* Read button status
-
-[Click me to learn more about advanced features!](duckyscript3_instructions.md)
-
-## Table of Contents
-
-[Main page](README.md)
-
-[Getting Started Guide](getting_started.md)
-
-[Kit Assembly Guide](kit_assembly_guide.md)
-
-[Using duckyScript](duckyscript_info.md) | [duckyScript 3 Info](duckyscript3_instructions.md)
-
-[Common issues / Troubleshooting](troubleshooting.md)
-
-[Firmware Updates and Version History](firmware_updates_and_version_history.md)
-
-[Make Your Own Keymap](./keymap_instructions.md)
-
-[Build a duckyPad Yourself](build_it_yourself.md)
-
-[Kickstarter Backer Acknowledgments](kickstarter_backers.md)
-
-## Questions or Comments?
-
-Please feel free to [open an issue](https://github.com/dekuNukem/duckypad/issues), ask in the [official duckyPad discord](https://discord.gg/4sJCBx5), DM me on discord `dekuNukem#6998`, or email `dekuNukem`@`gmail`.`com` for inquires.

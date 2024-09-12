@@ -8,9 +8,11 @@
 
 ## DFU Update
 
+## Version History
 
+### 2.0.0
 
-
+Initial Public Release
 
 ## Questions or Comments?
 
