@@ -74,15 +74,16 @@ Of course, people at the [Official Discord](https://discord.gg/4sJCBx5) are alwa
 - [Pressing Keys](#pressing-keys)
     - [Combos](#combos)
     - [`KEYDOWN` / `KEYUP`](#keydown--keyup)
+    - [`REPEAT`](#repeat)
 - [Mouse](#mouse)
     - [Mouse Buttons](#mouse-buttons)
     - [`MOUSE_MOVE X Y`](#mouse_move-x-y)
     - [`MOUSE_WHEEL X`](#mouse_wheel-x)
 - [Multiple Actions](#multiple-actions)
 - [Profile Switching](#profile-switching)
-    - [Autoswitcher](#autoswitcher)
     - [`PREV_PROFILE` / `NEXT_PROFILE`](#prev_profile--next_profile)
     - [`GOTO_PROFILE`](#goto_profile)
+    - [Autoswitcher](#autoswitcher)
 - [OLED](#oled)
     - [`OLED_CURSOR x y`](#oled_cursor-x-y)
     - [`OLED_PRINT`](#oled_print)
@@ -97,15 +98,9 @@ Of course, people at the [Official Discord](https://discord.gg/4sJCBx5) are alwa
 - [Variables](#variables)
 - [Reserved Variables](#reserved-variables)
 - [Operators](#operators)
-    - [Mathematics](#mathematics)
-    - [Comparison](#comparison)
-    - [Logical](#logical)
-    - [Bitwise](#bitwise)
 - [Arguments](#arguments)
 - [Conditional Statements](#conditional-statements)
 - [Loops](#loops)
-    - [`LBREAK`](#lbreak)
-    - [`CONTINUE`](#continue)
 - [Functions](#functions)
 - [Reading Inputs](#reading-inputs)
     - [Key ID](#key-id)
@@ -154,9 +149,9 @@ Change how long to wait between each **`key stroke`**.
 
 Default is 20ms.
 
-### `CHARJITTER X`
+### `CHARJITTER n`
 
-Adds an **additional** random delay between 0 and X milliseconds after `each key stroke`.
+Adds an **additional** random delay between 0 and `n` milliseconds after `each key stroke`.
 
 Can be used to make typing more human-like.
 
@@ -202,7 +197,7 @@ Similar to above, but without new lines.
 
 ## Pressing Keys
 
-### Combos
+### Special Keys
 
 duckyScript supports many special keys.
 
@@ -226,7 +221,7 @@ They can be used on their own:
 
 ------
 
-Supported Special Keys:
+List of Special Keys:
 
 ``` 
   CTRL / RCTRL         |     (media keys)             
@@ -272,6 +267,16 @@ KP_1
 KP_7
 KP_2
 KEYUP ALT
+```
+
+### `REPEAT`
+
+Repeats the **last line** **`n`** times.
+
+```
+STRING Hello world
+REPEAT 10
+// types out "Hello world" 11 times (1 original + 10 repeats)
 ```
 
 -------
@@ -337,21 +342,21 @@ ENTER
 
 ## Profile Switching
 
-### Autoswitcher
-
-Try the [autoswitcher](https://github.com/dekuNukem/duckyPad-profile-autoswitcher) to jump to a profile based on **current window**!
-
 ### `PREV_PROFILE` / `NEXT_PROFILE`
 
 Switch to the previous / next profile.
 
 ### `GOTO_PROFILE`
 
-Jump to a particular profile by name. **Case sensitive!**
+Jump to a profile by name. **Case sensitive!**
 
 ```
 GOTO_PROFILE NumPad
 ```
+
+### Autoswitcher
+
+Also try the [autoswitcher](https://github.com/dekuNukem/duckyPad-profile-autoswitcher) to jump to a profile based on **current window**!
 
 -------
 [⬆️⬆️⬆️⬆️⬆️⬆️ Back to Top ⬆️⬆️⬆️⬆️⬆️⬆️](#list-of-commands)
@@ -362,7 +367,9 @@ GOTO_PROFILE NumPad
 
 Set where to print on screen.
 
-`x`, `y`: coordinates between `0` and `127`.
+`x y`: Pixel coordinates between `0` and `127`.
+
+Characters are **7 pixels wide, 10 pixels tall.**
 
 Characters print from **top-left** corner.
 
@@ -479,15 +486,11 @@ You can read or write (RW) to adjust settings. Some are read-only (RO).
 
 #### `$_RANDOM_MIN` (RW)
 
-Lower bound of random number generator (RNG).
-
 #### `$_RANDOM_MAX` (RW)
-
-Upper bound of RNG.
 
 #### `$_RANDOM_INT` (RW)
 
-Get a random number between the upper and lower bound (**inclusive**).
+See [Randomisation](#randomisation)
 
 #### `$_TIME_S` (RO)
 
@@ -499,13 +502,17 @@ Get current time in **milliseconds**.
 
 #### `$_READKEY` (RO)
 
-Returns the first active key number.
-
-Returns 0 if no key is pressed.
-
 #### `$_BLOCKING_READKEY` (RO)
 
-Wait until a key is pressed, then returns its number.
+See [Reading Inputs](#reading-inputs)
+
+#### `$_IS_NUMLOCK_ON` (RO)
+
+#### `$_IS_CAPSLOCK_ON` (RO)
+
+#### `$_IS_SCROLLLOCK_ON` (RO)
+
+Returns 1 if true, 0 otherwise.
 
 -------
 [⬆️⬆️⬆️⬆️⬆️⬆️ Back to Top ⬆️⬆️⬆️⬆️⬆️⬆️](#list-of-commands)
