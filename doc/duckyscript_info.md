@@ -47,9 +47,11 @@ This allows writing ultra-specific macros for your exact needs.
 
 ## First Time?
 
-There are a lot of commands, and it can be a bit daunting.
+There are quite a few commands, and it can be a bit daunting.
 
-The `first 2 sections` (`Built-in` and `Special Keys`) is more than enough to get started. Then you can skim through the rest.
+The **first few sections** (from `Comments` to `Mouse`) is more than enough to get started.
+
+You can skim through the rest once familiar with the basics.
 
 Also **playing with sample profiles** is a good way to get a feel of duckyScript.
 
@@ -70,7 +72,7 @@ Of course, people at the [Official Discord](https://discord.gg/4sJCBx5) are alwa
     - [`STRINGLN_BLOCK` and `END_STRINGLN`](#stringln_block-and-end_stringln)
     - [`STRING_BLOCK` and `END_STRING`](#string_block-and-end_string)
 - [Pressing Keys](#pressing-keys)
-    - [Key Combos](#key-combos)
+    - [Combos](#combos)
     - [`KEYDOWN` / `KEYUP`](#keydown--keyup)
 - [Mouse](#mouse)
     - [Mouse Buttons](#mouse-buttons)
@@ -124,6 +126,9 @@ Any line starting with those is ignored.
 
 Comment block. Everything in-between is ignored.
 
+-------
+[⬆️⬆️⬆️⬆️⬆️⬆️ Back to Top ⬆️⬆️⬆️⬆️⬆️⬆️](#list-of-commands)
+
 ## Timing
 
 ### `DELAY`
@@ -157,6 +162,9 @@ Can be used to make typing more human-like.
 
 Set to 0 to disable.
 
+-------
+[⬆️⬆️⬆️⬆️⬆️⬆️ Back to Top ⬆️⬆️⬆️⬆️⬆️⬆️](#list-of-commands)
+
 ## Typing
 
 ### `STRING` and `STRINGLN`
@@ -189,9 +197,12 @@ END_STRINGLN
 
 Similar to above, but without new lines.
 
+-------
+[⬆️⬆️⬆️⬆️⬆️⬆️ Back to Top ⬆️⬆️⬆️⬆️⬆️⬆️](#list-of-commands)
+
 ## Pressing Keys
 
-### Key Combos
+### Combos
 
 duckyScript supports many special keys.
 
@@ -263,6 +274,9 @@ KP_2
 KEYUP ALT
 ```
 
+-------
+[⬆️⬆️⬆️⬆️⬆️⬆️ Back to Top ⬆️⬆️⬆️⬆️⬆️⬆️](#list-of-commands)
+
 ## Mouse
 
 ### Mouse Buttons
@@ -291,6 +305,9 @@ Scroll mouse wheel `X` lines.
 
 * A positive number scrolls UP, negative number scrolls DOWN.
 
+-------
+[⬆️⬆️⬆️⬆️⬆️⬆️ Back to Top ⬆️⬆️⬆️⬆️⬆️⬆️](#list-of-commands)
+
 ## Multiple Actions
 
 `LOOP` command lets you to **assign multiple actions to one key**.
@@ -315,6 +332,9 @@ ENTER
 
 * Loop and color state should persist through profile switches and reboots
 
+-------
+[⬆️⬆️⬆️⬆️⬆️⬆️ Back to Top ⬆️⬆️⬆️⬆️⬆️⬆️](#list-of-commands)
+
 ## Profile Switching
 
 ### Autoswitcher
@@ -332,6 +352,9 @@ Jump to a particular profile by name. **Case sensitive!**
 ```
 GOTO_PROFILE NumPad
 ```
+
+-------
+[⬆️⬆️⬆️⬆️⬆️⬆️ Back to Top ⬆️⬆️⬆️⬆️⬆️⬆️](#list-of-commands)
 
 ## OLED
 
@@ -365,6 +388,9 @@ This is **much faster** than updating the whole screen for every change.
 
 Restore the default profile/key name display. `OLED_UPDATE` **NOT NEEDED**.
 
+-------
+[⬆️⬆️⬆️⬆️⬆️⬆️ Back to Top ⬆️⬆️⬆️⬆️⬆️⬆️](#list-of-commands)
+
 ## Per-Key RGB
 
 ### `SWC_SET n r g b`
@@ -393,6 +419,9 @@ Set `n` from 1 to 15 for a particular key.
 
 Set `n` to 99 for all keys.
 
+-------
+[⬆️⬆️⬆️⬆️⬆️⬆️ Back to Top ⬆️⬆️⬆️⬆️⬆️⬆️](#list-of-commands)
+
 ## Constants
 
 You can use `DEFINE` to, well, define a constant.
@@ -410,6 +439,9 @@ STRING I'm MY_AGE years old!
 ```
 
 Internally, `TRUE` is `1`, and `FALSE` is `0`.
+
+-------
+[⬆️⬆️⬆️⬆️⬆️⬆️ Back to Top ⬆️⬆️⬆️⬆️⬆️⬆️](#list-of-commands)
 
 ## Variables
 
@@ -435,6 +467,9 @@ They can be printed with `STRING`, `STRINGLN`, and `OLED_PRINT`.
 ```
 STRING The value is: $spam
 ```
+
+-------
+[⬆️⬆️⬆️⬆️⬆️⬆️ Back to Top ⬆️⬆️⬆️⬆️⬆️⬆️](#list-of-commands)
 
 ## Reserved Variables
 
@@ -471,6 +506,9 @@ Returns 0 if no key is pressed.
 #### `$_BLOCKING_READKEY` (RO)
 
 Wait until a key is pressed, then returns its number.
+
+-------
+[⬆️⬆️⬆️⬆️⬆️⬆️ Back to Top ⬆️⬆️⬆️⬆️⬆️⬆️](#list-of-commands)
 
 ## Operators
 
@@ -524,6 +562,9 @@ All comparisons evaluate to **either 0 or 1**.
 >>       Right Shift   
 ```
 
+-------
+[⬆️⬆️⬆️⬆️⬆️⬆️ Back to Top ⬆️⬆️⬆️⬆️⬆️⬆️](#list-of-commands)
+
 ## Arguments
 
 You can use **constant, variable, or expression** as arguments in commands.
@@ -532,6 +573,9 @@ You can use **constant, variable, or expression** as arguments in commands.
 VAR $amount = 100
 DELAY $amount*2+5
 ```
+
+-------
+[⬆️⬆️⬆️⬆️⬆️⬆️ Back to Top ⬆️⬆️⬆️⬆️⬆️⬆️](#list-of-commands)
 
 ## Conditional Statements
 
@@ -569,6 +613,9 @@ ELSE
 END_IF
 ```
 
+
+-------
+[⬆️⬆️⬆️⬆️⬆️⬆️ Back to Top ⬆️⬆️⬆️⬆️⬆️⬆️](#list-of-commands)
 
 ## Loops
 
@@ -650,6 +697,9 @@ Counter is 5!
 To exit an infinite loop, you can [check button status](#reading-buttons), or turn on `Allow Abort` in the key settings.
 
 
+-------
+[⬆️⬆️⬆️⬆️⬆️⬆️ Back to Top ⬆️⬆️⬆️⬆️⬆️⬆️](#list-of-commands)
+
 ## Functions
 
 Functions let you run a block of code efficiently.
@@ -675,6 +725,9 @@ END_FUNCTION
 // call it
 print_info()
 ```
+
+-------
+[⬆️⬆️⬆️⬆️⬆️⬆️ Back to Top ⬆️⬆️⬆️⬆️⬆️⬆️](#list-of-commands)
 
 ## Reading Inputs
 
@@ -752,6 +805,9 @@ END_WHILE
 STRINGLN I pressed key $k!
 ```
 
+-------
+[⬆️⬆️⬆️⬆️⬆️⬆️ Back to Top ⬆️⬆️⬆️⬆️⬆️⬆️](#list-of-commands)
+
 ## Randomisation
 
 Read from `$_RANDOM_INT` to get a random number.
@@ -765,6 +821,9 @@ $_RANDOM_MIN = 0
 $_RANDOM_MAX = 100
 STRINGLN Random number: $_RANDOM_INT
 ```
+
+-------
+[⬆️⬆️⬆️⬆️⬆️⬆️ Back to Top ⬆️⬆️⬆️⬆️⬆️⬆️](#list-of-commands)
 
 ## Miscellaneous
 
