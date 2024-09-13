@@ -65,7 +65,7 @@ void app_main(void)
 
     xTaskCreate(kb_scan_task, "kb_scan_task", SW_SCAN_TASK_STACK_SIZE, NULL, 5, NULL);
 
-    pong_test();
+    // pong_test();
 
     if(should_mount_usb_msc())
     {

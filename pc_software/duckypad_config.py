@@ -1465,7 +1465,7 @@ def check_syntax():
         check_syntax_label.config(text="Code seems OK..", fg="green")
     else:
         script_textbox.tag_remove("error", '1.0', 'end')
-        error_lnum = result_dict['line_number']-1
+        error_lnum = result_dict['line_number']
         script_textbox.tag_add("error", str(error_lnum)+".0", str(error_lnum)+".0 lineend")
         check_syntax_label.config(text=result_dict['comments'], fg='red')
 
@@ -1542,7 +1542,7 @@ root.update()
 current_selected_expansion_module = 0
 
 def exp_page_update():
-    current_module_label.config(text=f"Module {current_selected_expansion_module}")
+    current_module_label.config(text=f"Module {current_selected_expansion_module+1}")
     for index,item in enumerate(key_button_list):
         if is_expansion_button(index):
             item.place(x=scaled_size(999), y=scaled_size(999)) # place_forget doesnt seem to work
@@ -1605,22 +1605,22 @@ ch_label_x = 5
 chy_start = 55
 chy_step = 32
 
-EXPCH0_label = Label(master=expansion_lf, text="CH0")
+EXPCH0_label = Label(master=expansion_lf, text="CH1")
 EXPCH0_label.place(x=scaled_size(ch_label_x), y=scaled_size(chy_start + chy_step * 0))
 
-EXPCH1_label = Label(master=expansion_lf, text="CH1")
+EXPCH1_label = Label(master=expansion_lf, text="CH2")
 EXPCH1_label.place(x=scaled_size(ch_label_x), y=scaled_size(chy_start + chy_step * 1))
 
-EXPCH2_label = Label(master=expansion_lf, text="CH2")
+EXPCH2_label = Label(master=expansion_lf, text="CH3")
 EXPCH2_label.place(x=scaled_size(ch_label_x), y=scaled_size(chy_start + chy_step * 2))
 
-EXPCH3_label = Label(master=expansion_lf, text="CH3")
+EXPCH3_label = Label(master=expansion_lf, text="CH4")
 EXPCH3_label.place(x=scaled_size(ch_label_x), y=scaled_size(chy_start + chy_step * 3))
 
-EXPCH4_label = Label(master=expansion_lf, text="CH4")
+EXPCH4_label = Label(master=expansion_lf, text="CH5")
 EXPCH4_label.place(x=scaled_size(ch_label_x), y=scaled_size(chy_start + chy_step * 4))
 
-EXPCH5_label = Label(master=expansion_lf, text="CH5")
+EXPCH5_label = Label(master=expansion_lf, text="CH6")
 EXPCH5_label.place(x=scaled_size(ch_label_x), y=scaled_size(chy_start + chy_step * 5))
 
 ch_button_x = 45
@@ -1629,7 +1629,7 @@ CH_BUTTON_WIDTH = 85
 # expansion module buttons
 for mmm in range(MAX_EXPANSION_MODULE_COUNT):
     for ccc in range(CHANNELS_PER_EXPANSION_MODULE):
-        this_ch_button = Label(expansion_lf, relief="solid") #text=f"M{mmm}CH{ccc}"
+        this_ch_button = Label(expansion_lf, relief="solid")
         this_ch_button.bind("<Button-1>", key_button_click_event)
         this_ch_button.bind("<B1-Motion>", button_drag_start)
         this_ch_button.bind("<ButtonRelease-1>", button_drag_release)

@@ -297,6 +297,7 @@ uint8_t poll_sw_state(uint8_t swid_zero_indexed, uint8_t perform_new_scan)
 		return 0;
 	if(perform_new_scan)
 		sw_scan();
+	// check if swid is encoder, return based on last event if true
 	return this_sw_state[swid_zero_indexed];
 }
 
