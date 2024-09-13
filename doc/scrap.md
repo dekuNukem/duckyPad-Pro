@@ -1,3 +1,6 @@
+p make_toc.py ../doc/duckyscript_info.md
+
+
 * Built-in
 	* Comments
 	* Timing and Delay
