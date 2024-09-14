@@ -6,33 +6,15 @@
 
 Some commonly encountered issues are explained here.
 
-* [I press a key and nothing happens!](#I-press-a-key-and-nothing-happens)
-
-* [The letters and symbols come out wrong!](#The-letters-and-symbols-come-out-wrong)
-
-* [F13 - F24 keys doesn't work!](#f13---f24-keys-doesnt-work)
-
-* [My duckyPad stopped working on latest firmware!](#my-duckypad-stopped-working-on-latest-firmware)
-
-* [My script behaves inconsistently!](#My-script-behaves-inconsistently)
-
-* [My duckyPad seems to be getting sluggish!](#My-duckyPad-seems-to-be-getting-sluggish)
-
-* [I want to use my own SD card!](#i-want-to-use-my-own-sd-card)
-
-* [The RGB backlight is flickering slightly!](#The-RGB-backlight-is-flickering-slightly)
-
-* [The RGB backlight is too bright!](#The-RGB-backlight-is-too-bright)
-
-* [The OLED screen isn't working properly!](#the-oled-screen-isnt-working-properly)
-
-* [Will the OLED suffer burn-in?](#Will-the-OLED-suffer-burn-in)
-
-* [Numpad keys doesn't work!](#Numpad-keys-doesnt-work)
-
-* [SD Card doesn't work on mac!](#SD-Card-doesnt-work-on-mac)
-
-* [USB configuration / Autoswitcher isn't working on macOS!](#usb-configuration--autoswitcher-isnt-working-on-macos)
+- [I press a key and nothing happens!](#i-press-a-key-and-nothing-happens)
+- [Letters and symbols come out wrong!](#letters-and-symbols-come-out-wrong)
+- [My script behaves inconsistently!](#my-script-behaves-inconsistently)
+- [I want to use my own SD card!](#i-want-to-use-my-own-sd-card)
+- [The RGB backlight is flickering slightly!](#the-rgb-backlight-is-flickering-slightly)
+- [The RGB backlight is too bright!](#the-rgb-backlight-is-too-bright)
+- [Will OLED suffer burn-in?](#will-oled-suffer-burn-in)
+- [Numpad keys doesn't work!](#numpad-keys-doesnt-work)
+- [USB configuration / Autoswitcher isn't working on macOS!](#usb-configuration--autoswitcher-isnt-working-on-macos)
 
 ## Join Our Discord!
 
@@ -66,7 +48,7 @@ Use the [latest configurator](https://github.com/dekuNukem/duckyPad/releases/lat
 
 Take off the switch and inspect the pins, chances are one of them is bent:
 
-![Alt text](../resources/photos/misc/bent.jpg)
+![Alt text](../resources/photos/trouble/bent.jpg)
 
 Straighten it up with a pair of pliers, then insert again.
 
@@ -96,19 +78,17 @@ Slow it down with the following commands:
 
 ## I want to use my own SD card!
 
-* (Optional) Make a backup of the contents of the original SD card.
+* (Optional) Copy off existing files of old SD card.
 
 * Format the new SD card in `FAT or FAT32`:
 
-![Alt text](resources/pics/format.PNG)
-
-![Alt text](resources/pics/macfat.png)
+![Alt text](../resources/photos/trouble/format.PNG)
 
 * Copy all the files back.
 
 * You can also download the [sample profiles](https://github.com/dekuNukem/duckyPad/raw/master/sample_profiles.zip) and copy everything to the **root of your SD card**:
 
-![Alt text](resources/pics/sample_pf.png)
+![Alt text](../resources/photos/trouble/sample_pf.png)
 
 ## The RGB backlight is flickering slightly!
 
@@ -152,15 +132,15 @@ Due to the security restrictions of macOS, to use USB configuration and autoswit
 
 * Press the `+` button
 
-![Alt text](resources/pics/input_mon.png)
+![Alt text](../resources/photos/trouble/input_mon.png)
 
 * Go to `Applications` -> `Utilities`, and add `Terminal` to the list.
 
-![Alt text](resources/pics/select_term.png)
+![Alt text](../resources/photos/trouble/select_term.png)
 
 * Select `Screen Recording`, and repeat the same process
 
-![Alt text](resources/pics/screen_rec.png)
+![Alt text](../resources/photos/trouble/screen_rec.png)
 
 ### Launch app as administrator
 
@@ -168,13 +148,13 @@ Due to the security restrictions of macOS, to use USB configuration and autoswit
 
 * Tick `New Terminal at Folder`
 
-![Alt text](resources/pics/terminal.png)
+![Alt text](../resources/photos/trouble/terminal.png)
 
 * Download the latest macOS software, unzip into a folder.
 
 * `Right click` on the unzipped folder and select `New Terminal at Folder`
 
-![Alt text](resources/pics/right.png)
+![Alt text](../resources/photos/trouble/right.png)
 
 * Type in `sh run.sh` and press enter, then enter your password.
 

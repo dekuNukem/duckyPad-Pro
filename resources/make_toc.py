@@ -28,6 +28,8 @@ def make_section(text):
 			result += letter
 		elif letter == '/':
 			result += placeholder
+		elif letter == '\'':
+			continue
 		else:
 			result += '-'
 	while '--' in result:
