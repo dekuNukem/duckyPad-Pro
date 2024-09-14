@@ -286,7 +286,7 @@ If that doesn't help, feel free to contact me by [opening an issue](https://gith
 
 You can update duckyPad's firmware for new features and bug fixes. 
 
-[Please see this guide](./firmware_updates_and_version_history.md).
+[Please see this guide](./fw_update.md).
 
 ## Table of Contents
 
@@ -300,7 +300,7 @@ You can update duckyPad's firmware for new features and bug fixes.
 
 [Common issues / Troubleshooting](troubleshooting.md)
 
-[Firmware Updates and Version History](firmware_updates_and_version_history.md)
+[Firmware Updates and Version History](fw_update.md)
 
 [Make Your Own Keymap](./keymap_instructions.md)
 
