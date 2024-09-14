@@ -69,6 +69,7 @@ LWin & F12::
 	Msgbox "I pressed duckyPad key 11!"
 	return
 }
+
 LWin & F13::
 {
 	Msgbox "I pressed duckyPad key 12!"
@@ -104,6 +105,7 @@ LWin & F18::
 	Msgbox "I pressed duckyPad key 17!"
 	return
 }
+
 LWin & F19::
 {
 	Msgbox "I pressed duckyPad key 18!"

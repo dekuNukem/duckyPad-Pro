@@ -1,5 +1,22 @@
+
+
+
+
 p make_toc.py ../doc/duckyscript_info.md
 
+#### (OPTIONAL) Load from SD card
+
+If app complains, you can also load from local files.
+
+* Push the SD card inwards to pop it out
+
+* Mount on your computer
+
+* Select the **`entire SD card`**
+
+![Alt text](../resources/photos/app/select_root.png)
+
+* It should load just the same
 
 * Built-in
 	* Comments

@@ -84,7 +84,7 @@ Your system might complain when launching the app.
 
 This is because the code isn't digitally signed, which costs hundreds of dollars a year.
 
-Feel free to [review the code](../pc_software). You can also run `duckypad_config.py` itself with Python3.
+Feel free to [review the files](../pc_software). You can also run the source code directly with Python.
 
 For Windows 10, click `More info` and then `Run anyway`.
 
@@ -102,31 +102,17 @@ Press the `Connect` button near top left.
 
 duckyPad Pro should show up as a USB storage drive.
 
-It might take a few seconds, then it should load up:
+Everything should load up. Might take a few seconds.
 
 ![Alt text](../resources/photos/app/overview.png)
 
-#### (OPTIONAL) Load from SD card
-
-If for some reason it didn't work, you can also **load from SD card**.
-
-* Push the SD card inwards to pop it out
-
-* Mount it on your computer
-
-* Select the **`entire SD card`**
-
-![Alt text](../resources/photos/app/select_root.png)
-
-* It should load just the same
+It may seem complex at first, let's break it down!
 
 ### Profiles
 
 * The leftmost column is for *profiles*.
 
-* Each profile contains a group of scripts corresponding to the keys on the duckyPad.
-
-* As you can see, you typically create a profile for **each app** you want to control.
+* You typically create one for **each app** you want to control.
 
 ![Alt text](../resources/photos/app/profiles.png)
 
@@ -138,23 +124,29 @@ If for some reason it didn't work, you can also **load from SD card**.
 
 * `Activation color` is the color that a key changes into when you press it.
 
-* By default unused keys are dimmed, you can override this by unticking the checkbox.
-
 ### Keys
 
-The middle column is for *keys*:
+The middle columns are for *keys*:
 
 ![Alt text](../resources/photos/app/keys.png)
 
-* Here you can configure the keys on your duckyPad.
+* Shows all the keys for the current profile.
 
-* Click a key to select.
+* Click to select, drag to rearrange.
 
-* Give it a name, or click `Remove` to delete.
+* Type to give a name, or click `Remove` to delete.
 
-* You can assign an unique color to each key, or use the same color as background.
+----------
 
-* Drag a key to rearrange order.
+* **`Custom Key Color`**: Set an unique color.
+
+* **`Press Any Key to Abort`**: Allow exiting early in longer macros.
+
+	* Do not select if you're writing your own button-checking code
+
+* **`Disable Auto-Repeat`**: Macro won't repeat when key is held down.
+
+* Click **`Rotate`** for landscape mode.
 
 ### Scripts
 
@@ -162,25 +154,17 @@ Finally, the rightmost column is for *scripts*:
 
 ![Alt text](../resources/photos/app/scripts.png)
 
-* When you select a key, the script it will execute is displayed here.
+* Shows the **duckyScript** that the key will execute.
 
-* duckyPad uses duckyScript, [**read about its usage here**](duckyscript_info.md).
+* [**Read about its usage here**](duckyscript_info.md).
+
+* Separate scripts for **On Press** and **On Release**
+
+* If not sure, just leave **On Release** blank.
 
 * Code check will be performed as you type, errors will be highlighted in yellow.
 
-### Settings & Updates
-
-![Alt text](../resources/photos/app/settings.png)
-
-By default, duckyPad goes to sleep after 30 minutes. Adjust the slider to set your own delay. Drag it all the way left for always-on.
-
-`Updates` section shows available updates. **Click on the text** for instructions.
-
-### Keyboard Layouts
-
-* To change keyboard layout, **`HOLD DOWN TOP LEFT KEY`** while **`PLUGGING DUCKYPAD IN`**, then select your layout.
-
-### Don't forget to save!
+### Make Sure to Save!
 
 * Press `Save` button to write the changes back to duckyPad.
 
@@ -188,49 +172,31 @@ By default, duckyPad goes to sleep after 30 minutes. Adjust the slider to set yo
 
 ### Automatic backups
 
-* A local backup is created every time `Save` button is pressed.
+* A local backup is created every time you save.
 
 * Press `Backup...` button to access the backups.
 
-* To restore, [format the SD card in FAT or FAT32](../resources/photos/format.PNG), then copy everything back.
-
-### Run it!
-
-duckyPad should automatically reboot when you press `Save`, and your new scripts will be ready to use!
-
-If configuring via SD card, pop it back and power on.
-
-* Press a key to execute the corresponding script.
-
-* Press `+` and `-` button to switch profiles.
-
-* **`Hold down`** `-` to change RGB backlight brightness.
-
-### Faster SD Card
-
-A newer SD card can reduce load time and make duckyPad more snappy.
-
-So if you have a spare, just [format it in FAT or FAT32](../resources/photos/format.PNG) and copy everything back.
+* To restore, [format the SD card in FAT or FAT32](../resources/photos/app/format.png), then copy everything back.
 
 ### Profile Auto-switching / Remote Control
 
-You can [use this app](https://github.com/dekuNukem/duckyPad-profile-autoswitcher) to **switch profiles automatically** based on **current active window**. Check it out!
+You can [use this app](https://github.com/dekuNukem/duckyPad-profile-autoswitcher) to **switch profiles automatically** based on **current active window**.
 
-You can also control duckyPad from PC by sending HID commands, see link for details.
+You can also **control duckyPad from PC** by sending HID commands, see same link for details.
 
 ### Careful with Passwords!
 
-It might be tempting to have duckyPad type out passwords, but it's **NOT** a good idea!
+It might be tempting to have duckyPad type out passwords, but all scripts are stored as **plain text** on SD card. So not a good idea!
 
-All scripts are stored as **plain text** on SD card, and can be easily accessed with a card reader or though HID commands.
-
-duckyPad is NOT designed to be a security device, so use at your own risk.
+duckyPad is NOT designed or certified to be a security device, so use at your own risk.
 
 ## Tips and Tricks
 
 ### Keyboard Shortcuts
 
-The most obvious use case is putting your commonly used hotkeys on duckyPad! Simply create a profile and add them in.
+The most obvious use case is putting your commonly used hotkeys on duckyPad!
+
+Create a profile and add them in.
 
 For many applications, you can find an official list of shortcuts. Just search `app_name shortcuts` on Google. Examples:
 
@@ -248,11 +214,11 @@ Another popular usage is launching apps. The easiest way is using Task Bar:
 
 Find the app, `Right click -> More -> Pin to taskbar`:
 
-![Alt text](../resources/photos/start.png)
+![Alt text](../resources/photos/app/start.png)
 
 Now you can use `WIN + number` to launch them:
 
-![Alt text](../resources/photos/taskbar.png)
+![Alt text](../resources/photos/app/taskbar.png)
 
 In duckyScript, it would be `WINDOWS 1`, `WINDOWS 2`, etc.
 
@@ -262,17 +228,17 @@ This method works with **`ANY FILE`**, not just apps!
 
 `Right click` on any file, select `Create shortcut`.
 
-![Alt text](../resources/photos/shortcut.png)
+![Alt text](../resources/photos/app/shortcut.png)
 
 Find the new shortcut, right click and select `Properties`
 
-![Alt text](../resources/photos/right_prop.png)
+![Alt text](../resources/photos/app/right_prop.png)
 
 Set a hotkey in the `Shortcut Key` box:
 
-![Alt text](../resources/photos/sc_prop.png)
+![Alt text](../resources/photos/app/sc_prop.png)
 
-Then you can use duckyPad to press this combo to launch anything with a push of a button!
+Use duckyPad to press the combo to launch anything with a push of a button.
 
 In this case, the duckyScript would be `CONTROL ALT D`.
 
@@ -280,33 +246,33 @@ In this case, the duckyScript would be `CONTROL ALT D`.
 
 Go to `System Preferences` -> `Keyboard` -> `Shortcuts` -> `App Shortcuts`:
 
-Press the `+` button, select an app to open, assign a hotkey, and set up duckyPad accordingly:
+Press `+` button, select app, assign a hotkey, and set up duckyPad accordingly:
 
-![Alt text](../resources/photos/mac_sc.png)
+![Alt text](../resources/photos/app/mac_sc.png)
 
 ### Advanced Scripting with Autohotkey
 
-You can use the free and open-source [autohotkey](https://www.autohotkey.com) for even more sophisticated needs, such as controlling mouse movements, executing scripts, etc.
+You can use the free and open-source [Autohotkey](https://www.autohotkey.com) for even more advanced scripting needs.
 
-To do this, duckyPad can press a simple combo like `WIN + F1`, which then gets captured by autohotkey to execute a more complex script on your PC.
+duckyPad can press a simple combo like `WIN + F1`, which triggers autohotkey to execute a more complex script on your PC.
 
 * Download and install [autohotkey](https://www.autohotkey.com)
 
-* Download and save [this sample autohotkey script](https://raw.githubusercontent.com/dekuNukem/duckyPad/master/resources/duckypad_autohotkey_script.ahk) as an `.ahk` file.
+* Download and save [this sample autohotkey script](../resources/duckypad_pro_autohotkey_script.ahk) as an `.ahk` file.
 
-* Switch the profile on duckyPad to `autohotkey`, and run the script by right clicking and select `Run Script`.
+* Activate the script by right clicking and select `Run Script`.
 
-![Alt text](../resources/photos/ahk_run.png)
+![Alt text](../resources/photos/app/ahk_run.png)
 
-* AHK will execute the script. Press any key on duckyPad, a corresponding message box will appear.
+* Switch to `autohotkey` profile, press a key.
 
-![Alt text](../resources/photos/ahk_box.png)
+* Corresponding message box will appear.
 
-* Now you can write your own autohotkey script to do whatever you want!
+![Alt text](../resources/photos/app/ahk_box.png)
 
-Check out the [official tutorials](https://www.autohotkey.com/docs_1.0/Tutorial.htm), the [autohotkey profile](sample_profiles/profile7_autohotkey), and the [sample autohotkey script](resources/duckypad_autohotkey_script.ahk) upon which you can tinker with.
+* Write your own AHK script!
 
-[Follow this guide](https://www.autohotkey.com/docs/FAQ.htm#Startup) to run your AHK scripts automatically on Windows startup.
+Check out the [official tutorials](https://www.autohotkey.com/docs_1.0/Tutorial.htm), and how to [launch AHK on startup](https://www.autohotkey.com/docs/FAQ.htm#Startup).
 
 For macOS, you can try [bettertouchtool](https://folivora.ai).
 
