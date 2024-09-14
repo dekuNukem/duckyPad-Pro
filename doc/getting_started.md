@@ -36,6 +36,26 @@ Plug it in, use the **UPPER** USB port, and voilà:
 
 * Press any key to exit
 
+### Bluetooth Mode
+
+* To use BT, plug into a **USB power bank**.
+
+* BT status is displayed on **top left corner**
+
+* Question mark = Discoverable
+
+![alt_text](../resources/photos/app/bt_searching.png)
+
+* It should show up on your computer, make sure the PIN matches.
+
+![alt_text](../resources/photos/bt.jpeg)
+
+* No question mark = Paired
+
+![alt_text](../resources/photos/app/bt_paired.png)
+
+* Should work the same as wired mode.
+
 ## Create Your Own Scripts
 
 After playing with examples and see what duckyPad can do, time to write your own!
@@ -46,17 +66,17 @@ After playing with examples and see what duckyPad can do, time to write your own
 
 #### Windows
 
-Extract the `.zip` file and launch the application by clicking `duckypad_config.exe`:
+Unzip, click `duckypad_config.exe`:
 
-![Alt text](resources/pics/app/duckexe.png)
+![Alt text](../resources/photos/app/duckexe.png)
 
 #### Mac
 
-hello
+![Alt text](../resources/photos/underc.gif)
 
 #### Linux
 
-hello
+![Alt text](../resources/photos/underc.gif)
 
 ### "Untrusted App" Warnings
 
@@ -64,23 +84,27 @@ Your system might complain when launching the app.
 
 This is because the code isn't digitally signed, which costs hundreds of dollars a year.
 
-Feel free to [review the code](link here). You can also run `duckypad_config.py` itself with Python3.
+Feel free to [review the code](../pc_software). You can also run `duckypad_config.py` itself with Python3.
 
 For Windows 10, click `More info` and then `Run anyway`.
 
-![Alt text](resources/pics/app/defender2.png)
+![Alt text](../resources/photos/app/defender.png)
 
 For macOS, **`RIGHT CLICK`** on the app and select `Open`. You might need to do it twice.
 
-![Alt text](resources/pics/app/macos_warning.png)
+![Alt text](../resources/photos/app/macos_warning.png)
 
 ### Using Configurator
 
-Make sure your duckyPad is plugged in. Press the `Connect` button near top left.
+Press the `Connect` button near top left.
 
-It should load the data from duckyPad:
+![Alt text](../resources/photos/app/connect.png)
 
-![Alt text](resources/pics/app/overview.png)
+duckyPad Pro should show up as a USB storage drive.
+
+It might take a few seconds, then it should load up:
+
+![Alt text](../resources/photos/app/overview.png)
 
 #### (OPTIONAL) Load from SD card
 
@@ -92,7 +116,7 @@ If for some reason it didn't work, you can also **load from SD card**.
 
 * Select the **`entire SD card`**
 
-![Alt text](resources/pics/app/select_root.png)
+![Alt text](../resources/photos/app/select_root.png)
 
 * It should load just the same
 
@@ -104,7 +128,7 @@ If for some reason it didn't work, you can also **load from SD card**.
 
 * As you can see, you typically create a profile for **each app** you want to control.
 
-![Alt text](resources/pics/app/profiles.png)
+![Alt text](../resources/photos/app/profiles.png)
 
 * Use the buttons to create, duplicate, name, and import a profile.
 
@@ -120,7 +144,7 @@ If for some reason it didn't work, you can also **load from SD card**.
 
 The middle column is for *keys*:
 
-![Alt text](resources/pics/app/keys.png)
+![Alt text](../resources/photos/app/keys.png)
 
 * Here you can configure the keys on your duckyPad.
 
@@ -136,7 +160,7 @@ The middle column is for *keys*:
 
 Finally, the rightmost column is for *scripts*:
 
-![Alt text](resources/pics/app/scripts.png)
+![Alt text](../resources/photos/app/scripts.png)
 
 * When you select a key, the script it will execute is displayed here.
 
@@ -146,7 +170,7 @@ Finally, the rightmost column is for *scripts*:
 
 ### Settings & Updates
 
-![Alt text](resources/pics/app/settings.png)
+![Alt text](../resources/photos/app/settings.png)
 
 By default, duckyPad goes to sleep after 30 minutes. Adjust the slider to set your own delay. Drag it all the way left for always-on.
 
@@ -160,7 +184,7 @@ By default, duckyPad goes to sleep after 30 minutes. Adjust the slider to set yo
 
 * Press `Save` button to write the changes back to duckyPad.
 
-![Alt text](resources/pics/app/save.png)
+![Alt text](../resources/photos/app/save.png)
 
 ### Automatic backups
 
@@ -168,7 +192,7 @@ By default, duckyPad goes to sleep after 30 minutes. Adjust the slider to set yo
 
 * Press `Backup...` button to access the backups.
 
-* To restore, [format the SD card in FAT or FAT32](resources/pics/format.PNG), then copy everything back.
+* To restore, [format the SD card in FAT or FAT32](../resources/photos/format.PNG), then copy everything back.
 
 ### Run it!
 
@@ -186,7 +210,7 @@ If configuring via SD card, pop it back and power on.
 
 A newer SD card can reduce load time and make duckyPad more snappy.
 
-So if you have a spare, just [format it in FAT or FAT32](resources/pics/format.PNG) and copy everything back.
+So if you have a spare, just [format it in FAT or FAT32](../resources/photos/format.PNG) and copy everything back.
 
 ### Profile Auto-switching / Remote Control
 
@@ -224,11 +248,11 @@ Another popular usage is launching apps. The easiest way is using Task Bar:
 
 Find the app, `Right click -> More -> Pin to taskbar`:
 
-![Alt text](resources/pics/start.png)
+![Alt text](../resources/photos/start.png)
 
 Now you can use `WIN + number` to launch them:
 
-![Alt text](resources/pics/taskbar.png)
+![Alt text](../resources/photos/taskbar.png)
 
 In duckyScript, it would be `WINDOWS 1`, `WINDOWS 2`, etc.
 
@@ -238,15 +262,15 @@ This method works with **`ANY FILE`**, not just apps!
 
 `Right click` on any file, select `Create shortcut`.
 
-![Alt text](resources/pics/shortcut.png)
+![Alt text](../resources/photos/shortcut.png)
 
 Find the new shortcut, right click and select `Properties`
 
-![Alt text](resources/pics/right_prop.png)
+![Alt text](../resources/photos/right_prop.png)
 
 Set a hotkey in the `Shortcut Key` box:
 
-![Alt text](resources/pics/sc_prop.png)
+![Alt text](../resources/photos/sc_prop.png)
 
 Then you can use duckyPad to press this combo to launch anything with a push of a button!
 
@@ -258,7 +282,7 @@ Go to `System Preferences` -> `Keyboard` -> `Shortcuts` -> `App Shortcuts`:
 
 Press the `+` button, select an app to open, assign a hotkey, and set up duckyPad accordingly:
 
-![Alt text](resources/pics/mac_sc.png)
+![Alt text](../resources/photos/mac_sc.png)
 
 ### Advanced Scripting with Autohotkey
 
@@ -272,11 +296,11 @@ To do this, duckyPad can press a simple combo like `WIN + F1`, which then gets c
 
 * Switch the profile on duckyPad to `autohotkey`, and run the script by right clicking and select `Run Script`.
 
-![Alt text](resources/pics/ahk_run.png)
+![Alt text](../resources/photos/ahk_run.png)
 
 * AHK will execute the script. Press any key on duckyPad, a corresponding message box will appear.
 
-![Alt text](resources/pics/ahk_box.png)
+![Alt text](../resources/photos/ahk_box.png)
 
 * Now you can write your own autohotkey script to do whatever you want!
 

@@ -25,29 +25,42 @@ uint8_t center_line(uint8_t line_len, uint8_t char_width_pixels, uint8_t oled_wi
   return start_pixel;
 }
 
+void draw_bluetooth_icon(uint8_t origx, uint8_t origy)
+{
+  ssd1306_DrawPixel(origx+2, origy+0, White);
+  ssd1306_DrawPixel(origx+2, origy+1, White);
+  ssd1306_DrawPixel(origx+3, origy+1, White);
+  ssd1306_DrawPixel(origx+2, origy+2, White);
+  ssd1306_DrawPixel(origx+4, origy+2, White);
+  ssd1306_DrawPixel(origx+0, origy+3, White);
+  ssd1306_DrawPixel(origx+2, origy+3, White);
+  ssd1306_DrawPixel(origx+5, origy+3, White);
+  ssd1306_DrawPixel(origx+1, origy+4, White);
+  ssd1306_DrawPixel(origx+2, origy+4, White);
+  ssd1306_DrawPixel(origx+4, origy+4, White);
+  ssd1306_DrawPixel(origx+2, origy+5, White);
+  ssd1306_DrawPixel(origx+3, origy+5, White);
+  ssd1306_DrawPixel(origx+1, origy+6, White);
+  ssd1306_DrawPixel(origx+2, origy+6, White);
+  ssd1306_DrawPixel(origx+4, origy+6, White);
+  ssd1306_DrawPixel(origx+0, origy+7, White);
+  ssd1306_DrawPixel(origx+2, origy+7, White);
+  ssd1306_DrawPixel(origx+5, origy+7, White);
+  ssd1306_DrawPixel(origx+2, origy+8, White);
+  ssd1306_DrawPixel(origx+4, origy+8, White);
+  ssd1306_DrawPixel(origx+2, origy+9, White);
+  ssd1306_DrawPixel(origx+3, origy+9, White);
+  ssd1306_DrawPixel(origx+2, origy+10, White);
+  ssd1306_SetCursor(origx+7, origy+2);
+  ssd1306_WriteString("?", Font_6x8, White);
+}
+
+
 int main(int argc, char *argv[])
 {
   ssd1306_Fill(Black);
   // ----------------------------------------
-  memset(oled_line_buf, 0, OLED_LINE_BUF_SIZE);
-  sprintf(oled_line_buf, "You reach a");
-  ssd1306_SetCursor(0, 10);
-  ssd1306_WriteString(oled_line_buf, Font_7x10, White);
-
-  memset(oled_line_buf, 0, OLED_LINE_BUF_SIZE);
-  sprintf(oled_line_buf, "forked path.");
-  ssd1306_SetCursor(0, 25);
-  ssd1306_WriteString(oled_line_buf, Font_7x10, White);
-
-  memset(oled_line_buf, 0, OLED_LINE_BUF_SIZE);
-  sprintf(oled_line_buf, "Both ways are");
-  ssd1306_SetCursor(0, 45);
-  ssd1306_WriteString(oled_line_buf, Font_7x10, White);
-
-  memset(oled_line_buf, 0, OLED_LINE_BUF_SIZE);
-  sprintf(oled_line_buf, "dark.");
-  ssd1306_SetCursor(0, 60);
-  ssd1306_WriteString(oled_line_buf, Font_7x10, White);
+  draw_bluetooth_icon(10,10);
   // ------------------------------
 
 	sprintf(filename_buf, "OLED_%d_%d.bin", SSD1306_WIDTH, SSD1306_HEIGHT);
