@@ -1,43 +1,73 @@
+# duckyPad Pro Kickstarter Information
 
-## New Features
+Introducing **duckyPad Pro**, the latest entry of the duckyPad family!
 
-Compared to [original duckyPad](https://github.com/dekuNukem/duckyPad/), DPP now has:
+With 4 years worth of feedback, long-requested upgrades, brand new features, and free from the shackles of QMK/VIA, duckyPad Pro aims to be the **most capable** macropad available today.
 
-* **Rotary Encoders**
+![alt_text](../resources/photos/title.jpeg)
+
+
+## Keep in touch
+
+Email signup
+
+Discord
+
+kickstarter pre-launch page
+
+![alt_text](../resources/photos/quarter.jpeg)
+
+## What's New
+
+Compared to [original duckyPad](https://github.com/dekuNukem/duckyPad/), there are many new features:
+
+* **Rotary Encoders (finally!)**
 	* Two encoders
-	* With tactile switch
+	* With built-in tactile switch
 
-* **More Keys**
-	* 20 Switches
-	* 4x5 Grid
+![alt_text](../resources/photos/re.jpeg)
+
+* **Bluetooth**
+	* Works as BT keyboard / Mouse!
+
+![alt_text](../resources/photos/ipad.gif)
 
 * **Expansion Modules**
-	* Wire up any switch you want
-	* Foot pedal, emergency shutoff, toggle switch, etc
-	* **6 Channels** per module
-	* **Daisy chain** up to **5 Modules** with regular USB-C cable
+	* Wire up your own **switches / buttons / foot pedals!**
+	* **Daisy-chainable**
+
+![alt_text](../resources/photos/exp.gif)
 
 * **Bigger OLED Screen**
 	* 128x128
-	* **Configurable orientation**
+	* **Portrait/landscape orientation**
 
 * **Faster CPU**
 	* ESP32-S3
 	* 5x faster
-	* Much simpler IDE setup for tinkerers
+	* Much simpler setup for tinkerers
 
-* **Wireless Communication**
-	* **Bluetooth** (fully working, add your own battery)
-	* Wi-Fi (Capable but currently unimplemented)
+* **More Keys**
+	* 20 Switches
+	* In 4x5 Grid
 
 * **duckyScript Engine**
-	* Separate scripts for **on press** and **on release**
+	* Separate script for **on press** and **on release**
 	* **Abort execution** with any key
-	* Many small improvements (migration guide?)
+	* Unlimited `EMUK` Keypresses
+	* Read NUMLOCK / CAPSLOCK / SCROLLLOCK status
+	* Many under-the-hood optimizations
 
 * **QoL Updates**
-	* Mount SD as **USB Storage**
-	* Faster configurator load/save
+	* Mount SD Card as **USB Storage**
+	* Much faster configurator load/save
 	* **Drag & drop** firmware update
 	* More sturdy +/- button
 	* Reinforced hotswap socket solder pads
+
+
+## Kickstarter Plan
+
+
+## Pricing
+

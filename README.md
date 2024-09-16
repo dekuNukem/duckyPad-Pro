@@ -262,7 +262,6 @@ Use the open-source configurator to set up your duckyPad Pro.
 
 ![alt_text](resources/photos/autoswitch.gif)
 
-
 ## Mechanical Switches
 
 duckyPad Pro has **20 Mechanical Switches** in **4x5 Grid.**

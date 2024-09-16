@@ -1,6 +1,10 @@
+Four years after the original duckyPad, I'm happy to announce **duckyPad Pro**!
 
+	* Many small improvements (migration guide?)
 
+this doc covers whats new, kickstarter plans, pricing, and future plans
 
+(landscape/portrait)
 
 p make_toc.py ../doc/duckyscript_info.md
 
