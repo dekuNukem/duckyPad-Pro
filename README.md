@@ -204,15 +204,11 @@ duckyPad Pro also supports optional **expansion modules** for even more customis
 
 ![alt_text](resources/photos/exp.gif)
 
-* 6 channels per module
-
-* **Daisy-chain** up to 5 modules with regular USB-C cable
-
 ## Bluetooth
 
 duckyPad Pro also works as a **Bluetooth Keyboard & Mouse** (with a catch!)
 
-* Bluetooth 4.2 BLE
+* Bluetooth 5.0
 
 * Built-in Antenna for both BT and Wi-Fi
 
