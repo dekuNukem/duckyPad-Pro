@@ -10,7 +10,7 @@ Feel free to join our [Official Discord](https://discord.gg/4sJCBx5) for discuss
 
 ## Kit Assembly
 
-[See this guide](/kit_assembly_guide.md) to put your duckyPad together!
+[See this guide](/kit_assembly.md) to put your duckyPad together!
 
 ## Quick Start
 
