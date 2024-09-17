@@ -1,6 +1,6 @@
 # duckyPad Pro: Advanced Macro Scripting Beyond QMK/VIA
 
-[Get duckyPad](https://www.tindie.com/products/21984/) | [Official Discord](https://discord.gg/4sJCBx5) | [Getting Started](getting_started.md) | [Table of Contents](#table-of-contents)
+[Kickstarter Info](https://www.kickstarter.com/projects/dekunukem/duckypad-pro-advanced-macro-scripting-beyond-qmk-via) | [Official Discord](https://discord.gg/4sJCBx5) | [Getting Started](./doc/getting_started.md) | [Table of Contents](#table-of-contents)
 
 -----------
 
@@ -12,11 +12,13 @@ Incorporating 4 years worth of feedback from the [original duckyPad](https://git
 
 ## Get duckyPad Pro
 
-hi!
+A Kickstarter campaign is planned for **early October 2024**.
 
-## Getting Started / Documentations
+If interested, please consider:
 
-hi!
+* Signing up [Pre-launch Page](https://www.kickstarter.com/projects/dekunukem/duckypad-pro-advanced-macro-scripting-beyond-qmk-via) to get notified!
+
+* Joining our [Official Discord](https://discord.gg/4sJCBx5) for latest discussions and updates!
 
 ## Highlights
 
@@ -307,4 +309,18 @@ duckyPad Pro has **20 Mechanical Switches** in **4x5 Grid.**
 
 ## Table of Contents
 
-hi!!
+[Main page](README.md)
+
+[Getting Started Guide](./doc/getting_started.md)
+
+[Kit Assembly Guide](./doc/kit_assembly.md)
+
+[Using duckyScript](./doc/duckyscript_info.md)
+
+[duckyScript VM](./doc/bytecode_vm.md)
+
+[Tinkering Guide](./doc/tinkering_guide.md)
+
+[Troubleshooting](./doc/troubleshooting.md)
+
+[Firmware Update](./doc/fw_update.md)

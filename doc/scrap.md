@@ -1,3 +1,18 @@
+![alt_text](../resources/photos/re.jpeg)
+
+![alt_text](../resources/photos/ipad.gif)
+
+![alt_text](../resources/photos/exp.gif)
+
+![alt_text](../resources/photos/youtube.png)
+
+<table>
+  <tr>
+    <td><a href="https://www.youtube.com/watch?v=uzL-kk1gB_Y" title="YouTube" rel="noopener"><img src="https://i.imgur.com/767Nnyt.png"></a></td>
+  </tr>
+</table>
+
+
 Four years after the original duckyPad, I'm happy to announce **duckyPad Pro**!
 
 	* Many small improvements (migration guide?)
