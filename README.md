@@ -307,6 +307,23 @@ duckyPad Pro has **20 Mechanical Switches** in **4x5 Grid.**
 
 ![alt_text](resources/photos/oled.jpeg)
 
+## Mounting Plates
+
+* Pure White FR4, 1.6mm
+	* Default Option
+	* Same material as PCB
+	* Sturdy & Durable
+
+* 🆕 **Brushed Aluminium**, 1.6mm
+	* Optional Upgrade
+	* Premium Finish
+	* Rigid & Durable
+
+![alt_text](resources/photos/plates.jpeg)
+
+![alt_text](resources/photos/alu.jpeg)
+
+
 ## Keep in Touch!
 
 Interested? Please consider:
