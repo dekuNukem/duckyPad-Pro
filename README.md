@@ -10,7 +10,7 @@ duckyPad Pro is a 20-key **mechanical macropad** for power users who demand **ad
 
 Incorporating 4 years worth of feedback from the [original duckyPad](https://github.com/dekuNukem/duckyPad), duckyPad Pro combines long-requested upgrades with a no-nonsense design, aiming simply to be the **most capable** macropad today.
 
-## Get duckyPad Pro
+## Launch Information
 
 A Kickstarter campaign is planned for **early October 2024**.
 
@@ -22,7 +22,7 @@ If interested, please consider:
 
 * Let your friends/family/colleagues know!
 
-* Detailed plans coming soon.
+* Details coming soon!
 
 ## Promo Video
 
@@ -323,12 +323,11 @@ duckyPad Pro has **20 Mechanical Switches** in **4x5 Grid.**
 
 ![alt_text](resources/photos/alu.jpeg)
 
-
 ## Keep in Touch!
 
 Interested? Please consider:
 
-* Signing up [Pre-launch Page](https://www.kickstarter.com/projects/dekunukem/duckypad-pro-advanced-macro-scripting-beyond-qmk-via) to get notified!
+* Signing up [Pre-launch Page](https://www.kickstarter.com/projects/dekunukem/duckypad-pro-advanced-macro-scripting-beyond-qmk-via) to get notified! (Or [Leave your email here](https://forms.gle/rERNdy7BvTqJD88S6))
 
 * Joining our [Official Discord](https://discord.gg/4sJCBx5) for questions, discussions, and updates!
 
