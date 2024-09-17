@@ -14,6 +14,8 @@ Incorporating 4 years worth of feedback from the [original duckyPad](https://git
 
 A Kickstarter campaign is planned for **early October 2024**.
 
+We're currently at **pre-launch** stage, feedbacks welcome!
+
 If interested, please consider:
 
 * Signing up [Pre-launch Page](https://www.kickstarter.com/projects/dekunukem/duckypad-pro-advanced-macro-scripting-beyond-qmk-via) to get notified! (Or [Leave your email here](https://forms.gle/rERNdy7BvTqJD88S6))
@@ -22,7 +24,7 @@ If interested, please consider:
 
 * Let your friends/family/colleagues know!
 
-* Details coming soon!
+* Let me know any comments / suggestions! Reach me on Discord, or dekuNukem`&&`gmail.com
 
 ## Promo Video
 
@@ -330,6 +332,8 @@ Interested? Please consider:
 * Signing up [Pre-launch Page](https://www.kickstarter.com/projects/dekunukem/duckypad-pro-advanced-macro-scripting-beyond-qmk-via) to get notified! (Or [Leave your email here](https://forms.gle/rERNdy7BvTqJD88S6))
 
 * Joining our [Official Discord](https://discord.gg/4sJCBx5) for questions, discussions, and updates!
+
+* Let me know any comments / suggestions! Reach me on Discord, or dekuNukem`&&`gmail.com
 
 ## Specifications
 
