@@ -1,6 +1,6 @@
 # duckyPad Assembly Guide
 
-[Kickstarter Info](https://www.kickstarter.com/projects/dekunukem/duckypad-pro-advanced-macro-scripting-beyond-qmk-via) | [Official Discord](https://discord.gg/4sJCBx5) | [Getting Started](./doc/getting_started.md) | [Table of Contents](#table-of-contents)
+[Kickstarter Info](https://www.kickstarter.com/projects/dekunukem/duckypad-pro-advanced-macro-scripting-beyond-qmk-via) | [Official Discord](https://discord.gg/4sJCBx5) | [Getting Started](getting_started.md) | [Table of Contents](#table-of-contents)
 
 ------
 
@@ -108,21 +108,21 @@ Head back to the [Quick Start Guide](/getting_started.md) to see how to use it!
 
 ## Table of Contents
 
-[Main page](README.md)
+[Main page](../README.md)
 
-[Getting Started Guide](./doc/getting_started.md)
+[Getting Started Guide](getting_started.md)
 
-[Kit Assembly Guide](./doc/kit_assembly.md)
+[Kit Assembly Guide](kit_assembly.md)
 
-[Using duckyScript](./doc/duckyscript_info.md)
+[Using duckyScript](duckyscript_info.md)
 
-[duckyScript VM](./doc/bytecode_vm.md)
+[duckyScript VM](bytecode_vm.md)
 
-[Tinkering Guide](./doc/tinkering_guide.md)
+[Tinkering Guide](tinkering_guide.md)
 
-[Troubleshooting](./doc/troubleshooting.md)
+[Troubleshooting](troubleshooting.md)
 
-[Firmware Update](./doc/fw_update.md)
+[Firmware Update](fw_update.md)
 
 ## Questions or Comments?
 

@@ -103,18 +103,18 @@ planning to backport new firmware and software features during / after the campa
 
 ## Table of Contents
 
-[Main page](README.md)
+[Main page](../README.md)
 
-[Getting Started Guide](./doc/getting_started.md)
+[Getting Started Guide](getting_started.md)
 
-[Kit Assembly Guide](./doc/kit_assembly.md)
+[Kit Assembly Guide](kit_assembly.md)
 
-[Using duckyScript](./doc/duckyscript_info.md)
+[Using duckyScript](duckyscript_info.md)
 
-[duckyScript VM](./doc/bytecode_vm.md)
+[duckyScript VM](bytecode_vm.md)
 
-[Tinkering Guide](./doc/tinkering_guide.md)
+[Tinkering Guide](tinkering_guide.md)
 
-[Troubleshooting](./doc/troubleshooting.md)
+[Troubleshooting](troubleshooting.md)
 
-[Firmware Update](./doc/fw_update.md)
+[Firmware Update](fw_update.md)
