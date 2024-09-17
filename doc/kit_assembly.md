@@ -10,7 +10,7 @@ Here's how to put everything together.
 
 ## Join Our Discord!
 
-Join our [Official Discord](https://discord.gg/4sJCBx5) for discussions, questions, scripts, and latest updates!
+Join our [Official Discord](https://discord.gg/4sJCBx5) for discussions and latest updates!
 
 ## Tools
 
@@ -102,7 +102,7 @@ Push all the way down, make sure it bottoms out.
 
 And you're done!
 
-Head back to the [Quick Start Guide](/getting_started.md) to see how to use it!
+Head back to the [Quick Start Guide](./getting_started.md) to see how to use it!
 
 ![Alt text](../resources/photos/instructions/done.jpeg)
 
