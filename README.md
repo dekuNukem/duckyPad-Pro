@@ -14,11 +14,13 @@ Incorporating 4 years worth of feedback from the [original duckyPad](https://git
 
 A Kickstarter campaign is planned for **early October 2024**.
 
-If interested, please consider:
+Please consider:
 
 * Signing up [Pre-launch Page](https://www.kickstarter.com/projects/dekunukem/duckypad-pro-advanced-macro-scripting-beyond-qmk-via) to get notified!
 
 * Joining our [Official Discord](https://discord.gg/4sJCBx5) for questions, discussions, and updates!
+
+* Let your friends/family/colleagues know!
 
 * Detailed plans coming soon.
 
