@@ -18,7 +18,13 @@ If interested, please consider:
 
 * Signing up [Pre-launch Page](https://www.kickstarter.com/projects/dekunukem/duckypad-pro-advanced-macro-scripting-beyond-qmk-via) to get notified!
 
-* Joining our [Official Discord](https://discord.gg/4sJCBx5) for latest discussions and updates!
+* Joining our [Official Discord](https://discord.gg/4sJCBx5) for questions, discussions, and updates!
+
+* Detailed plans coming soon.
+
+## Promo Video
+
+[<img src="../resources/photos/youtube.png">](https://www.youtube.com/watch?v=uzL-kk1gB_Y)
 
 ## Highlights
 
@@ -33,8 +39,8 @@ duckyPad Pro has all the basics:
 But also features **unlike any other**:
 
 * Custom **[duckyScript](duckyscript_info.md)** engine, **NOT QMK/VIA**.
-* **Longer and more complex** macros for **keyboard AND mouse**.
-* Configurable **OLED** screen
+* **Longer and more complex** macros
+* 1.5" **OLED** screen
 * **Bluetooth**
 * **Expansion Modules** for external switches / foot pedals
 * **64 profiles**, 3712 macros total.
@@ -67,10 +73,6 @@ Compared to QMK/VIA, you get:
 	* Quick Configuration / Backup / Deployment
 	* No sketchy drivers or apps
 	* No recompiling
-
-* **Existing Resources**
-	* Lots of [scripts](https://github.com/hak5/usbrubberducky-payloads) to try out
-	* Thriving [Discord](https://discord.gg/4sJCBx5) Community
 
 While QMK/VIA are great for regular keyboards, they are rather hopeless at even the basics of input automations.
 
@@ -143,15 +145,10 @@ END_WHILE
 ### Even Further
 
 * Explore the full potential with **advanced interactive scripting**
-
 * Read Buttons
-
 * Write to OLED screen
-
 * Change RGB colors
-
 * Conditions and Loops
-
 * Write ultra-specific macros for your exact needs
 
 ```
@@ -188,7 +185,7 @@ END_IF
 
 * Store over **3700 macros** in total
 
-* Scripts are compiled and executed on a custom [virtual stack machine](linkhere)
+* Executed on custom [virtual stack machine](./doc/bytecode_vm.md)
 
 * With the power and flexibility of duckyScript, it is now trivial to achieve what was long considered impossible on QMK/VIA!
 
@@ -226,8 +223,6 @@ Yes I know it's a bit silly having BT without internal battery! However, it woul
 
 All of which would inflate the cost way beyond just getting an off-the-shelf battery pack. As this is a one-person project, I prefer to keep things simple.
 
-Also, while the hardware for Wi-Fi is in place, the functionality is currently unimplemented.
-
 ## New CPU
 
 duckyPad Pro now runs a significantly more powerful processor:
@@ -243,8 +238,21 @@ Switching to ESP32 also allows **much simpler setup for tinkering:**
 * VSCode IDE
 * Open-source toolchain
 * USB Flashing, no external programmer needed.
-* Code in Arduino or ESP-IDF
-* Tinkering guide provided
+* [Tinkering guide provided](./doc/tinkering_guide.md)
+
+## QoL Updates
+
+* Separate script for **on press** and **on release**
+* **Abort execution** with any key
+* **Unlimited** `EMUK` Keypresses
+* Read `NUMLOCK` / `CAPSLOCK` / `SCROLLLOCK` status
+* Switch profile by name (instead of number)
+* Mount SD Card as **USB Storage**
+* Much faster configurator load/save
+* **Drag & drop** firmware update
+* More sturdy +/- button
+* Reinforced hotswap socket solder pads
+* A lot more under-the-hood optimizations
 
 ## duckyPad Configurator
 
@@ -296,6 +304,22 @@ duckyPad Pro has **20 Mechanical Switches** in **4x5 Grid.**
 ![alt_text](resources/photos/oled_sc.png)
 
 ![alt_text](resources/photos/oled.jpeg)
+
+## Keep in Touch!
+
+Interested? Please consider:
+
+* Signing up [Pre-launch Page](https://www.kickstarter.com/projects/dekunukem/duckypad-pro-advanced-macro-scripting-beyond-qmk-via) to get notified!
+
+* Joining our [Official Discord](https://discord.gg/4sJCBx5) for questions, discussions, and updates!
+
+## Specifications
+
+![alt_text](resources/photos/spec.png)
+
+## Questions or Comments?
+
+Please feel free to [open an issue](https://github.com/dekuNukem/duckypad-pro/issues), ask in the [official duckyPad discord](https://discord.gg/4sJCBx5), or email `dekuNukem`@`gmail`.`com`!
 
 ## Disclaimers
 

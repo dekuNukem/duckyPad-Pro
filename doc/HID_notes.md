@@ -284,3 +284,7 @@ Wake up from sleep
 [Troubleshooting](./doc/troubleshooting.md)
 
 [Firmware Update](./doc/fw_update.md)
+
+## Questions or Comments?
+
+Please feel free to [open an issue](https://github.com/dekuNukem/duckypad-pro/issues), ask in the [official duckyPad discord](https://discord.gg/4sJCBx5), or email `dekuNukem`@`gmail`.`com`!

@@ -108,6 +108,9 @@ Press `RESET` button to start using new FW.
 
 ![Alt text](../resources/photos/underc.gif)
 
+## Questions or Comments?
+
+Please feel free to [open an issue](https://github.com/dekuNukem/duckypad-pro/issues), ask in the [official duckyPad discord](https://discord.gg/4sJCBx5), or email `dekuNukem`@`gmail`.`com`!
 
 ## Table of Contents
 
