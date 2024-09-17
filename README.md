@@ -59,7 +59,7 @@ Compared to QMK/VIA, you get:
 
 * **Much Longer Macros**
 	* [Entire Bee Movie](resources/beemovie.txt) in one macro? Sure thing!
-	* Up to 3712 in total
+	* Over 3700 macros
 
 * **Advanced Interactive Scripting**
 	* Variables, conditionals, loops, functions, etc.
