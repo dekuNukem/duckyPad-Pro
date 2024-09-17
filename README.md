@@ -24,7 +24,7 @@ If interested, please consider:
 
 ## Promo Video
 
-[<img src="../resources/photos/youtube.png">](https://www.youtube.com/watch?v=uzL-kk1gB_Y)
+[<img src="resources/photos/youtube.png">](https://www.youtube.com/watch?v=uzL-kk1gB_Y)
 
 ## Highlights
 
