@@ -1,6 +1,6 @@
 # Getting Started with duckyPad
 
-[Get duckyPad](https://www.tindie.com/products/21984/) | [Official Discord](https://discord.gg/4sJCBx5) | [Getting Started](getting_started.md) | [Table of Contents](#table-of-contents)
+[Kickstarter Info](https://www.kickstarter.com/projects/dekunukem/duckypad-pro-advanced-macro-scripting-beyond-qmk-via) | [Official Discord](https://discord.gg/4sJCBx5) | [Getting Started](./doc/getting_started.md) | [Table of Contents](#table-of-contents)
 
 ------
 
@@ -292,21 +292,19 @@ You can update duckyPad's firmware for new features and bug fixes.
 
 [Main page](README.md)
 
-[Getting Started Guide](getting_started.md)
+[Getting Started Guide](./doc/getting_started.md)
 
-[Kit Assembly Guide](kit_assembly_guide.md)
+[Kit Assembly Guide](./doc/kit_assembly.md)
 
-[Using duckyScript](duckyscript_info.md) | [duckyScript 3 Info](duckyscript3_instructions.md)
+[Using duckyScript](./doc/duckyscript_info.md)
 
-[Common issues / Troubleshooting](troubleshooting.md)
+[duckyScript VM](./doc/bytecode_vm.md)
 
-[Firmware Updates and Version History](fw_update.md)
+[Tinkering Guide](./doc/tinkering_guide.md)
 
-[Make Your Own Keymap](./keymap_instructions.md)
+[Troubleshooting](./doc/troubleshooting.md)
 
-[Build a duckyPad Yourself](build_it_yourself.md)
-
-[Kickstarter Backer Acknowledgments](kickstarter_backers.md)
+[Firmware Update](./doc/fw_update.md)
 
 ## Questions or Comments?
 

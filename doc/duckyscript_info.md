@@ -1,6 +1,6 @@
 # Writing duckyScript
 
-[Get duckyPad](https://www.tindie.com/products/21984/) | [Official Discord](https://discord.gg/4sJCBx5) | [Getting Started](getting_started.md) | [Table of Contents](#table-of-contents)
+[Kickstarter Info](https://www.kickstarter.com/projects/dekunukem/duckypad-pro-advanced-macro-scripting-beyond-qmk-via) | [Official Discord](https://discord.gg/4sJCBx5) | [Getting Started](./doc/getting_started.md) | [Table of Contents](#table-of-contents)
 
 ------
 
@@ -846,3 +846,22 @@ Stop execution immediately
 
 -------
 [⬆️⬆️⬆️⬆️⬆️⬆️ Back to Top ⬆️⬆️⬆️⬆️⬆️⬆️](#list-of-commands)
+
+
+## Table of Contents
+
+[Main page](README.md)
+
+[Getting Started Guide](./doc/getting_started.md)
+
+[Kit Assembly Guide](./doc/kit_assembly.md)
+
+[Using duckyScript](./doc/duckyscript_info.md)
+
+[duckyScript VM](./doc/bytecode_vm.md)
+
+[Tinkering Guide](./doc/tinkering_guide.md)
+
+[Troubleshooting](./doc/troubleshooting.md)
+
+[Firmware Update](./doc/fw_update.md)

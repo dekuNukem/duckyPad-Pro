@@ -266,3 +266,21 @@ Wake up from sleep
 |     2    | Status, 0 = SUCCESS |
 | 3 ... 63 | 0x00 |
 
+
+## Table of Contents
+
+[Main page](README.md)
+
+[Getting Started Guide](./doc/getting_started.md)
+
+[Kit Assembly Guide](./doc/kit_assembly.md)
+
+[Using duckyScript](./doc/duckyscript_info.md)
+
+[duckyScript VM](./doc/bytecode_vm.md)
+
+[Tinkering Guide](./doc/tinkering_guide.md)
+
+[Troubleshooting](./doc/troubleshooting.md)
+
+[Firmware Update](./doc/fw_update.md)

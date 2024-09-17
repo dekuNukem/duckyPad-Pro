@@ -101,4 +101,20 @@ Original duckyPad still will be supported!
 planning to backport new firmware and software features during / after the campaign.
 
 
+## Table of Contents
 
+[Main page](README.md)
+
+[Getting Started Guide](./doc/getting_started.md)
+
+[Kit Assembly Guide](./doc/kit_assembly.md)
+
+[Using duckyScript](./doc/duckyscript_info.md)
+
+[duckyScript VM](./doc/bytecode_vm.md)
+
+[Tinkering Guide](./doc/tinkering_guide.md)
+
+[Troubleshooting](./doc/troubleshooting.md)
+
+[Firmware Update](./doc/fw_update.md)
