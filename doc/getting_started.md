@@ -6,11 +6,11 @@
 
 ## Join Our Discord!
 
-Feel free to join our [Official Discord](https://discord.gg/4sJCBx5) for discussions, questions, scripts, and latest updates!
+Feel free to join our [Official Discord](https://discord.gg/4sJCBx5) for discussions and latest updates!
 
 ## Kit Assembly
 
-[See this guide](/kit_assembly.md) to put your duckyPad together!
+[See this guide](./kit_assembly.md) to put your duckyPad together!
 
 ## Quick Start
 
