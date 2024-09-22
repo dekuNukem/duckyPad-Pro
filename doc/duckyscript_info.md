@@ -383,6 +383,18 @@ Prints the message into display buffer at current cursor location.
 
 Clears the display buffer.
 
+### `OLED_CIRCLE`
+
+`OLED_CIRCLE x y radius fill`
+
+### `OLED_LINE`
+
+`OLED_LINE x1 y1 x2 y2`
+
+### `OLED_RECT`
+
+`OLED_RECT x1 y1 x2 y2 fill`
+
 ### `OLED_UPDATE`
 
 Actually update the OLED.

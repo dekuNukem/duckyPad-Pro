@@ -113,8 +113,6 @@ Zero-terminated strings are stored at the end of the binary file.
 
 Variables are stored in `var_buf`. Up to 64 variables can be declared. 
 
-`bin_buf` can hold 2048 bytes, if the file is bigger, chunks are loaded on-the-fly from SD card. This might slow down execution, so try to keep it under 2KB.
-
 ## CPU Instructions
 
 All reference to **"stack"** refers to **Arithmetic Stack**. Unless noted otherwise.

@@ -82,6 +82,9 @@ OP_PREVP = ("PREVP", 44)
 OP_NEXTP = ("NEXTP", 45)
 OP_GOTOP = ("GOTOP", 46)
 OP_SLEEP = ("SLEEP", 47)
+OP_OLED_LINE = ("OLED_LINE", 48)
+OP_OLED_RECT = ("OLED_RECT", 49)
+OP_OLED_CIRCLE = ("OLED_CIRCLE", 50)
 
 OP_VMINFO = ("VMINFO", 255)
 
@@ -535,6 +538,22 @@ def make_dsb_with_exception(program_listing, profile_list=None):
             assembly_listing += parse_multi_expression(2, this_line)
             this_instruction['opcode'] = OP_OLC
             assembly_listing.append(this_instruction)
+
+        elif first_word == cmd_OLED_LINE:
+            assembly_listing += parse_multi_expression(4, this_line)
+            this_instruction['opcode'] = OP_OLED_LINE
+            assembly_listing.append(this_instruction)
+
+        elif first_word == cmd_OLED_CIRCLE:
+            assembly_listing += parse_multi_expression(4, this_line)
+            this_instruction['opcode'] = OP_OLED_CIRCLE
+            assembly_listing.append(this_instruction)
+
+        elif first_word == cmd_OLED_RECT:
+            assembly_listing += parse_multi_expression(5, this_line)
+            this_instruction['opcode'] = OP_OLED_RECT
+            assembly_listing.append(this_instruction)
+
         elif first_word == cmd_OLED_UPDATE:
             this_instruction['opcode'] = OP_OLU
             assembly_listing.append(this_instruction)

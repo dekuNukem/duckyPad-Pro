@@ -549,6 +549,12 @@ def run_once(program_listing):
             presult, pcomment = PARSE_OK, ''
         elif first_word == cmd_OLED_CURSOR:
             presult, pcomment = PARSE_OK, ''
+        elif first_word == cmd_OLED_LINE:
+            presult, pcomment = PARSE_OK, ''
+        elif first_word == cmd_OLED_RECT:
+            presult, pcomment = PARSE_OK, ''
+        elif first_word == cmd_OLED_CIRCLE:
+            presult, pcomment = PARSE_OK, ''
         elif first_word == cmd_OLED_UPDATE:
             return_dict['oled_restore_needed'] = True
             presult, pcomment = ensure_zero_arg(this_line)
