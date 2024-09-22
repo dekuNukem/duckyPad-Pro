@@ -105,6 +105,7 @@ void clear_sw_re_queue(void);
 void expansion_uart_init(void);
 uint8_t sw_queue_has_keydown_event(void);
 uint8_t re_event_to_swid(rotary_encoder_event_t* re_event);
+void sw_scan(void);
 
 #define SW_SCAN_TASK_STACK_SIZE 2048
 
@@ -113,6 +114,8 @@ extern QueueHandle_t switch_event_queue;
 
 #define KBSCAN_MUTEX_TIMEOUT_MS 100
 #define INPUT_TASK_FREQ_MS 13
+
+#define ROTARY_ENCODER_PERSISTENCE_MS 50
 
 #ifdef __cplusplus
 }

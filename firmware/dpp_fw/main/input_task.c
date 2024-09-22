@@ -297,7 +297,16 @@ uint8_t poll_sw_state(uint8_t swid_zero_indexed, uint8_t perform_new_scan)
 		return 0;
 	if(perform_new_scan)
 		sw_scan();
-	// check if swid is encoder, return based on last event if true
+	
+	if(swid_zero_indexed == RE1_CW)
+		return millis() - re_last_event_ts[0] < ROTARY_ENCODER_PERSISTENCE_MS && re_last_event_dir[0] == ROTARY_ENCODER_DIRECTION_CLOCKWISE;
+	if(swid_zero_indexed == RE1_CCW)
+		return millis() - re_last_event_ts[0] < ROTARY_ENCODER_PERSISTENCE_MS && re_last_event_dir[0] == ROTARY_ENCODER_DIRECTION_COUNTER_CLOCKWISE;
+	if(swid_zero_indexed == RE2_CW)
+		return millis() - re_last_event_ts[1] < ROTARY_ENCODER_PERSISTENCE_MS && re_last_event_dir[1] == ROTARY_ENCODER_DIRECTION_CLOCKWISE;
+	if(swid_zero_indexed == RE2_CCW)
+		return millis() - re_last_event_ts[1] < ROTARY_ENCODER_PERSISTENCE_MS && re_last_event_dir[1] == ROTARY_ENCODER_DIRECTION_COUNTER_CLOCKWISE;
+
 	return this_sw_state[swid_zero_indexed];
 }
 
