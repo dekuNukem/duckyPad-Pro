@@ -1,3 +1,15 @@
+void update_ball_pos(void)
+{
+  ball_pos_x += ball_velocity_x;
+  ball_pos_y += ball_velocity_y;
+
+  if((ball_pos_x >= 127 - BALL_RADIUS*2) || (ball_pos_x <= BALL_RADIUS*2))
+    ball_velocity_x = ball_velocity_x * -1;
+  
+  if((ball_pos_y >= 127 - BALL_RADIUS*2) || (ball_pos_y <= BALL_RADIUS*2))
+    ball_velocity_y = ball_velocity_y * -1;
+}
+
   while(1)
   {
     // uint8_t key_stat = readkey_nonblocking();
