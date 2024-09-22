@@ -1469,12 +1469,15 @@ def check_syntax():
     script_textbox.tag_remove("error", '1.0', 'end')
     if result_dict is None:
         check_syntax_label.config(text="Code seems OK..", fg="green")       
+        return
+    error_lnum = find_index(program_listing, result_dict['line_content'])
+    error_text = result_dict['comments']
+    if error_lnum is not None:
+        error_lnum += 1
+        script_textbox.tag_add("error", str(error_lnum)+".0", str(error_lnum)+".0 lineend")
     else:
-        error_lnum = find_index(program_listing, result_dict['line_content'])
-        if error_lnum is not None:
-            error_lnum += 1
-            script_textbox.tag_add("error", str(error_lnum)+".0", str(error_lnum)+".0 lineend")
-        check_syntax_label.config(text=result_dict['comments'], fg='red')
+        error_text = f"Error on line: {result_dict['line_content']}\n{result_dict['comments']}"
+    check_syntax_label.config(text=error_text, fg='red')
 
 check_syntax_label = Label(scripts_lf, text="")
 check_syntax_label.place(x=scaled_size(10), y=scaled_size(417))
@@ -1656,7 +1659,7 @@ def repeat_func():
 
 root.after(500, repeat_func)
 
-select_root_folder("sample_profiles")
+# select_root_folder("sample_profiles")
 my_compare.tk_root = root
 my_compare.tk_strvar = dp_root_folder_display
 root.mainloop()

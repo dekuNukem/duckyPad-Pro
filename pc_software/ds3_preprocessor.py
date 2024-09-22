@@ -440,7 +440,6 @@ def run_once(program_listing):
     'loop_state_save_needed':False,
     'color_state_save_needed':False,
     'oled_restore_needed':False,
-    'button_buf_clear_needed':False,
     'loop_size':None,
     'rem_block_table':None,
     'strlen_block_table':None,
@@ -458,9 +457,6 @@ def run_once(program_listing):
         first_word = this_line.split()[0]
         if needs_rstrip(first_word):
             this_line = this_line.rstrip(" \t")
-
-        if "$_READKEY" in this_line:
-            return_dict['button_buf_clear_needed'] = True
 
         presult = PARSE_ERROR
         pcomment = f"empty comment"
@@ -805,8 +801,6 @@ def run_all(program_listing, profile_list=None):
 
     if epilogue != 0:
         second_pass_program_listing.append((1, f"$_NEEDS_EPILOGUE = {epilogue}"))
-    if rdict['button_buf_clear_needed']:
-        second_pass_program_listing.append((1, cmd_BCLR))
     if rdict['loop_size'] is not None:
         second_pass_program_listing.append((1, f"$_LOOP_SIZE = {rdict['loop_size']+1}"))
 
@@ -863,9 +857,6 @@ def run_all(program_listing, profile_list=None):
 
     if needs_end_if:
         second_pass_program_listing.append((line_number_starting_from_1, cmd_END_IF))
-
-    if rdict['button_buf_clear_needed']:
-        second_pass_program_listing.append((line_number_starting_from_1, cmd_BCLR))
 
     print("---------Second Pass OK!---------\n")
 
