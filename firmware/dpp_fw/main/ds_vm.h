@@ -129,6 +129,5 @@ extern uint8_t allow_abort;
 extern uint8_t kb_led_status;
 
 void run_dsb(ds3_exe_result* er, uint8_t this_key_id, char* dsb_path);
-void pong_test(void);
 #endif
 

@@ -417,8 +417,8 @@ def make_dsb_with_exception(program_listing, profile_list=None):
     assembly_listing.append(first_instruction)
 
     for lnum, this_line in enumerate(compact_program_listing):
-        lnum += 1
         current_line_number_1_indexed = lnum
+        lnum += 1
         this_instruction = get_empty_instruction()
         this_instruction['comment'] = this_line
         first_word = this_line.split()[0]
