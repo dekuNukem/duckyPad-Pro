@@ -1,3 +1,25 @@
+  while(1)
+  {
+    // uint8_t key_stat = readkey_nonblocking();
+    // if(key_stat == 5)
+    //   paddle0_pos += 5;
+    // if(key_stat == 1)
+    //   paddle0_pos -= 5;
+    // printf("1: %ld %d\n", re_last_event_ts[0], re_last_event_dir[0]);
+    // printf("2: %ld %ld\n", re_last_event_ts[1], re_last_event_dir[1]);
+    sw_scan();
+    for (size_t i = RE1_CW; i < SW_PLUS; i++)
+      printf("%d ", poll_sw_state(i, 0));
+    printf("\n");
+
+    // update_ball_pos();
+    // draw_court();
+    // draw_ball(); 
+    // ssd1306_UpdateScreen();
+    delay_ms(66);
+  }
+
+
     printf("mmov %d %d\n", this_x_amount*xsign, this_y_amount*ysign);
 printf("!!! %x %x %x\n", combocode, ktype, kcode);
 

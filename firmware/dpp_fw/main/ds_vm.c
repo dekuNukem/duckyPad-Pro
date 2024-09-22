@@ -163,7 +163,7 @@ void write_var(uint16_t addr, uint16_t value)
     store_uint16_as_two_bytes_at(addr, value);
 }
 
-uint8_t readkey_nonblocking(void)
+uint8_t readkey_nonblocking_1_indexed(void)
 {
   for (uint8_t i = 0; i < MAX_TOTAL_SW_COUNT; i++)
   {
@@ -209,7 +209,7 @@ uint16_t read_var(uint16_t addr, uint8_t this_key_id)
   else if (addr == _LOOP_SIZE)
     return loop_size;
   else if (addr == _READKEY)
-    return readkey_nonblocking();
+    return readkey_nonblocking_1_indexed();
   else if (addr == _KEYPRESS_COUNT)
     return key_press_count[this_key_id];
   else if (addr == _NEEDS_EPILOGUE)
@@ -712,6 +712,11 @@ void draw_court(void)
   ssd1306_Line(0,0,0,127,Black);
 }
 
+void draw_paddle(void)
+{
+
+}
+
 void draw_ball(void)
 {
   uint8_t drawx = (uint8_t)ball_pos_x;
@@ -733,17 +738,13 @@ void pong_test(void)
   paddle0_pos = 64;
   while(1)
   {
-    // uint8_t key_stat = readkey_nonblocking();
-    // if(key_stat == 5)
-    //   paddle0_pos += 5;
-    // if(key_stat == 1)
-    //   paddle0_pos -= 5;
-    // printf("1: %ld %d\n", re_last_event_ts[0], re_last_event_dir[0]);
-    // printf("2: %ld %ld\n", re_last_event_ts[1], re_last_event_dir[1]);
-    sw_scan();
-    for (size_t i = RE1_CW; i < SW_PLUS; i++)
-		  printf("%d ", poll_sw_state(i, 0));
-    printf("\n");
+    uint8_t active_key = readkey_nonblocking_1_indexed();
+    if(active_key == RE1_CW+1)
+      paddle0_pos += 5;
+    else if(active_key == RE1_CCW+1)
+      paddle0_pos -= 5;
+
+    printf("%d\n", paddle0_pos);
 
     // update_ball_pos();
     // draw_court();
