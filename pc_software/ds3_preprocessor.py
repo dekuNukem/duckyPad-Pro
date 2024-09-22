@@ -83,7 +83,7 @@ def check_rvalue(rvalue_str, vt):
         if "$"+key in rvalue_str:
             rvalue_str = rvalue_str.replace("$"+key, str(vt[key])).strip()
     rvalue_str = rvalue_str.replace("^", "**")
-    # print("rvalue_str after replacement:", rvalue_str)
+    print("rvalue_str after replacement:", rvalue_str)
 
     if contains_english_alphabet(rvalue_str):
         return False, "unknown variable or invalid character"

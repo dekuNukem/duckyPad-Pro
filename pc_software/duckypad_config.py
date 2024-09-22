@@ -1445,10 +1445,10 @@ on_release_rb.place(x=scaled_size(150), y=scaled_size(20))
 root.update()
 
 def find_index(lst, query):
-    try:
-        return lst.index(query)
-    except ValueError:
-        return None
+    for index, item in enumerate(lst):
+        if query in item:
+            return index
+    return None        
 
 last_check_syntax_program_listing = []
 def check_syntax():
