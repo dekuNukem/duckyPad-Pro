@@ -121,6 +121,8 @@ typedef struct
 #define BIN_BUF_SIZE 65536
 #define VAR_BUF_SIZE 128
 
+#define MAX(a, b) ((a) > (b) ? (a) : (b))
+
 extern uint8_t bin_buf[BIN_BUF_SIZE];
 extern uint8_t key_press_count[MAX_TOTAL_SW_COUNT];
 extern uint8_t allow_abort;

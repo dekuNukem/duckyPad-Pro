@@ -365,7 +365,23 @@ void parse_oled_draw_circle(void)
     ssd1306_DrawCircle(x,y,radius,White);
 }
 
-#define MAX(a, b) ((a) > (b) ? (a) : (b))
+void parse_oled_draw_rect(void)
+{
+  int16_t x1,y1,x2,y2,fill;
+  stack_pop(&arithmetic_stack, (uint16_t *)&fill);
+  stack_pop(&arithmetic_stack, (uint16_t *)&y2);
+  stack_pop(&arithmetic_stack, (uint16_t *)&x2);
+  stack_pop(&arithmetic_stack, (uint16_t *)&y1);
+  stack_pop(&arithmetic_stack, (uint16_t *)&x1);
+  clamp_value(&x1, SSD1306_WIDTH);
+  clamp_value(&x2, SSD1306_WIDTH);
+  clamp_value(&y1, SSD1306_HEIGHT);
+  clamp_value(&y2, SSD1306_HEIGHT);
+  if(fill)
+    ssd1306_FillRectangle(x1,y1,x2,y2,White);
+  else
+    ssd1306_DrawRectangle(x1,y1,x2,y2,White);
+}
 
 void expand_mmov(int16_t xtotal, int16_t ytotal)
 {
@@ -624,6 +640,10 @@ void execute_instruction(uint16_t curr_pc, ds3_exe_result* exe, uint8_t this_key
   else if(this_opcode == OP_OLED_CIRCLE)
   {
     parse_oled_draw_circle();
+  }
+  else if(this_opcode == OP_OLED_RECT)
+  {
+    parse_oled_draw_rect();
   }
   else if(this_opcode == OP_OLP)
   {
