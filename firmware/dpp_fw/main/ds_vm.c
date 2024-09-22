@@ -325,6 +325,46 @@ void parse_olc(void)
   ssd1306_SetCursor(xxx, yyy);
 }
 
+void clamp_value(int16_t* value, int16_t upper_limit)
+{
+  if(value == NULL)
+    return;
+  if(*value < 0)
+    *value = 0;
+  if(*value > upper_limit)
+    *value = upper_limit;
+}
+
+void parse_oled_draw_line(void)
+{
+  int16_t x1,y1,x2,y2;
+  stack_pop(&arithmetic_stack, (uint16_t *)&y2);
+  stack_pop(&arithmetic_stack, (uint16_t *)&x2);
+  stack_pop(&arithmetic_stack, (uint16_t *)&y1);
+  stack_pop(&arithmetic_stack, (uint16_t *)&x1);
+  clamp_value(&x1, SSD1306_WIDTH);
+  clamp_value(&x2, SSD1306_WIDTH);
+  clamp_value(&y1, SSD1306_HEIGHT);
+  clamp_value(&y2, SSD1306_HEIGHT);
+  ssd1306_Line(x1, y1, x2, y2, White);
+}
+
+void parse_oled_draw_circle(void)
+{
+  int16_t x,y,radius,fill;
+  stack_pop(&arithmetic_stack, (uint16_t *)&fill);
+  stack_pop(&arithmetic_stack, (uint16_t *)&radius);
+  stack_pop(&arithmetic_stack, (uint16_t *)&y);
+  stack_pop(&arithmetic_stack, (uint16_t *)&x);
+  clamp_value(&x, SSD1306_WIDTH);
+  clamp_value(&y, SSD1306_HEIGHT);
+  clamp_value(&radius, SSD1306_HEIGHT/2);
+  if(fill)
+    ssd1306_FillCircle(x,y,radius,White);
+  else
+    ssd1306_DrawCircle(x,y,radius,White);
+}
+
 #define MAX(a, b) ((a) > (b) ? (a) : (b))
 
 void expand_mmov(int16_t xtotal, int16_t ytotal)
@@ -577,6 +617,14 @@ void execute_instruction(uint16_t curr_pc, ds3_exe_result* exe, uint8_t this_key
   {
     parse_olc();
   }
+  else if(this_opcode == OP_OLED_LINE)
+  {
+    parse_oled_draw_line();
+  }
+  else if(this_opcode == OP_OLED_CIRCLE)
+  {
+    parse_oled_draw_circle();
+  }
   else if(this_opcode == OP_OLP)
   {
     char* str_buf = make_str(op_data, this_key_id);
@@ -734,7 +782,6 @@ void draw_ball(void)
     return;
   if(drawy >= 127 - BALL_RADIUS || drawy <= BALL_RADIUS)
     return;
-  // printf("%d %d\n", drawx, drawy);
   ssd1306_FillCircle(drawx, drawy, 2, White);
 }
 

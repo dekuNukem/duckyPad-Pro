@@ -56,6 +56,10 @@
 #define OP_GOTOP 46
 #define OP_SLEEP 47
 
+#define OP_OLED_LINE 48
+#define OP_OLED_RECT 49
+#define OP_OLED_CIRCLE 50
+
 #define OP_VMINFO 255
 
 #define INSTRUCTION_SIZE_BYTES 3

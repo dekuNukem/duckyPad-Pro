@@ -73,6 +73,7 @@
     "ratio": "c",
     "system_error": "c",
     "tuple": "c",
-    "utility": "c"
+    "utility": "c",
+    "ssd1306_fonts.h": "c"
   }
 }
