@@ -1444,6 +1444,12 @@ on_release_rb = Radiobutton(scripts_lf, text="On Release", variable=on_press_rel
 on_release_rb.place(x=scaled_size(150), y=scaled_size(20))
 root.update()
 
+def find_index(lst, query):
+    try:
+        return lst.index(query)
+    except ValueError:
+        return None
+
 last_check_syntax_program_listing = []
 def check_syntax():
     global last_check_syntax_program_listing
@@ -1460,13 +1466,14 @@ def check_syntax():
         return
     result_dict, bin_arr = make_bytecode.make_dsb_no_exception(program_listing, profile_list)
     last_check_syntax_program_listing = program_listing.copy()
+    script_textbox.tag_remove("error", '1.0', 'end')
     if result_dict is None:
-        script_textbox.tag_remove("error", '1.0', 'end')
-        check_syntax_label.config(text="Code seems OK..", fg="green")
+        check_syntax_label.config(text="Code seems OK..", fg="green")       
     else:
-        script_textbox.tag_remove("error", '1.0', 'end')
-        error_lnum = result_dict['line_number']
-        script_textbox.tag_add("error", str(error_lnum)+".0", str(error_lnum)+".0 lineend")
+        error_lnum = find_index(program_listing, result_dict['line_content'])
+        if error_lnum is not None:
+            error_lnum += 1
+            script_textbox.tag_add("error", str(error_lnum)+".0", str(error_lnum)+".0 lineend")
         check_syntax_label.config(text=result_dict['comments'], fg='red')
 
 check_syntax_label = Label(scripts_lf, text="")

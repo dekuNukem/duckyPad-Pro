@@ -19,7 +19,7 @@ mouse move and mouse scroll arguments on stack
 more changes at the end of bytecode_vm.md
 """
 
-current_line_number_1_indexed = 0
+current_line_content = ''
 
 DS_VM_VERSION = 1
 
@@ -381,7 +381,9 @@ def make_dsb_with_exception(program_listing, profile_list=None):
     global label_dict
     global func_lookup
     global str_lookup
-    global current_line_number_1_indexed
+    global current_line_content
+
+    current_line_content = ''
     # result_dict should at least contain is_success and comments
     result_dict = ds3_preprocessor.run_all(program_listing, profile_list)
     if result_dict["is_success"] is False:
@@ -389,7 +391,7 @@ def make_dsb_with_exception(program_listing, profile_list=None):
         for key in result_dict:
             print(f'{key}: {result_dict[key]}')
         print("\n\n\n>>>>>>>>>> END ERROR REPORT\n\n")
-        current_line_number_1_indexed = result_dict['error_line_number_starting_from_1']
+        current_line_content = result_dict['error_line_str']
         raise ValueError(result_dict['comments'])
 
     if_skip_table = result_dict['if_skip_table']
@@ -417,8 +419,8 @@ def make_dsb_with_exception(program_listing, profile_list=None):
     assembly_listing.append(first_instruction)
 
     for lnum, this_line in enumerate(compact_program_listing):
-        current_line_number_1_indexed = lnum
         lnum += 1
+        current_line_content = this_line
         this_instruction = get_empty_instruction()
         this_instruction['comment'] = this_line
         first_word = this_line.split()[0]
@@ -673,6 +675,7 @@ def make_dsb_with_exception(program_listing, profile_list=None):
         if isinstance(item['oparg'], str) and "@" in item['oparg']:
             item['oparg'] = label_to_addr_dict[item['oparg']]
         if isinstance(item['oparg'], int) is False:
+            current_line_content = item['comment']
             raise ValueError("Unknown variable")
         item['oparg'] = int(item['oparg'])
 
@@ -712,7 +715,7 @@ def make_dsb_no_exception(program_listing, profile_list=None):
         return None, make_dsb_with_exception(program_listing, profile_list)
     except Exception as e:
         print(traceback.format_exc())
-        return {'comments':str(e), 'line_number':current_line_number_1_indexed}, None
+        return {'comments':str(e), 'line_content':current_line_content}, None
 
 if __name__ == "__main__":
 
