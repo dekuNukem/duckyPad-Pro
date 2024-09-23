@@ -14,8 +14,6 @@ Incorporating 4 years worth of feedback from the [original duckyPad](https://git
 
 A Kickstarter campaign is planned for **early October 2024**.
 
-We're currently at **pre-launch** stage, feedbacks welcome!
-
 If interested, please consider:
 
 * Signing up [Pre-launch Page](https://www.kickstarter.com/projects/dekunukem/duckypad-pro-advanced-macro-scripting-beyond-qmk-via) to get notified! (Or [Leave your email here](https://forms.gle/rERNdy7BvTqJD88S6))
@@ -24,7 +22,7 @@ If interested, please consider:
 
 * Let your friends/family/colleagues know!
 
-* Let me know any comments / suggestions! Reach me on Discord, or dekuNukem`&&`gmail.com
+* Let me know any comments / questions! Reach me on Discord, or dekuNukem`&&`gmail.com
 
 ## Promo Video
 
@@ -63,7 +61,7 @@ Compared to QMK/VIA, you get:
 
 * **Much Longer Macros**
 	* [Entire Bee Movie](resources/beemovie.txt) in one macro? Sure thing!
-	* Over 3700 macros
+	* Over 3700 macros total
 
 * **Advanced Interactive Scripting**
 	* Variables, conditionals, loops, functions, etc.
@@ -72,6 +70,7 @@ Compared to QMK/VIA, you get:
 	* Change RGB Color
 	* Fine timing control
 	* Randomization
+	* How about a [Pong game?](resources/pong.txt)
 
 * **SD Card Storage**
 	* Quick Configuration / Backup / Deployment
@@ -98,9 +97,9 @@ duckyScript is a no-brainer for power users with more demanding scripting needs.
 
 * **duckyScript** is an simple language for automating inputs
 
-* You basically tell it what keys to press!
+* You basically tell it what key to press!
 
-* Start simple by **mapping shortcuts** of your favourite app to any key or knob
+* Start simple by **mapping shortcuts** of your favourite app
 
 **Browsing**
 
@@ -173,6 +172,10 @@ END_IF
 
 ![alt_text](resources/photos/maze.jpeg)
 
+Or how about a fully working [Pong game?](resources/pong.txt)
+
+![alt_text](resources/photos/pong.gif)
+
 ### Hackerman!
 
 * Of course, by automating keystrokes, you can take over an entire computer with the push of a button!
@@ -191,7 +194,7 @@ END_IF
 
 * Executed on custom [virtual stack machine](./doc/bytecode_vm.md)
 
-* With the power and flexibility of duckyScript, it is now trivial to achieve what was long considered impossible on QMK/VIA!
+* With its power and flexibility, duckyScript makes it easy to achieve what was once impossible on QMK/VIA!
 
 ## Expansion Modules
 
@@ -225,7 +228,9 @@ duckyPad Pro also works as a **Bluetooth Keyboard & Mouse** (with a catch!)
 
 Yes I know it's a bit silly having BT without internal battery! However, it would involve more complex case design, additional components, and international shipping of rechargeable batteries.
 
-All of which would inflate the cost way beyond just getting an off-the-shelf battery pack. As this is a one-person project, I prefer to keep things simple.
+All of which would inflate the cost way beyond just getting an off-the-shelf battery pack.
+
+As this is a one-person project, I prefer to keep things simple.
 
 ## New CPU
 
@@ -262,8 +267,8 @@ Switching to ESP32 also allows **much simpler setup for tinkering:**
 
 Use the open-source configurator to set up your duckyPad Pro.
 
-* Windows / Mac / Linux
-* No account creation
+* Windows | Mac | Linux
+* No account / subscription needed
 * No data collection / telemetry
 
 ![alt_text](resources/photos/config.png)

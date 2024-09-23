@@ -1,4 +1,34 @@
 
+### Even Further
+
+* Explore the full potential with **advanced interactive scripting**
+* Read Buttons
+* Write to OLED screen
+* Change RGB colors
+* Conditions and Loops
+* Write ultra-specific macros for your exact needs
+
+```
+RGB_SET 1 128 0 255
+
+OLED_PRINT You are in a maze
+OLED_PRINT of twisty little passages
+
+VAR $choice = $_READKEY
+
+IF $choice == 1 THEN
+    OLED_CURSOR 0 10
+    OLED_PRINT It is a dead end.
+    OLED_PRINT Something moves
+    OLED_PRINT behind you.
+END_IF
+```
+
+![alt_text](resources/photos/maze.jpeg)
+
+
+
+--------
 
 Introducing **duckyPad Pro**, the second entry to the duckyPad family!
 
