@@ -194,7 +194,7 @@ Or how about a fully working [Pong game?](resources/pong.txt)
 
 * Executed on custom [virtual stack machine](./doc/bytecode_vm.md)
 
-* With its power and flexibility, duckyScript makes it easy to achieve what was once impossible on QMK/VIA!
+* With its power and flexibility, duckyScript makes it trivial to achieve the impossible on QMK/VIA!
 
 ## Expansion Modules
 
@@ -256,7 +256,9 @@ Switching to ESP32 also allows **much simpler setup for tinkering:**
 * **Unlimited** `EMUK` Keypresses
 * Read `NUMLOCK` / `CAPSLOCK` / `SCROLLLOCK` status
 * Switch profile by name (instead of number)
+* Configurable screen orientation
 * Mount SD Card as **USB Storage**
+* Blocking `$_READKEY`
 * Much faster configurator load/save
 * **Drag & drop** firmware update
 * More sturdy +/- button
