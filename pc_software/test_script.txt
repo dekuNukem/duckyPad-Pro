@@ -7,8 +7,8 @@ DEFINE RE_CCW 25
 
 VAR $ball_pos_x = $_RANDOM_INT%100 + 5
 VAR $ball_pos_y = $_RANDOM_INT%100 + 5
-VAR $ball_velocity_x = $_RANDOM_INT%1 + 2
-VAR $ball_velocity_y = $_RANDOM_INT%1 + 2
+VAR $ball_velocity_x = $_RANDOM_INT%2 + 2
+VAR $ball_velocity_y = $_RANDOM_INT%2 + 2
 VAR $paddle_pos = 64
 VAR $active_key = 0
 VAR $score = 0
@@ -59,14 +59,14 @@ FUNCTION draw_ball()
 END_FUNCTION
 
 FUNCTION draw_gameover()
-    SWC_FILL 32 0 0
+    SWC_FILL 255 0 0
     OLED_CLEAR
     draw_paddle()
     draw_court()
     draw_ball()
     
     OLED_CURSOR 20 40
-    OLED_PRINT GAME OVER!
+    OLED_PRINT GAME OVER
     OLED_CURSOR 20 60
     OLED_PRINT Score: $score
     OLED_CURSOR 20 80
@@ -84,15 +84,15 @@ END_FUNCTION
 
 FUNCTION speed_up_ball()
     IF $ball_velocity_x >= 0 THEN
-        $ball_velocity_x = $ball_velocity_x + 1
+        $ball_velocity_x = $ball_velocity_x + ($_RANDOM_INT % 2)
     ELSE IF $ball_velocity_x < 0 THEN
-        $ball_velocity_x = $ball_velocity_x - 1
+        $ball_velocity_x = $ball_velocity_x - ($_RANDOM_INT % 2)
     END_IF
 
     IF $ball_velocity_y >= 0 THEN
-        $ball_velocity_y = $ball_velocity_y + 1
+        $ball_velocity_y = $ball_velocity_y + ($_RANDOM_INT % 2)
     ELSE IF $ball_velocity_y < 0 THEN
-        $ball_velocity_y = $ball_velocity_y - 1
+        $ball_velocity_y = $ball_velocity_y - ($_RANDOM_INT % 2)
     END_IF
 END_FUNCTION
 
@@ -115,11 +115,9 @@ FUNCTION update_ball_pos()
             $ball_velocity_x = $ball_velocity_x * -1
             $score = $score + 1
 
-            IF $score % 2 == 0 THEN
-                speed_up_ball()
-            END_IF
+            speed_up_ball()
 
-            SWC_FILL $_RANDOM_INT%32 $_RANDOM_INT%32 $_RANDOM_INT%32
+            SWC_FILL $_RANDOM_INT%255 $_RANDOM_INT%255 $_RANDOM_INT%255
         ELSE
             $ball_velocity_x = 0
             $ball_velocity_y = 0
@@ -128,7 +126,7 @@ FUNCTION update_ball_pos()
     END_IF
 END_FUNCTION
 
-SWC_FILL 0 16 0
+SWC_FILL 0 255 0
 
 WHILE TRUE
     $active_key = $_READKEY
