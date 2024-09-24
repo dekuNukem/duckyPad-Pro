@@ -2,9 +2,19 @@
 
 Thank you very much for the interest and support of duckyPad Pro!
 
+I'm excited to share the details of the upcoming Kickstarter campaign!
+
+## Keep in Touch
+
+If you haven't already, please consider:
+
+* Signing up [Pre-launch Page](https://www.kickstarter.com/projects/dekunukem/duckypad-pro-advanced-macro-scripting-beyond-qmk-via) to get notified! (Or [Leave your email here](https://forms.gle/rERNdy7BvTqJD88S6))
+
+* Joining our [Official Discord](https://discord.gg/4sJCBx5) for questions, discussions, and updates.
+
 ## Launch Date
 
-duckyPad Pro [Kickstarter](https://www.kickstarter.com/projects/dekunukem/duckypad-pro-advanced-macro-scripting-beyond-qmk-via) is scheduled to launch on **`Tuesday October 1st 2024`** at:
+duckyPad Pro is scheduled to launch on **`Tuesday October 1st 2024`** at:
 
 ##### United States
 
@@ -36,7 +46,7 @@ The **`funding goal`** is set to $10700 (£8000).
 
 * All numbers in **USD**
 
-* duckyPad Pro is priced approximately **$20 higher** than the equivalent duckyPad
+* duckyPad Pro is priced approximately **$20 higher** than the standard duckyPad
 
 * **Board-only** config starts at $89.99 ($84.99 early bird)
 
@@ -44,21 +54,128 @@ The **`funding goal`** is set to $10700 (£8000).
 
 * **Fully-loaded:** Around $155
 
-* Ships from UK, international shipping starts around $10, faster upgrades available.
-
 ## Rewards
 
-* The rewards consist of **`2 tiers`** and several **`optional add-ons`**.
+* The rewards consist of a **`board-only base config`** and several **`optional add-ons`**.
 
-* **`200 early bird`** slots will be available with a **`discount`** AND **`immediate shipping`**.
+* **Early bird:**
+	* Small discount
+	* **Immediate shipping** after campaign ends (November 2024)
+	* 200 Slots
+
+* **Regular:**
+	* Separate production run
+	* Ships Dec 2024 / Jan 2025
 
 * duckyPads will be shipped in **`kit form`**. You can [put it together](kit_assembly.md) in minutes, **`no soldering needed`**.
 
+### What You'll Get
+
+![Alt text](../resources/photos/ks_tiers.png)
+
+### Optional Add-ons
+
+Feel free to pick-and-choose any extras you want.
+
+#### Switches & Keycaps
+
+* 20x Gateron Green **- $16.99**
+	* Firm & Clicky
+
+* 20x Kailh BOX NAVY **- $25.99**
+	* Heavy, crisp, clicky
+
+* 20x ABS Keycaps **- $16.99**
+	* Blank Milky Translucent
+	* R4 OEM Profile
+
+![Alt text](../resources/photos/swcaps.jpeg)
+
+#### 2x Knobs - $5.99
+
+* Anodised Aluminium
+* Chamfered Groove Pattern
+* 16mm Diameter x 11mm Height
+* D-shaft
+
+![Alt text](../resources/photos/knobs.jpeg)
+
+#### Aluminum Upgrade - $14.99
+
+* Upgrade to **Brushed Aluminum** mounting plates
+* Premium finish, rigid & durable.
+* Both front and back
+
+![Alt text](../resources/photos/alu.jpeg)
+
+#### Bluetooth / Wi-Fi Antenna Cable - $4.99
+
+* Needed for wireless functions
+
+![Alt text](../resources/photos/ant.jpeg)
+
+#### Expansion Module - $34.99
+
+* Wire up your own **switches / buttons / foot pedals**
+* **6 channels** per module, daisy-chainable. [More details](https://github.com/dekuNukem/duckyPad-expansion-modules).
+
+![Alt text](../resources/photos/exp.jpeg)
+
+## Shipping
+
+### Shipping Methods
+
+duckyPad Pro will be shipped from **`United Kingdom`**.
+
+[Royal Mail 1st Class](https://www.royalmail.com/sending/uk/1st-class) will be used for domestic shipping. 
+
+[Royal Mail International Standard](https://www.royalmail.com/sending/international/international-standard) will be used for everywhere else:
+
+* $10
+* 6-8 working days
+* Untracked
+
+You can also upgrade to [Royal Mail International Tracked & Signed](https://www.royalmail.com/sending/international/international-tracked-signed):
+
+* $20
+* 6-8 working days
+* End-to-end tracking
+* Signature on delivery
+
+For fastest delivery, [DHL Express Worldwide](https://parcel.dhl.co.uk/) is available:
+
+* $50
+* 2 working days
+* End-to-end tracking 
+* Signature on delivery
+
+### When will my duckyPad ship?
+
+**`Early Bird`** backers:
+
+* Shipping will begin after campaign concludes and fund is received. 
+
+* Most likely **`early November 2024`**.
+
+Regular backers:
+
+* A new production run will take place to produce your boards.
+
+* Most likely **`early January 2025`**.
+
+I'm fairly confident with these estimates, however they may change if any unexpected circumstances arise.
+
 ## What about my existing duckyPad?
 
-Original duckyPad still will be supported!
+The original duckyPad (2020) will **continue to be produced and supported**, as a lower-priced entry to the duckyPad family.
 
-planning to backport new firmware and software features during / after the campaign.
+I'm planning to **backport a majority of firmware improvements** to the OG duckyPad after the campaign wraps up and I have more time.
+
+## Any Questions?
+
+* Join our [Official Discord](https://discord.gg/4sJCBx5) for questions and discussions!
+* Or email me `dekunukem` `gmail.com`
+* Don't forget to follow the [Pre-launch Page](https://www.kickstarter.com/projects/dekunukem/duckypad-pro-advanced-macro-scripting-beyond-qmk-via)! (Or [Leave your email here](https://forms.gle/rERNdy7BvTqJD88S6))
 
 ## Table of Contents
 

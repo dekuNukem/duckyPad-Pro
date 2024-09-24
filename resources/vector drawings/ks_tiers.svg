@@ -8,7 +8,7 @@
    height="1080"
    viewBox="0 0 1919.9999 1080"
    sodipodi:docname="ks_tiers.svg"
-   inkscape:version="1.2.2 (732a01da63, 2022-12-09)"
+   inkscape:version="1.3.2 (091e20e, 2023-11-25)"
    inkscape:export-filename="ks_tiers.png"
    inkscape:export-xdpi="96"
    inkscape:export-ydpi="96"
@@ -11547,36 +11547,39 @@
      inkscape:pagecheckerboard="0"
      inkscape:deskcolor="#d1d1d1"
      showgrid="false"
-     inkscape:zoom="0.5"
-     inkscape:cx="1063"
-     inkscape:cy="550"
-     inkscape:window-width="1920"
-     inkscape:window-height="1017"
-     inkscape:window-x="1072"
-     inkscape:window-y="1085"
-     inkscape:window-maximized="1"
-     inkscape:current-layer="svg2599">
+     inkscape:zoom="0.77492772"
+     inkscape:cx="884.59863"
+     inkscape:cy="250.34593"
+     inkscape:window-width="2560"
+     inkscape:window-height="1387"
+     inkscape:window-x="0"
+     inkscape:window-y="25"
+     inkscape:window-maximized="0"
+     inkscape:current-layer="layer1">
     <inkscape:page
        x="0"
        y="0"
        id="page2605"
        width="1919.9999"
        height="1080"
-       inkscape:export-filename="Page 1.png"
-       inkscape:export-xdpi="200"
-       inkscape:export-ydpi="200" />
+       inkscape:export-filename="ks_tiers.png"
+       inkscape:export-xdpi="96"
+       inkscape:export-ydpi="96"
+       margin="0"
+       bleed="0" />
   </sodipodi:namedview>
   <g
      inkscape:groupmode="layer"
      id="layer2"
-     inkscape:label="background">
+     inkscape:label="background"
+     sodipodi:insensitive="true">
     <rect
        style="fill:#ffffff;fill-opacity:1;stroke:none;stroke-width:1.616;stroke-dasharray:none;stroke-dashoffset:0;stroke-opacity:1"
        id="rect61032"
        width="2116"
        height="1246"
-       x="-140"
-       y="-72" />
+       x="-81.930069"
+       y="-166" />
   </g>
   <g
      inkscape:groupmode="layer"
@@ -11819,48 +11822,48 @@
        xml:space="preserve"
        style="font-style:normal;font-variant:normal;font-weight:bold;font-stretch:normal;font-size:40px;font-family:sans-serif;-inkscape-font-specification:'sans-serif Bold';text-align:center;text-anchor:middle;fill:#000000;fill-opacity:1;stroke:none;stroke-width:1.616;stroke-dasharray:none;stroke-dashoffset:0;stroke-opacity:1"
        x="257.40802"
-       y="707.91248"
+       y="717.7406"
        id="text47426"><tspan
          sodipodi:role="line"
          x="257.40802"
-         y="707.91248"
+         y="717.7406"
          style="font-style:normal;font-variant:normal;font-weight:normal;font-stretch:normal;font-family:sans-serif;-inkscape-font-specification:sans-serif;stroke:none"
          id="tspan47432">Circuit Board</tspan><tspan
          sodipodi:role="line"
          x="257.40802"
-         y="757.91248"
+         y="767.7406"
          style="font-style:normal;font-variant:normal;font-weight:normal;font-stretch:normal;font-family:sans-serif;-inkscape-font-specification:sans-serif;stroke:none"
          id="tspan47436" /></text>
     <text
        xml:space="preserve"
        style="font-style:normal;font-variant:normal;font-weight:bold;font-stretch:normal;font-size:40px;font-family:sans-serif;-inkscape-font-specification:'sans-serif Bold';text-align:center;text-anchor:middle;display:inline;fill:#000000;fill-opacity:1;stroke:none;stroke-width:1.616;stroke-dasharray:none;stroke-dashoffset:0;stroke-opacity:1"
        x="756.74792"
-       y="707.91248"
+       y="713.91248"
        id="text47426-8"><tspan
          sodipodi:role="line"
          x="756.74792"
-         y="707.91248"
+         y="713.91248"
          style="font-style:normal;font-variant:normal;font-weight:normal;font-stretch:normal;font-family:sans-serif;-inkscape-font-specification:sans-serif;stroke:none"
          id="tspan47470">Mounting Plate - Front</tspan><tspan
          sodipodi:role="line"
          x="756.74792"
-         y="757.91248"
+         y="763.91248"
          style="font-style:normal;font-variant:normal;font-weight:normal;font-stretch:normal;font-family:sans-serif;-inkscape-font-specification:sans-serif;stroke:none"
          id="tspan47436-0" /></text>
     <text
        xml:space="preserve"
        style="font-style:normal;font-variant:normal;font-weight:bold;font-stretch:normal;font-size:40px;font-family:sans-serif;-inkscape-font-specification:'sans-serif Bold';text-align:center;text-anchor:middle;display:inline;fill:#000000;fill-opacity:1;stroke:none;stroke-width:1.616;stroke-dasharray:none;stroke-dashoffset:0;stroke-opacity:1"
        x="1256.4479"
-       y="707.91248"
+       y="713.91248"
        id="text47426-8-6"><tspan
          sodipodi:role="line"
          x="1256.4479"
-         y="707.91248"
+         y="713.91248"
          style="font-style:normal;font-variant:normal;font-weight:normal;font-stretch:normal;font-family:sans-serif;-inkscape-font-specification:sans-serif;stroke:none"
          id="tspan47470-3">Mounting Plate - Back</tspan><tspan
          sodipodi:role="line"
          x="1256.4479"
-         y="757.91248"
+         y="763.91248"
          style="font-style:normal;font-variant:normal;font-weight:normal;font-stretch:normal;font-family:sans-serif;-inkscape-font-specification:sans-serif;stroke:none"
          id="tspan47436-0-0" /></text>
     <text
@@ -15624,15 +15627,15 @@
   </g>
   <text
      xml:space="preserve"
-     style="font-size:85.3333px;font-family:'Bookman Old Style';-inkscape-font-specification:'Bookman Old Style';fill:#ff0000;stroke-width:5.30699"
-     x="43.515369"
-     y="146.2948"
+     style="font-size:77.3333px;font-family:'Bookman Old Style';-inkscape-font-specification:'Bookman Old Style';fill:#ff0000;stroke-width:5.30699"
+     x="68.033783"
+     y="142.6676"
      id="text13405"><tspan
        sodipodi:role="line"
        id="tspan13403"
-       x="43.515369"
-       y="146.2948"
-       style="font-style:normal;font-variant:normal;font-weight:normal;font-stretch:normal;font-size:85.3333px;font-family:sans-serif;-inkscape-font-specification:sans-serif;fill:#000000;fill-opacity:1;stroke-width:5.30699">duckyPad Pro: Base Config</tspan></text>
+       x="68.033783"
+       y="142.6676"
+       style="font-style:normal;font-variant:normal;font-weight:normal;font-stretch:normal;font-size:77.3333px;font-family:sans-serif;-inkscape-font-specification:sans-serif;fill:#000000;fill-opacity:1;stroke-width:5.30699">duckyPad Pro: Base Config</tspan></text>
   <path
      style="fill:none;fill-opacity:1;stroke:#000000;stroke-width:4;stroke-dasharray:4, 8;stroke-dashoffset:0;stroke-opacity:1"
      d="M 14.100614,217.62703 H 1901.4467"
@@ -15648,34 +15651,34 @@
      ry="25.022081" />
   <text
      xml:space="preserve"
-     style="font-style:normal;font-variant:normal;font-weight:normal;font-stretch:normal;font-size:33.2873px;font-family:sans-serif;-inkscape-font-specification:sans-serif;fill:#008080;fill-opacity:1;stroke:none;stroke-width:7.133;stroke-dasharray:none;stroke-dashoffset:0;stroke-opacity:1"
-     x="1178.3243"
+     style="font-style:normal;font-variant:normal;font-weight:normal;font-stretch:normal;font-size:32px;font-family:sans-serif;-inkscape-font-specification:sans-serif;fill:#008080;fill-opacity:1;stroke:none;stroke-width:7.133;stroke-dasharray:none;stroke-dashoffset:0;stroke-opacity:1"
+     x="1174.0022"
      y="167.41039"
      id="text26641"><tspan
        sodipodi:role="line"
-       x="1178.3243"
+       x="1174.0022"
        y="167.41039"
        id="tspan26745"
-       style="font-size:33.2873px;fill:#000000;fill-opacity:1;stroke-width:7.133">Immediate Shipping</tspan></text>
+       style="font-size:32px;fill:#000000;fill-opacity:1;stroke-width:7.133">Immediate Shipping</tspan></text>
   <text
      xml:space="preserve"
      style="font-style:normal;font-variant:normal;font-weight:normal;font-stretch:normal;font-size:35.665px;font-family:sans-serif;-inkscape-font-specification:sans-serif;fill:#2a9237;fill-opacity:1;stroke:none;stroke-width:7.133;stroke-dasharray:none;stroke-dashoffset:0;stroke-opacity:1"
-     x="1250.5837"
+     x="1238.3831"
      y="57.415276"
      id="text26641-6"><tspan
        sodipodi:role="line"
-       x="1250.5837"
+       x="1238.3831"
        y="57.415276"
        id="tspan26745-4"
        style="font-style:normal;font-variant:normal;font-weight:bold;font-stretch:normal;font-size:35.665px;font-family:sans-serif;-inkscape-font-specification:'sans-serif Bold';fill:#2a9237;fill-opacity:1;stroke-width:7.133">Early Bird</tspan></text>
   <text
      xml:space="preserve"
      style="font-style:normal;font-variant:normal;font-weight:normal;font-stretch:normal;font-size:53.4975px;font-family:sans-serif;-inkscape-font-specification:sans-serif;fill:#008080;fill-opacity:1;stroke:none;stroke-width:7.133;stroke-dasharray:none;stroke-dashoffset:0;stroke-opacity:1"
-     x="1290.2878"
+     x="1285.1759"
      y="128.91797"
      id="text26751"><tspan
        sodipodi:role="line"
-       x="1290.2878"
+       x="1285.1759"
        y="128.91797"
        style="font-size:53.4975px;fill:#000000;fill-opacity:1;stroke-width:7.133"
        id="tspan27642">$85</tspan></text>
@@ -15689,34 +15692,34 @@
      ry="25.022081" />
   <text
      xml:space="preserve"
-     style="font-style:normal;font-variant:normal;font-weight:normal;font-stretch:normal;font-size:33.2873px;font-family:sans-serif;-inkscape-font-specification:sans-serif;fill:#008080;fill-opacity:1;stroke:none;stroke-width:7.133;stroke-dasharray:none;stroke-dashoffset:0;stroke-opacity:1"
-     x="1588.2117"
+     style="font-style:normal;font-variant:normal;font-weight:normal;font-stretch:normal;font-size:32px;font-family:sans-serif;-inkscape-font-specification:sans-serif;fill:#008080;fill-opacity:1;stroke:none;stroke-width:7.133;stroke-dasharray:none;stroke-dashoffset:0;stroke-opacity:1"
+     x="1584.297"
      y="166.56758"
      id="text27623"><tspan
        sodipodi:role="line"
-       x="1588.2117"
+       x="1584.297"
        y="166.56758"
-       style="font-size:33.2873px;fill:#000000;fill-opacity:1;stroke-width:7.133"
+       style="font-size:32px;fill:#000000;fill-opacity:1;stroke-width:7.133"
        id="tspan39544">Ships Jan 2025</tspan></text>
   <text
      xml:space="preserve"
      style="font-style:normal;font-variant:normal;font-weight:normal;font-stretch:normal;font-size:37.68px;font-family:sans-serif;-inkscape-font-specification:sans-serif;fill:#2a9237;fill-opacity:1;stroke:none;stroke-width:7.133;stroke-dasharray:none;stroke-dashoffset:0;stroke-opacity:1"
-     x="1631.3424"
+     x="1623.2472"
      y="54.535549"
      id="text27627"><tspan
        sodipodi:role="line"
-       x="1631.3424"
+       x="1623.2472"
        y="54.535549"
        id="tspan27625"
        style="font-style:normal;font-variant:normal;font-weight:bold;font-stretch:normal;font-size:37.68px;font-family:sans-serif;-inkscape-font-specification:'sans-serif Bold';fill:#000000;fill-opacity:1;stroke-width:7.133">Regular</tspan></text>
   <text
      xml:space="preserve"
      style="font-style:normal;font-variant:normal;font-weight:normal;font-stretch:normal;font-size:53.4975px;font-family:sans-serif;-inkscape-font-specification:sans-serif;fill:#008080;fill-opacity:1;stroke:none;stroke-width:7.133;stroke-dasharray:none;stroke-dashoffset:0;stroke-opacity:1"
-     x="1660.7457"
+     x="1655.637"
      y="127.60474"
      id="text27631"><tspan
        sodipodi:role="line"
-       x="1660.7457"
+       x="1655.637"
        y="127.60474"
        id="tspan27629"
        style="font-size:53.4975px;fill:#000000;fill-opacity:1;stroke-width:7.133">$89</tspan></text>
