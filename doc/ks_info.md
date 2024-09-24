@@ -123,9 +123,7 @@ Pick-and-choose any extras you want.
 
 ![Alt text](../resources/photos/exp.jpeg)
 
-## Shipping
-
-### Shipping Methods
+## Shipping Methods
 
 duckyPad Pro will be shipped from **`United Kingdom`**.
 
@@ -151,7 +149,7 @@ For fastest delivery, [DHL Express Worldwide](https://parcel.dhl.co.uk/) is avai
 * End-to-end tracking 
 * Signature on delivery
 
-### Shipping Timeline
+## Shipping Timeline
 
 **`Early Bird`** backers:
 
