@@ -1,14 +1,16 @@
 # duckyPad Pro Kickstarter Information
 
-Thank you very much for the interest and support of duckyPad Pro!
+Thank you very much for the interest and support of the duckyPad project!
 
-I'm excited to share the details of the upcoming Kickstarter campaign!
+I'm excited to share the details of the upcoming Kickstarter campaign, so here it goes!
+
+![Alt text](../resources/photos/re.jpeg)
 
 ## Keep in Touch
 
 If you haven't already, please consider:
 
-* Signing up [Pre-launch Page](https://www.kickstarter.com/projects/dekunukem/duckypad-pro-advanced-macro-scripting-beyond-qmk-via) to get notified! (Or [Leave your email here](https://forms.gle/rERNdy7BvTqJD88S6))
+* Signing up [Pre-launch page](https://www.kickstarter.com/projects/dekunukem/duckypad-pro-advanced-macro-scripting-beyond-qmk-via) to get notified! (Or [Leave your email here](https://forms.gle/rERNdy7BvTqJD88S6))
 
 * Joining our [Official Discord](https://discord.gg/4sJCBx5) for questions, discussions, and updates.
 
@@ -26,7 +28,6 @@ duckyPad Pro is scheduled to launch on **`Tuesday October 1st 2024`** at:
 ##### Europe
 
 * 17:00 **BST**
-* 16:00 **UTC**
 * 18:00 **CEST**
 
 ##### Asia-Pacific
@@ -50,7 +51,7 @@ The **`funding goal`** is set to $10700 (£8000).
 
 * **Board-only** config starts at $89.99 ($84.99 early bird)
 
-* **Mid-trim:** Around $125
+* **Mid-trim:** Around $120
 
 * **Fully-loaded:** Around $155
 
@@ -65,7 +66,7 @@ The **`funding goal`** is set to $10700 (£8000).
 
 * **Regular:**
 	* Separate production run
-	* Ships Dec 2024 / Jan 2025
+	* Ships early Jan 2025
 
 * duckyPads will be shipped in **`kit form`**. You can [put it together](kit_assembly.md) in minutes, **`no soldering needed`**.
 
@@ -75,7 +76,7 @@ The **`funding goal`** is set to $10700 (£8000).
 
 ### Optional Add-ons
 
-Feel free to pick-and-choose any extras you want.
+Pick-and-choose any extras you want.
 
 #### Switches & Keycaps
 
@@ -85,25 +86,26 @@ Feel free to pick-and-choose any extras you want.
 * 20x Kailh BOX NAVY **- $25.99**
 	* Heavy, crisp, clicky
 
-* 20x ABS Keycaps **- $16.99**
+* 20x Keycaps **- $16.99**
 	* Blank Milky Translucent
 	* R4 OEM Profile
+	* ABS
 
 ![Alt text](../resources/photos/swcaps.jpeg)
 
-#### 2x Knobs - $5.99
+#### 2x Rotary Encoder Knobs - $5.99
 
 * Anodised Aluminium
 * Chamfered Groove Pattern
 * 16mm Diameter x 11mm Height
-* D-shaft
 
 ![Alt text](../resources/photos/knobs.jpeg)
 
 #### Aluminum Upgrade - $14.99
 
 * Upgrade to **Brushed Aluminum** mounting plates
-* Premium finish, rigid & durable.
+* Premium Finish
+* Rigid & Durable
 * Both front and back
 
 ![Alt text](../resources/photos/alu.jpeg)
@@ -117,7 +119,7 @@ Feel free to pick-and-choose any extras you want.
 #### Expansion Module - $34.99
 
 * Wire up your own **switches / buttons / foot pedals**
-* **6 channels** per module, daisy-chainable. [More details](https://github.com/dekuNukem/duckyPad-expansion-modules).
+* **6 channels** per module, daisy-chainable. [Details here](https://github.com/dekuNukem/duckyPad-expansion-modules).
 
 ![Alt text](../resources/photos/exp.jpeg)
 
@@ -149,7 +151,7 @@ For fastest delivery, [DHL Express Worldwide](https://parcel.dhl.co.uk/) is avai
 * End-to-end tracking 
 * Signature on delivery
 
-### When will my duckyPad ship?
+### Shipping Timeline
 
 **`Early Bird`** backers:
 
@@ -161,7 +163,7 @@ Regular backers:
 
 * A new production run will take place to produce your boards.
 
-* Most likely **`early January 2025`**.
+* Shipping most likely **`early January 2025`**.
 
 I'm fairly confident with these estimates, however they may change if any unexpected circumstances arise.
 

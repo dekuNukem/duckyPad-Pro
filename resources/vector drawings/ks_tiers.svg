@@ -11555,7 +11555,7 @@
      inkscape:window-x="0"
      inkscape:window-y="25"
      inkscape:window-maximized="0"
-     inkscape:current-layer="layer1">
+     inkscape:current-layer="svg2599">
     <inkscape:page
        x="0"
        y="0"
@@ -11821,49 +11821,49 @@
     <text
        xml:space="preserve"
        style="font-style:normal;font-variant:normal;font-weight:bold;font-stretch:normal;font-size:40px;font-family:sans-serif;-inkscape-font-specification:'sans-serif Bold';text-align:center;text-anchor:middle;fill:#000000;fill-opacity:1;stroke:none;stroke-width:1.616;stroke-dasharray:none;stroke-dashoffset:0;stroke-opacity:1"
-       x="257.40802"
-       y="717.7406"
+       x="269.40802"
+       y="711.7406"
        id="text47426"><tspan
          sodipodi:role="line"
-         x="257.40802"
-         y="717.7406"
+         x="269.40802"
+         y="711.7406"
          style="font-style:normal;font-variant:normal;font-weight:normal;font-stretch:normal;font-family:sans-serif;-inkscape-font-specification:sans-serif;stroke:none"
          id="tspan47432">Circuit Board</tspan><tspan
          sodipodi:role="line"
-         x="257.40802"
-         y="767.7406"
+         x="269.40802"
+         y="761.7406"
          style="font-style:normal;font-variant:normal;font-weight:normal;font-stretch:normal;font-family:sans-serif;-inkscape-font-specification:sans-serif;stroke:none"
          id="tspan47436" /></text>
     <text
        xml:space="preserve"
        style="font-style:normal;font-variant:normal;font-weight:bold;font-stretch:normal;font-size:40px;font-family:sans-serif;-inkscape-font-specification:'sans-serif Bold';text-align:center;text-anchor:middle;display:inline;fill:#000000;fill-opacity:1;stroke:none;stroke-width:1.616;stroke-dasharray:none;stroke-dashoffset:0;stroke-opacity:1"
-       x="756.74792"
-       y="713.91248"
+       x="768.74792"
+       y="711.91248"
        id="text47426-8"><tspan
          sodipodi:role="line"
-         x="756.74792"
-         y="713.91248"
+         x="768.74792"
+         y="711.91248"
          style="font-style:normal;font-variant:normal;font-weight:normal;font-stretch:normal;font-family:sans-serif;-inkscape-font-specification:sans-serif;stroke:none"
          id="tspan47470">Mounting Plate - Front</tspan><tspan
          sodipodi:role="line"
-         x="756.74792"
-         y="763.91248"
+         x="768.74792"
+         y="761.91248"
          style="font-style:normal;font-variant:normal;font-weight:normal;font-stretch:normal;font-family:sans-serif;-inkscape-font-specification:sans-serif;stroke:none"
          id="tspan47436-0" /></text>
     <text
        xml:space="preserve"
        style="font-style:normal;font-variant:normal;font-weight:bold;font-stretch:normal;font-size:40px;font-family:sans-serif;-inkscape-font-specification:'sans-serif Bold';text-align:center;text-anchor:middle;display:inline;fill:#000000;fill-opacity:1;stroke:none;stroke-width:1.616;stroke-dasharray:none;stroke-dashoffset:0;stroke-opacity:1"
-       x="1256.4479"
-       y="713.91248"
+       x="1268.4479"
+       y="711.91248"
        id="text47426-8-6"><tspan
          sodipodi:role="line"
-         x="1256.4479"
-         y="713.91248"
+         x="1268.4479"
+         y="711.91248"
          style="font-style:normal;font-variant:normal;font-weight:normal;font-stretch:normal;font-family:sans-serif;-inkscape-font-specification:sans-serif;stroke:none"
          id="tspan47470-3">Mounting Plate - Back</tspan><tspan
          sodipodi:role="line"
-         x="1256.4479"
-         y="763.91248"
+         x="1268.4479"
+         y="761.91248"
          style="font-style:normal;font-variant:normal;font-weight:normal;font-stretch:normal;font-family:sans-serif;-inkscape-font-specification:sans-serif;stroke:none"
          id="tspan47436-0-0" /></text>
     <text
@@ -11938,7 +11938,7 @@
   </g>
   <g
      id="g123005"
-     transform="matrix(1.1161671,0,0,1.1161671,-60.639011,209.47274)"
+     transform="matrix(1.1161671,0,0,1.1161671,-48.639011,209.47274)"
      style="stroke-width:1.44781;stroke-dasharray:none">
     <path
        d="m 527.7,324.76 h 35.52"
@@ -14808,7 +14808,7 @@
   </g>
   <g
      id="g122534"
-     transform="matrix(1.1119746,0,0,1.1119746,-28.683268,212.57586)"
+     transform="matrix(1.1119746,0,0,1.1119746,-16.683268,212.57586)"
      style="stroke-width:1.45327;stroke-dasharray:none">
     <g
        id="g122399"
@@ -15346,7 +15346,7 @@
   </g>
   <g
      id="g130096"
-     transform="matrix(1.486056,0,0,-1.486056,655.96652,901.14997)"
+     transform="matrix(1.486056,0,0,-1.486056,667.96652,901.14997)"
      style="stroke-width:1.08744;stroke-dasharray:none">
     <g
        id="g129677"

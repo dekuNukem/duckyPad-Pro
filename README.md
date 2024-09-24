@@ -1,6 +1,6 @@
 # duckyPad Pro: Advanced Macro Scripting Beyond QMK/VIA
 
-[Kickstarter Info](https://www.kickstarter.com/projects/dekunukem/duckypad-pro-advanced-macro-scripting-beyond-qmk-via) | [Official Discord](https://discord.gg/4sJCBx5) | [Getting Started](./doc/getting_started.md) | [Table of Contents](#table-of-contents)
+[Launch Details](./doc/ks_info.md) | [Official Discord](https://discord.gg/4sJCBx5) | [Getting Started](./doc/getting_started.md) | [Table of Contents](#table-of-contents)
 
 -----------
 
@@ -12,17 +12,15 @@ Incorporating 4 years worth of feedback from the [original duckyPad](https://git
 
 ## Launch Information
 
-A Kickstarter campaign is planned for **early October 2024**.
+A Kickstarter campaign is planned on **October 1st 2024**!
 
-If interested, please consider:
+* [Read more about launch details](./doc/ks_info.md)
 
-* Signing up [Pre-launch Page](https://www.kickstarter.com/projects/dekunukem/duckypad-pro-advanced-macro-scripting-beyond-qmk-via) to get notified! (Or [Leave your email here](https://forms.gle/rERNdy7BvTqJD88S6))
+* Sign up [Pre-launch Page](https://www.kickstarter.com/projects/dekunukem/duckypad-pro-advanced-macro-scripting-beyond-qmk-via) to get notified! (Or [Leave your email here](https://forms.gle/rERNdy7BvTqJD88S6))
 
-* Joining our [Official Discord](https://discord.gg/4sJCBx5) for questions, discussions, and updates!
+* Join our [Official Discord](https://discord.gg/4sJCBx5) for discussions and updates!
 
-* Let your friends/family/colleagues know!
-
-* Let me know any comments / questions! Reach me on Discord, or dekuNukem`&&`gmail.com
+* Questions or comments? Reach me on Discord, or `dekuNukem` `gmail.com` .
 
 ## Promo Video
 
