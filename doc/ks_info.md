@@ -1,22 +1,60 @@
 # duckyPad Pro Kickstarter Information
 
-More details coming soon!
+Thank you very much for the interest and support of duckyPad Pro!
 
-![Alt text](../resources/photos/underc.gif)
+## Launch Date
 
-## Kickstarter Plan
+duckyPad Pro [Kickstarter](https://www.kickstarter.com/projects/dekunukem/duckypad-pro-advanced-macro-scripting-beyond-qmk-via) is scheduled to launch on **`Tuesday October 1st 2024`** at:
 
-* Early October
+##### United States
 
-* 21 days
+* 9:00AM **PDT**
+* 10:00AM **MDT**
+* 11:00AM **CDT**
+* 12:00PM (noon) **EDT**
 
-* Similar to [last time](https://www.kickstarter.com/projects/dekunukem/duckypad-do-it-all-mechanical-macropad). Early bird rewards for immediately shipping.
+##### Europe
 
-* Rest of the rewards December / early 2025.
+* 17:00 **BST**
+* 16:00 **UTC**
+* 18:00 **CEST**
+
+##### Asia-Pacific
+
+* 01:00AM (October 2) **JST**
+* 02:00AM (October 2) **AEDT**
+
+The campaign will:
+
+* Run for **`22 days`**
+
+* Conclude on **`Wednesday 23 October 2024`** on the **`same hour`**.
+
+The **`funding goal`** is set to $10700 (£8000).
 
 ## Pricing
 
-Still deciding, likely starts around $80-85 for the base model, around $120 for mid-trim, and $140 fully loaded with options.
+* All numbers in **USD**
+
+* duckyPad Pro is priced approximately **$20 higher** than the equivalent duckyPad
+
+* **Board-only** config starts at $89.99 ($84.99 early bird)
+
+* **Mid-trim:** Around $125
+
+* **Fully-loaded:** Around $155
+
+* Ships from UK, international shipping starts around $10, faster upgrades available.
+
+## Rewards
+
+* The rewards consists of **`2 tiers`** and several **`optional add-ons`**.
+
+* There are **`200 early bird`** slots with a **`discount`** AND **`immediate shipping`**.
+
+* duckyPads will be shipped in **`kit form`**. You can [put it together](kit_assembly.md) in minutes, **`no soldering needed`**.
+
+
 
 ## What about my existing duckyPad?
 

@@ -46,7 +46,7 @@ Insert `8mm` and `3mm` screws.
 
 Place **something rigid** against the back, and flip over. The screws should stay in place.
 
-Thread on **2.5mm spacers**.
+Put on **2.5mm spacers**.
 
 **Moderately** tighten, use pliers if available.
 

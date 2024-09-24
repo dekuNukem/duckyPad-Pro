@@ -1,4 +1,14 @@
 
+* Early October
+
+* 21 days
+
+* Similar to [last time](https://www.kickstarter.com/projects/dekunukem/duckypad-do-it-all-mechanical-macropad). Early bird rewards for immediately shipping.
+
+* Rest of the rewards December / early 2025.
+
+
+
 ### Even Further
 
 * Explore the full potential with **advanced interactive scripting**
