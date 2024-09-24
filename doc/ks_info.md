@@ -2,7 +2,7 @@
 
 Thank you very much for the interest and support of the duckyPad project!
 
-I'm excited to share the details of the upcoming Kickstarter campaign, so here it goes!
+I'm excited to share the details about the upcoming Kickstarter campaign, so here it goes!
 
 ![Alt text](../resources/photos/re.jpeg)
 
@@ -10,7 +10,7 @@ I'm excited to share the details of the upcoming Kickstarter campaign, so here i
 
 If you haven't already, please consider:
 
-* Signing up [Pre-launch page](https://www.kickstarter.com/projects/dekunukem/duckypad-pro-advanced-macro-scripting-beyond-qmk-via) to get notified! (Or [Leave your email here](https://forms.gle/rERNdy7BvTqJD88S6))
+* Signing up [Pre-launch page](https://www.kickstarter.com/projects/dekunukem/duckypad-pro-advanced-macro-scripting-beyond-qmk-via) to get notified. (Or [Leave your email here](https://forms.gle/rERNdy7BvTqJD88S6))
 
 * Joining our [Official Discord](https://discord.gg/4sJCBx5) for questions, discussions, and updates.
 
@@ -169,7 +169,7 @@ I'm fairly confident with these estimates, however they may change if any unexpe
 
 ## What about my existing duckyPad?
 
-The original duckyPad (2020) will **continue to be produced and supported**, as a lower-priced entry to the duckyPad family.
+The original duckyPad (2020) will **continue to be produced and supported**, as a lower-price entry to the duckyPad family.
 
 I'm planning to **backport a majority of firmware improvements** to the OG duckyPad after the campaign wraps up and I have more time.
 
