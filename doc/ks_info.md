@@ -48,13 +48,11 @@ The **`funding goal`** is set to $10700 (£8000).
 
 ## Rewards
 
-* The rewards consists of **`2 tiers`** and several **`optional add-ons`**.
+* The rewards consist of **`2 tiers`** and several **`optional add-ons`**.
 
-* There are **`200 early bird`** slots with a **`discount`** AND **`immediate shipping`**.
+* **`200 early bird`** slots will be available with a **`discount`** AND **`immediate shipping`**.
 
 * duckyPads will be shipped in **`kit form`**. You can [put it together](kit_assembly.md) in minutes, **`no soldering needed`**.
-
-
 
 ## What about my existing duckyPad?
 
