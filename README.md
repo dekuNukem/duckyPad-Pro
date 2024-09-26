@@ -12,15 +12,13 @@ Incorporating 4 years worth of feedback from the [original duckyPad](https://git
 
 ## Launch Information
 
-A Kickstarter campaign is planned on **October 1st 2024**!
+A Kickstarter campaign is planned on **October 1st 2024** (next Tuesday)!
 
-* [Read more about launch details](./doc/ks_info.md)
+* [Full launch details](./doc/ks_info.md)
 
 * Sign up [Pre-launch Page](https://www.kickstarter.com/projects/dekunukem/duckypad-pro-advanced-macro-scripting-beyond-qmk-via) to get notified! (Or [Leave your email here](https://forms.gle/rERNdy7BvTqJD88S6))
 
 * Join our [Official Discord](https://discord.gg/4sJCBx5) for discussions and updates!
-
-* Questions or comments? Reach me on Discord, or `dekuNukem` `gmail.com` .
 
 ## Promo Video
 
@@ -31,7 +29,7 @@ A Kickstarter campaign is planned on **October 1st 2024**!
 duckyPad Pro has all the basics:
 
 * Hot-Swap
-* **Rotary Encoders**
+* Rotary Encoders
 * Per-key RGB
 * USB-C
 * 100% **Open-source**
@@ -47,7 +45,7 @@ But also features **unlike any other**:
 * [Automatic profile switching](https://github.com/dekuNukem/duckyPad-profile-autoswitcher) based on active window.
 * microSD storage
 * No proprietary drivers, works out-of-box.
-* **Hacker friendly** with tinkering guide
+* **Hacker friendly** with [tinkering guide](./doc/tinkering_guide.md)
 
 ![alt_text](resources/photos/quarter.jpeg)
 
@@ -62,16 +60,16 @@ Compared to QMK/VIA, you get:
 	* Over 3700 macros total
 
 * **Advanced Interactive Scripting**
-	* Variables, conditionals, loops, functions, etc.
+	* Variables, conditions, loops, functions, etc.
 	* Reading Buttons
 	* Print to OLED screen
 	* Change RGB Color
 	* Fine timing control
 	* Randomization
-	* How about a [Pong game?](resources/pong.txt)
+	* How about a fully functional [Pong game?](resources/photos/pong.gif) [[code]](resources/pong.txt)
 
 * **SD Card Storage**
-	* Quick Configuration / Backup / Deployment
+	* Fast Configuration / Backup / Deployment
 	* No sketchy drivers or apps
 	* No recompiling
 
@@ -93,7 +91,7 @@ duckyScript is a no-brainer for power users with more demanding scripting needs.
 
 ### Easy Start
 
-* **duckyScript** is an simple language for automating inputs
+* **duckyScript** is a simple language for automating inputs
 
 * You basically tell it what key to press!
 
@@ -172,6 +170,20 @@ END_IF
 
 Or how about a fully working [Pong game?](resources/pong.txt)
 
+```
+WHILE TRUE
+    $active_key = $_READKEY
+    update_paddle_pos()
+    update_ball_pos()
+    OLED_CLEAR
+    draw_paddle()
+    draw_court()
+    draw_ball()
+    OLED_UPDATE
+    DELAY 20
+END_WHILE
+```
+
 ![alt_text](resources/photos/pong.gif)
 
 ### Hackerman!
@@ -186,17 +198,17 @@ Or how about a fully working [Pong game?](resources/pong.txt)
 
 ### Nothing Like It
 
+* From **simple shortcuts** to **full-blown programs**, duckyScript can easily achieve what is impossible on QMK/VIA!
+
 * Each macro can type over **60,000 characters**
 
 * Store over **3700 macros** in total
 
 * Executed on custom [virtual stack machine](./doc/bytecode_vm.md)
 
-* With its power and flexibility, duckyScript makes it trivial to achieve the impossible on QMK/VIA!
-
 ## Expansion Modules
 
-duckyPad Pro also supports optional **expansion modules** for even more customisability.
+duckyPad Pro also supports optional [expansion modules](https://github.com/dekuNukem/duckyPad-expansion-modules) for even more customisability.
 
 ![alt_text](resources/photos/expdpp.jpeg)
 
@@ -295,9 +307,8 @@ duckyPad Pro has **20 Mechanical Switches** in **4x5 Grid.**
 ## Rotary Encoders
 
 * Two Encoders
-* Bourns Inc. PEC12R-4215F-S0024
+* Bourns Inc. PEC12R Series
 * Built-in Tactile Switch
-* D-shape 15mm Shaft
 * Max Knob Diameter: 24mm
 
 ![alt_text](resources/photos/knob.jpeg)
@@ -314,22 +325,6 @@ duckyPad Pro has **20 Mechanical Switches** in **4x5 Grid.**
 
 ![alt_text](resources/photos/oled.jpeg)
 
-## Mounting Plates
-
-* Pure White FR4, 1.6mm
-	* Default Option
-	* Same material as PCB
-	* Sturdy & Durable
-
-* 🆕 **Brushed Aluminium**, 1.6mm
-	* Optional Upgrade
-	* Premium Finish
-	* Rigid & Durable
-
-![alt_text](resources/photos/plates.jpeg)
-
-![alt_text](resources/photos/alu.jpeg)
-
 ## Keep in Touch!
 
 Interested? Please consider:
@@ -337,8 +332,6 @@ Interested? Please consider:
 * Signing up [Pre-launch Page](https://www.kickstarter.com/projects/dekunukem/duckypad-pro-advanced-macro-scripting-beyond-qmk-via) to get notified! (Or [Leave your email here](https://forms.gle/rERNdy7BvTqJD88S6))
 
 * Joining our [Official Discord](https://discord.gg/4sJCBx5) for questions, discussions, and updates!
-
-* Let me know any comments / suggestions! Reach me on Discord, or dekuNukem`&&`gmail.com
 
 ## Specifications
 
