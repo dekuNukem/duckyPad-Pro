@@ -349,7 +349,7 @@ Please feel free to [open an issue](https://github.com/dekuNukem/duckypad-pro/is
 
 * duckyScript appears to be a trademark of [Hak5 LLC](https://docs.hak5.org/hak5-usb-rubber-ducky/duckyscript-tm-quick-reference). The duckyPad project is not affiliated with, or endorsed by Hak5 LLC.
 
-* The duckyScript [compiler and virtual machine](./doc/duckyscript3_bytecode_vm.md) used in this project are independently developed from scratch.
+* The duckyScript [compiler and virtual machine](./doc/bytecode_vm.md) used in this project are independently developed from scratch.
 
 ## Table of Contents
 
