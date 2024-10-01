@@ -1,6 +1,6 @@
 # duckyPad Pro: Advanced Macro Scripting Beyond QMK/VIA
 
-[Launch Details](./doc/ks_info.md) | [Official Discord](https://discord.gg/4sJCBx5) | [Getting Started](./doc/getting_started.md) | [Table of Contents](#table-of-contents)
+[Get it on Kickstarter!](https://www.kickstarter.com/projects/dekunukem/duckypad-pro-advanced-macro-scripting-beyond-qmk-via) | [Official Discord](https://discord.gg/4sJCBx5) | [Getting Started](./doc/getting_started.md) | [Table of Contents](#table-of-contents)
 
 -----------
 
@@ -10,13 +10,13 @@ duckyPad Pro is a 20-key **mechanical macropad** for power users who demand **ad
 
 Incorporating 4 years worth of feedback from the [original duckyPad](https://github.com/dekuNukem/duckyPad), duckyPad Pro combines long-requested upgrades with a no-nonsense design, aiming simply to be the **most capable** macropad today.
 
-## Launch Information
+## Get duckyPad Pro
 
-A Kickstarter campaign is planned on **October 1st 2024** (next Tuesday)!
+[Kickstarter campaign is NOW LIVE!](https://www.kickstarter.com/projects/dekunukem/duckypad-pro-advanced-macro-scripting-beyond-qmk-via)
 
-* [Full launch details](./doc/ks_info.md)
+* Starts from $84.99 with optional add-ons
 
-* Sign up [Pre-launch Page](https://www.kickstarter.com/projects/dekunukem/duckypad-pro-advanced-macro-scripting-beyond-qmk-via) to get notified! (Or [Leave your email here](https://forms.gle/rERNdy7BvTqJD88S6))
+* 200 Early Bird slots with small discount and immediate shipping
 
 * Join our [Official Discord](https://discord.gg/4sJCBx5) for discussions and updates!
 
@@ -325,13 +325,11 @@ duckyPad Pro has **20 Mechanical Switches** in **4x5 Grid.**
 
 ![alt_text](resources/photos/oled.jpeg)
 
-## Keep in Touch!
+## Interested?
 
-Interested? Please consider:
+Please consider [supporting duckyPad Pro on Kickstarter!](https://www.kickstarter.com/projects/dekunukem/duckypad-pro-advanced-macro-scripting-beyond-qmk-via)
 
-* Signing up [Pre-launch Page](https://www.kickstarter.com/projects/dekunukem/duckypad-pro-advanced-macro-scripting-beyond-qmk-via) to get notified! (Or [Leave your email here](https://forms.gle/rERNdy7BvTqJD88S6))
-
-* Joining our [Official Discord](https://discord.gg/4sJCBx5) for questions, discussions, and updates!
+Join our [Official Discord](https://discord.gg/4sJCBx5) for discussions and updates!
 
 ## Specifications
 
