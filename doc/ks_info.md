@@ -12,7 +12,7 @@ https://www.kickstarter.com/projects/dekunukem/duckypad-pro-advanced-macro-scrip
 
 The original duckyPad (2020) will **continue to be produced and supported**, as a lower-price entry to the duckyPad family.
 
-I'm planning to **backport a majority of firmware improvements** to the OG duckyPad after the campaign wraps up and I have more time.
+I'm planning to **backport many new features** to the OG duckyPad after the campaign wraps up and I have more time.
 
 ## Questions or Comments?
 
