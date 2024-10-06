@@ -223,6 +223,10 @@ NOV2024</text>
 <rectangle x1="75.938" y1="89.662" x2="81.526" y2="92.964" layer="42"/>
 <text x="87.1482" y="1.4732" size="1.9304" layer="26" rot="MR180" align="center">*</text>
 <rectangle x1="75.938" y1="92.583" x2="81.526" y2="95.885" layer="42"/>
+<text x="91.263" y="4.572" size="1.778" layer="26" rot="MR180" align="center">ANT1</text>
+<text x="77.293" y="93.472" size="1.27" layer="26" rot="MR180" align="center">PSW</text>
+<text x="87.834" y="53.594" size="1.016" layer="26" ratio="10" rot="MR180" align="center">UFL1</text>
+<text x="79.325" y="5.842" size="1.016" layer="26" ratio="10" rot="MR180" align="center">UFL2</text>
 </plain>
 <libraries>
 <library name="clock">
