@@ -158,13 +158,13 @@ def open_discord_link():
         messagebox.showerror("Error", "I can't find the discord link...\n"+str(e))
 
 def open_duckypad_user_manual_url():
-    webbrowser.open('https://github.com/dekuNukem/duckyPad/blob/master/getting_started.md')
+    webbrowser.open('https://github.com/dekuNukem/duckyPad-Pro/blob/master/doc/getting_started.md')
 
 def open_duckypad_troubleshooting_url():
-    webbrowser.open('https://github.com/dekuNukem/duckyPad/blob/master/troubleshooting.md')
+    webbrowser.open('https://github.com/dekuNukem/duckyPad-Pro/blob/master/doc/troubleshooting.md')
 
 def app_update_click(event):
-    webbrowser.open('https://github.com/dekuNukem/duckyPad/releases/latest')
+    webbrowser.open('https://github.com/dekuNukem/duckyPad-Pro/releases/latest')
 
 def reset_key_button_relief():
     for item in key_button_list:
@@ -224,7 +224,7 @@ def check_firmware_update(current_fw_str=None):
     return 2, None
 
 def fw_update_click(event):
-    webbrowser.open('https://github.com/dekuNukem/duckyPad/blob/master/firmware_updates_and_version_history.md')
+    webbrowser.open('https://github.com/dekuNukem/duckyPad-Pro/blob/master/doc/fw_update.md')
 
 def print_fw_update_label(current_fw_str=None):
     fw_result, this_version = check_firmware_update(current_fw_str)
@@ -1376,7 +1376,7 @@ root.update()
 scripts_lf = LabelFrame(root, text="Scripts", width=scaled_size(310), height=scaled_size(473))
 
 def open_duckyscript_url():
-    webbrowser.open('https://github.com/dekuNukem/duckyPad/blob/master/duckyscript_info.md#writing-duckyscript')
+    webbrowser.open('https://github.com/dekuNukem/duckyPad-Pro/blob/master/doc/duckyscript_info.md')
 
 def script_instruction_click(event):
     open_duckyscript_url()
