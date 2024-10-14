@@ -159,6 +159,8 @@ void write_var(uint16_t addr, uint16_t value)
     ; // read only
   else if (addr == _DONT_REPEAT)
     disable_autorepeat = value;
+  else if (addr == _THIS_KEYID)
+    ; // read only
   else if(addr < VAR_BUF_SIZE)
     store_uint16_as_two_bytes_at(addr, value);
 }
@@ -226,6 +228,8 @@ uint16_t read_var(uint16_t addr, uint8_t this_key_id)
     return (kb_led_status & 0x4) ? 1 : 0;
   else if (addr == _DONT_REPEAT)
     return disable_autorepeat;
+  else if (addr == _THIS_KEYID)
+    return this_key_id+1;
   else if(addr < VAR_BUF_SIZE)
     return make_uint16(var_buf[addr], var_buf[addr+1]);
   return 0;

@@ -1,0 +1,107 @@
+%YAML 1.2
+---
+
+file_extensions:
+  - txt
+scope: source.duckyscript
+contexts:
+  main:
+    - match: 'STRING_BLOCK'
+      scope: keyword
+      push: 
+        - meta_scope: string
+        - match: 'END_STRING'
+          scope: keyword
+          pop: true
+
+    - match: 'STRINGLN_BLOCK'
+      scope: keyword
+      push: 
+        - meta_scope: string
+        - match: 'END_STRINGLN'
+          scope: keyword
+          pop: true
+
+    - match: 'REM_BLOCK'
+      scope: comment
+      push: 
+        - meta_scope: comment
+        - match: 'END_REM'
+          scope: comment
+          pop: true
+
+    - match: '\bWHILE'
+      scope: keyword
+      push: expr_eval
+
+    - match: '\bEND_WHILE'
+      scope: keyword
+
+    - match: '\bFUNCTION'
+      scope: keyword
+
+    - match: '\bEND_FUNCTION'
+      scope: keyword
+
+    - match: '^\s*(STRINGLN|STRING|OLED_PRINT)\b'
+      scope: keyword
+      push:
+        - meta_scope: string
+        - match: $
+          pop: true
+
+    - match: '^\s*REM\b'
+      scope: comment
+      push:
+        - meta_scope: comment
+        - match: $
+          pop: true
+
+    - match: '^\s*//'
+      scope: comment
+      push:
+        - meta_scope: comment
+        - match: $
+          pop: true
+
+    - match: '^\s*(IF|s*ELSE\s+IF)\b'
+      scope: keyword
+      push: expr_eval
+
+    - match: '^\s*(DELAY|DEFAULTDELAY|REPEAT|DEFAULTCHARDELAY|CHARJITTER|MOUSE_MOVE|MOUSE_WHEEL|OLED_CURSOR|SWC_SET|SWC_FILL|SWC_RESET)\b'
+      scope: keyword
+      push: ds_numeric
+
+    - match: '^\s*(KEYDOWN|KEYUP|PREV_PROFILE|NEXT_PROFILE|DEFINE|GOTO_PROFILE|OLED_CLEAR|OLED_UPDATE|OLED_RESTORE|DP_SLEEP|HALT|LBREAK|CONTINUE|ELSE|END_IF)\b'
+      scope: keyword
+
+    # - match: '^\s*(CTRL|ALT)\b.*$'
+    #   scope: punctuation.definition
+
+    - match: 'VAR'
+      scope: keyword
+      push: expr_eval
+
+    - match: '\$'
+      scope: punctuation.definition
+      push: expr_eval
+
+  ds_numeric:
+    - match: '\d+'
+      scope: constant.numeric
+    - match: $
+      pop: true
+
+  expr_eval:
+    - match: '\=|\+|\-|\*|\/|\&|\^|\%|\!|\>|\<|\||\&'
+      scope: keyword.operator
+    - match: '\d+'
+      scope: constant.numeric
+    - match: '\$'
+      scope: punctuation.definition
+    - match: 'THEN'
+      scope: keyword
+    - match: $
+      pop: true
+
+# regex of `$` means end of string

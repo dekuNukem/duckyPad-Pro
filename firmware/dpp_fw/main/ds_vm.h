@@ -101,6 +101,7 @@
 #define _IS_CAPSLOCK_ON (0xffff - 15)
 #define _IS_SCROLLLOCK_ON (0xffff - 16)
 #define _DONT_REPEAT (0xffff - 17)
+#define _THIS_KEYID (0xffff - 18)
 
 typedef struct
 {
