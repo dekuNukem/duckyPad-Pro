@@ -23,8 +23,10 @@
 #include "bluetooth_task.h"
 #include "nvs_flash.h"
 
+#define PLUS_MINUS_BUTTON_COOLDOWN_MS 250
 volatile uint8_t oled_brightness = OLED_CONTRAST_BRIGHT;
 volatile uint32_t last_keypress;
+volatile uint32_t last_execution_exit;
 
 void block_until_anykey(uint8_t event_type)
 {
@@ -52,6 +54,11 @@ void block_until_plus_minus_long_press(void)
     if((sw_event.id == SW_PLUS || sw_event.id == SW_MINUS) && sw_event.type == SW_EVENT_LONG_PRESS)
       return;
   }
+}
+
+uint8_t is_plus_minus_button(uint8_t swid)
+{
+  return swid == SW_MINUS || swid == SW_PLUS;
 }
 
 ds3_exe_result this_exe;
@@ -264,13 +271,13 @@ void process_keyevent(uint8_t swid, uint8_t event_type)
     goto_prev_profile();
     return;
   }
-  if((swid == SW_PLUS || swid == SW_MINUS) && event_type == SW_EVENT_LONG_PRESS)
+  if(is_plus_minus_button(swid) && event_type == SW_EVENT_LONG_PRESS)
   {
     settings_menu();
     goto_profile(current_profile_number);
     return;
   }
-  if(swid == SW_PLUS || swid == SW_MINUS)
+  if(is_plus_minus_button(swid))
     return; // just in case lol
 
   memset(dsb_on_press_path_buf, 0, PATH_BUF_SIZE);
@@ -283,6 +290,8 @@ void process_keyevent(uint8_t swid, uint8_t event_type)
     onboard_offboard_switch_press(swid, dsb_on_press_path_buf, dsb_on_release_path_buf);
   else if(event_type == SW_EVENT_RELEASE)
     onboard_offboard_switch_release(swid, dsb_on_release_path_buf);
+
+  last_execution_exit = millis();
 }
 
 volatile uint8_t is_sleeping;
@@ -342,6 +351,8 @@ void handle_rotary_encoder_event(rotary_encoder_event_t* this_re_event)
   rotary_encoder_activity(swid);
 }
 
+
+
 void handle_sw_event(switch_event_t* this_sw_event)
 {
   update_last_keypress();
@@ -377,6 +388,8 @@ void keypress_task(void *dummy)
     switch_event_t sw_event = { 0 };
     if (xQueueReceive(switch_event_queue, &sw_event, 0) == pdTRUE)
     {
+      if(is_plus_minus_button(sw_event.id) && millis() - last_execution_exit < PLUS_MINUS_BUTTON_COOLDOWN_MS)
+        continue;
       is_busy = 1;
       handle_sw_event(&sw_event);
       is_busy = 0;
