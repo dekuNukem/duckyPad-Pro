@@ -8,8 +8,8 @@ include:
   - README.md
   - LICENSE
 remote_theme: pages-themes/primer@v0.6.0
-title: [Welcome to duckyPad!]
-description: [duckyPad Landing Page]
+#title: Welcome to duckyPad!
+#description: duckyPad Landing Page
 permissions:
   id-token: write
   contents: read
