@@ -12,11 +12,9 @@ Incorporating 4 years worth of feedback from the [original duckyPad](https://git
 
 ## Get duckyPad Pro
 
-[Kickstarter campaign is NOW LIVE!](https://www.kickstarter.com/projects/dekunukem/duckypad-pro-advanced-macro-scripting-beyond-qmk-via)
+duckyPad Pro has been [successfully funded on Kickstarter campaign](https://www.kickstarter.com/projects/dekunukem/duckypad-pro-advanced-macro-scripting-beyond-qmk-via) with 666 backers 😈 and more than $100K raised!
 
-* Starts from $84.99 with optional add-ons
-
-* 200 Early Bird slots with small discount and immediate shipping
+* [Late Pledges](https://www.kickstarter.com/projects/dekunukem/duckypad-pro-advanced-macro-scripting-beyond-qmk-via) still available with **Jan 2025** shipping.
 
 * Join our [Official Discord](https://discord.gg/4sJCBx5) for discussions and updates!
 
