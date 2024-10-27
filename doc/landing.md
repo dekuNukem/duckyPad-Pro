@@ -6,7 +6,7 @@ duckyPad is a line of **mechanical macropads** for power users demanding **advan
 |:--:|:--:|
 |![alt](../resources/photos/sq.jpeg)|![alt](../resources/photos/og.jpeg)|
 |[Purchase Link](https://www.kickstarter.com/projects/dekunukem/duckypad-pro-advanced-macro-scripting-beyond-qmk-via)|[Purchase Link](https://www.tindie.com/products/21984/)|
-|[User Manual](https://github.com/dekuNukem/duckyPad-Pro/blob/master/doc/getting_started.md)|[User Manual](https://github.com/dekuNukem/duckyPad/blob/master/getting_started.md)|
+|[User Manual](getting_started.md)|[User Manual](https://github.com/dekuNukem/duckyPad/blob/master/getting_started.md)|
 
 # Highlights
 
