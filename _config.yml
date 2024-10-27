@@ -7,7 +7,7 @@ relative_links:
 include:
   - README.md
   - LICENSE
-remote_theme: pages-themes/primer@v0.2.0
+remote_theme: pages-themes/primer@v0.6.0
 title: [This is title]
 description: [this is description]
 
