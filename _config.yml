@@ -1,9 +1,13 @@
 plugins:
   - jekyll-relative-links
+  - jekyll-remote-theme
 relative_links:
   enabled: true
   collections: true
 include:
   - README.md
   - LICENSE
-theme: jekyll-theme-minimal
+remote_theme: pages-themes/slate@v0.2.0
+title: [This is title]
+description: [this is description]
+
