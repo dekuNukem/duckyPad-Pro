@@ -10,7 +10,7 @@ duckyPad is a line of **mechanical macropads** for power users demanding **advan
 
 # Highlights
 
-duckyPad Pro runs **duckyScript**, originally for performing [BadUSB](https://arstechnica.com/information-technology/2014/07/this-thumbdrive-hacks-computers-badusb-exploit-makes-devices-turn-evil/) attacks on [USB Rubber Ducky](https://shop.hak5.org/products/usb-rubber-ducky-deluxe).
+duckyPad Pro runs **duckyScript**, originally designed for [USB Rubber Ducky](https://shop.hak5.org/products/usb-rubber-ducky-deluxe) to perform [BadUSB attacks.](https://arstechnica.com/information-technology/2014/07/this-thumbdrive-hacks-computers-badusb-exploit-makes-devices-turn-evil/)
 
 Compared to QMK/VIA, you get:
 
