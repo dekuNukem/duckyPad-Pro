@@ -10,7 +10,7 @@ duckyPad is a line of **mechanical macropads** for power users demanding **advan
 
 # Highlights
 
-duckyPad Pro runs **duckyScript**, originally designed for  [USB Rubber Ducky](https://shop.hak5.org/products/usb-rubber-ducky-deluxe) to perform [BadUSB]() attacks.
+duckyPad runs **duckyScript**, originally designed for [USB Rubber Ducky](https://shop.hak5.org/products/usb-rubber-ducky-deluxe) to perform [BadUSB attacks.](https://arstechnica.com/information-technology/2014/07/this-thumbdrive-hacks-computers-badusb-exploit-makes-devices-turn-evil/)
 
 Compared to QMK/VIA, you get:
 
@@ -44,12 +44,12 @@ It is a no-brainer for power users with more demanding scripting needs.
 |Expansion Module|✅|❌|Wire up your own<br>Switches / Buttons / Foot Pedals|
 |Screen Rotation|✅|❌|Portrait / Landscape|
 |Capacity|64 Profiles<br>3712 Macros|32 Profiles<br>480 Macros||
-|OLED|1.5"<br>128 x 128|1.3"<br>128 x 64|Shows Key Function<br>User Controllable|
+|OLED|1.5"<br>128 x 128|1.3"<br>128 x 64|Shows Key Name<br>User Controllable|
 |duckyScript<br>Engine|✅|✅|Much Longer Macros<br>Interactive Scripting|
 |Per-key RGB|✅|✅|User Controllable|
 |SD Card<br>Storage|✅|✅|Fast Backup / Duplication / Deploy<br>No recompile needed|
-|Automatic<br>Profile Switching|✅|✅|Based on<br>Active Window|
-|Open-Source|✅|✅|No proprietary drivers<br>Works anywhere|
+|Automatic<br>Profile Switching|✅|✅|Based on Active Window|
+|100%<br>Open-Source|✅|✅|No Proprietary Drivers/Apps<br>No Subscription<br>Works Anywhere|
 |USB-C|✅|✅||
 
 # Questions or Comments?
