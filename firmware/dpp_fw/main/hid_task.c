@@ -603,6 +603,7 @@ void handle_hid_command(const uint8_t* hid_rx_buf, uint8_t rx_buf_size)
         send_hid_cmd_response(hid_tx_buf);
         if(hid_rx_buf[2])
             generate_msc_flag_file();
+        delay_ms(500);
         esp_restart();
     }
     /*

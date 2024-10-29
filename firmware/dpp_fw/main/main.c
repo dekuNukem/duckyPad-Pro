@@ -72,6 +72,7 @@ void app_main(void)
         neopixel_fill(32,32,32);
         draw_msc_mode();
         block_until_plus_minus_long_press();
+        delay_ms(500);
         esp_restart();
     }
 

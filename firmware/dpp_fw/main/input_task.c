@@ -178,7 +178,7 @@ void parse_expansion_data(uint8_t exp_data)
 		xQueueSend(switch_event_queue, &sw_event, NULL);
 		this_sw_state[sw_event.id] = 0;
 	}
-	printf("got data: %x\n", exp_data);
+	// printf("got data: %x\n", exp_data);
 }
 
 void kb_scan_task(void *dummy)
