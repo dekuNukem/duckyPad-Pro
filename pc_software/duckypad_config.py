@@ -1240,7 +1240,7 @@ for x in range(ONBOARD_SPARE_GPIO_COUNT):
     key_button_list.append(this_button)
 
 name_editor_lf = LabelFrame(root, text="Key Config", width=scaled_size(300), height=scaled_size(143))
-name_editor_lf.place(x=profiles_lf.winfo_x() + profiles_lf.winfo_width() + PADDING, y=380)
+name_editor_lf.place(x=profiles_lf.winfo_x() + profiles_lf.winfo_width() + PADDING, y=scaled_size(380))
 root.update()
 
 key_char_limit_portrait = "Name:\nmax 2 lines\n5 char per line"
@@ -1300,7 +1300,7 @@ def key_remove_click():
     key_button_click(key_button_list[selected_key])
 
 key_remove_button = Button(name_editor_lf, text="Remove\nKey", command=key_remove_click, state=DISABLED, fg="red")
-key_remove_button.place(x=scaled_size(200), y=scaled_size(5), width=80, height=40)
+key_remove_button.place(x=scaled_size(200), y=scaled_size(5), width=scaled_size(80), height=scaled_size(40))
 
 def is_key_selected():
     if len(profile_lstbox.curselection()) <= 0:
