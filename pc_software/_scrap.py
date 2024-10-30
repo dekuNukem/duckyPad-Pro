@@ -1,3 +1,25 @@
+
+
+def open_expansion_instruction(event):
+    messagebox.showinfo("oops", f"not implemented yet!!!")
+
+
+
+
+
+
+expansion_instruction = Label(master=expansion_lf, text="Whats this??", fg="blue", cursor="hand2")
+root.update()
+expansion_instruction.place(x=scaled_size(35), y=scaled_size(0))
+expansion_instruction.bind("<Button-1>", open_expansion_instruction)
+
+
+
+
+
+
+
+
 def expand_mousemove(xtotal, ytotal):
     result_listing = []
     x_actions = []

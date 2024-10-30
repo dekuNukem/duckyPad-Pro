@@ -120,8 +120,7 @@ UI_SCALE = float(ENV_UI_SCALE) if ENV_UI_SCALE else 1
 UI_SCALE = 1
 
 def ensure_dir(dir_path):
-    if not os.path.exists(dir_path):
-        os.makedirs(dir_path)
+    os.makedirs(dir_path, exist_ok=1)
 
 def is_root():
     return os.getuid() == 0
@@ -1567,6 +1566,8 @@ def exp_page_update():
     key_button_list[this_module_start+3].place(x=scaled_size(ch_button_x), y=scaled_size(chy_start + chy_step * 3 - 2), width=CH_BUTTON_WIDTH, height=25)
     key_button_list[this_module_start+4].place(x=scaled_size(ch_button_x), y=scaled_size(chy_start + chy_step * 4 - 2), width=CH_BUTTON_WIDTH, height=25)
     key_button_list[this_module_start+5].place(x=scaled_size(ch_button_x), y=scaled_size(chy_start + chy_step * 5 - 2), width=CH_BUTTON_WIDTH, height=25)
+    key_button_list[this_module_start+6].place(x=scaled_size(ch_button_x), y=scaled_size(chy_start + chy_step * 6 - 2), width=CH_BUTTON_WIDTH, height=25)
+    key_button_list[this_module_start+7].place(x=scaled_size(ch_button_x), y=scaled_size(chy_start + chy_step * 7 - 2), width=CH_BUTTON_WIDTH, height=25)
     scripts_lf.place_forget()
     empty_script_label.place(x=scaled_size(800), y=scaled_size(200))
     key_name_textbox.delete('1.0', 'end')
@@ -1588,32 +1589,26 @@ def exp_page_minus_button_click():
     current_selected_expansion_module = (current_selected_expansion_module - 1) % MAX_EXPANSION_MODULE_COUNT
     exp_page_update()
 
-def open_expansion_instruction(event):
-    messagebox.showinfo("oops", f"not implemented yet!!!")
 
 expansion_lf = LabelFrame(root, text="Expansion Modules", width=scaled_size(150), height=scaled_size(263))
 expansion_lf.place(x=scaled_size(590), y=scaled_size(260))
 root.update()
 
-expansion_instruction = Label(master=expansion_lf, text="Whats this??", fg="blue", cursor="hand2")
-root.update()
-expansion_instruction.place(x=scaled_size(35), y=scaled_size(0))
-expansion_instruction.bind("<Button-1>", open_expansion_instruction)
 
 exp_page_minus_button = Button(expansion_lf, text="-", command=exp_page_minus_button_click, state=DISABLED)
-exp_page_minus_button.place(x=scaled_size(10), y=scaled_size(20), width=25, height=22)
+exp_page_minus_button.place(x=scaled_size(10), y=scaled_size(0), width=scaled_size(25), height=scaled_size(22))
 
 exp_page_plus_button = Button(expansion_lf, text="+", command=exp_page_plus_button_click, state=DISABLED)
-exp_page_plus_button.place(x=scaled_size(110), y=scaled_size(20), width=25, height=22)
+exp_page_plus_button.place(x=scaled_size(110), y=scaled_size(0), width=scaled_size(25), height=scaled_size(22))
 
 current_module_label = Label(master=expansion_lf)
-current_module_label.place(x=scaled_size(45), y=scaled_size(20))
+current_module_label.place(x=scaled_size(45), y=scaled_size(0))
 
 root.update()
 
 ch_label_x = 5
-chy_start = 55
-chy_step = 32
+chy_start = 30
+chy_step = 27
 
 EXPCH0_label = Label(master=expansion_lf, text="CH1")
 EXPCH0_label.place(x=scaled_size(ch_label_x), y=scaled_size(chy_start + chy_step * 0))
@@ -1632,6 +1627,12 @@ EXPCH4_label.place(x=scaled_size(ch_label_x), y=scaled_size(chy_start + chy_step
 
 EXPCH5_label = Label(master=expansion_lf, text="CH6")
 EXPCH5_label.place(x=scaled_size(ch_label_x), y=scaled_size(chy_start + chy_step * 5))
+
+EXPCH5_label = Label(master=expansion_lf, text="CH7")
+EXPCH5_label.place(x=scaled_size(ch_label_x), y=scaled_size(chy_start + chy_step * 6))
+
+EXPCH5_label = Label(master=expansion_lf, text="CH8")
+EXPCH5_label.place(x=scaled_size(ch_label_x), y=scaled_size(chy_start + chy_step * 7))
 
 ch_button_x = 45
 CH_BUTTON_WIDTH = 85
@@ -1659,7 +1660,7 @@ def repeat_func():
 
 root.after(500, repeat_func)
 
-# select_root_folder("sample_profiles")
+select_root_folder("sample_profiles")
 my_compare.tk_root = root
 my_compare.tk_strvar = dp_root_folder_display
 root.mainloop()
