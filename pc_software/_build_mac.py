@@ -38,7 +38,7 @@ if THIS_VERSION is None:
 
 print(THIS_VERSION)
 # os.system("python3.13 setup.py py2app --packages=PIL")
-os.system("python3.13 setup.py py2app -A")
+os.system("python3.13 setup.py py2app")
 
 input("PRESS ANY KEY TO CONTINUE...")
 
