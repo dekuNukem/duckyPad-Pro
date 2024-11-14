@@ -12,7 +12,7 @@ from tkinter import simpledialog
 from tkinter.colorchooser import askcolor
 from tkinter import messagebox
 import urllib.request
-from appdirs import *
+from platformdirs import *
 import subprocess
 import hid_op
 import make_bytecode

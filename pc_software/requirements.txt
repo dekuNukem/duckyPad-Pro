@@ -1,0 +1,4 @@
+platformdirs
+hidapi
+pywin32
+psutil
