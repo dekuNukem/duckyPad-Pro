@@ -87,9 +87,11 @@ def duckypad_hid_sw_reset(reboot_into_usb_msc_mode=False):
     h.write(pc_to_duckypad_buf)
 
 def get_duckypad_drive_windows(vol_str):
-    removable_drives = [x for x in psutil.disk_partitions() if 'removable' in x.opts.lower()]
+    removable_drives = [x for x in psutil.disk_partitions() if ('removable' in x.opts.lower() and 'fat' in x.fstype.lower())]
     if len(removable_drives) == 0:
         return None
+    for item in removable_drives:
+        print("removable drives:", item)
     for item in removable_drives:
         vol_label = win32api.GetVolumeInformation(item.mountpoint)[0]
         if vol_str.strip().lower() in vol_label.strip().lower():
