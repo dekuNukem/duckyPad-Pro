@@ -1,17 +1,28 @@
+from glob import glob
 import os
+import PyInstaller.__main__
+import shutil
 import sys
 
 if 'win32' not in sys.platform:
     print("this script is for windows only!")
     exit()
 
-# add C:\Program Files\7-Zip to windows environment variable first!
-# or export PATH=$PATH:"C:\Program Files\7-Zip"
+def clean(additional=None):
+	removethese = ['__pycache__','build','dist','*.spec']
+	if additional:
+		removethese.append(additional)
+	for _object in removethese:
+		target=glob(os.path.join('.', _object))
+		for _target in target:
+			try:
+				if os.path.isdir(_target):
+					shutil.rmtree(_target)
+				else:
+					os.remove(_target)
+			except:
+				print(f'Error deleting {_target}.')
 
-os.system('rm -rfv ./__pycache__')
-os.system('rm -rfv ./build')
-os.system('rm -rfv ./dist')
-os.system('rm -rfv ./*.spec')
 
 THIS_VERSION = None
 try:
@@ -29,7 +40,8 @@ if THIS_VERSION is None:
 	exit()
 
 # --noconsole
-os.system("pyinstaller.exe --icon=_icon.ico duckypad_config.py")
+clean(additional='duckypad*.zip')
+PyInstaller.__main__.run(['duckypad_config.py','--icon=_icon.ico'])
 
 output_folder_path = os.path.join('.', "dist")
 original_name = os.path.join(output_folder_path, "duckypad_config")
@@ -39,10 +51,7 @@ print(original_name)
 print(new_name)
 
 os.rename(original_name, new_name)
-zip_file_name = "duckypad_config_" + THIS_VERSION + "_win10_x64.zip"
-os.system('7z.exe a ' + zip_file_name + ' -r ' + new_name)
+zip_file_name = "duckypad_config_" + THIS_VERSION + "_win10_x64"
+shutil.make_archive(zip_file_name, 'zip', new_name)
 
-os.system('rm -rfv ./__pycache__')
-os.system('rm -rfv ./build')
-os.system('rm -rfv ./dist')
-os.system('rm -rfv ./*.spec')
+clean()
