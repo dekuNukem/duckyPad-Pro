@@ -1,0 +1,6 @@
+sleep_index 2
+brightness_index 0
+last_profile 1
+fw_ver 1.0.0
+serial_number DP24_587188
+kb_layout dpkm_English (US).txt

@@ -1,0 +1,21 @@
+z1 Togle
+x1 Cam
+z2 Togle
+x2 Mute
+z3 Push
+x3 Talk
+z4 Hang
+x4 Up
+z5 Raise
+x5 Hand
+z6 Sett
+x6 ings
+z21 vol+
+z22 vol-
+z23 mute
+z24 zoom+
+z25 zoom-
+z26 reset
+BG_COLOR 16 157 217
+DIM_UNUSED_KEYS 0
+SWCOLOR_4 255 0 0

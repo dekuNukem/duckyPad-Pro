@@ -1,0 +1,56 @@
+VAR $fun_arg = 0
+FUNCTION increase()
+    IF $fun_arg < 127 THEN
+        $fun_arg = $fun_arg + 1
+    END_IF
+END_FUNCTION
+
+FUNCTION decrease()
+    IF $fun_arg > 0 THEN
+        $fun_arg = $fun_arg - 1
+    END_IF
+END_FUNCTION
+
+VAR $currX = 0
+VAR $currY = 0
+
+DEFINE RE_UPPER_CW 21
+DEFINE RE_UPPER_CCW 22
+DEFINE RE_UPPER_PUSH 23
+
+DEFINE RE_LOWER_CW 24
+DEFINE RE_LOWER_CCW 25
+DEFINE RE_LOWER_PUSH 26
+
+SWC_FILL 64 64 64
+OLED_CLEAR
+OLED_UPDATE
+
+WHILE 1
+    
+    OLED_LINE $currX 127-$currY $currX 127-$currY 
+    OLED_UPDATE
+
+    VAR $this_key = $_BLOCKING_READKEY
+
+    IF $this_key == RE_UPPER_CW THEN
+        $fun_arg = $currX
+        increase()
+        $currX = $fun_arg
+    ELSE IF $this_key == RE_UPPER_CCW THEN
+        $fun_arg = $currX
+        decrease()
+        $currX = $fun_arg
+    ELSE IF $this_key == RE_LOWER_CW THEN
+        $fun_arg = $currY
+        increase()
+        $currY = $fun_arg
+    ELSE IF $this_key == RE_LOWER_CCW THEN
+        $fun_arg = $currY
+        decrease()
+        $currY = $fun_arg
+    ELSE
+        HALT
+    END_IF
+    
+END_WHILE

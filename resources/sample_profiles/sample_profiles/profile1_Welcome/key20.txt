@@ -1,0 +1,145 @@
+DEFINE BALL_RADIUS 2
+DEFINE PADDLE_WIDTH 2
+DEFINE PADDLE_HEIGHT 30
+DEFINE PADDLE_MOVEMENT_STEP 6
+DEFINE RE_CW 24
+DEFINE RE_CCW 25
+
+VAR $ball_pos_x = $_RANDOM_INT%100 + 10
+VAR $ball_pos_y = $_RANDOM_INT%100 + 10
+VAR $ball_velocity_x = 4
+VAR $ball_velocity_y = 3
+VAR $paddle_pos = 64
+VAR $active_key = 0
+VAR $score = 0
+
+VAR $paddle_upper_limit = PADDLE_HEIGHT/2
+VAR $paddle_lower_limit = 127-PADDLE_HEIGHT/2
+
+FUNCTION update_paddle_position()
+    IF $active_key == RE_CCW THEN
+        $paddle_pos = $paddle_pos + PADDLE_MOVEMENT_STEP
+        IF $paddle_pos > $paddle_lower_limit THEN
+            $paddle_pos = $paddle_lower_limit
+        END_IF
+    END_IF
+
+    IF $active_key == RE_CW THEN
+        $paddle_pos = $paddle_pos - PADDLE_MOVEMENT_STEP
+        IF $paddle_pos < $paddle_upper_limit THEN
+            $paddle_pos = $paddle_upper_limit
+        END_IF
+    END_IF
+END_FUNCTION
+
+FUNCTION draw_court()
+    OLED_LINE 0 0 127 0
+    OLED_LINE 0 127 127 127
+    OLED_LINE 127 0 127 127
+END_FUNCTION
+
+FUNCTION draw_paddle()
+    VAR $paddle_top_y = $paddle_pos - PADDLE_HEIGHT/2
+    VAR $paddle_bottom_y = $paddle_pos + PADDLE_HEIGHT/2
+    OLED_RECT 0 $paddle_top_y PADDLE_WIDTH $paddle_bottom_y 1
+END_FUNCTION
+
+FUNCTION draw_ball()
+    VAR $drawx = $ball_pos_x
+    VAR $drawy = $ball_pos_y
+
+    IF $drawx >= 127-BALL_RADIUS || $drawx <= BALL_RADIUS THEN
+        RETURN
+    END_IF
+    IF $drawy >= 127-BALL_RADIUS || $drawy <= BALL_RADIUS THEN
+        RETURN
+    END_IF
+
+    OLED_CIRCLE $drawx $drawy BALL_RADIUS 1
+END_FUNCTION
+
+FUNCTION draw_gameover()
+    SWC_FILL 255 0 0
+    OLED_CLEAR
+    draw_paddle()
+    draw_court()
+    draw_ball()
+    
+    OLED_CURSOR 20 40
+    OLED_PRINT GAME OVER
+    OLED_CURSOR 20 60
+    OLED_PRINT Score: $score
+    //OLED_CURSOR 20 80
+    //OLED_PRINT Anykey to quit
+    OLED_UPDATE
+    
+    BCLR
+    WHILE TRUE
+        IF $_BLOCKING_READKEY <= 20 THEN
+            SWC_RESET 99
+            HALT
+        END_IF
+    END_WHILE
+END_FUNCTION
+
+FUNCTION speed_up_ball()
+    IF $ball_velocity_x >= 0 THEN
+        $ball_velocity_x = $ball_velocity_x + ($_RANDOM_INT % 2)
+    ELSE IF $ball_velocity_x < 0 THEN
+        $ball_velocity_x = $ball_velocity_x - ($_RANDOM_INT % 2)
+    END_IF
+
+    IF $ball_velocity_y >= 0 THEN
+        $ball_velocity_y = $ball_velocity_y + ($_RANDOM_INT % 2)
+    ELSE IF $ball_velocity_y < 0 THEN
+        $ball_velocity_y = $ball_velocity_y - ($_RANDOM_INT % 2)
+    END_IF
+END_FUNCTION
+
+FUNCTION update_ball_pos()
+    $ball_pos_x = $ball_pos_x + $ball_velocity_x
+    $ball_pos_y = $ball_pos_y + $ball_velocity_y
+
+    IF ($ball_pos_y >= 127 - BALL_RADIUS*2) || ($ball_pos_y <= BALL_RADIUS*2) THEN
+        $ball_velocity_y = $ball_velocity_y * -1
+    END_IF
+
+    IF $ball_pos_x >= 127 - BALL_RADIUS*2 THEN
+        $ball_velocity_x = $ball_velocity_x * -1
+    END_IF
+
+    IF $ball_pos_x <= BALL_RADIUS*2 THEN
+        VAR $paddle_top = $paddle_pos - PADDLE_HEIGHT/2
+        VAR $paddle_bottom = $paddle_pos + PADDLE_HEIGHT/2
+        IF $ball_pos_y >= $paddle_top && $ball_pos_y <= $paddle_bottom THEN
+            $ball_velocity_x = $ball_velocity_x * -1
+            $score = $score + 1
+
+            speed_up_ball()
+
+            SWC_FILL $_RANDOM_INT%255 $_RANDOM_INT%255 $_RANDOM_INT%255
+        ELSE
+            $ball_velocity_x = 0
+            $ball_velocity_y = 0
+            draw_gameover()
+        END_IF
+    END_IF
+END_FUNCTION
+
+SWC_FILL 0 255 0
+
+WHILE TRUE
+    $active_key = $_READKEY
+    update_paddle_position()
+
+    update_ball_pos()
+
+    OLED_CLEAR
+    draw_paddle()
+    draw_court()
+    draw_ball()
+    OLED_UPDATE
+    DELAY 20
+
+END_WHILE
+

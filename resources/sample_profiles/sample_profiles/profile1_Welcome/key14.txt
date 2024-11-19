@@ -1,0 +1,11 @@
+VAR $count = 5
+
+WHILE $count > 0
+	OLED_CLEAR
+	OLED_CURSOR 30 60
+	OLED_PRINT Count: $count
+	OLED_UPDATE
+
+	$count = $count - 1
+	DELAY 1000
+END_WHILE

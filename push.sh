@@ -4,7 +4,7 @@ if [[ $# -eq 0 ]] ; then
 fi
 
 find . -type f -name "*.b#*" -exec rm -f {} \;
-find . -type f -name "*.dsb" -exec rm -f {} \;
+# find . -type f -name "*.dsb" -exec rm -f {} \;
 find . -type f -name "*.s#*" -exec rm -f {} \;
 find . -type f -name "*.l#*" -exec rm -f {} \;
 find . -type f -name "*.csv#*" -exec rm -f {} \;
@@ -12,6 +12,11 @@ find . -type f -name "*.DS_Store*" -exec rm -f {} \;
 find . -type f -name "*.eggs*" -exec rm -f {} \;
 find . -name "__pycache__" -exec rm -rf {} \;
 find . -type f -name ".component_hash" -exec rm {} +
+
+cd ./resources/sample_profiles
+rm sample_profiles.zip
+7z a -r sample_profiles.zip ./sample_profiles/*
+zip -rv sample_profiles.zip ./sample_profiles/*
 
 current_branch=$(git rev-parse --abbrev-ref HEAD)
 

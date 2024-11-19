@@ -1,0 +1,38 @@
+z1 Start
+x1 Here
+z2 File
+z3 Hide
+z4 Task
+x4 Mngr
+z5 Multi
+x5 Line
+z6 ???
+z7 Bee
+x7 Movie
+z8 Mouse
+z9 RGB&
+x9 OLED
+z10 Text
+z11 Draw
+z12 RGB
+z13 VAR&
+x13 Loop
+z14 Count
+z15 Rand
+z16 Cave
+z17 Adv
+x17 anced
+z18 Key
+x18 Test
+z19 Etch
+x19 Ekth
+z20 PONG
+z21 vol+
+z22 vol-
+z23 mute
+BG_COLOR 64 53 255
+SWCOLOR_1 255 0 0
+SWCOLOR_5 61 253 55
+SWCOLOR_9 255 128 0
+SWCOLOR_13 255 0 255
+SWCOLOR_17 192 192 192

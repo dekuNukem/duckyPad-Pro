@@ -1,0 +1,27 @@
+SWC_FILL 128 128 128
+
+OLED_CLEAR
+OLED_CURSOR 20 10
+OLED_PRINT Press a key
+OLED_CURSOR 30 25
+OLED_PRINT To test
+OLED_CURSOR 10 110
+OLED_PRINT Press + to quit
+OLED_UPDATE
+
+WHILE 1
+    OLED_CURSOR 10 70
+    VAR $this_key = $_READKEY
+    IF $this_key == 28 THEN
+	SWC_RESET 99
+        HALT
+    ELSE IF $this_key != 0 THEN
+        OLED_PRINT Key $this_key Pressed!
+    ELSE
+        OLED_PRINT                       
+    END_IF
+    OLED_UPDATE
+    DELAY 30
+END_WHILE
+
+
