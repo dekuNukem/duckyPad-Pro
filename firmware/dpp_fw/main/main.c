@@ -22,12 +22,12 @@
 #include "ds_vm.h"
 
 /*
-2.0.0
-2024 08 24
-initial release
+1.0.0
+2024 11 18
+Public release
 */
 
-uint8_t fw_version_major = 2;
+uint8_t fw_version_major = 1;
 uint8_t fw_version_minor = 0;
 uint8_t fw_version_patch = 0;
 uint8_t dsvm_version = 1;
