@@ -18,16 +18,6 @@ A small **Phillips-head screwdriver** (`+`shape) is needed. One should be provid
 
 A **pair of pliers** also helps, but not required.
 
-## Handling PCB
-
-When handling the bare circuit board, remember to:
-
-* Wash your hands first
-
-* Always hold by its edge
-
-* Don't touch the components
-
 ## Assembly Steps
 
 You should have the following items:
@@ -37,6 +27,27 @@ You should have the following items:
 As well as the following fasteners:
 
 ![Alt text](../resources/photos/instructions/fast.png)
+
+* Before we start, wash your hands to discharge static electricity.
+
+First, the Bluetooth/Wi-Fi antenna cable.
+
+Look at the back of the PCB. Identify the sockets:
+
+![Alt text](../resources/photos/instructions/ant.png)
+
+Match the hole, push straight down.
+
+Careful not to bump into nearby components.
+
+It should click in place. Check it's fully seated.
+
+![Alt text](../resources/photos/instructions/ufl.png)
+
+Adjust the cable to avoid overlapping any components.
+
+![Alt text](../resources/photos/instructions/overlap.png)
+
 
 Hold the `Back Plate` **in the orientation shown**.
 
