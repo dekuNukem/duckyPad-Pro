@@ -10,7 +10,11 @@ Feel free to join our [Official Discord](https://discord.gg/4sJCBx5) for discuss
 
 ## Kit Assembly
 
+👇👇👇👇👇👇👇👇👇
+
 [See this guide](./kit_assembly.md) to put your duckyPad together!
+
+☝️☝️☝️☝️☝️☝️☝️☝️☝️☝️
 
 ## Quick Start
 
@@ -34,7 +38,7 @@ Plug it in, use the **UPPER** USB port, and voilà:
 
 * Press a key to execute script.
 
-	* ⚠️ Trying out the `Welcome` profile **strongly recommended**
+	* ⚠️ Start with the `Welcome` profile!
 
 * Press `+` and `-` to switch profiles.
 
