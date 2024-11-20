@@ -12,7 +12,7 @@ Incorporating 4 years worth of feedback from the [original duckyPad](https://git
 
 ## Get duckyPad Pro
 
-duckyPad Pro has been [successfully funded on Kickstarter campaign](https://www.kickstarter.com/projects/dekunukem/duckypad-pro-advanced-macro-scripting-beyond-qmk-via) with 666 backers 😈 and more than $100K raised!
+duckyPad Pro has been [successfully funded on Kickstarter](https://www.kickstarter.com/projects/dekunukem/duckypad-pro-advanced-macro-scripting-beyond-qmk-via) with more than $100K raised!
 
 * [Late Pledges](https://www.kickstarter.com/projects/dekunukem/duckypad-pro-advanced-macro-scripting-beyond-qmk-via) still available with **Jan 2025** shipping.
 
