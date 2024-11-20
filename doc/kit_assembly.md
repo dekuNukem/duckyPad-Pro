@@ -28,15 +28,15 @@ As well as the following fasteners:
 
 ![Alt text](../resources/photos/instructions/fast.png)
 
-* Before we start, wash your hands to discharge static electricity.
+* Before we start, **go wash your hands** to discharge static electricity.
 
-First, the Bluetooth/Wi-Fi antenna cable.
+First, the antenna cable.
 
 Look at the back of the PCB. Identify the sockets:
 
 ![Alt text](../resources/photos/instructions/ant.png)
 
-Match the hole, push straight down.
+Match the receptacles, push straight down.
 
 Careful not to bump into nearby components.
 

@@ -62,13 +62,17 @@ After playing with examples and see what duckyPad can do, time to write your own
 
 ### Download Configurator
 
-[Head here to download the latest release](link here).
-
 #### Windows
 
-Unzip, click `duckypad_config.exe`:
+![Alt text](../resources/photos/underc.gif)
 
-![Alt text](../resources/photos/app/duckexe.png)
+Windows might complain about unsigned app.
+
+Click `More info` and then `Run anyway`.
+
+Feel free to [review the files](../pc_software). You can also run the source code directly with Python.
+
+![Alt text](../resources/photos/app/defender.png)
 
 #### Mac
 
@@ -77,22 +81,6 @@ Unzip, click `duckypad_config.exe`:
 #### Linux
 
 ![Alt text](../resources/photos/underc.gif)
-
-### "Untrusted App" Warnings
-
-Your system might complain when launching the app.
-
-This is because the code isn't digitally signed, which costs hundreds of dollars a year.
-
-Feel free to [review the files](../pc_software). You can also run the source code directly with Python.
-
-For Windows 10, click `More info` and then `Run anyway`.
-
-![Alt text](../resources/photos/app/defender.png)
-
-For macOS, **`RIGHT CLICK`** on the app and select `Open`. You might need to do it twice.
-
-![Alt text](../resources/photos/app/macos_warning.png)
 
 ### Using Configurator
 
@@ -116,11 +104,15 @@ It may seem complex at first, let's break it down!
 
 ![Alt text](../resources/photos/app/profiles.png)
 
-* Use the buttons to create, duplicate, name, and import a profile.
+Let's make a new profile!
 
-* Use the up/down/x button to reorder/delete profiles.
+Click `New` button, give it a name.
+
+![Alt text](../resources/photos/app/pname.png)
 
 * Choose a background color for the RGB backlight.
+
+* Use the `up/down/x` buttons to reorder/delete profiles.
 
 * `Activation color` is the color that a key changes into when you press it.
 
@@ -130,13 +122,11 @@ The middle columns are for *keys*:
 
 ![Alt text](../resources/photos/app/keys.png)
 
-* Shows all the keys for the current profile.
+* Select an empty key in the `Onboard Switches` section
+* Type to give it a name
+* Drag to rearrange
 
-* Click to select, drag to rearrange.
-
-* Type to give a name, or click `Remove` to delete.
-
-----------
+---------
 
 * **`Custom Key Color`**: Set an unique color.
 
@@ -154,49 +144,84 @@ Finally, the rightmost column is for *scripts*:
 
 ![Alt text](../resources/photos/app/scripts.png)
 
-* Shows the **duckyScript** that the key will execute.
+* This shows the **duckyScript** that the key will execute.
 
-* [**Read about its usage here**](duckyscript_info.md).
+	* Can be anything from simple shortcuts to full-blown programs!
+
+	* [**Read about detailed usage here**](duckyscript_info.md).
+
+	* For this example, put in `STRING Hello World!`
 
 * Separate scripts for **On Press** and **On Release**
 
-* If not sure, just leave **On Release** blank.
+	* If not sure, just leave **On Release** blank.
 
-* Code check will be performed as you type, errors will be highlighted in yellow.
+* Code check will be performed as you type.
 
-### Make Sure to Save!
+### Remember to Save!
 
 * Press `Save` button to write the changes back to duckyPad.
 
-![Alt text](../resources/photos/app/save.png)
+* It might take a while to write new data
+
+* Subsequent writes will be much faster
+
+### Try It Out!
+
+duckyPad should reboot after saving.
+
+Press `+/-` button to go to the new profile, and press the key.
+
+It should execute the script and type out `Hello World!`:
+
+![Alt text](../resources/photos/app/hello.gif)
+
+That's it! Now you know how to set up your duckyPad!
+
+🎉 🎉 Great Job, but we're not done yet!
+
+⚠️⚠️ **Please keep reading** for more useful information!
+
+------------
+
+### Rotary Encoders
+
+You can assign duckyScript actions to Rotary Encoders just like any other key.
+
+Some ideas:
+
+* Volume Up/Down
+* Zoom In/Out
+* Undo/Redo
+* Brush Size
+
+### External Switches
+
+You can also wire up your own **Buttons / Switches / Foot pedals** using the optional **Expansion Module**.
+
+[Click me for details](https://github.com/dekuNukem/duckyPad-expansion-modules)
+
+### Profile Auto-Switching
+
+You can also **switch profiles automatically** based on **current active window**.
+
+[Click me for details](https://github.com/dekuNukem/duckyPad-profile-autoswitcher)
+
+### Careful with Passwords!
+
+It might be tempting to have duckyPad type out passwords, but beware that all scripts are stored as **plain text** on SD card. Not a good idea!
 
 ### Automatic backups
 
 * A local backup is created every time you save.
-
 * Press `Backup...` button to access the backups.
-
 * To restore, [format the SD card in FAT or FAT32](../resources/photos/app/format.png), then copy everything back.
-
-### Profile Auto-switching / Remote Control
-
-You can [use this app](https://github.com/dekuNukem/duckyPad-profile-autoswitcher) to **switch profiles automatically** based on **current active window**.
-
-You can also **control duckyPad from PC** by sending HID commands, see same link for details.
-
-### Careful with Passwords!
-
-It might be tempting to have duckyPad type out passwords, but all scripts are stored as **plain text** on SD card. So not a good idea!
-
-duckyPad is NOT designed or certified to be a security device, so use at your own risk.
 
 ## Tips and Tricks
 
 ### Keyboard Shortcuts
 
 The most obvious use case is putting your commonly used hotkeys on duckyPad!
-
-Create a profile and add them in.
 
 For many applications, you can find an official list of shortcuts. Just search `app_name shortcuts` on Google. Examples:
 
@@ -238,7 +263,7 @@ Set a hotkey in the `Shortcut Key` box:
 
 ![Alt text](../resources/photos/app/sc_prop.png)
 
-Use duckyPad to press the combo to launch anything with a push of a button.
+Then assign the combo on duckyPad!
 
 In this case, the duckyScript would be `CONTROL ALT D`.
 
