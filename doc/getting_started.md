@@ -22,39 +22,21 @@ Plug it in, use the **UPPER** USB port, and voilà:
 
 ![Alt text](../resources/photos/discord.jpeg)
 
-* Press a key to execute script.
-
-* Press `+` and `-` to switch profiles.
-
-* **`Hold down`** `+` or `-` for settings
+* **`Hold down`** `+` button for settings
 
 ![Alt text](../resources/photos/settings.png)
 
 * Select the correct **keyboard region**
 
-* Adjust others to your liking
+	* Adjust others to your liking
 
-* Press any key to exit
+	* Press any key to exit
 
-### Bluetooth Mode
+* Press a key to execute script.
 
-* To use BT, plug into a **USB power bank**.
+	* ⚠️ Trying out the `Welcome` profile **strongly recommended**
 
-* BT status is displayed on **top left corner**
-
-* Question mark = Discoverable
-
-![alt_text](../resources/photos/app/bt_searching.png)
-
-* It should show up on your computer, make sure the PIN matches.
-
-![alt_text](../resources/photos/bt.jpeg)
-
-* No question mark = Paired
-
-![alt_text](../resources/photos/app/bt_paired.png)
-
-* Should work the same as wired mode.
+* Press `+` and `-` to switch profiles.
 
 ## Create Your Own Scripts
 
@@ -129,13 +111,9 @@ The middle columns are for *keys*:
 ---------
 
 * **`Custom Key Color`**: Set an unique color.
-
-* **`Press Any Key to Abort`**: Allow exiting early in longer macros.
-
+* **`Press Any Key to Abort`**: Allow exiting early in long macros.
 	* Do not select if you're writing your own button-checking code
-
 * **`Disable Auto-Repeat`**: Macro won't repeat when key is held down.
-
 * Click **`Rotate`** for landscape mode.
 
 ### Scripts
@@ -152,7 +130,7 @@ Finally, the rightmost column is for *scripts*:
 
 	* For this example, put in `STRING Hello World!`
 
-* Separate scripts for **On Press** and **On Release**
+* Separate scripts possible for **On Press** and **On Release**
 
 	* If not sure, just leave **On Release** blank.
 
@@ -161,9 +139,8 @@ Finally, the rightmost column is for *scripts*:
 ### Remember to Save!
 
 * Press `Save` button to write the changes back to duckyPad.
-
 * It might take a while to write new data
-
+* Check debug window for progress
 * Subsequent writes will be much faster
 
 ### Try It Out!
@@ -176,7 +153,7 @@ It should execute the script and type out `Hello World!`:
 
 ![Alt text](../resources/photos/app/hello.gif)
 
-That's it! Now you know how to set up your duckyPad!
+That's it! Now you know how to customise your duckyPad!
 
 🎉 🎉 Great Job, but we're not done yet!
 
@@ -186,12 +163,13 @@ That's it! Now you know how to set up your duckyPad!
 
 ### Rotary Encoders
 
-You can assign duckyScript actions to Rotary Encoders just like any other key.
+You can assign actions to Rotary Encoders just like any other key.
 
 Some ideas:
 
 * Volume Up/Down
 * Zoom In/Out
+* Switching Tabs
 * Undo/Redo
 * Brush Size
 
@@ -203,7 +181,7 @@ You can also wire up your own **Buttons / Switches / Foot pedals** using the opt
 
 ### Profile Auto-Switching
 
-You can also **switch profiles automatically** based on **current active window**.
+duckyPad can **switch profiles automatically** based on **current active window**.
 
 [Click me for details](https://github.com/dekuNukem/duckyPad-profile-autoswitcher)
 
@@ -216,6 +194,30 @@ It might be tempting to have duckyPad type out passwords, but beware that all sc
 * A local backup is created every time you save.
 * Press `Backup...` button to access the backups.
 * To restore, [format the SD card in FAT or FAT32](../resources/photos/app/format.png), then copy everything back.
+
+### Bluetooth Mode
+
+* duckyPad Pro switches to BT when **no USB activity** is detected
+
+	* Plug into a USB power bank for example
+
+	* I might add a user option to always use BT in near future
+
+* BT status is displayed on **top left corner**
+
+* Question mark = Discoverable
+
+![alt_text](../resources/photos/app/bt_searching.png)
+
+* It should show up on your computer, make sure the PIN matches.
+
+![alt_text](../resources/photos/bt.jpeg)
+
+* No question mark = Paired
+
+![alt_text](../resources/photos/app/bt_paired.png)
+
+* Should work the same as wired mode.
 
 ## Tips and Tricks
 

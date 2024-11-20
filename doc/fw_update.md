@@ -42,7 +42,9 @@ You can easily update the firmware for new features and bug fixes.
 
 ## Version History
 
-### 2.0.0
+### 1.0.0
+
+20 Nov 2024
 
 Initial Public Release
 

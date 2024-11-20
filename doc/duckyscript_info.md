@@ -57,6 +57,12 @@ Also **playing with sample profiles** is a good way to get a feel of duckyScript
 
 Of course, people at the [Official Discord](https://discord.gg/4sJCBx5) are always happy to help!
 
+## 👉👉duckyScript Cheatsheet 👈👈
+
+[Click me to download](./duckyscript_cheatsheet) a copy of the quick reference guide!
+
+Much easier to lookup than going through this whole page.
+
 ## List of Commands
 
 - [Comments](#comments)
