@@ -80,7 +80,7 @@ def parse_line(ducky_line):
 	elif split[0] in mouse_commands:
 		parse_result, parse_message = parse_mouse(ducky_line)
 	elif ducky_line.startswith(cmd_EMUK):
-		return PARSE_ERROR, "EMUK not supported"
+		return PARSE_ERROR, "EMUK has been deprecated!\nUse KEYDOWN/KEYUP in onPress/onRelease instead."
 	else:
 		parse_result = PARSE_ERROR
 		parse_message = "Invalid command"
