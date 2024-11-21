@@ -1,4 +1,18 @@
 
+def check_firmware_update(current_fw_str=None):
+    if current_fw_str is not None:
+        return check_update.get_firmware_update_status(current_fw_str), current_fw_str
+    filelist = os.listdir(dp_root_folder_path)
+    if 'last_profile.kbd' in filelist and 'dp_stats.txt' not in filelist:
+        return 1, None
+    if 'dp_stats.txt' in filelist:
+        with open(os.path.join(dp_root_folder_path, 'dp_stats.txt')) as dp_stats_file:
+            for line in dp_stats_file:
+                if line.startswith('fw '):
+                    line = line.replace('\n', '').replace('\r', '').replace('fw ', '')
+                    return check_update.get_firmware_update_status(line), line
+    return 2, None
+
 
 def open_expansion_instruction(event):
     messagebox.showinfo("oops", f"not implemented yet!!!")

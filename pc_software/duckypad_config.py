@@ -211,25 +211,11 @@ def ui_reset():
     exp_page_plus_button.config(state=DISABLED)
     exp_page_minus_button.config(state=DISABLED)
 
-def check_firmware_update(current_fw_str=None):
-    if current_fw_str is not None:
-        return check_update.get_firmware_update_status(current_fw_str), current_fw_str
-    filelist = os.listdir(dp_root_folder_path)
-    if 'last_profile.kbd' in filelist and 'dp_stats.txt' not in filelist:
-        return 1, None
-    if 'dp_stats.txt' in filelist:
-        with open(os.path.join(dp_root_folder_path, 'dp_stats.txt')) as dp_stats_file:
-            for line in dp_stats_file:
-                if line.startswith('fw '):
-                    line = line.replace('\n', '').replace('\r', '').replace('fw ', '')
-                    return check_update.get_firmware_update_status(line), line
-    return 2, None
-
 def fw_update_click(event):
     webbrowser.open('https://github.com/dekuNukem/duckyPad-Pro/blob/master/doc/fw_update.md')
 
 def print_fw_update_label(current_fw_str=None):
-    fw_result, this_version = check_firmware_update(current_fw_str)
+    fw_result, this_version = check_update.get_firmware_update_status(current_fw_str), current_fw_str
     if fw_result == 0:
         dp_fw_update_label.config(text='Firmware (' + str(this_version) +'): Up to date', fg='black', bg=default_button_color)
         dp_fw_update_label.unbind("<Button-1>")
@@ -265,7 +251,7 @@ def check_fw_support(current_fw_str):
         print('check_fw_support', current_fw_str, e)
         return FW_UNKNOWN
 
-def select_root_folder(root_path=None, check_fw=True, is_msc=False):
+def select_root_folder(root_path=None, is_msc=False):
     global profile_list
     global dp_root_folder_path
     global is_root_folder_duckypad_msc
@@ -279,12 +265,6 @@ def select_root_folder(root_path=None, check_fw=True, is_msc=False):
     dp_root_folder_display.set("Selected: " + root_path)
     root_folder_path_label.config(foreground='navy')
     profile_list = duck_objs.build_profile(root_path)
-
-    if check_fw:
-        duckypad_fw_ver = print_fw_update_label()
-        fw_status = check_fw_support(duckypad_fw_ver)
-        if fw_status == FW_TOO_LOW or fw_status == FW_TOO_HIGH:
-            incompatible_fw_msgbox(duckypad_fw_ver, fw_status)
 
     ui_reset()
     update_profile_display()
