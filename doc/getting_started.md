@@ -70,7 +70,7 @@ Feel free to [review the files](../pc_software). You can also run the source cod
 
 #### Linux
 
-[Download the latest source here](https://github.com/dekuNukem/duckyPad-Pro/blob/master/pc_software/duckypad_config_latest_source.zip?raw=true)
+[Download the latest source here](https://github.com/dekuNukem/duckyPad-Pro/blob/master/pc_software/duckypad_config_latest_source.zip)
 
 * Unzip
 * Open a terminal at the directory
