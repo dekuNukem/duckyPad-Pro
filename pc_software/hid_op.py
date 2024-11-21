@@ -7,6 +7,7 @@ import psutil
 HID_WAIT_TIME = float(os.getenv('HID_WAIT_TIME', 0))
 
 if 'win32' in sys.platform:
+    import pywintypes
     import win32api
 
 def get_duckypad_path():
