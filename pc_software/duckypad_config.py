@@ -107,12 +107,15 @@ automatically splits STRING/STRINGLN commands if too long
 1.6.4 2024 01 22
 Fixed a bug where TRUE and FALSE is replaced with 1 and 0 inside STRING statements
 
-2.0.0 August 2024
+2.0.0 2024 11 21
 New for duckyPad Pro
+
+2.0.1 2024 11 22
+Fixed off-by-1 error in GOTO_PROFILE
 
 """
 
-THIS_VERSION_NUMBER = '2.0.0'
+THIS_VERSION_NUMBER = '2.0.1'
 MIN_DUCKYPAD_FIRMWARE_VERSION = "1.0.0"
 MAX_DUCKYPAD_FIRMWARE_VERSION = "1.5.0"
 
