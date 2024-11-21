@@ -13,7 +13,10 @@ find . -type f -name "*.eggs*" -exec rm -f {} \;
 find . -name "__pycache__" -exec rm -rf {} \;
 find . -type f -name ".component_hash" -exec rm {} +
 
-cd ./resources/sample_profiles
+cd ./pc_software
+python _zip_source.py
+
+cd ../resources/sample_profiles
 rm sample_profiles.zip
 7z a -r sample_profiles.zip ./sample_profiles/*
 zip -rv sample_profiles.zip ./sample_profiles/*
