@@ -136,8 +136,9 @@ backup_path = os.path.join(app_save_path, 'profile_backups')
 ensure_dir(app_save_path)
 ensure_dir(backup_path)
 
-print("This window prints debug information!")
-print("Used for troubleshooting if it crashes!")
+print("\n\nWelcome to duckyPad Configurator!\n")
+print("This window prints debug information.")
+print("Used for troubleshooting if it crashes.\n\n")
 
 default_button_color = 'SystemButtonFace'
 if 'linux' in sys.platform:
@@ -362,7 +363,7 @@ def connect_button_click():
     if init_success is False and 'linux' in sys.platform:
         box_result = messagebox.askyesnocancel("Info", "duckyPad detected, but additional permissions needed.\n\nClick Yes for instructions\n\nClick No to configure via SD card.")
         if box_result is True:
-            webbrowser.open('https://github.com/dekuNukem/duckyPad/blob/master/app_posix.md')
+            webbrowser.open('https://github.com/dekuNukem/duckyPad-Pro/blob/master/doc/linux_macos_notes.md')
         elif box_result is False:
             select_root_folder()
         return
@@ -370,7 +371,7 @@ def connect_button_click():
     if init_success is False and 'darwin' in sys.platform and is_root() is False:
         box_result = messagebox.askyesnocancel("Info", "duckyPad detected, but additional permissions needed to access it.\n\nClick Yes for instructions\n\nClick No to configure via SD card.")
         if box_result is True:
-            webbrowser.open('https://github.com/dekuNukem/duckyPad/blob/master/troubleshooting.md#usb-configuration--autoswitcher-isnt-working-on-macos')
+            webbrowser.open('https://github.com/dekuNukem/duckyPad-Pro/blob/master/doc/linux_macos_notes.md')
         elif box_result is False:
             select_root_folder()
         return
@@ -378,7 +379,7 @@ def connect_button_click():
     if init_success is False and 'darwin' in sys.platform and is_root() is True:
         box_result = messagebox.askyesnocancel("Info", "duckyPad detected, however, due to macOS restrictions, you need to enable some privacy settings.\n\nClick Yes to learn how.\n\nClick No to configure via SD card.")
         if box_result is True:
-            webbrowser.open('https://github.com/dekuNukem/duckyPad/blob/master/troubleshooting.md#usb-configuration--autoswitcher-isnt-working-on-macos')
+            webbrowser.open('https://github.com/dekuNukem/duckyPad-Pro/blob/master/doc/linux_macos_notes.md')
         elif box_result is False:
             select_root_folder()
         return
@@ -845,7 +846,7 @@ def key_button_click_event(event):
     key_button_click(event.widget)
 
 root = Tk()
-root.title("duckyPad configurator v" + THIS_VERSION_NUMBER)
+root.title("duckyPad Configurator v" + THIS_VERSION_NUMBER)
 root.geometry(str(MAIN_WINDOW_WIDTH) + "x" + str(MAIN_WINDOW_HEIGHT))
 root.resizable(width=FALSE, height=FALSE)
 profile_list = []
@@ -1507,7 +1508,7 @@ dp_fw_update_label = Label(master=updates_lf, text="Firmware: Unknown")
 dp_fw_update_label.place(x=scaled_size(5), y=scaled_size(25))
 
 def open_profile_autoswitcher_url():
-    webbrowser.open('https://github.com/dekuNukem/duckyPad-profile-autoswitcher/blob/master/README.md#duckypad-profile-auto-switcher')
+    webbrowser.open('https://github.com/dekuNukem/duckyPad-profile-autoswitcher/blob/master/README.md')
 
 def import_profile_click():
     global profile_list
@@ -1523,7 +1524,7 @@ def import_profile_click():
     update_profile_display()
 
 def open_tindie_store():
-    messagebox.showinfo("Oops", "not implemented yet! main product, expansion module, accessories?")
+    webbrowser.open('https://dekunukem.github.io/duckyPad-Pro/doc/store_links.html')
 
 user_manual_button = Button(resources_lf, text="User\nManual", command=open_duckypad_user_manual_url)
 user_manual_button.place(x=scaled_size(10), y=scaled_size(0), width=scaled_size(100))
@@ -1531,11 +1532,11 @@ user_manual_button.place(x=scaled_size(10), y=scaled_size(0), width=scaled_size(
 autoswitch_button = Button(resources_lf, text="Profile\nAutoswitcher", command=open_profile_autoswitcher_url)
 autoswitch_button.place(x=scaled_size(150), y=scaled_size(0), width=scaled_size(100))
 
-troubleshoot_button = Button(resources_lf, text="Troubleshooting\nGuide", command=open_duckypad_troubleshooting_url)
-troubleshoot_button.place(x=scaled_size(300), y=scaled_size(0), width=scaled_size(100))
-
 discord_button = Button(resources_lf, text="Discord\nChatroom", command=open_discord_link)
-discord_button.place(x=scaled_size(450), y=scaled_size(0), width=scaled_size(100))
+discord_button.place(x=scaled_size(300), y=scaled_size(0), width=scaled_size(100))
+
+troubleshoot_button = Button(resources_lf, text="Troubleshooting\nGuide", command=open_duckypad_troubleshooting_url)
+troubleshoot_button.place(x=scaled_size(450), y=scaled_size(0), width=scaled_size(100))
 
 tindie_button = Button(resources_lf, text="Accessories &\nUpgrades", command=open_tindie_store)
 tindie_button.place(x=scaled_size(600), y=scaled_size(0), width=scaled_size(100))
