@@ -60,7 +60,7 @@ Windows might complain about unsigned app.
 
 Click `More info` and then `Run anyway`.
 
-Feel free to [review the files](../pc_software). You can also run the source code directly with Python.
+Feel free to [review the files](../pc_software), or run the source code directly with Python.
 
 ![Alt text](../resources/photos/app/defender.png)
 
