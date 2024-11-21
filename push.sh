@@ -17,9 +17,7 @@ cd ./pc_software
 python _zip_source.py
 
 cd ../resources/sample_profiles
-rm sample_profiles.zip
-7z a -r sample_profiles.zip ./sample_profiles/*
-zip -rv sample_profiles.zip ./sample_profiles/*
+python zip_sample.py
 
 current_branch=$(git rev-parse --abbrev-ref HEAD)
 
