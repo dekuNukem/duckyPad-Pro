@@ -14,7 +14,7 @@ Join our [Official Discord](https://discord.gg/4sJCBx5) for discussions and late
 
 ## Tools
 
-A small **Phillips-head screwdriver** (`+`shape) is needed. One should be provided in the package.
+A small **Phillips-head screwdriver** (`+`shape) should be provided in the package.
 
 A **pair of pliers** also helps, but not required.
 

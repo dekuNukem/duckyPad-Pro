@@ -59,7 +59,7 @@ Of course, people at the [Official Discord](https://discord.gg/4sJCBx5) are alwa
 
 ## 👉👉duckyScript Cheatsheet 👈👈
 
-[Click me to download](./duckyscript_cheatsheet) a copy of the quick reference guide!
+[Click me to download](./duckyscript_cheatsheet.pdf) a copy of the quick reference guide!
 
 Much easier to lookup than going through this whole page.
 
