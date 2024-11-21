@@ -36,9 +36,9 @@ Plug it in, use the **UPPER** USB port, and voilà:
 
 	* Press any key to exit
 
-* Press a key to execute script.
+* ⚠️ Start with the `Welcome` profile
 
-	* ⚠️ Start with the `Welcome` profile!
+	* Press a key to execute script
 
 * Press `+` and `-` to switch profiles.
 
@@ -50,7 +50,11 @@ After playing with examples and see what duckyPad can do, time to write your own
 
 #### Windows
 
-![Alt text](../resources/photos/underc.gif)
+[Download the latest configurator here](https://github.com/dekuNukem/duckyPad-Pro/releases/latest)
+
+Extract the `.zip` file and launch the application by clicking `duckypad_config.exe`:
+
+![Alt text](../resources/photos/app/duckexe.png)
 
 Windows might complain about unsigned app.
 
@@ -66,7 +70,12 @@ Feel free to [review the files](../pc_software). You can also run the source cod
 
 #### Linux
 
-![Alt text](../resources/photos/underc.gif)
+[Download the latest source here](../pc_software/duckypad_config_latest_source.zip)
+
+* Unzip
+* Open a terminal at the directory
+* Install dependencies: `pip3 install -r requirements.txt`
+* Launch the app: `python3 ./duckypad_config.py`
 
 ### Using Configurator
 
