@@ -727,14 +727,14 @@ def run_all(program_listing, profile_list=None):
             this_line = this_line.replace(cmd_INJECT_MOD, "", 1)
 
         if first_word == cmd_GOTO_PROFILE_NAME:
-            this_line = this_line.replace(cmd_GOTO_PROFILE_NAME, cmd_GOTO_PROFILE)
+            this_line = this_line.replace(cmd_GOTO_PROFILE_NAME, cmd_GOTO_PROFILE, 1)
             first_word = this_line.split(" ")[0]
 
         if first_word == cmd_GOTO_PROFILE:
             target_profile_name = this_line.split(cmd_GOTO_PROFILE)[-1].strip()
-            target_profile_index = search_profile_index_from_name(target_profile_name, profile_list)
-            if target_profile_index is not None:
-                this_line = cmd_GOTO_PROFILE + " " + str(target_profile_index)
+            target_profile_index_1_indexed = search_profile_index_from_name(target_profile_name, profile_list) + 1
+            if target_profile_index_1_indexed is not None:
+                this_line = cmd_GOTO_PROFILE + " " + str(target_profile_index_1_indexed)
 
         this_line = this_line.lstrip(" ").lstrip("\t")
         new_program_listing.append(this_line)
