@@ -136,6 +136,7 @@ backup_path = os.path.join(app_save_path, 'profile_backups')
 ensure_dir(app_save_path)
 ensure_dir(backup_path)
 
+print("\n\n--------------------------")
 print("\n\nWelcome to duckyPad Configurator!\n")
 print("This window prints debug information.")
 print("Used for troubleshooting if it crashes.\n\n")
