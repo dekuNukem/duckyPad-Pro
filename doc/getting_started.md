@@ -178,6 +178,8 @@ That's it! Now you know how to customise your duckyPad!
 
 You can assign actions to Rotary Encoders just like any other key.
 
+Better to **keep it short** to feel more responsive.
+
 Some ideas:
 
 * Volume Up/Down

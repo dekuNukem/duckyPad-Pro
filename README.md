@@ -204,20 +204,6 @@ END_WHILE
 
 * Executed on custom [virtual stack machine](./doc/bytecode_vm.md)
 
-## Expansion Modules
-
-duckyPad Pro also supports optional [expansion modules](https://github.com/dekuNukem/duckyPad-expansion-modules) for even more customisability.
-
-![alt_text](resources/photos/expdpp.jpeg)
-
-* Wire up your own **switches / buttons / foot pedals**
-
-* **6 channels** per module
-
-* **Daisy-chain** up to 5 modules with regular USB-C cable
-
-![alt_text](resources/photos/exp.gif)
-
 ## Bluetooth
 
 duckyPad Pro also works as a **Bluetooth Keyboard & Mouse** (with a catch!)
@@ -239,6 +225,20 @@ Yes I know it's a bit silly having BT without internal battery! However, it woul
 All of which would inflate the cost way beyond just getting an off-the-shelf battery pack.
 
 As this is a one-person project, I prefer to keep things simple.
+
+## Expansion Modules
+
+duckyPad Pro also supports optional [expansion modules](https://github.com/dekuNukem/duckyPad-expansion-modules) for even more customisability.
+
+![alt_text](resources/photos/expdpp.jpeg)
+
+* Wire up your own **switches / buttons / foot pedals**
+
+* **6 channels** per module
+
+* **Daisy-chain** up to 5 modules with regular USB-C cable
+
+![alt_text](resources/photos/exp.gif)
 
 ## New CPU
 
@@ -285,7 +285,7 @@ Use the open-source configurator to set up your duckyPad Pro.
 
 ## Profile Auto-switching
 
-* Automatically jump to the appropriate profile
+* [Automatically jump to the appropriate profile](https://github.com/dekuNukem/duckyPad-profile-autoswitcher)
 
 * Based on **current active window**
 

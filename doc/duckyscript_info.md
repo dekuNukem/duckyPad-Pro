@@ -94,6 +94,9 @@ Much easier to lookup than going through this whole page.
     - [`OLED_CURSOR x y`](#oled_cursor-x-y)
     - [`OLED_PRINT`](#oled_print)
     - [`OLED_CLEAR`](#oled_clear)
+    - [`OLED_CIRCLE`](#oled_circle)
+    - [`OLED_LINE`](#oled_line)
+    - [`OLED_RECT`](#oled_rect)
     - [`OLED_UPDATE`](#oled_update)
     - [`OLED_RESTORE`](#oled_restore)
 - [Per-Key RGB](#per-key-rgb)
@@ -393,13 +396,23 @@ Clears the display buffer.
 
 `OLED_CIRCLE x y radius fill`
 
+* `x y`: Origin coordinate
+* `radius`: In Pixels
+* `fill`: 0 or 1
+
 ### `OLED_LINE`
 
 `OLED_LINE x1 y1 x2 y2`
+* `x1, y1`: Starting Point
+* `X2, y2`: Ending Point
 
 ### `OLED_RECT`
 
 `OLED_RECT x1 y1 x2 y2 fill`
+
+* `x1, y1`: Starting Corner
+* `X2, y2`: Ending Corner
+* `fill`: 0 or 1
 
 ### `OLED_UPDATE`
 
