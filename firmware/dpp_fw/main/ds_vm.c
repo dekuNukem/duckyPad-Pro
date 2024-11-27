@@ -619,6 +619,8 @@ void execute_instruction(uint16_t curr_pc, ds3_exe_result* exe, uint8_t this_key
     kk.code2 = 0;
     kk.type = KEY_TYPE_MOUSE_WHEEL;
     keyboard_press(&kk, 0);
+    delay_ms(defaultchardelay_value);
+    keyboard_release(&kk);
     delay_ms(defaultdelay_value);
   }
   else if(this_opcode == OP_SWCC)
