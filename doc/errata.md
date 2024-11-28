@@ -1,16 +1,16 @@
 # duckyPad Pro Spacer Adjustment
 
-This guide shows how to fix an issue where a component presses against the bottom plate due to it being slightly too tall.
+This guide shows how to resolve an issue where a component presses against the bottom plate due to its height.
 
 ## Who's Affected?
 
 * Kickstarter backer number **prior and including 155 (Nov 27 2024)**
 
-If your backer number is greater than 155, this issue is already fixed!
+If your backer number is greater than 155, it is already fixed!
 
 ## Symptoms
 
-An inductor on the PCB is slightly taller than the spacer on the bottom plate, causing them to touch during assembly.
+An inductor on the PCB is slightly too tall, causing it to touch the bottom plate during assembly.
 
 ![Alt text](../resources/photos/fix/inductor.jpeg)
 
