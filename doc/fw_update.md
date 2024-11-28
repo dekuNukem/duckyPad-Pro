@@ -4,21 +4,19 @@
 
 -----
 
-You can easily update the firmware for new features and bug fixes.
-
 ## Latest Firmware
 
 #### 1.0.1
 
 * 28 Nov 2024
 
-* 🐞 Bug fix: Unresponsive mouse scrolling
+* 🐞 Bug Fix: `MOUSE_WHEEL` hangs when scrolling upwards
 
 👇👇👇👇👇👇👇👇👇👇
 
 [Download Here](https://github.com/dekuNukem/duckyPad-Pro/raw/master/firmware/DPP_FW_1.0.1_1f9a0eac.bin)
 
-☝️☝️☝️☝️☝️☝️☝️☝️☝️☝️☝️
+☝️☝️☝️☝️☝️☝️☝️☝️☝️☝️
 
 ## Drag-and-Drop Update
 
@@ -58,7 +56,7 @@ You can easily update the firmware for new features and bug fixes.
 
 28 Nov 2024
 
-* 🐞 Fixed mouse scrolling unresponsive bug
+* 🐞 Bug Fix: `MOUSE_WHEEL` hangs when scrolling upwards
 
 ### 1.0.0
 
