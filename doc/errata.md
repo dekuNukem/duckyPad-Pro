@@ -77,7 +77,7 @@ Easiest and fastest.
 
 ### Off-the-shelf / 3D-Printed Washer
 
-If you already have some M2 washer, feel free to use them!
+If you already have some **NON-METAL** M2 washer, feel free to use them!
 
 If you have a 3D printer, it's trivial to print some.
 
