@@ -1,0 +1,88 @@
+# duckyPad Pro Spacer Adjustment
+
+This guide shows how to fix an issue where a component presses against the bottom plate due to it being slightly too tall.
+
+## Who's Affected?
+
+* Kickstarter backer number **prior and including 155 (Nov 27 2024)**
+
+If your backer number is greater than 155, this issue is already fixed!
+
+## Symptoms
+
+An inductor on the PCB is slightly taller than the spacer on the bottom plate, causing them to touch during assembly.
+
+![Alt text](../resources/photos/fix/inductor.jpeg)
+
+![Alt text](../resources/photos/fix/touch.jpeg)
+
+The inductor used in the production run differs slightly from the one in prototyping, and I overlooked the height difference. This oversight is entirely my fault, and I sincerely apologize.
+
+## Severity
+
+The contact may cause the PCB to bend slightly, putting stress on nearby components.
+
+No hardware malfunctions has been reported yet, but it's best to address the issue promptly.
+
+## Resolution
+
+Fortunately, the fix is simple: Just add some washers to increase the height.
+
+Entire doable by hand, here are some options:
+
+### Paper Washer
+
+Easiest and fastest.
+
+* Get a piece of semi-rigid paper 
+	* Thickness like cereal box / business card
+* Use the included screw driver, punch 8 holes on it.
+
+![Alt text](../resources/photos/fix/punch.jpeg)
+
+* Cut into 8 washers
+	* No need to be pretty, won't be visible anyway!
+
+![Alt text](../resources/photos/fix/cut.jpeg)
+
+* [Follow this guide in reverse](troubleshooting.md) until PCB is removed and bottom plate is visible
+* Place the paper washers above the spacer
+	* For the **Bottom-Right Spacer**, place the paper **UNDER** it.
+
+![Alt text](../resources/photos/fix/wash.jpeg)
+
+* Reinstall the PCB
+* Ensure the inductor is **not touching the plate**
+
+![Alt text](../resources/photos/fix/gap.jpeg)
+
+* If still touching, double up the paper.
+* If all good, reassemble.
+
+### Off-the-shelf / 3D-Printed Washer
+
+If you already have some M2 washer, feel free to use them!
+
+If you have a 3D printer, it's trivial to print some too.
+
+[Click me to download the STL file](../resources/photos/fix/dpp_washer.stl)
+
+Same steps as paper washer above.
+
+![Alt text](../resources/photos/fix/3d.jpeg)
+
+### Replacement Fasteners
+
+Of course, I'm happy to send you a set of replacement fasteners for free!
+
+Send me a message on Kickstarter or [Discord](https://discord.gg/4sJCBx5).
+
+It's worth doing if you're in UK, as it arrives next day.
+
+Outside UK is going to take a few days, so doing it yourself might be faster. But still, let me know!
+
+
+
+
+
+
