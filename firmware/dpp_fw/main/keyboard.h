@@ -102,8 +102,8 @@ typedef struct
 } my_key;
 
 uint8_t kb_print(char* msg, int32_t chardelay, int32_t charjitter);
-void keyboard_release(my_key* this_key);
-void keyboard_press(my_key* this_key, uint8_t use_shift);
+void action_release(my_key* this_key);
+void action_press(my_key* this_key, uint8_t use_shift);
 void keyboard_release_all(void);
 void init_my_key(my_key* kk);
 void media_key_release(void);

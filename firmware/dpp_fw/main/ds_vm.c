@@ -420,7 +420,7 @@ void expand_mmov(int16_t xtotal, int16_t ytotal)
     kk.code = (uint8_t)this_x_amount*xsign;
     kk.code2 = (uint8_t)this_y_amount*ysign;
     kk.type = KEY_TYPE_MOUSE_MOVEMENT;
-    keyboard_press(&kk, 0);
+    action_press(&kk, 0);
     delay_ms(defaultdelay_value);
   }
 }
@@ -618,9 +618,9 @@ void execute_instruction(uint16_t curr_pc, ds3_exe_result* exe, uint8_t this_key
     kk.code = scroll_amount;
     kk.code2 = 0;
     kk.type = KEY_TYPE_MOUSE_WHEEL;
-    keyboard_press(&kk, 0);
+    action_press(&kk, 0);
     delay_ms(defaultchardelay_value);
-    keyboard_release(&kk);
+    action_release(&kk);
     delay_ms(defaultdelay_value);
   }
   else if(this_opcode == OP_SWCC)

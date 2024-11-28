@@ -383,7 +383,7 @@ void mouse_release_all(void)
   USBD_CUSTOM_HID_SendReport(kb_buf);
 }
 
-void keyboard_press(my_key* this_key, uint8_t use_mod)
+void action_press(my_key* this_key, uint8_t use_mod)
 {
   uint16_t duckcode;
   if(this_key->type == KEY_TYPE_MEDIA)
@@ -441,7 +441,7 @@ void keyboard_press(my_key* this_key, uint8_t use_mod)
   USBD_CUSTOM_HID_SendReport(kb_buf);
 }
 
-void keyboard_release(my_key* this_key)
+void action_release(my_key* this_key)
 {
   uint16_t duckcode;
   if(this_key->type == KEY_TYPE_MEDIA)
@@ -533,14 +533,14 @@ void kb_print_char(my_key *kk, int32_t chardelay, int32_t charjitter)
   {
     temp_shift_key.type = KEY_TYPE_MODIFIER;
     temp_shift_key.code = KEY_LEFT_SHIFT;
-    keyboard_press(&temp_shift_key, 1);
+    action_press(&temp_shift_key, 1);
     delay_wrapper(chardelay, charjitter);
   }
   if(duckcode & ALT_GR)
   {
     temp_altgr_key.type = KEY_TYPE_MODIFIER;
     temp_altgr_key.code = KEY_RIGHT_ALT;
-    keyboard_press(&temp_altgr_key, 1);
+    action_press(&temp_altgr_key, 1);
     delay_wrapper(chardelay, charjitter);
   }
   if(is_deadkey != 0) // deadkey
@@ -555,26 +555,26 @@ void kb_print_char(my_key *kk, int32_t chardelay, int32_t charjitter)
       case 6: deadkey.type = KEY_TYPE_DEAD_CEDILLA; break;
       default: deadkey.type = KEY_TYPE_UNKNOWN; deadkey.code = 0;
     }
-    keyboard_press(&deadkey, 1);
+    action_press(&deadkey, 1);
     delay_wrapper(chardelay, charjitter);
   }
-  keyboard_press(kk, 1);
+  action_press(kk, 1);
   delay_wrapper(chardelay, charjitter);
-  keyboard_release(kk);
+  action_release(kk);
   delay_wrapper(chardelay, charjitter);
   if(is_deadkey != 0) // deadkey
   {
-    keyboard_release(&deadkey);
+    action_release(&deadkey);
     delay_wrapper(chardelay, charjitter);
   }
   if(duckcode & ALT_GR)
   {
-    keyboard_release(&temp_altgr_key);
+    action_release(&temp_altgr_key);
     delay_wrapper(chardelay, charjitter);
   }
   if(duckcode & SHIFT)
   {
-    keyboard_release(&temp_shift_key);
+    action_release(&temp_shift_key);
     delay_wrapper(chardelay, charjitter);
   }
 }
@@ -608,7 +608,7 @@ void press_key(uint8_t code, uint8_t type)
   my_key kk;
   kk.code = code;
   kk.type = type;
-  keyboard_press(&kk, 0);
+  action_press(&kk, 0);
 }
 
 void release_key(uint8_t code, uint8_t type)
@@ -616,5 +616,5 @@ void release_key(uint8_t code, uint8_t type)
   my_key kk;
   kk.code = code;
   kk.type = type;
-  keyboard_release(&kk);
+  action_release(&kk);
 }

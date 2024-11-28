@@ -6,6 +6,20 @@
 
 You can easily update the firmware for new features and bug fixes.
 
+## Latest Firmware
+
+#### 1.0.1
+
+* 28 Nov 2024
+
+* 🐞 Fixed mouse scrolling unresponsive bug
+
+👇👇👇👇👇👇👇👇👇👇
+
+[Download Here](https://github.com/dekuNukem/duckyPad-Pro/raw/master/firmware/DPP_FW_1.0.1_f24e34a6.bin)
+
+☝️☝️☝️☝️☝️☝️☝️☝️☝️☝️☝️
+
 ## Drag-and-Drop Update
 
 * Long-press `+/-` Button
@@ -41,6 +55,12 @@ You can easily update the firmware for new features and bug fixes.
 ![Alt text](../resources/photos/tinker/newver.png)
 
 ## Version History
+
+### 1.0.1
+
+28 Nov 2024
+
+* 🐞 Fixed mouse scrolling unresponsive bug
 
 ### 1.0.0
 
