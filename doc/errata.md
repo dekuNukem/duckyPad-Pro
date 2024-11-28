@@ -32,6 +32,13 @@ Fortunately, it can be resolved by adding some washers to increase the clearance
 
 Easily doable by hand, here are some options:
 
+* DIY Paper Washer
+	* Easiest and fastest
+* Off-the-shelf or 3D Printed Washer
+	* Neater if resources are available
+* Request replacement Fasteners
+	* Free but take the longest
+
 ### Paper Washer
 
 Easiest and fastest.
@@ -81,7 +88,7 @@ Send me a message on Kickstarter or [Discord](https://discord.gg/4sJCBx5).
 
 It's worth doing if you're in UK, as it arrives next day.
 
-Outside UK is going to take a few days, so doing it yourself might be faster. But still, let me know!
+Outside UK is going to take a week or go, so doing it yourself might be faster. But still, let me know!
 
 
 
