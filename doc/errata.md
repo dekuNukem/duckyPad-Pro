@@ -33,11 +33,18 @@ Fortunately, it can be fixed by adding some washers to increase the clearance.
 Easily doable by hand, here are some options:
 
 * DIY Paper Washer
+
 	* Easiest and fastest
+
 * Off-the-shelf or 3D Printed Washer
+
 	* Neater if resources are available
+
 * Request Replacement Fasteners
-	* Free but take the longest
+
+	* Free but takes the longest (outside UK)
+
+---------
 
 ### Paper Washer
 
@@ -45,7 +52,7 @@ Easiest and fastest.
 
 * Get a piece of semi-rigid paper 
 	* Thickness similar to cereal box / business card
-* Use the included screw driver, punch 8 holes on it.
+* Use the included screw driver, punch 8 holes in it.
 
 ![Alt text](../resources/photos/fix/punch.jpeg)
 
@@ -72,9 +79,9 @@ Easiest and fastest.
 
 If you already have some M2 washer, feel free to use them!
 
-If you have a 3D printer, it's trivial to print some too.
+If you have a 3D printer, it's trivial to print some.
 
-[Click me to download the STL file](../resources/photos/fix/dpp_washer.stl)
+* [Click me to download the STL file](../resources/photos/fix/dpp_washer.stl)
 
 Same steps as paper washer above.
 
