@@ -4,7 +4,7 @@
 
 ------
 
-Thanks for purchasing duckyPad Pro!
+Thanks for getting duckyPad Pro!
 
 Here's how to put everything together.
 
@@ -16,7 +16,7 @@ Join our [Official Discord](https://discord.gg/4sJCBx5) for discussions and late
 
 A small **Phillips-head screwdriver** (`+`shape) should be provided in the package.
 
-A **pair of pliers** also helps, but not required.
+A socket bit or **pair of pliers** also helps, but not required.
 
 ## Assembly Steps
 
@@ -28,7 +28,17 @@ As well as the following fasteners:
 
 ![Alt text](../resources/photos/instructions/fast.png)
 
-* Before we start, **go wash your hands** to discharge static electricity.
+Pay special attention to the **brass spacers**!
+
+![Alt text](../resources/photos/instructions/4mm3mm.png)
+
+* One is **slightly shorter** than the other.
+
+* Separate them out before starting, don't mix them up!
+
+----------
+
+Before we start, **go wash your hands** to discharge static electricity.
 
 First, the antenna cable.
 
@@ -48,7 +58,6 @@ Adjust the cable to avoid overlapping any components.
 
 ![Alt text](../resources/photos/instructions/overlap.png)
 
-
 Hold the `Back Plate` **in the orientation shown**.
 
 Insert `8mm` and `3mm` screws.
@@ -57,17 +66,27 @@ Insert `8mm` and `3mm` screws.
 
 Place **something rigid** against the back, and flip over. The screws should stay in place.
 
-Put on **2.5mm spacers**.
+Put on **3mm spacers** (the slightly shorter one)
 
-**Moderately** tighten, use pliers if available.
-
-It shouldn't rattle when shaken.
+Moderately tighten, with a socket bit if available. It shouldn't rattle when shaken.
 
 ![Alt text](../resources/photos/instructions/3mm.jpeg)
 
+🚨🚨🚨🚨🚨🚨🚨🚨🚨🚨🚨🚨🚨🚨🚨🚨🚨🚨🚨🚨🚨🚨
+
+If your Kickstarter Backer Number is **PRIOR TO 155**
+
+If your Kickstarter Backer Number is **PRIOR TO 155**
+
+If your Kickstarter Backer Number is **PRIOR TO 155**
+
+[Follow this guide to fix a minor clearance issue](errata.md).
+
+🚨🚨🚨🚨🚨🚨🚨🚨🚨🚨🚨🚨🚨🚨🚨🚨🚨🚨🚨🚨🚨🚨
+
 Install the circuit board, then `4mm spacers`.
 
-* Moderately tighten with a socket bit if available
+* Moderately tighten
 
 * If using pliers, avoid scratching the PCB or nearby components.
 

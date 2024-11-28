@@ -4,7 +4,7 @@ This guide shows how to resolve an issue where a component presses against the b
 
 ## Who's Affected?
 
-* Kickstarter backer number **prior and including 155 (Nov 27 2024)**
+* Kickstarter backer number **prior to (and including) 155**
 
 If your backer number is greater than 155, it is already fixed!
 
