@@ -16,7 +16,9 @@ An inductor on the PCB is slightly taller than the spacer on the bottom plate, c
 
 ![Alt text](../resources/photos/fix/touch.jpeg)
 
-The inductor used in the production run differs slightly from the one in prototyping, and I overlooked the height difference. This oversight is entirely my fault, and I sincerely apologize.
+The inductor used in the production run differs slightly from the one in prototyping, and I overlooked the height difference.
+
+This oversight is entirely my fault, and I sincerely apologize.
 
 ## Severity
 
@@ -26,9 +28,9 @@ No hardware malfunctions has been reported yet, but it's best to address the iss
 
 ## Resolution
 
-Fortunately, the fix is simple: Just add some washers to increase the height.
+Fortunately, it can be resolved by adding some washers to increase the clearance.
 
-Entire doable by hand, here are some options:
+Easily doable by hand, here are some options:
 
 ### Paper Washer
 
@@ -73,7 +75,7 @@ Same steps as paper washer above.
 
 ### Replacement Fasteners
 
-Of course, I'm happy to send you a set of replacement fasteners for free!
+Of course, you can request a set of replacement fasteners to be sent for free!
 
 Send me a message on Kickstarter or [Discord](https://discord.gg/4sJCBx5).
 
