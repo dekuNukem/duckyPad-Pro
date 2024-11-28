@@ -12,7 +12,7 @@ You can easily update the firmware for new features and bug fixes.
 
 * 28 Nov 2024
 
-* 🐞 Fixed mouse scrolling unresponsive bug
+* 🐞 Bug fix: Unresponsive mouse scrolling
 
 👇👇👇👇👇👇👇👇👇👇
 
@@ -29,8 +29,6 @@ You can easily update the firmware for new features and bug fixes.
 ![Alt text](../resources/photos/tinker/mount.png)
 
 * A USB drive should show up
-
-* With a name starting with `DP24_`
 
 * Drag the file **AS-IS** into the drive
 
