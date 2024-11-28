@@ -28,7 +28,7 @@ No hardware malfunctions has been reported yet, but it's best to address the iss
 
 ## Resolution
 
-Fortunately, it can be resolved by adding some washers to increase the clearance.
+Fortunately, it can be fixed by adding some washers to increase the clearance.
 
 Easily doable by hand, here are some options:
 
@@ -36,7 +36,7 @@ Easily doable by hand, here are some options:
 	* Easiest and fastest
 * Off-the-shelf or 3D Printed Washer
 	* Neater if resources are available
-* Request replacement Fasteners
+* Request Replacement Fasteners
 	* Free but take the longest
 
 ### Paper Washer
@@ -44,7 +44,7 @@ Easily doable by hand, here are some options:
 Easiest and fastest.
 
 * Get a piece of semi-rigid paper 
-	* Thickness like cereal box / business card
+	* Thickness similar to cereal box / business card
 * Use the included screw driver, punch 8 holes on it.
 
 ![Alt text](../resources/photos/fix/punch.jpeg)
@@ -56,7 +56,7 @@ Easiest and fastest.
 
 * [Follow this guide in reverse](troubleshooting.md) until PCB is removed and bottom plate is visible
 * Place the paper washers above the spacer
-	* For the **Bottom-Right Spacer**, place the paper **UNDER** it.
+	* For **Bottom-Right**, remove the spacer, place the paper **UNDER** it, and reinstall.
 
 ![Alt text](../resources/photos/fix/wash.jpeg)
 
@@ -88,7 +88,7 @@ Send me a message on Kickstarter or [Discord](https://discord.gg/4sJCBx5).
 
 It's worth doing if you're in UK, as it arrives next day.
 
-Outside UK is going to take a week or go, so doing it yourself might be faster. But still, let me know!
+Outside UK is going to take a week or so, so doing it yourself might be faster. But still, let me know!
 
 
 
