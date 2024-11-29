@@ -1,6 +1,6 @@
 # duckyPad Pro Spacer Adjustment
 
-This guide shows how to resolve an issue where a component presses against the bottom plate due to its height.
+This guide shows how to resolve an clearance issue between a component and the bottom plate.
 
 ## Who's Affected?
 
@@ -20,7 +20,7 @@ The inductor used in the production run differs slightly from the one in prototy
 
 This oversight is entirely my fault, and I sincerely apologize.
 
-## Severity
+## Effects
 
 The contact may cause the PCB to bend slightly, putting stress on nearby components.
 
