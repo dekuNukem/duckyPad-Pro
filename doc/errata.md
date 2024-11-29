@@ -22,9 +22,9 @@ This oversight is entirely my fault, and I sincerely apologize.
 
 ## Effects
 
-The contact may cause the PCB to bend slightly, putting stress on nearby components.
+The pressure may cause the PCB to bend slightly, putting stress on nearby components.
 
-No hardware malfunctions has been reported yet, but it's best to address the issue promptly.
+No hardware malfunctions have been reported yet, but it's best to address the issue promptly.
 
 ## Resolution
 
