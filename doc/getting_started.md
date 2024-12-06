@@ -10,7 +10,7 @@ Feel free to join our [Official Discord](https://discord.gg/4sJCBx5) for discuss
 
 ## Kit Assembly
 
-👇👇👇👇👇👇👇👇👇
+👇👇👇👇👇👇👇👇👇👇
 
 [See this guide](./kit_assembly.md) to put your duckyPad together!
 
@@ -18,7 +18,7 @@ Feel free to join our [Official Discord](https://discord.gg/4sJCBx5) for discuss
 
 ## Quick Start
 
-Check that power switch is ON:
+Ensure the power switch is ON:
 
 ![Alt text](../resources/photos/onoff.png)
 
@@ -329,6 +329,16 @@ If that doesn't help, feel free to contact me by [opening an issue](https://gith
 You can update duckyPad's firmware for new features and bug fixes. 
 
 [Please see this guide](./fw_update.md).
+
+## Dimension Drawing
+
+![Alt text](../pcb/dimension%20drawings/dimensions.png)
+
+## Tinkering Guide
+
+Being open source, it is very easy to modify the firmware of your duckyPad Pro.
+
+[See this guide for more details](tinkering_guide.md).
 
 ## Table of Contents
 
