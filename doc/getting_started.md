@@ -70,7 +70,7 @@ Feel free to [review the files](../pc_software), or run the source code directly
 
 * Unzip
 * Open a terminal at the directory
-* Use homebrew to install python-tk and virtualenv: `brew install python-tk virtualenv`
+* Use [homebrew](https://brew.sh) to install python-tk: `brew install python-tk`
 * Make a virtualenv and activate it: `python3 -m venv .venv; source .venv/bin/activate`
 * Install python dependencies: `pip3 install -r requirements.txt`
 * Launch the app: `python3 ./duckypad_config.py`
