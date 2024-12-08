@@ -66,7 +66,14 @@ Feel free to [review the files](../pc_software), or run the source code directly
 
 #### Mac
 
-![Alt text](../resources/photos/underc.gif)
+[Download the latest source here](https://github.com/dekuNukem/duckyPad-Pro/blob/master/pc_software/duckypad_config_latest_source.zip)
+
+* Unzip
+* Open a terminal at the directory
+* Use [homebrew](https://brew.sh) to install python-tk: `brew install python-tk`
+* Make a virtualenv and activate it: `python3 -m venv .venv; source .venv/bin/activate`
+* Install python dependencies: `pip3 install -r requirements.txt`
+* Launch the app: `python3 ./duckypad_config.py`
 
 #### Linux
 
