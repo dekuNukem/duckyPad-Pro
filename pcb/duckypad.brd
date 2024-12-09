@@ -7,7 +7,7 @@
 <setting keepoldvectorfont="yes"/>
 <setting verticaltext="up"/>
 </settings>
-<grid distance="5" unitdist="mil" unit="mil" style="lines" multiple="1" display="yes" altdistance="1" altunitdist="mil" altunit="mil"/>
+<grid distance="2.5" unitdist="mil" unit="mil" style="lines" multiple="1" display="yes" altdistance="1" altunitdist="mil" altunit="mil"/>
 <layers>
 <layer number="1" name="Top" color="4" fill="1" visible="no" active="yes"/>
 <layer number="2" name="pwr" color="49" fill="1" visible="no" active="yes"/>
@@ -213,10 +213,9 @@ GPIO3 must have pull resistor, pull to high to  free up JTAG pins?
 3.5mm corner radius
 
 double check RESET jumper has NO PASTE</text>
-<text x="86.818" y="79.629" size="1.778" layer="26" rot="MR180" align="center">duckyPad Pro
-PD1
+<text x="86.691" y="81.661" size="1.9304" layer="26" rot="MR180" align="center">duckyPad Pro
 dekuNukem
-NOV2024</text>
+DEC2024</text>
 <rectangle x1="80.153" y1="-1.905" x2="112.411" y2="8.001" layer="41"/>
 <rectangle x1="80.28" y1="-1.778" x2="112.538" y2="8.128" layer="42"/>
 <rectangle x1="76.184" y1="89.662" x2="81.772" y2="92.964" layer="41"/>
@@ -2013,7 +2012,7 @@ These are the free and generally easy to produce 4-layer PCB design rules. You c
 <signal name="N$11">
 <contactref element="LED_R2C4" pad="DOUT"/>
 <contactref element="LED_R3C4" pad="DIN"/>
-<wire x1="4.649" y1="69.977" x2="0.839" y2="66.167" width="0.2032" layer="16"/>
+<wire x1="4.5855" y1="69.9135" x2="0.839" y2="66.167" width="0.2032" layer="16"/>
 <wire x1="0.839" y1="66.167" x2="0.839" y2="57.277" width="0.2032" layer="16"/>
 <wire x1="40.082" y1="54.102" x2="42.495" y2="56.515" width="0.2032" layer="16"/>
 <wire x1="42.495" y1="56.515" x2="54.052" y2="56.515" width="0.2032" layer="16"/>
@@ -2032,11 +2031,11 @@ These are the free and generally easy to produce 4-layer PCB design rules. You c
 <wire x1="68.149" y1="56.388" x2="69.6" y2="54.937" width="0.2032" layer="16"/>
 <wire x1="69.6" y1="54.937" x2="69.6" y2="53.75" width="0.2032" layer="16"/>
 <wire x1="75.769" y1="72.39" x2="75.769" y2="70.485" width="0.2032" layer="16"/>
-<wire x1="75.769" y1="70.485" x2="75.261" y2="69.977" width="0.2032" layer="16"/>
+<wire x1="75.769" y1="70.485" x2="75.1975" y2="69.9135" width="0.2032" layer="16"/>
 <wire x1="74.139" y1="74.02" x2="70.87" y2="74.02" width="0.2032" layer="16"/>
 <wire x1="69.6" y1="72.75" x2="70.87" y2="74.02" width="0.2032" layer="16"/>
 <wire x1="74.139" y1="74.02" x2="75.769" y2="72.39" width="0.2032" layer="16"/>
-<wire x1="75.261" y1="69.977" x2="4.649" y2="69.977" width="0.2032" layer="16"/>
+<wire x1="75.1975" y1="69.9135" x2="4.5855" y2="69.9135" width="0.2032" layer="16"/>
 </signal>
 <signal name="N$12">
 <contactref element="LED_R3C4" pad="DOUT"/>
@@ -2105,7 +2104,7 @@ These are the free and generally easy to produce 4-layer PCB design rules. You c
 <contactref element="LED_R4C4" pad="DOUT"/>
 <contactref element="LED_R5C4" pad="DIN"/>
 <wire x1="69.6" y1="34.75" x2="71.372" y2="34.75" width="0.2032" layer="16"/>
-<wire x1="4.268" y1="32.004" x2="0.839" y2="28.575" width="0.2032" layer="16"/>
+<wire x1="4.2045" y1="31.9405" x2="0.839" y2="28.575" width="0.2032" layer="16"/>
 <wire x1="0.839" y1="28.575" x2="0.839" y2="20.574" width="0.2032" layer="16"/>
 <wire x1="34.494" y1="17.399" x2="35.3576" y2="16.5354" width="0.2032" layer="16"/>
 <wire x1="35.3576" y1="16.5354" x2="39.9804" y2="16.5354" width="0.2032" layer="16"/>
@@ -2115,7 +2114,7 @@ These are the free and generally easy to produce 4-layer PCB design rules. You c
 <wire x1="55.703" y1="16.129" x2="59.005" y2="16.129" width="0.2032" layer="16"/>
 <wire x1="61.164" y1="18.288" x2="68.022" y2="18.288" width="0.2032" layer="16"/>
 <wire x1="71.372" y1="34.75" x2="72.086" y2="34.036" width="0.2032" layer="16"/>
-<wire x1="73.737" y1="32.004" x2="4.268" y2="32.004" width="0.2032" layer="16"/>
+<wire x1="73.6735" y1="31.9405" x2="4.2045" y2="31.9405" width="0.2032" layer="16"/>
 <wire x1="0.839" y1="20.574" x2="4.014" y2="17.399" width="0.2032" layer="16"/>
 <wire x1="59.005" y1="16.129" x2="61.164" y2="18.288" width="0.2032" layer="16"/>
 <wire x1="68.022" y1="18.288" x2="69.6" y2="16.71" width="0.2032" layer="16"/>
@@ -2128,7 +2127,7 @@ These are the free and generally easy to produce 4-layer PCB design rules. You c
 <wire x1="72.086" y1="34.036" x2="73.93" y2="34.036" width="0.2032" layer="16"/>
 <wire x1="73.93" y1="34.036" x2="74.184" y2="33.782" width="0.2032" layer="16"/>
 <wire x1="74.184" y1="33.782" x2="74.184" y2="32.451" width="0.2032" layer="16"/>
-<wire x1="74.184" y1="32.451" x2="73.737" y2="32.004" width="0.2032" layer="16"/>
+<wire x1="74.184" y1="32.451" x2="73.6735" y2="31.9405" width="0.2032" layer="16"/>
 </signal>
 <signal name="N$21">
 <contactref element="LED_R5C4" pad="DOUT"/>
@@ -2456,7 +2455,7 @@ These are the free and generally easy to produce 4-layer PCB design rules. You c
 <contactref element="SWR2C1" pad="1"/>
 <contactref element="SWR3C1" pad="1"/>
 <contactref element="SWR4C1" pad="1"/>
-<wire x1="77.867" y1="83.566" x2="72.406" y2="89.027" width="0.2032" layer="1"/>
+<wire x1="77.867" y1="83.566" x2="72.5076" y2="88.9254" width="0.2032" layer="1"/>
 <wire x1="79.645" y1="74.803" x2="77.867" y2="76.581" width="0.2032" layer="1"/>
 <wire x1="79.645" y1="74.803" x2="79.645" y2="73.533" width="0.2032" layer="1"/>
 <via x="79.645" y="73.533" extent="1-16" drill="0.55"/>
@@ -2471,7 +2470,7 @@ These are the free and generally easy to produce 4-layer PCB design rules. You c
 <via x="3.645" y="42.92" extent="1-16" drill="0.55"/>
 <via x="3.645" y="23.92" extent="1-16" drill="0.55"/>
 <via x="3.645" y="4.92" extent="1-16" drill="0.55"/>
-<wire x1="72.406" y1="89.027" x2="5.715" y2="89.027" width="0.2032" layer="1"/>
+<wire x1="72.5076" y1="88.9254" x2="5.6134" y2="88.9254" width="0.2032" layer="1"/>
 <wire x1="3.645" y1="61.92" x2="3.899" y2="61.666" width="0.2032" layer="1"/>
 <wire x1="3.899" y1="61.666" x2="3.899" y2="51.016" width="0.2032" layer="1"/>
 <wire x1="3.899" y1="51.016" x2="3.048" y2="50.165" width="0.2032" layer="1"/>
@@ -2482,7 +2481,7 @@ These are the free and generally easy to produce 4-layer PCB design rules. You c
 <wire x1="1.794" y1="6.771" x2="3.645" y2="4.92" width="0.2032" layer="1"/>
 <wire x1="1.794" y1="22.069" x2="1.794" y2="6.771" width="0.2032" layer="1"/>
 <wire x1="3.645" y1="86.957" x2="3.645" y2="80.92" width="0.2032" layer="1"/>
-<wire x1="5.715" y1="89.027" x2="3.645" y2="86.957" width="0.2032" layer="1"/>
+<wire x1="5.6134" y1="88.9254" x2="3.645" y2="86.957" width="0.2032" layer="1"/>
 <wire x1="3.645" y1="80.92" x2="3.645" y2="61.92" width="0.2032" layer="1"/>
 </signal>
 <signal name="COL1">
@@ -2491,11 +2490,11 @@ These are the free and generally easy to produce 4-layer PCB design rules. You c
 <contactref element="SWR2C2" pad="1"/>
 <contactref element="SWR3C2" pad="1"/>
 <contactref element="SWR4C2" pad="1"/>
-<wire x1="71.898" y1="88.519" x2="76.47" y2="83.947" width="0.2032" layer="1"/>
+<wire x1="71.9488" y1="88.4682" x2="76.47" y2="83.947" width="0.2032" layer="1"/>
 <wire x1="76.47" y1="83.947" x2="76.47" y2="76.2" width="0.2032" layer="1"/>
 <wire x1="78.502" y1="74.168" x2="78.502" y2="70.104" width="0.2032" layer="1"/>
 <via x="78.502" y="70.104" extent="1-16" drill="0.55"/>
-<wire x1="71.898" y1="88.519" x2="23.892" y2="88.519" width="0.2032" layer="1"/>
+<wire x1="71.9488" y1="88.4682" x2="23.8412" y2="88.4682" width="0.2032" layer="1"/>
 <wire x1="76.47" y1="76.2" x2="78.502" y2="74.168" width="0.2032" layer="1"/>
 <contactref element="U3" pad="47"/>
 <wire x1="78.502" y1="70.104" x2="79.976" y2="68.63" width="0.2032" layer="16"/>
@@ -2508,7 +2507,7 @@ These are the free and generally easy to produce 4-layer PCB design rules. You c
 <via x="22.645" y="42.92" extent="1-16" drill="0.55"/>
 <via x="22.645" y="23.92" extent="1-16" drill="0.55"/>
 <via x="22.645" y="4.92" extent="1-16" drill="0.55"/>
-<wire x1="23.892" y1="88.519" x2="22.606" y2="87.233" width="0.2032" layer="1"/>
+<wire x1="23.8412" y1="88.4682" x2="22.606" y2="87.233" width="0.2032" layer="1"/>
 <wire x1="22.606" y1="87.233" x2="22.606" y2="80.899" width="0.2032" layer="1"/>
 <wire x1="22.606" y1="80.899" x2="22.606" y2="61.976" width="0.2032" layer="1"/>
 <wire x1="22.5975" y1="61.9675" x2="22.606" y2="61.976" width="0.2032" layer="1"/>
@@ -2742,12 +2741,13 @@ These are the free and generally easy to produce 4-layer PCB design rules. You c
 <contactref element="D6" pad="C"/>
 <wire x1="21.297" y1="67.31" x2="23.456" y2="69.469" width="0.2032" layer="16"/>
 <wire x1="23.456" y1="69.469" x2="40.22" y2="69.469" width="0.2032" layer="16"/>
-<wire x1="40.22" y1="69.469" x2="59.27" y2="69.469" width="0.2032" layer="16"/>
-<wire x1="59.27" y1="69.469" x2="75.835" y2="69.469" width="0.2032" layer="16"/>
-<wire x1="40.22" y1="67.31" x2="40.22" y2="69.469" width="0.2032" layer="16"/>
-<wire x1="59.27" y1="67.31" x2="59.27" y2="69.469" width="0.2032" layer="16"/>
+<wire x1="40.22" y1="69.4055" x2="59.27" y2="69.4055" width="0.2032" layer="16"/>
+<wire x1="59.27" y1="69.4055" x2="75.8985" y2="69.4055" width="0.2032" layer="16"/>
+<wire x1="40.22" y1="67.31" x2="40.22" y2="69.4055" width="0.2032" layer="16"/>
+<wire x1="40.22" y1="69.4055" x2="40.22" y2="69.469" width="0.2032" layer="16"/>
+<wire x1="59.27" y1="67.31" x2="59.27" y2="69.4055" width="0.2032" layer="16"/>
 <wire x1="78.32" y1="67.31" x2="77.994" y2="67.31" width="0.2032" layer="16"/>
-<wire x1="77.994" y1="67.31" x2="75.835" y2="69.469" width="0.2032" layer="16"/>
+<wire x1="77.994" y1="67.31" x2="75.8985" y2="69.4055" width="0.2032" layer="16"/>
 <contactref element="U3" pad="45"/>
 <wire x1="78.32" y1="67.31" x2="78.883" y2="66.747" width="0.2032" layer="16"/>
 <wire x1="78.883" y1="63.881" x2="78.248" y2="63.246" width="0.2032" layer="16"/>
@@ -2779,12 +2779,12 @@ These are the free and generally easy to produce 4-layer PCB design rules. You c
 <contactref element="D16" pad="C"/>
 <contactref element="D15" pad="C"/>
 <contactref element="D14" pad="C"/>
-<wire x1="21.297" y1="29.083" x2="23.71" y2="31.496" width="0.2032" layer="16"/>
-<wire x1="23.71" y1="31.496" x2="40.347" y2="31.496" width="0.2032" layer="16"/>
-<wire x1="40.347" y1="31.496" x2="59.143" y2="31.496" width="0.2032" layer="16"/>
-<wire x1="73.93" y1="31.496" x2="59.143" y2="31.496" width="0.2032" layer="16"/>
-<wire x1="40.347" y1="29.083" x2="40.347" y2="31.496" width="0.2032" layer="16"/>
-<wire x1="59.143" y1="29.083" x2="59.143" y2="31.496" width="0.2032" layer="16"/>
+<wire x1="21.297" y1="29.083" x2="23.6465" y2="31.4325" width="0.2032" layer="16"/>
+<wire x1="23.6465" y1="31.4325" x2="40.347" y2="31.4325" width="0.2032" layer="16"/>
+<wire x1="40.347" y1="31.4325" x2="59.143" y2="31.4325" width="0.2032" layer="16"/>
+<wire x1="73.8665" y1="31.4325" x2="59.143" y2="31.4325" width="0.2032" layer="16"/>
+<wire x1="40.347" y1="29.083" x2="40.347" y2="31.4325" width="0.2032" layer="16"/>
+<wire x1="59.143" y1="29.083" x2="59.143" y2="31.4325" width="0.2032" layer="16"/>
 <wire x1="59.143" y1="29.083" x2="59.452" y2="29.083" width="0.2032" layer="16"/>
 <wire x1="67.635" y1="24.456" x2="67.635" y2="20.32" width="0.2032" layer="16"/>
 <wire x1="59.452" y1="29.083" x2="61.992" y2="26.543" width="0.2032" layer="16"/>
@@ -2798,7 +2798,7 @@ These are the free and generally easy to produce 4-layer PCB design rules. You c
 <wire x1="64.151" y1="49.276" x2="64.151" y2="46.482" width="0.2032" layer="16"/>
 <wire x1="64.151" y1="46.482" x2="74.692" y2="35.941" width="0.2032" layer="16"/>
 <wire x1="74.692" y1="35.941" x2="74.692" y2="32.258" width="0.2032" layer="16"/>
-<wire x1="74.692" y1="32.258" x2="73.93" y2="31.496" width="0.2032" layer="16"/>
+<wire x1="74.692" y1="32.258" x2="73.8665" y2="31.4325" width="0.2032" layer="16"/>
 <contactref element="U3" pad="41"/>
 <wire x1="77.531" y1="54.524" x2="74.733" y2="54.524" width="0.2032" layer="16"/>
 <wire x1="74.733" y1="54.524" x2="73.041" y2="52.832" width="0.2032" layer="16"/>
