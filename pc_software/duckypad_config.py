@@ -121,7 +121,6 @@ MAX_DUCKYPAD_FIRMWARE_VERSION = "1.5.0"
 
 ENV_UI_SCALE = os.getenv("DUCKYPAD_UI_SCALE")
 UI_SCALE = float(ENV_UI_SCALE) if ENV_UI_SCALE else 1
-UI_SCALE = 1
 
 def ensure_dir(dir_path):
     os.makedirs(dir_path, exist_ok=1)
