@@ -234,9 +234,9 @@ duckyPad Pro also supports optional [expansion modules](https://github.com/dekuN
 
 * Wire up your own **switches / buttons / foot pedals**
 
-* **6 channels** per module
+* **8 channels** per module
 
-* **Daisy-chain** up to 5 modules with regular USB-C cable
+* **Daisy-chain** up to 32 channels
 
 ![alt_text](resources/photos/exp.gif)
 
