@@ -34,7 +34,7 @@ Pay special attention to the **brass spacers**!
 
 * One is **slightly shorter** than the other.
 
-* Separate them out before starting, don't mix them up!
+* Separate them out before starting
 
 ----------
 
@@ -72,23 +72,25 @@ Moderately tighten, with a socket bit if available. It shouldn't rattle when sha
 
 ![Alt text](../resources/photos/instructions/3mm.jpeg)
 
+**`IF`** you received some **thin washers**, install them:
+
+![Alt text](../resources/photos/instructions/washer.png)
+
 🚨🚨🚨🚨🚨🚨🚨🚨🚨🚨🚨🚨🚨🚨🚨🚨🚨🚨🚨🚨🚨🚨
 
-If your Kickstarter Backer Number is **PRIOR TO 155**
-
-If your Kickstarter Backer Number is **PRIOR TO 155**
-
-If your Kickstarter Backer Number is **PRIOR TO 155**
+And if your Kickstarter Backer Number is **PRIOR TO 155**
 
 [Follow this guide to fix a minor clearance issue](errata.md).
 
 🚨🚨🚨🚨🚨🚨🚨🚨🚨🚨🚨🚨🚨🚨🚨🚨🚨🚨🚨🚨🚨🚨
 
+--------
+
 Install the circuit board, then `4mm spacers`.
 
 * Moderately tighten
 
-* If using pliers, avoid scratching the PCB or nearby components.
+* Avoid scratching the PCB or nearby components
 
 ![Alt text](../resources/photos/instructions/4mm.png)
 
