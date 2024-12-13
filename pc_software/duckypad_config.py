@@ -730,9 +730,11 @@ def save_everything(save_path):
             for this_key in this_profile.keylist:
                 if this_key is None:
                     continue
-                config_file.write('z' + str(this_key.index) + ' ' + str(this_key.name) + '\n')
+                config_file.write(f"z{this_key.index} {this_key.name}\n")
                 if this_key.name_line2 is not None and len(this_key.name_line2) > 0:
-                    config_file.write('x' + str(this_key.index) + ' ' + str(this_key.name_line2) + '\n')
+                    config_file.write(f"x{this_key.index} {this_key.name_line2}\n")
+                if this_key.allow_abort:
+                    config_file.write(f"ab {this_key.index}\n")
 
             config_file.write('BG_COLOR %d %d %d\n' % (this_profile.bg_color))
             if this_profile.kd_color is not None:
