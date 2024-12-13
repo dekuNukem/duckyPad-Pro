@@ -15,11 +15,16 @@
 #define MAX_PROFILES 64
 #define KEYNAME_SIZE 8
 
+#define BT_MODE_SIZE 3
+#define BT_MODE_AUTO 0
+#define BT_MODE_NEVER 1
+#define BT_MODE_ALWAYS 2
+
 typedef struct
 {
   uint8_t brightness_index;
   uint8_t sleep_index;
-  // uint8_t screen_orientation;
+  uint8_t bt_mode;
   uint8_t bluetooth_priority;
   uint8_t last_used_profile;
   char current_kb_layout[FILENAME_BUFSIZE];

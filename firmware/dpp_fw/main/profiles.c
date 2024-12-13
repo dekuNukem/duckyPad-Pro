@@ -32,6 +32,7 @@ const char config_sleep_after_index[] = "sleep_index ";
 const char config_brightness_index[] = "brightness_index ";
 const char config_keyboard_layout[] = "kb_layout ";
 const char config_last_used_profile[] = "last_profile ";
+const char config_bt_mode[] = "bt_mode ";
 
 const char cmd_BG_COLOR[] = "BG_COLOR ";
 const char cmd_KD_COLOR[] = "KEYDOWN_COLOR ";
@@ -83,6 +84,8 @@ uint8_t load_settings(dp_global_settings* dps)
       dps->brightness_index = atoi(temp_buf + strlen(config_brightness_index));
     if(strncmp(temp_buf, config_last_used_profile, strlen(config_last_used_profile)) == 0)
       dps->last_used_profile = atoi(temp_buf + strlen(config_last_used_profile));
+    if(strncmp(temp_buf, config_bt_mode, strlen(config_bt_mode)) == 0)
+      dps->bt_mode = atoi(temp_buf + strlen(config_bt_mode)) % BT_MODE_SIZE;
     if(dps->brightness_index >= BRIGHTNESS_LEVEL_SIZE)
       dps->brightness_index = BRIGHTNESS_LEVEL_SIZE - 1;
     if(strncmp(temp_buf, config_keyboard_layout, strlen(config_keyboard_layout)) == 0)
@@ -109,13 +112,15 @@ uint8_t save_settings(dp_global_settings* dps)
     "%s%d\n"
     "fw_ver %d.%d.%d\n"
     "serial_number DP24_%02X%02X%02X\n"
-    "%s%s\n",
+    "%s%s\n"
+    "bt_mode %d\n",
     config_sleep_after_index, dps->sleep_index,
     config_brightness_index, dps->brightness_index,
     config_last_used_profile, current_profile_number,
     fw_version_major, fw_version_minor, fw_version_patch,
     esp_mac_addr[3], esp_mac_addr[4], esp_mac_addr[5],
-    config_keyboard_layout, dps->current_kb_layout
+    config_keyboard_layout, dps->current_kb_layout,
+    dps->bt_mode
   );
   fclose(sd_file);
   return 0;

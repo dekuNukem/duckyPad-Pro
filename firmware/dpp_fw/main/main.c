@@ -29,11 +29,15 @@ Public release
 1.0.1
 2024 11 27
 Fixed non-responsive mouse scroll bug
+
+1.6.0
+2024 12 13
+added BT mode option: Auto/Always/Never
 */
 
 uint8_t fw_version_major = 1;
-uint8_t fw_version_minor = 0;
-uint8_t fw_version_patch = 1;
+uint8_t fw_version_minor = 6;
+uint8_t fw_version_patch = 0;
 uint8_t dsvm_version = 1;
 
 static const char *TAG = "MAIN";

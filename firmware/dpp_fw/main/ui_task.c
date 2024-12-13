@@ -30,13 +30,19 @@ uint32_t sleep_after_ms_index_to_time_lookup[SLEEP_OPTION_SIZE] = {
   };
 
 const char* sleep_index_to_string_lookup[SLEEP_OPTION_SIZE] = {
-  "2 Minutes",
-  "5 Minutes",
-  "15 Minutes",
-  "30 Minutes",
-  "1 Hour",
-  "2 Hours",
+  "2 min",
+  "5 min",
+  "15 min",
+  "30 min",
+  "1 Hr",
+  "2 Hrs",
   "Never",
+};
+
+const char* bt_mode_to_string_lookup[BT_MODE_SIZE] = {
+  "Auto",
+  "Never",
+  "Always",
 };
 
 void oled_init(void)
@@ -394,20 +400,15 @@ void draw_settings(dp_global_settings *dps)
 //------------------------------
 
   memset(oled_line_buf, 0, OLED_LINE_BUF_SIZE);
-  sprintf(oled_line_buf, "2-Sleep After:");
-  ssd1306_SetCursor(0, 30);
-  ssd1306_WriteString(oled_line_buf, Font_7x10, White);
-
-  memset(oled_line_buf, 0, OLED_LINE_BUF_SIZE);
-  sprintf(oled_line_buf, "%s", sleep_index_to_string_lookup[dps->sleep_index]);
-  ssd1306_SetCursor(center_line(strlen(oled_line_buf), 7, SSD1306_WIDTH), 42);
+  sprintf(oled_line_buf, "2-Sleep: %s", sleep_index_to_string_lookup[dps->sleep_index]);
+  ssd1306_SetCursor(0, 29);
   ssd1306_WriteString(oled_line_buf, Font_7x10, White);
 
 //------------------------------
 
   memset(oled_line_buf, 0, OLED_LINE_BUF_SIZE);
   sprintf(oled_line_buf, "3-Keyboard Region");
-  ssd1306_SetCursor(0, 56);
+  ssd1306_SetCursor(0, 45);
   ssd1306_WriteString(oled_line_buf, Font_7x10, White);
 
   memset(oled_line_buf, 0, OLED_LINE_BUF_SIZE);
@@ -416,21 +417,28 @@ void draw_settings(dp_global_settings *dps)
     strcpy(oled_line_buf, dps->current_kb_layout+5);
     oled_line_buf[strlen(oled_line_buf)-4] = 0; // don't print .txt extension
   }
-  ssd1306_SetCursor(center_line(strlen(oled_line_buf), 7, SSD1306_WIDTH), 68);
+  ssd1306_SetCursor(center_line(strlen(oled_line_buf), 7, SSD1306_WIDTH), 57);
   ssd1306_WriteString(oled_line_buf, Font_7x10, White);
   load_keymap_by_name(dp_settings.current_kb_layout);
 
 //------------------------------
 
   memset(oled_line_buf, 0, OLED_LINE_BUF_SIZE);
-  sprintf(oled_line_buf, "4-BT Unpair All");
-  ssd1306_SetCursor(0, 84);
+  sprintf(oled_line_buf, "4-Use BT: %s", bt_mode_to_string_lookup[dps->bt_mode]);
+  ssd1306_SetCursor(0, 73);
+  ssd1306_WriteString(oled_line_buf, Font_7x10, White);
+
+//------------------------------
+
+  memset(oled_line_buf, 0, OLED_LINE_BUF_SIZE);
+  sprintf(oled_line_buf, "5-BT Unpair All");
+  ssd1306_SetCursor(0, 88);
   ssd1306_WriteString(oled_line_buf, Font_7x10, White);
 
 //------------------------------
   memset(oled_line_buf, 0, OLED_LINE_BUF_SIZE);
-  sprintf(oled_line_buf, "5-Mount USB");
-  ssd1306_SetCursor(0, 100);
+  sprintf(oled_line_buf, "6-Mount USB");
+  ssd1306_SetCursor(0, 102);
   ssd1306_WriteString(oled_line_buf, Font_7x10, White);
 //---------------
 

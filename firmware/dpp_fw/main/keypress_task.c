@@ -227,13 +227,18 @@ void settings_menu(void)
     }
     else if(sw_event.id == MSW_3)
     {
+      dp_settings.bt_mode = (dp_settings.bt_mode + 1) % BT_MODE_SIZE;
+      draw_settings(&dp_settings);
+    }
+    else if(sw_event.id == MSW_4)
+    {
       neopixel_fill(0, 0, 128);
       nvs_flash_erase();
       draw_nvm_erase();
       block_until_anykey(SW_EVENT_SHORT_PRESS);
       esp_restart();
     }
-    else if(sw_event.id == MSW_4)
+    else if(sw_event.id == MSW_5)
     {
       generate_msc_flag_file();
       esp_restart();
@@ -365,7 +370,7 @@ void handle_sw_event(switch_event_t* this_sw_event)
   uint32_t ke_start = pdTICKS_TO_MS(xTaskGetTickCount());
   process_keyevent(this_sw_event->id, this_sw_event->type);
   uint32_t execution_duration = pdTICKS_TO_MS(xTaskGetTickCount()) - ke_start;
-  printf("took %ldms\n", execution_duration);
+  // printf("took %ldms\n", execution_duration);
   if(execution_duration > 500)
     clear_sw_re_queue();
 }
