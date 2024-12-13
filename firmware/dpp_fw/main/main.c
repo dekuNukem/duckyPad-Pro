@@ -58,13 +58,22 @@ void app_main(void)
     oled_init();
     neopixel_init();
     expansion_uart_init();
-    oled_say("Booting...");
     if(sd_init())
     {
         draw_nosd();
         idle_loop();
     }
-    
+
+    load_settings(&dp_settings);
+    if(dp_settings.bt_mode == BT_MODE_ALWAYS)
+    {
+        oled_say("BT Only Mode");
+        delay_ms(1000);
+    }
+    else
+    {
+        oled_say("Booting...");
+    }
     memset(temp_buf, 0, TEMP_BUFSIZE);
     sprintf(temp_buf, "DP24_%02x%02x", esp_mac_addr[ESP_MAC_ADDR_SIZE-2], esp_mac_addr[ESP_MAC_ADDR_SIZE-1]);
     f_setlabel(temp_buf);
@@ -89,7 +98,6 @@ void app_main(void)
     esp_ota_mark_app_valid_cancel_rollback();
     is_busy = 0;
     
-    load_settings(&dp_settings);
     if(scan_profiles() == PSCAN_ERROR_NO_PROFILE)
     {
         draw_noprofile();
