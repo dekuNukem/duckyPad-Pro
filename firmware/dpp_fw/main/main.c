@@ -98,14 +98,24 @@ void app_main(void)
 
     load_keymap_by_name(dp_settings.current_kb_layout);
 
-    mount_hid_only();
-    if(wait_for_hid_connect(1500) == 0)
+    if(dp_settings.bt_mode == BT_MODE_NEVER)
     {
-        tinyusb_driver_uninstall();
-        draw_no_usb_activity();
-        delay_ms(2000);
+        mount_hid_only();
+    }
+    else if(dp_settings.bt_mode == BT_MODE_ALWAYS)
+    {
         my_bt_init();
-        goto_profile(current_profile_number);
+    }
+    else
+    {
+        mount_hid_only();
+        if(wait_for_hid_connect(1500) == 0)
+        {
+            tinyusb_driver_uninstall();
+            draw_no_usb_activity();
+            delay_ms(2000);
+            my_bt_init();
+        }
     }
 
     profile_init();

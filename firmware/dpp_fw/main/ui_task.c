@@ -40,9 +40,9 @@ const char* sleep_index_to_string_lookup[SLEEP_OPTION_SIZE] = {
 };
 
 const char* bt_mode_to_string_lookup[BT_MODE_SIZE] = {
-  "Auto",
   "Never",
   "Always",
+  "Auto",
 };
 
 void oled_init(void)

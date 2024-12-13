@@ -16,9 +16,9 @@
 #define KEYNAME_SIZE 8
 
 #define BT_MODE_SIZE 3
-#define BT_MODE_AUTO 0
-#define BT_MODE_NEVER 1
-#define BT_MODE_ALWAYS 2
+#define BT_MODE_NEVER 0
+#define BT_MODE_ALWAYS 1
+#define BT_MODE_AUTO 2
 
 typedef struct
 {
