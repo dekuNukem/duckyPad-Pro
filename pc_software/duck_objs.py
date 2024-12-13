@@ -111,9 +111,6 @@ class dp_profile(object):
 				this_key.script = get_script(on_press_path)
 				this_key.script_on_release = get_script(on_release_path)
 
-		for index, this_key in enumerate(self.keylist):
-			print(index, this_key)
-
 	def __str__(self):
 		ret = ""
 		ret += str('-----Profile info-----') + '\n'
