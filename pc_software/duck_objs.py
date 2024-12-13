@@ -5,55 +5,20 @@ from shared import *
 MAX_PROFILE_COUNT = 64
 
 class dp_key(object):
-	def load_script(self, path):
-		# print("load_script:", path)
-		if path is None or os.path.exists(path) is False:
-			return ""
-		try:
-			with open(path, encoding='utf8') as keyfile:
-				return keyfile.read()
-		except Exception as e:
-			print('load_script exception:', e)
-			return ""
-
-	def read_color(self, config_path):
-		with open(config_path) as configfile:
-			for line in configfile:
-				line = line.replace('\n', '').replace('\r', '')
-				hotword = "SWCOLOR_" + str(self.index) + ' '
-				while('  ' in line):
-					line = line.replace('  ', ' ')
-				if hotword in line:
-					temp_split = line.split(' ')
-					self.color = (int(temp_split[1]), int(temp_split[2]), int(temp_split[3]))
-
 	def __str__(self):
 		ret = ""
 		ret += str('...............') + '\n'
 		ret += "path:\t" + str(self.path) + '\n'
 		ret += "name:\t" + str(self.name) + '\n'
-		ret += "name_line2:\t" + str(self.name_line2) + '\n'
+		ret += "name2:\t" + str(self.name_line2) + '\n'
 		ret += "index:\t" + str(self.index) + '\n'
 		ret += "color:\t" + str(self.color) + '\n'
-		ret += "script:\t" + str(len(self.script)) + " characters\n"
+		ret += "abort:\t" + str(self.allow_abort) + '\n'
+		ret += "norep:\t" + str(self.dont_repeat) + '\n'
+		ret += "scr:\t" + str(len(self.script)) + " characters\n"
+		ret += "scr_r:\t" + str(len(self.script_on_release)) + " characters\n"
 		ret += str('...............') + '\n'
 		return ret
-
-	def get_keyname(self, path, index):
-		line1 = '???' + str(index)
-		line2 = ''
-		try:
-			with open(os.path.join(os.path.dirname(path), "config.txt")) as ffffff:
-				for line in ffffff:
-					this_split = line.replace('\n','').replace('\r','').split(' ', 1)
-					if this_split[0].startswith('z') and int(this_split[0][1:]) == index:
-						line1 = this_split[1]
-					if this_split[0].startswith('x') and int(this_split[0][1:]) == index:
-						line2 = this_split[1]
-		except Exception as e:
-			print('get_keyname exception:', e)
-			pass
-		return line1, line2
 
 	def __init__(self, path_on_press=None, path_on_release=None):
 		super(dp_key, self).__init__()
@@ -69,35 +34,24 @@ class dp_key(object):
 		self.binary_array_on_release = None
 		self.allow_abort = False
 		self.dont_repeat = False
-		if path_on_press is None:
-			return
-		self.index = int(os.path.basename(os.path.normpath(path_on_press)).split("_")[0].split("-")[0].split(".txt")[0].strip('key'))
-		if '_' in os.path.basename(os.path.normpath(path_on_press)):
-			self.name = os.path.basename(os.path.normpath(path_on_press)).rsplit('.', 1)[0].split('_', 1)[-1]
-		else:
-			self.name, self.name_line2 = self.get_keyname(path_on_press, self.index)
-		self.color = None
-		self.script = self.load_script(path_on_press).replace('\r', '')
-		self.script_on_release = self.load_script(path_on_release).replace('\r', '')
-		try:
-			config_path = os.path.join(os.path.dirname(path_on_press), "config.txt")
-			self.read_color(config_path)
-		except Exception as e:
-			print(">>> read_color:", config_path, e)
 
 # -----------------------------------------------------------
 
+def get_script(path):
+	if path is None or os.path.exists(path) is False:
+		return ""
+	try:
+		with open(path, encoding='utf8') as keyfile:
+			return keyfile.read()
+	except Exception as e:
+		print('get_script exception:', e)
+		return ""
+
 class dp_profile(object):
-	def read_keys(self, path):
-		key_file_list = [x for x in os.listdir(path) if x.endswith('.txt') and x.startswith('key') and x[3].isnumeric() and '-release' not in x]
-		key_file_list.sort(key=lambda s: int(s[3:].split("_")[0].split("-")[0].split(".txt")[0])) # sort by number not by letter
-		
-		for item in key_file_list:
-			on_press_path = os.path.join(path, item)
-			on_release_filename = item.replace('.txt', '') + "-release.txt"
-			on_release_path = os.path.join(path, on_release_filename)
-			this_key = dp_key(on_press_path, on_release_path)
-			self.keylist[this_key.index - 1] = this_key
+	def add_key_if_doesnt_exist(self, index):
+		if self.keylist[index] is None:
+			self.keylist[index] = dp_key()
+			self.keylist[index].index = index
 
 	def read_config(self, path):
 		try:
@@ -105,17 +59,39 @@ class dp_profile(object):
 				for line in configfile:
 					line = line.replace('\n', '').replace('\r', '')
 					while('  ' in line):
-						line = line.replace('  ', ' ')
+						line = line.replace('  ', ' ')					
+					this_split = line.split(' ', 1)
 					if line.startswith('BG_COLOR '):
 						temp_split = line.split(' ')
 						self.bg_color = (int(temp_split[1]), int(temp_split[2]), int(temp_split[3]))
-					if line.startswith('KEYDOWN_COLOR '):
+					elif line.startswith('KEYDOWN_COLOR '):
 						temp_split = line.split(' ')
 						self.kd_color = (int(temp_split[1]), int(temp_split[2]), int(temp_split[3]))
-					if line.startswith("DIM_UNUSED_KEYS 0"):
+					elif line.startswith("DIM_UNUSED_KEYS 0"):
 						self.dim_unused = False
-					if line.startswith("IS_LANDSCAPE 1"):
+					elif line.startswith("IS_LANDSCAPE 1"):
 						self.is_landscape = True
+					elif this_split[0].startswith('z'):
+						this_index = int(this_split[0][1:]) - 1
+						self.add_key_if_doesnt_exist(this_index)
+						self.keylist[this_index].name = this_split[1]
+					elif this_split[0].startswith('x'):
+						this_index = int(this_split[0][1:]) - 1
+						self.add_key_if_doesnt_exist(this_index)
+						self.keylist[this_index].name_line2 = this_split[1]
+					elif this_split[0].startswith('ab'):
+						this_index = int(this_split[1]) - 1
+						self.add_key_if_doesnt_exist(this_index)
+						self.keylist[this_index].allow_abort = True
+					elif this_split[0].startswith('dr'):
+						this_index = int(this_split[1]) - 1
+						self.add_key_if_doesnt_exist(this_index)
+						self.keylist[this_index].dont_repeat = True
+					elif this_split[0].startswith('SWCOLOR_'):
+						this_index = int(this_split[0].split("_")[-1]) - 1
+						self.add_key_if_doesnt_exist(this_index)
+						temp_split = line.split(' ')
+						self.keylist[this_index].color = (int(temp_split[1]), int(temp_split[2]), int(temp_split[3]))
 		except Exception as e:
 			print('>>>>> read_config:', path, e)
 			pass
@@ -128,7 +104,15 @@ class dp_profile(object):
 		self.path = path
 		self.name = folder_name.split('_', 1)[-1]
 		self.read_config(path)
-		self.read_keys(path)
+		for this_key in self.keylist:
+			if this_key is not None:
+				on_press_path = os.path.join(path, f'key{this_key.index+1}.txt')
+				on_release_path = os.path.join(path, f'key{this_key.index+1}-release.txt')
+				this_key.script = get_script(on_press_path)
+				this_key.script_on_release = get_script(on_release_path)
+
+		for index, this_key in enumerate(self.keylist):
+			print(index, this_key)
 
 	def __str__(self):
 		ret = ""

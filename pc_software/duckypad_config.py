@@ -735,6 +735,8 @@ def save_everything(save_path):
                     config_file.write(f"x{this_key.index} {this_key.name_line2}\n")
                 if this_key.allow_abort:
                     config_file.write(f"ab {this_key.index}\n")
+                if this_key.dont_repeat:
+                    config_file.write(f"dr {this_key.index}\n")
 
             config_file.write('BG_COLOR %d %d %d\n' % (this_profile.bg_color))
             if this_profile.kd_color is not None:
