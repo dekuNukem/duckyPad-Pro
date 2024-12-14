@@ -106,7 +106,10 @@ def get_duckypad_drive_mac(vol_str):
     return vol_list[0].mountpoint
 
 def get_duckypad_drive_linux(vol_str):
-    return None
+    vol_list = [x for x in psutil.disk_partitions() if vol_str.strip().lower() in x.mountpoint.strip().lower()]
+    if len(vol_list) == 0:
+        return None
+    return vol_list[0].mountpoint
 
 def get_duckypad_drive(vol_str):
     if 'win32' in sys.platform:
