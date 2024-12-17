@@ -119,8 +119,9 @@ THIS_VERSION_NUMBER = '2.0.1'
 MIN_DUCKYPAD_FIRMWARE_VERSION = "1.0.0"
 MAX_DUCKYPAD_FIRMWARE_VERSION = "1.5.0"
 
-ENV_UI_SCALE = os.getenv("DUCKYPAD_UI_SCALE")
-UI_SCALE = float(ENV_UI_SCALE) if ENV_UI_SCALE else 1
+UI_SCALE = float(os.getenv("DUCKYPAD_UI_SCALE", default=1))
+MOUNTPOINT = os.getenv("DUCKYPAD_MS_MOUNTPOINT", default=None)
+SECONDS_TO_WAIT = int(os.getenv("DUCKYPAD_MS_TIMEOUT", default=10))
 
 def ensure_dir(dir_path):
     os.makedirs(dir_path, exist_ok=1)
@@ -288,10 +289,14 @@ def incompatible_fw_msgbox(current_fw_str, fw_status):
         messagebox.showinfo("Info", f"duckyPad firmware unknown!\n\n")
 
 def put_duckypad_in_msc_mode_and_get_drive_path(reset_ui=True):
-    dp_info = hid_op.get_dp_info()
-    if dp_info is None:
-        return None
-    disk_label = f'DP{dp_info[6]}_{dp_info[9]:02X}{dp_info[10]:02X}'
+    disk_label = None
+    if MOUNTPOINT:
+        disk_label = MOUNTPOINT
+    else:
+        dp_info = hid_op.get_dp_info()
+        if dp_info is None:
+            return None
+        disk_label = f'DP{dp_info[6]}_{dp_info[9]:02X}{dp_info[10]:02X}'
     print("disk label should be", disk_label)
     duckypad_drive_path = hid_op.get_duckypad_drive(disk_label)
     # already mounted
@@ -303,7 +308,7 @@ def put_duckypad_in_msc_mode_and_get_drive_path(reset_ui=True):
     if reset_ui:
         ui_reset()
     root.update()
-    seconds_to_wait = 10
+    seconds_to_wait = SECONDS_TO_WAIT
     entry_time = time.time()
     while 1:
         duckypad_drive_path = hid_op.get_duckypad_drive(disk_label)
