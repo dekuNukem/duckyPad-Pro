@@ -113,9 +113,12 @@ New for duckyPad Pro
 2.0.1 2024 11 22
 Fixed off-by-1 error in GOTO_PROFILE
 
+2.0.2 2024 12 17
+Fixed text parsed as comments in STRING blocks
+
 """
 
-THIS_VERSION_NUMBER = '2.0.1'
+THIS_VERSION_NUMBER = '2.0.2'
 MIN_DUCKYPAD_FIRMWARE_VERSION = "1.0.0"
 MAX_DUCKYPAD_FIRMWARE_VERSION = "1.5.0"
 

@@ -1,0 +1,12 @@
+STRINGLN_BLOCK
+hahahlol
+         Hello World
+             //this should still be typed out
+END_STRINGLN
+// this should be gone
+         		     ENTER
+STRING_BLOCK
+         VAMPAIRE IN THE CORNER
+        INJECT_MOD CTRL
+             // one more time
+END_STRING

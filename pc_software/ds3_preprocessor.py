@@ -712,44 +712,11 @@ def check_swcolor(pgm_line, first_word):
     return PARSE_OK, '', arg_list
 
 def run_all(program_listing, profile_list=None):
-    new_program_listing = []
-    for index, this_line in enumerate(program_listing):
-        # remove leading space and tabs
-        this_line = this_line.lstrip(" ").lstrip("\t")
-        first_word = this_line.split(" ")[0]
-
-        # remove single-line comments 
-        if first_word == cmd_REM or first_word.startswith(cmd_C_COMMENT):
-            continue
-
-        # remove cmd_INJECT_MOD
-        if first_word == cmd_INJECT_MOD:
-            this_line = this_line.replace(cmd_INJECT_MOD, "", 1)
-
-        if first_word == cmd_GOTO_PROFILE_NAME:
-            this_line = this_line.replace(cmd_GOTO_PROFILE_NAME, cmd_GOTO_PROFILE, 1)
-            first_word = this_line.split(" ")[0]
-
-        if first_word == cmd_GOTO_PROFILE:
-            target_profile_name = this_line.split(cmd_GOTO_PROFILE)[-1].strip()
-            target_profile_index_1_indexed = search_profile_index_from_name(target_profile_name, profile_list) + 1
-            if target_profile_index_1_indexed is not None:
-                this_line = cmd_GOTO_PROFILE + " " + str(target_profile_index_1_indexed)
-
-        this_line = this_line.lstrip(" ").lstrip("\t")
-        new_program_listing.append(this_line)
-
-    # print("4444444444", new_program_listing)
-    program_listing = new_program_listing
-
+    # ----------- expand STRING_BLOCK and STRINGLN_BLOCK, split STRING and STRINGLN ----------
     rdict = run_once(program_listing)
     if rdict['is_success'] is False:
         return rdict
-
-    print("---------First Pass OK!---------")
-
-    # ----------- expand STRING_BLOCK and STRINGLN_BLOCK, split STRING and STRINGLN ----------
-
+    
     new_program_listing = []
     for line_number_starting_from_1, this_line in enumerate(program_listing):
         line_number_starting_from_1 += 1
@@ -760,6 +727,7 @@ def run_all(program_listing, profile_list=None):
             this_line = "STRING " + this_line
         else:
             this_line = this_line.lstrip(' \t')
+
         if len(this_line) == 0:
             continue
 
@@ -777,13 +745,43 @@ def run_all(program_listing, profile_list=None):
 
     program_listing = new_program_listing
 
-    # ----------- Do another pass ---------------
+    # ---------------------
+
+    new_program_listing = []
+    for index, this_line in enumerate(program_listing):
+        # remove leading space and tabs
+        this_line = this_line.lstrip(" ").lstrip("\t")
+        first_word = this_line.split(" ")[0]
+
+        # remove single-line comments 
+        if first_word == cmd_REM or first_word.startswith(cmd_C_COMMENT):
+            continue
+
+        # remove INJECT_MOD
+        if first_word == cmd_INJECT_MOD:
+            this_line = this_line.replace(cmd_INJECT_MOD, "", 1)
+
+        # parse GOTO_PROFILE commands
+        if first_word == cmd_GOTO_PROFILE_NAME:
+            this_line = this_line.replace(cmd_GOTO_PROFILE_NAME, cmd_GOTO_PROFILE, 1)
+            first_word = this_line.split(" ")[0]
+
+        if first_word == cmd_GOTO_PROFILE:
+            target_profile_name = this_line.split(cmd_GOTO_PROFILE)[-1].strip()
+            target_profile_index_1_indexed = search_profile_index_from_name(target_profile_name, profile_list) + 1
+            if target_profile_index_1_indexed is not None:
+                this_line = cmd_GOTO_PROFILE + " " + str(target_profile_index_1_indexed)
+
+        this_line = this_line.lstrip(" ").lstrip("\t")
+        new_program_listing.append(this_line)
+
+    program_listing = new_program_listing
 
     rdict = run_once(program_listing)
     if rdict['is_success'] is False:
         return rdict
 
-    print("\n---------STR expansion OK!---------\n")
+    print("---------First Pass OK!---------")
 
     # ----------- make condensed version ----------
 
