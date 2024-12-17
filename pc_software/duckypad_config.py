@@ -123,8 +123,8 @@ MIN_DUCKYPAD_FIRMWARE_VERSION = "1.0.0"
 MAX_DUCKYPAD_FIRMWARE_VERSION = "1.5.0"
 
 UI_SCALE = float(os.getenv("DUCKYPAD_UI_SCALE", default=1))
-MOUNTPOINT = os.getenv("DUCKYPAD_MS_MOUNTPOINT", default=None)
-SECONDS_TO_WAIT = int(os.getenv("DUCKYPAD_MS_TIMEOUT", default=10))
+USB_MSC_MOUNTPOINT = os.getenv("DUCKYPAD_MS_MOUNTPOINT", default=None)
+USB_MSC_SECONDS_TO_WAIT = int(os.getenv("DUCKYPAD_MS_TIMEOUT", default=10))
 
 def ensure_dir(dir_path):
     os.makedirs(dir_path, exist_ok=1)
@@ -293,8 +293,8 @@ def incompatible_fw_msgbox(current_fw_str, fw_status):
 
 def put_duckypad_in_msc_mode_and_get_drive_path(reset_ui=True):
     disk_label = None
-    if MOUNTPOINT:
-        disk_label = MOUNTPOINT
+    if USB_MSC_MOUNTPOINT:
+        disk_label = USB_MSC_MOUNTPOINT
     else:
         dp_info = hid_op.get_dp_info()
         if dp_info is None:
@@ -305,22 +305,22 @@ def put_duckypad_in_msc_mode_and_get_drive_path(reset_ui=True):
     # already mounted
     if duckypad_drive_path is not None:
         return duckypad_drive_path
-    root_folder_path_label.config(foreground="blue")
-
+    
     hid_op.duckypad_hid_sw_reset(reboot_into_usb_msc_mode=1)
+
     if reset_ui:
         ui_reset()
     root.update()
-    seconds_to_wait = SECONDS_TO_WAIT
+    root_folder_path_label.config(foreground="blue")
     entry_time = time.time()
     while 1:
         duckypad_drive_path = hid_op.get_duckypad_drive(disk_label)
         if duckypad_drive_path is not None:
             break
         time_elapsed = time.time() - entry_time
-        if time_elapsed > seconds_to_wait:
+        if time_elapsed > USB_MSC_SECONDS_TO_WAIT:
             break
-        dp_root_folder_display.set(f"duckyPad Pro detected! Waiting for storage... {int(seconds_to_wait - time_elapsed)}")
+        dp_root_folder_display.set(f"duckyPad Pro detected! Waiting for storage... {int(USB_MSC_SECONDS_TO_WAIT - time_elapsed)}")
         root.update()
         time.sleep(0.5)
     dp_root_folder_display.set("")
