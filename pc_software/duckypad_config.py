@@ -196,9 +196,6 @@ def ui_reset():
     rotate_keys_checkbox.config(state=DISABLED)
     key_remove_button.config(state=DISABLED)
     key_name_textbox.config(state=DISABLED)
-    bg_color_label.config(fg='grey')
-    kd_color_label.config(fg='grey')
-    key_char_limit_label.config(fg='grey')
     reset_key_button_relief()
     update_key_button_appearances(None)
     key_name_textbox.delete('1.0', 'end')
@@ -397,9 +394,6 @@ def enable_buttons():
     dim_unused_keys_checkbox.config(state=NORMAL)
     rotate_keys_checkbox.config(state=NORMAL)
     key_remove_button.config(state=NORMAL)
-    bg_color_label.config(fg='black')
-    kd_color_label.config(fg='black')
-    key_char_limit_label.config(fg='black')
     profile_import_button.config(state=NORMAL)
     exp_page_plus_button.config(state=NORMAL)
     exp_page_minus_button.config(state=NORMAL)
@@ -970,14 +964,14 @@ profile_dupe_button.place(x=PADDING * 2.5 + BUTTON_WIDTH, y=BUTTON_Y_POS, width=
 profile_rename_button = Button(profiles_lf, text="Rename", command=profile_rename_click, state=DISABLED)
 profile_rename_button.place(x=PADDING * 2.5 + BUTTON_WIDTH, y=BUTTON_Y_POS + BUTTON_HEIGHT + int(PADDING/2), width=BUTTON_WIDTH, height=BUTTON_HEIGHT)
 
-bg_color_label = Label(master=profiles_lf, text="Background color:", fg='grey')
+bg_color_label = Label(master=profiles_lf, text="Background color:")
 bg_color_label.place(x=scaled_size(20), y=scaled_size(355))
 
 bg_color_button = Label(master=profiles_lf, borderwidth=1, relief="solid")
 bg_color_button.place(x=scaled_size(160), y=scaled_size(356), width=scaled_size(60), height=scaled_size(20))
 bg_color_button.bind("<Button-1>", bg_color_click)
 
-kd_color_label = Label(master=profiles_lf, text="Activation color:", fg='grey')
+kd_color_label = Label(master=profiles_lf, text="Activation color:")
 kd_color_label.place(x=scaled_size(20), y=scaled_size(380))
 
 kd_color_button = Label(master=profiles_lf, borderwidth=1, relief="solid")
@@ -1242,7 +1236,7 @@ root.update()
 key_char_limit_portrait = "Name:\nmax 2 lines\n5 char per line"
 key_char_limit_landscape = "Name:\nmax 2 lines\n4 char per line"
 
-key_char_limit_label = Label(master=name_editor_lf, fg='grey')
+key_char_limit_label = Label(master=name_editor_lf)
 key_char_limit_label.place(x=scaled_size(17), y=scaled_size(0))
 root.update()
 
