@@ -514,36 +514,23 @@ uint8_t utf8ascii(uint8_t ascii)
   return 0; // otherwise: return zero, if character has to be ignored
 }
 
-my_key temp_shift_key;
-my_key temp_altgr_key;
-void kb_print_char(my_key *kk, int32_t chardelay, int32_t charjitter)
-{
-  /*
+/*
   kk.code is the ASCII character
   look it up in the keymap, result is uint16_t
   top 4 bits map to dead key 
   if no dead key, press as normal
   if has dead key, press it first
+
+  dead key first, dead key itself might contain MOD keys
   */
+my_key temp_shift_key;
+my_key temp_altgr_key;
+void kb_print_char(my_key *kk, int32_t chardelay, int32_t charjitter)
+{
   uint16_t duckcode = ascii_map[kk->code];
   if(duckcode == 0)
   	return;
-  uint16_t is_deadkey = duckcode & 0xf000;
-  if(duckcode & SHIFT)
-  {
-    temp_shift_key.type = KEY_TYPE_MODIFIER;
-    temp_shift_key.code = KEY_LEFT_SHIFT;
-    action_press(&temp_shift_key, 1);
-    delay_wrapper(chardelay, charjitter);
-  }
-  if(duckcode & ALT_GR)
-  {
-    temp_altgr_key.type = KEY_TYPE_MODIFIER;
-    temp_altgr_key.code = KEY_RIGHT_ALT;
-    action_press(&temp_altgr_key, 1);
-    delay_wrapper(chardelay, charjitter);
-  }
-  if(is_deadkey != 0) // deadkey
+  if(duckcode & 0xf000) // deadkey
   {
     switch(duckcode >> 12)
     {
@@ -558,6 +545,20 @@ void kb_print_char(my_key *kk, int32_t chardelay, int32_t charjitter)
     action_press(&deadkey, 1);
     delay_wrapper(chardelay, charjitter);
     action_release(&deadkey);
+    delay_wrapper(chardelay, charjitter);
+  }
+  if(duckcode & SHIFT)
+  {
+    temp_shift_key.type = KEY_TYPE_MODIFIER;
+    temp_shift_key.code = KEY_LEFT_SHIFT;
+    action_press(&temp_shift_key, 1);
+    delay_wrapper(chardelay, charjitter);
+  }
+  if(duckcode & ALT_GR)
+  {
+    temp_altgr_key.type = KEY_TYPE_MODIFIER;
+    temp_altgr_key.code = KEY_RIGHT_ALT;
+    action_press(&temp_altgr_key, 1);
     delay_wrapper(chardelay, charjitter);
   }
   action_press(kk, 1);
@@ -575,7 +576,6 @@ void kb_print_char(my_key *kk, int32_t chardelay, int32_t charjitter)
     delay_wrapper(chardelay, charjitter);
   }
 }
-
 uint8_t kb_print(char* msg, int32_t chardelay, int32_t charjitter)
 {
   my_key kk;
