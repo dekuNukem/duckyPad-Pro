@@ -36,7 +36,7 @@ added BT mode option: Auto/Always/Never
 
 1.0.3
 2024 12 18
-fixed dead key shift behaviour
+fixed dead key behaviour
 
 */
 

@@ -6,17 +6,19 @@
 
 ## Latest Firmware
 
-#### 1.0.1
+#### 1.0.3
 
-* 28 Nov 2024
+* 18 Dec 2024
 
-* 🐞 Bug Fix: `MOUSE_WHEEL` hangs when scrolling upwards
+* 🆕 Added BT Mode Override: Auto/Always/Never
+
+* 🐞 Fixed Dead Key behaviour
 
 👇👇👇👇👇👇👇👇👇👇
 
-[Download Here](https://github.com/dekuNukem/duckyPad-Pro/raw/master/firmware/DPP_FW_1.0.1_1f9a0eac.bin)
+[Download Here](https://github.com/dekuNukem/duckyPad-Pro/raw/master/firmware/DPP_FW_1.0.3_62cc7071.bin)
 
-☝️☝️☝️☝️☝️☝️☝️☝️☝️☝️
+☝️☝️☝️☝️☝️☝️☝️☝️☝️☝️☝️
 
 ## Drag-and-Drop Update
 
