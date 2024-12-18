@@ -2,12 +2,23 @@
 // Author: dekuNukem
 // Date: Dec 2024
 
+// à
 dk_grave_accent 0x012e
+
+// á
 dk_acute_accent 0x002e
-dk_circumflex 0x0035
-dk_tilde 0x0323
+
+// â
+dk_circumflex 0x0323
+
+// ã
+dk_tilde 0x0211
+
+// ä
 dk_diaeresis 0x0218
-dk_cedilla 0x0315
+
+// 
+//dk_cedilla 0x0000
 
 0x00 0x0000 
 0x01 0x0000 
