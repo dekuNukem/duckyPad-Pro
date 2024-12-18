@@ -49,9 +49,14 @@ new_name = os.path.join(output_folder_path, "duckypad_config_" + THIS_VERSION + 
 
 print(original_name)
 print(new_name)
-
 os.rename(original_name, new_name)
-zip_file_name = "duckypad_config_" + THIS_VERSION + "macOS_ARM"
+
+f = open(os.path.join(new_name, "run.sh"), "w")
+f.write("sudo ./duckypad_config")
+f.close()
+
+zip_file_name = "duckypad_config_" + THIS_VERSION + "_macOS_ARM"
 shutil.make_archive(zip_file_name, 'zip', new_name)
 
 clean()
+
