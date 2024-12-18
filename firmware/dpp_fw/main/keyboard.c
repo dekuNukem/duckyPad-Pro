@@ -576,6 +576,7 @@ void kb_print_char(my_key *kk, int32_t chardelay, int32_t charjitter)
     delay_wrapper(chardelay, charjitter);
   }
 }
+
 uint8_t kb_print(char* msg, int32_t chardelay, int32_t charjitter)
 {
   my_key kk;
