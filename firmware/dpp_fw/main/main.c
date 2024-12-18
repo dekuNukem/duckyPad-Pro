@@ -30,14 +30,19 @@ Public release
 2024 11 27
 Fixed non-responsive mouse scroll bug
 
-1.6.0
+1.0.2
 2024 12 13
 added BT mode option: Auto/Always/Never
+
+1.0.3
+2024 12 18
+fixed dead key shift behaviour
+
 */
 
 uint8_t fw_version_major = 1;
-uint8_t fw_version_minor = 6;
-uint8_t fw_version_patch = 0;
+uint8_t fw_version_minor = 0;
+uint8_t fw_version_patch = 3;
 uint8_t dsvm_version = 1;
 
 static const char *TAG = "MAIN";

@@ -557,16 +557,13 @@ void kb_print_char(my_key *kk, int32_t chardelay, int32_t charjitter)
     }
     action_press(&deadkey, 1);
     delay_wrapper(chardelay, charjitter);
+    action_release(&deadkey);
+    delay_wrapper(chardelay, charjitter);
   }
   action_press(kk, 1);
   delay_wrapper(chardelay, charjitter);
   action_release(kk);
   delay_wrapper(chardelay, charjitter);
-  if(is_deadkey != 0) // deadkey
-  {
-    action_release(&deadkey);
-    delay_wrapper(chardelay, charjitter);
-  }
   if(duckcode & ALT_GR)
   {
     action_release(&temp_altgr_key);
