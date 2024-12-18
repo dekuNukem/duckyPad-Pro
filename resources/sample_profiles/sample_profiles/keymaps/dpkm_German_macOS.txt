@@ -1,4 +1,4 @@
-// duckyPad Keymap - German
+// duckyPad Keymap - German macOS
 // Author: dekuNukem
 // Date: Dec 2024
 
