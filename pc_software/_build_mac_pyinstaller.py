@@ -52,8 +52,11 @@ print(new_name)
 os.rename(original_name, new_name)
 
 f = open(os.path.join(new_name, "run.sh"), "w")
-f.write("sudo ./duckypad_config")
+f.write("echo Welcome to duckyPad!\n")
+f.write("echo To Connect, Please Authenticate.\n")
+f.write("sudo ./duckypad_config\n")
 f.close()
+os.system(f"chmod a+x {os.path.join(new_name, "run.sh")}")
 
 zip_file_name = "duckypad_config_" + THIS_VERSION + "_macOS_ARM"
 shutil.make_archive(zip_file_name, 'zip', new_name)
