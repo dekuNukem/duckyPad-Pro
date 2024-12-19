@@ -803,7 +803,7 @@ def save_everything(save_path):
     return False
 
 def make_default_backup_dir_name():
-    return 'duckyPad_backup_' + datetime.now().strftime("%Y-%m-%dT%H-%M-%S")
+    return 'duckyPad_Pro_backup_' + datetime.now().strftime("%Y-%m-%dT%H-%M-%S")
 
 def save_click():
     this_backup_path = os.path.join(backup_path, make_default_backup_dir_name())
