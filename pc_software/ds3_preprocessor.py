@@ -712,7 +712,6 @@ def check_swcolor(pgm_line, first_word):
     return PARSE_OK, '', arg_list
 
 def run_all(program_listing, profile_list=None):
-
     new_program_listing = []
     for this_line in program_listing:
         first_word = this_line.lstrip(" \t").split(" ")[0]
@@ -726,7 +725,7 @@ def run_all(program_listing, profile_list=None):
             target_profile_name = this_line.split(cmd_GOTO_PROFILE, 1)[-1].strip()
             target_profile_index_0_indexed = search_profile_index_from_name(target_profile_name, profile_list)
             if target_profile_index_0_indexed is not None:
-                this_line = cmd_GOTO_PROFILE + " " + str(target_profile_index_0_indexed + 1)
+                this_line = f"{cmd_GOTO_PROFILE} {target_profile_index_0_indexed + 1}"
 
         new_program_listing.append(this_line)
 

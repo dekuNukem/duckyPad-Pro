@@ -124,7 +124,7 @@ MAX_DUCKYPAD_FIRMWARE_VERSION = "1.5.0"
 
 UI_SCALE = float(os.getenv("DUCKYPAD_UI_SCALE", default=1))
 USB_MSC_MOUNTPOINT = os.getenv("DUCKYPAD_MS_MOUNTPOINT", default=None)
-USB_MSC_SECONDS_TO_WAIT = int(os.getenv("DUCKYPAD_MS_TIMEOUT", default=10))
+USB_MSC_SECONDS_TO_WAIT = int(os.getenv("DUCKYPAD_MS_TIMEOUT", default=15))
 
 def ensure_dir(dir_path):
     os.makedirs(dir_path, exist_ok=1)
