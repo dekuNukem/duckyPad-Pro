@@ -1,4 +1,24 @@
 
+# def is_root():
+#     return os.getuid() == 0
+
+
+def copy_keymaps(dest_path):
+    print("need to figure out how do to it with pyinstaller")
+    # source_keymap_folder = "../resources/sample_profiles/sample_profiles/keymaps"
+    # destination_keymap_folder = os.path.join(dest_path, "keymaps")
+    # if not os.path.isdir(source_keymap_folder):
+    #     return
+    # ensure_dir(destination_keymap_folder)
+    # for item in [str(x.path) for x in os.scandir(source_keymap_folder) if 'dpkm_' in x.path.lower() and x.path.lower().endswith('.txt')]:
+    #     destination_file = os.path.join(destination_keymap_folder, os.path.basename(item))
+
+    #     if not os.path.exists(destination_file):
+    #         print("Copying keymap:", item, destination_keymap_folder)
+    #         shutil.copy2(item, destination_keymap_folder)
+    #     else:
+    #         print(f"keymap already exists: {destination_file}")
+
 def check_firmware_update(current_fw_str=None):
     if current_fw_str is not None:
         return check_update.get_firmware_update_status(current_fw_str), current_fw_str

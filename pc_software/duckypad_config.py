@@ -116,9 +116,11 @@ Fixed off-by-1 error in GOTO_PROFILE
 2.0.2 2024 12 17
 Fixed text parsed as comments in STRING blocks
 
-2.0.3 2024 12 17
-Fixed GOTO_PROFILE parsing order
-made default USB MSC timeout longer
+2.0.3 2024 12 19
+Adjusted text visibility for macOS dark mode
+Adjusted GOTO_PROFILE parsing order
+Increased default USB MSC timeout
+Adjusted macOS additional instruction warnings
 
 """
 
@@ -132,9 +134,6 @@ USB_MSC_SECONDS_TO_WAIT = int(os.getenv("DUCKYPAD_MS_TIMEOUT", default=15))
 
 def ensure_dir(dir_path):
     os.makedirs(dir_path, exist_ok=1)
-
-def is_root():
-    return os.getuid() == 0
 
 def scaled_size(size: int) -> int:
     return int(size * UI_SCALE)
@@ -321,7 +320,7 @@ def put_duckypad_in_msc_mode_and_get_drive_path(reset_ui=True):
         time_elapsed = time.time() - entry_time
         if time_elapsed > USB_MSC_SECONDS_TO_WAIT:
             break
-        dp_root_folder_display.set(f"duckyPad Pro detected! Waiting for storage... {int(USB_MSC_SECONDS_TO_WAIT - time_elapsed)}")
+        dp_root_folder_display.set(f"duckyPad detected! Waiting for storage... {int(USB_MSC_SECONDS_TO_WAIT - time_elapsed)}")
         root.update()
         time.sleep(0.5)
     dp_root_folder_display.set("")
@@ -329,7 +328,7 @@ def put_duckypad_in_msc_mode_and_get_drive_path(reset_ui=True):
 
 def connect_button_click():
     if hid_op.get_duckypad_path() is None:
-        if(messagebox.askokcancel("Info", "duckyPad not found!\n\nManually select a folder instead?") == False):
+        if(messagebox.askokcancel("Info", "duckyPad not found!\n\nSelect a folder manually instead?") == False):
             return
         select_root_folder()
         return
@@ -353,23 +352,15 @@ def connect_button_click():
         init_success = False
 
     if init_success is False and 'linux' in sys.platform:
-        box_result = messagebox.askyesnocancel("Info", "duckyPad detected, but additional permissions needed.\n\nClick Yes for instructions\n\nClick No to configure via SD card.")
+        box_result = messagebox.askyesnocancel("Info", "duckyPad detected, but additional permissions are needed.\n\nClick Yes for instructions\n\nClick No to select a folder manually.")
         if box_result is True:
             webbrowser.open('https://github.com/dekuNukem/duckyPad-Pro/blob/master/doc/linux_macos_notes.md')
         elif box_result is False:
             select_root_folder()
         return
 
-    if init_success is False and 'darwin' in sys.platform and is_root() is False:
-        box_result = messagebox.askyesnocancel("Info", "duckyPad detected, but additional permissions needed to access it.\n\nClick Yes for instructions\n\nClick No to configure via SD card.")
-        if box_result is True:
-            webbrowser.open('https://github.com/dekuNukem/duckyPad-Pro/blob/master/doc/linux_macos_notes.md')
-        elif box_result is False:
-            select_root_folder()
-        return
-
-    if init_success is False and 'darwin' in sys.platform and is_root() is True:
-        box_result = messagebox.askyesnocancel("Info", "duckyPad detected, however, due to macOS restrictions, you need to enable some privacy settings.\n\nClick Yes to learn how.\n\nClick No to configure via SD card.")
+    if init_success is False and 'darwin' in sys.platform:
+        box_result = messagebox.askyesnocancel("Info", "duckyPad detected, but additional permissions are needed.\n\nClick Yes for instructions\n\nClick No to select a folder manually.")
         if box_result is True:
             webbrowser.open('https://github.com/dekuNukem/duckyPad-Pro/blob/master/doc/linux_macos_notes.md')
         elif box_result is False:
@@ -378,7 +369,7 @@ def connect_button_click():
     
     duckypad_drive_path = put_duckypad_in_msc_mode_and_get_drive_path()
     if duckypad_drive_path is None:
-        if(messagebox.askokcancel("Info", "duckyPad drive not found!\n\nSelect manually instead?") == False):
+        if(messagebox.askokcancel("Info", "duckyPad drive not found!\n\nSelect a folder manually?") == False):
             return
         select_root_folder()
         return
@@ -692,21 +683,6 @@ def compile_all_scripts():
         messagebox.showerror("Error", error_msg)
     return False
 
-def copy_keymaps(dest_path):
-    source_keymap_folder = "keymaps"
-    destination_keymap_folder = os.path.join(dest_path, "keymaps")
-    if not os.path.isdir(source_keymap_folder):
-        return
-    ensure_dir(destination_keymap_folder)
-    for item in [str(x.path) for x in os.scandir(source_keymap_folder) if 'dpkm_' in x.path.lower() and x.path.lower().endswith('.txt')]:
-        destination_file = os.path.join(destination_keymap_folder, os.path.basename(item))
-
-        if not os.path.exists(destination_file):
-            print("Copying keymap:", item, destination_keymap_folder)
-            shutil.copy2(item, destination_keymap_folder)
-        else:
-            print(f"keymap already exists: {destination_file}")
-
 def save_everything(save_path):
     if compile_all_scripts() is False:
         return False
@@ -793,8 +769,6 @@ def save_everything(save_path):
                     config_file.write('SWCOLOR_%d %d %d %d\n' % (this_key.index, this_key.color[0], this_key.color[1], this_key.color[2]))
             config_file.close()
         
-        copy_keymaps(save_path)
-
         return True
     except Exception as e:
         error_msg = f"Save Failed:\n\n{e}"
@@ -1529,7 +1503,7 @@ discord_button = Button(resources_lf, text="Discord\nChatroom", command=open_dis
 discord_button.place(x=scaled_size(300), y=scaled_size(0), width=scaled_size(100))
 
 troubleshoot_button = Button(resources_lf, text="Troubleshooting\nGuide", command=open_duckypad_troubleshooting_url)
-troubleshoot_button.place(x=scaled_size(450), y=scaled_size(0), width=scaled_size(100))
+troubleshoot_button.place(x=scaled_size(445), y=scaled_size(0), width=scaled_size(110))
 
 tindie_button = Button(resources_lf, text="Accessories &\nUpgrades", command=open_tindie_store)
 tindie_button.place(x=scaled_size(600), y=scaled_size(0), width=scaled_size(100))
