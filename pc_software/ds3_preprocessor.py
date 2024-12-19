@@ -712,6 +712,26 @@ def check_swcolor(pgm_line, first_word):
     return PARSE_OK, '', arg_list
 
 def run_all(program_listing, profile_list=None):
+
+    new_program_listing = []
+    for this_line in program_listing:
+        first_word = this_line.lstrip(" \t").split(" ")[0]
+
+        # parse GOTO_PROFILE commands
+        if first_word == cmd_GOTO_PROFILE_NAME:
+            this_line = this_line.replace(cmd_GOTO_PROFILE_NAME, cmd_GOTO_PROFILE, 1)
+            first_word = cmd_GOTO_PROFILE
+
+        if first_word == cmd_GOTO_PROFILE:
+            target_profile_name = this_line.split(cmd_GOTO_PROFILE, 1)[-1].strip()
+            target_profile_index_0_indexed = search_profile_index_from_name(target_profile_name, profile_list)
+            if target_profile_index_0_indexed is not None:
+                this_line = cmd_GOTO_PROFILE + " " + str(target_profile_index_0_indexed + 1)
+
+        new_program_listing.append(this_line)
+
+    program_listing = new_program_listing
+
     # ----------- expand STRING_BLOCK and STRINGLN_BLOCK, split STRING and STRINGLN ----------
     rdict = run_once(program_listing)
     if rdict['is_success'] is False:
@@ -748,9 +768,9 @@ def run_all(program_listing, profile_list=None):
     # ---------------------
 
     new_program_listing = []
-    for index, this_line in enumerate(program_listing):
+    for this_line in program_listing:
         # remove leading space and tabs
-        this_line = this_line.lstrip(" ").lstrip("\t")
+        this_line = this_line.lstrip(" \t")
         first_word = this_line.split(" ")[0]
 
         # remove single-line comments 
@@ -761,18 +781,7 @@ def run_all(program_listing, profile_list=None):
         if first_word == cmd_INJECT_MOD:
             this_line = this_line.replace(cmd_INJECT_MOD, "", 1)
 
-        # parse GOTO_PROFILE commands
-        if first_word == cmd_GOTO_PROFILE_NAME:
-            this_line = this_line.replace(cmd_GOTO_PROFILE_NAME, cmd_GOTO_PROFILE, 1)
-            first_word = this_line.split(" ")[0]
-
-        if first_word == cmd_GOTO_PROFILE:
-            target_profile_name = this_line.split(cmd_GOTO_PROFILE)[-1].strip()
-            target_profile_index_1_indexed = search_profile_index_from_name(target_profile_name, profile_list) + 1
-            if target_profile_index_1_indexed is not None:
-                this_line = cmd_GOTO_PROFILE + " " + str(target_profile_index_1_indexed)
-
-        this_line = this_line.lstrip(" ").lstrip("\t")
+        this_line = this_line.lstrip(" \t")
         new_program_listing.append(this_line)
 
     program_listing = new_program_listing
