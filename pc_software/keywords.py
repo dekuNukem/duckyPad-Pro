@@ -419,6 +419,7 @@ reserved_variable_dict = {
 	"_IS_SCROLLLOCK_ON": (0xffff - 16),
 	"_DONT_REPEAT": (0xffff - 17),
 	"_THIS_KEYID": (0xffff - 18),
+	"_DP_MODEL": (0xffff - 19), # added dec 19 2024, havent implemented in FW yet
 }
 
 MAX_NUMBER_OF_VARIABLES = 64
