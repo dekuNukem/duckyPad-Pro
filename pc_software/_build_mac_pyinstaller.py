@@ -23,7 +23,6 @@ def clean(additional=None):
 			except:
 				print(f'Error deleting {_target}.')
 
-
 THIS_VERSION = None
 try:
 	mainfile = open('duckypad_config.py')
@@ -39,27 +38,35 @@ if THIS_VERSION is None:
 	print('could not find version number!')
 	exit()
 
+exe_file_name = f"duckypad_config_{THIS_VERSION.replace('.', '_')}_macOS_ARM"
+
 # --noconsole
 clean(additional='duckypad*.zip')
-PyInstaller.__main__.run(['duckypad_config.py','--icon=_icon.icns'])
+PyInstaller.__main__.run(['duckypad_config.py','--icon=_icon.icns', '--onefile', f"--name={exe_file_name}"])
+
 
 output_folder_path = os.path.join('.', "dist")
-original_name = os.path.join(output_folder_path, "duckypad_config")
-new_name = os.path.join(output_folder_path, "duckypad_config_" + THIS_VERSION + "_macOS_ARM")
+new_folder_path = exe_file_name
 
-print(original_name)
-print(new_name)
-os.rename(original_name, new_name)
+print(output_folder_path)
+print(new_folder_path)
 
-f = open(os.path.join(new_name, "run.sh"), "w")
+os.rename(output_folder_path, new_folder_path)
+
+f = open(os.path.join(new_folder_path, "run.sh"), "w")
+f.write("echo\n")
 f.write("echo Welcome to duckyPad!\n")
+f.write("echo\n")
 f.write("echo To Connect, Please Authenticate.\n")
-f.write("sudo ./duckypad_config\n")
+f.write("echo\n")
+f.write("echo More info: duckyPad.com\n")
+f.write("echo\n")
+f.write(f"sudo ./{exe_file_name}\n")
 f.close()
-os.system(f"chmod a+x {os.path.join(new_name, "run.sh")}")
+os.system(f"chmod a+x {os.path.join(new_folder_path, "run.sh")}")
 
-zip_file_name = "duckypad_config_" + THIS_VERSION + "_macOS_ARM"
-shutil.make_archive(zip_file_name, 'zip', new_name)
+zip_file_name = exe_file_name
+shutil.make_archive(exe_file_name, 'zip', new_folder_path)
 
 clean()
 
