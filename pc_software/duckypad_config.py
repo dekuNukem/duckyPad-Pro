@@ -362,7 +362,7 @@ def connect_button_click():
     if init_success is False and 'darwin' in sys.platform:
         box_result = messagebox.askyesnocancel("Info", "duckyPad detected, but I need additional permissions!\n\nClick Yes for instructions\n\nClick No to select a folder manually.")
         if box_result is True:
-            open_duckypad_troubleshooting_url()
+            webbrowser.open('https://github.com/dekuNukem/duckyPad-Pro/blob/master/doc/linux_macos_notes.md')
         elif box_result is False:
             select_root_folder()
         return
