@@ -1,6 +1,6 @@
 # Getting Started with duckyPad Pro
 
-[Support on Kickstarter!](https://www.kickstarter.com/projects/dekunukem/duckypad-pro-advanced-macro-scripting-beyond-qmk-via) | [Official Discord](https://discord.gg/4sJCBx5) | [Getting Started](./doc/getting_started.md) | [Table of Contents](#table-of-contents)
+[Support on Kickstarter!](https://www.kickstarter.com/projects/dekunukem/duckypad-pro-advanced-macro-scripting-beyond-qmk-via) | [Official Discord](https://discord.gg/4sJCBx5) | [Getting Started](./getting_started.md) | [Table of Contents](#table-of-contents)
 
 ------
 
@@ -52,7 +52,7 @@ After playing with examples and see what duckyPad can do, time to write your own
 
 [Download the latest configurator here](https://github.com/dekuNukem/duckyPad-Pro/releases/latest)
 
-Extract the `.zip` file and launch the application by clicking `duckypad_config.exe`:
+Unzip and launch by clicking `duckypad_config.exe`:
 
 ![Alt text](../resources/photos/app/duckexe.png)
 
@@ -66,18 +66,11 @@ Feel free to [review the files](../pc_software), or run the source code directly
 
 #### Mac
 
-[Download the latest source here](https://github.com/dekuNukem/duckyPad-Pro/blob/master/pc_software/duckypad_config_latest_source.zip)
-
-* Unzip
-* Open a terminal at the directory
-* Use [homebrew](https://brew.sh) to install python-tk: `brew install python-tk`
-* Make a virtualenv and activate it: `python3 -m venv .venv; source .venv/bin/activate`
-* Install python dependencies: `pip3 install -r requirements.txt`
-* Launch the app: `python3 ./duckypad_config.py`
+[See instruction here!](./linux_macos_notes.md)
 
 #### Linux
 
-[Download the latest source here](https://github.com/dekuNukem/duckyPad-Pro/blob/master/pc_software/duckypad_config_latest_source.zip)
+[Download the latest source release here](https://github.com/dekuNukem/duckyPad-Pro/releases/latest)
 
 * Unzip
 * Open a terminal at the directory
