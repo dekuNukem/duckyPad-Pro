@@ -122,6 +122,7 @@ Adjusted text visibility for macOS dark mode
 Adjusted GOTO_PROFILE parsing order
 Increased default USB MSC timeout
 Adjusted macOS additional instruction warnings
+updated linux "need sudo" text box
 
 """
 
