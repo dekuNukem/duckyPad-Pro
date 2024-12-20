@@ -13,9 +13,9 @@ find . -type f -name "*.eggs*" -exec rm -f {} \;
 find . -name "__pycache__" -exec rm -rf {} \;
 find . -type f -name ".component_hash" -exec rm {} +
 
-cd ./pc_software
-python _zip_source.py
-python3 _zip_source.py
+# cd ./pc_software
+# python _zip_source.py
+# python3 _zip_source.py
 
 cd ../resources/sample_profiles
 python zip_sample.py
