@@ -353,10 +353,8 @@ def connect_button_click():
         init_success = False
 
     if init_success is False and 'linux' in sys.platform:
-        box_result = messagebox.askyesnocancel("Info", "duckyPad detected, but I need additional permissions!\n\nClick Yes for instructions\n\nClick No to select a folder manually.")
+        box_result = messagebox.askokcancel("Info", "duckyPad detected, but please run me in sudo!\n\nClick OK to select a folder manually.")
         if box_result is True:
-            open_duckypad_troubleshooting_url()
-        elif box_result is False:
             select_root_folder()
         return
 
