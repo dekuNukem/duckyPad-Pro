@@ -14,7 +14,7 @@ Incorporating 4 years worth of feedback from the [original duckyPad](https://git
 
 duckyPad Pro has been [successfully funded on Kickstarter](https://www.kickstarter.com/projects/dekunukem/duckypad-pro-advanced-macro-scripting-beyond-qmk-via) with more than $100K raised!
 
-* [Late Pledges](https://www.kickstarter.com/projects/dekunukem/duckypad-pro-advanced-macro-scripting-beyond-qmk-via) still available with **Jan 2025** shipping.
+* [Late Pledges](https://www.kickstarter.com/projects/dekunukem/duckypad-pro-advanced-macro-scripting-beyond-qmk-via) available with **Jan 2025** shipping.
 
 * Join our [Official Discord](https://discord.gg/4sJCBx5) for discussions and updates!
 
@@ -325,7 +325,7 @@ duckyPad Pro has **20 Mechanical Switches** in **4x5 Grid.**
 
 ## Interested?
 
-Please consider [supporting duckyPad Pro on Kickstarter!](https://www.kickstarter.com/projects/dekunukem/duckypad-pro-advanced-macro-scripting-beyond-qmk-via)
+You can [pre-order duckyPad Pro on Kickstarter!](https://www.kickstarter.com/projects/dekunukem/duckypad-pro-advanced-macro-scripting-beyond-qmk-via)
 
 Join our [Official Discord](https://discord.gg/4sJCBx5) for discussions and updates!
 
