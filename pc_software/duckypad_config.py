@@ -114,6 +114,7 @@ New for duckyPad Pro
 Fixed off-by-1 error in GOTO_PROFILE
 
 2.0.2 2024 12 17
+Fixed press-anykey-to-abort not working
 Fixed text parsed as comments in STRING blocks
 
 2.0.3 2024 12 19
