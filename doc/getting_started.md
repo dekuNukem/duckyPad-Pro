@@ -1,6 +1,6 @@
 # Getting Started with duckyPad Pro
 
-[Support on Kickstarter!](https://www.kickstarter.com/projects/dekunukem/duckypad-pro-advanced-macro-scripting-beyond-qmk-via) | [Official Discord](https://discord.gg/4sJCBx5) | [Getting Started](./getting_started.md) | [Table of Contents](#table-of-contents)
+[Get duckyPad Pro](https://www.kickstarter.com/projects/dekunukem/duckypad-pro-advanced-macro-scripting-beyond-qmk-via) | [Official Discord](https://discord.gg/4sJCBx5) | [Getting Started](./getting_started.md) | [Table of Contents](#table-of-contents)
 
 ------
 
@@ -64,7 +64,7 @@ Feel free to [review the files](../pc_software), or run the source code directly
 
 ![Alt text](../resources/photos/app/defender.png)
 
-#### Mac
+#### MacOS
 
 [See instruction here!](./linux_macos_notes.md)
 
