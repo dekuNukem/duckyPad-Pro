@@ -329,21 +329,29 @@ Please take a look at the [Common issues / Troubleshooting](troubleshooting.md) 
 
 If that doesn't help, feel free to contact me by [opening an issue](https://github.com/dekuNukem/duckypad/issues) or ask in the [official duckyPad discord](https://discord.gg/4sJCBx5).
 
-## USB Firmware Updates
+## Firmware Update
 
-You can update duckyPad's firmware for new features and bug fixes. 
+You can update duckyPad's firmware for new features and bug fixes.
 
-[Please see this guide](./fw_update.md).
-
-## Dimension Drawing
-
-![Alt text](../pcb/dimension%20drawings/dimensions.png)
+[Click me for details](./fw_update.md)
 
 ## Tinkering Guide
 
 Being open source, it is very easy to modify the firmware of your duckyPad Pro.
 
-[See this guide for more details](tinkering_guide.md).
+[Click me for details](tinkering_guide.md).
+
+## Dimension Drawing
+
+![Alt text](../pcb/dimension%20drawings/dimensions.png)
+
+## Community Showcase
+
+### 3D Printed Case by msetsma / Mitch!
+
+https://github.com/msetsma/ducky-pad-pro
+
+![Alt text](../resources/photos/mitch.jpg)
 
 ## Table of Contents
 
