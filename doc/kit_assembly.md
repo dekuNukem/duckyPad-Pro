@@ -138,6 +138,16 @@ Head back to the [Quick Start Guide](./getting_started.md) to see how to use it!
 
 ![Alt text](../resources/photos/instructions/done.jpeg)
 
+## duckyPad Expansion Module
+
+👇👇👇👇👇👇👇👇👇👇
+
+[See this guide](./kit_assembly.md) to put your Expansion Module together!
+
+☝️☝️☝️☝️☝️☝️☝️☝️☝️☝️
+
+![Alt text](../resources/photos/instructions/exp.jpeg)
+
 ## Table of Contents
 
 [Main page](../README.md)
