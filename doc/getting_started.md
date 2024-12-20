@@ -213,11 +213,15 @@ It might be tempting to have duckyPad type out passwords, but beware that all sc
 
 ### Bluetooth Mode
 
-* duckyPad Pro switches to BT when **no USB activity** is detected
+* **Long press** `+ or -` button
 
+* Adjust `BT Mode` setting to your liking
+
+![Alt text](../resources/photos/bt_modes.png)
+
+* In **Auto** Mode:
+	* BT is used when **no USB activity** is detected
 	* Plug into a USB power bank for example
-
-	* I might add a user option to always use BT in near future
 
 * BT status is displayed on **top left corner**
 
