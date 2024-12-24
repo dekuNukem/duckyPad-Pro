@@ -5,14 +5,6 @@ import urllib.request
 pc_app_release_url = "https://api.github.com/repos/dekuNukem/duckyPad-Pro/releases/latest"
 firmware_url = 'https://api.github.com/repos/dekuNukem/duckyPad-Pro/contents/firmware?ref=master'
 
-def is_internet_available():
-    try:
-        socket.create_connection(("www.google.com", 80), timeout=1)
-        return True
-    except Exception:
-        pass
-    return False
-
 def versiontuple(v):
     return tuple(map(int, (v.strip('v').split("."))))
 
@@ -22,10 +14,8 @@ def versiontuple(v):
 2 unknown
 """
 def get_pc_app_update_status(this_version):
-	if is_internet_available() is False:
-		return 2
 	try:
-		result_dict = json.loads(urllib.request.urlopen(pc_app_release_url).read())
+		result_dict = json.loads(urllib.request.urlopen(pc_app_release_url, timeout=2).read())
 		this_version = versiontuple(this_version)
 		remote_version = versiontuple(result_dict['tag_name'])
 		return int(remote_version > this_version)
@@ -39,7 +29,7 @@ def get_pc_app_update_status(this_version):
 """
 def get_firmware_update_status(current_version):
 	try:
-		file_list = json.loads(urllib.request.urlopen(firmware_url).read())
+		file_list = json.loads(urllib.request.urlopen(firmware_url, timeout=2).read())
 		dfu_list = [x['name'] for x in file_list if 'name' in x and 'type' in x and x['type'] == 'file']
 		dfu_list = [d.replace('DPP_FW_', '').replace('.bin', '').split('_')[0] for d in dfu_list if d.startswith('DPP_FW_') and d.endswith('.bin')]
 		dfu_list.sort(key=lambda s: list(map(int, s.split('.'))))
