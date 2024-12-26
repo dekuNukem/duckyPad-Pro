@@ -123,9 +123,11 @@ def get_duckypad_drive(vol_str):
 def eject_drive(vol_str):
     print("ejecting...")
     if 'darwin' in sys.platform:
-        os.system(f"umount {vol_str}")
-        return
-    time.sleep(1)
+        os.system(f"diskutil unmountDisk force {vol_str}")
+    elif 'linux' in sys.platform:
+        os.system(f"umount -l {vol_str}")
+    else:
+        time.sleep(1) # well, good enough for windows
 
 # result = get_duckypad_drive("DP24_9BB0")
 # print(result)
