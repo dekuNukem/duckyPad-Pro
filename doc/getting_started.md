@@ -72,11 +72,11 @@ Feel free to [review the files](../pc_software), or run the source code directly
 
 [Download the latest source release here](https://github.com/dekuNukem/duckyPad-Pro/releases/latest)
 
-* Unzip
-* Open a terminal at the directory
+* Unzip & open a terminal at the directory
 * Install tkinter: `sudo apt install python3-tk`
 * Install dependencies: `sudo pip3 install -r requirements.txt`
-* Launch the app: `sudo python3 ./duckypad_config.py`
+* Launch the app: `sudo DUCKYPAD_UI_SCALE=1 python3 ./duckypad_config.py`
+	* For High-DPI screens, adjust `DUCKYPAD_UI_SCALE` environment variable.
 
 ### Using Configurator
 
