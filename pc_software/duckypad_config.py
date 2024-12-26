@@ -124,9 +124,12 @@ Increased default USB MSC timeout
 Adjusted macOS additional instruction warnings
 updated linux "need sudo" text box
 
+2.0.4 2024 12 26
+Updated mac and linux unmount command
+
 """
 
-THIS_VERSION_NUMBER = '2.0.3'
+THIS_VERSION_NUMBER = '2.0.4'
 MIN_DUCKYPAD_FIRMWARE_VERSION = "1.0.0"
 MAX_DUCKYPAD_FIRMWARE_VERSION = "1.5.0"
 
