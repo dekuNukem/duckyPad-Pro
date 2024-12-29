@@ -45,4 +45,5 @@ On macOS, you can run the configurator as a **pre-packaged app**, or execute the
 * Use [homebrew](https://brew.sh) to install python-tk: `brew install python-tk`
 * **[Optional]** Make a virtualenv and activate it: `python3 -m venv .venv; source .venv/bin/activate`
 * Install dependencies: `pip3 install -r requirements.txt`
-* Launch the app: `python3 ./duckypad_config.py`
+* Launch the Configurator: `sudo python3 ./duckypad_config.py`
+	* Or Profile Autoswitcher: `sudo python3 ./duckypad_autoprofile.py`
