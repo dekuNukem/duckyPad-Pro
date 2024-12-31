@@ -50,6 +50,7 @@ WHILE 1
         decrease()
         $currY = $fun_arg
     ELSE
+	SWC_RESET 99
         HALT
     END_IF
     
