@@ -1,4 +1,4 @@
-VAR $count = 5
+VAR $count = 6
 
 WHILE $count > 0
 	OLED_CLEAR
@@ -7,5 +7,5 @@ WHILE $count > 0
 	OLED_UPDATE
 
 	$count = $count - 1
-	DELAY 1000
+	DELAY 500
 END_WHILE
