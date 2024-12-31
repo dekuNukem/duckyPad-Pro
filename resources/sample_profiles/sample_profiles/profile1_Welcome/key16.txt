@@ -34,14 +34,14 @@ OLED_UPDATE
 
 WHILE TRUE
 	VAR $choice = $_BLOCKING_READKEY
-	IF $choice <= 3 THEN
+	IF $choice <= 4 THEN
 		LBREAK
 	END_IF
 END_WHILE
 
 OLED_CLEAR
 SWC_FILL 0 0 0
-IF $choice == 0 THEN
+IF $choice == 1 THEN
 	SWC_SET 1 128 0 255
 	OLED_CURSOR 0 10
 	OLED_PRINT It is a dead end.
@@ -49,7 +49,7 @@ IF $choice == 0 THEN
 	OLED_PRINT Something moves
 	OLED_CURSOR 0 55
 	OLED_PRINT behind you.
-ELSE IF $choice == 1 THEN
+ELSE IF $choice == 2 THEN
 	SWC_SET 2 128 0 255
 	OLED_CURSOR 0 10
 	OLED_PRINT You step into
@@ -59,7 +59,7 @@ ELSE IF $choice == 1 THEN
 	OLED_PRINT and slowly 
 	OLED_CURSOR 0 70
 	OLED_PRINT start to sink.
-ELSE IF $choice == 2 THEN
+ELSE IF $choice == 3 THEN
 	SWC_SET 3 128 0 255
 	OLED_CURSOR 0 10
 	OLED_PRINT A dragon blocks
@@ -84,3 +84,4 @@ OLED_UPDATE
 $choice = $_BLOCKING_READKEY
 
 SWC_RESET 99
+
