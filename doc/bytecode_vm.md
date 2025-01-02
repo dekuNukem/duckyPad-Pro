@@ -128,7 +128,7 @@ All reference to **"stack"** refers to **Arithmetic Stack**. Unless noted otherw
 |   CALL  |  6  |  0x6 |                                                              Jump to Subroutine<br>Push PC+1 to **call stack**<br>Jump to ADDR                                                             |  ADDR_LSB |  ADDR_MSB |
 |   RET   |  7  |  0x7 |                                                        Return from Subroutine<br>Pop one item off **call stack**<br>Set PC to its value                                                       |           |           |
 |   HALT  |  8  |  0x8 |                                                                                    Stop execution                                                                                    |           |           |
-|   VMVER  |  255  |  0xFF|     VM Version         |          |   VM VER        |
+|   VMVER  |  255  |  0xFF|     VM Version Check<br>Abort if mismatched         ||   VM VER        |
 
 
 ## Binary Operator Instructions
