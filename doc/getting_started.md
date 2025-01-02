@@ -34,7 +34,7 @@ Plug it in, use the **UPPER** USB port, and voilà:
 
 	* Adjust others to your liking
 
-	* Press any key to exit
+* To exit settings menu, press any unlit key.
 
 * ⚠️ Start with the `Welcome` profile
 
