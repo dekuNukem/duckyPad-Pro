@@ -46,7 +46,7 @@ Each profile now has their own keypress counter
 2025 01 07
 added _DP_MODEL reserved variable
 fixed BT unpair typo
-
+adjusted keypress counter increment logic
 */
 
 uint8_t fw_version_major = 1;
