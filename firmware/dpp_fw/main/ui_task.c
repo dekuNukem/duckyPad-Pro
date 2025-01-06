@@ -732,7 +732,7 @@ void draw_nvm_erase()
   ssd1306_WriteString(oled_line_buf, Font_7x10, White);
 
   memset(oled_line_buf, 0, OLED_LINE_BUF_SIZE);
-  sprintf(oled_line_buf, "has been forgotten");
+  sprintf(oled_line_buf, "have been erased");
   ssd1306_SetCursor(center_line(strlen(oled_line_buf), 7, SSD1306_WIDTH), 27);
   ssd1306_WriteString(oled_line_buf, Font_7x10, White);
 

@@ -45,6 +45,7 @@ Each profile now has their own keypress counter
 1.0.5
 2025 01 07
 added _DP_MODEL reserved variable
+fixed BT unpair typo
 
 */
 
