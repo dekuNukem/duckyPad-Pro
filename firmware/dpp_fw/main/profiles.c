@@ -544,7 +544,7 @@ uint8_t sps_bin_buf[SPS_BIN_SIZE];
 void save_persistent_state(uint8_t epilogue_value, uint8_t swid)
 {
   memset(sps_bin_buf, 0, SPS_BIN_SIZE);
-  memcpy(sps_bin_buf, key_press_count, MAX_TOTAL_SW_COUNT);
+  memcpy(sps_bin_buf, all_profile_info[current_profile_number].keypress_count, MAX_TOTAL_SW_COUNT);
   for (uint8_t i = 0; i < NEOPIXEL_COUNT; i++)
   {
     uint8_t r_addr = i*3 + COLOR_START_ADDR;
@@ -587,7 +587,7 @@ uint8_t load_persistent_state(void)
   memset(sps_bin_buf, 0, SPS_BIN_SIZE);
   fread(sps_bin_buf, 1, SPS_BIN_SIZE, file);
   fclose(file);
-  memcpy(key_press_count, sps_bin_buf, MAX_TOTAL_SW_COUNT);
+  memcpy(all_profile_info[current_profile_number].keypress_count, sps_bin_buf, MAX_TOTAL_SW_COUNT);
 
   for (uint8_t i = 0; i < NEOPIXEL_COUNT; ++i)
   {

@@ -38,11 +38,15 @@ added BT mode option: Auto/Always/Never
 2024 12 18
 fixed dead key behaviour
 
+1.0.4
+2025 01 06
+Each profile now has their own keypress counter
+
 */
 
 uint8_t fw_version_major = 1;
 uint8_t fw_version_minor = 0;
-uint8_t fw_version_patch = 3;
+uint8_t fw_version_patch = 4;
 uint8_t dsvm_version = 1;
 
 static const char *TAG = "MAIN";

@@ -42,6 +42,7 @@ typedef struct
   char sw_name_secondline[TOTAL_OBSW_COUNT][KEYNAME_SIZE];
   uint8_t sw_color[MECH_OBSW_COUNT][THREE]; // only mechanical keys have RGB LEDs
   uint8_t sw_activation_color[MECH_OBSW_COUNT][THREE];
+  uint8_t keypress_count[MAX_TOTAL_SW_COUNT];
   uint8_t dim_unused_keys;
   uint8_t is_landscape;
 } profile_info;

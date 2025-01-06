@@ -25,7 +25,6 @@ uint32_t rand_min, rand_max;
 uint16_t loop_size;
 uint8_t epilogue_actions;
 uint8_t allow_abort;
-uint8_t key_press_count[MAX_TOTAL_SW_COUNT];
 uint8_t kb_led_status;
 uint8_t last_stack_op_result;
 uint8_t disable_autorepeat;
@@ -121,7 +120,7 @@ void store_uint16_as_two_bytes_at(uint16_t addr, uint16_t value)
   var_buf[addr+1] = value >> 8;
 }
 
-void write_var(uint16_t addr, uint16_t value)
+void write_var(uint16_t addr, uint16_t value, uint8_t this_key_id)
 {
   if(addr == DEFAULTDELAY_ADDR)
     defaultdelay_value = value;
@@ -146,7 +145,7 @@ void write_var(uint16_t addr, uint16_t value)
   else if (addr == _LOOP_SIZE)
     loop_size = value;
   else if (addr == _KEYPRESS_COUNT)
-    ; // read only
+    all_profile_info[current_profile_number].keypress_count[this_key_id] = value;
   else if (addr == _NEEDS_EPILOGUE)
     epilogue_actions = value;
   else if (addr == _ALLOW_ABORT)
@@ -213,7 +212,7 @@ uint16_t read_var(uint16_t addr, uint8_t this_key_id)
   else if (addr == _READKEY)
     return readkey_nonblocking_1_indexed();
   else if (addr == _KEYPRESS_COUNT)
-    return key_press_count[this_key_id];
+    return all_profile_info[current_profile_number].keypress_count[this_key_id];
   else if (addr == _NEEDS_EPILOGUE)
     return epilogue_actions;
   else if (addr == _ALLOW_ABORT)
@@ -466,7 +465,7 @@ void execute_instruction(uint16_t curr_pc, ds3_exe_result* exe, uint8_t this_key
   {
     uint16_t this_item;
     stack_pop(&arithmetic_stack, &this_item);
-    write_var(op_data, this_item);
+    write_var(op_data, this_item, this_key_id);
   }
   else if(this_opcode == OP_BRZ)
   {

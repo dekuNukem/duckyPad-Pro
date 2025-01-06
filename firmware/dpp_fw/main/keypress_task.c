@@ -151,7 +151,7 @@ void onboard_offboard_switch_press(uint8_t swid, char* press_path, char* release
   if(access(press_path, F_OK))
     return;
   play_keydown_animation(current_profile_number, swid);
-  key_press_count[swid]++;
+  all_profile_info[current_profile_number].keypress_count[swid]++;
   //-------------
   uint8_t run_result = run_once(swid, press_path);
   if(run_result == DSB_DONT_PLAY_KEYUP_ANIMATION_RETURN_IMMEDIATELY)
@@ -175,7 +175,7 @@ void onboard_offboard_switch_press(uint8_t swid, char* press_path, char* release
   {
     if(poll_sw_state(swid, 1) == 0)
       break;
-    key_press_count[swid]++;
+    all_profile_info[current_profile_number].keypress_count[swid]++;
     if(run_once(swid, press_path) == DSB_DONT_PLAY_KEYUP_ANIMATION_RETURN_IMMEDIATELY)
       return;
   }
@@ -337,7 +337,7 @@ void rotary_encoder_activity(uint8_t swid)
   sprintf(dsb_on_press_path_buf, "/sdcard/%s/key%d.dsb", all_profile_info[current_profile_number].dir_path, swid+1);
   if(access(dsb_on_press_path_buf, F_OK))
     return;
-  key_press_count[swid]++;
+  all_profile_info[current_profile_number].keypress_count[swid]++;
   run_once(swid, dsb_on_press_path_buf);
 }
 
