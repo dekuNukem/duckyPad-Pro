@@ -42,11 +42,15 @@ fixed dead key behaviour
 2025 01 06
 Each profile now has their own keypress counter
 
+1.0.5
+2025 01 07
+added _DP_MODEL reserved variable
+
 */
 
 uint8_t fw_version_major = 1;
 uint8_t fw_version_minor = 0;
-uint8_t fw_version_patch = 4;
+uint8_t fw_version_patch = 5;
 uint8_t dsvm_version = 1;
 
 static const char *TAG = "MAIN";

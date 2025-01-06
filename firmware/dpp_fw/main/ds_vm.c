@@ -160,6 +160,8 @@ void write_var(uint16_t addr, uint16_t value, uint8_t this_key_id)
     disable_autorepeat = value;
   else if (addr == _THIS_KEYID)
     ; // read only
+  else if (addr == _DP_MODEL)
+    ; // read only
   else if(addr < VAR_BUF_SIZE)
     store_uint16_as_two_bytes_at(addr, value);
 }
@@ -229,6 +231,8 @@ uint16_t read_var(uint16_t addr, uint8_t this_key_id)
     return disable_autorepeat;
   else if (addr == _THIS_KEYID)
     return this_key_id+1;
+  else if (addr == _DP_MODEL)
+    return 2;
   else if(addr < VAR_BUF_SIZE)
     return make_uint16(var_buf[addr], var_buf[addr+1]);
   return 0;

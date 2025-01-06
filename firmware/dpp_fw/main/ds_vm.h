@@ -102,6 +102,7 @@
 #define _IS_SCROLLLOCK_ON (0xffff - 16)
 #define _DONT_REPEAT (0xffff - 17)
 #define _THIS_KEYID (0xffff - 18)
+#define _DP_MODEL (0xffff - 19)
 
 typedef struct
 {
