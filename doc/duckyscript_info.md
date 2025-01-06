@@ -565,16 +565,14 @@ Returns the [Key ID](#key-id) for the **current script**.
 
 #### `$_DP_MODEL` (RO)
 
-Not implemented yet, coming soon!
-
 Returns:
 
-* `1` for duckyPad(2020)
+* `1` for duckyPad (2020)
 * `2` for duckyPad Pro (2024)
 
 #### `$_KEYPRESS_COUNT` (RW)
 
-Returns how many times the current key have been pressed.
+Returns how many times the current key have been pressed **in the current profile**.
 
 Assign 0 to reset.
 
