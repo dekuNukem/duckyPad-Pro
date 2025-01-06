@@ -624,6 +624,7 @@ def make_dsb_with_exception(program_listing, profile_list=None):
     VAR_SIZE_BYTES = 2
     var_addr_dict = {}
     var_count = 0
+    # assign address to all variables
     for item in var_lookup:
         if item in reserved_variable_dict:
             var_addr_dict[item] = reserved_variable_dict[item]
