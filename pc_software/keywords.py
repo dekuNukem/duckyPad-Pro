@@ -401,7 +401,7 @@ cmd_MK_STOP : (KEY_MK_STOP, KEY_TYPE_MEDIA),
 
 GV_OFFSET = 64
 
-reserved_variable_dict = {
+internal_variable_dict = {
 	'_DEFAULTDELAY': (0xffff - 0),
 	'_DEFAULTCHARDELAY': (0xffff - 1),
 	'_CHARJITTER': (0xffff - 2),
@@ -422,7 +422,9 @@ reserved_variable_dict = {
 	"_DONT_REPEAT": (0xffff - 17),
 	"_THIS_KEYID": (0xffff - 18),
 	"_DP_MODEL": (0xffff - 19),
-	# --------------
+}
+
+global_variable_dict = {
 	"_GV0": (0xffff - GV_OFFSET - 0),
 	"_GV1": (0xffff - GV_OFFSET - 1),
 	"_GV2": (0xffff - GV_OFFSET - 2),
@@ -440,5 +442,7 @@ reserved_variable_dict = {
 	"_GV14": (0xffff - GV_OFFSET - 14),
 	"_GV15": (0xffff - GV_OFFSET - 15),
 }
+
+reserved_variable_dict = internal_variable_dict | global_variable_dict
 
 MAX_NUMBER_OF_VARIABLES = 64

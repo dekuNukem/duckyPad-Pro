@@ -83,7 +83,7 @@ def check_rvalue(rvalue_str, vt):
         if "$"+key in rvalue_str:
             rvalue_str = rvalue_str.replace("$"+key, str(vt[key])).strip()
     rvalue_str = rvalue_str.replace("^", "**")
-    print("rvalue_str after replacement:", rvalue_str)
+    # print("rvalue_str after replacement:", rvalue_str)
 
     if contains_english_alphabet(rvalue_str):
         return False, "unknown variable or invalid character"
@@ -109,25 +109,28 @@ def is_valid_expr(whole_line, vt):
     return presult, pcomment
 
 def assign_var(var_keyword, pgm_line, vt, check_duplicate=False):
+    has_global_variable = False
     try:
         var_sides = pgm_line.split(var_keyword, 1)[-1].split('=')
         lvalue = var_sides[0].split("$")[-1].rstrip()
         rvalue = var_sides[1].lstrip()
     except Exception as e:
-        return PARSE_ERROR, "var declaration parse failed"
+        return PARSE_ERROR, "var declaration parse failed", has_global_variable
     # print([lvalue, rvalue])
+    if lvalue in global_variable_dict:
+        has_global_variable = True
     if_valid_vn, vn_comment = is_valid_var_name(lvalue)
     if if_valid_vn is False:
-        return PARSE_ERROR, vn_comment
+        return PARSE_ERROR, vn_comment, has_global_variable
     is_valid_rv, rv_comment = check_rvalue(rvalue, vt)
     if is_valid_rv is False:
-        return PARSE_ERROR, rv_comment
+        return PARSE_ERROR, rv_comment, has_global_variable
     if var_keyword == cmd_VAR_ASSIGN and lvalue not in vt:
-        return PARSE_ERROR, "unknown variable"
+        return PARSE_ERROR, "unknown variable", has_global_variable
     if check_duplicate and lvalue in vt:
-        return PARSE_ERROR, "variable already declared"
+        return PARSE_ERROR, "variable already declared", has_global_variable
     vt[lvalue] = 127 # the actual value doesn't matter, since it will change at runtime anyway
-    return PARSE_OK, ''
+    return PARSE_OK, '', has_global_variable
 
 def new_rem_block_check(pgm_line, lnum, rbss, rbdict):
     if len(rbss) != 0:
@@ -440,6 +443,7 @@ def run_once(program_listing):
     'loop_state_save_needed':False,
     'color_state_save_needed':False,
     'oled_restore_needed':False,
+    'has_global_variable':False,
     'loop_size':None,
     'rem_block_table':None,
     'strlen_block_table':None,
@@ -491,9 +495,13 @@ def run_once(program_listing):
         elif first_word == cmd_DEFINE:
             presult, pcomment = new_define(this_line, define_dict)
         elif first_word == cmd_VAR_DECLARE:
-            presult, pcomment = assign_var(cmd_VAR_DECLARE, this_line, var_table, check_duplicate=True)
+            presult, pcomment, has_gv = assign_var(cmd_VAR_DECLARE, this_line, var_table, check_duplicate=True)
+            if has_gv:
+                return_dict["has_global_variable"] = True
         elif first_word[0] == "$":
-            presult, pcomment = assign_var(cmd_VAR_ASSIGN, this_line, var_table)
+            presult, pcomment, has_gv = assign_var(cmd_VAR_ASSIGN, this_line, var_table)
+            if has_gv:
+                return_dict["has_global_variable"] = True
         elif first_word == cmd_FUNCTION:
             presult, pcomment = new_func_check(this_line, line_number_starting_from_1, func_search_stack, func_table)
         elif first_word == cmd_END_FUNCTION:
@@ -804,6 +812,8 @@ def run_all(program_listing, profile_list=None):
         epilogue |= 0x2
     if rdict['oled_restore_needed']:
         epilogue |= 0x4
+    if rdict['has_global_variable']:
+        epilogue |= 0x8
 
     if epilogue != 0:
         second_pass_program_listing.append((1, f"$_NEEDS_EPILOGUE = {epilogue}"))
