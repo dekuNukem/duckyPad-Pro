@@ -71,6 +71,11 @@ void der_init(ds3_exe_result* der)
   der->epilogue_actions = 0;
 }
 
+void save_gv(void)
+{
+  printf("HERE!!!\n");
+}
+
 #define DSB_ALLOW_AUTOREPEAT 0
 #define DSB_DONT_PLAY_KEYUP_ANIMATION_RETURN_IMMEDIATELY 1
 #define DSB_DONT_REPEAT_RETURN_IMMEDIATELY 2
@@ -99,6 +104,10 @@ uint8_t run_once(uint8_t swid, char* dsb_path, uint8_t* to_increment)
     return DSB_DONT_PLAY_KEYUP_ANIMATION_RETURN_IMMEDIATELY;
   }
 
+  if(this_exe.epilogue_actions & EPILOGUE_SAVE_GV)
+  {
+    save_gv();
+  }
   if(this_exe.epilogue_actions & EPILOGUE_SAVE_LOOP_STATE)
   {
     save_persistent_state(this_exe.epilogue_actions, swid);

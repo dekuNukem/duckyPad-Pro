@@ -812,8 +812,9 @@ def run_all(program_listing, profile_list=None):
         epilogue |= 0x2
     if rdict['oled_restore_needed']:
         epilogue |= 0x4
+    # 0x8 is disable_autorepeat, generated on duckypad itself
     if rdict['has_global_variable']:
-        epilogue |= 0x8
+        epilogue |= 0x10
 
     if epilogue != 0:
         second_pass_program_listing.append((1, f"$_NEEDS_EPILOGUE = {epilogue}"))
