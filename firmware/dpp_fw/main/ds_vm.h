@@ -63,7 +63,7 @@
 #define OP_VMINFO 255
 
 #define INSTRUCTION_SIZE_BYTES 3
-#define STACK_SIZE 16
+#define MY_STACK_SIZE 16
 
 #define EXE_OK 0
 
@@ -123,6 +123,11 @@ typedef struct
 #define BIN_BUF_SIZE 65536
 #define VAR_BUF_SIZE 128
 
+#define GLOBAL_VARIABLE_COUNT 16
+#define GLOBAL_VARIABLE_OFFSET 64
+#define GLOBAL_VARIABLE_START (BIN_BUF_SIZE - 1 - GLOBAL_VARIABLE_OFFSET)
+#define GLOBAL_VARIABLE_END_INCLUSIVE (GLOBAL_VARIABLE_START - GLOBAL_VARIABLE_COUNT + 1)
+
 #define MAX(a, b) ((a) > (b) ? (a) : (b))
 
 extern uint8_t bin_buf[BIN_BUF_SIZE];
@@ -130,5 +135,6 @@ extern uint8_t allow_abort;
 extern uint8_t kb_led_status;
 
 void run_dsb(ds3_exe_result* er, uint8_t this_key_id, char* dsb_path);
+
 #endif
 

@@ -28,14 +28,28 @@ uint8_t allow_abort;
 uint8_t kb_led_status;
 uint8_t last_stack_op_result;
 uint8_t disable_autorepeat;
+uint16_t gv_buf[GLOBAL_VARIABLE_COUNT];
 
 typedef struct
 {
   uint8_t top;
-  uint16_t stack[STACK_SIZE];
+  uint16_t stack[MY_STACK_SIZE];
 } my_stack;
 
 my_stack arithmetic_stack, call_stack;
+
+uint8_t is_global_variable(uint16_t addr)
+{
+  return addr >= GLOBAL_VARIABLE_START && addr <= GLOBAL_VARIABLE_END_INCLUSIVE;
+}
+
+uint8_t get_gv_index(uint16_t addr)
+{
+  uint8_t result = GLOBAL_VARIABLE_START - addr;
+  if(result >= GLOBAL_VARIABLE_COUNT)
+    return 0;
+  return result;
+}
 
 uint8_t read_byte(uint16_t addr)
 {
@@ -45,12 +59,12 @@ uint8_t read_byte(uint16_t addr)
 void stack_init(my_stack* ms)
 {
   ms->top = 0;
-  memset(ms->stack, 0, STACK_SIZE*sizeof(uint16_t));
+  memset(ms->stack, 0, MY_STACK_SIZE*sizeof(uint16_t));
 }
 
 void stack_push(my_stack* ms, uint16_t value)
 {
-  if(ms->top >= STACK_SIZE)
+  if(ms->top >= MY_STACK_SIZE)
   {
     last_stack_op_result = EXE_STACK_OVERFLOW;
     return;
@@ -162,6 +176,8 @@ void write_var(uint16_t addr, uint16_t value, uint8_t this_key_id)
     ; // read only
   else if (addr == _DP_MODEL)
     ; // read only
+  else if (is_global_variable(addr))
+    gv_buf[get_gv_index(addr)] = value;
   else if(addr < VAR_BUF_SIZE)
     store_uint16_as_two_bytes_at(addr, value);
 }
@@ -233,6 +249,8 @@ uint16_t read_var(uint16_t addr, uint8_t this_key_id)
     return this_key_id+1;
   else if (addr == _DP_MODEL)
     return 2;
+  else if (is_global_variable(addr))
+    return gv_buf[get_gv_index(addr)];
   else if(addr < VAR_BUF_SIZE)
     return make_uint16(var_buf[addr], var_buf[addr+1]);
   return 0;

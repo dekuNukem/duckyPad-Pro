@@ -444,5 +444,5 @@ global_variable_dict = {
 }
 
 reserved_variable_dict = internal_variable_dict | global_variable_dict
-
+print(global_variable_dict)
 MAX_NUMBER_OF_VARIABLES = 64
