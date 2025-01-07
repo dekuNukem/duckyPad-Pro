@@ -128,8 +128,8 @@ updated linux "need sudo" text box
 Updated mac and linux unmount command
 
 2.1.0 2025 01 06
-Added 16 global variables $_GV0 to $_GV15
-
+Persistent global variables $_GV0 to $_GV15
+Fixed variables name parsing bug
 """
 
 THIS_VERSION_NUMBER = '2.1.0'

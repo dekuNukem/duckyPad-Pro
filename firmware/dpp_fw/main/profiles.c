@@ -609,5 +609,17 @@ void save_gv(void)
   FILE *file = fopen(temp_buf, "wb");
   fwrite(sps_bin_buf, 1, SPS_BIN_SIZE, file);
   fclose(file);
-  printf("GV saved!\n");
+}
+
+void load_gv(void)
+{
+  memset(temp_buf, 0, TEMP_BUFSIZE);
+  sprintf(temp_buf, "/sdcard/gv.sps");
+  FILE *file = fopen(temp_buf, "rb");
+  if(file == NULL)
+    return;
+  memset(sps_bin_buf, 0, SPS_BIN_SIZE);
+  fread(sps_bin_buf, 1, SPS_BIN_SIZE, file);
+  fclose(file);
+  memcpy(gv_buf, sps_bin_buf, GLOBAL_VARIABLE_COUNT * sizeof(uint16_t));
 }

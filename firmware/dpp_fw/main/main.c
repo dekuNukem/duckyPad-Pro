@@ -47,11 +47,14 @@ Each profile now has their own keypress counter
 added _DP_MODEL reserved variable
 fixed BT unpair typo
 adjusted keypress counter increment logic
+
+1.1.0
+Persistent global variables $_GV0 to $_GV15
 */
 
 uint8_t fw_version_major = 1;
-uint8_t fw_version_minor = 0;
-uint8_t fw_version_patch = 5;
+uint8_t fw_version_minor = 1;
+uint8_t fw_version_patch = 0;
 uint8_t dsvm_version = 1;
 
 static const char *TAG = "MAIN";
@@ -141,6 +144,7 @@ void app_main(void)
     }
 
     profile_init();
+    load_gv();
     is_profile_load_complete = 1;
 
     xTaskCreate(keypress_task, "keypress_task", KEYPRESS_TASK_STACK_SIZE, NULL, 6, NULL);
