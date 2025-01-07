@@ -339,10 +339,13 @@ def get_key_combined_value(keyname):
 def get_partial_varname_addr(msg, vad):
     if len(msg) == 0:
         return None, None
+    last_match = None
     for x in range(len(msg)+1):
         partial_name = msg[:x]
         if partial_name in vad:
-            return partial_name, vad[partial_name]
+            last_match = partial_name
+    if last_match is not None:
+        return last_match, vad[last_match]
     return None, None
 
 def replace_var_in_str(msg, vad):
