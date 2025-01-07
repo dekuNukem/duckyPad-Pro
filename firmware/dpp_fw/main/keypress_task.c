@@ -71,11 +71,6 @@ void der_init(ds3_exe_result* der)
   der->epilogue_actions = 0;
 }
 
-void save_gv(void)
-{
-  printf("HERE!!!\n");
-}
-
 #define DSB_ALLOW_AUTOREPEAT 0
 #define DSB_DONT_PLAY_KEYUP_ANIMATION_RETURN_IMMEDIATELY 1
 #define DSB_DONT_REPEAT_RETURN_IMMEDIATELY 2

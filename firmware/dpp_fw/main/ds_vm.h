@@ -134,6 +134,7 @@ typedef struct
 extern uint8_t bin_buf[BIN_BUF_SIZE];
 extern uint8_t allow_abort;
 extern uint8_t kb_led_status;
+extern uint16_t gv_buf[GLOBAL_VARIABLE_COUNT];
 
 void run_dsb(ds3_exe_result* er, uint8_t this_key_id, char* dsb_path);
 

@@ -1,2 +1,0 @@
-STRING $_GV3
-VAR $test = 3
