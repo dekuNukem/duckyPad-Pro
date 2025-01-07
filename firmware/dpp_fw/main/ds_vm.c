@@ -40,7 +40,7 @@ my_stack arithmetic_stack, call_stack;
 
 uint8_t is_global_variable(uint16_t addr)
 {
-  return addr >= GLOBAL_VARIABLE_START && addr <= GLOBAL_VARIABLE_END_INCLUSIVE;
+  return (addr <= GLOBAL_VARIABLE_START && addr >= GLOBAL_VARIABLE_END_INCLUSIVE);
 }
 
 uint8_t get_gv_index(uint16_t addr)
