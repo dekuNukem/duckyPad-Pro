@@ -362,14 +362,14 @@ void handle_rotary_encoder_event(rotary_encoder_event_t* this_re_event)
   rotary_encoder_activity(swid);
 }
 
-
-
 void handle_sw_event(switch_event_t* this_sw_event)
 {
   update_last_keypress();
   // printf("swid: %d type: %d\n", this_sw_event->id, this_sw_event->type);
-  if(is_sleeping && this_sw_event->type == SW_EVENT_SHORT_PRESS)
+  if(is_sleeping)
   {
+    if(is_plus_minus_button(this_sw_event->id) && this_sw_event->type != SW_EVENT_RELEASE) 
+      return;
     wakeup_from_sleep_and_load_profile(current_profile_number);
     return;
   }
@@ -380,7 +380,6 @@ void handle_sw_event(switch_event_t* this_sw_event)
   if(execution_duration > 500)
     clear_sw_re_queue();
 }
-
 void keypress_task(void *dummy)
 {
   update_last_keypress();

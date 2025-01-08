@@ -50,6 +50,7 @@ adjusted keypress counter increment logic
 
 1.1.0
 Persistent global variables $_GV0 to $_GV15
+Waking up from sleep with +/- button no longer changes profile
 */
 
 uint8_t fw_version_major = 1;
