@@ -6,17 +6,26 @@
 
 ## Latest Firmware
 
-#### 1.0.3
+#### 1.1.0
 
-* 18 Dec 2024
+9 Jan 2025
 
-* 🆕 Added BT Mode Override: Auto/Always/Never
+* 🆕 Persistent Global Variables
+	* `$_GV0` to `$_GV15`
+	* Available on all profiles
+	* Persistent over reboots
 
-* 🐞 Fixed Dead Key behaviour
+* 🆕 Added `_DP_MODEL` reserved variable
+
+* 🐞 Adjusted keypress counter implementation and logic
+
+* 🐞 Waking up from sleep with +/- button no longer changes profile
+
+* 🐞 Fixed typos
 
 👇👇👇👇👇👇👇👇👇👇
 
-[Download Here](https://github.com/dekuNukem/duckyPad-Pro/raw/master/firmware/DPP_FW_1.0.3_62cc7071.bin)
+[Download Here](https://github.com/dekuNukem/duckyPad-Pro/raw/master/firmware/DPP_FW_1.1.0_f0043533.bin)
 
 ☝️☝️☝️☝️☝️☝️☝️☝️☝️☝️☝️
 
@@ -53,6 +62,14 @@
 ![Alt text](../resources/photos/tinker/newver.png)
 
 ## Version History
+
+#### 1.0.3
+
+* 18 Dec 2024
+
+* 🆕 Added BT Mode Override: Auto/Always/Never
+
+* 🐞 Fixed Dead Key behaviour
 
 ### 1.0.1
 
