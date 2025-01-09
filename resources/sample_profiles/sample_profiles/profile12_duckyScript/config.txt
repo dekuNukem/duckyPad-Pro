@@ -10,7 +10,6 @@ z6 RGB
 x6 FILL
 z7 RGB
 x7 RESET
-z8 test
 z9 OLED
 x9 CLR
 z10 OLED

@@ -1,2 +1,0 @@
-$_GV15 = 255
-STRINGLN hello $_GV15
