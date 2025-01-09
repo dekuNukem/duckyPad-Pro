@@ -53,16 +53,25 @@ print(new_folder_path)
 
 os.rename(output_folder_path, new_folder_path)
 
-f = open(os.path.join(new_folder_path, "run.sh"), "w")
-f.write("echo\n")
-f.write("echo Welcome to duckyPad!\n")
-f.write("echo\n")
-f.write("echo To Connect, Please Authenticate.\n")
-f.write("echo\n")
-f.write("echo More info: duckyPad.com\n")
-f.write("echo\n")
-f.write(f"sudo ./{exe_file_name}\n")
-f.close()
+sh_content = f"""
+echo
+echo ---------------
+echo Welcome to duckyPad!
+echo
+echo To Connect, Please Authenticate.
+echo
+echo If Blocked:
+echo "    Go to Settings > Privacy & Security"
+echo "    Scroll down, click \"Allow Anyway\""
+echo
+echo More info: duckyPad.com
+echo ---------------
+echo
+sudo ./{exe_file_name}
+"""
+
+with open(os.path.join(new_folder_path, "run.sh"), "w") as f:
+	f.write(sh_content)
 os.system(f"chmod a+x {os.path.join(new_folder_path, "run.sh")}")
 
 zip_file_name = exe_file_name
