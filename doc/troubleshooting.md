@@ -14,11 +14,10 @@ Some commonly encountered issues are explained here.
 - [The RGB backlight is too bright!](#the-rgb-backlight-is-too-bright)
 - [Will OLED suffer burn-in?](#will-oled-suffer-burn-in)
 - [Numpad keys doesn't work!](#numpad-keys-doesnt-work)
-- [USB configuration / Autoswitcher isn't working on macOS!](#usb-configuration--autoswitcher-isnt-working-on-macos)
 
 ## Join Our Discord!
 
-If you have issues not in this list, feel free to join our [Official Discord](https://discord.gg/4sJCBx5) to ask about it! We also have discussions, script sharing, and latest updates!
+If you have issues not in this list, feel free to join our [Official Discord](https://discord.gg/4sJCBx5) to ask!
 
 ----
 
@@ -28,15 +27,13 @@ First of all, make sure the key has a script mapped to it.
 
 If in doubt, use one of the sample profiles.
 
-### Just updated firmware?
-
-Use the [latest configurator](https://github.com/dekuNukem/duckyPad/releases/latest), press `Connect` to load up data, then press `Save` to write it back.
-
 ### If *none* of the keys work
+
+* Check you're using the **top USB-C port**, NOT the one next to the screen!
 
 * Check that the cable is plugged all the way in.
 
-* Try a different cable.
+* Try a different cable (some don't have data pins).
 
 * Try a different USB port.
 
@@ -86,7 +83,7 @@ Slow it down with the following commands:
 
 * Copy all the files back.
 
-* You can also download the [sample profiles](https://github.com/dekuNukem/duckyPad/raw/master/sample_profiles.zip) and copy everything to the **root of your SD card**:
+* You can also download the [sample profiles](../resources/sample_profiles/sample_profiles.zip) and copy everything to the **root of your SD card**:
 
 ![Alt text](../resources/photos/trouble/sample_pf.png)
 
@@ -111,56 +108,6 @@ Measures have been taken to prevent burn-in.
 ## Numpad keys doesn't work!
 
 Make sure `NUMLOCK` is on.
-
-## USB configuration / Autoswitcher isn't working on macOS!
-
-Due to the security restrictions of macOS, to use USB configuration and autoswitcher, you need to:
-
-* Enable "Input Monitoring" permission (for loading from USB)
-
-* Enable "Screen Recording" permission (for reading window titles)
-
-* Run the app as root
-
-### Enable permission
-
-* Open `System Preferences` -> `Security & Privacy`
-
-* Select `Input Monitoring`
-
-* Click the lock to make changes
-
-* Press the `+` button
-
-![Alt text](../resources/photos/trouble/input_mon.png)
-
-* Go to `Applications` -> `Utilities`, and add `Terminal` to the list.
-
-![Alt text](../resources/photos/trouble/select_term.png)
-
-* Select `Screen Recording`, and repeat the same process
-
-![Alt text](../resources/photos/trouble/screen_rec.png)
-
-### Launch app as administrator
-
-* Open `System Preferences` -> `Keyboard` -> `Shortcuts` -> `Services`
-
-* Tick `New Terminal at Folder`
-
-![Alt text](../resources/photos/trouble/terminal.png)
-
-* Download the latest macOS software, unzip into a folder.
-
-* `Right click` on the unzipped folder and select `New Terminal at Folder`
-
-![Alt text](../resources/photos/trouble/right.png)
-
-* Type in `sh run.sh` and press enter, then enter your password.
-
-* The app should launch as administrator, and should be fully functional now.
-
-* If it still doesn't work, [let me know](#questions-or-comments)!
 
 ## Table of Contents
 
