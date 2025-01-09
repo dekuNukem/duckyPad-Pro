@@ -74,6 +74,21 @@ with open(os.path.join(new_folder_path, "run.sh"), "w") as f:
 	f.write(sh_content)
 os.system(f"chmod a+x {os.path.join(new_folder_path, "run.sh")}")
 
+readme_content = """
+
+Launching this app on macOS:
+
+https://dekunukem.github.io/duckyPad-Pro/doc/linux_macos_notes.html
+
+Full User Manual:
+
+https://dekunukem.github.io/duckyPad-Pro/doc/getting_started.html
+
+"""
+
+with open(os.path.join(new_folder_path, "README.txt"), "w") as f:
+	f.write(readme_content)
+
 zip_file_name = exe_file_name
 shutil.make_archive(exe_file_name, 'zip', new_folder_path)
 
