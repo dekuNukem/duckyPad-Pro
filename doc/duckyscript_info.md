@@ -106,15 +106,16 @@ Much easier to lookup than going through this whole page.
 - [Constants](#constants)
 - [Variables](#variables)
 - [Reserved Variables](#reserved-variables)
+- [Persistent Global Variables](#persistent-global-variables)
 - [Operators](#operators)
 - [Arguments](#arguments)
 - [Conditional Statements](#conditional-statements)
 - [Loops](#loops)
 - [Functions](#functions)
 - [Reading Inputs](#reading-inputs)
-    - [Key ID](#key-id)
     - [Blocking Read](#blocking-read)
     - [Non-Blocking Read](#non-blocking-read)
+    - [Key ID](#key-id)
 - [Randomisation](#randomisation)
 - [Miscellaneous](#miscellaneous)
     - [`DP_SLEEP`](#dp_sleep)
@@ -587,6 +588,16 @@ Used internally. Do not modify.
 -------
 [⬆️⬆️⬆️⬆️⬆️⬆️ Back to Top ⬆️⬆️⬆️⬆️⬆️⬆️](#list-of-commands)
 
+## Persistent Global Variables
+
+* `$_GV0` to `$_GV15`
+* Available across all profiles
+* Persists over reboots
+* Can be used to store non-volatile data
+
+-------
+[⬆️⬆️⬆️⬆️⬆️⬆️ Back to Top ⬆️⬆️⬆️⬆️⬆️⬆️](#list-of-commands)
+
 ## Operators
 
 You can perform operations on constants and variables.
@@ -814,9 +825,51 @@ You can read the status of:
 * Rotary Encoders
 * Expansion Module Switches
 
+### Blocking Read
+
+Simplest method.
+
+Just read `$_BLOCKING_READKEY` reserved variable.
+
+It will block until a key is pressed.
+
+```
+VAR $this_key = $_BLOCKING_READKEY
+
+IF $this_key == 1 THEN
+    // do something here
+ELSE IF $this_key == 2 THEN
+    // do something else
+END_IF
+
+```
+
+### Non-Blocking Read
+
+Read reserved variable `$_READKEY`, returns immediately.
+
+Returns 0 if no key is pressed. Key ID otherwise.
+
+Check this in a loop to perform work even when no key is pressed.
+
+```
+VAR $this_key = 0
+
+WHILE TRUE
+    $this_key = $_READKEY
+    IF $this_key == 1 THEN
+        // handling button press
+    END_IF
+
+    // otherwise perform work here
+END_WHILE
+```
+
 ### Key ID
 
-A number will be returned for each key.
+This is the number returned by methods above.
+
+![Alt text](../resources/photos/keyid.png)
 
 ```
 1-20:
@@ -835,49 +888,7 @@ A number will be returned for each key.
 27: Plus Button
 28: Minus Button
 
-37-99: External Switches
-```
-
-### Blocking Read
-
-Simplest method.
-
-Just read `$_BLOCKING_READKEY` internal variable.
-
-It will block until a key is pressed.
-
-```
-VAR $this_key = $_BLOCKING_READKEY
-
-IF $this_key == 1 THEN
-    // do something here
-ELSE IF $this_key == 2 THEN
-    // do something else
-ELSE IF $this_key == 3 THEN
-    // etc
-END_IF
-
-```
-
-### Non-Blocking Read
-
-Read internal variable `$_READKEY`, returns immediately.
-
-Returns 0 if no key is pressed. Key ID otherwise.
-
-Check this in a loop to perform work even when no key is pressed.
-
-```
-VAR $this_key = 0
-
-WHILE TRUE
-    $this_key = $_READKEY
-    IF $this_key == 1 THEN
-        // handling button press
-    END_IF
-
-    // otherwise perform work here
-END_WHILE
+37+: External Switches
 ```
 
 -------
