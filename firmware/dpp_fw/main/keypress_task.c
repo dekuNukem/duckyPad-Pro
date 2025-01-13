@@ -366,10 +366,17 @@ void handle_sw_event(switch_event_t* this_sw_event)
 {
   update_last_keypress();
   // printf("swid: %d type: %d\n", this_sw_event->id, this_sw_event->type);
-  if(is_sleeping)
+  if(is_sleeping && is_plus_minus_button(this_sw_event->id) && this_sw_event->type != SW_EVENT_RELEASE)
   {
-    if(is_plus_minus_button(this_sw_event->id) && this_sw_event->type != SW_EVENT_RELEASE) 
-      return;
+    return;
+  }
+  else if(is_sleeping && !is_plus_minus_button(this_sw_event->id) && this_sw_event->type == SW_EVENT_SHORT_PRESS)
+  {
+    wakeup_from_sleep_and_load_profile(current_profile_number);
+    return;
+  }
+  else if(is_sleeping && is_plus_minus_button(this_sw_event->id) && this_sw_event->type == SW_EVENT_RELEASE)
+  {
     wakeup_from_sleep_and_load_profile(current_profile_number);
     return;
   }

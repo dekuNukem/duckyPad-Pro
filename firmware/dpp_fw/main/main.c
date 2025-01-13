@@ -51,11 +51,14 @@ adjusted keypress counter increment logic
 1.1.0
 Persistent global variables $_GV0 to $_GV15
 Waking up from sleep with +/- button no longer changes profile
+
+1.1.1
+Fixed `DP_SLEEP` wakes up right away
 */
 
 uint8_t fw_version_major = 1;
 uint8_t fw_version_minor = 1;
-uint8_t fw_version_patch = 0;
+uint8_t fw_version_patch = 1;
 uint8_t dsvm_version = 1;
 
 static const char *TAG = "MAIN";
