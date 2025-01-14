@@ -4,7 +4,6 @@ import ast
 import myast
 from keywords import *
 import traceback
-# import wat
 
 """
 duckyscript VM changelog
@@ -124,13 +123,18 @@ label_dict = None
 func_lookup = None
 str_lookup = None
 
+current_line_number_sf1 = 0
+current_line_content = ''
+
 def get_empty_instruction():
     return {
     'opcode':OP_NOP,
     'oparg':None,
     'label':None,
     'comment':None,
-    'addr':None}
+    'addr':None,
+    'lnum_sf1':current_line_number_sf1
+    }
 
 def print_instruction(instruction):
     if instruction['label'] is not None:
@@ -373,8 +377,6 @@ def push_1_constant_on_stack(value, comment=None):
         this_instruction['comment'] = comment
     return this_instruction
 
-current_line_number_sf1 = 0
-current_line_content = ''
 """
 returns: status, dsb_binary_array
 
@@ -691,6 +693,7 @@ def make_dsb_with_exception(program_listing, profile_list=None):
             item['oparg'] = label_to_addr_dict[item['oparg']]
         if isinstance(item['oparg'], int) is False:
             current_line_content = item['comment']
+            current_line_number_sf1 = item['lnum_sf1']
             raise ValueError("Unknown variable")
         item['oparg'] = int(item['oparg'])
 
@@ -729,7 +732,7 @@ def make_dsb_no_exception(program_listing, profile_list=None):
     try:
         return make_dsb_with_exception(program_listing, profile_list)
     except Exception as e:
-        print(traceback.format_exc())
+        print("MDNE:", traceback.format_exc())
         return {'comments':str(e), 'error_line_str':current_line_content, 'error_line_number_starting_from_1':current_line_number_sf1}, None
 
 if __name__ == "__main__":

@@ -20,6 +20,7 @@ import make_bytecode
 from shared import *
 import my_compare
 from keywords import *
+import traceback
 
 """
 0.13.5
@@ -192,6 +193,12 @@ def reset_key_button_relief():
 
 def rgb_to_hex(rgb_tuple):
     return '#%02x%02x%02x' % rgb_tuple
+
+def make_list_of_ds_line_obj_from_str_listing(pgm_listing):
+    obj_list = []
+    for index, item in enumerate(pgm_listing):
+        obj_list.append(ds_line(item, index+1))
+    return obj_list
 
 def ui_reset():
     global selected_key
@@ -654,10 +661,14 @@ def profile_rename_click():
 def validate_data_objs(save_path):
     # update path and indexs of profile and keys
     for profile_index, this_profile in enumerate(profile_list):
-        this_profile.path = os.path.join(save_path, 'profile'+str(profile_index+1)+'_'+str(this_profile.name))
+        this_profile.path = os.path.join(save_path, f"profile{profile_index + 1}_{this_profile.name}")
         for key_index, this_key in enumerate(this_profile.keylist):
             if this_key is None:
                 continue
+            if this_key.script is None:
+                this_key.script = ""
+            if this_key.script_on_release is None:
+                this_key.script_on_release = ""
             this_key.path = os.path.join(this_profile.path, 'key'+str(key_index+1)+'.txt')
             this_key.path_on_release = os.path.join(this_profile.path, 'key'+str(key_index+1)+'-release.txt')
             this_key.index = key_index + 1
@@ -675,18 +686,28 @@ def compile_all_scripts():
     try:
         for this_profile in profile_list:
             for this_key in this_profile.keylist:
-                if this_key is not None:
-                    this_key.binary_array = make_bytecode.make_dsb_with_exception(make_final_script(this_key, this_key.script.lstrip().split('\n')), profile_list)
-                    if len(this_key.script_on_release.lstrip()) > 0:
-                        this_key.binary_array_on_release = make_bytecode.make_dsb_with_exception(make_final_script(this_key, this_key.script_on_release.lstrip().split('\n')), profile_list)
-                    if len(this_key.binary_array) >= 65500 or (this_key.binary_array_on_release is not None and len(this_key.binary_array_on_release) >= 65500):
-                        messagebox.showerror("Error", f'Script size too large!\n\nProfile: {this_profile.name}\nKey: {this_key.name}')
-                        return False
+                if this_key is None:
+                    continue
+                text_list = make_final_script(this_key, this_key.script.lstrip().split('\n'))
+                obj_list = make_list_of_ds_line_obj_from_str_listing(text_list)
+                result_dict, bin_arr = make_bytecode.make_dsb_with_exception(obj_list, profile_list)
+                if bin_arr is None:
+                    raise ValueError("Compile failed")
+                this_key.binary_array = bin_arr
+                if len(this_key.script_on_release.lstrip()) > 0:
+                    tl_or = make_final_script(this_key, this_key.script_on_release.lstrip().split('\n'))
+                    ol_or = make_list_of_ds_line_obj_from_str_listing(tl_or)
+                    result_dict, bin_arr = make_bytecode.make_dsb_with_exception(ol_or, profile_list)
+                    if bin_arr is None:
+                        raise ValueError("Compile failed")
+                    this_key.binary_array_on_release = bin_arr
+                if len(this_key.binary_array) >= 65000 or (this_key.binary_array_on_release is not None and len(this_key.binary_array_on_release) >= 65000):
+                    messagebox.showerror("Error", f'Script size too large!\n\nProfile: {this_profile.name}\nKey: {this_key.name}')
+                    return False
         return True
     except Exception as e:
-        error_msg = "Code contains error!\n"
-        error_msg += f"Profile [{this_profile.name}] Key [{this_key.name}]:\n"
-        error_msg += str(e)
+        error_msg = f"ERROR on Profile [{this_profile.name}] Key [{this_key.name}]:\n\n-------\n"
+        error_msg += str(traceback.format_exc())
         messagebox.showerror("Error", error_msg)
     return False
 
@@ -1418,12 +1439,6 @@ on_press_rb.place(x=scaled_size(50), y=scaled_size(20))
 on_release_rb = Radiobutton(scripts_lf, text="On Release", variable=on_press_release_rb_var, value=1, command=on_release_rb_click)
 on_release_rb.place(x=scaled_size(150), y=scaled_size(20))
 root.update()
-
-def make_list_of_ds_line_obj_from_str_listing(pgm_listing):
-    obj_list = []
-    for index, item in enumerate(pgm_listing):
-        obj_list.append(ds_line(item, index+1))
-    return obj_list
 
 last_check_syntax_listing = []
 def check_syntax():
