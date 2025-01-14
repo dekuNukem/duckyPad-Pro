@@ -375,6 +375,13 @@ def push_1_constant_on_stack(value, comment=None):
         this_instruction['comment'] = comment
     return this_instruction
 
+"""
+returns: status, dsb_binary_array
+
+status is None if successful
+dsb_binary_array is None if fail
+
+"""
 def make_dsb_with_exception(program_listing, profile_list=None):
     global if_skip_table
     global if_info_list
@@ -395,7 +402,7 @@ def make_dsb_with_exception(program_listing, profile_list=None):
             print(f'{key}: {result_dict[key]}')
         print("\n\n\n>>>>>>>>>> END ERROR REPORT\n\n")
         current_line_content = result_dict['error_line_str']
-        raise ValueError(result_dict['comments'])
+        return result_dict, None
 
     if_skip_table = result_dict['if_skip_table']
     if_info_list = result_dict["if_info"]
@@ -712,14 +719,8 @@ def make_dsb_with_exception(program_listing, profile_list=None):
     # print("str_bin_start:", str_bin_start)
     # print("str_list:", str_list)
     print(f'Binary Size: {len(output_bin_array)} Bytes')
-    return output_bin_array
+    return None, output_bin_array
 
-def make_dsb_no_exception(program_listing, profile_list=None):
-    try:
-        return None, make_dsb_with_exception(program_listing, profile_list)
-    except Exception as e:
-        print(traceback.format_exc())
-        return {'comments':str(e), 'line_content':current_line_content}, None
 
 if __name__ == "__main__":
 
@@ -733,9 +734,9 @@ if __name__ == "__main__":
 
     program_listing = []
     for index, item in enumerate(text_listing):
-        program_listing.append(ds_line(index+1, item))
+        program_listing.append(ds_line(item, index+1))
 
-    status, bin_arr = make_dsb_no_exception(program_listing)
+    status, bin_arr = make_dsb_with_exception(program_listing)
     if bin_arr is None:
         print(status)
         exit()

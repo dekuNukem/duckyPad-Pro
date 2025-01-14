@@ -447,9 +447,9 @@ reserved_variable_dict = internal_variable_dict | global_variable_dict
 MAX_NUMBER_OF_VARIABLES = 64
 
 class ds_line:
-    def __init__(self, lnum_sf1, content):
+    def __init__(self, content, lnum_sf1=None):
         self.lnum_sf1 = lnum_sf1
         self.content = content
 
-    def __str__(self):
-        return f"dsl_{self.lnum_sf1:04}: {self.content}"
+    def __repr__(self):
+        return f"ds_line({self.lnum_sf1:04}, {self.content})"

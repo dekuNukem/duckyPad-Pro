@@ -452,8 +452,9 @@ def run_once(program_listing):
 
     loop_numbers = set()
 
-    for line_number_starting_from_1, this_line in enumerate(program_listing):
-        line_number_starting_from_1 += 1
+    for line_obj in program_listing:
+        line_number_starting_from_1 = line_obj.lnum_sf1
+        this_line = line_obj.content
         this_line = this_line.lstrip(' \t')
         if len(this_line) == 0:
             continue
@@ -596,6 +597,7 @@ def run_once(program_listing):
         
         if presult == PARSE_ERROR:
             # error_message = f"PARSE ERROR at Line {line_number_starting_from_1}: {this_line}\n{pcomment}"
+            # print(error_message)
             return_dict['is_success'] = False
             return_dict['comments'] = pcomment
             return_dict['error_line_number_starting_from_1'] = line_number_starting_from_1
@@ -682,15 +684,14 @@ def split_string(input_string, max_length=STRING_MAX_SIZE):
         return [input_string]
     return [input_string[i:i+max_length] for i in range(0, len(input_string), max_length)]
 
-def split_str_cmd(cmd_type, this_line):
-    str_content = this_line.split(cmd_type + " ", 1)[-1]
+def split_str_cmd(cmd_type, line_obj):
+    str_content = line_obj.content.split(cmd_type + " ", 1)[-1]
     if len(str_content) <= STRING_MAX_SIZE:
-        return [this_line]
+        return [line_obj]
     cmd_list = []
     for item in split_string(str_content):
-        cmd_list.append(cmd_STRING + " " + item)
-    if cmd_type == cmd_STRINGLN:
-        cmd_list[-1] = cmd_list[-1].replace(cmd_STRING, cmd_STRINGLN, 1)
+        new_obj = ds_line(content=f"{cmd_type} {item}", lnum_sf1=line_obj.lnum_sf1)
+        cmd_list.append(new_obj)
     return cmd_list
 
 def search_profile_index_from_name(query, profile_list):
@@ -721,21 +722,21 @@ def check_swcolor(pgm_line, first_word):
 
 def run_all(program_listing, profile_list=None):
     new_program_listing = []
-    for this_line in program_listing:
-        first_word = this_line.lstrip(" \t").split(" ")[0]
+    for line_obj in program_listing:
+        first_word = line_obj.content.lstrip(" \t").split(" ")[0]
 
         # parse GOTO_PROFILE commands
         if first_word == cmd_GOTO_PROFILE_NAME:
-            this_line = this_line.replace(cmd_GOTO_PROFILE_NAME, cmd_GOTO_PROFILE, 1)
+            line_obj.content = line_obj.content.replace(cmd_GOTO_PROFILE_NAME, cmd_GOTO_PROFILE, 1)
             first_word = cmd_GOTO_PROFILE
 
         if first_word == cmd_GOTO_PROFILE:
-            target_profile_name = this_line.split(cmd_GOTO_PROFILE, 1)[-1].strip()
+            target_profile_name = line_obj.content.split(cmd_GOTO_PROFILE, 1)[-1].strip()
             target_profile_index_0_indexed = search_profile_index_from_name(target_profile_name, profile_list)
             if target_profile_index_0_indexed is not None:
-                this_line = f"{cmd_GOTO_PROFILE} {target_profile_index_0_indexed + 1}"
+                line_obj.content = f"{cmd_GOTO_PROFILE} {target_profile_index_0_indexed + 1}"
 
-        new_program_listing.append(this_line)
+        new_program_listing.append(line_obj)
 
     program_listing = new_program_listing
 
@@ -745,40 +746,40 @@ def run_all(program_listing, profile_list=None):
         return rdict
     
     new_program_listing = []
-    for line_number_starting_from_1, this_line in enumerate(program_listing):
-        line_number_starting_from_1 += 1
+    for line_obj in program_listing:
+        line_number_starting_from_1 = line_obj.lnum_sf1
 
         if is_within_strlen_block(line_number_starting_from_1, rdict['strlen_block_table']):
-            this_line = "STRINGLN " + this_line
+            line_obj.content = "STRINGLN " + line_obj.content
         elif is_within_str_block(line_number_starting_from_1, rdict['str_block_table']):
-            this_line = "STRING " + this_line
+            line_obj.content = "STRING " + line_obj.content
         else:
-            this_line = this_line.lstrip(' \t')
+            line_obj.content = line_obj.content.lstrip(' \t')
 
-        if len(this_line) == 0:
+        if len(line_obj.content) == 0:
             continue
 
-        first_word = this_line.split(" ")[0]
-        first_word, this_line = replace_delay_statements(this_line)
+        first_word = line_obj.content.split(" ")[0]
+        first_word, line_obj.content = replace_delay_statements(line_obj.content)
 
         if first_word in [cmd_STRINGLN_BLOCK, cmd_END_STRINGLN, cmd_STRING_BLOCK, cmd_END_STRING]:
             continue
 
         if first_word in [cmd_STRINGLN, cmd_STRING]:
-            for item in split_str_cmd(first_word, this_line):
+            for item in split_str_cmd(first_word, line_obj):
                 new_program_listing.append(item)
         else:
-            new_program_listing.append(this_line)
+            new_program_listing.append(line_obj)
 
     program_listing = new_program_listing
 
     # ---------------------
 
     new_program_listing = []
-    for this_line in program_listing:
+    for line_obj in program_listing:
         # remove leading space and tabs
-        this_line = this_line.lstrip(" \t")
-        first_word = this_line.split(" ")[0]
+        line_obj.content = line_obj.content.lstrip(" \t")
+        first_word = line_obj.content.split(" ")[0]
 
         # remove single-line comments 
         if first_word == cmd_REM or first_word.startswith(cmd_C_COMMENT):
@@ -786,10 +787,10 @@ def run_all(program_listing, profile_list=None):
 
         # remove INJECT_MOD
         if first_word == cmd_INJECT_MOD:
-            this_line = this_line.replace(cmd_INJECT_MOD, "", 1)
+            line_obj.content = line_obj.content.replace(cmd_INJECT_MOD, "", 1)
 
-        this_line = this_line.lstrip(" \t")
-        new_program_listing.append(this_line)
+        line_obj.content = line_obj.content.lstrip(" \t")
+        new_program_listing.append(line_obj)
 
     program_listing = new_program_listing
 
@@ -801,7 +802,6 @@ def run_all(program_listing, profile_list=None):
 
     # ----------- make condensed version ----------
 
-    def_dict = rdict['define_dict']
     second_pass_program_listing = []
     needs_end_if = False
 
@@ -834,7 +834,7 @@ def run_all(program_listing, profile_list=None):
         if first_word == cmd_REM or this_line.startswith(cmd_C_COMMENT):
             continue
         if first_word != cmd_DEFINE:
-            is_success, replaced_str = replace_DEFINE(this_line, def_dict)
+            is_success, replaced_str = replace_DEFINE(this_line, rdict['define_dict'])
             if is_success is False:
                 rdict['is_success'] = False
                 rdict['comments'] = "Recursive DEFINE"
