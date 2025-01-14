@@ -13,7 +13,7 @@ VAR $ball_velocity_y = $_RANDOM_INT%2 + 2
 VAR $paddle_pos = 64
 VAR $active_key = 0
 VAR $score = 0
-
+sdsd
 VAR $paddle_upper_limit = PADDLE_HEIGHT/2
 VAR $paddle_lower_limit = 127-PADDLE_HEIGHT/2
 

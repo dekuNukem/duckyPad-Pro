@@ -19,6 +19,7 @@ import hid_op
 import make_bytecode
 from shared import *
 import my_compare
+from keywords import *
 
 """
 0.13.5
@@ -1418,15 +1419,15 @@ on_release_rb = Radiobutton(scripts_lf, text="On Release", variable=on_press_rel
 on_release_rb.place(x=scaled_size(150), y=scaled_size(20))
 root.update()
 
-def find_index(lst, query):
-    for index, item in enumerate(lst):
-        if query in item:
-            return index
-    return None        
+def make_list_of_ds_line_obj_from_str_listing(pgm_listing):
+    obj_list = []
+    for index, item in enumerate(pgm_listing):
+        obj_list.append(ds_line(item, index+1))
+    return obj_list
 
-last_check_syntax_program_listing = []
+last_check_syntax_listing = []
 def check_syntax():
-    global last_check_syntax_program_listing
+    global last_check_syntax_listing
     if is_key_selected() == False:
         return
     profile_index = profile_lstbox.curselection()[0]
@@ -1435,22 +1436,19 @@ def check_syntax():
     program_listing = profile_list[profile_index].keylist[selected_key].script.split('\n')
     if on_press_release_rb_var.get() == 1:
         program_listing = profile_list[profile_index].keylist[selected_key].script_on_release.split('\n')
-    if program_listing == last_check_syntax_program_listing:
+    if program_listing == last_check_syntax_listing:
         # print("check_syntax: same")
         return
-    result_dict, bin_arr = make_bytecode.make_dsb_no_exception(program_listing, profile_list)
-    last_check_syntax_program_listing = program_listing.copy()
+    last_check_syntax_listing = program_listing.copy()
+    ds_line_obj_list = make_list_of_ds_line_obj_from_str_listing(program_listing)
+    result_dict, bin_arr = make_bytecode.make_dsb_no_exception(ds_line_obj_list, profile_list)
     script_textbox.tag_remove("error", '1.0', 'end')
     if result_dict is None:
         check_syntax_label.config(text="Code seems OK..", fg="green")       
         return
-    error_lnum = find_index(program_listing, result_dict['line_content'])
+    error_lnum = result_dict['error_line_number_starting_from_1']
     error_text = result_dict['comments']
-    if error_lnum is not None:
-        error_lnum += 1
-        script_textbox.tag_add("error", str(error_lnum)+".0", str(error_lnum)+".0 lineend")
-    else:
-        error_text = f"Error on line: {result_dict['line_content']}\n{result_dict['comments']}"
+    script_textbox.tag_add("error", str(error_lnum)+".0", str(error_lnum)+".0 lineend")
     check_syntax_label.config(text=error_text, fg='red')
 
 check_syntax_label = Label(scripts_lf, text="")
@@ -1635,7 +1633,7 @@ def repeat_func():
 
 root.after(500, repeat_func)
 
-# select_root_folder("sample_profiles")
+select_root_folder("sample_profiles")
 my_compare.tk_root = root
 my_compare.tk_strvar = dp_root_folder_display
 root.mainloop()

@@ -452,4 +452,9 @@ class ds_line:
         self.content = content
 
     def __repr__(self):
-        return f"ds_line({self.lnum_sf1}, {self.content})"
+        return f"ds_line({self.lnum_sf1!r}, {self.content!r})"
+	
+    def __eq__(self, other):
+        if isinstance(other, ds_line):
+            return self.lnum_sf1 == other.lnum_sf1 and self.content == other.content
+        return False

@@ -19,8 +19,6 @@ mouse move and mouse scroll arguments on stack
 more changes at the end of bytecode_vm.md
 """
 
-current_line_content = ''
-
 DS_VM_VERSION = 1
 
 # CPU instructions
@@ -375,6 +373,8 @@ def push_1_constant_on_stack(value, comment=None):
         this_instruction['comment'] = comment
     return this_instruction
 
+current_line_number_sf1 = 0
+current_line_content = ''
 """
 returns: status, dsb_binary_array
 
@@ -392,7 +392,9 @@ def make_dsb_with_exception(program_listing, profile_list=None):
     global func_lookup
     global str_lookup
     global current_line_content
+    global current_line_number_sf1
 
+    current_line_number_sf1 = 0
     current_line_content = ''
     # result_dict should at least contain is_success and comments
     result_dict = ds3_preprocessor.run_all(program_listing, profile_list)
@@ -431,6 +433,7 @@ def make_dsb_with_exception(program_listing, profile_list=None):
     for line_obj in compact_program_listing:
         lnum = line_obj.lnum_sf1
         this_line = line_obj.content
+        current_line_number_sf1 = lnum
         current_line_content = this_line
         this_instruction = get_empty_instruction()
         this_instruction['comment'] = this_line
@@ -722,6 +725,12 @@ def make_dsb_with_exception(program_listing, profile_list=None):
     print(f'Binary Size: {len(output_bin_array)} Bytes')
     return None, output_bin_array
 
+def make_dsb_no_exception(program_listing, profile_list=None):
+    try:
+        return make_dsb_with_exception(program_listing, profile_list)
+    except Exception as e:
+        print(traceback.format_exc())
+        return {'comments':str(e), 'error_line_str':current_line_content, 'error_line_number_starting_from_1':current_line_number_sf1}, None
 
 if __name__ == "__main__":
 
@@ -737,9 +746,11 @@ if __name__ == "__main__":
     for index, item in enumerate(text_listing):
         program_listing.append(ds_line(item, index+1))
 
-    status, bin_arr = make_dsb_with_exception(program_listing)
+    status_dict, bin_arr = make_dsb_no_exception(program_listing)
+    print("\n\nError Details:")
     if bin_arr is None:
-        print(status)
+        for key in status_dict:
+            print(f'{key}: {status_dict[key]}')
         exit()
 
     bin_out = open(sys.argv[2], 'wb')

@@ -13,6 +13,12 @@ def make_dsb_no_exception(program_listing, profile_list=None):
 
 
 
+def find_index(lst, query):
+    for index, item in enumerate(lst):
+        if query in item:
+            return index
+    return None
+
 # def is_root():
 #     return os.getuid() == 0
 
