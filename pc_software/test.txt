@@ -1,0 +1,21 @@
+REM_BLOCK
+- Use the command
+  $ pactl list sinks
+  to list available output devices. 
+- Add an entry below for each device 
+  you want to switch between 
+END_REM
+
+LOOP0: 
+ALT SPACE
+DEFAULTCHARDELAY 10
+STRING pactl set-default-sink alsa_output.pci-0000_0d_00.4.iec958-stereo
+DELAY 200
+ENTER
+
+LOOP1:
+ALT SPACE
+DEFAULTCHARDELAY 10
+STRING pactl set-default-sink alsa_output.usb-Creative_Technology_Ltd_Sound_Blaster_Tactic_3D__Omega-00.analog-stereo
+DELAY 200
+ENTER

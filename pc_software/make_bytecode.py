@@ -728,8 +728,12 @@ if __name__ == "__main__":
         exit()
 
     text_file = open(sys.argv[1])
-    program_listing = text_file.read().split('\n')
+    text_listing = text_file.read().split('\n')
     text_file.close()
+
+    program_listing = []
+    for index, item in enumerate(text_listing):
+        program_listing.append(ds_line(index+1, item))
 
     status, bin_arr = make_dsb_no_exception(program_listing)
     if bin_arr is None:
