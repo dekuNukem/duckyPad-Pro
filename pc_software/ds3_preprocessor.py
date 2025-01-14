@@ -454,8 +454,7 @@ def run_once(program_listing):
 
     for line_obj in program_listing:
         line_number_starting_from_1 = line_obj.lnum_sf1
-        this_line = line_obj.content
-        this_line = this_line.lstrip(' \t')
+        this_line = line_obj.content.lstrip(' \t')
         if len(this_line) == 0:
             continue
 
@@ -870,18 +869,14 @@ def run_all(program_listing, profile_list=None):
             second_pass_program_listing.append(ds_line(loop_str, line_number_starting_from_1))
             needs_end_if = True
         else:
-            second_pass_program_listing.append(ds_line(this_line, line_number_starting_from_1))
+            second_pass_program_listing.append(line_obj)
 
     if needs_end_if:
         second_pass_program_listing.append(ds_line(cmd_END_IF, line_number_starting_from_1))
 
     print("---------Second Pass OK!---------\n")
 
-    for item in second_pass_program_listing:
-        print(item)
-    exit()
-
-    final_dict = run_once([x[1] for x in second_pass_program_listing])
+    final_dict = run_once(second_pass_program_listing)
     final_dict["compact_listing"] = second_pass_program_listing
 
     if_info_list = []

@@ -408,17 +408,17 @@ def make_dsb_with_exception(program_listing, profile_list=None):
     if_info_list = result_dict["if_info"]
     while_lookup = result_dict['while_table_bidirectional']
     var_lookup = result_dict['var_table']
-    compact_program_listing = [x[1] for x in result_dict['compact_listing']]
+    compact_program_listing = result_dict['compact_listing']
     label_dict = {}
     func_lookup = result_dict['func_table']
     str_lookup = {}
     break_dict = result_dict['break_dict']
     continue_dict = result_dict['continue_dict']
 
-    print("--------- Program Listing After Preprocessing: ---------")
+    print("--------- Program Listing After Preprocessing: ---------")    
 
-    for index, item in enumerate(compact_program_listing):
-        print(str(index+1).ljust(4), item)
+    for line_obj in compact_program_listing:
+        print(f"{str(line_obj.lnum_sf1):<4} {line_obj.content}")
     print()
 
     assembly_listing = []
@@ -428,8 +428,9 @@ def make_dsb_with_exception(program_listing, profile_list=None):
     first_instruction['oparg'] = ((DS_VM_VERSION % 0xf) << 8)
     assembly_listing.append(first_instruction)
 
-    for lnum, this_line in enumerate(compact_program_listing):
-        lnum += 1
+    for line_obj in compact_program_listing:
+        lnum = line_obj.lnum_sf1
+        this_line = line_obj.content
         current_line_content = this_line
         this_instruction = get_empty_instruction()
         this_instruction['comment'] = this_line
