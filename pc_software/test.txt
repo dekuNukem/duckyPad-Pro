@@ -1,6 +1,7 @@
 
 DEFINE WTF 33
-
+SWC_SET 1 2 3 4
+LOOP
 REM_BLOCK
 - Use the command
   $ pactl list sinks

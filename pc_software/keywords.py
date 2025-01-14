@@ -452,4 +452,4 @@ class ds_line:
         self.content = content
 
     def __repr__(self):
-        return f"ds_line({self.lnum_sf1:04}, {self.content})"
+        return f"ds_line({self.lnum_sf1}, {self.content})"

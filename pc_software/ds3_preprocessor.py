@@ -817,20 +817,20 @@ def run_all(program_listing, profile_list=None):
         epilogue |= 0x10
 
     if epilogue != 0:
-        second_pass_program_listing.append((1, f"$_NEEDS_EPILOGUE = {epilogue}"))
+        second_pass_program_listing.append(ds_line(content=f"$_NEEDS_EPILOGUE = {epilogue}"))
     if rdict['loop_size'] is not None:
-        second_pass_program_listing.append((1, f"$_LOOP_SIZE = {rdict['loop_size']+1}"))
+        second_pass_program_listing.append(ds_line(content=f"$_LOOP_SIZE = {rdict['loop_size']+1}"))
 
-    for line_number_starting_from_1, this_line in enumerate(program_listing):
-        line_number_starting_from_1 += 1
-        this_line = this_line.lstrip(' \t')
+    for line_obj in program_listing:
+        line_number_starting_from_1 = line_obj.lnum_sf1
+        this_line = line_obj.content.lstrip(' \t')
         if len(this_line) == 0:
             continue
         first_word = this_line.split(" ")[0]
         if is_within_rem_block(line_number_starting_from_1, rdict['rem_block_table']):
             continue
         if needs_rstrip(first_word):
-            this_line = this_line.rstrip(" \t")
+            line_obj.content = this_line.rstrip(" \t")
         if first_word == cmd_REM or this_line.startswith(cmd_C_COMMENT):
             continue
         if first_word != cmd_DEFINE:
@@ -842,7 +842,7 @@ def run_all(program_listing, profile_list=None):
                 rdict['error_line_str'] = this_line
                 return rdict
             else:
-                this_line = replaced_str
+                line_obj.content = replaced_str
         else:
             continue
 
@@ -861,21 +861,25 @@ def run_all(program_listing, profile_list=None):
             this_str = f"{cmd_SWCC} "
             for item in arg_list:
                 this_str += f"{item} "
-            second_pass_program_listing.append((line_number_starting_from_1, this_str))
+            second_pass_program_listing.append(ds_line(this_str, line_number_starting_from_1))
         elif this_line.startswith(cmd_LOOP):
             presult, pcomment, value = check_loop(this_line)
             if needs_end_if:
-                second_pass_program_listing.append((line_number_starting_from_1, cmd_END_IF))
+                second_pass_program_listing.append(ds_line(cmd_END_IF, line_number_starting_from_1))
             loop_str = f'{cmd_IF} $_KEYPRESS_COUNT % $_LOOP_SIZE == {value} {cmd_THEN}'
-            second_pass_program_listing.append((line_number_starting_from_1, loop_str))
+            second_pass_program_listing.append(ds_line(loop_str, line_number_starting_from_1))
             needs_end_if = True
         else:
-            second_pass_program_listing.append((line_number_starting_from_1, this_line))
+            second_pass_program_listing.append(ds_line(this_line, line_number_starting_from_1))
 
     if needs_end_if:
-        second_pass_program_listing.append((line_number_starting_from_1, cmd_END_IF))
+        second_pass_program_listing.append(ds_line(cmd_END_IF, line_number_starting_from_1))
 
     print("---------Second Pass OK!---------\n")
+
+    for item in second_pass_program_listing:
+        print(item)
+    exit()
 
     final_dict = run_once([x[1] for x in second_pass_program_listing])
     final_dict["compact_listing"] = second_pass_program_listing
