@@ -48,7 +48,7 @@ The binary file should have extension `.dsb` (duckyScript binary).
 
 Normally this is taken care of in the configurator. But you can also try it out on its own:
 
-* [Download the source code](https://github.com/dekuNukem/duckyPad-Pro/blob/master/pc_software/duckypad_config_latest_source.zip)
+* [Download the latest source code](https://github.com/dekuNukem/duckyPad-Pro/releases/latest)
 
 * Unzip, and run with Python 3: `python3 make_bytecode.py input output`
 
@@ -107,7 +107,7 @@ Binary Size: 27 Bytes
 
 ## Binary Executable
 
-When a key is pressed, the corresponding `.dsb` file is loaded into `bin_buf` in [ds3_vm.c](https://github.com/dekuNukem/duckyPad/blob/master/firmware/code_duckyscript3/Src/ds3_vm.c). Execution occurs inside `run_dsb()` with `execute_instruction()`.
+When a key is pressed, the corresponding `.dsb` file is loaded into `bin_buf` in [ds3_vm.c](https://github.com/dekuNukem/duckyPad-Pro/blob/master/firmware/dpp_fw/main/ds_vm.c). Execution occurs inside `run_dsb()` with `execute_instruction()`.
 
 Zero-terminated strings are stored at the end of the binary file.
 
@@ -128,7 +128,7 @@ All reference to **"stack"** refers to **Arithmetic Stack**. Unless noted otherw
 |   CALL  |  6  |  0x6 |                                                              Jump to Subroutine<br>Push PC+1 to **call stack**<br>Jump to ADDR                                                             |  ADDR_LSB |  ADDR_MSB |
 |   RET   |  7  |  0x7 |                                                        Return from Subroutine<br>Pop one item off **call stack**<br>Set PC to its value                                                       |           |           |
 |   HALT  |  8  |  0x8 |                                                                                    Stop execution                                                                                    |           |           |
-|   VMVER  |  255  |  0xFF|     VM Version Check<br>Abort if mismatched         ||   VM VER        |
+|   VMVER  |  255  |  0xFF|     VM Version Check<br>Abort if mismath         ||   VM VER        |
 
 
 ## Binary Operator Instructions
