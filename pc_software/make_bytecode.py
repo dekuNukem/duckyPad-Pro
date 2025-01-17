@@ -419,10 +419,11 @@ def make_dsb_with_exception(program_listing, profile_list=None):
     break_dict = result_dict['break_dict']
     continue_dict = result_dict['continue_dict']
 
-    print("--------- Program Listing After Preprocessing: ---------")    
+    print("--------- Program Listing After Preprocessing: ---------")
 
-    for line_obj in compact_program_listing:
-        print(f"{str(line_obj.lnum_sf1):<4} {line_obj.content}")
+    for index,line_obj in enumerate(compact_program_listing):
+        line_obj.preprocessed_lnum_ssf1 = index+1
+        print(f"{str(line_obj.preprocessed_lnum_ssf1):<4} {str(line_obj.lnum_sf1):<4} {line_obj.content}")
     print()
 
     assembly_listing = []
@@ -434,6 +435,7 @@ def make_dsb_with_exception(program_listing, profile_list=None):
 
     for line_obj in compact_program_listing:
         lnum = line_obj.lnum_sf1
+        pp_lnum = line_obj.preprocessed_lnum_ssf1
         this_line = line_obj.content
         current_line_number_sf1 = lnum
         current_line_content = this_line
@@ -505,7 +507,7 @@ def make_dsb_with_exception(program_listing, profile_list=None):
         elif this_line.startswith(cmd_STRING) or first_word == cmd_OLED_PRINT:
             str_content = this_line.split(' ', 1)[-1]
             if str_content not in str_lookup:
-                str_lookup[str_content] = lnum
+                str_lookup[str_content] = pp_lnum
             if first_word == cmd_STRING:
                 this_instruction['opcode'] = OP_STR
             elif first_word == cmd_STRINGLN:
@@ -750,8 +752,9 @@ if __name__ == "__main__":
         program_listing.append(ds_line(item, index+1))
 
     status_dict, bin_arr = make_dsb_no_exception(program_listing)
-    print("\n\nError Details:")
+
     if bin_arr is None:
+        print("\n\nError Details:")
         for key in status_dict:
             print(f'{key}: {status_dict[key]}')
         exit()

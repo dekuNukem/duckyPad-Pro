@@ -172,39 +172,39 @@ english_alphabets = set(english_alphabets)
 valid_var_chars = set(valid_var_chars)
 
 def replace_DEFINE(pgm_line, dd):
-	if pgm_line.startswith(cmd_STRING+" ") or pgm_line.startswith(cmd_STRINGLN+" "):
-		dd.pop("TRUE", None)
-		dd.pop("FALSE", None)
-	else:
-		dd['TRUE'] = 1
-		dd['FALSE'] = 0
-	dd_list_longest_first = sorted(list(dd.keys()), key=len, reverse=True)
-	temp_line = f" {pgm_line} "
-	for key in dd_list_longest_first:
-		start_index = 0
-		loop_count = 0
-		while 1:
-			loop_count += 1
-			# hacky way to detect recursive DEFINE
-			if loop_count > 127:
-				return False, ""
-			# print("start_index", start_index)
-			key_location = str(temp_line).find(key, start_index)
-			if key_location == -1:
-				break
-			# print(key, "still in:", temp_line, 'at location', key_location)
-			letter_before = temp_line[key_location - 1]
-			letter_after = temp_line[key_location + len(key)]
-			# print("letter_before:", letter_before)
-			# print("letter_after:", letter_after)
-			if letter_before in valid_char_for_define_replacements and letter_after in valid_char_for_define_replacements:
-				# print("STRING BEFORE", temp_line[:key_location])
-				# print("STRING AFTER", temp_line[key_location + len(key):])
-				temp_line = temp_line[:key_location] + str(dd[key]) + temp_line[key_location + len(key):]
-			else:
-				start_index = key_location + len(key)
-	# print("AFTER REPLACEMENT:", temp_line)
-	return True, temp_line[1:len(temp_line)-1]
+    if pgm_line.startswith(cmd_STRING+" ") or pgm_line.startswith(cmd_STRINGLN+" "):
+        dd.pop("TRUE", None)
+        dd.pop("FALSE", None)
+    else:
+        dd['TRUE'] = 1
+        dd['FALSE'] = 0
+    dd_list_longest_first = sorted(list(dd.keys()), key=len, reverse=True)
+    temp_line = f" {pgm_line} "
+    for key in dd_list_longest_first:
+        start_index = 0
+        loop_count = 0
+        while 1:
+            loop_count += 1
+            # hacky way to detect recursive DEFINE
+            if loop_count > 127:
+                return False, ""
+            # print("start_index", start_index)
+            key_location = str(temp_line).find(key, start_index)
+            if key_location == -1:
+                break
+            # print(key, "still in:", temp_line, 'at location', key_location)
+            letter_before = temp_line[key_location - 1]
+            letter_after = temp_line[key_location + len(key)]
+            # print("letter_before:", letter_before)
+            # print("letter_after:", letter_after)
+            if letter_before in valid_char_for_define_replacements and letter_after in valid_char_for_define_replacements:
+                # print("STRING BEFORE", temp_line[:key_location])
+                # print("STRING AFTER", temp_line[key_location + len(key):])
+                temp_line = temp_line[:key_location] + str(dd[key]) + temp_line[key_location + len(key):]
+            else:
+                start_index = key_location + len(key)
+    # print("AFTER REPLACEMENT:", temp_line)
+    return True, temp_line[1:len(temp_line)-1]
 
 KEY_LEFT_CTRL =  0x01
 KEY_LEFT_SHIFT = 0x02
@@ -402,59 +402,55 @@ cmd_MK_STOP : (KEY_MK_STOP, KEY_TYPE_MEDIA),
 GV_OFFSET = 64
 
 internal_variable_dict = {
-	'_DEFAULTDELAY': (0xffff - 0),
-	'_DEFAULTCHARDELAY': (0xffff - 1),
-	'_CHARJITTER': (0xffff - 2),
-	"_RANDOM_MIN": (0xffff - 3),
-	"_RANDOM_MAX": (0xffff - 4),
-	"_RANDOM_INT": (0xffff - 5),
-	"_TIME_MS": (0xffff - 6),
-	"_READKEY": (0xffff - 7),
-	"_LOOP_SIZE": (0xffff - 8),
-	"_KEYPRESS_COUNT": (0xffff - 9),
-	"_NEEDS_EPILOGUE": (0xffff - 10),
-	"_TIME_S": (0xffff - 11),
-	"_ALLOW_ABORT": (0xffff - 12),
-	"_BLOCKING_READKEY": (0xffff - 13),
-	"_IS_NUMLOCK_ON": (0xffff - 14),
-	"_IS_CAPSLOCK_ON": (0xffff - 15),
-	"_IS_SCROLLLOCK_ON": (0xffff - 16),
-	"_DONT_REPEAT": (0xffff - 17),
-	"_THIS_KEYID": (0xffff - 18),
-	"_DP_MODEL": (0xffff - 19),
+    '_DEFAULTDELAY': (0xffff - 0),
+    '_DEFAULTCHARDELAY': (0xffff - 1),
+    '_CHARJITTER': (0xffff - 2),
+    "_RANDOM_MIN": (0xffff - 3),
+    "_RANDOM_MAX": (0xffff - 4),
+    "_RANDOM_INT": (0xffff - 5),
+    "_TIME_MS": (0xffff - 6),
+    "_READKEY": (0xffff - 7),
+    "_LOOP_SIZE": (0xffff - 8),
+    "_KEYPRESS_COUNT": (0xffff - 9),
+    "_NEEDS_EPILOGUE": (0xffff - 10),
+    "_TIME_S": (0xffff - 11),
+    "_ALLOW_ABORT": (0xffff - 12),
+    "_BLOCKING_READKEY": (0xffff - 13),
+    "_IS_NUMLOCK_ON": (0xffff - 14),
+    "_IS_CAPSLOCK_ON": (0xffff - 15),
+    "_IS_SCROLLLOCK_ON": (0xffff - 16),
+    "_DONT_REPEAT": (0xffff - 17),
+    "_THIS_KEYID": (0xffff - 18),
+    "_DP_MODEL": (0xffff - 19),
 }
 
 global_variable_dict = {
-	"_GV0": (0xffff - GV_OFFSET - 0),
-	"_GV1": (0xffff - GV_OFFSET - 1),
-	"_GV2": (0xffff - GV_OFFSET - 2),
-	"_GV3": (0xffff - GV_OFFSET - 3),
-	"_GV4": (0xffff - GV_OFFSET - 4),
-	"_GV5": (0xffff - GV_OFFSET - 5),
-	"_GV6": (0xffff - GV_OFFSET - 6),
-	"_GV7": (0xffff - GV_OFFSET - 7),
-	"_GV8": (0xffff - GV_OFFSET - 8),
-	"_GV9": (0xffff - GV_OFFSET - 9),
-	"_GV10": (0xffff - GV_OFFSET - 10),
-	"_GV11": (0xffff - GV_OFFSET - 11),
-	"_GV12": (0xffff - GV_OFFSET - 12),
-	"_GV13": (0xffff - GV_OFFSET - 13),
-	"_GV14": (0xffff - GV_OFFSET - 14),
-	"_GV15": (0xffff - GV_OFFSET - 15),
+    "_GV0": (0xffff - GV_OFFSET - 0),
+    "_GV1": (0xffff - GV_OFFSET - 1),
+    "_GV2": (0xffff - GV_OFFSET - 2),
+    "_GV3": (0xffff - GV_OFFSET - 3),
+    "_GV4": (0xffff - GV_OFFSET - 4),
+    "_GV5": (0xffff - GV_OFFSET - 5),
+    "_GV6": (0xffff - GV_OFFSET - 6),
+    "_GV7": (0xffff - GV_OFFSET - 7),
+    "_GV8": (0xffff - GV_OFFSET - 8),
+    "_GV9": (0xffff - GV_OFFSET - 9),
+    "_GV10": (0xffff - GV_OFFSET - 10),
+    "_GV11": (0xffff - GV_OFFSET - 11),
+    "_GV12": (0xffff - GV_OFFSET - 12),
+    "_GV13": (0xffff - GV_OFFSET - 13),
+    "_GV14": (0xffff - GV_OFFSET - 14),
+    "_GV15": (0xffff - GV_OFFSET - 15),
 }
 
 reserved_variable_dict = internal_variable_dict | global_variable_dict
 MAX_NUMBER_OF_VARIABLES = 64
 
 class ds_line:
-    def __init__(self, content, lnum_sf1=-1):
+    def __init__(self, content, lnum_sf1=-1, pplnum=-1):
         self.lnum_sf1 = lnum_sf1
         self.content = content
+        self.preprocessed_lnum_ssf1 = pplnum
 
     def __repr__(self):
-        return f"ds_line({self.lnum_sf1!r}, {self.content!r})"
-	
-    def __eq__(self, other):
-        if isinstance(other, ds_line):
-            return self.lnum_sf1 == other.lnum_sf1 and self.content == other.content
-        return False
+        return f"ds_line({self.lnum_sf1!r}, {self.content!r}, {self.preprocessed_lnum_ssf1!r})"
