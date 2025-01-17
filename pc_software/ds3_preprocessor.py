@@ -689,7 +689,10 @@ def split_str_cmd(cmd_type, line_obj):
         return [line_obj]
     cmd_list = []
     for item in split_string(str_content):
-        new_obj = ds_line(content=f"{cmd_type} {item}", lnum_sf1=line_obj.lnum_sf1)
+        new_obj = ds_line(content=f"{cmd_STRING} {item}", lnum_sf1=line_obj.lnum_sf1)
+        cmd_list.append(new_obj)
+    if cmd_type == cmd_STRINGLN:
+        new_obj = ds_line(content=f"{cmd_ENTER}", lnum_sf1=line_obj.lnum_sf1)
         cmd_list.append(new_obj)
     return cmd_list
 

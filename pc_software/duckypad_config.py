@@ -132,9 +132,14 @@ Updated mac and linux unmount command
 2.1.0 2025 01 06
 Persistent global variables $_GV0 to $_GV15
 Fixed variables name parsing bug
+
+2.2.0
+2025 01 17
+Updated preprocessor with improved line numbering memory
+Fixed a bug in preprocessing long STRINGLN commands
 """
 
-THIS_VERSION_NUMBER = '2.1.0'
+THIS_VERSION_NUMBER = '2.2.0'
 MIN_DUCKYPAD_FIRMWARE_VERSION = "1.0.0"
 MAX_DUCKYPAD_FIRMWARE_VERSION = "1.5.0"
 
@@ -1648,7 +1653,7 @@ def repeat_func():
 
 root.after(500, repeat_func)
 
-select_root_folder("sample_profiles")
+# select_root_folder("sample_profiles")
 my_compare.tk_root = root
 my_compare.tk_strvar = dp_root_folder_display
 root.mainloop()
