@@ -1,6 +1,6 @@
 # duckyPad Pro: Advanced Macro Scripting Beyond QMK/VIA
 
-[Get duckyPad Pro](https://www.kickstarter.com/projects/dekunukem/duckypad-pro-advanced-macro-scripting-beyond-qmk-via) | [Official Discord](https://discord.gg/4sJCBx5) | [Getting Started](./doc/getting_started.md) | [Table of Contents](#table-of-contents)
+[Get duckyPad Pro](https://www.tindie.com/products/37399/) | [Official Discord](https://discord.gg/4sJCBx5) | [Getting Started](./doc/getting_started.md) | [Table of Contents](#table-of-contents)
 
 -----------
 
@@ -10,13 +10,11 @@ duckyPad Pro is a 20-key **mechanical macropad** for power users who demand **ad
 
 Incorporating 4 years worth of feedback from the [original duckyPad](https://github.com/dekuNukem/duckyPad), duckyPad Pro combines long-requested upgrades with a no-nonsense design, aiming simply to be the **most capable** macropad today.
 
-## Get duckyPad Pro
+## Get One
 
 duckyPad Pro has been [successfully funded on Kickstarter](https://www.kickstarter.com/projects/dekunukem/duckypad-pro-advanced-macro-scripting-beyond-qmk-via) with more than $100K raised!
 
-* [Late Pledges](https://www.kickstarter.com/projects/dekunukem/duckypad-pro-advanced-macro-scripting-beyond-qmk-via) still available with **Jan 2025** shipping.
-
-* Join our [Official Discord](https://discord.gg/4sJCBx5) for discussions and updates!
+* Now available [on my Tindie Store!](https://www.tindie.com/products/37399/)
 
 ## Promo Video
 
@@ -325,7 +323,7 @@ duckyPad Pro has **20 Mechanical Switches** in **4x5 Grid.**
 
 ## Interested?
 
-You can [pre-order duckyPad Pro on Kickstarter!](https://www.kickstarter.com/projects/dekunukem/duckypad-pro-advanced-macro-scripting-beyond-qmk-via)
+Get one [on my Tindie store!](https://www.tindie.com/products/37399/)
 
 Join our [Official Discord](https://discord.gg/4sJCBx5) for discussions and updates!
 
