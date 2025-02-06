@@ -1,5 +1,20 @@
 # duckyPad Accessories & Upgrades
 
+Hi there! Here you can get:
+
+* Additional duckyPads
+
+* Replacement Parts
+
+* Accessories
+
+	* Aluminum Plates / Knobs
+	* Expansion Modules
+	* Switches & Keycaps
+	* and more!
+
+
+
 |duckyPad Pro (2024)|duckyPad (2020)|
 |:--:|:--:|
 |![alt](../resources/photos/sq.jpeg)|![alt](../resources/photos/og.jpeg)|
