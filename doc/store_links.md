@@ -1,4 +1,4 @@
-# duckyPad Store Links
+# duckyPad Accessories & Upgrades
 
 |duckyPad Pro (2024)|duckyPad (2020)|
 |:--:|:--:|
