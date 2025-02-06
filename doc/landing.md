@@ -7,6 +7,7 @@ duckyPad is a line of **mechanical macropads** for power users demanding **advan
 |![alt](../resources/photos/sq.jpeg)|![alt](../resources/photos/og.jpeg)|
 |[Purchase Link](https://www.tindie.com/products/37399/)|[Purchase Link](https://www.tindie.com/products/21984/)|
 |[User Manual](getting_started.md)|[User Manual](https://github.com/dekuNukem/duckyPad/blob/master/getting_started.md)|
+|[Accessories & Upgrades](https://www.tindie.com/products/dekunukem/duckypad-pro-accessories/)|[Accessories & Upgrades](https://www.tindie.com/products/dekunukem/duckypad-accessories/)|
 
 # Highlights
 
@@ -30,7 +31,7 @@ Compared to QMK/VIA, you get:
 
 ![alt](../resources/photos/quarter.jpeg)
 
-From **simple shortcuts** to **full-blown programs**, duckyScript can easily achieve the impossible on QMK/VIA.
+From **simple shortcuts** to **full-blown programs**, duckyScript can easily achieve what is impossible on QMK/VIA.
 
 It is a no-brainer for power users with more demanding scripting needs.
 
