@@ -81,7 +81,7 @@ Slow it down with the following commands:
 * Mount the SD card on PC
 * Format it in `FAT or FAT32`:
 
-![Alt text](../resources/photos/trouble/format.png)
+![Alt text](../resources/photos/trouble/sd_format.png)
 
 * Press `Backup...` button in the configurator
 
