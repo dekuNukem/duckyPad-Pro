@@ -81,18 +81,17 @@ Slow it down with the following commands:
 * Mount the SD card on PC
 * Format it in `FAT or FAT32`:
 
-![Alt text](../resources/photos/trouble/format.PNG)
+![Alt text](../resources/photos/trouble/format.png)
 
 * Press `Backup...` button in the configurator
 
-![Alt text](../resources/photos/trouble/backup.PNG)
+![Alt text](../resources/photos/trouble/backup.png)
 
 * Select a backup and copy files back to the **root of your SD card**
 
 ![Alt text](../resources/photos/trouble/sample_pf.png)
 
 * You can also download the [sample profiles](../resources/sample_profiles/sample_profiles.zip) and start fresh
-
 
 ## The RGB backlight is flickering slightly!
 
