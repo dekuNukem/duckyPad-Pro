@@ -136,7 +136,7 @@ void led_start_animation(led_animation* anime_struct, uint8_t dest_color[THREE],
 
 void play_keydown_animation(uint8_t profile_number, uint8_t sw_number)
 {
-  if(sw_number > NEOPIXEL_COUNT)
+  if(sw_number >= NEOPIXEL_COUNT)
     return;
   set_pixel_color(sw_number, all_profile_info[profile_number].sw_activation_color[sw_number]);
   neo_anime[sw_number].current_color[0] = all_profile_info[profile_number].sw_activation_color[sw_number][0];
@@ -150,7 +150,7 @@ void play_keydown_animation(uint8_t profile_number, uint8_t sw_number)
 
 void play_keyup_animation(uint8_t profile_number, uint8_t sw_number)
 {
-  if(sw_number > NEOPIXEL_COUNT)
+  if(sw_number >= NEOPIXEL_COUNT)
     return;
   led_start_animation(&neo_anime[sw_number], all_profile_info[profile_number].sw_color[sw_number], ANIMATION_CROSS_FADE, 50);
 }
