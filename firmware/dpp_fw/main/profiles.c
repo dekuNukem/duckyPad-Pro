@@ -195,10 +195,10 @@ const char cmd_sw_name_secondline[] = "x";
 
 void parse_profile_config_line(char* this_line, profile_info* this_profile)
 {
-  char* msg_end = this_line + strlen(this_line);
-
   if(this_line == NULL || strlen(this_line) <= 2)
     return;
+  
+  char* msg_end = this_line + strlen(this_line);
 
   if(strncmp(cmd_sw_name_firstline, this_line, strlen(cmd_sw_name_firstline)) == 0)
   {

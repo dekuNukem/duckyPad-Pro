@@ -699,7 +699,7 @@ void draw_bt_pin(uint32_t this_bt_pin)
   ssd1306_WriteString(oled_line_buf, Font_7x10, White);
 
   memset(oled_line_buf, 0, OLED_LINE_BUF_SIZE);
-  sprintf(oled_line_buf, "%06ld", this_bt_pin);
+  sprintf(oled_line_buf, "%06u", this_bt_pin);
   ssd1306_SetCursor(center_line(strlen(oled_line_buf), 11, SSD1306_WIDTH), 50);
   ssd1306_WriteString(oled_line_buf, Font_11x18, White);
 

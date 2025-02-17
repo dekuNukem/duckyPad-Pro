@@ -186,9 +186,9 @@ void fw_update_check(void)
   
   printf("FIRMWARE FOUND: %s\n", filename_buf);
   uint32_t crc32 = calculate_crc32(filename_buf);
-  printf("CRC32: %lx\n", crc32);
+  printf("CRC32: %x\n", crc32);
   
-  sprintf(temp_buf, "%lx", crc32);
+  sprintf(temp_buf, "%x", crc32);
   if(strstr(filename_buf, temp_buf) == NULL)
   {
     neopixel_fill(128, 0, 0);

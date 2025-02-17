@@ -251,7 +251,7 @@ uint16_t read_var(uint16_t addr, uint8_t this_key_id)
     return 2;
   else if (is_global_variable(addr))
     return gv_buf[get_gv_index(addr)];
-  else if(addr < VAR_BUF_SIZE)
+  else if(addr < VAR_BUF_SIZE - 1)
     return make_uint16(var_buf[addr], var_buf[addr+1]);
   return 0;
 }
@@ -724,9 +724,10 @@ uint8_t load_dsb(char* dsb_path)
   if(sd_file == NULL)
     return EXE_DSB_FOPEN_FAIL;
   memset(bin_buf, 0, BIN_BUF_SIZE);
-  if(fread(bin_buf, 1, BIN_BUF_SIZE, sd_file) == 0)
-    return EXE_DSB_FREAD_ERROR;
+  size_t bytes_read = fread(bin_buf, 1, BIN_BUF_SIZE, sd_file);
   fclose(sd_file);
+  if(bytes_read == 0)
+    return EXE_DSB_FREAD_ERROR;
   if(bin_buf[0] != OP_VMINFO)
     return EXE_DSB_INCOMPATIBLE_VERSION;
   if(bin_buf[2] != dsvm_version)
