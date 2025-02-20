@@ -216,32 +216,3 @@ All reference to **"stack"** refers to **Arithmetic Stack**. Unless noted otherw
 
 Please feel free to [open an issue](https://github.com/dekuNukem/duckypad-pro/issues), ask in the [official duckyPad discord](https://discord.gg/4sJCBx5), or email `dekuNukem`@`gmail`.`com`!
 
-## DSVM changelog
-
-### 2024 09 07
-
-MOUSE_WHEEL argument on stack
-
-MOUSE_MOVE argument on stack
-
-removed MOUSE_MOVE preprocessor expansion, to be done at instruction level
-
-evaluate_expr handles unary operations such as -1
-
-SWC_SET SWC_FILL SWC_RESET arguments now on stack
-
-OLED_CURSOR arguments now on stack
-
-### 2024 09 08
-
-KEYUP KEYDOWN and key combos argument on stack
-
-MOUSE_WHEEL FW implementation
-
-MOUSE_MOVE FW implementation
-
-MOUSE_MOVE FW level expansion
-
-KEYUP KEYDOWN FW level implementation
-
-------------
