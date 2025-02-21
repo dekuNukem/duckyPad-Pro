@@ -450,7 +450,7 @@ uint8_t load_keymap_by_name(char* km_name)
   return 0;
 }
 
-uint8_t get_next_keymap(char* current_keymap_filename, char* next_keymap_filename)
+uint8_t get_next_keymap(const char* current_keymap_filename, char* next_keymap_filename)
 {
   struct dirent *dir;
   DIR *d = opendir("/sdcard/keymaps");
