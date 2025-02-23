@@ -230,6 +230,7 @@ void settings_menu(void)
         strcpy(dp_settings.current_kb_layout, temp_buf);
       }
       draw_settings(&dp_settings);
+      load_keymap_by_name(dp_settings.current_kb_layout);
     }
     else if(sw_event.id == MSW_3)
     {

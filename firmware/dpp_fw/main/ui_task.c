@@ -419,7 +419,6 @@ void draw_settings(dp_global_settings *dps)
   }
   ssd1306_SetCursor(center_line(strlen(oled_line_buf), 7, SSD1306_WIDTH), 57);
   ssd1306_WriteString(oled_line_buf, Font_7x10, White);
-  load_keymap_by_name(dp_settings.current_kb_layout);
 
 //------------------------------
 
