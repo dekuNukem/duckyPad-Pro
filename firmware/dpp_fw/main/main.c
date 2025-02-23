@@ -54,11 +54,14 @@ Waking up from sleep with +/- button no longer changes profile
 
 1.1.1
 Fixed `DP_SLEEP` wakes up right away
+
+1.1.2
+Assorted bugfix during backporting
 */
 
 uint8_t fw_version_major = 1;
 uint8_t fw_version_minor = 1;
-uint8_t fw_version_patch = 1;
+uint8_t fw_version_patch = 2;
 uint8_t dsvm_version = 1;
 
 static const char *TAG = "MAIN";
