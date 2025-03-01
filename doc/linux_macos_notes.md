@@ -39,16 +39,15 @@ On macOS, you can run the configurator as a **pre-packaged app**, or execute the
 
 ---------
 
-
 * If the configurator complains “duckypad detected, but I need additional permissions” then you should grant the Terminal app permissions for “Input Monitoring”. This is one of the sub-menus in the Privacy & Security screen.
 
-<!-- These files will be moved to be included in 2 or 3 other commits. I did it like this because I'm too lazy to clone the repo locally and am using Github web editor. -->
-  ![Error pop-up with the text “duckypad detected, but I need additional permissions” and three options: Yes, No, and Cancel.](https://github.com/user-attachments/assets/bcab225c-0880-4e94-b61c-02fe22c11d78)
-  ![Input Monitoring settings granted to the Terminal and configurator app](https://github.com/user-attachments/assets/4e76885a-6859-4d12-b32c-fcdbb27fa6e7)
+  ![Error pop-up with the text “duckypad detected, but I need additional permissions” and three options: Yes, No, and Cancel.](../resources/photos/app/detected-but-additional-permissions.png)
+  
+  ![Input Monitoring settings granted to the Terminal and configurator app](../resources/photos/app/input-monitoring.png)
 
-  Other users needed to grant the configurator and Terminal permissions for “Full Disk Access” or “Developer Tools”.
+* Other users have needed to grant the configurator and Terminal permissions for “Full Disk Access” or “Developer Tools”.
 
-  If everything fails, you can also edit your duckypad by manually entering USB mount mode (hold +, select key 6) and selecting the newly mounted SD card. Be careful, this will fail to properly eject the SD card before restarting the duckypad which may corrupt it, and macOS will complain about this.
+* If everything fails, you can also edit your duckypad by manually entering USB mount mode (hold +, select key 6) and selecting the newly mounted SD card. Be careful, this will fail to properly eject the SD card before restarting the duckypad which may corrupt it, and macOS will complain about this.
 
 ## Run from Source
 
