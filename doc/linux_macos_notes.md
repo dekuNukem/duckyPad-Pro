@@ -14,7 +14,7 @@ On macOS, you can run the configurator as a **pre-packaged app**, or execute the
 
 * **Right Click** on the folder, select `New Terminal at Folder`
 
-![The right click menu with the option “New Terminal at Folder” higlighted.](../resources/photos/app/term.png)
+![The right click menu with the option "New Terminal at Folder" higlighted.](../resources/photos/app/term.png)
 
 * Type `sh ./run.sh`, press enter.
 
@@ -33,19 +33,21 @@ On macOS, you can run the configurator as a **pre-packaged app**, or execute the
 
 * Scroll down to security section and click "Allow Anyway" 
 
-![Warning pop-up with the text: “‘duckypad_config’ cannot be opened because it is from an unidentified developer. macOS cannot verify that this app is free from malware.”](../resources/photos/app/unknown.png)
+![Warning pop-up with the text: "duckypad_config cannot be opened because it is from an unidentified developer. macOS cannot verify that this app is free from malware."](../resources/photos/app/unknown.png)
 
-![Settings screen in Privacy & Security, the warning “‘duckypad_config’ was blocked from use because it is not from an identified developer,” is shown above a button with the text “Allow Anyway”.](../resources/photos/app/perf.png)
+![Settings screen in Privacy & Security, the warning "‘duckypad_config’ was blocked from use because it is not from an identified developer," is shown above a button with the text "Allow Anyway".](../resources/photos/app/perf.png)
 
 ---------
 
-* If the configurator complains “duckypad detected, but I need additional permissions” then you should grant the Terminal app permissions for “Input Monitoring”. This is one of the sub-menus in the Privacy & Security screen.
+If the configurator complains about **needing additional permissions:**
 
-  ![Error pop-up with the text “duckypad detected, but I need additional permissions” and three options: Yes, No, and Cancel.](../resources/photos/app/detected-but-additional-permissions.png)
+* Try granting "Input Monitoring" permissions for the `Terminal app`.
+
+  ![Error pop-up with the text "duckypad detected, but I need additional permissions" and three options: Yes, No, and Cancel.](../resources/photos/app/detected-but-additional-permissions.png)
   
   ![Input Monitoring settings granted to the Terminal and configurator app](../resources/photos/app/input-monitoring.png)
 
-* Other users have needed to grant the configurator and Terminal permissions for “Full Disk Access” or “Developer Tools”.
+* If still not working, try "Full Disk Access" or "Developer Tools".
 
 * If everything fails, you can also edit your duckypad by manually entering USB mount mode (hold +, select key 6) and selecting the newly mounted SD card. Be careful, this will fail to properly eject the SD card before restarting the duckypad which may corrupt it, and macOS will complain about this.
 
