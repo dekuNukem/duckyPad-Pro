@@ -72,13 +72,9 @@ Moderately tighten, with a socket bit if available. It shouldn't rattle when sha
 
 ![Alt text](../resources/photos/instructions/3mm.jpeg)
 
-**`IF`** you received some **thin washers**, install them:
-
-![Alt text](../resources/photos/instructions/washer.png)
-
 🚨🚨🚨🚨🚨🚨🚨🚨🚨🚨🚨🚨🚨🚨🚨🚨🚨🚨🚨🚨🚨🚨
 
-And if your Kickstarter Backer Number is **PRIOR TO 155**
+If your Kickstarter Backer Number is **PRIOR TO 155**
 
 [Follow this guide to fix a minor clearance issue](errata.md).
 

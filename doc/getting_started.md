@@ -24,7 +24,7 @@ Ensure the power switch is ON:
 
 Plug it in, use the **UPPER** USB port, and voilà:
 
-![Alt text](../resources/photos/discord.jpeg)
+![Alt text](../resources/photos/port.png)
 
 * **`Hold down`** `+` button for settings
 
@@ -86,7 +86,9 @@ Press the `Connect` button near top left.
 
 duckyPad Pro should show up as a USB storage drive.
 
-Everything should load up. Might take a few seconds.
+Everything should load up within a few seconds.
+
+If taking too long, make sure your antivirus software isn't scanning the card.
 
 ![Alt text](../resources/photos/app/overview.png)
 
