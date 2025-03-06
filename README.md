@@ -32,7 +32,7 @@ duckyPad Pro has all the basics:
 
 But also features **unlike any other**:
 
-* Custom **[duckyScript](duckyscript_info.md)** engine, **NOT QMK/VIA**.
+* Custom **[duckyScript](doc/duckyscript_info.md)** engine, **NOT QMK/VIA**.
 * **Longer and more complex** macros
 * 1.5" **OLED** screen
 * **Bluetooth**
