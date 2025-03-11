@@ -57,11 +57,14 @@ Fixed `DP_SLEEP` wakes up right away
 
 1.1.2
 Assorted bugfix during backporting
+
+1.1.3
+fixed a bug of not saving settings
 */
 
 uint8_t fw_version_major = 1;
 uint8_t fw_version_minor = 1;
-uint8_t fw_version_patch = 2;
+uint8_t fw_version_patch = 3;
 uint8_t dsvm_version = 1;
 
 static const char *TAG = "MAIN";
