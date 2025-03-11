@@ -137,6 +137,10 @@ Fixed variables name parsing bug
 2025 01 17
 Updated preprocessor with improved line numbering memory
 Fixed a bug in preprocessing long STRINGLN commands
+
+2.2.1
+2025 03 11
+fixed a bug where whitespace at end of KEYUP and KEYDOWN causes an syntax error
 """
 
 THIS_VERSION_NUMBER = '2.2.0'

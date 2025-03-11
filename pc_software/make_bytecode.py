@@ -520,12 +520,12 @@ def make_dsb_with_exception(program_listing, profile_list=None):
             assembly_listing += parse_multi_expression(1, this_line)
             assembly_listing.append(make_delay_instruction(this_line))
         elif first_word == cmd_KEYDOWN:
-            assembly_listing.append(push_1_constant_on_stack(get_key_combined_value(this_line.split(' ')[-1]), comment=this_line))
+            assembly_listing.append(push_1_constant_on_stack(get_key_combined_value(this_line.rstrip().split(' ')[-1]), comment=this_line))
             this_instruction = get_empty_instruction()
             this_instruction['opcode'] = OP_KDOWN
             assembly_listing.append(this_instruction)
         elif first_word == cmd_KEYUP:
-            assembly_listing.append(push_1_constant_on_stack(get_key_combined_value(this_line.split(' ')[-1]), comment=this_line))
+            assembly_listing.append(push_1_constant_on_stack(get_key_combined_value(this_line.rstrip().split(' ')[-1]), comment=this_line))
             this_instruction['opcode'] = OP_KUP
             assembly_listing.append(this_instruction)
         elif first_word == cmd_RETURN:
