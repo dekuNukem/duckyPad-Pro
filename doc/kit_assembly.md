@@ -16,7 +16,7 @@ Join our [Official Discord](https://discord.gg/4sJCBx5) for discussions and late
 
 A small **Phillips-head screwdriver** (`+`shape) should be provided in the package.
 
-A socket bit or **pair of pliers** also helps, but not required.
+A 3mm socket bit or **pair of pliers** also helps, but not required.
 
 ## Assembly Steps
 
@@ -27,14 +27,6 @@ You should have the following items:
 As well as the following fasteners:
 
 ![Alt text](../resources/photos/instructions/fast.png)
-
-Pay special attention to the **brass spacers**!
-
-![Alt text](../resources/photos/instructions/4mm3mm.png)
-
-* One is **slightly shorter** than the other.
-
-* Separate them out before starting
 
 ----------
 
@@ -74,7 +66,7 @@ Moderately tighten, with a socket bit if available. It shouldn't rattle when sha
 
 🚨🚨🚨🚨🚨🚨🚨🚨🚨🚨🚨🚨🚨🚨🚨🚨🚨🚨🚨🚨🚨🚨
 
-If your Kickstarter Backer Number is **PRIOR TO 155**
+If your Kickstarter Backer Number is **PRIOR TO 155** (28 Nov 2024)
 
 [Follow this guide to fix a minor clearance issue](errata.md).
 
