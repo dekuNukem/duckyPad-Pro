@@ -17,9 +17,9 @@ const char *OTA_TAG = "OTA";
 
 uint8_t esp_mac_addr[ESP_MAC_ADDR_SIZE];
 
-void strip_newline(char* line, uint8_t size)
+void strip_newline(char* line, uint16_t size)
 {
-  for(int i = 0; i < size; ++i)
+  for(size_t i = 0; i < size; ++i)
     if(line[i] == '\n' || line[i] == '\r')
       line[i] = 0;
 }

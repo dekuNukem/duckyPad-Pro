@@ -1,3 +1,12 @@
+  printf("%s:\n", all_profile_info[1].pf_name);
+  for(size_t i = 0; i < TOTAL_OBSW_COUNT; i++)
+  {
+    char* tttt = all_profile_info[1].sw_name_firstline[i];
+    printf("%d %s", strlen(tttt), tttt);
+    for (size_t ccc = 0; ccc < KEYNAME_SIZE; ccc++)
+      printf(" %x", tttt[ccc]);
+    printf("\n");
+  }
 
 void print_profile_info(profile_info *pinfo)
 {

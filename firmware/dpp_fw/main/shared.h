@@ -20,7 +20,7 @@ extern uint8_t fw_version_minor;
 extern uint8_t fw_version_patch;
 extern uint8_t dsvm_version;
 
-void strip_newline(char* line, uint8_t size);
+void strip_newline(char* line, uint16_t size);
 uint8_t how_many_digits(uint8_t number);
 char* goto_next_arg(char* buf, char* buf_end);
 void fw_update_check(void);

@@ -294,6 +294,7 @@ void load_profile_config(profile_info* this_profile)
   {
     strip_newline(temp_buf, TEMP_BUFSIZE);
     parse_profile_config_line(temp_buf, this_profile);
+    CLEAR_TEMP_BUF();
   }
 
   if(this_profile->dim_unused_keys)
@@ -333,7 +334,7 @@ uint8_t scan_profiles()
 
   for(size_t i = 0; i < MAX_PROFILES; i++)
     load_profile_config(&all_profile_info[i]);
-
+  
   return PSCAN_OK;
 }
 
