@@ -625,7 +625,6 @@ void load_gv(void)
   memcpy(gv_buf, sps_bin_buf, GLOBAL_VARIABLE_COUNT * sizeof(uint16_t));
 }
 
-
 const char* profile_str = "profile";
 uint8_t ensure_new_profile_format(void)
 {
@@ -660,6 +659,14 @@ uint8_t ensure_new_profile_format(void)
     if(this_profile_number >= MAX_PROFILES)
       continue;
     printf("index: %d\n", this_profile_number);
+    this_profile_name = strchr(filename_buf, '_');
+    if(this_profile_name == NULL)
+      continue;
+    this_profile_name++;
+    printf("name: %s\n", this_profile_name);
+
+    all_profile_info[this_profile_number];
+
   }
   closedir(dir);
   return 0;
