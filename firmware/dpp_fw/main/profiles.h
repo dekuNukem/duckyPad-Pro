@@ -10,7 +10,7 @@
 #include "input_task.h"
 #include "neopixel_task.h"
 
-#define TEMP_BUFSIZE 128
+#define TEMP_BUFSIZE 256
 #define FILENAME_BUFSIZE 64
 #define MAX_PROFILES 64
 #define KEYNAME_SIZE 8
@@ -50,6 +50,7 @@ typedef struct
 extern profile_info all_profile_info[MAX_PROFILES];
 extern dp_global_settings dp_settings;
 extern uint8_t current_profile_number;
+#define CLEAR_TEMP_BUF() memset(temp_buf, 0, TEMP_BUFSIZE)
 extern char temp_buf[TEMP_BUFSIZE];
 extern char filename_buf[FILENAME_BUFSIZE];
 
@@ -72,6 +73,7 @@ uint8_t goto_profile_without_updating_rgb_LED(uint8_t profile_number);
 uint8_t load_persistent_state(void);
 void save_gv(void);
 void load_gv(void);
+uint8_t ensure_new_profile_format(void);
 
 extern uint8_t is_profile_load_complete;
 

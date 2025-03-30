@@ -101,7 +101,7 @@ void app_main(void)
     {
         oled_say("Booting...");
     }
-    memset(temp_buf, 0, TEMP_BUFSIZE);
+    CLEAR_TEMP_BUF();
     sprintf(temp_buf, "DP24_%02x%02x", esp_mac_addr[ESP_MAC_ADDR_SIZE-2], esp_mac_addr[ESP_MAC_ADDR_SIZE-1]);
     f_setlabel(temp_buf);
 
@@ -124,6 +124,12 @@ void app_main(void)
     fw_update_check();
     esp_ota_mark_app_valid_cancel_rollback();
     is_busy = 0;
+
+    uint8_t result = ensure_new_profile_format();
+    CLEAR_TEMP_BUF();
+    sprintf(temp_buf, "Convert: %d", result);
+    oled_say(temp_buf);
+    idle_loop();
     
     if(scan_profiles() == PSCAN_ERROR_NO_PROFILE)
     {

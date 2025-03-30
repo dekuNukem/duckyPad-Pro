@@ -702,7 +702,7 @@ void draw_bt_pin(uint32_t this_bt_pin)
   ssd1306_SetCursor(center_line(strlen(oled_line_buf), 11, SSD1306_WIDTH), 50);
   ssd1306_WriteString(oled_line_buf, Font_11x18, White);
 
-  memset(temp_buf, 0, TEMP_BUFSIZE);
+  CLEAR_TEMP_BUF();
   sprintf(oled_line_buf, "Press Any Key");
   ssd1306_SetCursor(center_line(strlen(oled_line_buf), 7, SSD1306_WIDTH), 100);
   ssd1306_WriteString(oled_line_buf, Font_7x10, White);
@@ -745,7 +745,7 @@ void draw_nvm_erase()
   ssd1306_SetCursor(center_line(strlen(oled_line_buf), 7, SSD1306_WIDTH), 67);
   ssd1306_WriteString(oled_line_buf, Font_7x10, White);
 
-  memset(temp_buf, 0, TEMP_BUFSIZE);
+  CLEAR_TEMP_BUF();
   sprintf(oled_line_buf, "Press Any Key");
   ssd1306_SetCursor(center_line(strlen(oled_line_buf), 7, SSD1306_WIDTH), 100);
   ssd1306_WriteString(oled_line_buf, Font_7x10, White);

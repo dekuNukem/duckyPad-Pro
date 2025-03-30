@@ -207,7 +207,7 @@ void fw_update_check(void)
   uint8_t update_result = update_firmware(filename_buf);
   if(update_result)
   {
-    memset(temp_buf, 0, TEMP_BUFSIZE);
+    CLEAR_TEMP_BUF();
     sprintf(temp_buf, "Failed: %d", update_result);
     oled_say(temp_buf);
   }

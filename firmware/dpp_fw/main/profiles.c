@@ -21,6 +21,7 @@
 #include "ds_vm.h"
 #include "bluetooth_task.h"
 
+const char* profile_info_file_path = "/sdcard/profile_info.txt";
 const char settings_file_path[] = "/sdcard/dpp_config.txt";
 const char default_settings_file[] = "sleep_index 0\nbrightness_index 0\nlast_profile 1\nfw_ver 0.0.0\nserial_number DP24_000000\nkb_layout dpkm_English (US).txt\n";
 dp_global_settings dp_settings;
@@ -50,10 +51,10 @@ uint8_t load_settings(dp_global_settings* dps)
     return 1;
 
   // remove incompatible files from old duckyPad
-  memset(temp_buf, 0, TEMP_BUFSIZE);
+  CLEAR_TEMP_BUF();
   sprintf(temp_buf, "/sdcard/dp_settings.txt");
   remove(temp_buf);
-  memset(temp_buf, 0, TEMP_BUFSIZE);
+  CLEAR_TEMP_BUF();
   sprintf(temp_buf, "/sdcard/dp_stats.txt");
   remove(temp_buf);
 
@@ -73,7 +74,7 @@ uint8_t load_settings(dp_global_settings* dps)
   if(sd_file == NULL)
     return 3;
 
-  memset(temp_buf, 0, TEMP_BUFSIZE);
+  CLEAR_TEMP_BUF();
   memset(dps->current_kb_layout, 0, FILENAME_BUFSIZE);
 
   while(fgets(temp_buf, TEMP_BUFSIZE, sd_file))
@@ -303,7 +304,7 @@ void load_profile_config(profile_info* this_profile)
   if(sd_file == NULL)
     return;
   this_profile->dim_unused_keys = 1;
-  memset(temp_buf, 0, TEMP_BUFSIZE);
+  CLEAR_TEMP_BUF();
   while(fgets(temp_buf, TEMP_BUFSIZE, sd_file))
   {
     strip_newline(temp_buf, TEMP_BUFSIZE);
@@ -420,7 +421,7 @@ uint8_t load_keymap_by_name(char* km_name)
   char* next;
   if(km_name == NULL)
     return 1;
-  memset(temp_buf, 0, TEMP_BUFSIZE);
+  CLEAR_TEMP_BUF();
   sprintf(temp_buf, "/sdcard/keymaps/%s", km_name);
   FILE *sd_file = fopen(temp_buf, "r");
   if(sd_file == NULL)
@@ -565,11 +566,11 @@ void save_persistent_state(uint8_t epilogue_value, uint8_t swid)
   }
   
   // remove sps file for old duckyPad
-  memset(temp_buf, 0, TEMP_BUFSIZE);
+  CLEAR_TEMP_BUF();
   sprintf(temp_buf, "/sdcard/%s/state.sps", all_profile_info[current_profile_number].dir_path);
   remove(temp_buf);
 
-  memset(temp_buf, 0, TEMP_BUFSIZE);
+  CLEAR_TEMP_BUF();
   sprintf(temp_buf, "/sdcard/%s/state_dpp.sps", all_profile_info[current_profile_number].dir_path);
 
   FILE *file = fopen(temp_buf, "wb");
@@ -579,7 +580,7 @@ void save_persistent_state(uint8_t epilogue_value, uint8_t swid)
 
 uint8_t load_persistent_state(void)
 {
-  memset(temp_buf, 0, TEMP_BUFSIZE);
+  CLEAR_TEMP_BUF();
   sprintf(temp_buf, "/sdcard/%s/state_dpp.sps", all_profile_info[current_profile_number].dir_path);
   FILE *file = fopen(temp_buf, "rb");
   if(file == NULL)
@@ -604,7 +605,7 @@ void save_gv(void)
 {
   memset(sps_bin_buf, 0, SPS_BIN_SIZE);
   memcpy(sps_bin_buf, gv_buf, GLOBAL_VARIABLE_COUNT*sizeof(uint16_t));
-  memset(temp_buf, 0, TEMP_BUFSIZE);
+  CLEAR_TEMP_BUF();
   sprintf(temp_buf, "/sdcard/gv.sps");
   FILE *file = fopen(temp_buf, "wb");
   fwrite(sps_bin_buf, 1, SPS_BIN_SIZE, file);
@@ -613,7 +614,7 @@ void save_gv(void)
 
 void load_gv(void)
 {
-  memset(temp_buf, 0, TEMP_BUFSIZE);
+  CLEAR_TEMP_BUF();
   sprintf(temp_buf, "/sdcard/gv.sps");
   FILE *file = fopen(temp_buf, "rb");
   if(file == NULL)
@@ -622,4 +623,44 @@ void load_gv(void)
   fread(sps_bin_buf, 1, SPS_BIN_SIZE, file);
   fclose(file);
   memcpy(gv_buf, sps_bin_buf, GLOBAL_VARIABLE_COUNT * sizeof(uint16_t));
+}
+
+
+const char* profile_str = "profile";
+uint8_t ensure_new_profile_format(void)
+{
+  char* this_profile_name;
+  uint8_t this_profile_number;
+  struct stat st;
+
+  if(access(profile_info_file_path, F_OK) == 0) // profile_info.txt already exists
+    return 1;
+  
+  DIR* dir = opendir("/sdcard/");
+  if(dir == NULL)
+    return 2;
+
+  oled_say("Converting...");
+  struct dirent* entry;
+  while ((entry = readdir(dir)) != NULL)
+  {
+    memset(filename_buf, 0, FILENAME_BUFSIZE);
+    strncpy(filename_buf, entry->d_name, FILENAME_BUFSIZE - 1);
+    CLEAR_TEMP_BUF();
+    sprintf(temp_buf, "/sdcard/%s", filename_buf);
+    if(stat(temp_buf, &st) == -1)
+      continue;
+    if(!S_ISDIR(st.st_mode))
+      continue;
+    if(strncmp(filename_buf, profile_str, strlen(profile_str)) != 0)
+      continue;
+
+    printf("Found: %s\n", filename_buf);
+    this_profile_number = atoi(filename_buf + strlen(profile_str));
+    if(this_profile_number >= MAX_PROFILES)
+      continue;
+    printf("index: %d\n", this_profile_number);
+  }
+  closedir(dir);
+  return 0;
 }

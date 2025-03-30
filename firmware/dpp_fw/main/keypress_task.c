@@ -219,7 +219,7 @@ void settings_menu(void)
     }
     else if(sw_event.id == MSW_2)
     {
-      memset(temp_buf, 0, TEMP_BUFSIZE);
+      CLEAR_TEMP_BUF();
       if(get_next_keymap(dp_settings.current_kb_layout, temp_buf))
       {
         memset(dp_settings.current_kb_layout, 0, FILENAME_BUFSIZE);
