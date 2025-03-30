@@ -14,6 +14,7 @@
 #define FILENAME_BUFSIZE 64
 #define MAX_PROFILES 64
 #define KEYNAME_SIZE 8
+#define PROFILE_NAME_MAX_LEN 16
 
 #define BT_MODE_SIZE 3
 #define BT_MODE_NEVER 0
@@ -36,8 +37,7 @@ typedef struct
 typedef struct
 {
   uint8_t is_loaded;
-  char dir_path[FILENAME_BUFSIZE];
-  char* pf_name;
+  char pf_name[PROFILE_NAME_MAX_LEN];
   char sw_name_firstline[TOTAL_OBSW_COUNT][KEYNAME_SIZE];
   char sw_name_secondline[TOTAL_OBSW_COUNT][KEYNAME_SIZE];
   uint8_t sw_color[MECH_OBSW_COUNT][THREE]; // only mechanical keys have RGB LEDs

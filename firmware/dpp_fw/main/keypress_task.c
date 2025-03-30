@@ -293,10 +293,10 @@ void process_keyevent(uint8_t swid, uint8_t event_type)
     return; // just in case lol
 
   memset(dsb_on_press_path_buf, 0, PATH_BUF_SIZE);
-  sprintf(dsb_on_press_path_buf, "/sdcard/%s/key%d.dsb", all_profile_info[current_profile_number].dir_path, swid+1);
+  sprintf(dsb_on_press_path_buf, "/sdcard/profile_%s/key%d.dsb", all_profile_info[current_profile_number].pf_name, swid+1);
 
   memset(dsb_on_release_path_buf, 0, PATH_BUF_SIZE);
-  sprintf(dsb_on_release_path_buf, "/sdcard/%s/key%d-release.dsb", all_profile_info[current_profile_number].dir_path, swid+1);
+  sprintf(dsb_on_release_path_buf, "/sdcard/profile_%s/key%d-release.dsb", all_profile_info[current_profile_number].pf_name, swid+1);
 
   if(event_type == SW_EVENT_SHORT_PRESS)
     onboard_offboard_switch_press(swid, dsb_on_press_path_buf, dsb_on_release_path_buf);
@@ -341,7 +341,7 @@ void wakeup_from_sleep_and_load_profile(uint8_t profile_to_load)
 void rotary_encoder_activity(uint8_t swid)
 {
   memset(dsb_on_press_path_buf, 0, PATH_BUF_SIZE);
-  sprintf(dsb_on_press_path_buf, "/sdcard/%s/key%d.dsb", all_profile_info[current_profile_number].dir_path, swid+1);
+  sprintf(dsb_on_press_path_buf, "/sdcard/profile_%s/key%d.dsb", all_profile_info[current_profile_number].pf_name, swid+1);
   if(access(dsb_on_press_path_buf, F_OK))
     return;
   all_profile_info[current_profile_number].keypress_count[swid]++;

@@ -125,11 +125,7 @@ void app_main(void)
     esp_ota_mark_app_valid_cancel_rollback();
     is_busy = 0;
 
-    uint8_t result = ensure_new_profile_format();
-    CLEAR_TEMP_BUF();
-    sprintf(temp_buf, "Convert: %d", result);
-    oled_say(temp_buf);
-    idle_loop();
+    ensure_new_profile_format();
     
     if(scan_profiles() == PSCAN_ERROR_NO_PROFILE)
     {

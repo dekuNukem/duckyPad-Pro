@@ -145,50 +145,35 @@ uint8_t is_profile_dir(char* dirname)
   return 1;
 }
 
-void print_profile_info(profile_info *pinfo)
-{
-  if(pinfo == NULL)
-    return;
-  printf("--------\n");
-  printf("is_loaded: %d\n", pinfo->is_loaded);
-  printf("dir_path: %s\n", pinfo->dir_path);
-  printf("pf_name: %s\n", pinfo->pf_name);
-  // printf("dim_unused_keys: %d\n", pinfo->dim_unused_keys);
-  // for (size_t i = 0; i < TOTAL_OBSW_COUNT; i++)
-  // {
-  //   if(strlen(pinfo->sw_name[i]) == 0)
-  //     continue;
-  //   printf("key %d: %s\n", i, pinfo->sw_name[i]);
-  //   printf("sw_color %d %d %d\n", pinfo->sw_color[i][0], pinfo->sw_color[i][1], pinfo->sw_color[i][2]);
-  //   printf("sw_activation_color %d %d %d\n", pinfo->sw_activation_color[i][0], pinfo->sw_activation_color[i][1], pinfo->sw_activation_color[i][2]);
-  //   printf(".\n");
-  // }
-  printf("--------\n");
-}
-
 void load_profile_info(void)
 {
-  struct dirent *dir;
-  DIR *d = opendir(SD_MOUNT_POINT);
-  if(d) 
+  FILE *sd_file = fopen(profile_info_file_path, "r");
+  uint8_t this_pf_number = 0;
+  char* this_pf_name;
+  if(sd_file == NULL)
+    return;
+  
+  while(1)
   {
-    while ((dir = readdir(d)) != NULL)
-    {
-      if(dir->d_type != DT_DIR)
-        continue;
-      if(is_profile_dir(dir->d_name) == 0)
-        continue;
-      uint8_t this_profile_number = atoi(dir->d_name + strlen(profile_dir_prefix));
-      if(this_profile_number >= MAX_PROFILES)
-        continue;
-
-      all_profile_info[this_profile_number].is_loaded = 1;
-      memset(all_profile_info[this_profile_number].dir_path, 0, FILENAME_BUFSIZE);
-      strcpy(all_profile_info[this_profile_number].dir_path, dir->d_name);
-      all_profile_info[this_profile_number].pf_name = all_profile_info[this_profile_number].dir_path + strlen(profile_dir_prefix) + how_many_digits(this_profile_number) + 1;
-    }
+    CLEAR_TEMP_BUF();
+    if(fgets(temp_buf, TEMP_BUFSIZE, sd_file) == NULL)
+      break;
+    this_pf_number = atoi(temp_buf);
+    this_pf_name = goto_next_arg(temp_buf, temp_buf + PROFILE_NAME_MAX_LEN);
+    if(this_pf_number == 0 || this_pf_number >= MAX_PROFILES)
+      continue;
+    if(this_pf_name == NULL)
+      continue;
+    strip_newline(this_pf_name, PROFILE_NAME_MAX_LEN);
+    memset(filename_buf, 0, FILENAME_BUFSIZE);
+    sprintf(filename_buf, "/sdcard/profile_%s/config.txt", this_pf_name);
+    if(access(filename_buf, F_OK) != 0)
+      continue;
+    all_profile_info[this_pf_number].is_loaded = 1;
+    memset(all_profile_info[this_pf_number].pf_name, 0, PROFILE_NAME_MAX_LEN);
+    strncpy(all_profile_info[this_pf_number].pf_name, this_pf_name, PROFILE_NAME_MAX_LEN);
   }
-  closedir(d);
+  fclose(sd_file);
 }
 
 const char cmd_sw_name_firstline[] = "z";
@@ -298,7 +283,7 @@ void load_profile_config(profile_info* this_profile)
   if(this_profile == NULL || this_profile->is_loaded == 0)
     return;
   memset(filename_buf, 0, FILENAME_BUFSIZE);
-  sprintf(filename_buf, "%s/%s/config.txt", SD_MOUNT_POINT, this_profile->dir_path);
+  sprintf(filename_buf, "%s/profile_%s/config.txt", SD_MOUNT_POINT, this_profile->pf_name);
 
   FILE *sd_file = fopen(filename_buf, "r");
   if(sd_file == NULL)
@@ -567,11 +552,11 @@ void save_persistent_state(uint8_t epilogue_value, uint8_t swid)
   
   // remove sps file for old duckyPad
   CLEAR_TEMP_BUF();
-  sprintf(temp_buf, "/sdcard/%s/state.sps", all_profile_info[current_profile_number].dir_path);
+  sprintf(temp_buf, "/sdcard/profile_%s/state.sps", all_profile_info[current_profile_number].pf_name);
   remove(temp_buf);
 
   CLEAR_TEMP_BUF();
-  sprintf(temp_buf, "/sdcard/%s/state_dpp.sps", all_profile_info[current_profile_number].dir_path);
+  sprintf(temp_buf, "/sdcard/profile_%s/state_dpp.sps", all_profile_info[current_profile_number].pf_name);
 
   FILE *file = fopen(temp_buf, "wb");
   fwrite(sps_bin_buf, 1, SPS_BIN_SIZE, file);
@@ -581,7 +566,7 @@ void save_persistent_state(uint8_t epilogue_value, uint8_t swid)
 uint8_t load_persistent_state(void)
 {
   CLEAR_TEMP_BUF();
-  sprintf(temp_buf, "/sdcard/%s/state_dpp.sps", all_profile_info[current_profile_number].dir_path);
+  sprintf(temp_buf, "/sdcard/profile_%s/state_dpp.sps", all_profile_info[current_profile_number].pf_name);
   FILE *file = fopen(temp_buf, "rb");
   if(file == NULL)
     return 1;
@@ -640,6 +625,7 @@ uint8_t ensure_new_profile_format(void)
     return 2;
 
   oled_say("Converting...");
+  memset(all_profile_info, 0, sizeof(all_profile_info));
   struct dirent* entry;
   while ((entry = readdir(dir)) != NULL)
   {
@@ -654,20 +640,41 @@ uint8_t ensure_new_profile_format(void)
     if(strncmp(filename_buf, profile_str, strlen(profile_str)) != 0)
       continue;
 
-    printf("Found: %s\n", filename_buf);
+    printf("Converting: %s\n", filename_buf);
     this_profile_number = atoi(filename_buf + strlen(profile_str));
     if(this_profile_number >= MAX_PROFILES)
       continue;
-    printf("index: %d\n", this_profile_number);
     this_profile_name = strchr(filename_buf, '_');
     if(this_profile_name == NULL)
       continue;
     this_profile_name++;
-    printf("name: %s\n", this_profile_name);
-
-    all_profile_info[this_profile_number];
-
+    all_profile_info[this_profile_number].is_loaded = 1;
+    strncpy(all_profile_info[this_profile_number].pf_name, this_profile_name, PROFILE_NAME_MAX_LEN);
   }
   closedir(dir);
+
+  FILE *sd_file = fopen(profile_info_file_path, "w");
+  if(sd_file == NULL)
+    return 3;
+  for (size_t i = 0; i < MAX_PROFILES; i++)
+  {
+    if(all_profile_info[i].is_loaded == 0)
+      continue;
+    fprintf(sd_file, "%d %s\n", i, all_profile_info[i].pf_name);
+  }
+  fclose(sd_file);
+
+  for (size_t i = 0; i < MAX_PROFILES; i++)
+  {
+    if(all_profile_info[i].is_loaded == 0)
+      continue;
+    CLEAR_TEMP_BUF();
+    memset(filename_buf, 0, FILENAME_BUFSIZE);
+    sprintf(temp_buf, "/sdcard/profile%d_%s", i, all_profile_info[i].pf_name);
+    sprintf(filename_buf, "/sdcard/profile_%s", all_profile_info[i].pf_name);
+    printf("%s --> %s\n", temp_buf, filename_buf);
+    rename(temp_buf, filename_buf);
+  }
+  oled_say("Done!");
   return 0;
 }

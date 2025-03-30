@@ -1,3 +1,24 @@
+
+void print_profile_info(profile_info *pinfo)
+{
+  if(pinfo == NULL)
+    return;
+  printf("--------\n");
+  printf("is_loaded: %d\n", pinfo->is_loaded);
+  printf("pf_name: %s\n", pinfo->pf_name);
+  // printf("dim_unused_keys: %d\n", pinfo->dim_unused_keys);
+  // for (size_t i = 0; i < TOTAL_OBSW_COUNT; i++)
+  // {
+  //   if(strlen(pinfo->sw_name[i]) == 0)
+  //     continue;
+  //   printf("key %d: %s\n", i, pinfo->sw_name[i]);
+  //   printf("sw_color %d %d %d\n", pinfo->sw_color[i][0], pinfo->sw_color[i][1], pinfo->sw_color[i][2]);
+  //   printf("sw_activation_color %d %d %d\n", pinfo->sw_activation_color[i][0], pinfo->sw_activation_color[i][1], pinfo->sw_activation_color[i][2]);
+  //   printf(".\n");
+  // }
+  printf("--------\n");
+}
+
 if(is_sleeping && is_plus_minus_button(this_sw_event->id) && this_sw_event->type != SW_EVENT_RELEASE)
   {
     return;
