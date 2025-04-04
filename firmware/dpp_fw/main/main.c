@@ -60,11 +60,14 @@ Assorted bugfix during backporting
 
 1.1.3
 fixed a bug of not saving settings
+
+1.6.0
+New profile folder name format
 */
 
 uint8_t fw_version_major = 1;
-uint8_t fw_version_minor = 1;
-uint8_t fw_version_patch = 3;
+uint8_t fw_version_minor = 6;
+uint8_t fw_version_patch = 0;
 uint8_t dsvm_version = 1;
 
 static const char *TAG = "MAIN";
