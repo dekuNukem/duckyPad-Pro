@@ -1,12 +1,14 @@
-# duckyPad Configurator macOS Notes
+# duckyPad Configurator macOS / Linux Notes
 
 [Get duckyPad Pro](https://www.tindie.com/products/37399/) | [Official Discord](https://discord.gg/4sJCBx5) | [Getting Started](./getting_started.md) | [Table of Contents](#table-of-contents)
 
 ---------
 
+## macOS
+
 On macOS, you can run the configurator as a **pre-packaged app**, or execute the **source code** directly.
 
-## Pre-packaged App
+### macOS Pre-packaged App
 
 * [Download the latest macOS release here](https://github.com/dekuNukem/duckyPad-Pro/releases/latest)
 
@@ -51,7 +53,7 @@ If the configurator complains about **needing additional permissions:**
 
 * If everything fails, you can also edit your duckypad by manually entering USB mount mode (hold +, select key 6) and selecting the newly mounted SD card. Be careful, this will fail to properly eject the SD card before restarting the duckypad which may corrupt it, and macOS will complain about this.
 
-## Run from Source
+### macOS Run from Source
 
 * [Download the latest source release here](https://github.com/dekuNukem/duckyPad-Pro/releases/latest)
 * Double click to unzip
@@ -63,3 +65,28 @@ If the configurator complains about **needing additional permissions:**
 * **[Optional]** Make a virtualenv and activate it: `python3 -m venv .venv; source .venv/bin/activate`
 * Install dependencies: `pip3 install -r requirements.txt`
 * Launch the app: `sudo python3 ./duckypad_config.py`
+
+-----------
+
+## Linux
+
+You can run the code from source under Linux.
+
+[Download the latest source release here](https://github.com/dekuNukem/duckyPad-Pro/releases/latest)
+
+* Unzip & open a terminal at the directory
+* Install tkinter: `sudo apt install python3-tk`
+* Install dependencies: `sudo pip3 install -r requirements.txt`
+* Launch the app: `sudo DUCKYPAD_UI_SCALE=1 python3 ./duckypad_config.py`
+  * For High-DPI screens, adjust `DUCKYPAD_UI_SCALE` environment variable.
+* Setup the udev rules
+  * Create the file: `sudo touch /etc/udev/rules.d/20-duckyPad.rules`
+  * Add the following contents:
+      ```
+      SUBSYSTEMS=="usb", ATTRS{idVendor}=="0483", ATTRS{idProduct}=="d11c", TAG+="uaccess", TAG+="udev-acl"
+      SUBSYSTEMS=="usb", ATTRS{idVendor}=="0483", ATTRS{idProduct}=="d11d", TAG+="uaccess", TAG+="udev-acl"
+  * Give it the correct permissions: `sudo chmod 644 /etc/udev/rules.d/20-duckyPad.rules`
+  * Give it the correct ownership: `sudo chown root:root /etc/udev/rules.d/20-duckyPad.rules`
+  * Reload udev rules: `sudo udevadm control --reload-rules`
+  * Trigger udev: `sudo udevadm trigger`
+
