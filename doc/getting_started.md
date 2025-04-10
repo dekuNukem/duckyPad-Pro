@@ -77,6 +77,16 @@ Feel free to [review the files](https://github.com/dekuNukem/duckyPad-Pro/tree/m
 * Install dependencies: `sudo pip3 install -r requirements.txt`
 * Launch the app: `sudo DUCKYPAD_UI_SCALE=1 python3 ./duckypad_config.py`
 	* For High-DPI screens, adjust `DUCKYPAD_UI_SCALE` environment variable.
+* Setup the udev rules
+	* Create the file: `sudo touch /etc/udev/rules.d/20-duckyPad.rules`
+ 	* Add the following contents:
+  		```
+  		SUBSYSTEMS=="usb", ATTRS{idVendor}=="0483", ATTRS{idProduct}=="d11c", TAG+="uaccess", TAG+="udev-acl"
+  		SUBSYSTEMS=="usb", ATTRS{idVendor}=="0483", ATTRS{idProduct}=="d11d", TAG+="uaccess", TAG+="udev-acl"
+ 	* Give it the correct permissions: `sudo chmod 644 /etc/udev/rules.d/20-duckyPad.rules`
+ 	* Give it the correct ownership: `sudo chown root:root /etc/udev/rules.d/20-duckyPad.rules`
+ 	* Reload udev rules: `sudo udevadm control --reload-rules`
+ 	* Trigger udev: `sudo udevadm trigger`
 
 ### Using Configurator
 
