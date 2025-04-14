@@ -336,6 +336,7 @@ uint8_t should_use_mod(uint8_t ttt)
   return 0;
 }
 
+uint8_t mouse_button_status;
 void mouse_press(my_key* this_key)
 {
   memset(kb_buf, 0, DP_HID_MSG_SIZE);
@@ -344,9 +345,11 @@ void mouse_press(my_key* this_key)
   if(this_key->type == KEY_TYPE_MOUSE_BUTTON)
   {
     kb_buf[1] = this_key->code;
+    mouse_button_status = kb_buf[1];
   }
   else if(this_key->type == KEY_TYPE_MOUSE_MOVEMENT)
   {
+    kb_buf[1] = mouse_button_status;
     kb_buf[2] = this_key->code;
     kb_buf[3] = ~(this_key->code2) + 1;
   }
@@ -363,9 +366,11 @@ void mouse_release(my_key* this_key)
   if(this_key->type == KEY_TYPE_MOUSE_BUTTON)
   {
     kb_buf[1] = 0;
+    mouse_button_status = 0;
   }
   else if(this_key->type == KEY_TYPE_MOUSE_MOVEMENT)
   {
+    kb_buf[1] = mouse_button_status;
     kb_buf[2] = 0;
     kb_buf[3] = 0;
   }
@@ -378,6 +383,7 @@ void mouse_release(my_key* this_key)
 
 void mouse_release_all(void)
 {
+  mouse_button_status = 0;
   memset(kb_buf, 0, DP_HID_MSG_SIZE);
   kb_buf[0] = HID_USAGE_ID_MOUSE;
   USBD_CUSTOM_HID_SendReport(kb_buf);

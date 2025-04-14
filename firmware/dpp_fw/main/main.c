@@ -63,11 +63,19 @@ fixed a bug of not saving settings
 
 1.6.0
 New profile folder name format
+
+2.0.0
+Apr 7 2025
+Public beta release
+
+2.0.1
+Apr 14 2025
+fixed MOUSE_MOVE not holding mouse button
 */
 
-uint8_t fw_version_major = 1;
-uint8_t fw_version_minor = 6;
-uint8_t fw_version_patch = 0;
+uint8_t fw_version_major = 2;
+uint8_t fw_version_minor = 0;
+uint8_t fw_version_patch = 1;
 uint8_t dsvm_version = 1;
 
 static const char *TAG = "MAIN";
