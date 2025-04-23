@@ -6,15 +6,20 @@
 
 ## Latest Firmware
 
-#### 1.1.1
+#### 2.0.1
 
-6 Feb 2025
+14 Apr 2025
 
-* 🐞 Fixed `DP_SLEEP` wakes up right away
+* 🐞 Faster Save / Load time when reordering profiles.
+
+* 🐞 Fixed `MOUSE_MOVE` not holding mouse buttons
+
+* ⚠️ Requires the [Latest Configurator](https://github.com/duckyPad/duckyPad-Configurator/releases/latest)
+
 
 👇👇👇👇👇👇👇👇👇👇
 
-[Download Here](https://github.com/dekuNukem/duckyPad-Pro/raw/master/firmware/DPP_FW_1.1.1_8d7c8b0f.bin)
+[Download Here](https://github.com/dekuNukem/duckyPad-Pro/raw/master/firmware/DPP_FW_2.0.1_b5ee21f8.bin)
 
 ☝️☝️☝️☝️☝️☝️☝️☝️☝️☝️☝️
 
@@ -51,6 +56,12 @@
 ![Alt text](../resources/photos/tinker/newver.png)
 
 ## Version History
+
+#### 1.1.1
+
+6 Feb 2025
+
+* 🐞 Fixed `DP_SLEEP` wakes up right away
 
 #### 1.1.0
 
