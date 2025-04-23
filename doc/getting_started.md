@@ -50,7 +50,7 @@ After playing with examples and see what duckyPad can do, time to write your own
 
 #### Windows
 
-[Download the latest configurator here](https://github.com/dekuNukem/duckyPad-Pro/releases/latest)
+[Download the latest configurator here](https://github.com/duckyPad/duckyPad-Configurator/releases/latest)
 
 Unzip and launch by clicking `duckypad_config.exe`:
 
