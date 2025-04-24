@@ -71,11 +71,15 @@ Public beta release
 2.0.1
 Apr 14 2025
 fixed MOUSE_MOVE not holding mouse button
+
+2.0.2
+Apr 24 2025
+Reboots into MSC mode if no valid profile
 */
 
 uint8_t fw_version_major = 2;
 uint8_t fw_version_minor = 0;
-uint8_t fw_version_patch = 1;
+uint8_t fw_version_patch = 2;
 uint8_t dsvm_version = 1;
 
 static const char *TAG = "MAIN";
@@ -141,7 +145,9 @@ void app_main(void)
     if(scan_profiles() == PSCAN_ERROR_NO_PROFILE)
     {
         draw_noprofile();
-        idle_loop();
+        delay_ms(3000);
+        generate_msc_flag_file();
+        esp_restart();
     }
 
     load_keymap_by_name(dp_settings.current_kb_layout);
