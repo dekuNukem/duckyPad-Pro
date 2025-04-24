@@ -1,5 +1,0 @@
-platformdirs
-hidapi
-pywin32 ; sys_platform == 'win32'
-psutil
-pyinstaller
