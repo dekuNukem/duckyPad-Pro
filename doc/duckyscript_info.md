@@ -57,9 +57,9 @@ Also **playing with sample profiles** is a good way to get a feel of duckyScript
 
 Of course, people at the [Official Discord](https://discord.gg/4sJCBx5) are always happy to help!
 
-## 👉👉duckyScript Cheatsheet 👈👈
+## 👉👉 duckyScript Cheatsheet 👈👈
 
-[Click me to download](./duckyscript_cheatsheet.pdf) a copy of the quick reference guide!
+[Click me to download](https://github.com/dekuNukem/duckyPad-Pro/blob/master/doc/duckyscript_cheatsheet.pdf?raw=1) a copy of the quick reference guide!
 
 Much easier to lookup than going through this whole page.
 
@@ -892,6 +892,8 @@ duckyPad Pro:
 
 37+: External Switches
 ```
+
+![Alt text](../resources/photos/keyid_dp20.png)
 
 ```
 duckyPad (2020):
