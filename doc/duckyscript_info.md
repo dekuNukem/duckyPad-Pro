@@ -869,8 +869,6 @@ END_WHILE
 
 This is the number returned by methods above.
 
-![Alt text](../resources/photos/keyid.png)
-
 ```
 duckyPad Pro:
 
@@ -893,7 +891,7 @@ duckyPad Pro:
 37+: External Switches
 ```
 
-![Alt text](../resources/photos/keyid_dp20.png)
+![Alt text](../resources/photos/keyid.png)
 
 ```
 duckyPad (2020):
@@ -903,6 +901,8 @@ duckyPad (2020):
     * Bottom right is 15
     * Plus button 16, Minus button 17.
 ```
+
+![Alt text](../resources/photos/keyid_dp20.png)
 
 -------
 [⬆️⬆️⬆️⬆️⬆️⬆️ Back to Top ⬆️⬆️⬆️⬆️⬆️⬆️](#list-of-commands)
