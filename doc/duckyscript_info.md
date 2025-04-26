@@ -872,6 +872,8 @@ This is the number returned by methods above.
 ![Alt text](../resources/photos/keyid.png)
 
 ```
+duckyPad Pro:
+
 1-20:
     * Built-in keys
     * Top left is 1
@@ -889,6 +891,15 @@ This is the number returned by methods above.
 28: Minus Button
 
 37+: External Switches
+```
+
+```
+duckyPad (2020):
+
+1-15:
+    * Top left is 1
+    * Bottom right is 15
+    * Plus button 16, Minus button 17.
 ```
 
 -------
