@@ -26,10 +26,10 @@ On macOS, you can run the configurator as a **pre-packaged app**, or execute the
 
 ![The text to run the configurator shown in a terminal window.](../resources/photos/app/run.png)
 
-* Authenticate. Your password will be hidden in the terminal, the letters won't appear but press enter and the configurator should launch!
+* Type your password. The letters won't appear, but press enter and the configurator should launch!
 
 > [!IMPORTANT]
-> You should use this to start the application every time, it grants the configurator permission to connect to the duckypad.
+> Use this to start the app every time, it grants the configurator permission to connect to the duckyPad.
 
 ---------
 
@@ -55,7 +55,7 @@ If the configurator complains about **needing additional permissions:**
 
 * If still not working, try "Full Disk Access" or "Developer Tools".
 
-* If everything fails, you can also edit your duckypad by manually entering USB mount mode (hold +, select key 6) and selecting the newly mounted SD card. Be careful, this will fail to properly eject the SD card before restarting the duckypad which may corrupt it, and macOS will complain about this.
+* If everything else fails, you can also edit your duckypad by manually entering USB mount mode (hold +, select key 6) and selecting the newly appeared SD card.
 
 ### macOS: Run from Source
 
@@ -86,6 +86,9 @@ You can run the code from source under Linux.
 * Install dependencies: `sudo pip3 install -r requirements.txt`
 * Launch the app: `sudo DUCKYPAD_UI_SCALE=1 python3 ./duckypad_config.py`
   * For High-DPI screens, adjust `DUCKYPAD_UI_SCALE` environment variable.
+
+If still not working:
+
 * Setup the udev rules
   * Create the file: `sudo touch /etc/udev/rules.d/20-duckyPad.rules`
   * Add the following contents:
