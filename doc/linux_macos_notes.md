@@ -1,4 +1,4 @@
-# duckyPad Configurator macOS / Linux Notes
+# duckyPad Software macOS / Linux Notes
 
 [Get duckyPad Pro](https://www.tindie.com/products/37399/) | [Official Discord](https://discord.gg/4sJCBx5) | [Getting Started](./getting_started.md) | [Table of Contents](#table-of-contents)
 
@@ -10,7 +10,11 @@ On macOS, you can run the configurator as a **pre-packaged app**, or execute the
 
 ### macOS Pre-packaged App
 
-* [Download the latest macOS release here](https://github.com/dekuNukem/duckyPad-Pro/releases/latest)
+* Download the latest macOS release below
+
+  * [Configurator](https://github.com/duckyPad/duckyPad-Configurator/releases/latest)
+
+  * [Profile Autoswitcher](https://github.com/duckyPad/duckyPad-Profile-Autoswitcher/releases/latest)
 
 * Double click to unzip
 
@@ -72,8 +76,9 @@ If the configurator complains about **needing additional permissions:**
 
 You can run the code from source under Linux.
 
-[Download the latest source release here](https://github.com/dekuNukem/duckyPad-Pro/releases/latest)
-
+* Download the latest Linux release below
+  * [Configurator](https://github.com/duckyPad/duckyPad-Configurator/releases/latest)
+  * [Profile Autoswitcher](https://github.com/duckyPad/duckyPad-Profile-Autoswitcher/releases/latest)
 * Unzip & open a terminal at the directory
 * Install tkinter: `sudo apt install python3-tk`
 * Install dependencies: `sudo pip3 install -r requirements.txt`
@@ -89,4 +94,4 @@ You can run the code from source under Linux.
   * Give it the correct ownership: `sudo chown root:root /etc/udev/rules.d/20-duckyPad.rules`
   * Reload udev rules: `sudo udevadm control --reload-rules`
   * Trigger udev: `sudo udevadm trigger`
-
+```
