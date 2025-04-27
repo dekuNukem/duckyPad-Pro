@@ -8,9 +8,9 @@
 
 On macOS, you can run the configurator as a **pre-packaged app**, or execute the **source code** directly.
 
-### macOS Pre-packaged App
+### macOS: Pre-packaged App
 
-* Download the latest macOS release below
+* Download the latest **macOS** release:
 
   * [Configurator](https://github.com/duckyPad/duckyPad-Configurator/releases/latest)
 
@@ -57,9 +57,11 @@ If the configurator complains about **needing additional permissions:**
 
 * If everything fails, you can also edit your duckypad by manually entering USB mount mode (hold +, select key 6) and selecting the newly mounted SD card. Be careful, this will fail to properly eject the SD card before restarting the duckypad which may corrupt it, and macOS will complain about this.
 
-### macOS Run from Source
+### macOS: Run from Source
 
-* [Download the latest source release here](https://github.com/dekuNukem/duckyPad-Pro/releases/latest)
+* Download the latest source:
+  * [Configurator](https://github.com/duckyPad/duckyPad-Configurator/releases/latest)
+  * [Profile Autoswitcher](https://github.com/duckyPad/duckyPad-Profile-Autoswitcher/releases/latest)
 * Double click to unzip
 * **Right Click** on the folder, select `New Terminal at Folder`
 
@@ -76,7 +78,7 @@ If the configurator complains about **needing additional permissions:**
 
 You can run the code from source under Linux.
 
-* Download the latest Linux release below
+* Download the latest source:
   * [Configurator](https://github.com/duckyPad/duckyPad-Configurator/releases/latest)
   * [Profile Autoswitcher](https://github.com/duckyPad/duckyPad-Profile-Autoswitcher/releases/latest)
 * Unzip & open a terminal at the directory
