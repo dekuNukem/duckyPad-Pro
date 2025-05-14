@@ -48,7 +48,7 @@ The binary file should have extension `.dsb` (duckyScript binary).
 
 Normally this is taken care of in the configurator. But you can also try it out on its own:
 
-* [Download the latest source code](https://github.com/dekuNukem/duckyPad-Pro/releases/latest)
+* [Download the latest source code](https://github.com/duckyPad/duckyPad-Configurator/releases/latest)
 
 * Unzip, and run with Python 3: `python3 make_bytecode.py input output`
 
@@ -107,7 +107,7 @@ Binary Size: 27 Bytes
 
 ## Binary Executable
 
-When a key is pressed, the corresponding `.dsb` file is loaded into `bin_buf` in [ds3_vm.c](https://github.com/dekuNukem/duckyPad-Pro/blob/master/firmware/dpp_fw/main/ds_vm.c). Execution occurs inside `run_dsb()` with `execute_instruction()`.
+When a key is pressed, the corresponding `.dsb` file is loaded into `bin_buf` in [ds_vm.c](https://github.com/dekuNukem/duckyPad-Pro/blob/master/firmware/dpp_fw/main/ds_vm.c). Execution occurs inside `run_dsb()` with `execute_instruction()`.
 
 Zero-terminated strings are stored at the end of the binary file.
 
