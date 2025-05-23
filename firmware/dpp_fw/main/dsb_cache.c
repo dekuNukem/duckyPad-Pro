@@ -3,6 +3,9 @@
 #include <stdint.h>
 #include "dsb_cache.h"
 
+const char* key_release_file_string = "release";
+uint8_t dsvm_cached_data[DSB_CACHE_BYTE_SIZE];
+
 dsbc_item dsb_cache[DSB_CACHE_ENTRIES_SIZE];
 
 uint8_t get_empty_idx(dsbc_item* dlist)
@@ -44,7 +47,6 @@ void dsbc_add(uint8_t pf_idx, uint8_t k_idx, uint8_t is_kdown, uint32_t ts, uint
   // Copy data safely
   memcpy(item->data, data, data_size);
 }
-
 
 // void dsbc_print_item(const dsbc_item* item)
 // {

@@ -75,11 +75,15 @@ fixed MOUSE_MOVE not holding mouse button
 2.0.2
 Apr 24 2025
 Reboots into MSC mode if no valid profile
+
+2.1.0
+May 24 2025
+Cache recent keypresses
 */
 
 uint8_t fw_version_major = 2;
-uint8_t fw_version_minor = 0;
-uint8_t fw_version_patch = 2;
+uint8_t fw_version_minor = 1;
+uint8_t fw_version_patch = 0;
 uint8_t dsvm_version = 1;
 
 static const char *TAG = "MAIN";

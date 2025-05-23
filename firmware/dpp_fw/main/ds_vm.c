@@ -719,15 +719,16 @@ void execute_instruction(uint16_t curr_pc, ds3_exe_result* exe, uint8_t this_key
   }
 }
 
+uint32_t this_dsb_file_size;
 uint8_t load_dsb(char* dsb_path)
 {
   FILE *sd_file = fopen(dsb_path, "r");
   if(sd_file == NULL)
     return EXE_DSB_FOPEN_FAIL;
   memset(bin_buf, 0, BIN_BUF_SIZE);
-  size_t bytes_read = fread(bin_buf, 1, BIN_BUF_SIZE, sd_file);
+  this_dsb_file_size = fread(bin_buf, 1, BIN_BUF_SIZE, sd_file);
   fclose(sd_file);
-  if(bytes_read == 0)
+  if(this_dsb_file_size == 0)
     return EXE_DSB_FREAD_ERROR;
   if(bin_buf[0] != OP_VMINFO)
     return EXE_DSB_INCOMPATIBLE_VERSION;
@@ -736,13 +737,21 @@ uint8_t load_dsb(char* dsb_path)
   return EXE_OK;
 }
 
-void run_dsb(ds3_exe_result* er, uint8_t this_key_id, char* dsb_path)
+void run_dsb(ds3_exe_result* er, uint8_t this_key_id, char* dsb_path, uint8_t is_cached, uint8_t* dsb_cache)
 {
-  uint8_t dsb_load_result = load_dsb(dsb_path);
-  if(dsb_load_result)
+  if(is_cached)
   {
-    er->result = dsb_load_result;
-    return;
+    memset(bin_buf, 0, BIN_BUF_SIZE);
+    memcpy(bin_buf, dsb_cache, DSB_CACHE_BYTE_SIZE);
+  }
+  else
+  {
+    uint8_t dsb_load_result = load_dsb(dsb_path);
+    if(dsb_load_result)
+    {
+      er->result = dsb_load_result;
+      return;
+    }
   }
   
   uint16_t current_pc = 0;
@@ -770,4 +779,11 @@ void run_dsb(ds3_exe_result* er, uint8_t this_key_id, char* dsb_path)
   if(disable_autorepeat)
     epilogue_actions |= EPILOGUE_DONT_AUTO_REPEAT;
   er->epilogue_actions = epilogue_actions;
+
+  if(is_cached == 0 && this_dsb_file_size <= DSB_CACHE_BYTE_SIZE)
+  {
+    uint8_t is_press = strstr(dsb_path, key_release_file_string) == NULL;
+    dsbc_add(current_profile_number, this_key_id, is_press, millis(), bin_buf, this_dsb_file_size);
+    // printf("added %02d %02d %02d to cache!\n", current_profile_number, this_key_id, is_press);
+  }
 }
