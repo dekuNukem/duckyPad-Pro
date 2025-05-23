@@ -22,6 +22,8 @@
 #include "hid_task.h"
 #include "bluetooth_task.h"
 #include "nvs_flash.h"
+#include "dsb_cache.h"
+
 
 #define PLUS_MINUS_BUTTON_COOLDOWN_MS 250
 volatile uint8_t oled_brightness = OLED_CONTRAST_BRIGHT;

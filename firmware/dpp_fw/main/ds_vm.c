@@ -15,6 +15,7 @@
 #include "keyboard.h"
 #include "ds_vm.h"
 #include "input_task.h"
+#include "dsb_cache.h"
 
 uint8_t bin_buf[BIN_BUF_SIZE];
 uint8_t var_buf[VAR_BUF_SIZE];
