@@ -145,9 +145,7 @@ Finally, the rightmost column is for *scripts*:
 ### Remember to Save!
 
 * Press `Save` button to write the changes back to duckyPad.
-* It might take a while to write new data
 * Check debug window for progress
-* Subsequent writes will be much faster
 
 ### Try It Out!
 

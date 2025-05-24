@@ -1,119 +1,101 @@
+#Requires AutoHotkey v2.0
+
 LWin & F1::
 {
-	Msgbox "I pressed duckyPad key 0!"
-	return
+    MsgBox "I pressed duckyPad key 1!"
 }
 
 LWin & F2::
 {
-	Msgbox "I pressed duckyPad key 1!"
-	return
+    MsgBox "I pressed duckyPad key 2!"
 }
 
 LWin & F3::
 {
-	Msgbox "I pressed duckyPad key 2!"
-	return
+    MsgBox "I pressed duckyPad key 3!"
 }
 
 LWin & F4::
 {
-	Msgbox "I pressed duckyPad key 3!"
-	return
+    MsgBox "I pressed duckyPad key 4!"
 }
 
 LWin & F5::
 {
-	Msgbox "I pressed duckyPad key 4!"
-	return
+    MsgBox "I pressed duckyPad key 5!"
 }
 
 LWin & F6::
 {
-	Msgbox "I pressed duckyPad key 5!"
-	return
+    MsgBox "I pressed duckyPad key 6!"
 }
 
 LWin & F7::
 {
-	Msgbox "I pressed duckyPad key 6!"
-	return
+    MsgBox "I pressed duckyPad key 7!"
 }
 
 LWin & F8::
 {
-	Msgbox "I pressed duckyPad key 7!"
-	return
+    MsgBox "I pressed duckyPad key 8!"
 }
 
 LWin & F9::
 {
-	Msgbox "I pressed duckyPad key 8!"
-	return
+    MsgBox "I pressed duckyPad key 9!"
 }
 
 LWin & F10::
 {
-	Msgbox "I pressed duckyPad key 9!"
-	return
+    MsgBox "I pressed duckyPad key 10!"
 }
 
 LWin & F11::
 {
-	Msgbox "I pressed duckyPad key 10!"
-	return
+    MsgBox "I pressed duckyPad key 11!"
 }
 
 LWin & F12::
 {
-	Msgbox "I pressed duckyPad key 11!"
-	return
+    MsgBox "I pressed duckyPad key 12!"
 }
 
 LWin & F13::
 {
-	Msgbox "I pressed duckyPad key 12!"
-	return
+    MsgBox "I pressed duckyPad key 13!"
 }
 
 LWin & F14::
 {
-	Msgbox "I pressed duckyPad key 13!"
-	return
+    MsgBox "I pressed duckyPad key 14!"
 }
 
 LWin & F15::
 {
-	Msgbox "I pressed duckyPad key 14!"
-	return
+    MsgBox "I pressed duckyPad key 15!"
 }
 
 LWin & F16::
 {
-	Msgbox "I pressed duckyPad key 15!"
-	return
+    MsgBox "I pressed duckyPad key 16!"
 }
 
 LWin & F17::
 {
-	Msgbox "I pressed duckyPad key 16!"
-	return
+    MsgBox "I pressed duckyPad key 17!"
 }
 
 LWin & F18::
 {
-	Msgbox "I pressed duckyPad key 17!"
-	return
+    MsgBox "I pressed duckyPad key 18!"
 }
 
 LWin & F19::
 {
-	Msgbox "I pressed duckyPad key 18!"
-	return
+    MsgBox "I pressed duckyPad key 19!"
 }
 
 LWin & F20::
 {
-	Msgbox "I pressed duckyPad key 19!"
-	return
+    MsgBox "I pressed duckyPad key 20!"
 }
