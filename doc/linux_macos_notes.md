@@ -2,6 +2,11 @@
 
 [Get duckyPad Pro](https://www.tindie.com/products/37399/) | [Official Discord](https://discord.gg/4sJCBx5) | [Getting Started](./getting_started.md) | [Table of Contents](#table-of-contents)
 
+## Table of Contents
+
+- [macOS](#macos)
+- [Linux](#linux)
+
 ---------
 
 ## macOS
@@ -81,24 +86,31 @@ You can run the code from source under Linux.
 * Download the latest source:
   * [Configurator](https://github.com/duckyPad/duckyPad-Configurator/releases/latest)
   * [Profile Autoswitcher](https://github.com/duckyPad/duckyPad-Profile-Autoswitcher/releases/latest)
-* Unzip & open a terminal at the directory
+* Unzip & open terminal at the directory
 * Install tkinter: `sudo apt install python3-tk`
 * Install dependencies: `sudo pip3 install -r requirements.txt`
 * Launch the app: `sudo DUCKYPAD_UI_SCALE=1 python3 ./duckypad_config.py`
   * For High-DPI screens, adjust `DUCKYPAD_UI_SCALE` environment variable.
 
-----------
+### Use Without `sudo`
 
-If still not working:
+* Create the udev rule file: `sudo touch /etc/udev/rules.d/41-duckypad.rules`
 
-* Setup the udev rules
-  * Create the file: `sudo touch /etc/udev/rules.d/20-duckyPad.rules`
-  * Add the following contents:
-      ```
-      SUBSYSTEMS=="usb", ATTRS{idVendor}=="0483", ATTRS{idProduct}=="d11c", TAG+="uaccess", TAG+="udev-acl"
-      SUBSYSTEMS=="usb", ATTRS{idVendor}=="0483", ATTRS{idProduct}=="d11d", TAG+="uaccess", TAG+="udev-acl"
-  * Give it the correct permissions: `sudo chmod 644 /etc/udev/rules.d/20-duckyPad.rules`
-  * Give it the correct ownership: `sudo chown root:root /etc/udev/rules.d/20-duckyPad.rules`
-  * Reload udev rules: `sudo udevadm control --reload-rules`
-  * Trigger udev: `sudo udevadm trigger`
+* Add following contents:
+
 ```
+SUBSYSTEM=="usb" ATTRS{idVendor}=="0483", ATTRS{idProduct}=="d11d", MODE="0660", TAG+="uaccess", TAG+="udev-acl", TAG+="DuckyPad Pro"
+SUBSYSTEM=="usb" ATTRS{idVendor}=="0483", ATTRS{idProduct}=="d11c", MODE="0660", TAG+="uaccess", TAG+="udev-acl", TAG+="DuckyPad"
+KERNEL=="hidraw*", ATTRS{idVendor}=="0483", ATTRS{idProduct}=="d11d", MODE="0660", GROUP="plugdev", TAG+="uaccess", TAG+="udev-acl", TAG+="DuckyPad Pro"
+KERNEL=="hidraw*", ATTRS{idVendor}=="0483", ATTRS{idProduct}=="d11c", MODE="0660", GROUP="plugdev", TAG+="uaccess", TAG+="udev-acl", TAG+="DuckyPad"
+```
+
+*  Set permissions: `sudo chmod 644 /etc/udev/rules.d/41-duckypad.rules`
+
+* Set ownership: `sudo chown root:root /etc/udev/rules.d/41-duckypad.rules`
+
+* Reload udev rules: `sudo udevadm control --reload-rules`
+
+* Trigger udev: `sudo udevadm trigger
+
+* Unplug & replug duckyPad
