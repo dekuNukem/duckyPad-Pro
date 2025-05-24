@@ -31,7 +31,9 @@ On macOS, you can run the configurator as a **pre-packaged app**, or execute the
 
 ![The text to run the configurator shown in a terminal window.](../resources/photos/app/run.png)
 
-* Type your password. The letters won't appear, but press enter and it should launch!
+* Type your password.
+
+  * The letters won't appear, but press enter and it should launch!
 
 > [!IMPORTANT]
 > Use this to start the app every time, it grants the configurator permission to connect to the duckyPad.
@@ -40,11 +42,11 @@ On macOS, you can run the configurator as a **pre-packaged app**, or execute the
 
 * If macOS complains about unsigned app
 
+![Warning pop-up with the text: "duckypad_config cannot be opened because it is from an unidentified developer. macOS cannot verify that this app is free from malware."](../resources/photos/app/unknown.png)
+
 * Go to Settings > Privacy & Security
 
 * Scroll down to security section and click "Allow Anyway" 
-
-![Warning pop-up with the text: "duckypad_config cannot be opened because it is from an unidentified developer. macOS cannot verify that this app is free from malware."](../resources/photos/app/unknown.png)
 
 ![Settings screen in Privacy & Security, the warning "‘duckypad_config’ was blocked from use because it is not from an identified developer," is shown above a button with the text "Allow Anyway".](../resources/photos/app/perf.png)
 
@@ -52,13 +54,11 @@ On macOS, you can run the configurator as a **pre-packaged app**, or execute the
 
 If the configurator complains about **needing additional permissions:**
 
-* Try granting "Input Monitoring" permissions for the `Terminal app`.
+![Error pop-up with the text "duckypad detected, but I need additional permissions" and three options: Yes, No, and Cancel.](../resources/photos/app/detected-but-additional-permissions.png)
 
-  ![Error pop-up with the text "duckypad detected, but I need additional permissions" and three options: Yes, No, and Cancel.](../resources/photos/app/detected-but-additional-permissions.png)
-  
-  ![Input Monitoring settings granted to the Terminal and configurator app](../resources/photos/app/input-monitoring.png)
+* Try granting `Input Monitoring` and `Full Disk Access` permissions for the `Terminal app`.
 
-* If still not working, try "Full Disk Access" or "Developer Tools".
+![Input Monitoring settings granted to the Terminal and configurator app](../resources/photos/app/input-monitoring.png)
 
 * If everything else fails, you can edit manually by entering USB mount mode (hold +, select `Mount USB`) and selecting the newly appeared SD card.
 
@@ -114,3 +114,25 @@ KERNEL=="hidraw*", ATTRS{idVendor}=="0483", ATTRS{idProduct}=="d11c", MODE="0660
 * Trigger udev: `sudo udevadm trigger
 
 * Unplug & replug duckyPad
+
+## Table of Contents
+
+[Main page](../README.md)
+
+[Getting Started Guide](getting_started.md)
+
+[Kit Assembly Guide](kit_assembly.md)
+
+[Using duckyScript](duckyscript_info.md)
+
+[duckyScript VM](bytecode_vm.md)
+
+[Tinkering Guide](tinkering_guide.md)
+
+[Troubleshooting](troubleshooting.md)
+
+[Firmware Update](fw_update.md)
+
+## Questions or Comments?
+
+Please feel free to [open an issue](https://github.com/dekuNukem/duckypad-pro/issues), ask in the [official duckyPad discord](https://discord.gg/4sJCBx5), or email `dekuNukem`@`gmail`.`com`!
