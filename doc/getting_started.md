@@ -60,7 +60,7 @@ Windows might complain about unsigned app.
 
 Click `More info` and then `Run anyway`.
 
-Feel free to [review the files](https://github.com/dekuNukem/duckyPad-Pro/tree/master/pc_software), or run the source code directly with Python.
+Feel free to [review the files](https://github.com/duckyPad/duckyPad-Configurator), or run the source code directly with Python.
 
 ![Alt text](../resources/photos/app/defender.png)
 
