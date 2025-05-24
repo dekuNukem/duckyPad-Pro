@@ -197,8 +197,9 @@ void onboard_offboard_switch_press(uint8_t swid, char* press_path, char* release
     play_keyup_animation(current_profile_number, swid);
 }
 
-void settings_menu(void)
+uint8_t settings_menu(void)
 {
+  uint8_t needs_reboot = 0;
   ssd1306_set_rotation_only_for_128x128_do_not_use_for_anything_else(SSD1306_NO_ROTATION);
   draw_settings(&dp_settings);
   draw_settings_led();
@@ -242,6 +243,7 @@ void settings_menu(void)
     {
       dp_settings.bt_mode = (dp_settings.bt_mode + 1) % BT_MODE_SIZE;
       draw_settings(&dp_settings);
+      needs_reboot = 1;
     }
     else if(sw_event.id == MSW_4)
     {
@@ -262,6 +264,7 @@ void settings_menu(void)
     }
   }
   save_settings(&dp_settings);
+  return needs_reboot;
 }
 
 void onboard_offboard_switch_release(uint8_t swid, char* release_path)
@@ -291,7 +294,8 @@ void process_keyevent(uint8_t swid, uint8_t event_type)
   }
   if(is_plus_minus_button(swid) && event_type == SW_EVENT_LONG_PRESS)
   {
-    settings_menu();
+    if(settings_menu())
+      esp_restart();
     goto_profile(current_profile_number);
     return;
   }

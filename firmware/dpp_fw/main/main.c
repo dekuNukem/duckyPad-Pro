@@ -79,6 +79,7 @@ Reboots into MSC mode if no valid profile
 2.1.0
 May 24 2025
 Cache recent keypresses
+Reboots after changing Bluetooth mode
 */
 
 uint8_t fw_version_major = 2;
