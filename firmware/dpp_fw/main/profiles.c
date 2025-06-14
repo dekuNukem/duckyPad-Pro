@@ -40,6 +40,8 @@ const char cmd_KD_COLOR[] = "KEYDOWN_COLOR ";
 const char cmd_SWCOLOR[] = "SWCOLOR_";
 const char cmd_DIM_UNUSED_KEYS[] = "DIM_UNUSED_KEYS 0";
 const char cmd_IS_LANDSCAPE[] = "IS_LANDSCAPE 1";
+const char cmd_IS_UPPER_HS[] = "UPPER_HS 1";
+const char cmd_IS_LOWER_HS[] = "LOWER_HS 1";
 
 uint8_t is_profile_load_complete;
 uint8_t current_profile_number;
@@ -276,6 +278,14 @@ void parse_profile_config_line(char* this_line, profile_info* this_profile)
   {
     this_profile->is_landscape = 1;
   }
+  else if(strncmp(cmd_IS_UPPER_HS, this_line, strlen(cmd_IS_UPPER_HS)) == 0)
+  {
+    this_profile->is_upper_halfstep = 1;
+  }
+  else if(strncmp(cmd_IS_LOWER_HS, this_line, strlen(cmd_IS_LOWER_HS)) == 0)
+  {
+    this_profile->is_lower_halfstep = 1;
+  }
 }
 
 void load_profile_config(profile_info* this_profile)
@@ -356,6 +366,16 @@ void goto_profile(uint8_t profile_number)
     redraw_bg(profile_number);
   else
     neopixel_draw_current_buffer();
+  
+  if(all_profile_info[profile_number].is_upper_halfstep)
+    set_re_halfstep(1, 1);
+  else
+    set_re_halfstep(1, 0);
+  
+  if(all_profile_info[profile_number].is_lower_halfstep)
+    set_re_halfstep(0, 1);
+  else
+    set_re_halfstep(0, 0);
 }
 
 void goto_next_profile(void)

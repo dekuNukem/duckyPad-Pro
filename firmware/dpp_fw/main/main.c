@@ -78,12 +78,17 @@ Reboots into MSC mode if no valid profile
 
 2.1.0
 May 24 2025
-Cache recent keypresses
+Caches recent keypresses
 Reboots after changing Bluetooth mode
+
+2.2.0
+June 14 2025
+Added option for rotary encoder half-step
+increases sensitivity
 */
 
 uint8_t fw_version_major = 2;
-uint8_t fw_version_minor = 1;
+uint8_t fw_version_minor = 2;
 uint8_t fw_version_patch = 0;
 uint8_t dsvm_version = 1;
 

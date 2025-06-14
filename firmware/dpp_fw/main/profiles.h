@@ -45,6 +45,8 @@ typedef struct
   uint8_t keypress_count[MAX_TOTAL_SW_COUNT];
   uint8_t dim_unused_keys;
   uint8_t is_landscape;
+  uint8_t is_upper_halfstep;
+  uint8_t is_lower_halfstep;
 } profile_info;
 
 extern profile_info all_profile_info[MAX_PROFILES];
