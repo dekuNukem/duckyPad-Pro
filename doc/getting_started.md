@@ -102,7 +102,11 @@ Click `New` button, give it a name.
 
 * Use the `up/down/x` buttons to reorder/delete profiles.
 
-* `Activation color` is the color that a key changes into when you press it.
+----
+
+* `Keydown color` is the color that a key changes into when you press it.
+	* Default is the inverse of background color
+	* You can also set your own
 
 ### Keys
 
