@@ -6,18 +6,21 @@
 
 ## Latest Firmware
 
-#### 2.0.2
+#### 2.2.0
 
-24 Apr 2025
+14 June 2025
 
-* 🐞 Boots into USB storage mode if SD card is empty.
+* 🆕 Supports increased rotary encoder sensitivity
+
+* 🆕 Recent keypresses are cached to reduce latency
+
+* 🐞 Reboots after changing Bluetooth mode
 
 * ⚠️ Requires the [Latest Configurator](https://github.com/duckyPad/duckyPad-Configurator/releases/latest)
 
-
 👇👇👇👇👇👇👇👇👇👇
 
-[Download Here](https://github.com/dekuNukem/duckyPad-Pro/raw/master/firmware/DPP_FW_2.0.2_e4b6e573.bin)
+[Download Here](https://github.com/dekuNukem/duckyPad-Pro/raw/master/firmware/DPP_FW_2.2.0_e4b6e573.bin)
 
 ☝️☝️☝️☝️☝️☝️☝️☝️☝️☝️☝️
 
@@ -55,6 +58,14 @@
 
 ## Version History
 
+## Latest Firmware
+
+#### 2.0.2
+
+24 Apr 2025
+
+* 🐞 Boots into USB storage mode if SD card is empty.
+
 #### 2.0.1
 
 14 Apr 2025
@@ -62,8 +73,6 @@
 * 🐞 Faster Save / Load time when reordering profiles.
 
 * 🐞 Fixed `MOUSE_MOVE` not holding mouse buttons
-
-* ⚠️ Requires the [Latest Configurator](https://github.com/duckyPad/duckyPad-Configurator/releases/latest)
 
 #### 1.1.1
 
