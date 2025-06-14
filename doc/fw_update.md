@@ -20,7 +20,7 @@
 
 👇👇👇👇👇👇👇👇👇👇
 
-[Download Here](https://github.com/dekuNukem/duckyPad-Pro/raw/master/firmware/DPP_FW_2.2.0_e4b6e573.bin)
+[Download Here](https://github.com/dekuNukem/duckyPad-Pro/raw/master/firmware/DPP_FW_2.2.0_2b46187d.bin)
 
 ☝️☝️☝️☝️☝️☝️☝️☝️☝️☝️☝️
 
