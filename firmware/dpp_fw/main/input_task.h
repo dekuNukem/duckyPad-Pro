@@ -106,6 +106,7 @@ void expansion_uart_init(void);
 uint8_t sw_queue_has_keydown_event(void);
 uint8_t re_event_to_swid(rotary_encoder_event_t* re_event);
 void sw_scan(void);
+void set_re_halfstep(uint8_t is_upper, uint8_t enable_hs);
 
 #define SW_SCAN_TASK_STACK_SIZE 2048
 

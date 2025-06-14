@@ -39,7 +39,7 @@ void expansion_uart_init(void)
   ESP_ERROR_CHECK(uart_set_pin(EXPANSION_UART_PORT_NUM, EXPANSION_UART_TX_PIN, EXPANSION_UART_RX_PIN, -1, -1));
 }
 
-#define ENABLE_HALF_STEPS 0  // tracking at half step resolution, suitable for smooth encoder to make it more sensitive
+#define DEFAULT_HALF_STEP_STATE 0  // tracking at half step resolution, suitable for smooth encoder to make it more sensitive
 #define SWITCH_EVENT_QUEUE_SIZE 10
 
 rotary_encoder_info_t upper_rc_info;
@@ -47,6 +47,17 @@ rotary_encoder_info_t lower_rc_info;
 QueueHandle_t rotary_encoder_event_queue;
 QueueHandle_t switch_event_queue;
 SemaphoreHandle_t kbscan_mutex;
+
+void set_re_halfstep(uint8_t is_upper, uint8_t enable_hs)
+{
+	rotary_encoder_info_t *this_re;
+	if(is_upper)
+		this_re = &upper_rc_info;
+	else
+		this_re = &lower_rc_info;
+	
+	rotary_encoder_enable_half_steps(this_re, enable_hs);
+}
 
 void my_rotary_encoder_init(void)
 {
@@ -58,11 +69,11 @@ void my_rotary_encoder_init(void)
     // Initialise the rotary encoder device with the GPIOs for A and B signals
     memset(&upper_rc_info, 0, sizeof(rotary_encoder_info_t));
     ESP_ERROR_CHECK(rotary_encoder_init(&upper_rc_info, RE1_A, RE1_B, ROTARY_ENCODER_UPPER));
-    ESP_ERROR_CHECK(rotary_encoder_enable_half_steps(&upper_rc_info, ENABLE_HALF_STEPS));
+    ESP_ERROR_CHECK(rotary_encoder_enable_half_steps(&upper_rc_info, DEFAULT_HALF_STEP_STATE));
 
 	memset(&lower_rc_info, 0, sizeof(rotary_encoder_info_t));
     ESP_ERROR_CHECK(rotary_encoder_init(&lower_rc_info, RE2_A, RE2_B, ROTARY_ENCODER_LOWER));
-    ESP_ERROR_CHECK(rotary_encoder_enable_half_steps(&lower_rc_info, ENABLE_HALF_STEPS));
+    ESP_ERROR_CHECK(rotary_encoder_enable_half_steps(&lower_rc_info, DEFAULT_HALF_STEP_STATE));
 
     rotary_encoder_event_queue = rotary_encoder_create_queue();
     ESP_ERROR_CHECK(rotary_encoder_set_queue(&upper_rc_info, rotary_encoder_event_queue));

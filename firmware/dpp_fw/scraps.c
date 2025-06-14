@@ -1,4 +1,18 @@
-  printf("%s:\n", all_profile_info[1].pf_name);
+void goto_profile(uint8_t profile_number)
+{
+  if(goto_profile_without_updating_rgb_LED(profile_number))
+    return;
+  if(load_persistent_state())
+    redraw_bg(profile_number);
+  else
+    neopixel_draw_current_buffer();
+  if(profile_number > 2)
+    set_re_halfstep(1, 1);
+  else
+    set_re_halfstep(1, 0);
+}
+
+printf("%s:\n", all_profile_info[1].pf_name);
   for(size_t i = 0; i < TOTAL_OBSW_COUNT; i++)
   {
     char* tttt = all_profile_info[1].sw_name_firstline[i];
