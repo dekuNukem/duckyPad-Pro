@@ -75,7 +75,9 @@ If the configurator complains about **needing additional permissions:**
 * Use [homebrew](https://brew.sh) to install python-tk: `brew install python-tk`
 * **[Optional]** Make a virtualenv and activate it: `python3 -m venv .venv; source .venv/bin/activate`
 * Install dependencies: `pip3 install -r requirements.txt`
-* Launch the app: `sudo python3 ./duckypad_config.py`
+* Launch the app
+  * Configurator: `sudo python3 ./duckypad_config.py`
+  * Autoswitcher: `sudo python3 ./duckypad_autoprofile.py`
 
 -----------
 
@@ -89,8 +91,10 @@ You can run the code from source under Linux.
 * Unzip & open terminal at the directory
 * Install tkinter: `sudo apt install python3-tk`
 * Install dependencies: `sudo pip3 install -r requirements.txt`
-* Launch the app: `sudo DUCKYPAD_UI_SCALE=1 python3 ./duckypad_config.py`
-  * For High-DPI screens, adjust `DUCKYPAD_UI_SCALE` environment variable.
+* Launch the app
+  * Configurator: `sudo DUCKYPAD_UI_SCALE=1 python3 ./duckypad_config.py`
+  * Autoswitcher: `sudo DUCKYPAD_UI_SCALE=1 python3 ./duckypad_autoprofile.py`
+* For High-DPI screens, adjust `DUCKYPAD_UI_SCALE` to suit.
 
 ### Use Without `sudo`
 
@@ -105,13 +109,13 @@ KERNEL=="hidraw*", ATTRS{idVendor}=="0483", ATTRS{idProduct}=="d11d", MODE="0660
 KERNEL=="hidraw*", ATTRS{idVendor}=="0483", ATTRS{idProduct}=="d11c", MODE="0660", GROUP="plugdev", TAG+="uaccess", TAG+="udev-acl", TAG+="DuckyPad"
 ```
 
-*  Set permissions: `sudo chmod 644 /etc/udev/rules.d/41-duckypad.rules`
+* Set permissions: `sudo chmod 644 /etc/udev/rules.d/41-duckypad.rules`
 
 * Set ownership: `sudo chown root:root /etc/udev/rules.d/41-duckypad.rules`
 
 * Reload udev rules: `sudo udevadm control --reload-rules`
 
-* Trigger udev: `sudo udevadm trigger
+* Trigger udev: `sudo udevadm trigger`
 
 * Unplug & replug duckyPad
 
