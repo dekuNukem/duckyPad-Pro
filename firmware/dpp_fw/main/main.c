@@ -85,10 +85,15 @@ Reboots after changing Bluetooth mode
 June 14 2025
 Added option for rotary encoder half-step
 increases sensitivity
+
+2.3.0
+June 29 2025
+Increased persistent global variables to 32
+$_GV0 to $_GV31
 */
 
 uint8_t fw_version_major = 2;
-uint8_t fw_version_minor = 2;
+uint8_t fw_version_minor = 3;
 uint8_t fw_version_patch = 0;
 uint8_t dsvm_version = 1;
 
