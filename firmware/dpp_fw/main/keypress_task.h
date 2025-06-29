@@ -23,6 +23,7 @@ extern volatile uint32_t last_keypress;
 extern volatile uint8_t is_sleeping;
 extern volatile uint8_t is_busy;
 extern volatile uint8_t oled_brightness;
+
 #ifdef __cplusplus
 }
 #endif

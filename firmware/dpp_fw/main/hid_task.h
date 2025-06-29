@@ -18,14 +18,13 @@ void handle_hid_command(const uint8_t* hid_rx_buf, uint8_t rx_buf_size);
 #define HID_COMMAND_GOTO_PROFILE_BY_NUMBER 1
 #define HID_COMMAND_PREV_PROFILE 2
 #define HID_COMMAND_NEXT_PROFILE 3
-
 #define HID_COMMAND_SET_LED_SINGLE 4
-
 #define HID_COMMAND_SW_RESET 20
 #define HID_COMMAND_SLEEP 21
 #define HID_COMMAND_WAKEUP 22
-
 #define HID_COMMAND_GOTO_PROFILE_BY_NAME 23
+#define HID_COMMAND_DUMP_GV 24
+#define HID_COMMAND_WRITE_GV 25
 
 #define HID_RESPONSE_OK 0
 #define HID_RESPONSE_GENERIC_ERROR 1
@@ -42,6 +41,7 @@ void handle_hid_command(const uint8_t* hid_rx_buf, uint8_t rx_buf_size);
 
 extern volatile uint8_t is_usb_hid_connected;
 uint8_t wait_for_hid_connect(uint32_t how_long_ms);
+extern volatile uint8_t needs_gv_save;
 
 #ifdef __cplusplus
 }

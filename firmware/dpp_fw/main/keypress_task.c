@@ -398,6 +398,7 @@ void handle_sw_event(switch_event_t* this_sw_event)
   if(execution_duration > 500)
     clear_sw_re_queue();
 }
+
 void keypress_task(void *dummy)
 {
   update_last_keypress();
@@ -429,6 +430,12 @@ void keypress_task(void *dummy)
       update_kbled_icon(kb_led_status);
     }
     draw_bt_pin(bt_pin_code);
+
+    if(needs_gv_save)
+    {
+      save_gv();
+      needs_gv_save = 0;
+    }
   }
 }
 

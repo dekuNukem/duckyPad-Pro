@@ -32,6 +32,7 @@
 
 static const char *TAG = "USBHID";
 
+volatile uint8_t needs_gv_save;
 volatile uint8_t is_usb_hid_connected;
 
 #define TUSB_DESC_TOTAL_LEN      (TUD_CONFIG_DESC_LEN + CFG_TUD_HID * TUD_HID_DESC_LEN)
@@ -420,6 +421,19 @@ uint8_t parse_hid_goto_profile(uint8_t* this_buf)
     return 255;
 }
 
+void split_uint16(uint16_t input, uint8_t* high_byte, uint8_t* low_byte)
+{
+    if (high_byte == NULL || low_byte == NULL)
+        return;
+    *high_byte = (input >> 8) & 0xFF;
+    *low_byte = input & 0xFF;
+}
+
+uint16_t combine_uint16(uint8_t high_byte, uint8_t low_byte)
+{
+    return ((uint16_t)high_byte << 8) | low_byte;
+}
+
 void handle_hid_command(const uint8_t* hid_rx_buf, uint8_t rx_buf_size)
 {
     uint8_t command_type = hid_rx_buf[1];
@@ -430,7 +444,7 @@ void handle_hid_command(const uint8_t* hid_rx_buf, uint8_t rx_buf_size)
 
     /*
         duckyPad to PC
-        [0]   seq number (not used)
+        [0]   reserved
         [1]   Status
     */
     if(is_busy)
@@ -451,11 +465,11 @@ void handle_hid_command(const uint8_t* hid_rx_buf, uint8_t rx_buf_size)
         GET INFO
         -----------
         PC to duckyPad:
-        [0]   seq number (not used)
+        [0]   reserved
         [1]   command
         -----------
         duckyPad to PC
-        [0]   seq number (not used)
+        [0]   reserved
         [1]   Status, 0 = OK
         [2]   firmware version major
         [3]   firmware version minor
@@ -483,12 +497,12 @@ void handle_hid_command(const uint8_t* hid_rx_buf, uint8_t rx_buf_size)
         GOTO PROFILE BY NUMBER
         -----------
         PC to duckyPad:
-        [0]   seq number (not used)
+        [0]   reserved
         [1]   command
         [2]   profile number
         -----------
         duckyPad to PC
-        [0]   seq number (not used)
+        [0]   reserved
         [1]   Status
     */
     else if(command_type == HID_COMMAND_GOTO_PROFILE_BY_NUMBER)
@@ -509,12 +523,12 @@ void handle_hid_command(const uint8_t* hid_rx_buf, uint8_t rx_buf_size)
         GOTO PROFILE BY NAME
         -----------
         PC to duckyPad:
-        [0]   seq number (not used)
+        [0]   reserved
         [1]   command
         [2]   profile name string, 0 terminated
         -----------
         duckyPad to PC
-        [0]   seq number (not used)
+        [0]   reserved
         [1]   Status
     */
     else if(command_type == HID_COMMAND_GOTO_PROFILE_BY_NAME)
@@ -539,7 +553,7 @@ void handle_hid_command(const uint8_t* hid_rx_buf, uint8_t rx_buf_size)
         [1]   command
         -----------
         duckyPad to PC
-        [0]   seq number (not used)
+        [0]   reserved
         [1]   0 = OK
     */
     else if(command_type == HID_COMMAND_PREV_PROFILE)
@@ -556,7 +570,7 @@ void handle_hid_command(const uint8_t* hid_rx_buf, uint8_t rx_buf_size)
         [1]   command
         -----------
         duckyPad to PC
-        [0]   seq number (not used)
+        [0]   reserved
         [1]   0 = OK
     */
     else if(command_type == HID_COMMAND_NEXT_PROFILE)
@@ -569,7 +583,7 @@ void handle_hid_command(const uint8_t* hid_rx_buf, uint8_t rx_buf_size)
         SET LED SINGLE
         -----------
         PC to duckyPad:
-        [0] seq number (not used)
+        [0] reserved
         [1] command
         [2] LED index, 0 to 19
         [3] red
@@ -577,7 +591,7 @@ void handle_hid_command(const uint8_t* hid_rx_buf, uint8_t rx_buf_size)
         [5] blue
         -----------
         duckyPad to PC
-        [0]   seq number (not used)
+        [0]   reserved
         [1]   0 = OK
     */
     else if(command_type == HID_COMMAND_SET_LED_SINGLE)
@@ -590,12 +604,12 @@ void handle_hid_command(const uint8_t* hid_rx_buf, uint8_t rx_buf_size)
         SOFTWARE RESET
         -----------
         PC to duckyPad:
-        [0]   seq number (not used)
+        [0]   reserved
         [1]   command
         [2]   reboot options. 0 = normal, 1 = reboot into MSC
         -----------
         duckyPad to PC
-        [0]   seq number (not used)
+        [0]   reserved
         [1]   0 = OK
     */
     else if(command_type == HID_COMMAND_SW_RESET)
@@ -610,11 +624,11 @@ void handle_hid_command(const uint8_t* hid_rx_buf, uint8_t rx_buf_size)
         SLEEP
         -----------
         PC to duckyPad:
-        [0]   seq number (not used)
+        [0]   reserved
         [1]   command
         -----------
         duckyPad to PC
-        [0]   seq number (not used)
+        [0]   reserved
         [1]   0 = OK
     */
     else if(command_type == HID_COMMAND_SLEEP)
@@ -626,16 +640,76 @@ void handle_hid_command(const uint8_t* hid_rx_buf, uint8_t rx_buf_size)
         WAKE UP
         -----------
         PC to duckyPad:
-        [0]   seq number (not used)
+        [0]   reserved
         [1]   command
         -----------
         duckyPad to PC
-        [0]   seq number (not used)
+        [0]   reserved
         [1]   0 = OK
     */
     else if(command_type == HID_COMMAND_WAKEUP)
     {
         wakeup_from_sleep_and_load_profile(current_profile_number);
+        send_hid_cmd_response(hid_tx_buf);
+    }
+    /*
+        DUMP GV
+        -----------
+        PC to duckyPad:
+        [0]   reserved
+        [1]   Command: Dump GV
+        -----------
+        duckyPad to PC
+        [0]   reserved
+        [1]   0 = OK
+        [2-3] GV0
+        [4-5] GV1
+        .....
+        [62-63] GV30
+    */
+    else if(command_type == HID_COMMAND_DUMP_GV)
+    {
+        for (size_t i=2; i < HID_TX_BUF_SIZE; i+=2)
+        {
+            uint8_t this_gv = (i-2)/2;
+            if(this_gv >= GLOBAL_VARIABLE_COUNT)
+                continue;
+            uint8_t* upper_byte = &hid_tx_buf[i];
+            uint8_t* lower_byte = &hid_tx_buf[i+1];
+            split_uint16(gv_buf[this_gv], upper_byte, lower_byte);
+        }
+        send_hid_cmd_response(hid_tx_buf);
+    }
+    /*
+        Write GV
+        -----------
+        PC to duckyPad:
+        [0]   reserved
+        [1]   Command: Write GV
+
+        [2] 127 + GV index (0 indexed)
+        [3] Upper Byte
+        [4] Lower Byte
+
+        [5-7] next chunk (if needed)
+        etc
+        -----------
+        duckyPad to PC
+        [0]   reserved
+        [1]   0 = OK
+    */
+    else if(command_type == HID_COMMAND_WRITE_GV)
+    {
+        for (size_t i = 2; i < HID_TX_BUF_SIZE; i+=3)
+        {
+            if((hid_rx_buf[i] & 0x80) == 0)
+                continue;
+            uint8_t this_gv_index = hid_rx_buf[i] & 0x7f;
+            if(this_gv_index >= GLOBAL_VARIABLE_COUNT)
+                continue;
+            gv_buf[this_gv_index] = combine_uint16(hid_rx_buf[i+1], hid_rx_buf[i+2]);
+            needs_gv_save = 1;
+        }
         send_hid_cmd_response(hid_tx_buf);
     }
     else // not a valid HID command
