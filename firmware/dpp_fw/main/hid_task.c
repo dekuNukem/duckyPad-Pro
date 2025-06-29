@@ -443,11 +443,68 @@ void handle_hid_command(const uint8_t* hid_rx_buf, uint8_t rx_buf_size)
     hid_tx_buf[1] = HID_RESPONSE_OK;
 
     /*
+        DUMP GV
+        -----------
+        PC to duckyPad:
+        [0]   reserved
+        [1]   Command: Dump GV
+        -----------
         duckyPad to PC
         [0]   reserved
-        [1]   Status
+        [1]   0 = OK
+        [2-3] GV0
+        [4-5] GV1
+        .....
+        [62-63] GV30
     */
-    if(is_busy)
+    if(command_type == HID_COMMAND_DUMP_GV)
+    {
+        for (size_t i=2; i < HID_TX_BUF_SIZE; i+=2)
+        {
+            uint8_t this_gv = (i-2)/2;
+            if(this_gv >= GLOBAL_VARIABLE_COUNT)
+                continue;
+            uint8_t* upper_byte = &hid_tx_buf[i];
+            uint8_t* lower_byte = &hid_tx_buf[i+1];
+            split_uint16(gv_buf[this_gv], upper_byte, lower_byte);
+        }
+        send_hid_cmd_response(hid_tx_buf);
+        return;
+    }
+    /*
+        Write GV
+        -----------
+        PC to duckyPad:
+        [0]   reserved
+        [1]   Command: Write GV
+
+        [2] 127 + GV index (0 indexed)
+        [3] Upper Byte
+        [4] Lower Byte
+
+        [5-7] next chunk (if needed)
+        etc
+        -----------
+        duckyPad to PC
+        [0]   reserved
+        [1]   0 = OK
+    */
+    else if(command_type == HID_COMMAND_WRITE_GV)
+    {
+        for (size_t i = 2; i < HID_TX_BUF_SIZE; i+=3)
+        {
+            if((hid_rx_buf[i] & 0x80) == 0)
+                continue;
+            uint8_t this_gv_index = hid_rx_buf[i] & 0x7f;
+            if(this_gv_index >= GLOBAL_VARIABLE_COUNT)
+                continue;
+            gv_buf[this_gv_index] = combine_uint16(hid_rx_buf[i+1], hid_rx_buf[i+2]);
+            needs_gv_save = 1;
+        }
+        send_hid_cmd_response(hid_tx_buf);
+        return;
+    }
+    else if(is_busy)
     {
         hid_tx_buf[1] = HID_RESPONSE_BUSY;
         send_hid_cmd_response(hid_tx_buf);
@@ -652,67 +709,7 @@ void handle_hid_command(const uint8_t* hid_rx_buf, uint8_t rx_buf_size)
         wakeup_from_sleep_and_load_profile(current_profile_number);
         send_hid_cmd_response(hid_tx_buf);
     }
-    /*
-        DUMP GV
-        -----------
-        PC to duckyPad:
-        [0]   reserved
-        [1]   Command: Dump GV
-        -----------
-        duckyPad to PC
-        [0]   reserved
-        [1]   0 = OK
-        [2-3] GV0
-        [4-5] GV1
-        .....
-        [62-63] GV30
-    */
-    else if(command_type == HID_COMMAND_DUMP_GV)
-    {
-        for (size_t i=2; i < HID_TX_BUF_SIZE; i+=2)
-        {
-            uint8_t this_gv = (i-2)/2;
-            if(this_gv >= GLOBAL_VARIABLE_COUNT)
-                continue;
-            uint8_t* upper_byte = &hid_tx_buf[i];
-            uint8_t* lower_byte = &hid_tx_buf[i+1];
-            split_uint16(gv_buf[this_gv], upper_byte, lower_byte);
-        }
-        send_hid_cmd_response(hid_tx_buf);
-    }
-    /*
-        Write GV
-        -----------
-        PC to duckyPad:
-        [0]   reserved
-        [1]   Command: Write GV
-
-        [2] 127 + GV index (0 indexed)
-        [3] Upper Byte
-        [4] Lower Byte
-
-        [5-7] next chunk (if needed)
-        etc
-        -----------
-        duckyPad to PC
-        [0]   reserved
-        [1]   0 = OK
-    */
-    else if(command_type == HID_COMMAND_WRITE_GV)
-    {
-        for (size_t i = 2; i < HID_TX_BUF_SIZE; i+=3)
-        {
-            if((hid_rx_buf[i] & 0x80) == 0)
-                continue;
-            uint8_t this_gv_index = hid_rx_buf[i] & 0x7f;
-            if(this_gv_index >= GLOBAL_VARIABLE_COUNT)
-                continue;
-            gv_buf[this_gv_index] = combine_uint16(hid_rx_buf[i+1], hid_rx_buf[i+2]);
-            needs_gv_save = 1;
-        }
-        send_hid_cmd_response(hid_tx_buf);
-    }
-    else // not a valid HID command
+    else // invalid HID command
     {
         hid_tx_buf[1] = HID_RESPONSE_UNKNOWN_CMD;
         send_hid_cmd_response(hid_tx_buf);

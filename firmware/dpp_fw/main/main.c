@@ -90,6 +90,7 @@ increases sensitivity
 June 29 2025
 Increased persistent global variables to 32
 $_GV0 to $_GV31
+Read and write GVs via HID
 */
 
 uint8_t fw_version_major = 2;
