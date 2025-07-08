@@ -89,7 +89,7 @@ You can run the code from source under Linux.
   * [Configurator](https://github.com/duckyPad/duckyPad-Configurator/releases/latest)
   * [Profile Autoswitcher](https://github.com/duckyPad/duckyPad-Profile-Autoswitcher/releases/latest)
 * Unzip & open terminal at the directory
-* Install tkinter: `sudo apt install python3-tk`
+* Install tkinter and pip3: `sudo apt install python3-tk python3-pip`
 * Install dependencies: `sudo pip3 install -r requirements.txt`
 * Launch the app
   * Configurator: `sudo DUCKYPAD_UI_SCALE=1 python3 ./duckypad_config.py`
