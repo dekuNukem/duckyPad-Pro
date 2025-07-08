@@ -362,6 +362,7 @@ void mouse_press(my_key* this_key)
 
 void mouse_release(my_key* this_key)
 {
+  memset(kb_buf, 0, DP_HID_MSG_SIZE);
   kb_buf[0] = HID_USAGE_ID_MOUSE;
   if(this_key->type == KEY_TYPE_MOUSE_BUTTON)
   {
@@ -392,6 +393,7 @@ void mouse_release_all(void)
 void action_press(my_key* this_key, uint8_t use_mod)
 {
   uint16_t duckcode;
+  memset(kb_buf, 0, DP_HID_MSG_SIZE);
   if(this_key->type == KEY_TYPE_MEDIA)
   {
     media_key_press(this_key);
