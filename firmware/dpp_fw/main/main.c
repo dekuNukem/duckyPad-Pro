@@ -92,14 +92,14 @@ Increased persistent global variables to 32
 $_GV0 to $_GV31
 Read and write GVs via HID
 
-2.3.1
+2.3.2
 July 8 2025
 fixed a bug where HID buffer was not properly cleared
 */
 
 uint8_t fw_version_major = 2;
 uint8_t fw_version_minor = 3;
-uint8_t fw_version_patch = 1;
+uint8_t fw_version_patch = 2;
 uint8_t dsvm_version = 1;
 
 static const char *TAG = "MAIN";

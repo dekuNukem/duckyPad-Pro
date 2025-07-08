@@ -358,6 +358,7 @@ void mouse_press(my_key* this_key)
     kb_buf[4] = this_key->code;
   }
   USBD_CUSTOM_HID_SendReport(kb_buf);
+  memset(kb_buf, 0, DP_HID_MSG_SIZE);
 }
 
 void mouse_release(my_key* this_key)
@@ -380,6 +381,7 @@ void mouse_release(my_key* this_key)
     kb_buf[4] = 0;
   }
   USBD_CUSTOM_HID_SendReport(kb_buf);
+  memset(kb_buf, 0, DP_HID_MSG_SIZE);
 }
 
 void mouse_release_all(void)
@@ -393,7 +395,6 @@ void mouse_release_all(void)
 void action_press(my_key* this_key, uint8_t use_mod)
 {
   uint16_t duckcode;
-  memset(kb_buf, 0, DP_HID_MSG_SIZE);
   if(this_key->type == KEY_TYPE_MEDIA)
   {
     media_key_press(this_key);
