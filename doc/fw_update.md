@@ -6,21 +6,21 @@
 
 ## Latest Firmware
 
-#### 2.2.0
+#### 2.3.2
 
-14 June 2025
+9 July 2025
 
-* 🆕 Supports increased rotary encoder sensitivity
+🆕 Increased Persistent Global Variables count to 32
 
-* 🆕 Recent keypresses are cached to reduce latency
+🆕 Added support for **reading and writing PGVs from a computer**. [Details](https://github.com/duckyPad/duckyPad-Profile-Autoswitcher/blob/master/HID_details.md)
 
-* 🐞 Reboots after changing Bluetooth mode
+🐞 Fixed a bug where HID buffer was not properly cleared causing ghost inputs
 
-* ⚠️ Requires the [Latest Configurator](https://github.com/duckyPad/duckyPad-Configurator/releases/latest)
+⚠️ Make sure to use the [Latest Configurator](https://github.com/duckyPad/duckyPad-Configurator/releases/latest)
 
 👇👇👇👇👇👇👇👇👇👇
 
-[Download Here](https://github.com/dekuNukem/duckyPad-Pro/raw/master/firmware/DPP_FW_2.2.0_994ab8da.bin)
+[Download Here](https://github.com/dekuNukem/duckyPad-Pro/raw/master/firmware/DPP_FW_2.3.2_fafd94a9.bin)
 
 ☝️☝️☝️☝️☝️☝️☝️☝️☝️☝️☝️
 
@@ -58,7 +58,15 @@
 
 ## Version History
 
-## Latest Firmware
+#### 2.2.0
+
+14 June 2025
+
+* 🆕 Supports increased rotary encoder sensitivity
+
+* 🆕 Recent keypresses are cached to reduce latency
+
+* 🐞 Reboots after changing Bluetooth mode
 
 #### 2.0.2
 
