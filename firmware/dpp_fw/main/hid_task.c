@@ -143,7 +143,7 @@ const uint8_t hid_report_descriptor[] = {
   0xC0,              // End Collection
 
   // Report ID 4: Custom HID communication pipe
-  0x06, 0x00, 0xFF,                    // USAGE_PAGE (Generic Desktop)
+  0x06, 0x00, 0xFF,                    // USAGE_PAGE (vendor defined???)
   0x09, 0x01,                    // USAGE (custom pipe?)
   0xa1, 0x01,                    // COLLECTION (Application)
   
@@ -187,6 +187,17 @@ void tud_hid_set_report_cb(uint8_t instance, uint8_t report_id, hid_report_type_
       kb_led_status = buffer[0];
     else if(report_id == 5)
       handle_hid_command(buffer, bufsize);
+    // printf("tud_hid_set_report_cb:\n");
+    // printf("  instance   = %u\n", instance);
+    // printf("  report_id  = %u\n", report_id);
+    // printf("  report_type= %d\n", report_type);  // assuming enum -> int
+    // printf("  bufsize    = %u\n", bufsize);
+
+    // printf("  buffer     = ");
+    // for (uint16_t i = 0; i < bufsize; i++) {
+    //     printf("%02X ", buffer[i]);  // print each byte as hex
+    // }
+    // printf("\n");
 }
 
 #define BT_HID_BUF_SIZE 6
