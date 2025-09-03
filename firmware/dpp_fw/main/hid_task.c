@@ -53,13 +53,6 @@ const uint8_t hid_report_descriptor[] = {
   0x15, 0x00,        //   Logical Minimum (0)
   0x25, 0x01,        //   Logical Maximum (1)
   0x81, 0x02,        //   Input (Data,Var,Abs,No Wrap,Linear,Preferred State,No Null Position)
-  
-  // ----------- chatGPT says this is needed for boot protocol?????? -----------
-  0x95, 0x01,                    //   Report Count (1)       // <<< ADDED: reserved byte
-  0x75, 0x08,                    //   Report Size (8)        // <<< ADDED
-  0x81, 0x01,                    //   Input (Const,Array,Abs)// <<< ADDED
-  //------------- end ChatGPT bit ---------
-
   0x95, 0x06,        //   Report Count (6) 6 key rollover
   0x75, 0x08,        //   Report Size (8)
   0x15, 0x00,        //   Logical Minimum (0)
@@ -68,7 +61,7 @@ const uint8_t hid_report_descriptor[] = {
   0x19, 0x00,        //   Usage Minimum (0x00)
   0x29, 0x94,        //   Usage Maximum (0x94) originally 65, 73 supports F13 - F24
   0x81, 0x00,        //   Input (Data,Array,Abs,No Wrap,Linear,Preferred State,No Null Position)
-    // LEDs?
+  // LEDs?
   0x05, 0x08, // USAGE_PAGE (LEDs)
   0x19, 0x01, // USAGE_MINIMUM (Num Lock)
   0x29, 0x03, // USAGE_MAXIMUM (Scroll Lock)
@@ -146,21 +139,21 @@ const uint8_t hid_report_descriptor[] = {
   0x06, 0x00, 0xFF,                    // USAGE_PAGE (vendor defined???)
   0x09, 0x01,                    // USAGE (custom pipe?)
   0xa1, 0x01,                    // COLLECTION (Application)
+  0x15, 0x00,                    //   LOGICAL_MINIMUM (0)
+  0x26, 0xff, 0x00,              //   LOGICAL_MAXIMUM (255)
   
   // IN report
   0x85, 0x04,                    //   REPORT_ID (4)
-  0x15, 0x00,                    //   LOGICAL_MINIMUM (0)
-  0x26, 0xff, 0x00,              //   LOGICAL_MAXIMUM (255)
   0x75, 0x08,                    //   REPORT_SIZE (8)
   0x95, CUSTOM_HID_EPIN_SIZE,        //   REPORT_COUNT (this is the byte length)
   0x09, 0x01,                    //   USAGE (custom pipe?)
-  0x81, 0x82,                    //   INPUT (Data,Var,Abs,Vol)
+  0x81, 0x02,                    //   INPUT (Data,Var,Abs)
   // OUT report
   0x85, 0x05,                    //   REPORT_ID (5)
   0x75, 0x08,                    //   REPORT_SIZE (8)
   0x95, USBD_CUSTOMHID_OUTREPORT_BUF_SIZE,       //   REPORT_COUNT (this is the byte length)
   0x09, 0x01,                    //   USAGE (custom pipe?)
-  0x91, 0x82,                    //   OUTPUT (Data,Var,Abs,Vol)
+  0x91, 0x82,                    //   OUTPUT (Data,Var,Abs, volatile)
   0xc0,                           // END_COLLECTION
 };
 
