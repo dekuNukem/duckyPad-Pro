@@ -122,7 +122,7 @@ const uint8_t hid_report_descriptor[] = {
   0x95, 0x03,        //     Report Count (3)
   0x81, 0x06,        //     Input (Data,Var,Rel,No Wrap,Linear,Preferred State,No Null Position)
   0xC0,              //   End Collection
-  0x09, 0x3C,        //   Usage (Motion Wakeup)
+//   0x09, 0x3C,        //   Usage (Motion Wakeup)
   0x05, 0xFF,        //   Usage Page (Reserved 0xFF)
   0x09, 0x01,        //   Usage (0x01)
   0x15, 0x00,        //   Logical Minimum (0)
