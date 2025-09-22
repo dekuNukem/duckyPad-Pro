@@ -229,9 +229,9 @@
 <wire x1="104" y1="5.877" x2="105" y2="4.877" width="0" layer="20" curve="90"/>
 <wire x1="105" y1="4.877" x2="108" y2="4.877" width="0" layer="20"/>
 <wire x1="108" y1="4.877" x2="109" y2="3.877" width="0" layer="20" curve="-90"/>
-<text x="18.843" y="49.697" size="3.175" layer="26" rot="MR0" align="center">duckyPad Pro</text>
-<text x="19.343" y="42.815" size="2.1844" layer="26" rot="MR0" align="center">dekuNukem
-2024</text>
+<text x="18.843" y="48.197" size="3.175" layer="26" rot="MR0" align="center">duckyPad Pro</text>
+<text x="18.843" y="10.315" size="2.1844" layer="26" distance="60" rot="MR0" align="center">duckyPad.com
+dekuNukem</text>
 <wire x1="105.5" y1="96" x2="109" y2="92.5" width="0" layer="20" curve="-90"/>
 <wire x1="109" y1="92.5" x2="109" y2="32.75" width="0" layer="20"/>
 <wire x1="109" y1="32.75" x2="108" y2="31.75" width="0" layer="20" curve="-90"/>
