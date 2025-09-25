@@ -24,7 +24,7 @@ Ideal for key combos:
 
 Once familiar, you can write **longer multi-line** scripts for more complex actions.
 
-##### Open a Webpage:
+##### Open Webpage:
 
 ```
 WINDOWS r
@@ -37,10 +37,10 @@ ENTER
 
 At full potential, duckyScript is closer to a **general-purpose language**. You can:
 
+* Use Variables, Conditions, and Loops.
 * Read Buttons
 * Write to OLED screen
 * Change RGB colors
-* Variables, Conditions, and Loops.
 * And more!
 
 This allows writing ultra-specific macros for your exact needs.
@@ -264,7 +264,7 @@ List of Special Keys:
 
 ### `KEYDOWN` / `KEYUP`
 
-Hold/release a key on command.
+Hold/release a key.
 
 Allows more fine-grained control.
 
@@ -302,6 +302,8 @@ REPEAT 10
 
 * `MMOUSE`: Click MIDDLE mouse button
 
+* Can be used with `KEYDOWN` / `KEYUP` commands.
+
 ### `MOUSE_MOVE X Y`
 
 Move mouse cursor `X` pixels horizontally, and `Y` pixels vertically.
@@ -310,7 +312,7 @@ Move mouse cursor `X` pixels horizontally, and `Y` pixels vertically.
 
 * For `Y`, a positive number moves UP, negative number moves DOWN.
 
-* Set `X` or `Y` to 0 if no movement needed.
+* Set to 0 if no movement needed.
 
 * **Disable mouse acceleration** for pixel-accurate results
 
@@ -347,6 +349,8 @@ ENTER
 
 * Keep the code inside simple!
 
+* For more complex needs, see [Loops](#loops) section below.
+
 -------
 [⬆️⬆️⬆️⬆️⬆️⬆️ Back to Top ⬆️⬆️⬆️⬆️⬆️⬆️](#list-of-commands)
 
@@ -360,13 +364,15 @@ Switch to the previous / next profile.
 
 Jump to a profile by name. **Case sensitive!**
 
+This ends the current script execution.
+
 ```
 GOTO_PROFILE NumPad
 ```
 
 ### Autoswitcher
 
-Also try the [autoswitcher](https://github.com/dekuNukem/duckyPad-profile-autoswitcher) to jump to a profile based on **current window**!
+Also try the [Autoswitcher](https://github.com/dekuNukem/duckyPad-profile-autoswitcher) for **switching profile automatically** based on **active window**!
 
 -------
 [⬆️⬆️⬆️⬆️⬆️⬆️ Back to Top ⬆️⬆️⬆️⬆️⬆️⬆️](#list-of-commands)
@@ -419,7 +425,7 @@ Clears the display buffer.
 
 Actually update the OLED.
 
-You should use `OLED_CLEAR`, `OLED_CURSOR`, and `OLED_PRINT` to set up the display, then use this to print it.
+You should use `OLED_CLEAR`, `OLED_CURSOR`, `OLED_PRINT`, etc, to set up the display, then use this to print it.
 
 This is **much faster** than updating the whole screen for every change.
 
@@ -454,7 +460,7 @@ Reset the key back to default color.
 
 Set `n` to 0 for current key.
 
-Set `n` from 1 to 15 for a particular key.
+Set `n` from 1 to 20 for a particular key.
 
 Set `n` to 99 for all keys.
 
@@ -590,7 +596,7 @@ Used internally. Do not modify.
 
 ## Persistent Global Variables
 
-* `$_GV0` to `$_GV15`
+* `$_GV0` to `$_GV31`
 * Available across all profiles
 * Persists over reboots
 * Can be used to store non-volatile data
