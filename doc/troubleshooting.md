@@ -7,6 +7,7 @@
 Some commonly encountered issues are explained here.
 
 - [I press a key and nothing happens!](#i-press-a-key-and-nothing-happens)
+- [Rotary encoder pushbutton doesn't work!](#rotary-encoder-pushbutton-doesnt-work)
 - [Letters and symbols come out wrong!](#letters-and-symbols-come-out-wrong)
 - [My script behaves inconsistently!](#my-script-behaves-inconsistently)
 - [I want to use my own SD card!](#i-want-to-use-my-own-sd-card)
@@ -52,15 +53,27 @@ Straighten it up with a pair of pliers, then insert again.
 
 Make sure the **pins are straight** and aim for hot-swap socket holes.
 
+## Rotary encoder pushbutton doesn't work!
+
+Some knobs have a hole that's slightly too deep, making it bottom out before the pushbutton fully activates.
+
+To Fix:
+
+* Pull off the knob
+
+* Stuff a tiny amount of paper tissue into the hole
+
+* Reinstall
+
 ## Letters and symbols come out wrong!
 
-* **Long-press** `+/-` button
+* **Long-press** `+` button
 
 * Select the correct keyboard layout
 
-* Press any key to save & quit
+* Press any unlit key to save & quit
 
-* Read more about [writing your own keymaps](https://github.com/dekuNukem/duckyPad/blob/master/keymap_instructions.md)
+* [Optional] Read more about [how keymaps work](https://github.com/dekuNukem/duckyPad/blob/master/keymap_instructions.md)
 
 ## My script behaves inconsistently!
 
@@ -101,7 +114,7 @@ Slow it down with the following commands:
 
 ## The RGB backlight is too bright!
 
-* Adjust the brightness by **long-pressing `+/-` button**.
+* Adjust the brightness by **long-pressing `+` button**.
 
 ## Will OLED suffer burn-in?
 
@@ -109,7 +122,7 @@ Measures have been taken to prevent burn-in.
 
 * Screen dims after 1 minute.
 
-* duckyPad goes to sleep after 5 minutes (adjustable).
+* duckyPad goes to sleep after 15 minutes (adjustable).
 
 ## I want to replace the OLED screen!
 
@@ -131,7 +144,7 @@ Measures have been taken to prevent burn-in.
 
 * Insert the ribbon cable into connector, the gold contact should be barely visible (see photo above).
 
-* Push the black tab back in to lock.
+* Push the black tab back in.
 
 * Try it out and reassemble!
 
