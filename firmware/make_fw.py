@@ -53,3 +53,5 @@ new_filename = f"DPP_FW_{fw_ver_major}.{fw_ver_minor}.{fw_ver_patch}_{fw_crc:x}.
 new_fw_path = os.path.join(".", new_filename)
 shutil.copy2(fw_bin_path, new_fw_path)
 print("Copied", new_fw_path)
+
+input("!!!!!!!!!!!!!\n!!!!!!!!!!!!!\n\nDON'T FORGET TO UPDATE LINK IN WEBPAGE\n\nPress Enter to continue\n\n!!!!!!!!!!!!!\n!!!!!!!!!!!!!\n")
