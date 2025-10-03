@@ -6,7 +6,7 @@
 
 ## Overview
 
-duckyScript is a simple language for automating keyboard/mouse inputs.
+duckyScript is a simple language for **automating keyboard/mouse inputs**.
 
 It was originally developed for [USB Rubber Ducky](https://shop.hak5.org/products/usb-rubber-ducky-deluxe).
 
@@ -876,7 +876,7 @@ END_WHILE
 This is the number returned by methods above.
 
 ```
-duckyPad Pro:
+duckyPad Pro (2024):
 
 1-20:
     * Built-in keys

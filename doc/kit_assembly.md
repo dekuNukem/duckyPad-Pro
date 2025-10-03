@@ -38,9 +38,11 @@ Look at the back of the PCB. Identify the sockets:
 
 ![Alt text](../resources/photos/instructions/ant.png)
 
-Match the receptacles, push straight down. 
+Match the receptacles, push **straight down**. 
 
-If too tight, put some soft cushion on the other side, and use the flat end of a pen for more leverage. Careful not to slip and damage nearby components.
+If too tight, put some cushioning on the other side, and use the **flat end of a pen** for more leverage.
+
+Always push **straight down**, careful not to slip and damage nearby components.
 
 It should click in place. Check it's fully seated.
 
