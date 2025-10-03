@@ -60,17 +60,9 @@ Place **something rigid** against the back, and flip over. The screws should sta
 
 Put on **3mm spacers** (the slightly shorter one)
 
-Moderately tighten, with a socket bit if available. It shouldn't rattle when shaken.
+Moderately tighten, with pliers if available. It shouldn't rattle when shaken.
 
 ![Alt text](../resources/photos/instructions/3mm.jpeg)
-
-🚨🚨🚨🚨🚨🚨🚨🚨🚨🚨🚨🚨🚨🚨🚨🚨🚨🚨🚨🚨🚨🚨
-
-If your Kickstarter Backer Number is **PRIOR TO 155** (28 Nov 2024)
-
-[Follow this guide to fix a minor clearance issue](errata.md).
-
-🚨🚨🚨🚨🚨🚨🚨🚨🚨🚨🚨🚨🚨🚨🚨🚨🚨🚨🚨🚨🚨🚨
 
 --------
 
