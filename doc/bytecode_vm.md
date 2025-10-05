@@ -20,15 +20,15 @@ Being much more complex, it makes sense to compile the script into bytecode and 
 
 ## Virtual Stack Machine
 
-DPDS3 VM is a simple stack machine with two stacks and a Program Counter (PC).
+DPDS3 VM is a simple **16-bit stack machine** with **two stacks** and a **Program Counter (PC)**.
 
 * PC points to the current instruction being executed.
 
-* Arithmetic Stack: Used to perform calculations and store arguments.
+* **Arithmetic Stack**: Used to perform calculations and store arguments.
 
-* Call Stack: Keeps track of function calls.
+* **Call Stack**: Keeps track of function calls.
 
-Compiled binary is loaded into memory, and PC starts executing at the beginning of the program.
+Compiled binary is loaded into memory, and PC starts executing from 0x0.
 
 ## Instruction Set
 
