@@ -75,6 +75,7 @@
     "tuple": "c",
     "utility": "c",
     "ssd1306_fonts.h": "c",
-    "diskio_impl.h": "c"
+    "diskio_impl.h": "c",
+    "time.h": "c"
   }
 }
