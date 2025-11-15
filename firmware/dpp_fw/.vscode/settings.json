@@ -5,7 +5,7 @@
     "board/esp32s3-builtin.cfg"
   ],
   "idf.flashType": "UART",
-  "idf.portWin": "COM48",
+  "idf.portWin": "COM8",
   "files.associations": {
     "gpio.h": "c",
     "string.h": "c",
@@ -74,6 +74,7 @@
     "system_error": "c",
     "tuple": "c",
     "utility": "c",
-    "ssd1306_fonts.h": "c"
+    "ssd1306_fonts.h": "c",
+    "diskio_impl.h": "c"
   }
 }

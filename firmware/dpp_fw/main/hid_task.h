@@ -42,6 +42,7 @@ void handle_hid_command(const uint8_t* hid_rx_buf, uint8_t rx_buf_size);
 extern volatile uint8_t is_usb_hid_connected;
 uint8_t wait_for_hid_connect(uint32_t how_long_ms);
 extern volatile uint8_t needs_gv_save;
+extern volatile uint8_t is_rtc_valid;
 
 #ifdef __cplusplus
 }

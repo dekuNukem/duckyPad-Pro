@@ -1,7 +1,7 @@
 from PIL import Image
 
 
-img = Image.open("image.png")
+img = Image.open("clock.png")
 # img = img.convert('1')  # Ensure the image is in 1-bit mode
 
 # Get image dimensions

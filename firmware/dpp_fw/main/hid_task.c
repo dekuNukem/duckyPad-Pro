@@ -32,6 +32,7 @@
 
 static const char *TAG = "USBHID";
 
+volatile uint8_t is_rtc_valid;
 volatile uint8_t needs_gv_save;
 volatile uint8_t is_usb_hid_connected;
 

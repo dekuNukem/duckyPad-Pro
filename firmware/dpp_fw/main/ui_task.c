@@ -12,6 +12,7 @@
 #include "bluetooth_task.h"
 #include "keypress_task.h"
 #include "ds_vm.h"
+#include "hid_task.h"
 
 static const char *TAG = "UI";
 spi_device_handle_t my_spi_handle;
@@ -309,7 +310,7 @@ void draw_profile_normal(profile_info* this_profile)
   ssd1306_Line(64,10,64,127,White);
   ssd1306_Line(96,10,96,127,White);
 
-  draw_bluetooth_icon(0, -1, bluetooth_status, 0);
+  draw_status_icon(0, 0, 0);
   draw_kbled_icon(kb_led_status, 0);
 
   ssd1306_UpdateScreen();
@@ -358,7 +359,7 @@ void draw_profile_rotated(profile_info* this_profile)
   ssd1306_Line(76,10,76,127,White);
   ssd1306_Line(102,10,102,127,White);
 
-  draw_bluetooth_icon(0, -1, bluetooth_status, 0);
+  draw_status_icon(0, 0, 0);
   draw_kbled_icon(kb_led_status, 0);
 
   ssd1306_UpdateScreen();
@@ -608,34 +609,24 @@ void oled_say(char* what)
   ssd1306_UpdateScreen();
 }
 
-void draw_bluetooth_icon(uint8_t origx, uint8_t origy, uint8_t this_bt_stat, uint8_t update_screen)
+#define BT_ICON_HEIGHT (9)
+#define BT_ICON_WIDTH (6)
+const unsigned char bt_icon[] = {
+    0x30, 0x28, 0xA4, 0x68, 0x30, 0x68, 0xA4, 0x28, 0x30,
+};
+
+#define RTC_ICON_HEIGHT (9)
+#define RTC_ICON_WIDTH (9)
+const unsigned char rtc_icon[] = {
+    0x1C, 0x00, 0x6B, 0x00, 0x49, 0x00, 0x88, 0x80, 0x8E, 0x80, 0x80, 0x80,
+    0x41, 0x00, 0x63, 0x00, 0x1C, 0x00,
+};
+
+void draw_bt_icon(uint8_t origx, uint8_t origy, uint8_t this_bt_stat, uint8_t update_screen)
 {
   if(this_bt_stat == BT_DISABLED)
     return;
-  ssd1306_DrawPixel(origx+2, origy+0, White);
-  ssd1306_DrawPixel(origx+2, origy+1, White);
-  ssd1306_DrawPixel(origx+3, origy+1, White);
-  ssd1306_DrawPixel(origx+2, origy+2, White);
-  ssd1306_DrawPixel(origx+4, origy+2, White);
-  ssd1306_DrawPixel(origx+0, origy+3, White);
-  ssd1306_DrawPixel(origx+2, origy+3, White);
-  ssd1306_DrawPixel(origx+5, origy+3, White);
-  ssd1306_DrawPixel(origx+1, origy+4, White);
-  ssd1306_DrawPixel(origx+2, origy+4, White);
-  ssd1306_DrawPixel(origx+4, origy+4, White);
-  ssd1306_DrawPixel(origx+2, origy+5, White);
-  ssd1306_DrawPixel(origx+3, origy+5, White);
-  ssd1306_DrawPixel(origx+1, origy+6, White);
-  ssd1306_DrawPixel(origx+2, origy+6, White);
-  ssd1306_DrawPixel(origx+4, origy+6, White);
-  ssd1306_DrawPixel(origx+0, origy+7, White);
-  ssd1306_DrawPixel(origx+2, origy+7, White);
-  ssd1306_DrawPixel(origx+5, origy+7, White);
-  ssd1306_DrawPixel(origx+2, origy+8, White);
-  ssd1306_DrawPixel(origx+4, origy+8, White);
-  ssd1306_DrawPixel(origx+2, origy+9, White);
-  ssd1306_DrawPixel(origx+3, origy+9, White);
-  ssd1306_DrawPixel(origx+2, origy+10, White);
+  ssd1306_DrawBitmap(origx, origy, bt_icon, BT_ICON_WIDTH, BT_ICON_HEIGHT, White);
 
   ssd1306_SetCursor(origx+7, origy+2);
   if(this_bt_stat == BT_DISCOVERABLE)
@@ -647,13 +638,29 @@ void draw_bluetooth_icon(uint8_t origx, uint8_t origy, uint8_t this_bt_stat, uin
     ssd1306_UpdateScreen();
 }
 
-uint8_t last_bt_stat = 255;
-void update_bluetooth_icon(uint8_t origx, uint8_t origy, uint8_t this_bt_stat)
+void draw_rtc_icon(uint8_t origx, uint8_t origy, uint8_t update_screen)
 {
-  if(this_bt_stat == last_bt_stat)
+  ssd1306_DrawBitmap(origx, origy, rtc_icon, RTC_ICON_WIDTH, RTC_ICON_HEIGHT, White);
+  if(update_screen)
+    ssd1306_UpdateScreen();
+}
+
+void draw_status_icon(uint8_t origx, uint8_t origy, uint8_t update_screen)
+{
+  if(is_rtc_valid)
+    draw_rtc_icon(origx, origy, update_screen);
+  else
+    draw_bt_icon(origx, origy, bluetooth_status, update_screen);
+}
+
+uint8_t last_icon_stat = 255;
+void update_status_icon()
+{
+  uint8_t this_icon_stat = bluetooth_status + is_rtc_valid * 4;
+  if(this_icon_stat == last_icon_stat)
     return;
-  draw_bluetooth_icon(origx, origy, this_bt_stat, 1);
-  last_bt_stat = this_bt_stat;
+  draw_status_icon(0, 0, 1);
+  last_icon_stat = this_icon_stat;
 }
 
 void draw_kbled_icon(uint8_t this_led_state, uint8_t update_screen)
