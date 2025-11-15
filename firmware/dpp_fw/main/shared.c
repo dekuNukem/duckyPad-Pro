@@ -3,6 +3,7 @@
 #include <sys/stat.h>
 #include <dirent.h>
 #include <ds_vm.h>
+#include <time.h>
 #include "esp_log.h"
 #include "profiles.h"
 #include "shared.h"
@@ -251,4 +252,11 @@ uint8_t check_rtc_is_valid(void)
       return 1;
   }
   return 1;
+}
+
+void get_local_time(int16_t offset_minutes, struct tm *out)
+{
+  time_t now_utc = time(NULL);
+  time_t adjusted_ts = (time_t)now_utc + (time_t)offset_minutes * 60;
+  gmtime_r(&adjusted_ts, out);
 }

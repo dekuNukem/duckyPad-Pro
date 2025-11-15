@@ -2,6 +2,7 @@
 #include <stdint.h>
 #include <string.h>
 #include <stdlib.h>
+#include <time.h>
 
 #include "rotary_encoder.h"
 #include "input_task.h"
@@ -16,6 +17,8 @@
 #include "ds_vm.h"
 #include "input_task.h"
 #include "dsb_cache.h"
+#include "shared.h"
+#include "hid_task.h"
 
 uint8_t bin_buf[BIN_BUF_SIZE];
 uint8_t var_buf[VAR_BUF_SIZE];
@@ -135,6 +138,7 @@ void store_uint16_as_two_bytes_at(uint16_t addr, uint16_t value)
   var_buf[addr+1] = value >> 8;
 }
 
+// Reserved variables not shown here are read-only
 void write_var(uint16_t addr, uint16_t value, uint8_t this_key_id)
 {
   if(addr == DEFAULTDELAY_ADDR)
@@ -147,16 +151,6 @@ void write_var(uint16_t addr, uint16_t value, uint8_t this_key_id)
     rand_min = value;
   else if (addr == _RANDOM_MAX)
     rand_max = value;
-  else if (addr == _RANDOM_INT)
-    ; // read only
-  else if (addr == _TIME_MS)
-    ; // read only
-  else if (addr == _TIME_S)
-    ; // read only
-  else if (addr == _READKEY)
-    ; // read only
-  else if (addr == _BLOCKING_READKEY)
-    ; // read only
   else if (addr == _LOOP_SIZE)
     loop_size = value;
   else if (addr == _KEYPRESS_COUNT)
@@ -165,18 +159,10 @@ void write_var(uint16_t addr, uint16_t value, uint8_t this_key_id)
     epilogue_actions = value;
   else if (addr == _ALLOW_ABORT)
     allow_abort = value;
-  else if (addr == _IS_NUMLOCK_ON)
-    ; // read only
-  else if (addr == _IS_CAPSLOCK_ON)
-    ; // read only
-  else if (addr == _IS_SCROLLLOCK_ON)
-    ; // read only
   else if (addr == _DONT_REPEAT)
     disable_autorepeat = value;
-  else if (addr == _THIS_KEYID)
-    ; // read only
-  else if (addr == _DP_MODEL)
-    ; // read only
+  else if (addr == _RTC_UTC_OFFSET)
+    utc_offset_minutes = (int16_t)value;
   else if (is_global_variable(addr))
     gv_buf[get_gv_index(addr)] = value;
   else if(addr < VAR_BUF_SIZE)
@@ -206,6 +192,26 @@ uint8_t readkey_blocking(void)
     if(xQueueReceive(switch_event_queue, &sw_event, 0) && sw_event.type == SW_EVENT_SHORT_PRESS)
       return sw_event.id+1;
   }
+}
+
+uint16_t get_rtc_data(uint16_t addr)
+{
+  struct tm local_tm;
+  get_local_time(utc_offset_minutes, &local_tm);
+
+  if(addr == _RTC_YEAR)
+    return local_tm.tm_year + 1900;
+  if(addr == _RTC_MONTH)
+    return local_tm.tm_mon + 1;
+  if(addr == _RTC_DAY)
+    return local_tm.tm_mday;
+  if(addr == _RTC_HOUR)
+    return local_tm.tm_hour;
+  if(addr == _RTC_MINUTE)
+    return local_tm.tm_min;
+  if(addr == _RTC_SECOND)
+    return local_tm.tm_sec;
+  return 0;
 }
 
 uint16_t read_var(uint16_t addr, uint8_t this_key_id)
@@ -250,6 +256,12 @@ uint16_t read_var(uint16_t addr, uint8_t this_key_id)
     return this_key_id+1;
   else if (addr == _DP_MODEL)
     return 2;
+  else if (addr == _RTC_IS_VALID)
+    return is_rtc_valid;
+  else if (addr == _RTC_UTC_OFFSET)
+    return utc_offset_minutes;
+  else if (addr >= _RTC_SECOND && addr <= _RTC_YEAR)
+    return get_rtc_data(addr);
   else if (is_global_variable(addr))
     return gv_buf[get_gv_index(addr)];
   else if(addr < VAR_BUF_SIZE - 1)
