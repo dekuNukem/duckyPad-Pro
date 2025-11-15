@@ -602,7 +602,8 @@ uint8_t load_persistent_state(void)
     uint8_t red = sps_bin_buf[r_addr];
     uint8_t green = sps_bin_buf[r_addr+1];
     uint8_t blue = sps_bin_buf[r_addr+2];
-    set_pixel_3color_update_buffer(i, red, green, blue);
+    if(strlen(all_profile_info[current_profile_number].sw_name_firstline[i]))
+      set_pixel_3color_update_buffer(i, red, green, blue);
   }
   return 0;
 }
