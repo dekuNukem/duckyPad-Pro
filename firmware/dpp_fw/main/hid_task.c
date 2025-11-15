@@ -433,6 +433,15 @@ void split_uint16(uint16_t input, uint8_t* high_byte, uint8_t* low_byte)
     *low_byte = input & 0xFF;
 }
 
+void split_int16(int16_t input, uint8_t* high_byte, uint8_t* low_byte)
+{
+    if (high_byte == NULL || low_byte == NULL)
+        return;
+    uint16_t raw = (uint16_t)input;
+    *high_byte = (raw >> 8) & 0xFF;
+    *low_byte  = raw & 0xFF;
+}
+
 uint16_t combine_uint16(uint8_t high_byte, uint8_t low_byte)
 {
     return ((uint16_t)high_byte << 8) | low_byte;
@@ -537,8 +546,11 @@ void handle_hid_command(const uint8_t* hid_rx_buf, uint8_t rx_buf_size)
         [4]   firmware version patch
         [5]   hardware revision
         [6 - 9]   UUID (uint32_t)
-        [10]   current profile
+        [10] current profile
         [11] is_sleeping
+        [12] is_rtc_valid
+        [13-14]: UTC offset
+        [15-18]: UNIX timestamp (uint32_t)
     */
     if(command_type == HID_COMMAND_GET_INFO)
     {
@@ -552,6 +564,9 @@ void handle_hid_command(const uint8_t* hid_rx_buf, uint8_t rx_buf_size)
         hid_tx_buf[9] = esp_mac_addr[5];
         hid_tx_buf[10] = current_profile_number;
         hid_tx_buf[11] = is_sleeping;
+        hid_tx_buf[12] = is_rtc_valid;
+        split_int16(utc_offset_minutes, &hid_tx_buf[13], &hid_tx_buf[14]);
+        split_uint32_be((uint32_t)time(NULL), &hid_tx_buf[15], &hid_tx_buf[16], &hid_tx_buf[17], &hid_tx_buf[18]);
         send_hid_cmd_response(hid_tx_buf);
     }
     /*
@@ -720,7 +735,7 @@ void handle_hid_command(const uint8_t* hid_rx_buf, uint8_t rx_buf_size)
         [0]   reserved
         [1]   command
         [2-5] UNIX Timestamp
-        [6] UTC Offset
+        [6-7] UTC Offset
         -----------
         duckyPad to PC
         [0]   reserved
@@ -732,7 +747,8 @@ void handle_hid_command(const uint8_t* hid_rx_buf, uint8_t rx_buf_size)
         struct timeval tv = {0};
         tv.tv_sec = bytes_to_uint32_big_endian(hid_rx_buf+2);
         settimeofday(&tv, NULL);
-        utc_offset_hours = (int8_t)hid_rx_buf[6];
+        utc_offset_minutes = combine_uint16(hid_rx_buf[6], hid_rx_buf[7]);
+        printf("utc_offset_minutes: %d\n", utc_offset_minutes);
         is_rtc_valid = 1;
     }
     else // invalid HID command

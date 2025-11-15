@@ -15,7 +15,7 @@
 
 const char *OTA_TAG = "OTA";
 
-int8_t utc_offset_hours;
+int16_t utc_offset_minutes;
 
 uint8_t esp_mac_addr[ESP_MAC_ADDR_SIZE];
 
@@ -234,6 +234,14 @@ uint32_t bytes_to_uint32_big_endian(const uint8_t b[4])
     ((uint32_t)b[1] << 16) |
     ((uint32_t)b[2] << 8)  |
     ((uint32_t)b[3]);
+}
+
+void split_uint32_be(uint32_t value, uint8_t *msb, uint8_t *b1, uint8_t *b2, uint8_t *lsb)
+{
+  *msb = (value >> 24) & 0xFF;
+  *b1  = (value >> 16) & 0xFF;
+  *b2  = (value >> 8)  & 0xFF;
+  *lsb =  value        & 0xFF;
 }
 
 uint8_t check_rtc_is_valid(void)
