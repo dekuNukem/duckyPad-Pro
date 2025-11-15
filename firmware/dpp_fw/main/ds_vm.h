@@ -103,6 +103,14 @@
 #define _DONT_REPEAT (0xffff - 17)
 #define _THIS_KEYID (0xffff - 18)
 #define _DP_MODEL (0xffff - 19)
+#define _RTC_IS_VALID (0xffff - 20)
+#define _RTC_UTC_OFFSET (0xffff - 21)
+#define _RTC_YEAR (0xffff - 22)
+#define _RTC_MONTH (0xffff - 23)
+#define _RTC_DAY (0xffff - 24)
+#define _RTC_HOUR (0xffff - 25)
+#define _RTC_MINUTE (0xffff - 26)
+#define _RTC_SECOND (0xffff - 27)
 
 typedef struct
 {
