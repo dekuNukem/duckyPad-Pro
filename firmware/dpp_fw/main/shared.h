@@ -19,10 +19,9 @@ extern uint8_t fw_version_major;
 extern uint8_t fw_version_minor;
 extern uint8_t fw_version_patch;
 extern uint8_t dsvm_version;
-extern int16_t utc_offset_minutes;
+extern RTC_NOINIT_ATTR int16_t utc_offset_minutes;
 
 void strip_newline(char* line, uint16_t size);
-uint8_t how_many_digits(uint8_t number);
 char* goto_next_arg(char* buf, char* buf_end);
 void fw_update_check(void);
 void delay_ms(uint32_t amount);

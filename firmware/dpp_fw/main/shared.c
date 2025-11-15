@@ -15,7 +15,7 @@
 
 const char *OTA_TAG = "OTA";
 
-int16_t utc_offset_minutes;
+RTC_NOINIT_ATTR int16_t utc_offset_minutes;
 
 uint8_t esp_mac_addr[ESP_MAC_ADDR_SIZE];
 
@@ -24,15 +24,6 @@ void strip_newline(char* line, uint16_t size)
   for(size_t i = 0; i < size; ++i)
     if(line[i] == '\n' || line[i] == '\r')
       line[i] = 0;
-}
-
-uint8_t how_many_digits(uint8_t number)
-{
-  if(number >= 100)
-    return 3;
-  if(number >= 10)
-    return 2;
-  return 1;
 }
 
 char* goto_next_arg(char* buf, char* buf_end)
@@ -246,9 +237,6 @@ void split_uint32_be(uint32_t value, uint8_t *msb, uint8_t *b1, uint8_t *b2, uin
 
 uint8_t check_rtc_is_valid(void)
 {
-  // printf("rtc: %lld\n", time(NULL));
-  // printf("reset reason: %d\n", esp_reset_reason());
-
   if (time(NULL) <= 315597628)  // 1980-01-01
     return 0;
 

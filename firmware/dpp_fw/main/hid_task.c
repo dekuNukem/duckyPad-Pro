@@ -748,7 +748,6 @@ void handle_hid_command(const uint8_t* hid_rx_buf, uint8_t rx_buf_size)
         tv.tv_sec = bytes_to_uint32_big_endian(hid_rx_buf+2);
         settimeofday(&tv, NULL);
         utc_offset_minutes = combine_uint16(hid_rx_buf[6], hid_rx_buf[7]);
-        printf("utc_offset_minutes: %d\n", utc_offset_minutes);
         is_rtc_valid = 1;
     }
     else // invalid HID command
