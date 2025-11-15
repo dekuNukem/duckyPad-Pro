@@ -99,6 +99,12 @@ fixed a bug where HID buffer was not properly cleared
 2.4.0
 Nov 15 2025
 Adding RTC support
+    Setting / Reading RTC via HID commands
+    Query time and date as reserved variables
+    Detect if RTC is still valid
+
+Bug Fixs:
+    Persistent state loading color of no-longer-assigned keys
 
 */
 
