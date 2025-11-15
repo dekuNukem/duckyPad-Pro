@@ -25,6 +25,7 @@ uint8_t how_many_digits(uint8_t number);
 char* goto_next_arg(char* buf, char* buf_end);
 void fw_update_check(void);
 void delay_ms(uint32_t amount);
+uint32_t bytes_to_uint32_big_endian(const uint8_t b[4]);
 
 #define MY_UINT32_MAX 0xffffffff
 

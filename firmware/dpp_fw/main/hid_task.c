@@ -710,6 +710,26 @@ void handle_hid_command(const uint8_t* hid_rx_buf, uint8_t rx_buf_size)
         wakeup_from_sleep_and_load_profile(current_profile_number);
         send_hid_cmd_response(hid_tx_buf);
     }
+    /*
+        Set RTC
+        -----------
+        PC to duckyPad:
+        [0]   reserved
+        [1]   command
+        [2-5] UNIX Timestamp
+        [6] UTC Offset
+        -----------
+        duckyPad to PC
+        [0]   reserved
+        [1]   0 = OK
+    */
+    else if(command_type == HID_COMMAND_SET_RTC)
+    {
+        send_hid_cmd_response(hid_tx_buf);
+        uint32_t unix_ts = bytes_to_uint32_big_endian(hid_rx_buf+2);
+        int8_t utc_offset = hid_rx_buf[6];
+        is_rtc_valid = 1;
+    }
     else // invalid HID command
     {
         hid_tx_buf[1] = HID_RESPONSE_UNKNOWN_CMD;

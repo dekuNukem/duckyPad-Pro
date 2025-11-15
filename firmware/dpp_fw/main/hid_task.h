@@ -14,17 +14,18 @@ void mount_hid_only(void);
 void USBD_CUSTOM_HID_SendReport(uint8_t* hid_buf);
 void handle_hid_command(const uint8_t* hid_rx_buf, uint8_t rx_buf_size);
 
-#define HID_COMMAND_GET_INFO 0
-#define HID_COMMAND_GOTO_PROFILE_BY_NUMBER 1
-#define HID_COMMAND_PREV_PROFILE 2
-#define HID_COMMAND_NEXT_PROFILE 3
-#define HID_COMMAND_SET_LED_SINGLE 4
-#define HID_COMMAND_SW_RESET 20
-#define HID_COMMAND_SLEEP 21
-#define HID_COMMAND_WAKEUP 22
-#define HID_COMMAND_GOTO_PROFILE_BY_NAME 23
-#define HID_COMMAND_DUMP_GV 24
-#define HID_COMMAND_WRITE_GV 25
+#define HID_COMMAND_GET_INFO               0x00
+#define HID_COMMAND_GOTO_PROFILE_BY_NUMBER 0x01
+#define HID_COMMAND_PREV_PROFILE           0x02
+#define HID_COMMAND_NEXT_PROFILE           0x03
+#define HID_COMMAND_SET_LED_SINGLE         0x04
+#define HID_COMMAND_SW_RESET               0x14
+#define HID_COMMAND_SLEEP                  0x15
+#define HID_COMMAND_WAKEUP                 0x16
+#define HID_COMMAND_GOTO_PROFILE_BY_NAME   0x17
+#define HID_COMMAND_DUMP_GV                0x18
+#define HID_COMMAND_WRITE_GV               0x19
+#define HID_COMMAND_SET_RTC                0x1A
 
 #define HID_RESPONSE_OK 0
 #define HID_RESPONSE_GENERIC_ERROR 1
