@@ -15,6 +15,8 @@
 
 const char *OTA_TAG = "OTA";
 
+int8_t utc_offset_hours;
+
 uint8_t esp_mac_addr[ESP_MAC_ADDR_SIZE];
 
 void strip_newline(char* line, uint16_t size)
@@ -228,8 +230,29 @@ void delay_ms(uint32_t amount)
 
 uint32_t bytes_to_uint32_big_endian(const uint8_t b[4])
 {
-    return ((uint32_t)b[0] << 24) |
-           ((uint32_t)b[1] << 16) |
-           ((uint32_t)b[2] << 8)  |
-           ((uint32_t)b[3]);
+  return ((uint32_t)b[0] << 24) |
+    ((uint32_t)b[1] << 16) |
+    ((uint32_t)b[2] << 8)  |
+    ((uint32_t)b[3]);
+}
+
+uint8_t check_rtc_is_valid(void)
+{
+  // printf("rtc: %lld\n", time(NULL));
+  // printf("reset reason: %d\n", esp_reset_reason());
+
+  if (time(NULL) <= 315597628)  // 1980-01-01
+    return 0;
+
+  switch (esp_reset_reason())
+  {
+    case ESP_RST_UNKNOWN:
+    case ESP_RST_POWERON:
+    case ESP_RST_BROWNOUT:
+    case ESP_RST_PWR_GLITCH:
+      return 0;
+    default:
+      return 1;
+  }
+  return 1;
 }

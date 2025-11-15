@@ -1,4 +1,7 @@
 #include <stdlib.h>
+#include <time.h>
+#include <sys/time.h>
+
 #include "esp_log.h"
 #include "freertos/FreeRTOS.h"
 #include "freertos/task.h"
@@ -726,8 +729,10 @@ void handle_hid_command(const uint8_t* hid_rx_buf, uint8_t rx_buf_size)
     else if(command_type == HID_COMMAND_SET_RTC)
     {
         send_hid_cmd_response(hid_tx_buf);
-        uint32_t unix_ts = bytes_to_uint32_big_endian(hid_rx_buf+2);
-        int8_t utc_offset = hid_rx_buf[6];
+        struct timeval tv = {0};
+        tv.tv_sec = bytes_to_uint32_big_endian(hid_rx_buf+2);
+        settimeofday(&tv, NULL);
+        utc_offset_hours = (int8_t)hid_rx_buf[6];
         is_rtc_valid = 1;
     }
     else // invalid HID command

@@ -125,6 +125,8 @@ void app_main(void)
     oled_init();
     neopixel_init();
     expansion_uart_init();
+    is_rtc_valid = check_rtc_is_valid();
+
     if(sd_init())
     {
         draw_nosd();
