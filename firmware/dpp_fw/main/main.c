@@ -109,6 +109,8 @@ Print format reserved variables
 
 Anykey-to-Abort now works during DELAY command
 
+Added bitwise XOR instruction in DSVM
+
 Bug Fixs:
     Persistent state loading color of no-longer-assigned keys
     better handling of division by zero

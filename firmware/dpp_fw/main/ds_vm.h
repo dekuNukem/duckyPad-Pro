@@ -60,6 +60,10 @@
 #define OP_OLED_RECT 49
 #define OP_OLED_CIRCLE 50
 
+#define OP_BITXOR 51
+
+// ----------
+
 #define OP_VMINFO 255
 
 #define INSTRUCTION_SIZE_BYTES 3

@@ -108,6 +108,7 @@ uint16_t binop_equal(uint16_t a, uint16_t b) {return a == b;}
 uint16_t binop_not_equal(uint16_t a, uint16_t b) {return a != b;}
 uint16_t binop_bitwise_and(uint16_t a, uint16_t b) {return a & b;}
 uint16_t binop_bitwise_or(uint16_t a, uint16_t b) {return a | b;}
+uint16_t binop_bitwise_xor(uint16_t a, uint16_t b) {return a ^ b;}
 uint16_t binop_lshift(uint16_t a, uint16_t b) {return a << b;}
 uint16_t binop_rshift(uint16_t a, uint16_t b) {return a >> b;}
 uint16_t binop_logical_and(uint16_t a, uint16_t b) {return a && b;}
@@ -666,6 +667,10 @@ void execute_instruction(uint16_t curr_pc, ds3_exe_result* exe, uint8_t this_key
   else if(this_opcode == OP_LOGIAND)
   {
     binop(binop_logical_and);
+  }
+  else if(this_opcode == OP_BITXOR)
+  {
+    binop(binop_bitwise_xor);
   }
   else if(this_opcode == OP_STR || this_opcode == OP_STRLN)
   {
