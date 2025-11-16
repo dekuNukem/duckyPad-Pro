@@ -617,7 +617,7 @@ You can perform operations on constants and variables.
 *       Multiply  
 /       Divide    
 %       Modulus   
-^       Exponent
+**      Exponent
 ```
 
 Example:
@@ -652,6 +652,7 @@ All comparisons evaluate to **either 0 or 1**.
 ```
 &        Bitwise AND   
 |        Bitwise OR    
+^        Bitwise XOR
 <<       Left Shift    
 >>       Right Shift   
 ```
