@@ -146,6 +146,17 @@ void store_uint16_as_two_bytes_at(uint16_t addr, uint16_t value)
   var_buf[addr+1] = value >> 8;
 }
 
+uint8_t delayms_check_abort(uint32_t amount)
+{
+  for (uint32_t i = 0; i < amount; i++)
+  {
+    if(allow_abort && sw_queue_has_keydown_event())
+      return 1;
+    delay_ms(1);
+  }
+  return 0;
+}
+
 // Reserved variables not shown here are read-only
 void write_var(uint16_t addr, uint16_t value, uint8_t this_key_id)
 {
@@ -698,7 +709,11 @@ void execute_instruction(uint16_t curr_pc, ds3_exe_result* exe, uint8_t this_key
   {
     uint16_t delay_amount;
     stack_pop(&arithmetic_stack, &delay_amount);
-    delay_ms(delay_amount);
+    if(delayms_check_abort(delay_amount))
+    {
+      exe->result = EXE_ABORTED;
+      return;
+    }
   }
   else if(this_opcode == OP_MSCL)
   {

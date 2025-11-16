@@ -113,6 +113,7 @@ uint8_t utf8ascii(uint8_t ascii);
 void mouse_release_all(void);
 void press_key(uint8_t code, uint8_t type);
 void release_key(uint8_t code, uint8_t type);
+void release_everything(void);
 
 extern uint16_t duckcode_circumflex;
 extern uint16_t duckcode_diaeresis;

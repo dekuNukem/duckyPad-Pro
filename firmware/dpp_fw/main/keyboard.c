@@ -625,3 +625,14 @@ void release_key(uint8_t code, uint8_t type)
   kk.type = type;
   action_release(&kk);
 }
+
+void release_everything(void)
+{
+  delay_ms(100);
+  media_key_release();
+  delay_ms(100);
+  keyboard_release_all();
+  delay_ms(100);
+  mouse_release_all();
+  delay_ms(1000);
+}

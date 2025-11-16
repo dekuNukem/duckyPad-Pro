@@ -107,6 +107,8 @@ Print format reserved variables
     Signed / Unsigned / Hex upper case / Hex lower case
     Seletable precision
 
+Anykey-to-Abort now works during DELAY command
+
 Bug Fixs:
     Persistent state loading color of no-longer-assigned keys
     better handling of division by zero
