@@ -109,7 +109,7 @@ Print format reserved variables
 
 Bug Fixs:
     Persistent state loading color of no-longer-assigned keys
-
+    better handling of division by zero
 */
 
 uint8_t fw_version_major = 2;

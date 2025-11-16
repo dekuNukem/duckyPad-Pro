@@ -77,7 +77,6 @@ void stack_push(my_stack* ms, uint16_t value)
   }
   ms->stack[ms->top] = value;
   ms->top++;
-  last_stack_op_result = EXE_OK;
 }
 
 void stack_pop(my_stack* ms, uint16_t *result)
@@ -90,7 +89,6 @@ void stack_pop(my_stack* ms, uint16_t *result)
   ms->top--;
   *result = ms->stack[ms->top];
   ms->stack[ms->top] = 0;
-  last_stack_op_result = EXE_OK;
 }
 
 uint16_t make_uint16(uint8_t b0, uint8_t b1)
@@ -101,7 +99,6 @@ uint16_t make_uint16(uint8_t b0, uint8_t b1)
 uint16_t binop_add(uint16_t a, uint16_t b) {return a + b;}
 uint16_t binop_sub(uint16_t a, uint16_t b) {return a - b;}
 uint16_t binop_mul(uint16_t a, uint16_t b) {return a * b;}
-uint16_t binop_divide(uint16_t a, uint16_t b) {return a / b;}
 uint16_t binop_mod(uint16_t a, uint16_t b) {return a % b;}
 uint16_t binop_greater(uint16_t a, uint16_t b) {return a > b;}
 uint16_t binop_greater_eq(uint16_t a, uint16_t b) {return a >= b;}
@@ -115,6 +112,15 @@ uint16_t binop_lshift(uint16_t a, uint16_t b) {return a << b;}
 uint16_t binop_rshift(uint16_t a, uint16_t b) {return a >> b;}
 uint16_t binop_logical_and(uint16_t a, uint16_t b) {return a && b;}
 uint16_t binop_logical_or(uint16_t a, uint16_t b) {return a || b;}
+
+uint16_t binop_divide(uint16_t a, uint16_t b)
+{
+  if(b != 0)
+    return a/b;
+  last_stack_op_result = EXE_DIVISION_BY_ZERO;
+  return 0;
+}
+
 uint16_t binop_power(uint16_t x, uint16_t exponent)
 {
   uint16_t result = 1;
@@ -836,10 +842,13 @@ void run_dsb(ds3_exe_result* er, uint8_t this_key_id, char* dsb_path, uint8_t is
   while(1)
   {
     execute_instruction(current_pc, er, this_key_id);
-    if(er->result != EXE_OK || last_stack_op_result != EXE_OK)
+    if(last_stack_op_result != EXE_OK)
+      er->result = last_stack_op_result;
+    if(er->result != EXE_OK)
       break;
     current_pc = er->next_pc;
   }
+  
   if(disable_autorepeat)
     epilogue_actions |= EPILOGUE_DONT_AUTO_REPEAT;
   er->epilogue_actions = epilogue_actions;
