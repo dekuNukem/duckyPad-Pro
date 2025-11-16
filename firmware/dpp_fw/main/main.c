@@ -103,6 +103,10 @@ Adding RTC support
     Query time and date as reserved variables
     Detect if RTC is still valid
 
+Print format reserved variables
+    Signed / Unsigned / Hex upper case / Hex lower case
+    Seletable precision
+
 Bug Fixs:
     Persistent state loading color of no-longer-assigned keys
 

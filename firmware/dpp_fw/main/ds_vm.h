@@ -111,6 +111,8 @@
 #define _RTC_HOUR (0xffff - 25)
 #define _RTC_MINUTE (0xffff - 26)
 #define _RTC_SECOND (0xffff - 27)
+#define _STR_PRINT_FORMAT (0xffff - 28)
+#define _STR_PRINT_PADDING (0xffff - 29)
 
 typedef struct
 {
@@ -144,7 +146,15 @@ extern uint8_t allow_abort;
 extern uint8_t kb_led_status;
 extern uint16_t gv_buf[GLOBAL_VARIABLE_COUNT];
 
+extern uint8_t str_print_format;
+extern uint8_t str_print_padding;
+
 void run_dsb(ds3_exe_result* er, uint8_t this_key_id, char* dsb_path, uint8_t is_cached, uint8_t* dsb_cache);
+
+#define STR_PRINT_FORMAT_DEC_UNSIGNED    0
+#define STR_PRINT_FORMAT_DEC_SIGNED      1
+#define STR_PRINT_FORMAT_HEX_LOWER_CASE  2
+#define STR_PRINT_FORMAT_HEX_UPPER_CASE  3
 
 #endif
 

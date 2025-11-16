@@ -20,6 +20,8 @@
 #include "shared.h"
 #include "hid_task.h"
 
+uint8_t str_print_format;
+uint8_t str_print_padding;
 uint8_t bin_buf[BIN_BUF_SIZE];
 uint8_t var_buf[VAR_BUF_SIZE];
 uint16_t defaultdelay_value;
@@ -163,6 +165,10 @@ void write_var(uint16_t addr, uint16_t value, uint8_t this_key_id)
     disable_autorepeat = value;
   else if (addr == _RTC_UTC_OFFSET)
     utc_offset_minutes = (int16_t)value;
+  else if (addr == _STR_PRINT_FORMAT)
+    str_print_format = value;
+  else if (addr == _STR_PRINT_PADDING)
+    str_print_padding = value;
   else if (is_global_variable(addr))
     gv_buf[get_gv_index(addr)] = value;
   else if(addr < VAR_BUF_SIZE)
@@ -262,6 +268,10 @@ uint16_t read_var(uint16_t addr, uint8_t this_key_id)
     return utc_offset_minutes;
   else if (addr >= _RTC_SECOND && addr <= _RTC_YEAR)
     return get_rtc_data(addr);
+  else if (addr == _STR_PRINT_FORMAT)
+    return str_print_format;
+  else if (addr == _STR_PRINT_PADDING)
+    return str_print_padding;
   else if (is_global_variable(addr))
     return gv_buf[get_gv_index(addr)];
   else if(addr < VAR_BUF_SIZE - 1)
@@ -269,7 +279,47 @@ uint16_t read_var(uint16_t addr, uint8_t this_key_id)
   return 0;
 }
 
-#define STR_BUF_SIZE 8
+void my_snprintf_int_only(char* buf, uint8_t buf_size,
+                         uint16_t value,
+                         uint8_t print_format,
+                         uint8_t precision)
+{
+  if (buf == NULL || buf_size <= 2)
+    return;
+
+  memset(buf, 0, buf_size);
+
+  if (precision == 0 && value == 0)
+  {
+    buf[0] = '0';
+    return;
+  }
+
+  if(precision > 8)
+    precision = 8;
+
+  switch (print_format)
+  {
+    case STR_PRINT_FORMAT_DEC_UNSIGNED:
+      snprintf(buf, buf_size, "%.*u", (int)precision, (unsigned int)value);
+      break;
+
+    case STR_PRINT_FORMAT_DEC_SIGNED:
+      snprintf(buf, buf_size, "%.*d", (int)precision, (int)(int16_t)value);
+      break;
+
+    case STR_PRINT_FORMAT_HEX_LOWER_CASE:
+      snprintf(buf, buf_size, "%.*x", (int)precision, (unsigned int)value);
+      break;
+
+    case STR_PRINT_FORMAT_HEX_UPPER_CASE:
+      snprintf(buf, buf_size, "%.*X", (int)precision, (unsigned int)value);
+      break;
+  }
+  buf[buf_size - 1] = '\0';
+}
+
+#define STR_BUF_SIZE 16
 char make_str_buf[STR_BUF_SIZE];
 #define READ_BUF_SIZE 256 * 5
 char read_buffer[READ_BUF_SIZE];
@@ -295,7 +345,7 @@ char* make_str(uint16_t str_start_addr, uint8_t this_key_id)
       uint16_t var_addr = make_uint16(lsb, msb);
       uint16_t var_value = read_var(var_addr, this_key_id);
       memset(make_str_buf, 0, STR_BUF_SIZE);
-      sprintf(make_str_buf, "%d", var_value);
+      my_snprintf_int_only(make_str_buf, STR_BUF_SIZE, var_value, str_print_format, str_print_padding);
       strcat(read_buffer, make_str_buf);
       continue;
     }
@@ -779,6 +829,8 @@ void run_dsb(ds3_exe_result* er, uint8_t this_key_id, char* dsb_path, uint8_t is
   allow_abort = 0;
   last_stack_op_result = EXE_OK;
   disable_autorepeat = 0;
+  str_print_format = STR_PRINT_FORMAT_DEC_UNSIGNED;
+  str_print_padding = 0;
   srand(xTaskGetTickCount());
 
   while(1)
