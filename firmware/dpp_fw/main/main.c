@@ -108,12 +108,12 @@ Print format reserved variables
     Seletable precision
 
 Anykey-to-Abort now works during DELAY command
-
 Added bitwise XOR instruction in DSVM
 
 Bug Fixs:
     Persistent state loading color of no-longer-assigned keys
     better handling of division by zero
+    No longer shows stale content on OLED on reset
 */
 
 uint8_t fw_version_major = 2;
@@ -136,18 +136,19 @@ void app_main(void)
     esp_read_mac(esp_mac_addr, ESP_MAC_ADDR_SIZE);
     my_rotary_encoder_init();
     switch_init();
-    oled_init();
     neopixel_init();
     expansion_uart_init();
     is_rtc_valid = check_rtc_is_valid();
 
     if(sd_init())
     {
+        oled_init();
         draw_nosd();
         idle_loop();
     }
 
     load_settings(&dp_settings);
+    oled_init();
     if(dp_settings.bt_mode == BT_MODE_ALWAYS)
     {
         oled_say("BT Only Mode");
