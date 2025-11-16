@@ -7,9 +7,9 @@
 <setting keepoldvectorfont="yes"/>
 <setting verticaltext="up"/>
 </settings>
-<grid distance="2.5" unitdist="mil" unit="mil" style="lines" multiple="1" display="yes" altdistance="1" altunitdist="mil" altunit="mil"/>
+<grid distance="5" unitdist="mil" unit="mil" style="lines" multiple="1" display="yes" altdistance="1" altunitdist="mil" altunit="mil"/>
 <layers>
-<layer number="1" name="Top" color="4" fill="1" visible="no" active="yes"/>
+<layer number="1" name="Top" color="4" fill="1" visible="yes" active="yes"/>
 <layer number="2" name="pwr" color="49" fill="1" visible="no" active="yes"/>
 <layer number="3" name="Route3" color="4" fill="3" visible="no" active="no"/>
 <layer number="4" name="Route4" color="1" fill="4" visible="no" active="no"/>
@@ -215,7 +215,7 @@ GPIO3 must have pull resistor, pull to high to  free up JTAG pins?
 double check RESET jumper has NO PASTE</text>
 <text x="86.691" y="81.661" size="1.9304" layer="26" rot="MR180" align="center">duckyPad Pro
 dekuNukem
-APR2025</text>
+JAN2026</text>
 <rectangle x1="80.153" y1="-1.905" x2="112.411" y2="8.001" layer="41"/>
 <rectangle x1="80.28" y1="-1.778" x2="112.538" y2="8.128" layer="42"/>
 <rectangle x1="76.184" y1="89.662" x2="81.772" y2="92.964" layer="41"/>
@@ -227,6 +227,12 @@ APR2025</text>
 <text x="87.834" y="53.594" size="1.016" layer="26" ratio="10" rot="MR180" align="center">UFL1</text>
 <text x="79.325" y="5.842" size="1.016" layer="26" ratio="10" rot="MR180" align="center">UFL2</text>
 <text x="106.63" y="19.304" size="1.27" layer="26" rot="MR180" align="center">SH1</text>
+<polygon width="0.1524" layer="42">
+<vertex x="83.82" y="55.245"/>
+<vertex x="78.105" y="55.245"/>
+<vertex x="78.105" y="49.784"/>
+<vertex x="83.82" y="49.784"/>
+</polygon>
 </plain>
 <libraries>
 <library name="clock">
@@ -1779,11 +1785,8 @@ These are the free and generally easy to produce 4-layer PCB design rules. You c
 <wire x1="82.312" y1="17.095" x2="82.412" y2="17.095" width="0.3048" layer="16"/>
 <via x="93.107" y="54.737" extent="1-16" drill="0.55"/>
 <wire x1="86.426" y1="59.309" x2="86.426" y2="58.8518" width="0.2032" layer="16"/>
-<wire x1="86.426" y1="58.8518" x2="83.576" y2="56.0018" width="0.2032" layer="16"/>
-<wire x1="83.576" y1="56.0018" x2="83.576" y2="55.769" width="0.2032" layer="16"/>
-<wire x1="83.576" y1="55.769" x2="83.176" y2="55.769" width="0.2032" layer="16"/>
+<wire x1="86.426" y1="58.8518" x2="85.0341" y2="57.4599" width="0.2032" layer="16"/>
 <wire x1="89.899" y1="54.124" x2="84.421" y2="54.124" width="0.2032" layer="16"/>
-<wire x1="84.421" y1="54.124" x2="84.421" y2="54.524" width="0.2032" layer="16"/>
 <wire x1="86.1982" y1="67.2592" x2="86.426" y2="67.0314" width="0.2032" layer="16"/>
 <wire x1="86.426" y1="67.0314" x2="86.426" y2="61.087" width="0.2032" layer="16"/>
 <wire x1="86.426" y1="61.087" x2="86.426" y2="59.309" width="0.2032" layer="16"/>
@@ -1859,6 +1862,14 @@ These are the free and generally easy to produce 4-layer PCB design rules. You c
 <vertex x="126.127" y="-13.081"/>
 <vertex x="-7.477" y="-13.081"/>
 </polygon>
+<wire x1="83.6219" y1="57.4599" x2="85.0341" y2="57.4599" width="0.2032" layer="16"/>
+<wire x1="83.176" y1="57.014" x2="83.176" y2="55.769" width="0.2032" layer="16"/>
+<wire x1="83.6219" y1="57.4599" x2="83.176" y2="57.014" width="0.2032" layer="16"/>
+<wire x1="85.0341" y1="57.4599" x2="83.576" y2="56.0018" width="0.2032" layer="16"/>
+<wire x1="83.576" y1="56.0018" x2="83.576" y2="55.769" width="0.2032" layer="16"/>
+<wire x1="84.421" y1="54.124" x2="83.566" y2="54.124" width="0.2032" layer="16"/>
+<wire x1="83.566" y1="54.524" x2="84.421" y2="54.524" width="0.2032" layer="16"/>
+<wire x1="83.566" y1="54.124" x2="83.566" y2="54.524" width="0.2032" layer="16"/>
 </signal>
 <signal name="USB_DP">
 <contactref element="U2" pad="A6"/>
