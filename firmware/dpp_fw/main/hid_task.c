@@ -749,8 +749,6 @@ void handle_hid_command(const uint8_t* hid_rx_buf, uint8_t rx_buf_size)
         settimeofday(&tv, NULL);
         utc_offset_minutes = combine_uint16(hid_rx_buf[6], hid_rx_buf[7]);
         is_rtc_valid = 1;
-        if(is_sleeping)
-            wakeup_from_sleep_and_load_profile(current_profile_number);
     }
     else // invalid HID command
     {
