@@ -426,6 +426,7 @@ void keypress_task(void *dummy)
       update_status_icon();
       update_kbled_icon(kb_led_status);
     }
+    
     draw_bt_pin(bt_pin_code);
 
     if(needs_gv_save)
