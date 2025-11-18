@@ -20,20 +20,24 @@ Compared to QMK/VIA, you get:
 
 * **Advanced Interactive Scripting**
 	* Variables, conditions, loops, functions, etc.
-	* Reading Buttons
-	* Print to OLED screen
+	* Reading Buttons / Print to OLED, etc.
+	* Real-time Clock (RTC)
 	* How about a fully functional [Pong game?](../resources/photos/pong.gif) [[code]](../resources/pong.txt)
 
 * **SD Card Storage**
 	* Fast Config / Backup / Deployment
-	* No sketchy drivers or apps
-	* No recompiling
+	* No Recompiling
+
+* Fully **Open Source**
+	* MIT License
+	* No Sketchy Drivers or Apps
+	* [Tinkering Welcome!](tinkering_guide.md)
 
 ![alt](../resources/photos/quarter.jpeg)
 
-From **simple shortcuts** to **full-blown programs**, duckyScript can easily achieve what is impossible on QMK/VIA.
+From **simple shortcuts** to **full-blown programs**, duckyScript can easily achieve what's impossible on QMK/VIA.
 
-It is a no-brainer for power users with more demanding scripting needs.
+It is a no-brainer for power users with demanding scripting needs.
 
 # Comparisons
 
@@ -42,15 +46,15 @@ It is a no-brainer for power users with more demanding scripting needs.
 |Hot-Swap Switches|20|15||
 |Rotary Encoders|✅|❌|2 Encoders<br>Tactile or Smooth|
 |Bluetooth|✅|❌||
-|Expansion Module|✅|❌|Wire up your own<br>Switches / Buttons / Foot Pedals|
+|[Expansion Module](github.com/dekuNukem/duckyPad-expansion-modules)|✅|❌|Wire up your own<br>Switches / Buttons / Foot Pedals|
 |Screen Rotation|✅|❌|Portrait / Landscape|
 |Capacity|64 Profiles<br>3712 Macros|32 Profiles<br>480 Macros||
 |OLED|1.5"<br>128 x 128|1.3"<br>128 x 64|Shows Key Name<br>User Controllable|
 |duckyScript<br>Engine|✅|✅|Much Longer Macros<br>Interactive Scripting|
 |Per-key RGB|✅|✅|User Controllable|
 |SD Card<br>Storage|✅|✅|Fast Backup / Duplication / Deploy<br>No recompile needed|
-|Automatic<br>Profile Switching|✅|✅|Based on Active Window|
-|100%<br>Open-Source|✅|✅|No Proprietary Drivers/Apps<br>No Subscription<br>Works Anywhere|
+|[Automatic](https://github.com/duckyPad/duckyPad-Profile-Autoswitcher)<br>[Profile Switching](https://github.com/duckyPad/duckyPad-Profile-Autoswitcher)|✅|✅|Based on Active Window|
+|100%<br>Open-Source|✅|✅|No Proprietary Apps<br>No Subscription<br>Works Anywhere|
 |USB-C|✅|✅||
 
 # Questions or Comments?
