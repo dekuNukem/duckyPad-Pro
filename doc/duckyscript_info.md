@@ -68,19 +68,20 @@ Much easier to lookup than going through this whole page.
 - [Comments](#comments)
     - [`REM` and `//`](#rem-and-)
     - [`REM_BLOCK` and `END_REM`](#rem_block-and-end_rem)
-- [Timing](#timing)
-    - [`DELAY`](#delay)
-    - [`DEFAULTDELAY`](#defaultdelay)
-    - [`DEFAULTCHARDELAY`](#defaultchardelay)
-    - [`CHARJITTER X`](#charjitter-x)
 - [Typing](#typing)
     - [`STRING` and `STRINGLN`](#string-and-stringln)
     - [`STRINGLN_BLOCK` and `END_STRINGLN`](#stringln_block-and-end_stringln)
     - [`STRING_BLOCK` and `END_STRING`](#string_block-and-end_string)
+    - [Printing Variables / Print Formatting](#printing-variables--print-formatting)
 - [Pressing Keys](#pressing-keys)
-    - [Combos](#combos)
+    - [Special Keys](#special-keys)
     - [`KEYDOWN` / `KEYUP`](#keydown--keyup)
     - [`REPEAT`](#repeat)
+- [Timing](#timing)
+    - [`DELAY`](#delay)
+    - [`DEFAULTDELAY`](#defaultdelay)
+    - [`DEFAULTCHARDELAY`](#defaultchardelay)
+    - [`CHARJITTER n`](#charjitter-n)
 - [Mouse](#mouse)
     - [Mouse Buttons](#mouse-buttons)
     - [`MOUSE_MOVE X Y`](#mouse_move-x-y)
@@ -105,12 +106,21 @@ Much easier to lookup than going through this whole page.
     - [`SWC_RESET n`](#swc_reset-n)
 - [Constants](#constants)
 - [Variables](#variables)
-- [Reserved Variables](#reserved-variables)
-- [Persistent Global Variables](#persistent-global-variables)
-- [Operators](#operators)
-- [Arguments](#arguments)
+    - [Persistent Global Variables](#persistent-global-variables)
+    - [Internal Reserved Variables](#internal-reserved-variables)
+    - [Operators](#operators)
+    - [Arguments](#arguments)
+- [Advanced Printing](#advanced-printing)
+    - [Print Format](#print-format)
+    - [Leading Zeros](#leading-zeros)
+- [Real-time Clock (RTC)](#real-time-clock-rtc)
+    - [Setting RTC](#setting-rtc)
+    - [Reading](#reading)
 - [Conditional Statements](#conditional-statements)
 - [Loops](#loops)
+    - [`LBREAK`](#lbreak)
+    - [`CONTINUE`](#continue)
+    - [Infinite Loop](#infinite-loop)
 - [Functions](#functions)
 - [Reading Inputs](#reading-inputs)
     - [Blocking Read](#blocking-read)
@@ -120,52 +130,28 @@ Much easier to lookup than going through this whole page.
 - [Miscellaneous](#miscellaneous)
     - [`DP_SLEEP`](#dp_sleep)
     - [`HALT`](#halt)
-
+- [Reserved Variables](#reserved-variables)
 ## Comments
 
 ### `REM` and `//`
 
 Any line starting with those is ignored.
 
+```
+REM This is a comment
+// This is comment too!
+```
+
 ### `REM_BLOCK` and `END_REM`
 
 Comment block. Everything in-between is ignored.
 
--------
-[⬆️⬆️⬆️⬆️⬆️⬆️ Back to Top ⬆️⬆️⬆️⬆️⬆️⬆️](#list-of-commands)
-
-## Timing
-
-### `DELAY`
-
-Creates a pause (in milliseconds) in execution.
-
-Useful for **waiting for UI to catch up**.
-
 ```
-DELAY 1000
-// wait 1000 milliseconds, or 1 second
+REM_BLOCK
+    Put as much comment here
+    as you want!
+END_REM
 ```
-
-### `DEFAULTDELAY`
-
-Change how long to wait between **`each line of code`**.
-
-Default is 20ms.
-
-### `DEFAULTCHARDELAY`
-
-Change how long to wait between each **`key stroke`**.
-
-Default is 20ms.
-
-### `CHARJITTER n`
-
-Adds an **additional** random delay between 0 and `n` milliseconds after `each key stroke`.
-
-Can be used to make typing more human-like.
-
-Set to 0 to disable.
 
 -------
 [⬆️⬆️⬆️⬆️⬆️⬆️ Back to Top ⬆️⬆️⬆️⬆️⬆️⬆️](#list-of-commands)
@@ -202,6 +188,10 @@ END_STRINGLN
 
 Similar to above, but without new lines.
 
+### Printing Variables / Print Formatting
+
+See [Advanced Printing](#advanced-printing)
+
 -------
 [⬆️⬆️⬆️⬆️⬆️⬆️ Back to Top ⬆️⬆️⬆️⬆️⬆️⬆️](#list-of-commands)
 
@@ -213,15 +203,21 @@ duckyScript supports many special keys.
 
 They can be used on their own:
 
-`WINDOWS`
+```
+WINDOWS
+```
 
 ...or combined with a character to form shortcuts:
 
-`WINDOWS s`
+```
+WINDOWS s
+```
 
 ...or chained even longer:
 
-`WINDOWS SHIFT s`
+```
+WINDOWS SHIFT s
+```
 
 ------
 
@@ -288,6 +284,60 @@ STRING Hello world
 REPEAT 10
 // types out "Hello world" 11 times (1 original + 10 repeats)
 ```
+
+-------
+[⬆️⬆️⬆️⬆️⬆️⬆️ Back to Top ⬆️⬆️⬆️⬆️⬆️⬆️](#list-of-commands)
+
+## Timing
+
+### `DELAY`
+
+Creates a pause (in milliseconds) in execution.
+
+Useful for **waiting for UI to catch up**.
+
+```
+WINDOWS r
+DELAY 1000 // wait 1000 milliseconds, or 1 second
+STRING cmd
+```
+
+### `DEFAULTDELAY`
+
+How long to wait between **`each input-generating command`**.
+
+* Default: 20ms
+    * Try 50-100 if computer can't keep up.
+
+```
+DEFAULTDELAY 50
+// Wait 50ms between each command below
+
+ALT
+DOWN
+ENTER
+```
+
+### `DEFAULTCHARDELAY`
+
+How long to wait between **`each letter`** when **`typing text`**.
+
+* Default: 20ms
+
+```
+DEFAULTCHARDELAY 50
+// Wait 50ms between each letter 
+
+STRING Hello World!
+```
+
+### `CHARJITTER n`
+
+Adds an **additional** random delay between 0 and `n` milliseconds after `each key stroke`.
+
+Can make typing more human-like.
+
+* Set to 0 to disable.
 
 -------
 [⬆️⬆️⬆️⬆️⬆️⬆️ Back to Top ⬆️⬆️⬆️⬆️⬆️⬆️](#list-of-commands)
@@ -473,7 +523,7 @@ You can use `DEFINE` to, well, define a constant.
 
 It can be either **integer** or **string**.
 
-The content is **replaced AS-IS** during pre-processing, very much like `#define` in C.
+The content is **replaced AS-IS** during preprocessing, very much like `#define` in C.
 
 ```
 DEFINE MY_EMAIL example@gmail.com
@@ -501,114 +551,33 @@ VAR $eggs = 10
 $spam = 20
 ```
 
-Variables must start with dollar sign `$`.
+* Variables must start with dollar sign `$`.
 
-Variables are **unsigned 16-bit integers**, and can hold values from **0 to 65535**.
+* Variables are **unsigned 16-bit integers**, and can hold values from **0 to 65535**.
 
-All variables have **global scope**, and can be referenced anywhere in the script.
+    * Treated as signed integers in some commands.
 
-They can be printed with `STRING`, `STRINGLN`, and `OLED_PRINT`.
+* All variables have **global scope**, and can be referenced **anywhere in the script**.
 
-```
-STRING The value is: $spam
-```
+### Persistent Global Variables
 
--------
-[⬆️⬆️⬆️⬆️⬆️⬆️ Back to Top ⬆️⬆️⬆️⬆️⬆️⬆️](#list-of-commands)
-
-## Reserved Variables
-
-There are a few **reserved variables** that are always available.
-
-You can read or write (RW) to adjust settings. Some are read-only (RO).
-
-#### `$_RANDOM_MIN` (RW)
-
-#### `$_RANDOM_MAX` (RW)
-
-#### `$_RANDOM_INT` (RW)
-
-See [Randomisation](#randomisation)
-
-#### `$_TIME_S` (RO)
-
-Get elapsed time since power-on in **seconds**.
-
-#### `$_TIME_MS` (RO)
-
-Get elapsed time since power-on in **milliseconds**.
-
-#### `$_READKEY` (RO)
-
-#### `$_BLOCKING_READKEY` (RO)
-
-See [Reading Inputs](#reading-inputs)
-
-#### `$_IS_NUMLOCK_ON` (RO)
-
-#### `$_IS_CAPSLOCK_ON` (RO)
-
-#### `$_IS_SCROLLLOCK_ON` (RO)
-
-Returns 1 if true, 0 otherwise.
-
-#### `$_DEFAULTDELAY` (RW)
-
-#### `$_DEFAULTCHARDELAY` (RW)
-
-#### `$_CHARJITTER` (RW)
-
-Alias for their respective commands
-
-#### `$_ALLOW_ABORT` (RW)
-
-#### `$_DONT_REPEAT` (RW)
-
-Set to 1 to enable, 0 to disable.
-
-#### `$_THIS_KEYID` (RO)
-
-Returns the [Key ID](#key-id) for the **current script**.
-
-#### `$_DP_MODEL` (RO)
-
-Returns:
-
-* `1` for duckyPad (2020)
-* `2` for duckyPad Pro (2024)
-
-#### `$_KEYPRESS_COUNT` (RW)
-
-Returns how many times the current key have been pressed **in the current profile**.
-
-Assign 0 to reset.
-
-#### `$_LOOP_SIZE` (RO)
-
-Used by `LOOP` command, do not modify.
-
-#### `$_NEEDS_EPILOGUE` (RO)
-
-Used internally. Do not modify.
-
--------
-[⬆️⬆️⬆️⬆️⬆️⬆️ Back to Top ⬆️⬆️⬆️⬆️⬆️⬆️](#list-of-commands)
-
-## Persistent Global Variables
+There are 32 pre-defined global variables that provides **non-volatile** data storage.
 
 * `$_GV0` to `$_GV31`
-* Available across all profiles
+* Available across **all profiles**
 * Persists over reboots
-* Can be used to store non-volatile data
 
--------
-[⬆️⬆️⬆️⬆️⬆️⬆️ Back to Top ⬆️⬆️⬆️⬆️⬆️⬆️](#list-of-commands)
+### Internal Reserved Variables
 
-## Operators
+Some variables are always available, you can read/write to them to adjust settings.
+
+[Full list](#reserved-variables)
+
+### Operators
 
 You can perform operations on constants and variables.
 
-### Mathematics
+#### Mathematics
 
 ```
 =       Assignment
@@ -627,7 +596,7 @@ $spam = 2+3
 $spam = $eggs * 10
 ```
 
-### Comparison
+#### Comparison
 
 All comparisons evaluate to **either 0 or 1**.
 
@@ -640,14 +609,14 @@ All comparisons evaluate to **either 0 or 1**.
 <=        Less than or equal   
 ```
 
-### Logical 
+#### Logical 
 
 | Operator |          Name         | Comment                                                |
 |:--------:|:---------------------:|--------------------------------------------------------|
 |    &&    |      Logical AND      | Evaluates to 1 if BOTH side are non-zero, otherwise 0. |
 |   \|\|   |       Logical OR      | Evaluates to 1 if ANY side is non-zero, otherwise 0.   |
 
-### Bitwise
+#### Bitwise
 
 ```
 &        Bitwise AND   
@@ -657,10 +626,7 @@ All comparisons evaluate to **either 0 or 1**.
 >>       Right Shift   
 ```
 
--------
-[⬆️⬆️⬆️⬆️⬆️⬆️ Back to Top ⬆️⬆️⬆️⬆️⬆️⬆️](#list-of-commands)
-
-## Arguments
+### Arguments
 
 You can use **constant, variable, or expression** as arguments in commands.
 
@@ -671,6 +637,103 @@ DELAY $amount*2+5
 
 -------
 [⬆️⬆️⬆️⬆️⬆️⬆️ Back to Top ⬆️⬆️⬆️⬆️⬆️⬆️](#list-of-commands)
+
+## Advanced Printing
+
+You can print **the value of variables** when using `STRING`, `STRINGLN`, and `OLED_PRINT`:
+
+```
+STRING The value is: $spam
+```
+
+### Print Format
+
+Change the `$_STR_PRINT_FORMAT` variable to adjust **how values are printed**.
+
+* Can be changed **on-the-fly**, takes effect immediately.
+
+#### 0: Decimal Unsigned [Default]
+
+```
+$_STR_PRINT_FORMAT = 0
+VAR $spam = 5
+STRING The value is: $spam
+```
+
+```
+The value is: 5
+```
+
+#### 1: Decimal Signed
+
+* Prints the varible as **unsigned 16-bit integer**
+
+```
+$_STR_PRINT_FORMAT = 1
+VAR $spam = -127
+STRING The value is: $spam
+```
+
+```
+The value is: -127
+```
+
+#### 2: Hexadecimal Lower Case
+
+```
+$_STR_PRINT_FORMAT = 2
+VAR $spam = 254
+STRING The value is: $spam
+```
+
+```
+The value is: fe
+```
+
+#### 3: Hexadecimal Upper Case
+
+```
+$_STR_PRINT_FORMAT = 3
+VAR $spam = 254
+STRING The value is: $spam
+```
+
+```
+The value is: FE
+```
+
+### Leading Zeros
+
+Change the `$_STR_PRINT_PADDING` variable to adjust **padding**.
+
+* **Leading zeros** are added if the variable has fewer digits.
+
+* Can be changed **on-the-fly**, takes effect immediately.
+
+* Set to 0 for no padding.
+
+* Works with all print formats.
+
+```
+$_STR_PRINT_PADDING = 2
+
+VAR $year = 2025
+VAR $month = 8
+VAR $day = 5
+STRING Date is: $year-$month-$day
+```
+
+```
+Date is: 2025-08-05
+```
+
+## Real-time Clock (RTC)
+
+Under construction
+
+### Setting RTC
+
+### Reading 
 
 ## Conditional Statements
 
@@ -707,7 +770,6 @@ ELSE
     STRING spam is none of those!
 END_IF
 ```
-
 
 -------
 [⬆️⬆️⬆️⬆️⬆️⬆️ Back to Top ⬆️⬆️⬆️⬆️⬆️⬆️](#list-of-commands)
@@ -780,7 +842,7 @@ WHILE $i < 5
 END_WHILE
 ```
 
-Here when `$count` is 3, it skips printing and start from beginning instead.
+Here when `$count` is 3, it skips printing and starts from the top instead.
 
 ```
 Counter is 1!
@@ -789,15 +851,16 @@ Counter is 4!
 Counter is 5!
 ```
 
-To exit an infinite loop, you can [check button status](#reading-buttons), or turn on `Allow Abort` in the key settings.
+### Infinite Loop
 
+To exit an infinite loop, you can [check button status](#reading-inputs), or turn on `Allow Abort` in the key settings.
 
 -------
 [⬆️⬆️⬆️⬆️⬆️⬆️ Back to Top ⬆️⬆️⬆️⬆️⬆️⬆️](#list-of-commands)
 
 ## Functions
 
-Functions let you run a block of code efficiently.
+**Functions** let you run a block of code efficiently.
 
 Syntax:
 
@@ -809,7 +872,7 @@ END_FUNCTION
 
 You can use **`RETURN`** to exit a function early.
 
-Arguments and return values are NOT supported, use global variables instead.
+Arguments and return values are NOT supported, use variables instead (they are global scope).
 
 ```
 FUNCTION print_info()
@@ -842,6 +905,7 @@ It will block until a key is pressed.
 
 ```
 VAR $this_key = $_BLOCKING_READKEY
+// Waits here until a key is pressed
 
 IF $this_key == 1 THEN
     // do something here
@@ -868,7 +932,7 @@ WHILE TRUE
         // handling button press
     END_IF
 
-    // otherwise perform work here
+    // otherwise do work here
 END_WHILE
 ```
 
@@ -944,6 +1008,85 @@ Press any key to wake up.
 ### `HALT`
 
 Stop execution immediately
+
+-------
+[⬆️⬆️⬆️⬆️⬆️⬆️ Back to Top ⬆️⬆️⬆️⬆️⬆️⬆️](#list-of-commands)
+
+
+## Reserved Variables
+
+There are a few **reserved variables** that are always available.
+
+You can read or write (RW) to adjust settings. Some are read-only (RO).
+
+#### `$_RANDOM_MIN` (RW)
+
+#### `$_RANDOM_MAX` (RW)
+
+#### `$_RANDOM_INT` (RW)
+
+See [Randomisation](#randomisation)
+
+#### `$_TIME_S` (RO)
+
+Get elapsed time since power-on in **seconds**.
+
+#### `$_TIME_MS` (RO)
+
+Get elapsed time since power-on in **milliseconds**.
+
+#### `$_READKEY` (RO)
+
+#### `$_BLOCKING_READKEY` (RO)
+
+See [Reading Inputs](#reading-inputs)
+
+#### `$_IS_NUMLOCK_ON` (RO)
+
+#### `$_IS_CAPSLOCK_ON` (RO)
+
+#### `$_IS_SCROLLLOCK_ON` (RO)
+
+Returns 1 if true, 0 otherwise.
+
+#### `$_DEFAULTDELAY` (RW)
+
+#### `$_DEFAULTCHARDELAY` (RW)
+
+#### `$_CHARJITTER` (RW)
+
+Alias for their respective commands
+
+#### `$_ALLOW_ABORT` (RW)
+
+#### `$_DONT_REPEAT` (RW)
+
+Set to 1 to enable, 0 to disable.
+
+#### `$_THIS_KEYID` (RO)
+
+Returns the [Key ID](#key-id) for the **current script**.
+
+#### `$_DP_MODEL` (RO)
+
+Returns:
+
+* `1` for duckyPad (2020)
+* `2` for duckyPad Pro (2024)
+
+#### `$_KEYPRESS_COUNT` (RW)
+
+Returns how many times the current key have been pressed **in the current profile**.
+
+Assign 0 to reset.
+
+#### `$_LOOP_SIZE` (RO)
+
+Used by `LOOP` command, do not modify.
+
+#### `$_NEEDS_EPILOGUE` (RO)
+
+Used internally. Do not modify.
 
 -------
 [⬆️⬆️⬆️⬆️⬆️⬆️ Back to Top ⬆️⬆️⬆️⬆️⬆️⬆️](#list-of-commands)
