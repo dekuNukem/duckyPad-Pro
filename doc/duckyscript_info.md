@@ -72,7 +72,6 @@ Much easier to lookup than going through this whole page.
     - [`STRING` and `STRINGLN`](#string-and-stringln)
     - [`STRINGLN_BLOCK` and `END_STRINGLN`](#stringln_block-and-end_stringln)
     - [`STRING_BLOCK` and `END_STRING`](#string_block-and-end_string)
-    - [Printing Variables / Print Formatting](#printing-variables--print-formatting)
 - [Pressing Keys](#pressing-keys)
     - [Special Keys](#special-keys)
     - [`KEYDOWN` / `KEYUP`](#keydown--keyup)
@@ -107,7 +106,6 @@ Much easier to lookup than going through this whole page.
 - [Constants](#constants)
 - [Variables](#variables)
     - [Persistent Global Variables](#persistent-global-variables)
-    - [Internal Reserved Variables](#internal-reserved-variables)
     - [Operators](#operators)
     - [Arguments](#arguments)
 - [Advanced Printing](#advanced-printing)
@@ -115,7 +113,7 @@ Much easier to lookup than going through this whole page.
     - [Leading Zeros](#leading-zeros)
 - [Real-time Clock (RTC)](#real-time-clock-rtc)
     - [Setting RTC](#setting-rtc)
-    - [Reading](#reading)
+    - [Reading RTC](#reading-rtc)
 - [Conditional Statements](#conditional-statements)
 - [Loops](#loops)
     - [`LBREAK`](#lbreak)
@@ -131,11 +129,12 @@ Much easier to lookup than going through this whole page.
     - [`DP_SLEEP`](#dp_sleep)
     - [`HALT`](#halt)
 - [Reserved Variables](#reserved-variables)
+
 ## Comments
 
 ### `REM` and `//`
 
-Any line starting with those is ignored.
+Any line **starting with** those is ignored.
 
 ```
 REM This is a comment
@@ -666,7 +665,7 @@ The value is: 5
 
 #### 1: Decimal Signed
 
-* Prints the varible as **unsigned 16-bit integer**
+* Prints the variable as **unsigned 16-bit integer**
 
 ```
 $_STR_PRINT_FORMAT = 1
@@ -729,8 +728,6 @@ Date is: 2025-08-05
 
 ## Real-time Clock (RTC)
 
-⚠️ Under Construction ⚠️
-
 duckyPad can keep track of **current date and time** for use in scripts.
 
 ### Setting RTC
@@ -745,9 +742,9 @@ It must be set once, after which it will keep time **as long as it is powered-on
 
 * You can also set it manually
 
-    * HID Commands
+    * [HID Commands](https://github.com/duckyPad/duckyPad-Profile-Autoswitcher/blob/master/HID_details.md)
 
-    * Sample Script
+    * [Sample Script](https://github.com/duckyPad/duckyPad-Profile-Autoswitcher/blob/master/hid_example/ex3_set_rtc.py)
 
 ### Reading RTC
 
@@ -764,7 +761,7 @@ END_IF
 
 #### UTC Offset
 
-The RTC runs in **UTC**, local time is obtained by adding a **UTC Offset in minutes**
+The RTC runs in **UTC**, local time is obtained by adding an **UTC Offset in minutes**
 
 * It is **set automatically** to your **local timezone** when using the [Autoswitcher](https://github.com/duckyPad/duckyPad-Profile-Autoswitcher).
 
@@ -786,7 +783,16 @@ With valid RTC and correct UTC offset, you can now read from the variables below
 | `$_RTC_MINUTE` | Minute                | `0–59` |
 | `$_RTC_SECOND` | Second                | `0–60` |
 
+#### Example Usage
 
+```
+$_STR_PRINT_PADDING = 2
+STRINGLN $_RTC_YEAR-$_RTC_MONTH-$_RTC_DAY $_RTC_HOUR:$_RTC_MINUTE:$_RTC_SECOND
+```
+
+```
+2025-09-18 09:07:23
+```
 ## Conditional Statements
 
 `IF` statement is used to conditionally execute code.
@@ -1082,8 +1088,11 @@ You can read or write (RW) to adjust settings. Some are read-only (RO).
 | **`$_THIS_KEYID`**                                                          | RO    | Returns the [Key ID](#key-id) for the **current script**     |
 | **`$_DP_MODEL`**                                                            | RO    | Device model. Returns:<br>`1` for duckyPad (2020)<br>`2` for duckyPad Pro (2024)                              |
 | **`$_KEYPRESS_COUNT`**                                                      | RW    | Number of times the current key was pressed in the **current profile**.<br>Assign **0 to reset**. |
-| **`$_LOOP_SIZE`**                                                           | RO    | Used by the `LOOP` command. Do not modify.                                                     |
+| **`$_LOOP_SIZE`**                                                           | RO    | Used by the `LOOP` command.<br>Do not modify.                                                     |
 | **`$_NEEDS_EPILOGUE`**                                                      | RO    | Internal use only. Do not modify.                                                              |
+|**`$_RTC_IS_VALID`**<br>**`$_RTC_YEAR`**<br>**`$_RTC_MONTH`**<br>**`$_RTC_DAY`**<br>**`$_RTC_HOUR`**<br>**`$_RTC_MINUTE`**<br>**`$_RTC_SECOND`**|RO|See [Real-time Clock](#real-time-clock-rtc)|
+|**`$_RTC_UTC_OFFSET`**|RW|See [Real-time Clock](#real-time-clock-rtc)|
+|**`$_STR_PRINT_FORMAT`**<br>**`$_STR_PRINT_PADDING`**<br>|RW|See [Advanced Printing](#advanced-printing)|
 
 -------
 [⬆️⬆️⬆️⬆️⬆️⬆️ Back to Top ⬆️⬆️⬆️⬆️⬆️⬆️](#list-of-commands)
