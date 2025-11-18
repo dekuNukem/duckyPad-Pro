@@ -729,11 +729,63 @@ Date is: 2025-08-05
 
 ## Real-time Clock (RTC)
 
-Under construction
+⚠️ Under Construction ⚠️
+
+duckyPad can keep track of **current date and time** for use in scripts.
 
 ### Setting RTC
 
-### Reading 
+On cold-boot, duckyPad doesn't know what time it is.
+
+It must be set once, after which it will keep time **as long as it is powered-on**.
+
+* RTC is **automatically set** when using the [Autoswitcher](https://github.com/duckyPad/duckyPad-Profile-Autoswitcher)
+
+    * A clock icon appears when RTC is valid
+
+* You can also set it manually
+
+    * HID Commands
+
+    * Sample Script
+
+### Reading RTC
+
+#### Validity Check
+
+First, read `$_RTC_IS_VALID`. **Do not proceed** if value is 0.
+
+```
+IF $_RTC_IS_VALID == 0 THEN
+    // RTC is uninitialised, do not proceed.
+    HALT
+END_IF
+```
+
+#### UTC Offset
+
+The RTC runs in **UTC**, local time is obtained by adding a **UTC Offset in minutes**
+
+* It is **set automatically** to your **local timezone** when using the [Autoswitcher](https://github.com/duckyPad/duckyPad-Profile-Autoswitcher).
+
+* You can check (and manually adjust) the offset by reading/writing `$_RTC_UTC_OFFSET` variable
+
+    * Can be positive, 0, or negative.
+
+#### Time and Date
+
+With valid RTC and correct UTC offset, you can now read from the variables below:
+
+| Name      | Comment                | Range |
+| ------------- | -------------------------- | --------------- |
+| `$_RTC_YEAR`  | Full 4-digit year          | e.g., `2025`    |
+| `$_RTC_MONTH` | Month of year              | `1–12`          |
+| `$_RTC_DAY`   | Day of month               | `1–31`          |
+| `$_RTC_WDAY`  | Day of week (`0 = Sunday`) | `0–6`           |
+| `$_RTC_HOUR`   | Hour (24-hour format) | `0–23` |
+| `$_RTC_MINUTE` | Minute                | `0–59` |
+| `$_RTC_SECOND` | Second                | `0–60` |
+
 
 ## Conditional Statements
 
@@ -1019,74 +1071,19 @@ There are a few **reserved variables** that are always available.
 
 You can read or write (RW) to adjust settings. Some are read-only (RO).
 
-#### `$_RANDOM_MIN` (RW)
-
-#### `$_RANDOM_MAX` (RW)
-
-#### `$_RANDOM_INT` (RW)
-
-See [Randomisation](#randomisation)
-
-#### `$_TIME_S` (RO)
-
-Get elapsed time since power-on in **seconds**.
-
-#### `$_TIME_MS` (RO)
-
-Get elapsed time since power-on in **milliseconds**.
-
-#### `$_READKEY` (RO)
-
-#### `$_BLOCKING_READKEY` (RO)
-
-See [Reading Inputs](#reading-inputs)
-
-#### `$_IS_NUMLOCK_ON` (RO)
-
-#### `$_IS_CAPSLOCK_ON` (RO)
-
-#### `$_IS_SCROLLLOCK_ON` (RO)
-
-Returns 1 if true, 0 otherwise.
-
-#### `$_DEFAULTDELAY` (RW)
-
-#### `$_DEFAULTCHARDELAY` (RW)
-
-#### `$_CHARJITTER` (RW)
-
-Alias for their respective commands
-
-#### `$_ALLOW_ABORT` (RW)
-
-#### `$_DONT_REPEAT` (RW)
-
-Set to 1 to enable, 0 to disable.
-
-#### `$_THIS_KEYID` (RO)
-
-Returns the [Key ID](#key-id) for the **current script**.
-
-#### `$_DP_MODEL` (RO)
-
-Returns:
-
-* `1` for duckyPad (2020)
-* `2` for duckyPad Pro (2024)
-
-#### `$_KEYPRESS_COUNT` (RW)
-
-Returns how many times the current key have been pressed **in the current profile**.
-
-Assign 0 to reset.
-
-#### `$_LOOP_SIZE` (RO)
-
-Used by `LOOP` command, do not modify.
-
-#### `$_NEEDS_EPILOGUE` (RO)
-
-Used internally. Do not modify.
+| Name                                                                 | Access | Description                                                                                    |
+| --------------------------------------------------------------------------- | ----- | ---------------------------------------------------------------------------------------------- |
+| **`$_RANDOM_MIN`**<br>**`$_RANDOM_MAX`**<br>**`$_RANDOM_INT`**              | RW    | See [Randomisation](#randomisation)                                       |
+| **`$_TIME_S`**<br>**`$_TIME_MS`**                                           | RO    | Elapsed time since power-on, in **seconds** or **milliseconds**.                               |
+| **`$_READKEY`**<br>**`$_BLOCKING_READKEY`**                                 | RO    | See [Reading Inputs](#reading-inputs)                                      |
+| **`$_IS_NUMLOCK_ON`**<br>**`$_IS_CAPSLOCK_ON`**<br>**`$_IS_SCROLLLOCK_ON`** | RO    | Returns **1 if LED is on**, **0 otherwise**.                                                     |
+| **`$_DEFAULTDELAY`**<br>**`$_DEFAULTCHARDELAY`**<br>**`$_CHARJITTER`**      | RW    | Aliases.                               |
+| **`$_ALLOW_ABORT`**<br>**`$_DONT_REPEAT`**                                  | RW    | **1 to enable**, **0 to disable**.                                      |
+| **`$_THIS_KEYID`**                                                          | RO    | Returns the [Key ID](#key-id) for the **current script**     |
+| **`$_DP_MODEL`**                                                            | RO    | Device model. Returns:<br>`1` for duckyPad (2020)<br>`2` for duckyPad Pro (2024)                              |
+| **`$_KEYPRESS_COUNT`**                                                      | RW    | Number of times the current key was pressed in the **current profile**.<br>Assign **0 to reset**. |
+| **`$_LOOP_SIZE`**                                                           | RO    | Used by the `LOOP` command. Do not modify.                                                     |
+| **`$_NEEDS_EPILOGUE`**                                                      | RO    | Internal use only. Do not modify.                                                              |
 
 -------
 [⬆️⬆️⬆️⬆️⬆️⬆️ Back to Top ⬆️⬆️⬆️⬆️⬆️⬆️](#list-of-commands)
