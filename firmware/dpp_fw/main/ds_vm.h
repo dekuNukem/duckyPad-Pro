@@ -116,8 +116,10 @@
 #define _RTC_HOUR (0xffff - 25)
 #define _RTC_MINUTE (0xffff - 26)
 #define _RTC_SECOND (0xffff - 27)
-#define _STR_PRINT_FORMAT (0xffff - 28)
-#define _STR_PRINT_PADDING (0xffff - 29)
+#define _RTC_WDAY (0xffff - 28)
+#define _RTC_YDAY (0xffff - 29)
+#define _STR_PRINT_FORMAT (0xffff - 30)
+#define _STR_PRINT_PADDING (0xffff - 31)
 
 typedef struct
 {

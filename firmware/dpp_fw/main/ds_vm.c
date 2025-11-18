@@ -222,7 +222,6 @@ uint16_t get_rtc_data(uint16_t addr)
 {
   struct tm local_tm;
   get_local_time(utc_offset_minutes, &local_tm);
-
   if(addr == _RTC_YEAR)
     return local_tm.tm_year + 1900;
   if(addr == _RTC_MONTH)
@@ -235,6 +234,10 @@ uint16_t get_rtc_data(uint16_t addr)
     return local_tm.tm_min;
   if(addr == _RTC_SECOND)
     return local_tm.tm_sec;
+  if(addr == _RTC_WDAY)
+    return local_tm.tm_wday;
+  if(addr == _RTC_YDAY)
+    return local_tm.tm_yday;
   return 0;
 }
 
@@ -284,7 +287,7 @@ uint16_t read_var(uint16_t addr, uint8_t this_key_id)
     return is_rtc_valid;
   else if (addr == _RTC_UTC_OFFSET)
     return utc_offset_minutes;
-  else if (addr >= _RTC_SECOND && addr <= _RTC_YEAR)
+  else if (addr >= _RTC_YDAY && addr <= _RTC_YEAR)
     return get_rtc_data(addr);
   else if (addr == _STR_PRINT_FORMAT)
     return str_print_format;
