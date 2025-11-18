@@ -117,8 +117,8 @@ Bug Fixs:
 
 2.4.1
 Nov 18 2025
-
 Added _RTC_WDAY and _RTC_YDAY
+Improved runtime error display
 */
 
 uint8_t fw_version_major = 2;

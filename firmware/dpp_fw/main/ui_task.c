@@ -453,31 +453,42 @@ void draw_settings(dp_global_settings *dps)
   // ssd1306_take_screenshot();
 }
 
-void draw_exe_error(uint8_t err_code)
+static const char* exe_error_string(uint8_t err_code)
+{
+  switch (err_code) {
+    case EXE_UNKNOWN_OPCODE:          return "Unknown Opcode";
+    case EXE_DSB_INCOMPATIBLE_VERSION:return "Unsupported VM";
+    case EXE_DSB_FOPEN_FAIL:          return "File Open Fail";
+    case EXE_DSB_FREAD_ERROR:         return "File Read Fail";
+    case EXE_STACK_OVERFLOW:          return "Stack Overflow";
+    case EXE_STACK_UNDERFLOW:         return "Stack Underflow";
+    case EXE_DIVISION_BY_ZERO:        return "Division by Zero";
+    default:                          return "Unknown";
+  }
+}
+
+void draw_exe_error(uint8_t err_code, uint16_t pc)
 {
   ssd1306_Fill(Black);
 
   memset(oled_line_buf, 0, OLED_LINE_BUF_SIZE);
-  sprintf(oled_line_buf, "Execution Error");
+  sprintf(oled_line_buf, "Runtime Error");
   ssd1306_SetCursor(center_line(strlen(oled_line_buf), 7, SSD1306_WIDTH), 0);
   ssd1306_WriteString(oled_line_buf, Font_7x10, White);
 
   ssd1306_Line(0,10,128,10,White);
 
+  const char *err_msg = exe_error_string(err_code);
+
   memset(oled_line_buf, 0, OLED_LINE_BUF_SIZE);
-  sprintf(oled_line_buf, "Error Code: %d", err_code);
-  ssd1306_SetCursor(center_line(strlen(oled_line_buf), 7, SSD1306_WIDTH), 30);
+  sprintf(oled_line_buf, "%s", err_msg);
+  ssd1306_SetCursor(center_line(strlen(oled_line_buf), 7, SSD1306_WIDTH), 40);
   ssd1306_WriteString(oled_line_buf, Font_7x10, White);
 
-  // memset(oled_line_buf, 0, OLED_LINE_BUF_SIZE);
-  // sprintf(oled_line_buf, "Open & Save");
-  // ssd1306_SetCursor(center_line(strlen(oled_line_buf), 7, SSD1306_WIDTH), 60);
-  // ssd1306_WriteString(oled_line_buf, Font_7x10, White);
-
-  // memset(oled_line_buf, 0, OLED_LINE_BUF_SIZE);
-  // sprintf(oled_line_buf, "on PC app");
-  // ssd1306_SetCursor(center_line(strlen(oled_line_buf), 7, SSD1306_WIDTH), 75);
-  // ssd1306_WriteString(oled_line_buf, Font_7x10, White);
+  memset(oled_line_buf, 0, OLED_LINE_BUF_SIZE);
+  sprintf(oled_line_buf, "PC: 0x%X", pc);
+  ssd1306_SetCursor(center_line(strlen(oled_line_buf), 7, SSD1306_WIDTH), 60);
+  ssd1306_WriteString(oled_line_buf, Font_7x10, White);
 
   memset(oled_line_buf, 0, OLED_LINE_BUF_SIZE);
   sprintf(oled_line_buf, "Press Any Key");

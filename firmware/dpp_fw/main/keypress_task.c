@@ -126,7 +126,7 @@ uint8_t run_once(uint8_t swid, char* dsb_path, uint8_t* to_increment)
   if(this_exe.result >= EXE_ERROR_CODE_START)
   {
     neopixel_fill(128, 0, 0);
-    draw_exe_error(this_exe.result);
+    draw_exe_error(this_exe.result, this_exe.next_pc - INSTRUCTION_SIZE_BYTES);
     release_everything();
     block_until_anykey(SW_EVENT_SHORT_PRESS);
     goto_profile(current_profile_number);
