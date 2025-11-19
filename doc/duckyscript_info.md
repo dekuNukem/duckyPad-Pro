@@ -665,7 +665,7 @@ The value is: 5
 
 #### 1: Decimal Signed
 
-* Prints the variable as **unsigned 16-bit integer**
+* Prints the variable as **signed 16-bit integer**
 
 ```
 $_STR_PRINT_FORMAT = 1
@@ -738,7 +738,10 @@ It must be set once, after which it will keep time **as long as it is powered-on
 
 * RTC is **automatically set** when using the [Autoswitcher](https://github.com/duckyPad/duckyPad-Profile-Autoswitcher)
 
-    * A clock icon appears when RTC is valid
+    * A **clock icon** appears when RTC is valid
+
+    ![Alt text](../resources/photos/app/rtc.png)
+
 
 * You can also set it manually
 
@@ -761,7 +764,9 @@ END_IF
 
 #### UTC Offset
 
-The RTC runs in **UTC**, local time is obtained by adding an **UTC Offset in minutes**
+The RTC always runs in **UTC**.
+
+Local time is obtained by adding an **UTC Offset in `MINUTES`**
 
 * It is **set automatically** to your **local timezone** when using the [Autoswitcher](https://github.com/duckyPad/duckyPad-Profile-Autoswitcher).
 
@@ -775,13 +780,13 @@ With valid RTC and correct UTC offset, you can now read from the variables below
 
 | Name      | Comment                | Range |
 | ------------- | -------------------------- | --------------- |
-| `$_RTC_YEAR`  | **4-digit** Year          | e.g., `2025`    |
-| `$_RTC_MONTH` | Month of Year              | `1–12`          |
-| `$_RTC_DAY`   | Day of Month               | `1–31`          |
+| `$_RTC_YEAR`  | **4-digit** Year          | e.g. `2025`    |
+| `$_RTC_MONTH` | Month              | `1–12`          |
+| `$_RTC_DAY`   | Day              | `1–31`          |
 | `$_RTC_HOUR`   | Hour | `0–23` |
 | `$_RTC_MINUTE` | Minute                | `0–59` |
 | `$_RTC_SECOND` | Second                | `0–60` |
-| `$_RTC_WDAY`  | Day of week (`0 = Sunday`) | `0–6`           |
+| `$_RTC_WDAY`  | Day of Week (`0 = Sunday`) | `0–6`           |
 | `$_RTC_YDAY`  | Day of Year (`0 = Jan 1`) | `0–365`           |
 
 #### Example Usage
