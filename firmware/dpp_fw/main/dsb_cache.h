@@ -5,7 +5,6 @@
 
 #define DSB_CACHE_ENTRIES_SIZE 40
 #define DSB_CACHE_BYTE_SIZE 32
-#define MY_UINT32_MAX 0xFFFFFFFF
 
 typedef struct
 {

@@ -2,6 +2,7 @@
 #include <string.h>
 #include <stdint.h>
 #include "dsb_cache.h"
+#include "shared.h"
 
 const char* key_release_file_string = "release";
 uint8_t dsvm_cached_data[DSB_CACHE_BYTE_SIZE];
