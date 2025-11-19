@@ -197,6 +197,7 @@ All reference to **"stack"** refers to **Arithmetic Stack**. Unless noted otherw
 | OLED_LINE|48|0x30|OLED Draw Line<br>Pop FOUR items<br>`x1, y1, x2, y2`<br>Draw single-pixel line inbetween |||
 | OLED_RECT|49|0x31|OLED Draw Rectangle<br>Pop FIVE items<br>`fill, x1, y1, x2, y2`<br>Draw rectangle between two points<br>Fill if `fill` is non-zero|||
 | OLED_CIRC|50|0x32|OLED Draw Rectangle<br>Pop FOUR items<br>`fill, radius, x, y`<br>Draw circle with `radius` at `(x,y)`<br>Fill if `fill` is non-zero|||
+
 ## Table of Contents
 
 [Main page](../README.md)
