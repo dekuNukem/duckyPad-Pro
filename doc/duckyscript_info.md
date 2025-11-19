@@ -647,67 +647,43 @@ STRING The value is: $spam
 
 ### Print Format
 
-Change the `$_STR_PRINT_FORMAT` variable to adjust **how values are printed**.
+Write to `$_STR_PRINT_FORMAT` to adjust **how numbers are printed**.
 
-* Can be changed **on-the-fly**, takes effect immediately.
-
-#### 0: Decimal Unsigned [Default]
+|Value|Format|Example|
+|:---:|:---:|:---:|
+|0|Decimal Unsigned (default)|`65409`|
+|1|Decimal Signed|`-127`|
+|2|Hexadecimal Lower Case|`ff81`|
+|3|Hexadecimal Upper Case|`FF81`|
 
 ```
+VAR $foo = 65409
+
 $_STR_PRINT_FORMAT = 0
-VAR $spam = 5
-STRING The value is: $spam
-```
+STRINGLN The value is: $foo
 
-```
-The value is: 5
-```
-
-#### 1: Decimal Signed
-
-* Prints the variable as **signed 16-bit integer**
-
-```
 $_STR_PRINT_FORMAT = 1
-VAR $spam = -127
-STRING The value is: $spam
-```
+STRINGLN The value is: $foo
 
-```
-The value is: -127
-```
-
-#### 2: Hexadecimal Lower Case
-
-```
 $_STR_PRINT_FORMAT = 2
-VAR $spam = 254
-STRING The value is: $spam
-```
+STRINGLN The value is: $foo
 
-```
-The value is: fe
-```
-
-#### 3: Hexadecimal Upper Case
-
-```
 $_STR_PRINT_FORMAT = 3
-VAR $spam = 254
-STRING The value is: $spam
+STRINGLN The value is: $foo
 ```
 
 ```
-The value is: FE
+The value is: 65409
+The value is: -127
+The value is: ff81
+The value is: FF81
 ```
 
 ### Leading Zeros
 
-Change the `$_STR_PRINT_PADDING` variable to adjust **padding**.
+Write to `$_STR_PRINT_PADDING` to adjust **padding**.
 
 * **Leading zeros** are added if the variable has fewer digits.
-
-* Can be changed **on-the-fly**, takes effect immediately.
 
 * Set to 0 for no padding.
 
@@ -741,7 +717,6 @@ It must be set once, after which it will keep time **as long as it is powered-on
     * A **clock icon** appears when RTC is valid
 
     ![Alt text](../resources/photos/app/rtc.png)
-
 
 * You can also set it manually
 
