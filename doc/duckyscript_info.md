@@ -775,13 +775,14 @@ With valid RTC and correct UTC offset, you can now read from the variables below
 
 | Name      | Comment                | Range |
 | ------------- | -------------------------- | --------------- |
-| `$_RTC_YEAR`  | Full 4-digit year          | e.g., `2025`    |
-| `$_RTC_MONTH` | Month of year              | `1–12`          |
-| `$_RTC_DAY`   | Day of month               | `1–31`          |
-| `$_RTC_WDAY`  | Day of week (`0 = Sunday`) | `0–6`           |
-| `$_RTC_HOUR`   | Hour (24-hour format) | `0–23` |
+| `$_RTC_YEAR`  | **4-digit** Year          | e.g., `2025`    |
+| `$_RTC_MONTH` | Month of Year              | `1–12`          |
+| `$_RTC_DAY`   | Day of Month               | `1–31`          |
+| `$_RTC_HOUR`   | Hour | `0–23` |
 | `$_RTC_MINUTE` | Minute                | `0–59` |
 | `$_RTC_SECOND` | Second                | `0–60` |
+| `$_RTC_WDAY`  | Day of week (`0 = Sunday`) | `0–6`           |
+| `$_RTC_YDAY`  | Day of Year (`0 = Jan 1`) | `0–365`           |
 
 #### Example Usage
 
@@ -1090,7 +1091,7 @@ You can read or write (RW) to adjust settings. Some are read-only (RO).
 | **`$_KEYPRESS_COUNT`**                                                      | RW    | Number of times the current key was pressed in the **current profile**.<br>Assign **0 to reset**. |
 | **`$_LOOP_SIZE`**                                                           | RO    | Used by the `LOOP` command.<br>Do not modify.                                                     |
 | **`$_NEEDS_EPILOGUE`**                                                      | RO    | Internal use only. Do not modify.                                                              |
-|**`$_RTC_IS_VALID`**<br>**`$_RTC_YEAR`**<br>**`$_RTC_MONTH`**<br>**`$_RTC_DAY`**<br>**`$_RTC_HOUR`**<br>**`$_RTC_MINUTE`**<br>**`$_RTC_SECOND`**|RO|See [Real-time Clock](#real-time-clock-rtc)|
+|**`$_RTC_IS_VALID`**<br>**`$_RTC_YEAR`**<br>**`$_RTC_MONTH`**<br>**`$_RTC_DAY`**<br>**`$_RTC_HOUR`**<br>**`$_RTC_MINUTE`**<br>**`$_RTC_SECOND`**<br>**`$_RTC_WDAY`**<br>**`$_RTC_YDAY`**|RO|See [Real-time Clock](#real-time-clock-rtc)|
 |**`$_RTC_UTC_OFFSET`**|RW|See [Real-time Clock](#real-time-clock-rtc)|
 |**`$_STR_PRINT_FORMAT`**<br>**`$_STR_PRINT_PADDING`**<br>|RW|See [Advanced Printing](#advanced-printing)|
 
