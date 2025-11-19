@@ -182,7 +182,7 @@ All reference to **"stack"** refers to **Arithmetic Stack**. Unless noted otherw
 |   SWCC  |  33 | 0x21 |                         **Switch Color Change**<br>Pop FOUR items<br>N, Red, Green, Blue<br>Set N-th switch to the RGB value<br>If N is 0, set current switch.                         |           |           |
 |   SWCR  |  34 | 0x22 | **Switch Color Reset**<br>Pop one item off top of stack<br>If value is 0, reset color of current key<br>If value is between 1 and 20, reset color of that key<br>If value is 99, reset color of all keys |           |           |
 |   STR   |  35 | 0x23 |                                                                          Print zero-terminated string at ADDR                                                                         |  ADDR_LSB |  ADDR_MSB |
-|  STRLN  |  36 | 0x24 |                                                                          Same as above, presses ENTER at end                                                                         |           |           |
+|  STRLN  |  36 | 0x24 |                                                                          Same as above, presses ENTER at end                                                                         |  ADDR_LSB   |   ADDR_MSB   |
 |   ----  |  37 | 0x25 |                                                                                     Deprecated<br>Do not use                                                                                     |    |    |
 |   OLC   |  38 | 0x26 |                                                      **OLED_CURSOR**<br>Pop TWO items<br>X and Y<br>                                                  |           |           |
 |   OLP   |  39 | 0x27 |                                                                      Print zero-terminated string at ADDR to OLED                                                                     |  ADDR_LSB |  ADDR_MSB |
@@ -196,7 +196,7 @@ All reference to **"stack"** refers to **Arithmetic Stack**. Unless noted otherw
 |  SLEEP  |  47 | 0x2f |                                                                       Put duckyPad to sleep<br>Terminates execution                                                                      |           |           |
 | OLED_LINE|48|0x30|OLED Draw Line<br>Pop FOUR items<br>`x1, y1, x2, y2`<br>Draw single-pixel line inbetween |||
 | OLED_RECT|49|0x31|OLED Draw Rectangle<br>Pop FIVE items<br>`fill, x1, y1, x2, y2`<br>Draw rectangle between two points<br>Fill if `fill` is non-zero|||
-| OLED_CIRC|50|0x32|OLED Draw Rectangle<br>Pop FOUR items<br>`fill, radius, x, y`<br>Draw circle with `radius` at `(x,y)`<br>Fill if `fill` is non-zero|||
+| OLED_CIRC|50|0x32|OLED Draw Circle<br>Pop FOUR items<br>`fill, radius, x, y`<br>Draw circle with `radius` at `(x,y)`<br>Fill if `fill` is non-zero|||
 
 ## Table of Contents
 
