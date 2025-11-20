@@ -8,15 +8,15 @@ Lots of new features! Try it out before the public release!
 
 ## Update Firmware
 
-* Download the [Beta 2.4.1 Firmware]()
+* Download the [Beta 2.4.1 Firmware](https://github.com/dekuNukem/duckyPad-Pro/raw/refs/heads/master/firmware/beta/DPP_FW_2.4.1_614ca467.bin)
 
-* [Follow this guide](), **use the file you just downloaded**.
+* [Follow this guide](https://dekunukem.github.io/duckyPad-Pro/doc/fw_update.html), **use the file you just downloaded**.
 
 ## Download Latest Apps
 
-* [Configurator 3.4.0]()
+* [Configurator 3.4.0](https://github.com/duckyPad/duckyPad-Configurator/releases/tag/3.4.0)
 
-* [Autoswitcher 1.1.0]()
+* [Autoswitcher 1.1.0](https://github.com/duckyPad/duckyPad-Profile-Autoswitcher/releases/tag/1.1.0)
 
 ## 🆕 Real-time Clock (RTC)
 
@@ -145,7 +145,7 @@ STRINGLN $_RTC_YEAR-$_RTC_MONTH-$_RTC_DAY $_RTC_HOUR:$_RTC_MINUTE:$_RTC_SECOND
 
 ## 🆕 Bitwise XOR
 
-* Bitwise XOR operator `^` has been added
+* **Bitwise XOR** operator `^` has been added
 	* `$foo = 0xab ^ 0xff`
 * **`Power-of`** operator is now `**`
 	* `$foo = 2 ** 4` (2 to the power of 4)
