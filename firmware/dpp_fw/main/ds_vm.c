@@ -23,38 +23,44 @@
 uint8_t str_print_format;
 uint8_t str_print_padding;
 uint8_t bin_buf[BIN_BUF_SIZE];
-uint8_t var_buf[VAR_BUF_SIZE];
-uint16_t defaultdelay_value;
-uint16_t defaultchardelay_value;
-uint16_t charjitter_value;
+uint32_t defaultdelay_value;
+uint32_t defaultchardelay_value;
+uint32_t charjitter_value;
 uint32_t rand_min, rand_max;
-uint16_t loop_size;
+uint32_t loop_size;
 uint8_t epilogue_actions;
 uint8_t allow_abort;
 uint8_t kb_led_status;
 uint8_t last_stack_op_result;
 uint8_t disable_autorepeat;
-uint16_t gv_buf[GLOBAL_VARIABLE_COUNT];
+uint32_t gv_buf[PGV_COUNT];
+uint16_t var_buf[VAR_BUF_SIZE];
 
 typedef struct
 {
-  uint8_t top;
-  uint16_t stack[MY_STACK_SIZE];
-} my_stack;
+  uint8_t* curr_addr;
+  uint8_t* start_addr;
+  uint16_t buf_size_bytes;
+} my_stack_32b;
 
-my_stack arithmetic_stack, call_stack;
+my_stack_32b data_stack, call_stack;
 
-uint8_t is_global_variable(uint16_t addr)
+uint8_t is_pgv(uint16_t addr)
 {
-  return (addr <= GLOBAL_VARIABLE_START && addr >= GLOBAL_VARIABLE_END_INCLUSIVE);
+  return addr >= PGV_START_ADDRESS && addr <= PGV_END_ADDRESS_INCLUSIVE;
+}
+
+uint8_t is_user_defined_variable(uint16_t addr)
+{
+  return addr >= USER_VAR_START_ADDRESS && addr <= USER_VAR_END_ADDRESS_INCLUSIVE;
 }
 
 uint8_t get_gv_index(uint16_t addr)
 {
-  uint8_t result = GLOBAL_VARIABLE_START - addr;
-  if(result >= GLOBAL_VARIABLE_COUNT)
-    return 0;
-  return result;
+  uint8_t gv_index = (addr - PGV_START_ADDRESS) / PGV_BYTE_WIDTH;
+  if(gv_index >= PGV_COUNT)
+    gv_index = 0;
+  return gv_index;
 }
 
 uint8_t read_byte(uint16_t addr)
@@ -62,33 +68,34 @@ uint8_t read_byte(uint16_t addr)
   return bin_buf[addr];
 }
 
-void stack_init(my_stack* ms)
+void stack_init(my_stack_32b* ms, uint8_t* start_addr, uint16_t size_bytes)
 {
-  ms->top = 0;
-  memset(ms->stack, 0, MY_STACK_SIZE*sizeof(uint16_t));
+  ms->start_addr = start_addr;
+  ms->curr_addr = start_addr;
+  ms->buf_size_bytes = size_bytes;
+  memset(ms->start_addr, 0, size_bytes);
 }
 
-void stack_push(my_stack* ms, uint16_t value)
+void stack_push(my_stack_32b* ms, uint32_t in_value)
 {
-  if(ms->top >= MY_STACK_SIZE)
+  if((ms->curr_addr - ms->start_addr) + sizeof(uint32_t) > ms->buf_size_bytes)
   {
     last_stack_op_result = EXE_STACK_OVERFLOW;
     return;
   }
-  ms->stack[ms->top] = value;
-  ms->top++;
+  memcpy(ms->curr_addr, &in_value, sizeof(uint32_t));
+  ms->curr_addr += sizeof(uint32_t);
 }
 
-void stack_pop(my_stack* ms, uint16_t *result)
+void stack_pop(my_stack_32b* ms, uint32_t *out_value)
 {
-  if(ms->top == 0)
+  if(ms->curr_addr <= ms->start_addr)
   {
     last_stack_op_result = EXE_STACK_UNDERFLOW;
     return;
   }
-  ms->top--;
-  *result = ms->stack[ms->top];
-  ms->stack[ms->top] = 0;
+  ms->curr_addr -= sizeof(uint32_t);
+  memcpy(out_value, ms->curr_addr, sizeof(uint32_t));
 }
 
 uint16_t make_uint16(uint8_t b0, uint8_t b1)
@@ -96,25 +103,34 @@ uint16_t make_uint16(uint8_t b0, uint8_t b1)
   return b0 | (b1 << 8);
 }
 
-uint16_t binop_add(uint16_t a, uint16_t b) {return a + b;}
-uint16_t binop_sub(uint16_t a, uint16_t b) {return a - b;}
-uint16_t binop_mul(uint16_t a, uint16_t b) {return a * b;}
-uint16_t binop_mod(uint16_t a, uint16_t b) {return a % b;}
-uint16_t binop_greater(uint16_t a, uint16_t b) {return a > b;}
-uint16_t binop_greater_eq(uint16_t a, uint16_t b) {return a >= b;}
-uint16_t binop_lower(uint16_t a, uint16_t b) {return a < b;}
-uint16_t binop_lower_eq(uint16_t a, uint16_t b) {return a <= b;}
-uint16_t binop_equal(uint16_t a, uint16_t b) {return a == b;}
-uint16_t binop_not_equal(uint16_t a, uint16_t b) {return a != b;}
-uint16_t binop_bitwise_and(uint16_t a, uint16_t b) {return a & b;}
-uint16_t binop_bitwise_or(uint16_t a, uint16_t b) {return a | b;}
-uint16_t binop_bitwise_xor(uint16_t a, uint16_t b) {return a ^ b;}
-uint16_t binop_lshift(uint16_t a, uint16_t b) {return a << b;}
-uint16_t binop_rshift(uint16_t a, uint16_t b) {return a >> b;}
-uint16_t binop_logical_and(uint16_t a, uint16_t b) {return a && b;}
-uint16_t binop_logical_or(uint16_t a, uint16_t b) {return a || b;}
+uint32_t make_uint32(uint8_t* start_addr)
+{
+  // little endian, [0] lsb, [3] msb
+    return  (uint32_t)start_addr[0]        |
+           ((uint32_t)start_addr[1] << 8)  |
+           ((uint32_t)start_addr[2] << 16) |
+           ((uint32_t)start_addr[3] << 24);
+}
 
-uint16_t binop_divide(uint16_t a, uint16_t b)
+uint32_t binop_add(uint32_t a, uint32_t b) {return a + b;}
+uint32_t binop_sub(uint32_t a, uint32_t b) {return a - b;}
+uint32_t binop_mul(uint32_t a, uint32_t b) {return a * b;}
+uint32_t binop_mod(uint32_t a, uint32_t b) {return a % b;}
+uint32_t binop_greater(uint32_t a, uint32_t b) {return a > b;}
+uint32_t binop_greater_eq(uint32_t a, uint32_t b) {return a >= b;}
+uint32_t binop_lower(uint32_t a, uint32_t b) {return a < b;}
+uint32_t binop_lower_eq(uint32_t a, uint32_t b) {return a <= b;}
+uint32_t binop_equal(uint32_t a, uint32_t b) {return a == b;}
+uint32_t binop_not_equal(uint32_t a, uint32_t b) {return a != b;}
+uint32_t binop_bitwise_and(uint32_t a, uint32_t b) {return a & b;}
+uint32_t binop_bitwise_or(uint32_t a, uint32_t b) {return a | b;}
+uint32_t binop_bitwise_xor(uint32_t a, uint32_t b) {return a ^ b;}
+uint32_t binop_lshift(uint32_t a, uint32_t b) {return a << b;}
+uint32_t binop_rshift(uint32_t a, uint32_t b) {return a >> b;}
+uint32_t binop_logical_and(uint32_t a, uint32_t b) {return a && b;}
+uint32_t binop_logical_or(uint32_t a, uint32_t b) {return a || b;}
+
+uint32_t binop_divide(uint32_t a, uint32_t b)
 {
   if(b != 0)
     return a/b;
@@ -122,29 +138,31 @@ uint16_t binop_divide(uint16_t a, uint16_t b)
   return 0;
 }
 
-uint16_t binop_power(uint16_t x, uint16_t exponent)
+uint32_t binop_power(uint32_t x, uint32_t exponent)
 {
-  uint16_t result = 1;
+  uint32_t result = 1;
   for (int i = 0; i < exponent; ++i)
     result *= x;
   return result;
 }
 
-typedef uint16_t (*FUNC_PTR)(uint16_t, uint16_t);
+typedef uint32_t (*FUNC_PTR)(uint32_t, uint32_t);
 void binop(FUNC_PTR bin_func)
 {
-  uint16_t rhs, lhs;
-  stack_pop(&arithmetic_stack, &rhs);
-  stack_pop(&arithmetic_stack, &lhs);
-  stack_push(&arithmetic_stack, bin_func(lhs, rhs));
+  uint32_t rhs, lhs;
+  stack_pop(&data_stack, &rhs);
+  stack_pop(&data_stack, &lhs);
+  stack_push(&data_stack, bin_func(lhs, rhs));
 }
 
 #define VAR_BOUNDARY (0x1f)
 
-void store_uint16_as_two_bytes_at(uint16_t addr, uint16_t value)
+void write_uint32_as_4B(uint16_t addr, uint32_t value)
 {
-  var_buf[addr] = value & 0xff;
-  var_buf[addr+1] = value >> 8;
+  bin_buf[addr]     =  value        & 0xFF;        // least significant byte
+  bin_buf[addr + 1] = (value >> 8)  & 0xFF;
+  bin_buf[addr + 2] = (value >> 16) & 0xFF;
+  bin_buf[addr + 3] = (value >> 24) & 0xFF;        // most significant byte
 }
 
 uint8_t delayms_check_abort(uint32_t amount)
@@ -159,7 +177,7 @@ uint8_t delayms_check_abort(uint32_t amount)
 }
 
 // Reserved variables not shown here are read-only
-void write_var(uint16_t addr, uint16_t value, uint8_t this_key_id)
+void write_mem(uint16_t addr, uint32_t value, uint8_t this_key_id)
 {
   if(addr == DEFAULTDELAY_ADDR)
     defaultdelay_value = value;
@@ -187,10 +205,10 @@ void write_var(uint16_t addr, uint16_t value, uint8_t this_key_id)
     str_print_format = value;
   else if (addr == _STR_PRINT_PADDING)
     str_print_padding = value;
-  else if (is_global_variable(addr))
+  else if (is_pgv(addr))
     gv_buf[get_gv_index(addr)] = value;
-  else if(addr < VAR_BUF_SIZE)
-    store_uint16_as_two_bytes_at(addr, value);
+  else
+    write_uint32_as_4B(addr, value);
 }
 
 uint8_t readkey_nonblocking_1_indexed(void)
@@ -241,7 +259,7 @@ uint16_t get_rtc_data(uint16_t addr)
   return 0;
 }
 
-uint16_t read_var(uint16_t addr, uint8_t this_key_id)
+uint32_t read_mem(uint16_t addr, uint8_t this_key_id)
 {
   if(addr == DEFAULTDELAY_ADDR)
     return defaultdelay_value;
@@ -256,9 +274,9 @@ uint16_t read_var(uint16_t addr, uint8_t this_key_id)
   else if (addr == _RANDOM_INT)
     return rand() % (rand_max + 1 - rand_min) + rand_min;
   else if (addr == _TIME_MS)
-    return (uint16_t)pdTICKS_TO_MS(xTaskGetTickCount());
+    return (uint32_t)millis();
   else if (addr == _TIME_S)
-    return (uint16_t)(pdTICKS_TO_MS(xTaskGetTickCount()) / 1000);
+    return (uint32_t)(millis()/1000);
   else if (addr == _LOOP_SIZE)
     return loop_size;
   else if (addr == _READKEY)
@@ -266,7 +284,7 @@ uint16_t read_var(uint16_t addr, uint8_t this_key_id)
   else if (addr == _KEYPRESS_COUNT)
     return all_profile_info[current_profile_number].keypress_count[this_key_id];
   else if (addr == _NEEDS_EPILOGUE)
-    return epilogue_actions;
+    return epilogue_actions & 0xff;
   else if (addr == _ALLOW_ABORT)
     return allow_abort;
   else if (addr == _BLOCKING_READKEY)
@@ -293,15 +311,15 @@ uint16_t read_var(uint16_t addr, uint8_t this_key_id)
     return str_print_format;
   else if (addr == _STR_PRINT_PADDING)
     return str_print_padding;
-  else if (is_global_variable(addr))
+  else if (is_pgv(addr))
     return gv_buf[get_gv_index(addr)];
-  else if(addr < VAR_BUF_SIZE - 1)
-    return make_uint16(var_buf[addr], var_buf[addr+1]);
+  else if(is_user_defined_variable(addr))
+    return make_uint32(&bin_buf[addr]);
   return 0;
 }
 
 void my_snprintf_int_only(char* buf, uint8_t buf_size,
-                         uint16_t value,
+                         uint32_t value,
                          uint8_t print_format,
                          uint8_t precision)
 {
@@ -326,7 +344,7 @@ void my_snprintf_int_only(char* buf, uint8_t buf_size,
       break;
 
     case STR_PRINT_FORMAT_DEC_SIGNED:
-      snprintf(buf, buf_size, "%.*d", (int)precision, (int)(int16_t)value);
+      snprintf(buf, buf_size, "%.*d", (int)precision, (int)value);
       break;
 
     case STR_PRINT_FORMAT_HEX_LOWER_CASE:
@@ -364,7 +382,7 @@ char* make_str(uint16_t str_start_addr, uint8_t this_key_id)
       curr_addr++;
       curr_addr++;
       uint16_t var_addr = make_uint16(lsb, msb);
-      uint16_t var_value = read_var(var_addr, this_key_id);
+      uint32_t var_value = read_mem(var_addr, this_key_id);
       memset(make_str_buf, 0, STR_BUF_SIZE);
       my_snprintf_int_only(make_str_buf, STR_BUF_SIZE, var_value, str_print_format, str_print_padding);
       strcat(read_buffer, make_str_buf);
@@ -381,10 +399,10 @@ char* make_str(uint16_t str_start_addr, uint8_t this_key_id)
 uint16_t this_index, red, green, blue;
 void parse_swcc(uint8_t opcode, uint8_t key_id_0_indexed)
 {
-  stack_pop(&arithmetic_stack, &blue);
-  stack_pop(&arithmetic_stack, &green);
-  stack_pop(&arithmetic_stack, &red);
-  stack_pop(&arithmetic_stack, &this_index);
+  stack_pop(&data_stack, &blue);
+  stack_pop(&data_stack, &green);
+  stack_pop(&data_stack, &red);
+  stack_pop(&data_stack, &this_index);
 
   if(this_index == 0)
     this_index = key_id_0_indexed;
@@ -399,9 +417,9 @@ void parse_swcc(uint8_t opcode, uint8_t key_id_0_indexed)
 
 void parse_swcf(void)
 {
-  stack_pop(&arithmetic_stack, &blue);
-  stack_pop(&arithmetic_stack, &green);
-  stack_pop(&arithmetic_stack, &red);
+  stack_pop(&data_stack, &blue);
+  stack_pop(&data_stack, &green);
+  stack_pop(&data_stack, &red);
   halt_all_animations();
   for (int i = 0; i < NEOPIXEL_COUNT; ++i)
     set_pixel_3color(i, red, green, blue);
@@ -411,7 +429,7 @@ void parse_swcf(void)
 void parse_swcr(uint8_t key_id_0_indexed)
 {
   uint16_t swcr_arg;
-  stack_pop(&arithmetic_stack, &swcr_arg);
+  stack_pop(&data_stack, &swcr_arg);
 
   if(swcr_arg == 0)
     swcr_arg = key_id_0_indexed;
@@ -427,8 +445,8 @@ void parse_swcr(uint8_t key_id_0_indexed)
 void parse_olc(void)
 {
   uint16_t xxx, yyy;
-  stack_pop(&arithmetic_stack, &yyy);
-  stack_pop(&arithmetic_stack, &xxx);
+  stack_pop(&data_stack, &yyy);
+  stack_pop(&data_stack, &xxx);
   if(xxx >= SSD1306_WIDTH || yyy >= SSD1306_HEIGHT)
     return;
   ssd1306_SetCursor(xxx, yyy);
@@ -447,10 +465,10 @@ void clamp_value(int16_t* value, int16_t upper_limit)
 void parse_oled_draw_line(void)
 {
   int16_t x1,y1,x2,y2;
-  stack_pop(&arithmetic_stack, (uint16_t *)&y2);
-  stack_pop(&arithmetic_stack, (uint16_t *)&x2);
-  stack_pop(&arithmetic_stack, (uint16_t *)&y1);
-  stack_pop(&arithmetic_stack, (uint16_t *)&x1);
+  stack_pop(&data_stack, (uint16_t *)&y2);
+  stack_pop(&data_stack, (uint16_t *)&x2);
+  stack_pop(&data_stack, (uint16_t *)&y1);
+  stack_pop(&data_stack, (uint16_t *)&x1);
   clamp_value(&x1, SSD1306_WIDTH);
   clamp_value(&x2, SSD1306_WIDTH);
   clamp_value(&y1, SSD1306_HEIGHT);
@@ -461,10 +479,10 @@ void parse_oled_draw_line(void)
 void parse_oled_draw_circle(void)
 {
   int16_t x,y,radius,fill;
-  stack_pop(&arithmetic_stack, (uint16_t *)&fill);
-  stack_pop(&arithmetic_stack, (uint16_t *)&radius);
-  stack_pop(&arithmetic_stack, (uint16_t *)&y);
-  stack_pop(&arithmetic_stack, (uint16_t *)&x);
+  stack_pop(&data_stack, (uint16_t *)&fill);
+  stack_pop(&data_stack, (uint16_t *)&radius);
+  stack_pop(&data_stack, (uint16_t *)&y);
+  stack_pop(&data_stack, (uint16_t *)&x);
   clamp_value(&x, SSD1306_WIDTH);
   clamp_value(&y, SSD1306_HEIGHT);
   clamp_value(&radius, SSD1306_HEIGHT/2);
@@ -477,11 +495,11 @@ void parse_oled_draw_circle(void)
 void parse_oled_draw_rect(void)
 {
   int16_t x1,y1,x2,y2,fill;
-  stack_pop(&arithmetic_stack, (uint16_t *)&fill);
-  stack_pop(&arithmetic_stack, (uint16_t *)&y2);
-  stack_pop(&arithmetic_stack, (uint16_t *)&x2);
-  stack_pop(&arithmetic_stack, (uint16_t *)&y1);
-  stack_pop(&arithmetic_stack, (uint16_t *)&x1);
+  stack_pop(&data_stack, (uint16_t *)&fill);
+  stack_pop(&data_stack, (uint16_t *)&y2);
+  stack_pop(&data_stack, (uint16_t *)&x2);
+  stack_pop(&data_stack, (uint16_t *)&y1);
+  stack_pop(&data_stack, (uint16_t *)&x1);
   clamp_value(&x1, SSD1306_WIDTH);
   clamp_value(&x2, SSD1306_WIDTH);
   clamp_value(&y1, SSD1306_HEIGHT);
@@ -533,8 +551,8 @@ void expand_mmov(int16_t xtotal, int16_t ytotal)
 void parse_mmov(void)
 {
   uint16_t tempx, tempy;
-  stack_pop(&arithmetic_stack, &tempy);
-  stack_pop(&arithmetic_stack, &tempx);
+  stack_pop(&data_stack, &tempy);
+  stack_pop(&data_stack, &tempx);
   expand_mmov(tempx, tempy);
 }
 
@@ -559,24 +577,24 @@ void execute_instruction(uint16_t curr_pc, ds3_exe_result* exe, uint8_t this_key
   {
     return;
   }
-  else if(this_opcode == OP_PUSHC)
+  else if(this_opcode == OP_PUSHC16)
   {
-    stack_push(&arithmetic_stack, op_data);
+    stack_push(&data_stack, op_data);
   }
-  else if(this_opcode == OP_PUSHV)
+  else if(this_opcode == OP_PUSHI32)
   {
-    stack_push(&arithmetic_stack, read_var(op_data, this_key_id));
+    stack_push(&data_stack, read_mem(op_data, this_key_id));
   }
   else if(this_opcode == OP_POP)
   {
     uint16_t this_item;
-    stack_pop(&arithmetic_stack, &this_item);
-    write_var(op_data, this_item, this_key_id);
+    stack_pop(&data_stack, &this_item);
+    write_mem(op_data, this_item, this_key_id);
   }
   else if(this_opcode == OP_BRZ)
   {
     uint16_t this_value;
-    stack_pop(&arithmetic_stack, &this_value);
+    stack_pop(&data_stack, &this_value);
     if(this_value == 0)
       exe->next_pc = op_data;
   }
@@ -694,7 +712,7 @@ void execute_instruction(uint16_t curr_pc, ds3_exe_result* exe, uint8_t this_key
   else if(this_opcode == OP_KDOWN)
   {
     uint16_t combocode;
-    stack_pop(&arithmetic_stack, &combocode);
+    stack_pop(&data_stack, &combocode);
     uint8_t ktype = (combocode >> 8) & 0xff;
     uint8_t kcode = combocode & 0xff;
   	press_key(kcode, ktype);
@@ -703,7 +721,7 @@ void execute_instruction(uint16_t curr_pc, ds3_exe_result* exe, uint8_t this_key
   else if(this_opcode == OP_KUP)
   {
     uint16_t combocode;
-    stack_pop(&arithmetic_stack, &combocode);
+    stack_pop(&data_stack, &combocode);
     uint8_t ktype = (combocode >> 8) & 0xff;
     uint8_t kcode = combocode & 0xff;
   	release_key(kcode, ktype);
@@ -716,7 +734,7 @@ void execute_instruction(uint16_t curr_pc, ds3_exe_result* exe, uint8_t this_key
   else if(this_opcode == OP_DELAY)
   {
     uint16_t delay_amount;
-    stack_pop(&arithmetic_stack, &delay_amount);
+    stack_pop(&data_stack, &delay_amount);
     if(delayms_check_abort(delay_amount))
     {
       exe->result = EXE_ABORTED;
@@ -726,7 +744,7 @@ void execute_instruction(uint16_t curr_pc, ds3_exe_result* exe, uint8_t this_key
   else if(this_opcode == OP_MSCL)
   {
     uint16_t scroll_amount;
-    stack_pop(&arithmetic_stack, &scroll_amount);
+    stack_pop(&data_stack, &scroll_amount);
     my_key kk;
     kk.code = scroll_amount;
     kk.code2 = 0;
@@ -800,7 +818,7 @@ void execute_instruction(uint16_t curr_pc, ds3_exe_result* exe, uint8_t this_key
   else if(this_opcode == OP_GOTOP)
   {
     uint16_t target_profile;
-    stack_pop(&arithmetic_stack, &target_profile);
+    stack_pop(&data_stack, &target_profile);
     exe->result = EXE_ACTION_GOTO_PROFILE;
     exe->data = (uint8_t)target_profile;
   }
@@ -847,8 +865,8 @@ void run_dsb(ds3_exe_result* er, uint8_t this_key_id, char* dsb_path, uint8_t is
   }
   
   uint16_t current_pc = 0;
-  stack_init(&arithmetic_stack);
-  stack_init(&call_stack);
+  stack_init(&data_stack, &bin_buf[DATA_STACK_START_ADDRESS], DATA_STACK_SIZE_BYTES);
+  stack_init(&call_stack, &bin_buf[CALL_STACK_START_ADDRESS], CALL_STACK_SIZE_BYTES);
   defaultdelay_value = DEFAULT_CMD_DELAY_MS;
   defaultchardelay_value = DEFAULT_CHAR_DELAY_MS;
   charjitter_value = 0;

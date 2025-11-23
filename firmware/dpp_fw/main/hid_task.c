@@ -475,7 +475,7 @@ void handle_hid_command(const uint8_t* hid_rx_buf, uint8_t rx_buf_size)
         for (size_t i=2; i < HID_TX_BUF_SIZE; i+=2)
         {
             uint8_t this_gv = (i-2)/2;
-            if(this_gv >= GLOBAL_VARIABLE_COUNT)
+            if(this_gv >= PGV_COUNT)
                 continue;
             uint8_t* upper_byte = &hid_tx_buf[i];
             uint8_t* lower_byte = &hid_tx_buf[i+1];
@@ -509,7 +509,7 @@ void handle_hid_command(const uint8_t* hid_rx_buf, uint8_t rx_buf_size)
             if((hid_rx_buf[i] & 0x80) == 0)
                 continue;
             uint8_t this_gv_index = hid_rx_buf[i] & 0x7f;
-            if(this_gv_index >= GLOBAL_VARIABLE_COUNT)
+            if(this_gv_index >= PGV_COUNT)
                 continue;
             gv_buf[this_gv_index] = combine_uint16(hid_rx_buf[i+1], hid_rx_buf[i+2]);
             needs_gv_save = 1;
