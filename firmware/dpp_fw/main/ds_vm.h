@@ -173,7 +173,7 @@ typedef struct
 extern uint8_t bin_buf[BIN_BUF_SIZE];
 extern uint8_t allow_abort;
 extern uint8_t kb_led_status;
-extern uint32_t gv_buf[PGV_COUNT];
+extern uint32_t pgv_buf[PGV_COUNT];
 
 extern uint8_t str_print_format;
 extern uint8_t str_print_padding;

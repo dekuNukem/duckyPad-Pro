@@ -479,7 +479,7 @@ void handle_hid_command(const uint8_t* hid_rx_buf, uint8_t rx_buf_size)
                 continue;
             uint8_t* upper_byte = &hid_tx_buf[i];
             uint8_t* lower_byte = &hid_tx_buf[i+1];
-            split_uint16(gv_buf[this_gv], upper_byte, lower_byte);
+            split_uint16(pgv_buf[this_gv], upper_byte, lower_byte);
         }
         send_hid_cmd_response(hid_tx_buf);
         return;
@@ -511,7 +511,7 @@ void handle_hid_command(const uint8_t* hid_rx_buf, uint8_t rx_buf_size)
             uint8_t this_gv_index = hid_rx_buf[i] & 0x7f;
             if(this_gv_index >= PGV_COUNT)
                 continue;
-            gv_buf[this_gv_index] = combine_uint16(hid_rx_buf[i+1], hid_rx_buf[i+2]);
+            pgv_buf[this_gv_index] = combine_uint16(hid_rx_buf[i+1], hid_rx_buf[i+2]);
             needs_gv_save = 1;
         }
         send_hid_cmd_response(hid_tx_buf);

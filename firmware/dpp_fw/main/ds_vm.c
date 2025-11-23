@@ -33,7 +33,7 @@ uint8_t allow_abort;
 uint8_t kb_led_status;
 uint8_t last_stack_op_result;
 uint8_t disable_autorepeat;
-uint32_t gv_buf[PGV_COUNT];
+uint32_t pgv_buf[PGV_COUNT];
 uint16_t var_buf[VAR_BUF_SIZE];
 
 typedef struct
@@ -206,7 +206,7 @@ void write_mem(uint16_t addr, uint32_t value, uint8_t this_key_id)
   else if (addr == _STR_PRINT_PADDING)
     str_print_padding = value;
   else if (is_pgv(addr))
-    gv_buf[get_gv_index(addr)] = value;
+    pgv_buf[get_gv_index(addr)] = value;
   else
     write_uint32_as_4B(addr, value);
 }
@@ -312,7 +312,7 @@ uint32_t read_mem(uint16_t addr, uint8_t this_key_id)
   else if (addr == _STR_PRINT_PADDING)
     return str_print_padding;
   else if (is_pgv(addr))
-    return gv_buf[get_gv_index(addr)];
+    return pgv_buf[get_gv_index(addr)];
   else if(is_user_defined_variable(addr))
     return make_uint32(&bin_buf[addr]);
   return 0;
