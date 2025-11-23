@@ -130,9 +130,9 @@ Fixed address for data stack, call stack, user-defined variables, PGVs, and rese
 */
 
 uint8_t fw_version_major = 2;
-uint8_t fw_version_minor = 4;
-uint8_t fw_version_patch = 1;
-uint8_t dsvm_version = 1;
+uint8_t fw_version_minor = 6;
+uint8_t fw_version_patch = 0;
+uint8_t dsvm_version = 2;
 
 static const char *TAG = "MAIN";
 

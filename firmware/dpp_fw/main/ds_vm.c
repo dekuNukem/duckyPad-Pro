@@ -360,7 +360,7 @@ void my_snprintf_int_only(char* buf, uint8_t buf_size,
 
 #define STR_BUF_SIZE 16
 char make_str_buf[STR_BUF_SIZE];
-#define READ_BUF_SIZE 256 * 5
+#define READ_BUF_SIZE (256 * 5)
 char read_buffer[READ_BUF_SIZE];
 char* make_str(uint16_t str_start_addr, uint8_t this_key_id)
 {
@@ -396,7 +396,7 @@ char* make_str(uint16_t str_start_addr, uint8_t this_key_id)
   return read_buffer;
 }
 
-uint16_t this_index, red, green, blue;
+uint32_t this_index, red, green, blue;
 void parse_swcc(uint8_t opcode, uint8_t key_id_0_indexed)
 {
   stack_pop(&data_stack, &blue);
@@ -428,7 +428,7 @@ void parse_swcf(void)
 
 void parse_swcr(uint8_t key_id_0_indexed)
 {
-  uint16_t swcr_arg;
+  uint32_t swcr_arg;
   stack_pop(&data_stack, &swcr_arg);
 
   if(swcr_arg == 0)
@@ -444,7 +444,7 @@ void parse_swcr(uint8_t key_id_0_indexed)
 
 void parse_olc(void)
 {
-  uint16_t xxx, yyy;
+  uint32_t xxx, yyy;
   stack_pop(&data_stack, &yyy);
   stack_pop(&data_stack, &xxx);
   if(xxx >= SSD1306_WIDTH || yyy >= SSD1306_HEIGHT)
@@ -465,10 +465,10 @@ void clamp_value(int16_t* value, int16_t upper_limit)
 void parse_oled_draw_line(void)
 {
   int16_t x1,y1,x2,y2;
-  stack_pop(&data_stack, (uint16_t *)&y2);
-  stack_pop(&data_stack, (uint16_t *)&x2);
-  stack_pop(&data_stack, (uint16_t *)&y1);
-  stack_pop(&data_stack, (uint16_t *)&x1);
+  stack_pop(&data_stack, (uint32_t*)&y2);
+  stack_pop(&data_stack, (uint32_t*)&x2);
+  stack_pop(&data_stack, (uint32_t*)&y1);
+  stack_pop(&data_stack, (uint32_t*)&x1);
   clamp_value(&x1, SSD1306_WIDTH);
   clamp_value(&x2, SSD1306_WIDTH);
   clamp_value(&y1, SSD1306_HEIGHT);
@@ -479,10 +479,10 @@ void parse_oled_draw_line(void)
 void parse_oled_draw_circle(void)
 {
   int16_t x,y,radius,fill;
-  stack_pop(&data_stack, (uint16_t *)&fill);
-  stack_pop(&data_stack, (uint16_t *)&radius);
-  stack_pop(&data_stack, (uint16_t *)&y);
-  stack_pop(&data_stack, (uint16_t *)&x);
+  stack_pop(&data_stack, (uint32_t*)&fill);
+  stack_pop(&data_stack, (uint32_t*)&radius);
+  stack_pop(&data_stack, (uint32_t*)&y);
+  stack_pop(&data_stack, (uint32_t*)&x);
   clamp_value(&x, SSD1306_WIDTH);
   clamp_value(&y, SSD1306_HEIGHT);
   clamp_value(&radius, SSD1306_HEIGHT/2);
@@ -495,11 +495,11 @@ void parse_oled_draw_circle(void)
 void parse_oled_draw_rect(void)
 {
   int16_t x1,y1,x2,y2,fill;
-  stack_pop(&data_stack, (uint16_t *)&fill);
-  stack_pop(&data_stack, (uint16_t *)&y2);
-  stack_pop(&data_stack, (uint16_t *)&x2);
-  stack_pop(&data_stack, (uint16_t *)&y1);
-  stack_pop(&data_stack, (uint16_t *)&x1);
+  stack_pop(&data_stack, (uint32_t*)&fill);
+  stack_pop(&data_stack, (uint32_t*)&y2);
+  stack_pop(&data_stack, (uint32_t*)&x2);
+  stack_pop(&data_stack, (uint32_t*)&y1);
+  stack_pop(&data_stack, (uint32_t*)&x1);
   clamp_value(&x1, SSD1306_WIDTH);
   clamp_value(&x2, SSD1306_WIDTH);
   clamp_value(&y1, SSD1306_HEIGHT);
@@ -550,10 +550,10 @@ void expand_mmov(int16_t xtotal, int16_t ytotal)
 
 void parse_mmov(void)
 {
-  uint16_t tempx, tempy;
+  uint32_t tempx, tempy;
   stack_pop(&data_stack, &tempy);
   stack_pop(&data_stack, &tempx);
-  expand_mmov(tempx, tempy);
+  expand_mmov((int16_t)tempx, (int16_t)tempy);
 }
 
 void execute_instruction(uint16_t curr_pc, ds3_exe_result* exe, uint8_t this_key_id)
@@ -587,13 +587,13 @@ void execute_instruction(uint16_t curr_pc, ds3_exe_result* exe, uint8_t this_key
   }
   else if(this_opcode == OP_POP)
   {
-    uint16_t this_item;
+    uint32_t this_item;
     stack_pop(&data_stack, &this_item);
     write_mem(op_data, this_item, this_key_id);
   }
   else if(this_opcode == OP_BRZ)
   {
-    uint16_t this_value;
+    uint32_t this_value;
     stack_pop(&data_stack, &this_value);
     if(this_value == 0)
       exe->next_pc = op_data;
@@ -609,7 +609,7 @@ void execute_instruction(uint16_t curr_pc, ds3_exe_result* exe, uint8_t this_key
   }
   else if(this_opcode == OP_RET)
   {
-    uint16_t return_pc;
+    uint32_t return_pc;
     stack_pop(&call_stack, &return_pc);
     exe->next_pc = return_pc;
   }
@@ -711,7 +711,7 @@ void execute_instruction(uint16_t curr_pc, ds3_exe_result* exe, uint8_t this_key
   }
   else if(this_opcode == OP_KDOWN)
   {
-    uint16_t combocode;
+    uint32_t combocode;
     stack_pop(&data_stack, &combocode);
     uint8_t ktype = (combocode >> 8) & 0xff;
     uint8_t kcode = combocode & 0xff;
@@ -720,7 +720,7 @@ void execute_instruction(uint16_t curr_pc, ds3_exe_result* exe, uint8_t this_key
   }
   else if(this_opcode == OP_KUP)
   {
-    uint16_t combocode;
+    uint32_t combocode;
     stack_pop(&data_stack, &combocode);
     uint8_t ktype = (combocode >> 8) & 0xff;
     uint8_t kcode = combocode & 0xff;
@@ -733,7 +733,7 @@ void execute_instruction(uint16_t curr_pc, ds3_exe_result* exe, uint8_t this_key
   }
   else if(this_opcode == OP_DELAY)
   {
-    uint16_t delay_amount;
+    uint32_t delay_amount;
     stack_pop(&data_stack, &delay_amount);
     if(delayms_check_abort(delay_amount))
     {
@@ -743,7 +743,7 @@ void execute_instruction(uint16_t curr_pc, ds3_exe_result* exe, uint8_t this_key
   }
   else if(this_opcode == OP_MSCL)
   {
-    uint16_t scroll_amount;
+    uint32_t scroll_amount;
     stack_pop(&data_stack, &scroll_amount);
     my_key kk;
     kk.code = scroll_amount;
@@ -817,7 +817,7 @@ void execute_instruction(uint16_t curr_pc, ds3_exe_result* exe, uint8_t this_key
   }
   else if(this_opcode == OP_GOTOP)
   {
-    uint16_t target_profile;
+    uint32_t target_profile;
     stack_pop(&data_stack, &target_profile);
     exe->result = EXE_ACTION_GOTO_PROFILE;
     exe->data = (uint8_t)target_profile;
