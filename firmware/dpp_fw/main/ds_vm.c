@@ -452,40 +452,38 @@ void parse_olc(void)
   ssd1306_SetCursor(xxx, yyy);
 }
 
-void clamp_value(int16_t* value, int16_t upper_limit)
+void clamp_value_uint32(uint32_t* value, uint32_t upper_limit)
 {
   if(value == NULL)
     return;
-  if(*value < 0)
-    *value = 0;
   if(*value > upper_limit)
     *value = upper_limit;
 }
 
 void parse_oled_draw_line(void)
 {
-  int16_t x1,y1,x2,y2;
-  stack_pop(&data_stack, (uint32_t*)&y2);
-  stack_pop(&data_stack, (uint32_t*)&x2);
-  stack_pop(&data_stack, (uint32_t*)&y1);
-  stack_pop(&data_stack, (uint32_t*)&x1);
-  clamp_value(&x1, SSD1306_WIDTH);
-  clamp_value(&x2, SSD1306_WIDTH);
-  clamp_value(&y1, SSD1306_HEIGHT);
-  clamp_value(&y2, SSD1306_HEIGHT);
+  uint32_t x1,y1,x2,y2;
+  stack_pop(&data_stack, &y2);
+  stack_pop(&data_stack, &x2);
+  stack_pop(&data_stack, &y1);
+  stack_pop(&data_stack, &x1);
+  clamp_value_uint32(&x1, SSD1306_WIDTH);
+  clamp_value_uint32(&x2, SSD1306_WIDTH);
+  clamp_value_uint32(&y1, SSD1306_HEIGHT);
+  clamp_value_uint32(&y2, SSD1306_HEIGHT);
   ssd1306_Line(x1, y1, x2, y2, White);
 }
 
 void parse_oled_draw_circle(void)
 {
-  int16_t x,y,radius,fill;
-  stack_pop(&data_stack, (uint32_t*)&fill);
-  stack_pop(&data_stack, (uint32_t*)&radius);
-  stack_pop(&data_stack, (uint32_t*)&y);
-  stack_pop(&data_stack, (uint32_t*)&x);
-  clamp_value(&x, SSD1306_WIDTH);
-  clamp_value(&y, SSD1306_HEIGHT);
-  clamp_value(&radius, SSD1306_HEIGHT/2);
+  uint32_t x,y,radius,fill;
+  stack_pop(&data_stack, &fill);
+  stack_pop(&data_stack, &radius);
+  stack_pop(&data_stack, &y);
+  stack_pop(&data_stack, &x);
+  clamp_value_uint32(&x, SSD1306_WIDTH);
+  clamp_value_uint32(&y, SSD1306_HEIGHT);
+  clamp_value_uint32(&radius, SSD1306_HEIGHT/2);
   if(fill)
     ssd1306_FillCircle(x,y,radius,White);
   else
@@ -494,16 +492,16 @@ void parse_oled_draw_circle(void)
 
 void parse_oled_draw_rect(void)
 {
-  int16_t x1,y1,x2,y2,fill;
-  stack_pop(&data_stack, (uint32_t*)&fill);
-  stack_pop(&data_stack, (uint32_t*)&y2);
-  stack_pop(&data_stack, (uint32_t*)&x2);
-  stack_pop(&data_stack, (uint32_t*)&y1);
-  stack_pop(&data_stack, (uint32_t*)&x1);
-  clamp_value(&x1, SSD1306_WIDTH);
-  clamp_value(&x2, SSD1306_WIDTH);
-  clamp_value(&y1, SSD1306_HEIGHT);
-  clamp_value(&y2, SSD1306_HEIGHT);
+  uint32_t x1,y1,x2,y2,fill;
+  stack_pop(&data_stack, &fill);
+  stack_pop(&data_stack, &y2);
+  stack_pop(&data_stack, &x2);
+  stack_pop(&data_stack, &y1);
+  stack_pop(&data_stack, &x1);
+  clamp_value_uint32(&x1, SSD1306_WIDTH);
+  clamp_value_uint32(&x2, SSD1306_WIDTH);
+  clamp_value_uint32(&y1, SSD1306_HEIGHT);
+  clamp_value_uint32(&y2, SSD1306_HEIGHT);
   if(fill)
     ssd1306_FillRectangle(x1,y1,x2,y2,White);
   else
