@@ -119,6 +119,14 @@ Bug Fixs:
 Nov 18 2025
 Added _RTC_WDAY and _RTC_YDAY
 Improved runtime error display
+
+2.6.0
+Nov 23 2025
+Started working on DSVM Version 2
+Flat memory map
+Fixed address for data stack, call stack, user-defined variables, PGVs, and reserved variables
+32-bit wide data stack
+
 */
 
 uint8_t fw_version_major = 2;

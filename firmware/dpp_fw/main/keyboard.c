@@ -634,5 +634,5 @@ void release_everything(void)
   keyboard_release_all();
   delay_ms(100);
   mouse_release_all();
-  delay_ms(1000);
+  delay_ms(100);
 }

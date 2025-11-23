@@ -823,7 +823,7 @@ uint8_t load_dsb(char* dsb_path)
     return EXE_DSB_FREAD_ERROR;
   if(bin_buf[0] != OP_VMINFO)
     return EXE_DSB_INCOMPATIBLE_VERSION;
-  if(bin_buf[2] != dsvm_version)
+  if(bin_buf[1] != dsvm_version)
     return EXE_DSB_INCOMPATIBLE_VERSION;
   return EXE_OK;
 }
@@ -841,6 +841,7 @@ void run_dsb(ds3_exe_result* er, uint8_t this_key_id, char* dsb_path, uint8_t is
     if(dsb_load_result)
     {
       er->result = dsb_load_result;
+      er->next_pc = INSTRUCTION_SIZE_BYTES;
       return;
     }
   }
