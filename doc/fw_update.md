@@ -10,11 +10,17 @@
 
 26 Nov 2025
 
+
 🆕 Real-time Clock (RTC)
+
 🆕 Print Formatting
+
 🆕 Numerical Padding
+
 🆕 More Persistent Global Variables
+
 🆕 Bitwise XOR
+
 🐞 Bug Fixes
 
 👉[More info](https://dekunukem.github.io/duckyPad-Pro/doc/beta_test.html)
