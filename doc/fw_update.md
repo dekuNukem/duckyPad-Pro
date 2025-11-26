@@ -23,7 +23,7 @@
 
 🐞 Bug Fixes
 
-👉[More info](https://dekunukem.github.io/duckyPad-Pro/doc/beta_test.html)
+👉 [More info](https://dekunukem.github.io/duckyPad-Pro/doc/beta_test.html)
 
 ⚠️ Make sure to use the latest [Configurator](https://github.com/duckyPad/duckyPad-Configurator/releases/latest) and [Autoswitcher](https://github.com/duckyPad/duckyPad-Profile-Autoswitcher/releases/latest)!
 
