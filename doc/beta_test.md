@@ -1,8 +1,10 @@
-# duckyPad Beta Test: Nov 2025
+# duckyPad Feature Update: Nov 2025
 
-Lots of new features! Try it out before the public release!
+Big update for the holiday season!
 
-* Only for **duckyPad Pro (2024)** FOR NOW
+This guide shows how to try out the new features.
+
+* Only for **[duckyPad Pro (2024)](https://dekunukem.github.io/duckyPad-Pro/README.html)** FOR NOW
 
 	* Will port to OG duckyPad later
 
