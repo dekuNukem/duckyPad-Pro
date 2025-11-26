@@ -6,32 +6,18 @@
 
 ## Latest Firmware
 
-#### 2.4.2
+### 2.4.2
 
 26 Nov 2025
 
 🆕 Real-time Clock (RTC)
-* duckyPad now knows current **date and time**.
-
 🆕 Print Formatting
-* Print numbers as Signed / Unsigned / Hexadecimal 
-
 🆕 Numerical Padding
-* Specify **leading zeros** when printing numbers
-
 🆕 More Persistent Global Variables
-* 32 PGVs now! `$_GV0` to `$_GV31`
-
 🆕 Bitwise XOR
-* BitXOR: `^` operator 
-* **`Power-of`** operator is now `**`
-
 🐞 Bug Fixes
 
-* Fixed "ghost colors" on unassigned keys
-* Improved handling of run-time errors
-* OLED no longer show stale content on boot
-
+👉[More info](https://dekunukem.github.io/duckyPad-Pro/doc/beta_test.html)
 
 ⚠️ Make sure to use the latest [Configurator](https://github.com/duckyPad/duckyPad-Configurator/releases/latest) and [Autoswitcher](https://github.com/duckyPad/duckyPad-Profile-Autoswitcher/releases/latest)!
 
