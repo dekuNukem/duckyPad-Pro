@@ -6,21 +6,38 @@
 
 ## Latest Firmware
 
-#### 2.3.2
+#### 2.4.2
 
-9 July 2025
+26 Nov 2025
 
-🆕 Increased Persistent Global Variables count to 32
+🆕 Real-time Clock (RTC)
+* duckyPad now knows current **date and time**.
 
-🆕 Added support for **reading and writing PGVs from a computer**. [Details](https://github.com/duckyPad/duckyPad-Profile-Autoswitcher/blob/master/HID_details.md)
+🆕 Print Formatting
+* Print numbers as Signed / Unsigned / Hexadecimal 
 
-🐞 Fixed a bug where HID buffer was not properly cleared causing ghost inputs
+🆕 Numerical Padding
+* Specify **leading zeros** when printing numbers
 
-⚠️ Make sure to use the [Latest Configurator](https://github.com/duckyPad/duckyPad-Configurator/releases/latest)
+🆕 More Persistent Global Variables
+* 32 PGVs now! `$_GV0` to `$_GV31`
+
+🆕 Bitwise XOR
+* BitXOR: `^` operator 
+* **`Power-of`** operator is now `**`
+
+🐞 Bug Fixes
+
+* Fixed "ghost colors" on unassigned keys
+* Improved handling of run-time errors
+* OLED no longer show stale content on boot
+
+
+⚠️ Make sure to use the latest [Configurator](https://github.com/duckyPad/duckyPad-Configurator/releases/latest) and [Autoswitcher](https://github.com/duckyPad/duckyPad-Profile-Autoswitcher/releases/latest)!
 
 👇👇👇👇👇👇👇👇👇👇
 
-[Download Here](https://github.com/dekuNukem/duckyPad-Pro/raw/master/firmware/DPP_FW_2.3.2_b092b14f.bin)
+[Download Here](https://github.com/dekuNukem/duckyPad-Pro/raw/master/firmware/DPP_FW_2.4.2_432f6da5.bin)
 
 ☝️☝️☝️☝️☝️☝️☝️☝️☝️☝️☝️
 
@@ -57,6 +74,16 @@
 ![Alt text](../resources/photos/tinker/newver.png)
 
 ## Version History
+
+#### 2.3.2
+
+9 July 2025
+
+🆕 Increased Persistent Global Variables count to 32
+
+🆕 Added support for **reading and writing PGVs from a computer**. [Details](https://github.com/duckyPad/duckyPad-Profile-Autoswitcher/blob/master/HID_details.md)
+
+🐞 Fixed a bug where HID buffer was not properly cleared causing ghost inputs
 
 #### 2.2.0
 

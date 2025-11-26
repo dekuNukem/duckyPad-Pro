@@ -10,15 +10,13 @@ This guide shows how to try out the new features.
 
 ## Update Firmware
 
-* [Download the latest firmware](https://github.com/dekuNukem/duckyPad-Pro/raw/refs/heads/master/firmware/beta/DPP_FW_2.4.1_614ca467.bin)
-
-* [Follow this guide](https://dekunukem.github.io/duckyPad-Pro/doc/fw_update.html), **use the file you just downloaded**.
+* Update to latest FW by [following this guide](https://dekunukem.github.io/duckyPad-Pro/doc/fw_update.html)
 
 ## Download Latest Apps
 
-* [Configurator 3.4.0](https://github.com/duckyPad/duckyPad-Configurator/releases/tag/3.4.0)
+* [Configurator](https://github.com/duckyPad/duckyPad-Configurator/releases/latest)
 
-* [Autoswitcher 1.1.0](https://github.com/duckyPad/duckyPad-Profile-Autoswitcher/releases/tag/1.1.0)
+* [Autoswitcher](https://github.com/duckyPad/duckyPad-Profile-Autoswitcher/releases/latest)
 
 ## 🆕 Real-time Clock (RTC)
 
