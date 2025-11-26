@@ -8,7 +8,7 @@ duckyPad Pro is a 20-key **mechanical macropad** for power users who demand **ad
 
 ![alt_text](resources/photos/title.jpeg)
 
-Incorporating 4 years worth of feedback from the [original duckyPad](https://github.com/dekuNukem/duckyPad), duckyPad Pro combines long-requested upgrades with a no-nonsense design, aiming simply to be the **most capable** macropad today.
+Built on 4 years of feedback from the [original duckyPad](https://github.com/dekuNukem/duckyPad), **duckyPad Pro** combines long-requested upgrades with a no-nonsense design, aiming simply to be the **most capable** macropad today.
 
 ## Get One
 
@@ -16,7 +16,7 @@ duckyPad Pro has been [successfully funded on Kickstarter](https://www.kickstart
 
 * Now available [on my Tindie Store!](https://www.tindie.com/products/37399/)
 
-## Promo Video
+## Video
 
 [<img src="resources/photos/youtube.png">](https://www.youtube.com/watch?v=uzL-kk1gB_Y)
 
@@ -27,18 +27,18 @@ duckyPad Pro has all the basics:
 * Hot-Swap
 * Rotary Encoders
 * Per-key RGB
-* USB-C
 * 100% **Open-source**
 
 But also features **unlike any other**:
 
 * Custom **[duckyScript](doc/duckyscript_info.md)** engine, **NOT QMK/VIA**.
 * **Longer and more complex** macros
-* 1.5" **OLED** screen
+	* **64 profiles**, 3712 macros.
+* **OLED** screen
 * **Bluetooth**
-* **Expansion Modules** for external switches / foot pedals
-* **64 profiles**, 3712 macros total.
-* [Automatic profile switching](https://github.com/dekuNukem/duckyPad-profile-autoswitcher) based on active window.
+* Real-time Clock
+* **[Expansion Modules](https://github.com/dekuNukem/duckyPad-expansion-modules)** for external switches / foot pedals
+* [Profile Auto-switching](https://github.com/dekuNukem/duckyPad-profile-autoswitcher) based on **active window**.
 * microSD storage
 * No proprietary drivers, works out-of-box.
 * **Hacker friendly** with [tinkering guide](./doc/tinkering_guide.md)

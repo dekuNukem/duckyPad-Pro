@@ -10,7 +10,7 @@ This guide shows how to try out the new features.
 
 ## Update Firmware
 
-* Download the [Beta 2.4.1 Firmware](https://github.com/dekuNukem/duckyPad-Pro/raw/refs/heads/master/firmware/beta/DPP_FW_2.4.1_614ca467.bin)
+* [Download the latest firmware](https://github.com/dekuNukem/duckyPad-Pro/raw/refs/heads/master/firmware/beta/DPP_FW_2.4.1_614ca467.bin)
 
 * [Follow this guide](https://dekunukem.github.io/duckyPad-Pro/doc/fw_update.html), **use the file you just downloaded**.
 
@@ -160,9 +160,9 @@ STRINGLN $_RTC_YEAR-$_RTC_MONTH-$_RTC_DAY $_RTC_HOUR:$_RTC_MINUTE:$_RTC_SECOND
 
 ## How'd It Go?
 
-Do your worst, try break it!
+Hopefully everything still works!
 
-If you do break it though, let me know 😅!
+If you run into any bugs, do let me know 😅!
 
 * [Discord](https://discord.gg/4sJCBx5)
 * Email: `dekuNukem` `gmail.com`
