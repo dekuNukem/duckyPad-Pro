@@ -467,8 +467,59 @@ static const char* exe_error_string(uint8_t err_code)
   }
 }
 
+
+void draw_wrong_vmver()
+{
+  ssd1306_Fill(Black);
+
+  memset(oled_line_buf, 0, OLED_LINE_BUF_SIZE);
+  sprintf(oled_line_buf, "Incompatible");
+  ssd1306_SetCursor(center_line(strlen(oled_line_buf), 7, SSD1306_WIDTH), 0);
+  ssd1306_WriteString(oled_line_buf, Font_7x10, White);
+
+  memset(oled_line_buf, 0, OLED_LINE_BUF_SIZE);
+  sprintf(oled_line_buf, "Script File!");
+  ssd1306_SetCursor(center_line(strlen(oled_line_buf), 7, SSD1306_WIDTH), 15);
+  ssd1306_WriteString(oled_line_buf, Font_7x10, White);
+
+  ssd1306_Line(0,28,128,28,White);
+
+  memset(oled_line_buf, 0, OLED_LINE_BUF_SIZE);
+  sprintf(oled_line_buf, "Update to latest");
+  ssd1306_SetCursor(center_line(strlen(oled_line_buf), 7, SSD1306_WIDTH), 37);
+  ssd1306_WriteString(oled_line_buf, Font_7x10, White);
+
+  memset(oled_line_buf, 0, OLED_LINE_BUF_SIZE);
+  sprintf(oled_line_buf, "FW & PC App");
+  ssd1306_SetCursor(center_line(strlen(oled_line_buf), 7, SSD1306_WIDTH), 52);
+  ssd1306_WriteString(oled_line_buf, Font_7x10, White);
+
+  memset(oled_line_buf, 0, OLED_LINE_BUF_SIZE);
+  sprintf(oled_line_buf, "Load & Save to");
+  ssd1306_SetCursor(center_line(strlen(oled_line_buf), 7, SSD1306_WIDTH), 75);
+  ssd1306_WriteString(oled_line_buf, Font_7x10, White);
+
+  memset(oled_line_buf, 0, OLED_LINE_BUF_SIZE);
+  sprintf(oled_line_buf, "Refresh Files");
+  ssd1306_SetCursor(center_line(strlen(oled_line_buf), 7, SSD1306_WIDTH), 90);
+  ssd1306_WriteString(oled_line_buf, Font_7x10, White);
+
+  memset(oled_line_buf, 0, OLED_LINE_BUF_SIZE);
+  sprintf(oled_line_buf, "Press Any Key");
+  ssd1306_SetCursor(center_line(strlen(oled_line_buf), 7, SSD1306_WIDTH), 117);
+  ssd1306_WriteString(oled_line_buf, Font_7x10, White);
+
+  ssd1306_UpdateScreen();
+}
+
 void draw_exe_error(uint8_t err_code, uint16_t pc)
 {
+  if(err_code == EXE_DSB_INCOMPATIBLE_VERSION)
+  {
+    draw_wrong_vmver();
+    return;
+  }
+
   ssd1306_Fill(Black);
 
   memset(oled_line_buf, 0, OLED_LINE_BUF_SIZE);
