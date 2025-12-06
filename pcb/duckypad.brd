@@ -9,7 +9,7 @@
 </settings>
 <grid distance="5" unitdist="mil" unit="mil" style="lines" multiple="1" display="yes" altdistance="1" altunitdist="mil" altunit="mil"/>
 <layers>
-<layer number="1" name="Top" color="4" fill="1" visible="yes" active="yes"/>
+<layer number="1" name="Top" color="4" fill="1" visible="no" active="yes"/>
 <layer number="2" name="pwr" color="49" fill="1" visible="no" active="yes"/>
 <layer number="3" name="Route3" color="4" fill="3" visible="no" active="no"/>
 <layer number="4" name="Route4" color="1" fill="4" visible="no" active="no"/>
@@ -215,7 +215,7 @@ GPIO3 must have pull resistor, pull to high to  free up JTAG pins?
 double check RESET jumper has NO PASTE</text>
 <text x="86.691" y="81.661" size="1.9304" layer="26" rot="MR180" align="center">duckyPad Pro
 dekuNukem
-JAN2026</text>
+R2 JAN2026</text>
 <rectangle x1="80.153" y1="-1.905" x2="112.411" y2="8.001" layer="41"/>
 <rectangle x1="80.28" y1="-1.778" x2="112.538" y2="8.128" layer="42"/>
 <rectangle x1="76.184" y1="89.662" x2="81.772" y2="92.964" layer="41"/>
@@ -797,6 +797,15 @@ by exp-lbrs.ulp</description>
 <smd name="B'" x="3.4" y="2.25" dx="3.2" dy="1.2" layer="1"/>
 <text x="-3" y="3.5" size="1.27" layer="25">&gt;NAME</text>
 <text x="-3.2" y="-4.8" size="1.27" layer="27">&gt;VALUE</text>
+</package>
+<package name="BUZZ">
+<smd name="PLUS" x="0" y="0" dx="2.4" dy="2" layer="1" rot="R90"/>
+<wire x1="0" y1="1" x2="1" y2="2" width="0.1524" layer="21"/>
+<wire x1="1" y1="2" x2="4" y2="2" width="0.1524" layer="21"/>
+<wire x1="4" y1="2" x2="4" y2="-2" width="0.1524" layer="21"/>
+<wire x1="4" y1="-2" x2="0" y2="-2" width="0.1524" layer="21"/>
+<wire x1="0" y1="-2" x2="0" y2="1" width="0.1524" layer="21"/>
+<smd name="MINUS" x="4" y="0" dx="2.4" dy="2" layer="1" rot="R90"/>
 </package>
 </packages>
 </library>
@@ -1384,6 +1393,10 @@ These are the free and generally easy to produce 4-layer PCB design rules. You c
 </element>
 <element name="JP1" library="SparkFun-Jumpers" package="SMT-JUMPER_2_NO_NO-SILK" value="JUMPER-SMT_2_NO_NO-SILK" x="79.613" y="95.25" smashed="yes" rot="MR0"/>
 <element name="JP4" library="SparkFun-Jumpers" package="SMT-JUMPER_2_NO_NO-SILK" value="JUMPER-SMT_2_NO_NO-SILK" x="108.2802" y="56.9976" smashed="yes" rot="R270"/>
+<element name="U$3" library="duckypad" package="BUZZ" value="BUZZ40402" x="99.568" y="2.794" smashed="yes" rot="MR180"/>
+<element name="R19" library="joyAnalog" package="0805" value="5K1" x="100.457" y="7.112" smashed="yes" rot="MR180">
+<attribute name="NAME" x="99.695" y="6.2865" size="0.8128" layer="26" rot="MR180"/>
+</element>
 </elements>
 <signals>
 <signal name="GND">
@@ -1616,6 +1629,9 @@ These are the free and generally easy to produce 4-layer PCB design rules. You c
 <wire x1="74.803" y1="89.408" x2="71.882" y2="92.329" width="0.2032" layer="16"/>
 <wire x1="71.882" y1="92.329" x2="71.882" y2="94.488" width="0.2032" layer="16"/>
 <wire x1="68.326" y1="95.504" x2="67.8334" y2="95.0114" width="0.2032" layer="16"/>
+<contactref element="U$3" pad="MINUS"/>
+<wire x1="106.85" y1="5.834" x2="103.81" y2="2.794" width="0.2032" layer="16"/>
+<wire x1="103.81" y1="2.794" x2="103.568" y2="2.794" width="0.2032" layer="16"/>
 <wire x1="108.156" y1="71.102" x2="108.156" y2="75.202" width="0" layer="19" extent="1-1"/>
 </signal>
 <signal name="+3V3">
@@ -2995,11 +3011,15 @@ These are the free and generally easy to produce 4-layer PCB design rules. You c
 <wire x1="77.5876" y1="9.8044" x2="77.5876" y2="45.8724" width="0.2032" layer="16"/>
 <wire x1="74.692" y1="48.768" x2="77.5876" y2="45.8724" width="0.2032" layer="16"/>
 <wire x1="74.692" y1="52.832" x2="74.692" y2="48.768" width="0.2032" layer="16"/>
-<wire x1="79.01" y1="8.382" x2="102.759" y2="8.382" width="0.2032" layer="16"/>
+<wire x1="79.01" y1="8.382" x2="101.346" y2="8.382" width="0.2032" layer="16"/>
+<wire x1="101.346" y1="8.382" x2="102.759" y2="8.382" width="0.2032" layer="16"/>
 <wire x1="79.01" y1="8.382" x2="77.5876" y2="9.8044" width="0.2032" layer="16"/>
 <contactref element="SH1" pad="8"/>
 <wire x1="103.561" y1="9.184" x2="104.525" y2="9.184" width="0.2032" layer="16"/>
 <wire x1="102.759" y1="8.382" x2="103.561" y2="9.184" width="0.2032" layer="16"/>
+<contactref element="R19" pad="2"/>
+<wire x1="101.357" y1="7.112" x2="101.357" y2="8.371" width="0.2032" layer="16"/>
+<wire x1="101.357" y1="8.371" x2="101.346" y2="8.382" width="0.2032" layer="16"/>
 </signal>
 <signal name="N$72">
 <contactref element="U3" pad="50"/>
@@ -3025,10 +3045,7 @@ These are the free and generally easy to produce 4-layer PCB design rules. You c
 <wire x1="80.776" y1="55.769" x2="80.776" y2="70.497" width="0.2032" layer="16"/>
 <wire x1="80.776" y1="70.497" x2="80.28" y2="70.993" width="0.2032" layer="16"/>
 <via x="80.28" y="70.993" extent="1-16" drill="0.5"/>
-<wire x1="104.918" y1="7.184" x2="104.918" y2="3.683" width="0.2032" layer="16"/>
-<wire x1="104.918" y1="3.683" x2="106.442" y2="2.159" width="0.2032" layer="16"/>
 <contactref element="SH1" pad="10"/>
-<wire x1="104.918" y1="7.184" x2="104.525" y2="7.184" width="0.2032" layer="16"/>
 <wire x1="83.1943" y1="10.4207" x2="96.0213" y2="10.4207" width="0.2032" layer="2"/>
 <wire x1="96.0213" y1="10.4207" x2="104.283" y2="2.159" width="0.2032" layer="2"/>
 <wire x1="104.283" y1="2.159" x2="106.442" y2="2.159" width="0.2032" layer="2"/>
@@ -3036,6 +3053,14 @@ These are the free and generally easy to produce 4-layer PCB design rules. You c
 <wire x1="73.676" y1="19.939" x2="73.676" y2="62.246" width="0.2032" layer="2"/>
 <wire x1="73.676" y1="62.246" x2="80.28" y2="68.85" width="0.2032" layer="2"/>
 <wire x1="80.28" y1="68.85" x2="80.28" y2="70.993" width="0.2032" layer="2"/>
+<wire x1="104.525" y1="7.184" x2="104.525" y2="6.354" width="0.2032" layer="16"/>
+<wire x1="103.378" y1="5.207" x2="102.489" y2="5.207" width="0.2032" layer="16"/>
+<wire x1="102.489" y1="5.207" x2="101.6" y2="4.318" width="0.2032" layer="16"/>
+<wire x1="105.045" y1="0.762" x2="106.442" y2="2.159" width="0.2032" layer="16"/>
+<wire x1="104.525" y1="6.354" x2="103.378" y2="5.207" width="0.2032" layer="16"/>
+<wire x1="101.6" y1="4.318" x2="101.6" y2="1.397" width="0.2032" layer="16"/>
+<wire x1="101.6" y1="1.397" x2="102.235" y2="0.762" width="0.2032" layer="16"/>
+<wire x1="102.235" y1="0.762" x2="105.045" y2="0.762" width="0.2032" layer="16"/>
 </signal>
 <signal name="N$71">
 <contactref element="X2" pad="3"/>
@@ -3105,6 +3130,12 @@ These are the free and generally easy to produce 4-layer PCB design rules. You c
 <vertex x="80.026" y="-0.508"/>
 </polygon>
 </signal>
+<signal name="N$37">
+<contactref element="U$3" pad="PLUS"/>
+<contactref element="R19" pad="1"/>
+<wire x1="99.557" y1="7.112" x2="99.557" y2="2.805" width="0.2032" layer="16"/>
+<wire x1="99.557" y1="2.805" x2="99.568" y2="2.794" width="0.2032" layer="16"/>
+</signal>
 </signals>
 <mfgpreviewcolors>
 <mfgpreviewcolor name="soldermaskcolor" color="0xC8008000"/>
@@ -3138,9 +3169,7 @@ These are the free and generally easy to produce 4-layer PCB design rules. You c
 <approved hash="6,16,b555b536a94aa929"/>
 <approved hash="6,16,2b102b18c3e4c3ec"/>
 <approved hash="6,16,3b113b19cbe5cbed"/>
-<approved hash="6,16,ac55ac72ccb6cc63"/>
 <approved hash="6,16,820bbd32c348fc71"/>
-<approved hash="6,16,362f36ac546c54ef"/>
 <approved hash="6,16,7297c98b48a21f83"/>
 <approved hash="6,16,e69ef9a424756c82"/>
 <approved hash="6,16,1fb61d74936291a0"/>
@@ -3222,6 +3251,37 @@ These are the free and generally easy to produce 4-layer PCB design rules. You c
 <approved hash="21,19,cbe3c9e1c9e1cbe3"/>
 <approved hash="4,1,fb0d05774024b8f2"/>
 <approved hash="4,1,ff05016f4c3cb70a"/>
+<approved hash="6,16,fb3c793d167918ff"/>
+<approved hash="6,16,53a4508730473364"/>
+<approved hash="6,16,c624c6fbdd03dddc"/>
+<approved hash="6,16,d83cd87f803f807c"/>
+<approved hash="6,16,c625c6fb1d031ddd"/>
+<approved hash="6,16,8eef8e2f08ef48ec"/>
+<approved hash="6,16,b330b303c443c470"/>
+<approved hash="6,16,b6782856da12ddfd"/>
+<approved hash="6,16,c357fc7f9003af2b"/>
+<approved hash="6,16,b7478860541c6b3b"/>
+<approved hash="6,16,aea4d0a9e76daca8"/>
+<approved hash="6,16,f8689bbac6d66844"/>
+<approved hash="6,16,4111415d821d8251"/>
+<approved hash="6,16,08aa084f690f69ea"/>
+<approved hash="6,16,de145df1bb35fed4"/>
+<approved hash="6,16,916d1ca0a0ecfd6f"/>
+<approved hash="6,16,1d3f1dc79c079cff"/>
+<approved hash="6,16,afe269ff61c0689c"/>
+<approved hash="6,16,34e8cb28caa13561"/>
+<approved hash="6,16,c49aba1f3dde069a"/>
+<approved hash="6,16,ce75c0b5c092ce52"/>
+<approved hash="6,16,97c6288628469706"/>
+<approved hash="6,16,a04d9a379a5ba021"/>
+<approved hash="6,16,61d2cb896ebd0787"/>
+<approved hash="6,16,f97d721e28749f15"/>
+<approved hash="6,16,11a04bc4398da528"/>
+<approved hash="6,16,19c2c3a2d4cfde90"/>
+<approved hash="6,16,54df1ddea792ea92"/>
+<approved hash="6,16,3bd80259b0c8cb8f"/>
+<approved hash="6,16,80f3623c91fc703d"/>
+<approved hash="6,16,902f8324d51d70b2"/>
 </errors>
 </board>
 </drawing>

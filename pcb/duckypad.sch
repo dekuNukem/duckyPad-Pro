@@ -3,7 +3,7 @@
 <eagle version="9.6.2">
 <drawing>
 <settings>
-<setting alwaysvectorfont="yes"/>
+<setting alwaysvectorfont="no"/>
 <setting keepoldvectorfont="yes"/>
 <setting verticaltext="up"/>
 </settings>
@@ -7082,6 +7082,15 @@ by exp-lbrs.ulp</description>
 <text x="-3" y="3.5" size="1.27" layer="25">&gt;NAME</text>
 <text x="-3.2" y="-4.8" size="1.27" layer="27">&gt;VALUE</text>
 </package>
+<package name="BUZZ">
+<smd name="PLUS" x="0" y="0" dx="2.4" dy="2" layer="1" rot="R90"/>
+<wire x1="0" y1="1" x2="1" y2="2" width="0.1524" layer="21"/>
+<wire x1="1" y1="2" x2="4" y2="2" width="0.1524" layer="21"/>
+<wire x1="4" y1="2" x2="4" y2="-2" width="0.1524" layer="21"/>
+<wire x1="4" y1="-2" x2="0" y2="-2" width="0.1524" layer="21"/>
+<wire x1="0" y1="-2" x2="0" y2="1" width="0.1524" layer="21"/>
+<smd name="MINUS" x="4" y="0" dx="2.4" dy="2" layer="1" rot="R90"/>
+</package>
 </packages>
 <symbols>
 <symbol name="M2_SCREW_SYM">
@@ -7202,6 +7211,14 @@ by exp-lbrs.ulp</description>
 <pin name="S1" x="2.54" y="5.08" visible="pad" length="short" direction="pas" swaplevel="1" rot="R270"/>
 <text x="-6.35" y="-2.54" size="1.778" layer="95" rot="R90">&gt;NAME</text>
 <text x="-3.81" y="3.175" size="1.778" layer="96" rot="R90">&gt;VALUE</text>
+</symbol>
+<symbol name="BUZZ">
+<wire x1="-10.16" y1="5.08" x2="10.16" y2="5.08" width="0.1524" layer="94"/>
+<wire x1="10.16" y1="5.08" x2="10.16" y2="-5.08" width="0.1524" layer="94"/>
+<wire x1="10.16" y1="-5.08" x2="-10.16" y2="-5.08" width="0.1524" layer="94"/>
+<wire x1="-10.16" y1="-5.08" x2="-10.16" y2="5.08" width="0.1524" layer="94"/>
+<pin name="PLUS" x="-15.24" y="0" length="middle"/>
+<pin name="MINUS" x="15.24" y="0" length="middle" rot="R180"/>
 </symbol>
 </symbols>
 <devicesets>
@@ -7341,6 +7358,22 @@ by exp-lbrs.ulp</description>
 <connect gate="G$1" pin="P1" pad="A'"/>
 <connect gate="G$1" pin="S" pad="B"/>
 <connect gate="G$1" pin="S1" pad="B'"/>
+</connects>
+<technologies>
+<technology name=""/>
+</technologies>
+</device>
+</devices>
+</deviceset>
+<deviceset name="BUZZ40402">
+<gates>
+<gate name="G$1" symbol="BUZZ" x="0" y="0"/>
+</gates>
+<devices>
+<device name="" package="BUZZ">
+<connects>
+<connect gate="G$1" pin="MINUS" pad="MINUS"/>
+<connect gate="G$1" pin="PLUS" pad="PLUS"/>
 </connects>
 <technologies>
 <technology name=""/>
@@ -8437,6 +8470,9 @@ You are welcome to use this library for commercial purposes. For attribution, we
 <part name="JP1" library="SparkFun-Jumpers" deviceset="JUMPER-SMT_2_NO" device="_NO-SILK"/>
 <part name="GND65" library="supply1" deviceset="GND" device=""/>
 <part name="JP4" library="SparkFun-Jumpers" deviceset="JUMPER-SMT_2_NO" device="_NO-SILK"/>
+<part name="U$3" library="duckypad" deviceset="BUZZ40402" device=""/>
+<part name="R19" library="joyAnalog" deviceset="RESISTOR" device="0805-RES" value="5K1"/>
+<part name="GND41" library="supply1" deviceset="GND" device=""/>
 </parts>
 <sheets>
 <sheet>
@@ -9289,6 +9325,14 @@ You are welcome to use this library for commercial purposes. For attribution, we
 <instance part="JP4" gate="G$1" x="342.9" y="-5.08" smashed="yes" rot="R90">
 <attribute name="NAME" x="340.36" y="-7.62" size="1.778" layer="95" font="vector" rot="R90"/>
 </instance>
+<instance part="U$3" gate="G$1" x="93.98" y="-220.98" smashed="yes" rot="MR0"/>
+<instance part="R19" gate="G$1" x="119.38" y="-220.98" smashed="yes" rot="MR180">
+<attribute name="NAME" x="118.11" y="-217.3986" size="1.778" layer="95" rot="MR180"/>
+<attribute name="VALUE" x="118.11" y="-215.138" size="1.778" layer="96" rot="MR180"/>
+</instance>
+<instance part="GND41" gate="1" x="71.12" y="-223.52" smashed="yes" rot="MR0">
+<attribute name="VALUE" x="73.66" y="-226.06" size="1.778" layer="96" rot="MR0"/>
+</instance>
 </instances>
 <busses>
 </busses>
@@ -9730,6 +9774,11 @@ You are welcome to use this library for commercial purposes. For attribution, we
 <wire x1="-10.16" y1="-185.42" x2="-10.16" y2="-190.5" width="0.1524" layer="91"/>
 <wire x1="-5.08" y1="-185.42" x2="-10.16" y2="-185.42" width="0.1524" layer="91"/>
 <junction x="-10.16" y="-185.42"/>
+</segment>
+<segment>
+<pinref part="GND41" gate="1" pin="GND"/>
+<pinref part="U$3" gate="G$1" pin="MINUS"/>
+<wire x1="71.12" y1="-220.98" x2="78.74" y2="-220.98" width="0.1524" layer="91"/>
 </segment>
 </net>
 <net name="+3V3" class="0">
@@ -11061,6 +11110,8 @@ You are welcome to use this library for commercial purposes. For attribution, we
 <wire x1="373.38" y1="-83.82" x2="373.38" y2="-220.98" width="0.1524" layer="91"/>
 <wire x1="373.38" y1="-220.98" x2="124.46" y2="-220.98" width="0.1524" layer="91"/>
 <pinref part="SH1" gate="G$1" pin="8"/>
+<pinref part="R19" gate="G$1" pin="2"/>
+<junction x="124.46" y="-220.98"/>
 </segment>
 </net>
 <net name="N$72" class="0">
@@ -11126,6 +11177,13 @@ You are welcome to use this library for commercial purposes. For attribution, we
 <pinref part="R18" gate="G$1" pin="2"/>
 <pinref part="U1" gate="G$1" pin="CC2"/>
 <wire x1="5.08" y1="-185.42" x2="10.16" y2="-185.42" width="0.1524" layer="91"/>
+</segment>
+</net>
+<net name="N$37" class="0">
+<segment>
+<pinref part="U$3" gate="G$1" pin="PLUS"/>
+<pinref part="R19" gate="G$1" pin="1"/>
+<wire x1="109.22" y1="-220.98" x2="114.3" y2="-220.98" width="0.1524" layer="91"/>
 </segment>
 </net>
 </nets>

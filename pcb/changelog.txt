@@ -10,5 +10,8 @@ adjust screw location
 adjusted PCB size
 
 Production run 1
-2027 10 08
+2024 10 08
 moved reset-to-knob jumper to board edge
+
+2025 12 07
+Added mystery component
