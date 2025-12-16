@@ -144,6 +144,10 @@ uint8_t dsvm_version = 1;
 static const char *TAG = "MAIN";
 
 /*
+    Notes:
+    
+    In menu config: tinyUSB FIFO size: 512 default, too slow. 2048 = 2.4x faster, 4096 = 3x
+
     xTaskCreate higher number = higher priority
     configMAX_PRIORITIES
 */
