@@ -6,32 +6,24 @@
 
 ## Latest Firmware
 
-### 2.4.2
+### 2.4.3
 
-26 Nov 2025
+16 Dec 2025
 
+🆕 **1000Hz** Polling Rate!
 
-🆕 Real-time Clock (RTC)
-
-🆕 Print Formatting
-
-🆕 Numerical Padding
-
-🆕 More Persistent Global Variables
-
-🆕 Bitwise XOR
-
-🐞 Bug Fixes
-
-👉 [More info about those new features](https://dekunukem.github.io/duckyPad-Pro/doc/beta_test.html)
-
-⚠️ Make sure to use the latest [Configurator](https://github.com/duckyPad/duckyPad-Configurator/releases/latest) and [Autoswitcher](https://github.com/duckyPad/duckyPad-Profile-Autoswitcher/releases/latest)!
+* 🐇 Much faster typing speed
+* To try it out, put `DEFAULTCHARDELAY 10` at top of script.
+	* `5` even faster, `1` might be too fast
 
 👇👇👇👇👇👇👇👇👇👇
 
-[Download Here](https://github.com/dekuNukem/duckyPad-Pro/raw/master/firmware/DPP_FW_2.4.2_432f6da5.bin)
+[Download Here](https://github.com/dekuNukem/duckyPad-Pro/raw/master/firmware/DPP_FW_2.4.3_edf3b9f7.bin)
 
 ☝️☝️☝️☝️☝️☝️☝️☝️☝️☝️☝️
+
+👉 [More info about recent new features](https://dekunukem.github.io/duckyPad-Pro/doc/beta_test.html)
+
 
 ## Drag-and-Drop Update
 
@@ -66,6 +58,24 @@
 ![Alt text](../resources/photos/tinker/newver.png)
 
 ## Version History
+
+### 2.4.2
+
+26 Nov 2025
+
+🆕 Real-time Clock (RTC)
+
+🆕 Print Formatting
+
+🆕 Numerical Padding
+
+🆕 More Persistent Global Variables
+
+🆕 Bitwise XOR
+
+🐞 Bug Fixes
+
+👉 [More info about those new features](https://dekunukem.github.io/duckyPad-Pro/doc/beta_test.html)
 
 #### 2.3.2
 

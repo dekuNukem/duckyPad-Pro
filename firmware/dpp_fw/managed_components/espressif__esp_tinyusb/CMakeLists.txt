@@ -10,7 +10,7 @@ endif() # CONFIG_TINYUSB_NO_DEFAULT_TASK
 
 if(CONFIG_TINYUSB_CDC_ENABLED)
     list(APPEND srcs
-        "cdc.c"
+       
         "tusb_cdc_acm.c"
         )
     if(CONFIG_VFS_SUPPORT_IO)
