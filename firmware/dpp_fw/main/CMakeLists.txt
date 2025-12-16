@@ -5,3 +5,4 @@ idf_component_register(
     INCLUDE_DIRS "."
     REQUIRES "${requires}"
     )
+target_compile_options(${COMPONENT_LIB} PRIVATE "-Wno-error=maybe-uninitialized")

@@ -129,11 +129,15 @@ Dec 16 2025
 Increased USB polling rate
 Allows much faster typing
 
+2.4.4
+Dec 16 2025
+Increased USB MSC buffer, faster transfer.
+
 */
 
 uint8_t fw_version_major = 2;
 uint8_t fw_version_minor = 4;
-uint8_t fw_version_patch = 3;
+uint8_t fw_version_patch = 4;
 
 uint8_t dsvm_version = 1;
 
