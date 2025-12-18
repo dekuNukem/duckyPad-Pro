@@ -1072,5 +1072,38 @@ void run_dsb(exe_context* er, uint8_t this_key_id, char* dsb_path, uint8_t is_ca
     return;
   }
 
+  uint16_t current_pc = 0;
+  uint16_t data_stack_size_bytes = STACK_BASE_ADDR - this_dsb_size - STACK_MOAT_BYTES;
+  stack_init(&data_stack, bin_buf, STACK_BASE_ADDR, data_stack_size_bytes);
 
+  defaultdelay = DEFAULT_CMD_DELAY_MS;
+  defaultchardelay = DEFAULT_CHAR_DELAY_MS;
+  charjitter = 0;
+  rand_max = 0xffffffff;
+  rand_min = 0;
+  loop_size = 0;
+  epilogue_actions = 0;
+  allow_abort = 0;
+  disable_autorepeat = 0;
+  str_print_format = STR_PRINT_FORMAT_DEC_SIGNED;
+  str_print_padding = 0;
+
+  int panic_code = setjmp(jmpbuf);
+  if(panic_code != 0)
+  {
+    printf("VM Crashed! Panic: %d\n", panic_code);
+    return;
+  }
+  while(1)
+  {
+    execute_instruction(current_pc, er);
+    current_pc = er->next_pc;
+    if(er->result != EXE_OK)
+      break;
+    if(current_pc > this_dsb_size)
+      break;
+  }
+  printf("Execution Complete\n");
+  disable_autorepeat ? DS_SET_BITS(epilogue_actions, EPI_NO_AUTOREPEAT) : DS_CLEAR_BITS(epilogue_actions, EPI_NO_AUTOREPEAT);
+  printf("Epilogue: %02x\n", epilogue_actions);
 }
