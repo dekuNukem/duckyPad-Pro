@@ -20,6 +20,7 @@
 #include "bluetooth_task.h"
 #include "esp_vfs_fat.h"
 #include "ds_vm.h"
+#include "mypwm.h"
 
 /*
 1.0.0
@@ -133,13 +134,16 @@ Allows much faster typing
 Dec 16 2025
 Increased USB MSC buffer, faster transfer.
 
+3.0.0
+Dec 18 2025
+Working on DSVM2
 */
 
-uint8_t fw_version_major = 2;
-uint8_t fw_version_minor = 4;
-uint8_t fw_version_patch = 4;
+uint8_t fw_version_major = 3;
+uint8_t fw_version_minor = 0;
+uint8_t fw_version_patch = 0;
 
-uint8_t dsvm_version = 1;
+uint8_t dsvm_version = 2;
 
 static const char *TAG = "MAIN";
 
@@ -171,6 +175,7 @@ void app_main(void)
         idle_loop();
     }
 
+    my_pwm_test();
     load_settings(&dp_settings);
     oled_init();
     if(dp_settings.bt_mode == BT_MODE_ALWAYS)
