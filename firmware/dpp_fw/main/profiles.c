@@ -611,7 +611,7 @@ uint8_t load_persistent_state(void)
 void save_gv(void)
 {
   memset(sps_bin_buf, 0, SPS_BIN_SIZE);
-  memcpy(sps_bin_buf, gv_buf, GLOBAL_VARIABLE_COUNT*sizeof(uint16_t));
+  memcpy(sps_bin_buf, pgv_buf, PGV_COUNT*sizeof(uint32_t));
   CLEAR_TEMP_BUF();
   sprintf(temp_buf, "/sdcard/gv.sps");
   FILE *file = fopen(temp_buf, "wb");
@@ -629,7 +629,7 @@ void load_gv(void)
   memset(sps_bin_buf, 0, SPS_BIN_SIZE);
   fread(sps_bin_buf, 1, SPS_BIN_SIZE, file);
   fclose(file);
-  memcpy(gv_buf, sps_bin_buf, GLOBAL_VARIABLE_COUNT * sizeof(uint16_t));
+  memcpy(pgv_buf, sps_bin_buf, PGV_COUNT * sizeof(uint32_t));
 }
 
 const char* profile_str = "profile";

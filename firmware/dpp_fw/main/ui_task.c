@@ -456,7 +456,7 @@ void draw_settings(dp_global_settings *dps)
 static const char* exe_error_string(uint8_t err_code)
 {
   switch (err_code) {
-    case EXE_UNKNOWN_OPCODE:          return "Unknown Opcode";
+    case EXE_ILLEGAL_INSTRUCTION:          return "Unknown Opcode";
     case EXE_DSB_INCOMPATIBLE_VERSION:return "Unsupported VM";
     case EXE_DSB_FOPEN_FAIL:          return "File Open Fail";
     case EXE_DSB_FREAD_ERROR:         return "File Read Fail";

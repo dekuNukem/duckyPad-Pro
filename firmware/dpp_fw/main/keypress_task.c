@@ -64,9 +64,9 @@ uint8_t is_plus_minus_button(uint8_t swid)
   return swid == SW_MINUS || swid == SW_PLUS;
 }
 
-ds3_exe_result this_exe;
+exe_context this_exe;
 
-void der_init(ds3_exe_result* der)
+void der_init(exe_context* der)
 {
   der->result = EXE_OK;
   der->next_pc = 0;
@@ -126,7 +126,7 @@ uint8_t run_once(uint8_t swid, char* dsb_path, uint8_t* to_increment)
   if(this_exe.result >= EXE_ERROR_CODE_START)
   {
     neopixel_fill(128, 0, 0);
-    draw_exe_error(this_exe.result, this_exe.next_pc - INSTRUCTION_SIZE_BYTES);
+    draw_exe_error(this_exe.result, this_exe.next_pc);
     release_everything();
     block_until_anykey(SW_EVENT_SHORT_PRESS);
     goto_profile(current_profile_number);

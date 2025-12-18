@@ -7,67 +7,30 @@
 
 #include <input_task.h>
 
-#define OP_NOP 0
-#define OP_PUSHC 1
-#define OP_PUSHV 2
-#define OP_POP 3
-#define OP_BRZ 4
-#define OP_JMP 5
-#define OP_CALL 6
-#define OP_RET 7
-#define OP_HALT 8
-#define OP_EQ 9
-#define OP_NOTEQ 10
-#define OP_LT 11
-#define OP_LTE 12
-#define OP_GT 13
-#define OP_GTE 14
-#define OP_ADD 15
-#define OP_SUB 16
-#define OP_MULT 17
-#define OP_DIV 18
-#define OP_MOD 19
-#define OP_POW 20
-#define OP_LSHIFT 21
-#define OP_RSHIFT 22
-#define OP_BITOR 23
-#define OP_BITAND 24
-#define OP_LOGIAND 25
-#define OP_LOGIOR 26
-#define OP_DELAY 27
-#define OP_KUP 28
-#define OP_KDOWN 29
-#define OP_MSCL 30
-#define OP_MMOV 31
-#define OP_SWCF 32
-#define OP_SWCC 33
-#define OP_SWCR 34
-#define OP_STR 35
-#define OP_STRLN 36
-// #define OP_EMUK 37
-#define OP_OLC 38
-#define OP_OLP 39
-#define OP_OLU 40
-#define OP_OLB 41
-#define OP_OLR 42
-#define OP_BCLR 43
-#define OP_PREVP 44
-#define OP_NEXTP 45
-#define OP_GOTOP 46
-#define OP_SLEEP 47
+#define EXE_BIN_START_ADDRESS 0x0
+#define STACK_BASE_ADDR 0xf7ff
+#define STACK_MOAT_BYTES 32
 
-#define OP_OLED_LINE 48
-#define OP_OLED_RECT 49
-#define OP_OLED_CIRCLE 50
+#define MIN_STACK_SIZE_BYTES  512
+#define MAX_BIN_SIZE (STACK_BASE_ADDR - MIN_STACK_SIZE_BYTES - STACK_MOAT_BYTES)
 
-#define OP_BITXOR 51
+#define USER_VAR_START_ADDRESS 0xF800
+#define USER_VAR_END_ADDRESS_INCLUSIVE 0xF9FF
+
+#define PGV_START_ADDRESS 0xFD00
+#define PGV_COUNT 32
+#define PGV_BYTE_WIDTH 4
+#define PGV_END_ADDRESS_INCLUSIVE (PGV_START_ADDRESS + PGV_BYTE_WIDTH * PGV_COUNT - 1)
+
+#define INTERAL_VAR_START_ADDRESS 0xFE00
+#define INTERAL_VAR_BYTE_WIDTH 4
+#define MEMORY_END 0xFFFF
+
+#define MAX_INSTRUCTION_LEN 3
 
 // ----------
-
-#define OP_VMINFO 255
-
-#define INSTRUCTION_SIZE_BYTES 3
-#define MY_STACK_SIZE 16
+#define BIN_BUF_SIZE (USER_VAR_END_ADDRESS_INCLUSIVE+1)
+// ----------
 
 #define EXE_OK 0
 
@@ -80,46 +43,55 @@
 #define EXE_ABORTED 11
 
 #define EXE_ERROR_CODE_START 20
-#define EXE_UNKNOWN_OPCODE EXE_ERROR_CODE_START
+#define EXE_ILLEGAL_INSTRUCTION (EXE_ERROR_CODE_START + 0)
 #define EXE_DSB_INCOMPATIBLE_VERSION (EXE_ERROR_CODE_START + 1)
 #define EXE_DSB_FOPEN_FAIL (EXE_ERROR_CODE_START + 2)
 #define EXE_DSB_FREAD_ERROR (EXE_ERROR_CODE_START + 3)
 #define EXE_STACK_OVERFLOW (EXE_ERROR_CODE_START + 4)
 #define EXE_STACK_UNDERFLOW (EXE_ERROR_CODE_START + 5)
 #define EXE_DIVISION_BY_ZERO (EXE_ERROR_CODE_START + 6)
+#define EXE_ILLEGAL_ADDR (EXE_ERROR_CODE_START + 7)
+#define EXE_DSB_FILE_TOO_LARGE (EXE_ERROR_CODE_START + 8)
+#define EXE_UNIMPLEMENTED (EXE_ERROR_CODE_START + 9)
+#define EXE_UNALIGNED_ACCESS (EXE_ERROR_CODE_START + 10)
 
-#define DEFAULTDELAY_ADDR (0xffff - 0)
-#define DEFAULTCHARDELAY_ADDR (0xffff - 1)
-#define CHARJITTER_ADDR (0xffff - 2)
-#define _RANDOM_MIN (0xffff - 3)
-#define _RANDOM_MAX (0xffff - 4)
-#define _RANDOM_INT (0xffff - 5)
-#define _TIME_MS (0xffff - 6)
-#define _READKEY (0xffff - 7)
-#define _LOOP_SIZE (0xffff - 8)
-#define _KEYPRESS_COUNT (0xffff - 9)
-#define _NEEDS_EPILOGUE  (0xffff - 10)
-#define _TIME_S  (0xffff - 11)
-#define _ALLOW_ABORT (0xffff - 12)
-#define _BLOCKING_READKEY (0xffff - 13)
-#define _IS_NUMLOCK_ON (0xffff - 14)
-#define _IS_CAPSLOCK_ON (0xffff - 15)
-#define _IS_SCROLLLOCK_ON (0xffff - 16)
-#define _DONT_REPEAT (0xffff - 17)
-#define _THIS_KEYID (0xffff - 18)
-#define _DP_MODEL (0xffff - 19)
-#define _RTC_IS_VALID (0xffff - 20)
-#define _RTC_UTC_OFFSET (0xffff - 21)
-#define _RTC_YEAR (0xffff - 22)
-#define _RTC_MONTH (0xffff - 23)
-#define _RTC_DAY (0xffff - 24)
-#define _RTC_HOUR (0xffff - 25)
-#define _RTC_MINUTE (0xffff - 26)
-#define _RTC_SECOND (0xffff - 27)
-#define _RTC_WDAY (0xffff - 28)
-#define _RTC_YDAY (0xffff - 29)
-#define _STR_PRINT_FORMAT (0xffff - 30)
-#define _STR_PRINT_PADDING (0xffff - 31)
+#define _DEFAULTDELAY (INTERAL_VAR_START_ADDRESS + 0 * INTERAL_VAR_BYTE_WIDTH)
+#define _DEFAULTCHARDELAY (INTERAL_VAR_START_ADDRESS + 1 * INTERAL_VAR_BYTE_WIDTH)
+#define _CHARJITTER (INTERAL_VAR_START_ADDRESS + 2 * INTERAL_VAR_BYTE_WIDTH)
+#define _RANDOM_MIN (INTERAL_VAR_START_ADDRESS + 3 * INTERAL_VAR_BYTE_WIDTH)
+#define _RANDOM_MAX (INTERAL_VAR_START_ADDRESS + 4 * INTERAL_VAR_BYTE_WIDTH)
+#define _RANDOM_INT (INTERAL_VAR_START_ADDRESS + 5 * INTERAL_VAR_BYTE_WIDTH)
+#define _TIME_MS (INTERAL_VAR_START_ADDRESS + 6 * INTERAL_VAR_BYTE_WIDTH)
+#define _READKEY (INTERAL_VAR_START_ADDRESS + 7 * INTERAL_VAR_BYTE_WIDTH)
+#define _LOOP_SIZE (INTERAL_VAR_START_ADDRESS + 8 * INTERAL_VAR_BYTE_WIDTH)
+#define _KEYPRESS_COUNT (INTERAL_VAR_START_ADDRESS + 9 * INTERAL_VAR_BYTE_WIDTH)
+#define _EPILOGUE_ACTIONS (INTERAL_VAR_START_ADDRESS + 10 * INTERAL_VAR_BYTE_WIDTH)
+#define _TIME_S (INTERAL_VAR_START_ADDRESS + 11 * INTERAL_VAR_BYTE_WIDTH)
+#define _ALLOW_ABORT (INTERAL_VAR_START_ADDRESS + 12 * INTERAL_VAR_BYTE_WIDTH)
+#define _BLOCKING_READKEY (INTERAL_VAR_START_ADDRESS + 13 * INTERAL_VAR_BYTE_WIDTH)
+#define _IS_NUMLOCK_ON (INTERAL_VAR_START_ADDRESS + 14 * INTERAL_VAR_BYTE_WIDTH)
+#define _IS_CAPSLOCK_ON (INTERAL_VAR_START_ADDRESS + 15 * INTERAL_VAR_BYTE_WIDTH)
+#define _IS_SCROLLLOCK_ON (INTERAL_VAR_START_ADDRESS + 16 * INTERAL_VAR_BYTE_WIDTH)
+#define _DONT_REPEAT (INTERAL_VAR_START_ADDRESS + 17 * INTERAL_VAR_BYTE_WIDTH)
+#define _THIS_KEYID (INTERAL_VAR_START_ADDRESS + 18 * INTERAL_VAR_BYTE_WIDTH)
+#define _DP_MODEL (INTERAL_VAR_START_ADDRESS + 19 * INTERAL_VAR_BYTE_WIDTH)
+#define _RTC_IS_VALID (INTERAL_VAR_START_ADDRESS + 20 * INTERAL_VAR_BYTE_WIDTH)
+#define _RTC_UTC_OFFSET (INTERAL_VAR_START_ADDRESS + 21 * INTERAL_VAR_BYTE_WIDTH)
+#define _RTC_YEAR (INTERAL_VAR_START_ADDRESS + 22 * INTERAL_VAR_BYTE_WIDTH)
+#define _RTC_MONTH (INTERAL_VAR_START_ADDRESS + 23 * INTERAL_VAR_BYTE_WIDTH)
+#define _RTC_DAY (INTERAL_VAR_START_ADDRESS + 24 * INTERAL_VAR_BYTE_WIDTH)
+#define _RTC_HOUR (INTERAL_VAR_START_ADDRESS + 25 * INTERAL_VAR_BYTE_WIDTH)
+#define _RTC_MINUTE (INTERAL_VAR_START_ADDRESS + 26 * INTERAL_VAR_BYTE_WIDTH)
+#define _RTC_SECOND (INTERAL_VAR_START_ADDRESS + 27 * INTERAL_VAR_BYTE_WIDTH)
+#define _RTC_WDAY (INTERAL_VAR_START_ADDRESS + 28 * INTERAL_VAR_BYTE_WIDTH)
+#define _RTC_YDAY (INTERAL_VAR_START_ADDRESS + 29 * INTERAL_VAR_BYTE_WIDTH)
+#define _STR_PRINT_FORMAT (INTERAL_VAR_START_ADDRESS + 30 * INTERAL_VAR_BYTE_WIDTH)
+#define _STR_PRINT_PADDING (INTERAL_VAR_START_ADDRESS + 31 * INTERAL_VAR_BYTE_WIDTH)
+#define _UNUSED (INTERAL_VAR_START_ADDRESS + 32 * INTERAL_VAR_BYTE_WIDTH)
+#define _UNSIGNED_MATH (INTERAL_VAR_START_ADDRESS + 33 * INTERAL_VAR_BYTE_WIDTH)
+#define _SW_BITFIELD (INTERAL_VAR_START_ADDRESS + 34 * INTERAL_VAR_BYTE_WIDTH)
+
+#define DUMMY_DATA_REPLACE_ME (69)
 
 typedef struct
 {
@@ -127,7 +99,7 @@ typedef struct
   uint16_t next_pc;
   uint8_t data;
   uint8_t epilogue_actions;
-} ds3_exe_result;
+} exe_context;
 
 #define DEFAULT_CMD_DELAY_MS 20
 #define DEFAULT_CHAR_DELAY_MS 20
@@ -138,30 +110,54 @@ typedef struct
 #define EPILOGUE_DONT_AUTO_REPEAT 0x8
 #define EPILOGUE_SAVE_GV 0x10
 
-#define BIN_BUF_SIZE 65536
-#define VAR_BUF_SIZE 128
-
-#define GLOBAL_VARIABLE_COUNT 32
-#define GLOBAL_VARIABLE_OFFSET 64
-#define GLOBAL_VARIABLE_START (BIN_BUF_SIZE - 1 - GLOBAL_VARIABLE_OFFSET)
-#define GLOBAL_VARIABLE_END_INCLUSIVE (GLOBAL_VARIABLE_START - GLOBAL_VARIABLE_COUNT + 1)
-
 #define MAX(a, b) ((a) > (b) ? (a) : (b))
 
 extern uint8_t bin_buf[BIN_BUF_SIZE];
 extern uint8_t allow_abort;
 extern uint8_t kb_led_status;
-extern uint16_t gv_buf[GLOBAL_VARIABLE_COUNT];
+extern uint32_t pgv_buf[PGV_COUNT];
 
 extern uint8_t str_print_format;
 extern uint8_t str_print_padding;
-
-void run_dsb(ds3_exe_result* er, uint8_t this_key_id, char* dsb_path, uint8_t is_cached, uint8_t* dsb_cache);
 
 #define STR_PRINT_FORMAT_DEC_UNSIGNED    0
 #define STR_PRINT_FORMAT_DEC_SIGNED      1
 #define STR_PRINT_FORMAT_HEX_LOWER_CASE  2
 #define STR_PRINT_FORMAT_HEX_UPPER_CASE  3
+
+#define MAKESTR_VAR_BOUNDARY_IMM (0x1f)
+#define MAKESTR_VAR_BOUNDARY_REL (0x1e)
+
+/*
+  Stack grows from larger address to smaller address
+  SP points to next available slot
+*/
+typedef struct
+{
+  uint16_t sp;         // Virtual Stack Pointer (offset, e.g., 0xF7FC)
+  uint16_t fp;         // Virtual Frame Pointer
+  uint16_t lower_bound;// Lowest allowed virtual address (Stack Limit)
+  uint16_t upper_bound;// Highest allowed virtual address (Stack Base)
+  uint8_t* ram_base;   // Host pointer to bin_buf[0]
+} my_stack;
+
+typedef uint32_t (*FUNC_PTR_BINOP)(uint32_t, uint32_t);
+typedef uint32_t (*FUNC_PTR_UNARY)(uint32_t);
+
+void stack_print(my_stack* ms, char* comment);
+
+#define EPI_SAVE_LOOP_STATE 0x1
+#define EPI_SAVE_COLOR_STATE 0x2
+#define EPI_RESTORE_OLED 0x4
+#define EPI_NO_AUTOREPEAT 0x8
+#define EPI_SAVE_PGV 0x10
+
+#define DS_SET_BITS(variable, mask)   ((variable) |= (mask))
+#define DS_CLEAR_BITS(variable, mask) ((variable) &= ~(mask))
+
+#define PRINT_DEBUG 0
+
+void run_dsb(exe_context* er, uint8_t this_key_id, char* dsb_path, uint8_t is_cached, uint8_t* dsb_cache);
 
 #endif
 
