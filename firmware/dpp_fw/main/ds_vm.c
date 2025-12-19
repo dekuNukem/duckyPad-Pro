@@ -1064,6 +1064,7 @@ void execute_instruction(uint16_t curr_pc, exe_context* exe)
 void run_dsb(exe_context* er, uint8_t this_key_id, char* dsb_path, uint8_t is_cached, uint8_t* dsb_cache)
 {
   uint32_t this_dsb_size = DSB_CACHE_BYTE_SIZE;
+  current_key_id = this_key_id;
   if(is_cached)
   {
     memset(bin_buf, 0, BIN_BUF_SIZE);
