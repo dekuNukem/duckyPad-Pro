@@ -1063,13 +1063,21 @@ void execute_instruction(uint16_t curr_pc, exe_context* exe)
 
 void run_dsb(exe_context* er, uint8_t this_key_id, char* dsb_path, uint8_t is_cached, uint8_t* dsb_cache)
 {
-  uint32_t this_dsb_size = 0;
-  uint8_t dsb_load_result = load_dsb(dsb_path, &this_dsb_size);
-  if(dsb_load_result)
+  uint32_t this_dsb_size = DSB_CACHE_BYTE_SIZE;
+  if(is_cached)
   {
-    printf("DSB load fail: %d\n", dsb_load_result);
-    er->result = dsb_load_result;
-    return;
+    memset(bin_buf, 0, BIN_BUF_SIZE);
+    memcpy(bin_buf, dsb_cache, DSB_CACHE_BYTE_SIZE);
+  }
+  else
+  {
+    uint8_t dsb_load_result = load_dsb(dsb_path, &this_dsb_size);
+    if(dsb_load_result)
+    {
+      printf("DSB load fail: %d\n", dsb_load_result);
+      er->result = dsb_load_result;
+      return;
+    }
   }
 
   uint16_t current_pc = 0;
@@ -1087,6 +1095,7 @@ void run_dsb(exe_context* er, uint8_t this_key_id, char* dsb_path, uint8_t is_ca
   disable_autorepeat = 0;
   str_print_format = STR_PRINT_FORMAT_DEC_SIGNED;
   str_print_padding = 0;
+  srand(millis());
 
   int panic_code = setjmp(jmpbuf);
   if(panic_code != 0)
@@ -1106,4 +1115,11 @@ void run_dsb(exe_context* er, uint8_t this_key_id, char* dsb_path, uint8_t is_ca
   printf("Execution Complete\n");
   disable_autorepeat ? DS_SET_BITS(epilogue_actions, EPI_NO_AUTOREPEAT) : DS_CLEAR_BITS(epilogue_actions, EPI_NO_AUTOREPEAT);
   printf("Epilogue: %02x\n", epilogue_actions);
+
+  if(is_cached == 0 && this_dsb_size <= DSB_CACHE_BYTE_SIZE)
+  {
+    uint8_t is_press = strstr(dsb_path, key_release_file_string) == NULL;
+    dsbc_add(current_profile_number, this_key_id, is_press, millis(), bin_buf, this_dsb_size);
+    printf("added %02d %02d %02d to cache!\n", current_profile_number, this_key_id, is_press);
+  }
 }
