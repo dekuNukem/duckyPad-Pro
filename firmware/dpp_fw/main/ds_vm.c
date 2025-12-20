@@ -645,6 +645,18 @@ uint8_t str_is_integer(const char *str, long *out_value)
   return 1;
 }
 
+int8_t lookup_profile_index(const char* identifier)
+{
+  int32_t pf_int = -1;
+  if (str_is_integer(identifier, &pf_int))
+    if (pf_int >= 0 && pf_int < MAX_PROFILES && all_profile_info[pf_int].is_loaded)
+      return (int8_t)pf_int;
+  for (uint8_t i = 0; i < MAX_PROFILES; i++)
+    if (all_profile_info[i].is_loaded && strcmp(identifier, all_profile_info[i].pf_name) == 0)
+      return (int8_t)i;
+  return -1;
+}
+
 uint8_t inst_size_lookup(uint8_t opcode)
 {
   if(opcode == OP_VMVER)
@@ -1222,8 +1234,11 @@ void execute_instruction(exe_context* exe)
     uint32_t this_value;
     stack_pop(&data_stack, &this_value);
     char* str_buf = make_str((uint16_t)this_value);
-    uint8_t is_int = str_is_integer(str_buf, NULL);
-    printf("OP_GOTOP_STR %d: %s\n", is_int, str_buf);
+    int8_t profile_idx = lookup_profile_index(str_buf);
+    if(profile_idx == -1)
+      longjmp(jmpbuf, EXE_PROFILE_NOT_FOUND);
+    exe->result = EXE_ACTION_GOTO_PROFILE;
+    exe->data = (uint8_t)profile_idx;
   }
   else if(opcode == OP_SLEEP)
   {

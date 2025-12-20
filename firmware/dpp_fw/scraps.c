@@ -1,5 +1,37 @@
 
-
+  else if(opcode == OP_GOTOP)
+  {
+    uint32_t this_value;
+    stack_pop(&data_stack, &this_value);
+    char* str_buf = make_str((uint16_t)this_value);
+    int32_t pf_int = 255;
+    uint8_t is_int = str_is_integer(str_buf, &pf_int);
+    printf("OP_GOTOP %d: %s\n", is_int, str_buf);
+    if(is_int && pf_int < MAX_PROFILES && all_profile_info[pf_int].is_loaded)
+    {
+      exe->result = EXE_ACTION_GOTO_PROFILE;
+      exe->data = (uint8_t)pf_int;
+    }
+    else
+    {
+      uint8_t pf_idx = 0;
+      for (pf_idx = 0; pf_idx < MAX_PROFILES; pf_idx++)
+      {
+        if(all_profile_info[pf_idx].is_loaded == 0)
+          continue;
+        // printf("%s\n---\n", all_profile_info[pf_idx].pf_name);
+        if(strcmp(str_buf, all_profile_info[pf_idx].pf_name) == 0)
+        {
+          exe->result = EXE_ACTION_GOTO_PROFILE;
+          exe->data = pf_idx;
+          break;
+        }
+      }
+      if(pf_idx == MAX_PROFILES)
+        longjmp(jmpbuf, EXE_PROFILE_NOT_FOUND);
+    }
+  }.
+  
 DS_SET_BITS(epilogue_actions, EPILOGUE_NEED_OLED_RESTORE);
 DS_CLEAR_BITS(epilogue_actions, EPILOGUE_NEED_OLED_RESTORE);
 

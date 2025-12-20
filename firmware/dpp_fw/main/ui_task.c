@@ -468,6 +468,7 @@ static const char* exe_error_string(uint8_t err_code)
     case EXE_DSB_FILE_TOO_LARGE:       return "File Too Large";
     case EXE_UNIMPLEMENTED:            return "Unimplemented";
     case EXE_UNALIGNED_ACCESS:         return "Unaligned Read";
+    case EXE_PROFILE_NOT_FOUND:        return "Profile Not Found";
     default:                           return "Unknown Error";
   }
 }
@@ -543,7 +544,7 @@ void draw_exe_error(exe_context* ctx)
   ssd1306_WriteString(oled_line_buf, Font_7x10, White);
 
   memset(oled_line_buf, 0, OLED_LINE_BUF_SIZE);
-  sprintf(oled_line_buf, "PC: 0x%X", err_pc);
+  sprintf(oled_line_buf, "PC: 0x%04X / %d", err_pc, err_pc);
   ssd1306_SetCursor(center_line(strlen(oled_line_buf), 7, SSD1306_WIDTH), 60);
   ssd1306_WriteString(oled_line_buf, Font_7x10, White);
 
