@@ -1,3 +1,32 @@
+
+
+DS_SET_BITS(epilogue_actions, EPILOGUE_NEED_OLED_RESTORE);
+DS_CLEAR_BITS(epilogue_actions, EPILOGUE_NEED_OLED_RESTORE);
+
+
+  printf("Execution Complete\n");
+
+  printf("Epilogue: %02x\n", epilogue_actions);
+
+    printf("VM Crashed! Panic: %d\n", panic_code);
+      printf("DSB load fail: %d\n", dsb_load_result);
+
+else if(opcode == OP_STR)
+  {
+    uint32_t this_value;
+    stack_pop(&data_stack, &this_value);
+    char* str_buf = make_str((uint16_t)this_value);
+    printf(">>>>> STRING: %s\n", str_buf);
+  }
+  else if(opcode == OP_STRLN)
+  {
+    uint32_t this_value;
+    stack_pop(&data_stack, &this_value);
+    char* str_buf = make_str((uint16_t)this_value);
+    printf(">>>>> STRINGLN: %s\n", str_buf);
+  }
+
+
 void draw_exe_error(uint8_t err_code)
 {
   ssd1306_Fill(Black);

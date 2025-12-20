@@ -455,18 +455,22 @@ void draw_settings(dp_global_settings *dps)
 
 static const char* exe_error_string(uint8_t err_code)
 {
-  switch (err_code) {
-    case EXE_ILLEGAL_INSTRUCTION:          return "Unknown Opcode";
-    case EXE_DSB_INCOMPATIBLE_VERSION:return "Unsupported VM";
-    case EXE_DSB_FOPEN_FAIL:          return "File Open Fail";
-    case EXE_DSB_FREAD_ERROR:         return "File Read Fail";
-    case EXE_STACK_OVERFLOW:          return "Stack Overflow";
-    case EXE_STACK_UNDERFLOW:         return "Stack Underflow";
-    case EXE_DIVISION_BY_ZERO:        return "Division by Zero";
-    default:                          return "Unknown";
+  switch (err_code)
+  {
+    case EXE_ILLEGAL_INSTRUCTION:      return "Unknown Opcode";
+    case EXE_DSB_INCOMPATIBLE_VERSION: return "Unsupported VM";
+    case EXE_DSB_FOPEN_FAIL:           return "File Open Fail";
+    case EXE_DSB_FREAD_ERROR:          return "File Read Fail";
+    case EXE_STACK_OVERFLOW:           return "Stack Overflow";
+    case EXE_STACK_UNDERFLOW:          return "Stack Underflow";
+    case EXE_DIVISION_BY_ZERO:         return "Division by Zero";
+    case EXE_ILLEGAL_ADDR:             return "Illegal Address";
+    case EXE_DSB_FILE_TOO_LARGE:       return "File Too Large";
+    case EXE_UNIMPLEMENTED:            return "Unimplemented";
+    case EXE_UNALIGNED_ACCESS:         return "Unaligned Read";
+    default:                           return "Unknown Error";
   }
 }
-
 
 void draw_wrong_vmver()
 {
@@ -512,8 +516,10 @@ void draw_wrong_vmver()
   ssd1306_UpdateScreen();
 }
 
-void draw_exe_error(uint8_t err_code, uint16_t pc)
+void draw_exe_error(exe_context* ctx)
 {
+  uint8_t err_code = ctx->result;
+  uint16_t err_pc = ctx->this_pc;
   if(err_code == EXE_DSB_INCOMPATIBLE_VERSION)
   {
     draw_wrong_vmver();
@@ -537,7 +543,7 @@ void draw_exe_error(uint8_t err_code, uint16_t pc)
   ssd1306_WriteString(oled_line_buf, Font_7x10, White);
 
   memset(oled_line_buf, 0, OLED_LINE_BUF_SIZE);
-  sprintf(oled_line_buf, "PC: 0x%X", pc);
+  sprintf(oled_line_buf, "PC: 0x%X", err_pc);
   ssd1306_SetCursor(center_line(strlen(oled_line_buf), 7, SSD1306_WIDTH), 60);
   ssd1306_WriteString(oled_line_buf, Font_7x10, White);
 

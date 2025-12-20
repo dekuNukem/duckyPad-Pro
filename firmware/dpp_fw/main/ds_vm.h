@@ -105,12 +105,6 @@ typedef struct
 #define DEFAULT_CMD_DELAY_MS 20
 #define DEFAULT_CHAR_DELAY_MS 20
 
-#define EPILOGUE_SAVE_LOOP_STATE 0x1
-#define EPILOGUE_SAVE_COLOR_STATE 0x2
-#define EPILOGUE_NEED_OLED_RESTORE 0x4
-#define EPILOGUE_DONT_AUTO_REPEAT 0x8
-#define EPILOGUE_SAVE_GV 0x10
-
 #define MAX(a, b) ((a) > (b) ? (a) : (b))
 
 extern uint8_t bin_buf[BIN_BUF_SIZE];
@@ -147,11 +141,11 @@ typedef uint32_t (*FUNC_PTR_UNARY)(uint32_t);
 
 void stack_print(my_stack* ms, char* comment);
 
-#define EPI_SAVE_LOOP_STATE 0x1
-#define EPI_SAVE_COLOR_STATE 0x2
-#define EPI_RESTORE_OLED 0x4
-#define EPI_NO_AUTOREPEAT 0x8
-#define EPI_SAVE_PGV 0x10
+#define EPILOGUE_SAVE_LOOP_STATE 0x1
+#define EPILOGUE_SAVE_COLOR_STATE 0x2
+#define EPILOGUE_NEED_OLED_RESTORE 0x4
+#define EPILOGUE_DONT_AUTO_REPEAT 0x8
+#define EPILOGUE_SAVE_PGV 0x10
 
 #define DS_SET_BITS(variable, mask)   ((variable) |= (mask))
 #define DS_CLEAR_BITS(variable, mask) ((variable) &= ~(mask))

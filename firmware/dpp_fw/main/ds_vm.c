@@ -30,7 +30,7 @@ uint32_t defaultchardelay;
 uint32_t charjitter;
 uint32_t rand_min, rand_max;
 uint32_t loop_size;
-uint8_t epilogue_actions;
+uint8_t* epilogue_ptr;
 uint8_t allow_abort;
 uint8_t kb_led_status;
 uint8_t disable_autorepeat;
@@ -458,6 +458,54 @@ void write_uint32_as_4B(uint8_t* bbuf, uint32_t value)
   memcpy(bbuf, &value, sizeof(uint32_t));
 }
 
+uint8_t readkey_nonblocking_1_indexed(void)
+{
+  for (uint8_t i = 0; i < MAX_TOTAL_SW_COUNT; i++)
+  {
+    if(poll_sw_state(i, 0))
+      return i+1;
+  }
+  return 0;
+}
+
+uint8_t readkey_blocking_1_indexed(void)
+{
+  switch_event_t sw_event;
+  rotary_encoder_event_t re_event;
+  clear_sw_re_queue();
+  while(1)
+  {
+    delay_ms(10);
+    if(xQueueReceive(rotary_encoder_event_queue, &re_event, 0))
+      return re_event_to_swid(&re_event)+1;
+    if(xQueueReceive(switch_event_queue, &sw_event, 0) && sw_event.type == SW_EVENT_SHORT_PRESS)
+      return sw_event.id+1;
+  }
+}
+
+uint16_t get_rtc_data(uint16_t addr)
+{
+  struct tm local_tm;
+  get_local_time(utc_offset_minutes, &local_tm);
+  if(addr == _RTC_YEAR)
+    return local_tm.tm_year + 1900;
+  if(addr == _RTC_MONTH)
+    return local_tm.tm_mon + 1;
+  if(addr == _RTC_DAY)
+    return local_tm.tm_mday;
+  if(addr == _RTC_HOUR)
+    return local_tm.tm_hour;
+  if(addr == _RTC_MINUTE)
+    return local_tm.tm_min;
+  if(addr == _RTC_SECOND)
+    return local_tm.tm_sec;
+  if(addr == _RTC_WDAY)
+    return local_tm.tm_wday;
+  if(addr == _RTC_YDAY)
+    return local_tm.tm_yday;
+  return 0;
+}
+
 uint32_t memread_u32(uint16_t addr)
 {
   if (addr <= USER_VAR_END_ADDRESS_INCLUSIVE)
@@ -475,29 +523,29 @@ uint32_t memread_u32(uint16_t addr)
   if (addr == _RANDOM_MAX)
     return rand_max;
   if (addr == _RANDOM_INT)
-    return DUMMY_DATA_REPLACE_ME;
+    return rand() % (rand_max + 1 - rand_min) + rand_min;;
   if (addr == _TIME_MS)
-    return DUMMY_DATA_REPLACE_ME;
+    return millis();
   if (addr == _READKEY)
-    return DUMMY_DATA_REPLACE_ME;
+    return readkey_nonblocking_1_indexed();
   if (addr == _LOOP_SIZE)
     return loop_size;
   if (addr == _KEYPRESS_COUNT)
-    return DUMMY_DATA_REPLACE_ME;
+    return all_profile_info[current_profile_number].keypress_count[current_key_id];
   if (addr == _EPILOGUE_ACTIONS)
-    return epilogue_actions;
+    return *epilogue_ptr;
   if (addr == _TIME_S)
-    return DUMMY_DATA_REPLACE_ME;
+    return millis()/1000;
   if (addr == _ALLOW_ABORT)
     return allow_abort;
   if (addr == _BLOCKING_READKEY)
-    return DUMMY_DATA_REPLACE_ME;
+    return readkey_blocking_1_indexed();
   if (addr == _IS_NUMLOCK_ON)
-    return DUMMY_DATA_REPLACE_ME;
+    return (kb_led_status & 0x1) ? 1 : 0;
   if (addr == _IS_CAPSLOCK_ON)
-    return DUMMY_DATA_REPLACE_ME;
+    return (kb_led_status & 0x2) ? 1 : 0;
   if (addr == _IS_SCROLLLOCK_ON)
-    return DUMMY_DATA_REPLACE_ME;
+    return (kb_led_status & 0x4) ? 1 : 0;
   if (addr == _DONT_REPEAT)
     return disable_autorepeat;
   if (addr == _THIS_KEYID)
@@ -505,25 +553,11 @@ uint32_t memread_u32(uint16_t addr)
   if (addr == _DP_MODEL)
     return 2;
   if (addr == _RTC_IS_VALID)
-    return DUMMY_DATA_REPLACE_ME;
+    return is_rtc_valid;
   if (addr == _RTC_UTC_OFFSET)
     return utc_offset_minutes;
-  if (addr == _RTC_YEAR)
-    return DUMMY_DATA_REPLACE_ME;
-  if (addr == _RTC_MONTH)
-    return DUMMY_DATA_REPLACE_ME;
-  if (addr == _RTC_DAY)
-    return DUMMY_DATA_REPLACE_ME;
-  if (addr == _RTC_HOUR)
-    return DUMMY_DATA_REPLACE_ME;
-  if (addr == _RTC_MINUTE)
-    return DUMMY_DATA_REPLACE_ME;
-  if (addr == _RTC_SECOND)
-    return DUMMY_DATA_REPLACE_ME;
-  if (addr == _RTC_WDAY)
-    return DUMMY_DATA_REPLACE_ME;
-  if (addr == _RTC_YDAY)
-    return DUMMY_DATA_REPLACE_ME;
+  if (addr >= _RTC_YEAR && addr <= _RTC_YDAY)
+    return get_rtc_data(addr);
   if (addr == _STR_PRINT_FORMAT)
     return str_print_format;
   if (addr == _STR_PRINT_PADDING)
@@ -544,7 +578,7 @@ void memwrite_u32(uint16_t addr, uint32_t value)
   else if (is_pgv(addr))
   {
     pgv_buf[get_gv_index(addr)] = value;
-    DS_SET_BITS(epilogue_actions, EPI_SAVE_PGV);
+    DS_SET_BITS(*epilogue_ptr, EPILOGUE_SAVE_PGV);
   }
   else if (addr == _DEFAULTDELAY)
 	  defaultdelay = value;
@@ -557,9 +591,9 @@ void memwrite_u32(uint16_t addr, uint32_t value)
   else if (addr == _RANDOM_MAX)
     rand_max = value;
   else if (addr == _KEYPRESS_COUNT)
-    (void)DUMMY_DATA_REPLACE_ME;
+    all_profile_info[current_profile_number].keypress_count[current_key_id] = value;
   else if (addr == _EPILOGUE_ACTIONS)
-    epilogue_actions = value;
+    *epilogue_ptr = value;
   else if (addr == _ALLOW_ABORT)
     allow_abort = value;
   else if (addr == _DONT_REPEAT)
@@ -708,6 +742,112 @@ char* make_str(uint16_t str_start_addr)
     curr_addr++;
   }
   return read_buffer;
+}
+
+uint8_t delayms_check_abort(uint32_t amount)
+{
+  for (uint32_t i = 0; i < amount; i++)
+  {
+    if(allow_abort && sw_queue_has_keydown_event())
+      return 1;
+    delay_ms(1);
+  }
+  return 0;
+}
+
+void parse_swcf(void)
+{
+  uint32_t red, green, blue;
+  stack_pop(&data_stack, &red);
+  stack_pop(&data_stack, &green);
+  stack_pop(&data_stack, &blue);
+  halt_all_animations();
+  for (int i = 0; i < NEOPIXEL_COUNT; ++i)
+    set_pixel_3color(i, red, green, blue);
+  neopixel_draw_current_buffer();
+  DS_SET_BITS(*epilogue_ptr, EPILOGUE_SAVE_COLOR_STATE);
+}
+
+void parse_swcc(void)
+{
+  uint32_t this_index, red, green, blue;
+  stack_pop(&data_stack, &this_index);
+  stack_pop(&data_stack, &red);
+  stack_pop(&data_stack, &green);
+  stack_pop(&data_stack, &blue);
+  if(this_index == 0)
+    this_index = current_key_id;
+  else
+    this_index--;
+  if(this_index >= NEOPIXEL_COUNT)
+    return;
+  halt_all_animations();
+  set_pixel_3color(this_index, red, green, blue);
+  neopixel_draw_current_buffer();
+  DS_SET_BITS(*epilogue_ptr, EPILOGUE_SAVE_COLOR_STATE);
+}
+
+void parse_swcr(void)
+{
+  uint32_t this_value;
+  stack_pop(&data_stack, &this_value);
+
+  if(this_value == 0)
+    this_value = current_key_id;
+  else
+    this_value--;
+
+  if(this_value >= NEOPIXEL_COUNT)
+    redraw_bg(current_profile_number);
+  else
+    reset_key_color(this_value);
+  DS_CLEAR_BITS(*epilogue_ptr, EPILOGUE_SAVE_COLOR_STATE);
+}
+
+void expand_mmov(int16_t xtotal, int16_t ytotal)
+{
+  int16_t xsign = (xtotal < 0) ? -1 : 1;
+  int16_t ysign = (ytotal < 0) ? -1 : 1;
+
+  xtotal = abs(xtotal);
+  ytotal = abs(ytotal);
+
+  uint8_t loops_needed_x = abs(xtotal) / 128;
+  uint8_t loops_needed_y = abs(ytotal) / 128;
+
+  uint8_t total_loops_needed = MAX(loops_needed_x, loops_needed_y);
+
+  for (int i = 0; i <= total_loops_needed; ++i)
+  {
+    int8_t this_x_amount;
+    if(xtotal > 127)
+      this_x_amount = 127;
+    else
+      this_x_amount = xtotal;
+    xtotal -= this_x_amount;
+
+    int8_t this_y_amount;
+    if(ytotal > 127)
+      this_y_amount = 127;
+    else
+      this_y_amount = ytotal;
+    ytotal -= this_y_amount;
+
+    my_key kk;
+    kk.code = (uint8_t)this_x_amount*xsign;
+    kk.code2 = (uint8_t)this_y_amount*ysign;
+    kk.type = KEY_TYPE_MOUSE_MOVEMENT;
+    action_press(&kk, 0);
+    delay_ms(defaultdelay);
+  }
+}
+
+void clamp_uint(uint32_t* value, uint32_t upper_limit)
+{
+  if(value == NULL)
+    return;
+  if(*value > upper_limit)
+    *value = upper_limit;
 }
 
 void execute_instruction(exe_context* exe)
@@ -909,101 +1049,109 @@ void execute_instruction(exe_context* exe)
   {
     uint32_t this_value;
     stack_pop(&data_stack, &this_value);
-    printf("OP_DELAY: %ldms\n", this_value);
+    if(delayms_check_abort(this_value))
+    {
+      exe->result = EXE_ABORTED;
+      return;
+    }
   }
   else if(opcode == OP_KDOWN)
   {
     uint32_t combocode;
     stack_pop(&data_stack, &combocode);
-    printf("OP_KDOWN: %ld\n", combocode);
+    uint8_t ktype = (combocode >> 8) & 0xff;
+    uint8_t kcode = combocode & 0xff;
+  	press_key(kcode, ktype);
+  	delay_ms(defaultdelay);
   }
   else if(opcode == OP_KUP)
   {
     uint32_t combocode;
     stack_pop(&data_stack, &combocode);
-    printf("OP_KUP: %ld\n", combocode);
+    uint8_t ktype = (combocode >> 8) & 0xff;
+    uint8_t kcode = combocode & 0xff;
+  	release_key(kcode, ktype);
+  	delay_ms(defaultdelay);
   }
   else if(opcode == OP_MSCL)
   {
     uint32_t this_value;
     stack_pop(&data_stack, &this_value);
-    printf("OP_MSCL: %ld\n", this_value);
+    my_key kk;
+    kk.code = this_value;
+    kk.code2 = 0;
+    kk.type = KEY_TYPE_MOUSE_WHEEL;
+    action_press(&kk, 0);
+    delay_ms(defaultchardelay);
+    action_release(&kk);
+    delay_ms(defaultdelay);
   }
   else if(opcode == OP_MMOV)
   {
     uint32_t tempx, tempy;
     stack_pop(&data_stack, &tempx);
     stack_pop(&data_stack, &tempy);
-    printf("OP_MMOV: %ld %ld\n", tempx, tempy);
+    expand_mmov(tempx, tempy);
   }
   else if(opcode == OP_SWCF)
   {
-    uint32_t red, green, blue;
-    stack_pop(&data_stack, &red);
-    stack_pop(&data_stack, &green);
-    stack_pop(&data_stack, &blue);
-    printf("OP_SWCF: %ld %ld %ld\n", red, green, blue);
-    DS_SET_BITS(epilogue_actions, EPI_SAVE_COLOR_STATE);
+    parse_swcf();
   }
   else if(opcode == OP_SWCC)
   {
-    uint32_t this_index, red, green, blue;
-    stack_pop(&data_stack, &this_index);
-    stack_pop(&data_stack, &red);
-    stack_pop(&data_stack, &green);
-    stack_pop(&data_stack, &blue);
-    printf("OP_SWCC: %ld %ld %ld %ld\n", this_index, red, green, blue);
-    DS_SET_BITS(epilogue_actions, EPI_SAVE_COLOR_STATE);
+    parse_swcc();
   }
   else if(opcode == OP_SWCR)
   {
-    uint32_t this_value;
-    stack_pop(&data_stack, &this_value);
-    printf("OP_SWCR: %ld\n", this_value);
-    DS_CLEAR_BITS(epilogue_actions, EPI_SAVE_COLOR_STATE);
+    parse_swcr();
   }
-  else if(opcode == OP_STR)
+  else if(opcode == OP_STR || opcode == OP_STRLN)
   {
     uint32_t this_value;
     stack_pop(&data_stack, &this_value);
     char* str_buf = make_str((uint16_t)this_value);
-    printf(">>>>> STRING: %s\n", str_buf);
-  }
-  else if(opcode == OP_STRLN)
-  {
-    uint32_t this_value;
-    stack_pop(&data_stack, &this_value);
-    char* str_buf = make_str((uint16_t)this_value);
-    printf(">>>>> STRINGLN: %s\n", str_buf);
+    if(kb_print(str_buf, defaultchardelay, charjitter))
+    {
+      exe->result = EXE_ABORTED;
+      return;
+    }
+    if(opcode == OP_STRLN)
+    {
+    	press_key(0x28, 0x03); // ENTER key
+    	delay_ms(defaultdelay);
+    	release_key(0x28, 0x03);
+    	delay_ms(defaultdelay);
+    }
   }
   else if(opcode == OP_OLED_CUSR)
   {
     uint32_t xxx, yyy;
     stack_pop(&data_stack, &xxx);
     stack_pop(&data_stack, &yyy);
-    printf("OP_OLED_CUSR: %ld %ld\n", xxx, yyy);
+    if(xxx < SSD1306_WIDTH && yyy < SSD1306_HEIGHT)
+      ssd1306_SetCursor(xxx, yyy);
   }
   else if(opcode == OP_OLED_PRNT)
   {
     uint32_t this_value;
     stack_pop(&data_stack, &this_value);
     char* str_buf = make_str((uint16_t)this_value);
-    printf(">>>>> OLED_PRINT: %s\n", str_buf);
+    ssd1306_WriteString(str_buf, Font_7x10, White);
   }
   else if(opcode == OP_OLED_UPDE)
   {
-    printf("OP_OLED_UPDE\n");
-    DS_SET_BITS(epilogue_actions, EPI_RESTORE_OLED);
+    ssd1306_UpdateScreen();
+    DS_SET_BITS(*epilogue_ptr, EPILOGUE_NEED_OLED_RESTORE);
   }
   else if(opcode == OP_OLED_CLR)
   {
-    printf("OP_OLED_CLR\n");
+    ssd1306_Fill(Black);
   }
   else if(opcode == OP_OLED_REST)
   {
-    printf("OP_OLED_REST\n");
+    draw_profile(&all_profile_info[current_profile_number]);
     // user already restored OLED content, no need to do it again.
-    DS_CLEAR_BITS(epilogue_actions, EPI_RESTORE_OLED);
+    DS_CLEAR_BITS(*epilogue_ptr, EPILOGUE_NEED_OLED_RESTORE);
   }
   else if(opcode == OP_OLED_LINE)
   {
@@ -1012,7 +1160,11 @@ void execute_instruction(exe_context* exe)
     stack_pop(&data_stack, &y1);
     stack_pop(&data_stack, &x2);
     stack_pop(&data_stack, &y2);
-    printf("OP_OLED_LINE: %ld %ld %ld %ld\n", x1, y1, x2, y2);
+    clamp_uint(&x1, SSD1306_WIDTH);
+    clamp_uint(&x2, SSD1306_WIDTH);
+    clamp_uint(&y1, SSD1306_HEIGHT);
+    clamp_uint(&y2, SSD1306_HEIGHT);
+    ssd1306_Line(x1, y1, x2, y2, White);
   }
   else if(opcode == OP_OLED_RECT)
   {
@@ -1022,7 +1174,14 @@ void execute_instruction(exe_context* exe)
     stack_pop(&data_stack, &x2);
     stack_pop(&data_stack, &y2);
     stack_pop(&data_stack, &fill);
-    printf("OP_OLED_RECT: %ld %ld %ld %ld %ld\n", x1, y1, x2, y2, fill);
+    clamp_uint(&x1, SSD1306_WIDTH);
+    clamp_uint(&x2, SSD1306_WIDTH);
+    clamp_uint(&y1, SSD1306_HEIGHT);
+    clamp_uint(&y2, SSD1306_HEIGHT);
+    if(fill)
+      ssd1306_FillRectangle(x1,y1,x2,y2,White);
+    else
+      ssd1306_DrawRectangle(x1,y1,x2,y2,White);
   }
   else if(opcode == OP_OLED_CIRC)
   {
@@ -1031,17 +1190,27 @@ void execute_instruction(exe_context* exe)
     stack_pop(&data_stack, &y);
     stack_pop(&data_stack, &radius);
     stack_pop(&data_stack, &fill);
-    printf("OP_OLED_CIRC: %ld %ld %ld %ld\n", x, y, radius, fill);
+    clamp_uint(&x, SSD1306_WIDTH);
+    clamp_uint(&y, SSD1306_HEIGHT);
+    clamp_uint(&radius, SSD1306_HEIGHT/2);
+    if(fill)
+      ssd1306_FillCircle(x,y,radius,White);
+    else
+      ssd1306_DrawCircle(x,y,radius,White);
   }
   else if(opcode == OP_BCLR)
   {
-    printf("OP_BCLR\n");
+    clear_sw_re_queue();
   }
   else if(opcode == OP_SKIPP)
   {
     uint32_t this_value;
     stack_pop(&data_stack, &this_value);
-    printf("OP_SKIPP: %ld\n", this_value);
+    int32_t amount = this_value;
+    if(amount > 0)
+      exe->result = EXE_ACTION_NEXT_PROFILE;
+    else if(amount < 0)
+      exe->result = EXE_ACTION_PREV_PROFILE;
   }
   else if(opcode == OP_GOTOP)
   {
@@ -1053,7 +1222,7 @@ void execute_instruction(exe_context* exe)
   }
   else if(opcode == OP_SLEEP)
   {
-    printf("OP_SLEEP\n");
+    exe->result = EXE_ACTION_SLEEP;
   }
   else
   {
@@ -1062,7 +1231,7 @@ void execute_instruction(exe_context* exe)
   }
 }
 
-void run_dsb(exe_context* er, uint8_t this_key_id, char* dsb_path, uint8_t is_cached, uint8_t* dsb_cache)
+void run_dsb(exe_context* ctx, uint8_t this_key_id, char* dsb_path, uint8_t is_cached, uint8_t* dsb_cache)
 {
   uint32_t this_dsb_size = DSB_CACHE_BYTE_SIZE;
   current_key_id = this_key_id;
@@ -1076,8 +1245,7 @@ void run_dsb(exe_context* er, uint8_t this_key_id, char* dsb_path, uint8_t is_ca
     uint8_t dsb_load_result = load_dsb(dsb_path, &this_dsb_size);
     if(dsb_load_result)
     {
-      printf("DSB load fail: %d\n", dsb_load_result);
-      er->result = dsb_load_result;
+      ctx->result = dsb_load_result;
       return;
     }
   }
@@ -1091,7 +1259,7 @@ void run_dsb(exe_context* er, uint8_t this_key_id, char* dsb_path, uint8_t is_ca
   rand_max = 0xffffffff;
   rand_min = 0;
   loop_size = 0;
-  epilogue_actions = 0;
+  epilogue_ptr = &ctx->epilogue_actions;
   allow_abort = 0;
   disable_autorepeat = 0;
   str_print_format = STR_PRINT_FORMAT_DEC_SIGNED;
@@ -1101,26 +1269,24 @@ void run_dsb(exe_context* er, uint8_t this_key_id, char* dsb_path, uint8_t is_ca
   int panic_code = setjmp(jmpbuf);
   if(panic_code != 0)
   {
-    printf("VM Crashed! Panic: %d\n", panic_code);
+    ctx->result = panic_code;
     return;
   }
   while(1)
   {
-    execute_instruction(er);
-    er->this_pc = er->next_pc;
-    if(er->result != EXE_OK)
+    execute_instruction(ctx);
+    ctx->this_pc = ctx->next_pc;
+    if(ctx->result != EXE_OK)
       break;
-    if(er->this_pc > this_dsb_size)
+    if(ctx->this_pc > this_dsb_size)
       break;
   }
-  printf("Execution Complete\n");
-  disable_autorepeat ? DS_SET_BITS(epilogue_actions, EPI_NO_AUTOREPEAT) : DS_CLEAR_BITS(epilogue_actions, EPI_NO_AUTOREPEAT);
-  printf("Epilogue: %02x\n", epilogue_actions);
+  disable_autorepeat ? DS_SET_BITS(*epilogue_ptr, EPILOGUE_DONT_AUTO_REPEAT) : DS_CLEAR_BITS(*epilogue_ptr, EPILOGUE_DONT_AUTO_REPEAT);
 
   if(is_cached == 0 && this_dsb_size <= DSB_CACHE_BYTE_SIZE)
   {
     uint8_t is_press = strstr(dsb_path, key_release_file_string) == NULL;
     dsbc_add(current_profile_number, this_key_id, is_press, millis(), bin_buf, this_dsb_size);
-    printf("added %02d %02d %02d to cache!\n", current_profile_number, this_key_id, is_press);
+    // printf("added %02d %02d %02d to cache!\n", current_profile_number, this_key_id, is_press);
   }
 }

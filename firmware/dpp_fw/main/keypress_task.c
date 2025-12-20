@@ -102,7 +102,7 @@ uint8_t run_once(uint8_t swid, char* dsb_path, uint8_t* to_increment)
     return DSB_DONT_PLAY_KEYUP_ANIMATION_RETURN_IMMEDIATELY;
   }
 
-  if(this_exe.epilogue_actions & EPILOGUE_SAVE_GV)
+  if(this_exe.epilogue_actions & EPILOGUE_SAVE_PGV)
   {
     save_gv();
   }
@@ -127,7 +127,7 @@ uint8_t run_once(uint8_t swid, char* dsb_path, uint8_t* to_increment)
   if(this_exe.result >= EXE_ERROR_CODE_START)
   {
     neopixel_fill(128, 0, 0);
-    draw_exe_error(this_exe.result, this_exe.next_pc);
+    draw_exe_error(&this_exe);
     release_everything();
     block_until_anykey(SW_EVENT_SHORT_PRESS);
     goto_profile(current_profile_number);

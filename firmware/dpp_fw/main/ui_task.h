@@ -7,6 +7,7 @@
 
 #include "driver/spi_master.h"
 #include "profiles.h"
+#include "ds_vm.h"
 
 #define OLED_MOSI 10
 #define OLED_CS 14
@@ -22,7 +23,7 @@ void draw_noprofile(void);
 void draw_profile(profile_info* this_profile);
 void draw_settings(dp_global_settings *dps);
 void draw_msc_mode(void);
-void draw_exe_error(uint8_t err_code, uint16_t pc);
+void draw_exe_error(exe_context* ctx);
 void draw_fw_update_ask(char* fw_path_str);
 void draw_fw_crc_error(char* fw_path_str);
 void oled_say(char* what);
