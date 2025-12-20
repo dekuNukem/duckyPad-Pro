@@ -710,8 +710,9 @@ char* make_str(uint16_t str_start_addr)
   return read_buffer;
 }
 
-void execute_instruction(uint16_t curr_pc, exe_context* exe)
+void execute_instruction(exe_context* exe)
 {
+  uint16_t curr_pc = exe->this_pc;
   uint8_t opcode = read_byte(curr_pc);
   uint8_t instruction_size_bytes = inst_size_lookup(opcode);
   uint16_t payload = 0;
@@ -1081,7 +1082,6 @@ void run_dsb(exe_context* er, uint8_t this_key_id, char* dsb_path, uint8_t is_ca
     }
   }
 
-  uint16_t current_pc = 0;
   uint16_t data_stack_size_bytes = STACK_BASE_ADDR - this_dsb_size - STACK_MOAT_BYTES;
   stack_init(&data_stack, bin_buf, STACK_BASE_ADDR, data_stack_size_bytes);
 
@@ -1106,11 +1106,11 @@ void run_dsb(exe_context* er, uint8_t this_key_id, char* dsb_path, uint8_t is_ca
   }
   while(1)
   {
-    execute_instruction(current_pc, er);
-    current_pc = er->next_pc;
+    execute_instruction(er);
+    er->this_pc = er->next_pc;
     if(er->result != EXE_OK)
       break;
-    if(current_pc > this_dsb_size)
+    if(er->this_pc > this_dsb_size)
       break;
   }
   printf("Execution Complete\n");

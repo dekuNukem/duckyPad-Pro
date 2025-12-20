@@ -96,6 +96,7 @@
 typedef struct
 {
   uint8_t result;
+  uint16_t this_pc;
   uint16_t next_pc;
   uint8_t data;
   uint8_t epilogue_actions;

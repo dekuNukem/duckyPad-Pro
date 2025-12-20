@@ -66,12 +66,13 @@ uint8_t is_plus_minus_button(uint8_t swid)
 
 exe_context this_exe;
 
-void der_init(exe_context* der)
+void exe_ctx_init(exe_context* ctx)
 {
-  der->result = EXE_OK;
-  der->next_pc = 0;
-  der->data = 0;
-  der->epilogue_actions = 0;
+  ctx->result = EXE_OK;
+  ctx->this_pc = 0;
+  ctx->next_pc = 0;
+  ctx->data = 0;
+  ctx->epilogue_actions = 0;
 }
 
 #define DSB_ALLOW_AUTOREPEAT 0
@@ -79,7 +80,7 @@ void der_init(exe_context* der)
 #define DSB_DONT_REPEAT_RETURN_IMMEDIATELY 2
 uint8_t run_once(uint8_t swid, char* dsb_path, uint8_t* to_increment)
 {
-  der_init(&this_exe);
+  exe_ctx_init(&this_exe);
 
   uint8_t is_press = strstr(dsb_path, key_release_file_string) == NULL;
   uint8_t is_cached = dsbc_search(current_profile_number, swid, is_press, dsvm_cached_data);
