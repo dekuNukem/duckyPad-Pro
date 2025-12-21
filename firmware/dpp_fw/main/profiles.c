@@ -172,7 +172,7 @@ void load_profile_info(void)
     if(access(filename_buf, F_OK) != 0)
       continue;
     all_profile_info[this_pf_number].is_loaded = 1;
-    memset(all_profile_info[this_pf_number].pf_name, 0, PROFILE_NAME_MAX_LEN);
+    memset(all_profile_info[this_pf_number].pf_name, 0, PROFILE_NAME_BUF_LEN);
     strncpy(all_profile_info[this_pf_number].pf_name, this_pf_name, PROFILE_NAME_MAX_LEN);
   }
   fclose(sd_file);
@@ -671,6 +671,7 @@ uint8_t ensure_new_profile_format(void)
       continue;
     this_profile_name++;
     all_profile_info[this_profile_number].is_loaded = 1;
+    memset(all_profile_info[this_profile_number].pf_name, 0, PROFILE_NAME_BUF_LEN);
     strncpy(all_profile_info[this_profile_number].pf_name, this_profile_name, PROFILE_NAME_MAX_LEN);
   }
   closedir(dir);
