@@ -48,7 +48,7 @@ typedef struct
   uint8_t is_landscape;
   uint8_t is_upper_halfstep;
   uint8_t is_lower_halfstep;
-  uint8_t has_custom_keycolor;
+  uint8_t has_user_assigned_keycolor;
 } profile_info;
 
 extern profile_info all_profile_info[MAX_PROFILES];

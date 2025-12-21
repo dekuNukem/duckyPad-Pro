@@ -137,6 +137,7 @@ Increased USB MSC buffer, faster transfer.
 3.0.0
 Dec 18 2025
 Working on DSVM2
+fix user-assigned keycolor saving
 */
 
 uint8_t fw_version_major = 3;
