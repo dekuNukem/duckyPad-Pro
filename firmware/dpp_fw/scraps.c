@@ -130,8 +130,8 @@ void print_profile_info(profile_info *pinfo)
   //   if(strlen(pinfo->sw_name[i]) == 0)
   //     continue;
   //   printf("key %d: %s\n", i, pinfo->sw_name[i]);
-  //   printf("sw_color %d %d %d\n", pinfo->sw_color[i][0], pinfo->sw_color[i][1], pinfo->sw_color[i][2]);
-  //   printf("sw_activation_color %d %d %d\n", pinfo->sw_activation_color[i][0], pinfo->sw_activation_color[i][1], pinfo->sw_activation_color[i][2]);
+  //   printf("sw_color %d %d %d\n", pinfo->sw_color_default[i][0], pinfo->sw_color_default[i][1], pinfo->sw_color_default[i][2]);
+  //   printf("sw_color_keydown %d %d %d\n", pinfo->sw_color_keydown[i][0], pinfo->sw_color_keydown[i][1], pinfo->sw_color_keydown[i][2]);
   //   printf(".\n");
   // }
   printf("--------\n");
@@ -512,9 +512,9 @@ if(epilogue_value & EPILOGUE_SAVE_COLOR_STATE)
     }
     else
     {
-      red = all_profile_info[current_profile_number].sw_color[i][0];
-      green = all_profile_info[current_profile_number].sw_color[i][1];
-      blue = all_profile_info[current_profile_number].sw_color[i][2];
+      red = all_profile_info[current_profile_number].sw_color_default[i][0];
+      green = all_profile_info[current_profile_number].sw_color_default[i][1];
+      blue = all_profile_info[current_profile_number].sw_color_default[i][2];
     }
 void save_persistent_state(uint8_t epilogue_value)
 {
@@ -534,9 +534,9 @@ void save_persistent_state(uint8_t epilogue_value)
     }
     else
     {
-      red = all_profile_info[current_profile_number].sw_color[i][0];
-      green = all_profile_info[current_profile_number].sw_color[i][1];
-      blue = all_profile_info[current_profile_number].sw_color[i][2];
+      red = all_profile_info[current_profile_number].sw_color_default[i][0];
+      green = all_profile_info[current_profile_number].sw_color_default[i][1];
+      blue = all_profile_info[current_profile_number].sw_color_default[i][2];
     }
     sps_bin_buf[r_addr] = red;
     sps_bin_buf[g_addr] = green;
@@ -590,7 +590,7 @@ void redraw_bg(uint8_t profile_number)
   for (int i = 0; i < NEOPIXEL_COUNT; ++i)
   {
     neo_anime[i].animation_type = ANIMATION_NONE;
-    set_pixel_color(i, all_profile_info[profile_number].sw_color[i]);
+    set_pixel_color(i, all_profile_info[profile_number].sw_color_default[i]);
     if(all_profile_info[profile_number].dim_unused_keys)
   }
   neopixel_draw_current_buffer();
@@ -601,7 +601,7 @@ void redraw_bg(uint8_t profile_number)
   for (int i = 0; i < NEOPIXEL_COUNT; ++i)
   {
     neo_anime[i].animation_type = ANIMATION_NONE;
-    set_pixel_color(i, all_profile_info[profile_number].sw_color[i]);
+    set_pixel_color(i, all_profile_info[profile_number].sw_color_default[i]);
   }
   neopixel_draw_current_buffer();
 }
@@ -1445,13 +1445,13 @@ void fill_default_color(profile_info* this_profile)
     return;
   for (size_t i = 0; i < TOTAL_OBSW_COUNT; i++)
   {
-    this_profile->sw_color[i][0] = DEFAULT_BG_RED;
-    this_profile->sw_color[i][1] = DEFAULT_BG_GREEN;
-    this_profile->sw_color[i][2] = DEFAULT_BG_BLUE;
+    this_profile->sw_color_default[i][0] = DEFAULT_BG_RED;
+    this_profile->sw_color_default[i][1] = DEFAULT_BG_GREEN;
+    this_profile->sw_color_default[i][2] = DEFAULT_BG_BLUE;
 
-    this_profile->sw_activation_color[i][0] = DEFAULT_KD_RED;
-    this_profile->sw_activation_color[i][1] = DEFAULT_KD_GREEN;
-    this_profile->sw_activation_color[i][2] = DEFAULT_KD_BLUE;
+    this_profile->sw_color_keydown[i][0] = DEFAULT_KD_RED;
+    this_profile->sw_color_keydown[i][1] = DEFAULT_KD_GREEN;
+    this_profile->sw_color_keydown[i][2] = DEFAULT_KD_BLUE;
   }
 }
 

@@ -94,7 +94,7 @@ void redraw_bg(uint8_t profile_number)
   for (int i = 0; i < NEOPIXEL_COUNT; ++i)
   {
     neo_anime[i].animation_type = ANIMATION_NONE;
-    set_pixel_color(i, all_profile_info[profile_number].sw_color[i]);
+    set_pixel_color(i, all_profile_info[profile_number].sw_color_default[i]);
   }
   neopixel_draw_current_buffer();
 }
@@ -104,7 +104,7 @@ void reset_key_color(uint8_t which)
   if(which >= NEOPIXEL_COUNT)
     return;
   neo_anime[which].animation_type = ANIMATION_NONE;
-  set_pixel_color(which, all_profile_info[current_profile_number].sw_color[which]);
+  set_pixel_color(which, all_profile_info[current_profile_number].sw_color_default[which]);
   neopixel_draw_current_buffer();
 }
 
@@ -138,13 +138,13 @@ void play_keydown_animation(uint8_t profile_number, uint8_t sw_number)
 {
   if(sw_number >= NEOPIXEL_COUNT)
     return;
-  set_pixel_color(sw_number, all_profile_info[profile_number].sw_activation_color[sw_number]);
-  neo_anime[sw_number].current_color[0] = all_profile_info[profile_number].sw_activation_color[sw_number][0];
-  neo_anime[sw_number].current_color[1] = all_profile_info[profile_number].sw_activation_color[sw_number][1];
-  neo_anime[sw_number].current_color[2] = all_profile_info[profile_number].sw_activation_color[sw_number][2];
-  neo_anime[sw_number].target_color[0] = all_profile_info[profile_number].sw_activation_color[sw_number][0];
-  neo_anime[sw_number].target_color[1] = all_profile_info[profile_number].sw_activation_color[sw_number][1];
-  neo_anime[sw_number].target_color[2] = all_profile_info[profile_number].sw_activation_color[sw_number][2];
+  set_pixel_color(sw_number, all_profile_info[profile_number].sw_color_keydown[sw_number]);
+  neo_anime[sw_number].current_color[0] = all_profile_info[profile_number].sw_color_keydown[sw_number][0];
+  neo_anime[sw_number].current_color[1] = all_profile_info[profile_number].sw_color_keydown[sw_number][1];
+  neo_anime[sw_number].current_color[2] = all_profile_info[profile_number].sw_color_keydown[sw_number][2];
+  neo_anime[sw_number].target_color[0] = all_profile_info[profile_number].sw_color_keydown[sw_number][0];
+  neo_anime[sw_number].target_color[1] = all_profile_info[profile_number].sw_color_keydown[sw_number][1];
+  neo_anime[sw_number].target_color[2] = all_profile_info[profile_number].sw_color_keydown[sw_number][2];
   neopixel_draw_current_buffer();
 }
 
@@ -152,7 +152,7 @@ void play_keyup_animation(uint8_t profile_number, uint8_t sw_number)
 {
   if(sw_number >= NEOPIXEL_COUNT)
     return;
-  led_start_animation(&neo_anime[sw_number], all_profile_info[profile_number].sw_color[sw_number], ANIMATION_CROSS_FADE, 50);
+  led_start_animation(&neo_anime[sw_number], all_profile_info[profile_number].sw_color_default[sw_number], ANIMATION_CROSS_FADE, 50);
 }
 
 // this runs every frame

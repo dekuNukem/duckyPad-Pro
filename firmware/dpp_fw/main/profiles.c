@@ -228,12 +228,12 @@ void parse_profile_config_line(char* this_line, profile_info* this_profile)
     uint8_t bbb = atoi(curr);
     for (size_t i = 0; i < MECH_OBSW_COUNT; i++)
     {
-      this_profile->sw_color[i][0] = rrr;
-      this_profile->sw_color[i][1] = ggg;
-      this_profile->sw_color[i][2] = bbb;
-      this_profile->sw_activation_color[i][0] = 255 - rrr;
-      this_profile->sw_activation_color[i][1] = 255 - ggg;
-      this_profile->sw_activation_color[i][2] = 255 - bbb;
+      this_profile->sw_color_default[i][0] = rrr;
+      this_profile->sw_color_default[i][1] = ggg;
+      this_profile->sw_color_default[i][2] = bbb;
+      this_profile->sw_color_keydown[i][0] = 255 - rrr;
+      this_profile->sw_color_keydown[i][1] = 255 - ggg;
+      this_profile->sw_color_keydown[i][2] = 255 - bbb;
     }
   }
   else if(strncmp(cmd_SWCOLOR, this_line, strlen(cmd_SWCOLOR)) == 0)
@@ -248,12 +248,12 @@ void parse_profile_config_line(char* this_line, profile_info* this_profile)
     uint8_t ggg = atoi(curr);
     curr = goto_next_arg(curr, msg_end);
     uint8_t bbb = atoi(curr);
-    this_profile->sw_color[sw_index][0] = rrr;
-    this_profile->sw_color[sw_index][1] = ggg;
-    this_profile->sw_color[sw_index][2] = bbb;
-    this_profile->sw_activation_color[sw_index][0] = 255 - rrr;
-    this_profile->sw_activation_color[sw_index][1] = 255 - ggg;
-    this_profile->sw_activation_color[sw_index][2] = 255 - bbb;
+    this_profile->sw_color_default[sw_index][0] = rrr;
+    this_profile->sw_color_default[sw_index][1] = ggg;
+    this_profile->sw_color_default[sw_index][2] = bbb;
+    this_profile->sw_color_keydown[sw_index][0] = 255 - rrr;
+    this_profile->sw_color_keydown[sw_index][1] = 255 - ggg;
+    this_profile->sw_color_keydown[sw_index][2] = 255 - bbb;
   }
   else if(strncmp(cmd_KD_COLOR, this_line, strlen(cmd_KD_COLOR)) == 0)
   {
@@ -265,9 +265,9 @@ void parse_profile_config_line(char* this_line, profile_info* this_profile)
     uint8_t bbb = atoi(curr);
     for (size_t i = 0; i < MECH_OBSW_COUNT; i++)
     {
-      this_profile->sw_activation_color[i][0] = rrr;
-      this_profile->sw_activation_color[i][1] = ggg;
-      this_profile->sw_activation_color[i][2] = bbb;
+      this_profile->sw_color_keydown[i][0] = rrr;
+      this_profile->sw_color_keydown[i][1] = ggg;
+      this_profile->sw_color_keydown[i][2] = bbb;
     }
   }
   else if(strncmp(cmd_DIM_UNUSED_KEYS, this_line, strlen(cmd_DIM_UNUSED_KEYS)) == 0)
@@ -313,12 +313,12 @@ void load_profile_config(profile_info* this_profile)
     {
       if(strlen(this_profile->sw_name_firstline[i]) > 0)
         continue;
-      this_profile->sw_color[i][0] = 0;
-      this_profile->sw_color[i][1] = 0;
-      this_profile->sw_color[i][2] = 0;
-      this_profile->sw_activation_color[i][0] = 0;
-      this_profile->sw_activation_color[i][1] = 0;
-      this_profile->sw_activation_color[i][2] = 0;
+      this_profile->sw_color_default[i][0] = 0;
+      this_profile->sw_color_default[i][1] = 0;
+      this_profile->sw_color_default[i][2] = 0;
+      this_profile->sw_color_keydown[i][0] = 0;
+      this_profile->sw_color_keydown[i][1] = 0;
+      this_profile->sw_color_keydown[i][2] = 0;
     }
   }
   fclose(sd_file);
@@ -562,9 +562,9 @@ void save_persistent_state(uint8_t epilogue_value, uint8_t swid)
     // if not asking to save color state, save the current key color with assigned switch color, instead of keydown color
     if((epilogue_value & EPILOGUE_SAVE_COLOR_STATE) == 0 && i == swid)
     {
-      red = all_profile_info[current_profile_number].sw_color[i][0];
-      green = all_profile_info[current_profile_number].sw_color[i][1];
-      blue = all_profile_info[current_profile_number].sw_color[i][2];
+      red = all_profile_info[current_profile_number].sw_color_default[i][0];
+      green = all_profile_info[current_profile_number].sw_color_default[i][1];
+      blue = all_profile_info[current_profile_number].sw_color_default[i][2];
     }
     sps_bin_buf[r_addr] = red;
     sps_bin_buf[g_addr] = green;
