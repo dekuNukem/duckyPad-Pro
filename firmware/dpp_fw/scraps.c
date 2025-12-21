@@ -1,4 +1,19 @@
 
+void parse_swcf(void)
+{
+  uint32_t red, green, blue;
+  stack_pop(&data_stack, &red);
+  stack_pop(&data_stack, &green);
+  stack_pop(&data_stack, &blue);
+  halt_all_animations();
+  for (int i = 0; i < NEOPIXEL_COUNT; ++i)
+    set_pixel_3color(i, red, green, blue);
+  neopixel_draw_current_buffer();
+  DS_SET_BITS(*epilogue_ptr, EPILOGUE_SAVE_COLOR_STATE);
+}
+
+
+
   else if(opcode == OP_GOTOP)
   {
     uint32_t this_value;
