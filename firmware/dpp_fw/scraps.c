@@ -1,4 +1,30 @@
+  for (int i = 0; i < NEOPIXEL_COUNT; ++i)
+    set_pixel_3color(i, red, green, blue);
 
+
+void halt_all_animations(void)
+{
+  for (size_t i = 0; i < NEOPIXEL_COUNT; i++)
+    neo_anime[i].animation_type = ANIMATION_NONE;  
+}
+
+void reset_key_color(uint8_t which)
+{
+  if(which >= NEOPIXEL_COUNT)
+    return;
+  neo_anime[which].animation_type = ANIMATION_NONE;
+  set_pixel_color(which, all_profile_info[current_profile_number].sw_color_default[which]);
+  neopixel_draw_current_buffer();
+}
+void redraw_bg(uint8_t profile_number)
+{
+  for (int i = 0; i < NEOPIXEL_COUNT; ++i)
+  {
+    neo_anime[i].animation_type = ANIMATION_NONE;
+    set_pixel_color(i, all_profile_info[profile_number].sw_color_default[i]);
+  }
+  neopixel_draw_current_buffer();
+}
 uint8_t load_persistent_state(void)
 {
   return 1;

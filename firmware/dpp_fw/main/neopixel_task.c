@@ -61,6 +61,24 @@ void neopixel_show(uint8_t* red, uint8_t* green, uint8_t* blue, uint8_t brightne
   led_strip_refresh(my_led_strip);
 }
 
+// stop all animation, shows user keycolor, if none, show default key color.
+void redraw_bg(uint8_t profile_number)
+{
+  if(profile_number >= MAX_PROFILES)
+    return;
+  if(all_profile_info[profile_number].is_loaded == 0)
+    return;
+  for (int i = 0; i < NEOPIXEL_COUNT; ++i)
+  {
+    neo_anime[i].animation_type = ANIMATION_NONE;
+    if(all_profile_info[profile_number].has_user_assigned_keycolor[i])
+      set_pixel_color(i, all_profile_info[profile_number].sw_color_user_assigned[i]);
+    else
+      set_pixel_color(i, all_profile_info[profile_number].sw_color_default[i]);
+  }
+  neopixel_draw_current_buffer();
+}
+
 void neopixel_draw_current_buffer(void)
 {
   if(xSemaphoreTake(neopixel_mutex, pdMS_TO_TICKS(NEOPIXEL_MUTEX_TIMEOUT_MS)) == pdFALSE)
@@ -86,25 +104,6 @@ void neopixel_off(void)
     neo_anime[i].animation_type = ANIMATION_NONE;
     set_pixel_3color(i, 0, 0, 0);
   }
-  neopixel_draw_current_buffer();
-}
-
-void redraw_bg(uint8_t profile_number)
-{
-  for (int i = 0; i < NEOPIXEL_COUNT; ++i)
-  {
-    neo_anime[i].animation_type = ANIMATION_NONE;
-    set_pixel_color(i, all_profile_info[profile_number].sw_color_default[i]);
-  }
-  neopixel_draw_current_buffer();
-}
-
-void reset_key_color(uint8_t which)
-{
-  if(which >= NEOPIXEL_COUNT)
-    return;
-  neo_anime[which].animation_type = ANIMATION_NONE;
-  set_pixel_color(which, all_profile_info[current_profile_number].sw_color_default[which]);
   neopixel_draw_current_buffer();
 }
 
@@ -226,10 +225,4 @@ void get_current_color(uint8_t which, uint8_t* red, uint8_t* green, uint8_t* blu
   *red = red_buf[pixel_map[which]];
   *green = green_buf[pixel_map[which]];
   *blue = blue_buf[pixel_map[which]];
-}
-
-void halt_all_animations(void)
-{
-  for (size_t i = 0; i < NEOPIXEL_COUNT; i++)
-    neo_anime[i].animation_type = ANIMATION_NONE;  
 }

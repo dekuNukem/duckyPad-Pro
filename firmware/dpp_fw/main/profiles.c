@@ -362,10 +362,8 @@ void goto_profile(uint8_t profile_number)
 {
   if(goto_profile_without_updating_rgb_LED(profile_number))
     return;
-  if(load_persistent_state())
-    redraw_bg(profile_number);
-  else
-    neopixel_draw_current_buffer();
+  load_persistent_state();
+  redraw_bg(current_profile_number);
   
   if(all_profile_info[profile_number].is_upper_halfstep)
     set_re_halfstep(1, 1);
@@ -597,6 +595,7 @@ void save_persistent_state(void)
     return;
   fwrite(sps_bin_buf, 1, SPS_BIN_SIZE, file);
   fclose(file);
+  printf("SPS save OK\n");
 }
 
 uint8_t load_persistent_state(void)
@@ -636,6 +635,7 @@ uint8_t load_persistent_state(void)
     all_profile_info[current_profile_number].sw_color_user_assigned[i][GREEN] = sps_bin_buf[has_user_assigned_color_addr + 2];
     all_profile_info[current_profile_number].sw_color_user_assigned[i][BLUE]  = sps_bin_buf[has_user_assigned_color_addr + 3];
   }
+  printf("SPS load OK\n");
   return 0;
 }
 

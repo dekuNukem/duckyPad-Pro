@@ -40,18 +40,16 @@ typedef struct
 void neopixel_init(void);
 void led_animation_init();
 void led_animation_handler(void);
-void redraw_bg(uint8_t profile_number);
 void play_keydown_animation(uint8_t profile_number, uint8_t sw_number);
 void play_keyup_animation(uint8_t profile_number, uint8_t sw_number);
 void neopixel_draw_current_buffer(void);
 void neopixel_fill(uint8_t rr, uint8_t gg, uint8_t bb);
 void neopixel_off(void);
 void set_pixel_3color(uint8_t which, uint8_t r, uint8_t g, uint8_t b);
-void reset_key_color(uint8_t which);
 void draw_settings_led(void);
 void get_current_color(uint8_t which, uint8_t* red, uint8_t* green, uint8_t* blue);
 void set_pixel_3color_update_buffer(uint8_t which, uint8_t r, uint8_t g, uint8_t b);
-void halt_all_animations(void);
+void redraw_bg(uint8_t profile_number);
 
 extern uint8_t brightness_index_to_percent_lookup[BRIGHTNESS_LEVEL_SIZE];
 

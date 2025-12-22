@@ -787,10 +787,7 @@ void parse_swcf(void)
     all_profile_info[current_profile_number].sw_color_user_assigned[i][GREEN] = (uint8_t)green;
     all_profile_info[current_profile_number].sw_color_user_assigned[i][BLUE] = (uint8_t)blue;
   }
-  halt_all_animations();
-  for (int i = 0; i < NEOPIXEL_COUNT; ++i)
-    set_pixel_3color(i, red, green, blue);
-  neopixel_draw_current_buffer();
+  redraw_bg(current_profile_number);
   DS_SET_BITS(*epilogue_ptr, EPILOGUE_SAVE_COLOR_STATE);
 }
 
@@ -811,9 +808,7 @@ void parse_swcc(void)
   all_profile_info[current_profile_number].sw_color_user_assigned[this_index][RED] = (uint8_t)red;
   all_profile_info[current_profile_number].sw_color_user_assigned[this_index][GREEN] = (uint8_t)green;
   all_profile_info[current_profile_number].sw_color_user_assigned[this_index][BLUE] = (uint8_t)blue;
-  halt_all_animations();
-  set_pixel_3color(this_index, red, green, blue);
-  neopixel_draw_current_buffer();
+  redraw_bg(current_profile_number);
   DS_SET_BITS(*epilogue_ptr, EPILOGUE_SAVE_COLOR_STATE);
 }
 
@@ -831,14 +826,13 @@ void parse_swcr(void)
   {
     for (size_t i = 0; i < NEOPIXEL_COUNT; i++)
       all_profile_info[current_profile_number].has_user_assigned_keycolor[i] = 0;
-    redraw_bg(current_profile_number);
   }
   else
   {
     all_profile_info[current_profile_number].has_user_assigned_keycolor[this_value] = 0;
-    reset_key_color(this_value);
   }
-  DS_CLEAR_BITS(*epilogue_ptr, EPILOGUE_SAVE_COLOR_STATE);
+  redraw_bg(current_profile_number);
+  DS_SET_BITS(*epilogue_ptr, EPILOGUE_SAVE_COLOR_STATE);
 }
 
 void expand_mmov(int16_t xtotal, int16_t ytotal)
