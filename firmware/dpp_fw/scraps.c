@@ -1,5 +1,66 @@
-  for (int i = 0; i < NEOPIXEL_COUNT; ++i)
+
+
+void stack_print(my_stack* ms, char* comment)
+{
+  if(PRINT_DEBUG == 0)
+    return;
+  printf("\n=== STACK STATE: %s ===\n", comment);
+  printf("------------------------\n");
+
+  // 1. Start iteration directly at SP (The Free Slot)
+  //    We loop from SP (Low Address) up to Upper Bound (High Address)
+  uint16_t current_v_addr = ms->sp;
+
+  // 2. Iterate
+  while (current_v_addr <= ms->upper_bound)
+  {
+    // Translate Virtual Addr -> Host Addr
+    uint8_t* host_addr = ms->ram_base + current_v_addr;
+    
+    // Read value safely (Note: For the free slot, this is technically garbage/uninitialized data)
+    uint32_t val;
+    memcpy(&val, host_addr, sizeof(uint32_t));
+
+    // Print Line: [Addr]  HexValue
+    printf(" [0x%04X]  0x%08X  ", current_v_addr, (unsigned int)val);
+
+    // 3. Special handling for the SP (Free Slot) vs Data Slots
+    if (current_v_addr == ms->sp) 
+    {
+      // This is the empty slot waiting for the next push
+      printf("<----------------------- SP");
+    }
+    else 
+    {
+      // This is actual data
+      printf("(%10d)", (int)val);
+      // Mark the actual Top of Stack data (the item most recently pushed)
+      if (current_v_addr == ms->sp + sizeof(uint32_t))
+        printf("  [TOS]");
+    }
+
+    // Add visual markers for Frame Pointer
+    if (current_v_addr == ms->fp)
+      printf(" <--- FP");
+    // Mark the Stack Bottom (First item pushed)
+    if (current_v_addr == ms->upper_bound)
+      printf("  [BOTTOM]");
+    printf("\n");
+    // Move to the next item (higher address)
+    current_v_addr += sizeof(uint32_t);
+  }
+  printf("========================\n\n");
+}
+
+for (int i = 0; i < NEOPIXEL_COUNT; ++i)
     set_pixel_3color(i, red, green, blue);
+
+void get_current_color(uint8_t which, uint8_t* red, uint8_t* green, uint8_t* blue)
+{
+  *red = red_buf[pixel_map[which]];
+  *green = green_buf[pixel_map[which]];
+  *blue = blue_buf[pixel_map[which]];
+}
 
 
 void halt_all_animations(void)

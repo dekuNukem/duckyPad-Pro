@@ -47,7 +47,6 @@ void neopixel_fill(uint8_t rr, uint8_t gg, uint8_t bb);
 void neopixel_off(void);
 void set_pixel_3color(uint8_t which, uint8_t r, uint8_t g, uint8_t b);
 void draw_settings_led(void);
-void get_current_color(uint8_t which, uint8_t* red, uint8_t* green, uint8_t* blue);
 void set_pixel_3color_update_buffer(uint8_t which, uint8_t r, uint8_t g, uint8_t b);
 void redraw_bg(uint8_t profile_number);
 

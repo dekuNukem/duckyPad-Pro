@@ -138,7 +138,9 @@ Increased USB MSC buffer, faster transfer.
 Dec 18 2025
 Working on DSVM2
 profile max len bug
-fix user-assigned keycolor saving
+New persistent state savefile format
+Fixed user-defined key color saving
+
 */
 
 uint8_t fw_version_major = 3;

@@ -595,7 +595,6 @@ void save_persistent_state(void)
     return;
   fwrite(sps_bin_buf, 1, SPS_BIN_SIZE, file);
   fclose(file);
-  printf("SPS save OK\n");
 }
 
 uint8_t load_persistent_state(void)
@@ -635,7 +634,6 @@ uint8_t load_persistent_state(void)
     all_profile_info[current_profile_number].sw_color_user_assigned[i][GREEN] = sps_bin_buf[has_user_assigned_color_addr + 2];
     all_profile_info[current_profile_number].sw_color_user_assigned[i][BLUE]  = sps_bin_buf[has_user_assigned_color_addr + 3];
   }
-  printf("SPS load OK\n");
   return 0;
 }
 
@@ -693,7 +691,7 @@ uint8_t ensure_new_profile_format(void)
     if(strncmp(filename_buf, profile_str, strlen(profile_str)) != 0)
       continue;
 
-    printf("Converting: %s\n", filename_buf);
+    // printf("Converting: %s\n", filename_buf);
     this_profile_number = atoi(filename_buf + strlen(profile_str));
     if(this_profile_number >= MAX_PROFILES)
       continue;
@@ -726,7 +724,7 @@ uint8_t ensure_new_profile_format(void)
     memset(filename_buf, 0, FILENAME_BUFSIZE);
     snprintf(temp_buf, TEMP_BUFSIZE, "/sdcard/profile%d_%s", i, all_profile_info[i].pf_name);
     snprintf(filename_buf, FILENAME_BUFSIZE, "/sdcard/profile_%s", all_profile_info[i].pf_name);
-    printf("%s --> %s\n", temp_buf, filename_buf);
+    // printf("%s --> %s\n", temp_buf, filename_buf);
     rename(temp_buf, filename_buf);
   }
   oled_say("Done!");

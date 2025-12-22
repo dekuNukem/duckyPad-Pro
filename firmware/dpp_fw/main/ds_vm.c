@@ -288,58 +288,6 @@ void stack_read_fp_rel(my_stack* ms, int16_t offset, uint32_t* value)
   memcpy(value, host_addr, sizeof(uint32_t));
 }
 
-void stack_print(my_stack* ms, char* comment)
-{
-  if(PRINT_DEBUG == 0)
-    return;
-  printf("\n=== STACK STATE: %s ===\n", comment);
-  printf("------------------------\n");
-
-  // 1. Start iteration directly at SP (The Free Slot)
-  //    We loop from SP (Low Address) up to Upper Bound (High Address)
-  uint16_t current_v_addr = ms->sp;
-
-  // 2. Iterate
-  while (current_v_addr <= ms->upper_bound)
-  {
-    // Translate Virtual Addr -> Host Addr
-    uint8_t* host_addr = ms->ram_base + current_v_addr;
-    
-    // Read value safely (Note: For the free slot, this is technically garbage/uninitialized data)
-    uint32_t val;
-    memcpy(&val, host_addr, sizeof(uint32_t));
-
-    // Print Line: [Addr]  HexValue
-    printf(" [0x%04X]  0x%08X  ", current_v_addr, (unsigned int)val);
-
-    // 3. Special handling for the SP (Free Slot) vs Data Slots
-    if (current_v_addr == ms->sp) 
-    {
-      // This is the empty slot waiting for the next push
-      printf("<----------------------- SP");
-    }
-    else 
-    {
-      // This is actual data
-      printf("(%10d)", (int)val);
-      // Mark the actual Top of Stack data (the item most recently pushed)
-      if (current_v_addr == ms->sp + sizeof(uint32_t))
-        printf("  [TOS]");
-    }
-
-    // Add visual markers for Frame Pointer
-    if (current_v_addr == ms->fp)
-      printf(" <--- FP");
-    // Mark the Stack Bottom (First item pushed)
-    if (current_v_addr == ms->upper_bound)
-      printf("  [BOTTOM]");
-    printf("\n");
-    // Move to the next item (higher address)
-    current_v_addr += sizeof(uint32_t);
-  }
-  printf("========================\n\n");
-}
-
 uint32_t binop_equal(uint32_t a, uint32_t b) {return a == b;}
 uint32_t binop_not_equal(uint32_t a, uint32_t b) {return a != b;}
 uint32_t binop_lower(uint32_t a, uint32_t b)
@@ -417,7 +365,7 @@ void binop(FUNC_PTR_BINOP bin_func)
   stack_pop(&data_stack, &rhs);
   stack_pop(&data_stack, &lhs);
   stack_push(&data_stack, bin_func(lhs, rhs));
-  stack_print(&data_stack, "AFTER BINOP");
+  // stack_print(&data_stack, "AFTER BINOP");
 }
 
 void unaryop(FUNC_PTR_UNARY una_func)
@@ -425,7 +373,7 @@ void unaryop(FUNC_PTR_UNARY una_func)
   uint32_t value;
   stack_pop(&data_stack, &value);
   stack_push(&data_stack, una_func(value));
-  stack_print(&data_stack, "AFTER UNAOP");
+  // stack_print(&data_stack, "AFTER UNAOP");
 }
 
 uint16_t make_uint16(uint8_t b0, uint8_t b1)
@@ -893,11 +841,7 @@ void execute_instruction(exe_context* exe)
     payload = make_uint16(read_byte(curr_pc+1), read_byte(curr_pc+2));
   
   if(PRINT_DEBUG)
-  {
-    printf("\n--------------------\n");
-    printf("PC: %04d    Opcode: %02d    Payload: %04x", curr_pc, opcode, payload);
-    printf("\n");
-  }
+    printf("\n--------------------\nPC: %04d    Opcode: %02d    Payload: %04x\n", curr_pc, opcode, payload);
 
   if(opcode == OP_NOP || opcode == OP_VMVER)
   {
@@ -906,33 +850,33 @@ void execute_instruction(exe_context* exe)
   else if(opcode == OP_PUSHC16)
   {
     stack_push(&data_stack, payload);
-    stack_print(&data_stack, "AFTER PUSHC16");
+    // stack_print(&data_stack, "AFTER PUSHC16");
   }
   else if(opcode == OP_PUSHI)
   {
     stack_push(&data_stack, memread_u32(payload));
-    stack_print(&data_stack, "AFTER PUSHI");
+    // stack_print(&data_stack, "AFTER PUSHI");
   }
   else if(opcode == OP_PUSHR)
   {
     uint32_t this_value;
     stack_read_fp_rel(&data_stack, (int16_t)payload, &this_value);
     stack_push(&data_stack, this_value);
-    stack_print(&data_stack, "AFTER PUSHR");
+    // stack_print(&data_stack, "AFTER PUSHR");
   }
   else if(opcode == OP_POPI)
   {
     uint32_t this_value;
     stack_pop(&data_stack, &this_value);
     memwrite_u32(payload, this_value);
-    stack_print(&data_stack, "AFTER POPI");
+    // stack_print(&data_stack, "AFTER POPI");
   }
   else if(opcode == OP_POPR)
   {
     uint32_t this_value;
     stack_pop(&data_stack, &this_value);
     stack_write_fp_rel(&data_stack, (int16_t)payload, this_value);
-    stack_print(&data_stack, "AFTER POPR");
+    // stack_print(&data_stack, "AFTER POPR");
   }
   else if(opcode == OP_BRZ)
   {
@@ -949,19 +893,19 @@ void execute_instruction(exe_context* exe)
   {
     for (size_t i = 0; i < payload; i++)
       stack_push(&data_stack, 0);
-    stack_print(&data_stack, "After ALLOC");
+    // stack_print(&data_stack, "After ALLOC");
   }
   else if(opcode == OP_CALL)
   {
     uint32_t frame_info = (data_stack.fp << 16) | (curr_pc + instruction_size_bytes);
     stack_push(&data_stack, frame_info);
     data_stack.fp = data_stack.sp + sizeof(uint32_t);
-    stack_print(&data_stack, "CALL");
+    // stack_print(&data_stack, "CALL");
     exe->next_pc = payload;
   }
   else if(opcode == OP_RET)
   {
-    stack_print(&data_stack, "RET");
+    // stack_print(&data_stack, "RET");
     // stash return value
     uint32_t func_return_val;
     stack_pop(&data_stack, &func_return_val);
@@ -982,7 +926,7 @@ void execute_instruction(exe_context* exe)
       stack_pop(&data_stack, NULL);
     // push return value back on stack
     stack_push(&data_stack, func_return_val);
-    stack_print(&data_stack, "UNWIND DONE");
+    // stack_print(&data_stack, "UNWIND DONE");
   }
   else if(opcode == OP_HALT)
   {
