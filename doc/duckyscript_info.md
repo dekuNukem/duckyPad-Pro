@@ -24,7 +24,7 @@ Ideal for key combos:
 
 Once familiar, you can write **longer multi-line** scripts for more complex actions.
 
-##### Open Webpage:
+**Open Webpage:**
 
 ```
 WINDOWS r
@@ -35,7 +35,9 @@ ENTER
 
 ---------
 
-At full potential, duckyScript is closer to a **general-purpose language**. You can:
+At full potential, duckyScript is much closer to a **general-purpose language**.
+
+You can:
 
 * Use Variables, Conditions, and Loops.
 * Read Buttons
@@ -43,7 +45,7 @@ At full potential, duckyScript is closer to a **general-purpose language**. You 
 * Change RGB colors
 * And more!
 
-This allows writing ultra-specific macros for your exact needs.
+This allows highly customized macros for your exact needs.
 
 ## First Time?
 
@@ -65,13 +67,17 @@ Much easier to lookup than going through this whole page.
 
 ## List of Commands
 
+
+
 - [Comments](#comments)
-    - [`REM` and `//`](#rem-and-)
+    - [`//`](#)
+    - [`REM`](#rem)
     - [`REM_BLOCK` and `END_REM`](#rem_block-and-end_rem)
 - [Typing](#typing)
     - [`STRING` and `STRINGLN`](#string-and-stringln)
     - [`STRINGLN_BLOCK` and `END_STRINGLN`](#stringln_block-and-end_stringln)
     - [`STRING_BLOCK` and `END_STRING`](#string_block-and-end_string)
+    - [Printing Variables / Print Formatting](#printing-variables--print-formatting)
 - [Pressing Keys](#pressing-keys)
     - [Special Keys](#special-keys)
     - [`KEYDOWN` / `KEYUP`](#keydown--keyup)
@@ -106,8 +112,9 @@ Much easier to lookup than going through this whole page.
 - [Constants](#constants)
 - [Variables](#variables)
     - [Persistent Global Variables](#persistent-global-variables)
+    - [Internal Reserved Variables](#internal-reserved-variables)
     - [Operators](#operators)
-    - [Arguments](#arguments)
+    - [Expressions](#expressions)
 - [Advanced Printing](#advanced-printing)
     - [Print Format](#print-format)
     - [Leading Zeros](#leading-zeros)
@@ -123,6 +130,7 @@ Much easier to lookup than going through this whole page.
 - [Reading Inputs](#reading-inputs)
     - [Blocking Read](#blocking-read)
     - [Non-Blocking Read](#non-blocking-read)
+    - [Switch Status Bitfield](#switch-status-bitfield)
     - [Key ID](#key-id)
 - [Randomisation](#randomisation)
 - [Miscellaneous](#miscellaneous)
@@ -132,13 +140,20 @@ Much easier to lookup than going through this whole page.
 
 ## Comments
 
-### `REM` and `//`
+### `//`
 
-Any line **starting with** those is ignored.
+C-style comment. Anything after `//` is ignored.
+
+```
+// This is a comment
+```
+
+### `REM`
+
+BASIC/DOS/Win style comment. Works the same way.
 
 ```
 REM This is a comment
-// This is comment too!
 ```
 
 ### `REM_BLOCK` and `END_REM`
@@ -306,7 +321,6 @@ STRING cmd
 How long to wait between **`each input-generating command`**.
 
 * Default: 20ms
-    * Try 50-100 if computer can't keep up.
 
 ```
 DEFAULTDELAY 50
@@ -322,10 +336,11 @@ ENTER
 How long to wait between **`each letter`** when **`typing text`**.
 
 * Default: 20ms
+    * To type faster, set to around 10.
 
 ```
-DEFAULTCHARDELAY 50
-// Wait 50ms between each letter 
+DEFAULTCHARDELAY 10
+// Wait 10ms between each letter 
 
 STRING Hello World!
 ```
@@ -382,16 +397,13 @@ You can use it to toggle / cycle through several actions like this:
 
 ```
 LOOP0:
-STRING first action
-ENTER
+STRINGLN first action
 
 LOOP1:
-STRING second action
-ENTER
+STRINGLN second action
 
 LOOP2:
-STRING third action
-ENTER
+STRINGLN third action
 ```
 
 * When pressed, a counter increments, and the script at the corresponding loop is executed.
@@ -480,7 +492,9 @@ This is **much faster** than updating the whole screen for every change.
 
 ### `OLED_RESTORE`
 
-Restore the default profile/key name display. `OLED_UPDATE` **NOT NEEDED**.
+Restore the default profile/key name display.
+
+`OLED_UPDATE` **NOT NEEDED**.
 
 -------
 [⬆️⬆️⬆️⬆️⬆️⬆️ Back to Top ⬆️⬆️⬆️⬆️⬆️⬆️](#list-of-commands)
@@ -526,13 +540,9 @@ The content is **replaced AS-IS** during preprocessing, very much like `#define`
 
 ```
 DEFINE MY_EMAIL example@gmail.com
-DEFINE MY_AGE 69
 
 STRING My email is MY_EMAIL!
-STRING I'm MY_AGE years old! 
 ```
-
-Internally, `TRUE` is `1`, and `FALSE` is `0`.
 
 -------
 [⬆️⬆️⬆️⬆️⬆️⬆️ Back to Top ⬆️⬆️⬆️⬆️⬆️⬆️](#list-of-commands)
@@ -543,38 +553,52 @@ You can declare a variable using `VAR` command:
 
 ```
 // Declaration
-VAR $spam = 0
-VAR $eggs = 10
+VAR spam = 0
+VAR eggs = 10
 
 // Assignment
-$spam = 20
+spam = 20
 ```
 
-* Variables must start with dollar sign `$`.
+* Variables are **signed 32-bit integers**.
 
-* Variables are **unsigned 16-bit integers**, and can hold values from **0 to 65535**.
+* Variables declared at top level have **global scope** and can be accessed **anywhere**.
 
-    * Treated as signed integers in some commands.
+* Variables declared **inside a function** have **local scope** and is only accessible **within that function**.
 
-* All variables have **global scope**, and can be referenced **anywhere in the script**.
+    * **Shadowing:** Local variables take precedence over global variables with the same name.
+
+    * **Naming**: Local variables cannot share names with function arguments.
 
 ### Persistent Global Variables
 
 There are 32 pre-defined global variables that provides **non-volatile** data storage.
 
-* `$_GV0` to `$_GV31`
+* `_GV0` to `_GV31`
 * Available across **all profiles**
 * Persists over reboots
 
 ### Internal Reserved Variables
 
-Some variables are always available, you can read/write to them to adjust settings.
+Some variables are **always available**. They all start with an underscore `_`.
 
-[Full list](#reserved-variables)
+You can read them to obtain information, or write to adjust settings.
+
+```
+VAR status = _IS_NUMLOCK_ON
+_RANDOM_MIN = 10
+```
+
+[Click Me for Full list](#reserved-variables)
 
 ### Operators
 
 You can perform operations on constants and variables.
+
+* 🚨 All ops are **SIGNED** BY DEFAULT
+    * Set `_UNSIGNED_MATH = 1` to switch to **unsigned** arithmetic mode
+
+⚠️ = Affected by current **Arithmetic Mode**
 
 #### Mathematics
 
@@ -583,16 +607,16 @@ You can perform operations on constants and variables.
 +       Add       
 -       Subtract  
 *       Multiply  
-/       Divide    
-%       Modulus   
+/       ⚠️ Integer Division
+%       ⚠️ Modulus   
 **      Exponent
 ```
 
 Example:
 
 ```
-$spam = 2+3
-$spam = $eggs * 10
+spam = 2+3
+spam = eggs * 10
 ```
 
 #### Comparison
@@ -602,36 +626,40 @@ All comparisons evaluate to **either 0 or 1**.
 ```
 ==        Equal                  
 !=        Not equal              
->         Greater than           
-<         Less than              
->=        Greater than or equal  
-<=        Less than or equal   
+>         ⚠️Greater than           
+<         ⚠️Less than              
+>=        ⚠️Greater than or equal  
+<=        ⚠️Less than or equal   
 ```
 
 #### Logical 
 
 | Operator |          Name         | Comment                                                |
 |:--------:|:---------------------:|--------------------------------------------------------|
-|    &&    |      Logical AND      | Evaluates to 1 if BOTH side are non-zero, otherwise 0. |
-|   \|\|   |       Logical OR      | Evaluates to 1 if ANY side is non-zero, otherwise 0.   |
+|    `&&`    |      Logical AND      | Evaluates to 1 if BOTH side are non-zero, otherwise 0. |
+|   `\|\|`   |       Logical OR      | Evaluates to 1 if ANY side is non-zero, otherwise 0.   |
+|    `!`    |      Logical NOT      | Evaluates to 1 expression is 0, vice versa. |
 
 #### Bitwise
 
 ```
-&        Bitwise AND   
-|        Bitwise OR    
-^        Bitwise XOR
-<<       Left Shift    
->>       Right Shift   
+&       Bitwise AND   
+|       Bitwise OR    
+^       Bitwise XOR
+~       Bitwise NOT
+<<      Left Shift    
+>>      ⚠️Right Shift
+            Signed Mode: Arithmetic Shift (sign-extend)
+            Unsigned Mode: Logical Shift (0-extend)
 ```
 
-### Arguments
+### Expressions
 
-You can use **constant, variable, or expression** as arguments in commands.
+You can use **constant, variable, or expressions** in commands.
 
 ```
-VAR $amount = 100
-DELAY $amount*2+5
+VAR amount = 100
+DELAY amount*2+5
 ```
 
 -------
@@ -641,13 +669,15 @@ DELAY $amount*2+5
 
 You can print **the value of variables** when using `STRING`, `STRINGLN`, and `OLED_PRINT`:
 
+Add a **dollar symbol ($) before the variable name** to print it as number.
+
 ```
 STRING The value is: $spam
 ```
 
 ### Print Format
 
-Write to `$_STR_PRINT_FORMAT` to adjust **how numbers are printed**.
+Write to `_STR_PRINT_FORMAT` to adjust **how numbers are printed**.
 
 |Value|Format|Example|
 |:---:|:---:|:---:|
@@ -657,18 +687,18 @@ Write to `$_STR_PRINT_FORMAT` to adjust **how numbers are printed**.
 |3|Hexadecimal Upper Case|`FF81`|
 
 ```
-VAR $foo = 65409
+VAR foo = 65409
 
-$_STR_PRINT_FORMAT = 0
+_STR_PRINT_FORMAT = 0
 STRINGLN The value is: $foo
 
-$_STR_PRINT_FORMAT = 1
+_STR_PRINT_FORMAT = 1
 STRINGLN The value is: $foo
 
-$_STR_PRINT_FORMAT = 2
+_STR_PRINT_FORMAT = 2
 STRINGLN The value is: $foo
 
-$_STR_PRINT_FORMAT = 3
+_STR_PRINT_FORMAT = 3
 STRINGLN The value is: $foo
 ```
 
@@ -681,7 +711,7 @@ The value is: FF81
 
 ### Leading Zeros
 
-Write to `$_STR_PRINT_PADDING` to adjust **padding**.
+Write to `_STR_PRINT_PADDING` to adjust **padding**.
 
 * **Leading zeros** are added if the variable has fewer digits.
 
@@ -690,11 +720,11 @@ Write to `$_STR_PRINT_PADDING` to adjust **padding**.
 * Works with all print formats.
 
 ```
-$_STR_PRINT_PADDING = 2
+_STR_PRINT_PADDING = 2
 
-VAR $year = 2025
-VAR $month = 8
-VAR $day = 5
+VAR year = 2025
+VAR month = 8
+VAR day = 5
 STRING Date is: $year-$month-$day
 ```
 
@@ -728,10 +758,10 @@ It must be set once, after which it will keep time **as long as it is powered-on
 
 #### Validity Check
 
-First, read `$_RTC_IS_VALID`. **Do not proceed** if value is 0.
+First, read `_RTC_IS_VALID`. **Do not proceed** if value is 0.
 
 ```
-IF $_RTC_IS_VALID == 0 THEN
+IF _RTC_IS_VALID == 0 THEN
     // RTC is uninitialised, do not proceed.
     HALT
 END_IF
@@ -745,7 +775,7 @@ Local time is obtained by adding an **UTC Offset in `MINUTES`**
 
 * It is **set automatically** to your **local timezone** when using the [Autoswitcher](https://github.com/duckyPad/duckyPad-Profile-Autoswitcher).
 
-* You can check (and manually adjust) the offset by reading/writing `$_RTC_UTC_OFFSET` variable
+* You can check (and manually adjust) the offset by reading/writing `_RTC_UTC_OFFSET` variable
 
     * Can be positive, 0, or negative.
 
@@ -755,20 +785,20 @@ With valid RTC and correct UTC offset, you can now read from the variables below
 
 | Name      | Comment                | Range |
 | ------------- | -------------------------- | --------------- |
-| `$_RTC_YEAR`  | **4-digit** Year          | e.g. `2025`    |
-| `$_RTC_MONTH` | Month              | `1–12`          |
-| `$_RTC_DAY`   | Day              | `1–31`          |
-| `$_RTC_HOUR`   | Hour | `0–23` |
-| `$_RTC_MINUTE` | Minute                | `0–59` |
-| `$_RTC_SECOND` | Second                | `0–60` |
-| `$_RTC_WDAY`  | Day of Week (`0 = Sunday`) | `0–6`           |
-| `$_RTC_YDAY`  | Day of Year (`0 = Jan 1`) | `0–365`           |
+| `_RTC_YEAR`  | **4-digit** Year          | e.g. `2025`    |
+| `_RTC_MONTH` | Month              | `1–12`          |
+| `_RTC_DAY`   | Day              | `1–31`          |
+| `_RTC_HOUR`   | Hour | `0–23` |
+| `_RTC_MINUTE` | Minute                | `0–59` |
+| `_RTC_SECOND` | Second                | `0–60` |
+| `_RTC_WDAY`  | Day of Week (`0 = Sunday`) | `0–6`           |
+| `_RTC_YDAY`  | Day of Year (`0 = Jan 1`) | `0–365`           |
 
 #### Example Usage
 
 ```
-$_STR_PRINT_PADDING = 2
-STRINGLN $_RTC_YEAR-$_RTC_MONTH-$_RTC_DAY $_RTC_HOUR:$_RTC_MINUTE:$_RTC_SECOND
+_STR_PRINT_PADDING = 2
+STRINGLN _RTC_YEAR-_RTC_MONTH-_RTC_DAY _RTC_HOUR:_RTC_MINUTE:_RTC_SECOND
 ```
 
 ```
@@ -799,11 +829,11 @@ If the first `IF` evaluate to 0, `ELSE IF`s are checked and executed if conditio
 If none of the conditions are met, then code inside `ELSE` is executed.
 
 ```
-VAR $spam = 5
+VAR spam = 5
 
-IF $spam == 0 THEN
+IF spam == 0 THEN
     STRING spam is zero!
-ELSE IF $spam == 1 THEN
+ELSE IF spam == 1 THEN
     STRING spam is one!
 ELSE
     STRING spam is none of those!
@@ -830,10 +860,10 @@ If `expression` evaluates to zero, the code is skipped. Otherwise the code insid
 This simple example loops 3 times.
 
 ```
-VAR $i = 0
-WHILE $i < 3
+VAR i = 0
+WHILE i < 3
     STRINGLN Counter is $i!
-    $i = $i + 1
+    i = i + 1
 END_WHILE
 ```
 
@@ -848,12 +878,12 @@ Counter is 2!
 Use `LBREAK` to **exit a loop** immediately.
 
 ```
-VAR $i = 0
+VAR i = 0
 WHILE TRUE
     STRINGLN Counter is $i!
-    $i = $i + 1
+    i = i + 1
 
-    IF $i == 3 THEN
+    IF i == 3 THEN
         LBREAK
     END_IF
 END_WHILE
@@ -869,11 +899,11 @@ Counter is 2!
 Use `CONTINUE` to **jump to the start of loop** immediately.
 
 ```
-VAR $i = 0
-WHILE $i < 5
-    $i = $i + 1
+VAR i = 0
+WHILE i < 5
+    i = i + 1
 
-    IF $i == 3 THEN
+    IF i == 3 THEN
         CONTINUE
     END_IF
 
@@ -881,7 +911,7 @@ WHILE $i < 5
 END_WHILE
 ```
 
-Here when `$count` is 3, it skips printing and starts from the top instead.
+Here when `i` is 3, it skips printing and starts from the top instead.
 
 ```
 Counter is 1!
@@ -892,36 +922,27 @@ Counter is 5!
 
 ### Infinite Loop
 
-To exit an infinite loop, you can [check button status](#reading-inputs), or turn on `Allow Abort` in the key settings.
+To exit an infinite loop, you can [check button status](#reading-inputs), or turn on `Allow Abort` in configurator settings.
 
 -------
 [⬆️⬆️⬆️⬆️⬆️⬆️ Back to Top ⬆️⬆️⬆️⬆️⬆️⬆️](#list-of-commands)
 
 ## Functions
 
-**Functions** let you run a block of code efficiently.
-
 Syntax:
 
 ```
-FUNCTION func_name()
+FUNCTION func_name(arg1, arg2...)
     code
+    ...
+    RETURN
 END_FUNCTION
 ```
 
-You can use **`RETURN`** to exit a function early.
-
-Arguments and return values are NOT supported, use variables instead (they are global scope).
-
-```
-FUNCTION print_info()
-    STRING My email is example@gmail.com
-    STRING I'm 69 years old!
-END_FUNCTION
-
-// call it
-print_info()
-```
+* Up to 8 arguments
+* Use **`RETURN`** to exit a function early
+* Variables declared inside function have local scope
+* 0 is returned without an explicit `RETURN` statement
 
 -------
 [⬆️⬆️⬆️⬆️⬆️⬆️ Back to Top ⬆️⬆️⬆️⬆️⬆️⬆️](#list-of-commands)
@@ -938,17 +959,17 @@ You can read the status of:
 
 Simplest method.
 
-Just read `$_BLOCKING_READKEY` reserved variable.
+Just read `_BLOCKING_READKEY` reserved variable.
 
 It will block until a key is pressed.
 
 ```
-VAR $this_key = $_BLOCKING_READKEY
+VAR this_key = _BLOCKING_READKEY
 // Waits here until a key is pressed
 
-IF $this_key == 1 THEN
+IF this_key == 1 THEN
     // do something here
-ELSE IF $this_key == 2 THEN
+ELSE IF this_key == 2 THEN
     // do something else
 END_IF
 
@@ -956,24 +977,36 @@ END_IF
 
 ### Non-Blocking Read
 
-Read reserved variable `$_READKEY`, returns immediately.
+Read reserved variable `_READKEY`, returns immediately.
 
 Returns 0 if no key is pressed. Key ID otherwise.
 
 Check this in a loop to perform work even when no key is pressed.
 
 ```
-VAR $this_key = 0
+VAR this_key = 0
 
 WHILE TRUE
-    $this_key = $_READKEY
-    IF $this_key == 1 THEN
+    this_key = _READKEY
+    IF this_key == 1 THEN
         // handling button press
     END_IF
 
     // otherwise do work here
 END_WHILE
 ```
+
+### Switch Status Bitfield
+
+Read reserved variable `_SW_BITFIELD`, returns immediately.
+
+Each bit position stores the status of the corresponding key.
+
+E.g. bit 1 = key ID 1, bit 13 = key ID 13, etc.
+
+If that bit is 1, the key is held down.
+
+You can use bitmasks to check multiple keys at once.
 
 ### Key ID
 
@@ -1019,16 +1052,16 @@ duckyPad (2020):
 
 ## Randomisation
 
-Read from `$_RANDOM_INT` to get a random number.
+Read from `_RANDOM_INT` to get a random number.
 
 By default, it is between 0 and 65535.
 
 You can change the upper and lower bounds (**inclusive**) by writing to `_RANDOM_MAX` and `_RANDOM_MIN`.
 
 ```
-$_RANDOM_MIN = 0
-$_RANDOM_MAX = 100
-STRINGLN Random number: $_RANDOM_INT
+_RANDOM_MIN = 0
+_RANDOM_MAX = 100
+STRINGLN Random number: _RANDOM_INT
 ```
 
 -------
@@ -1051,7 +1084,6 @@ Stop execution immediately
 -------
 [⬆️⬆️⬆️⬆️⬆️⬆️ Back to Top ⬆️⬆️⬆️⬆️⬆️⬆️](#list-of-commands)
 
-
 ## Reserved Variables
 
 There are a few **reserved variables** that are always available.
@@ -1060,20 +1092,23 @@ You can read or write (RW) to adjust settings. Some are read-only (RO).
 
 | Name                                                                 | Access | Description                                                                                    |
 | --------------------------------------------------------------------------- | ----- | ---------------------------------------------------------------------------------------------- |
-| **`$_RANDOM_MIN`**<br>**`$_RANDOM_MAX`**<br>**`$_RANDOM_INT`**              | RW    | See [Randomisation](#randomisation)                                       |
-| **`$_TIME_S`**<br>**`$_TIME_MS`**                                           | RO    | Elapsed time since power-on, in **seconds** or **milliseconds**.                               |
-| **`$_READKEY`**<br>**`$_BLOCKING_READKEY`**                                 | RO    | See [Reading Inputs](#reading-inputs)                                      |
-| **`$_IS_NUMLOCK_ON`**<br>**`$_IS_CAPSLOCK_ON`**<br>**`$_IS_SCROLLLOCK_ON`** | RO    | Returns **1 if LED is on**, **0 otherwise**.                                                     |
-| **`$_DEFAULTDELAY`**<br>**`$_DEFAULTCHARDELAY`**<br>**`$_CHARJITTER`**      | RW    | Aliases.                               |
-| **`$_ALLOW_ABORT`**<br>**`$_DONT_REPEAT`**                                  | RW    | **1 to enable**, **0 to disable**.                                      |
-| **`$_THIS_KEYID`**                                                          | RO    | Returns the [Key ID](#key-id) for the **current script**     |
-| **`$_DP_MODEL`**                                                            | RO    | Device model. Returns:<br>`1` for duckyPad (2020)<br>`2` for duckyPad Pro (2024)                              |
-| **`$_KEYPRESS_COUNT`**                                                      | RW    | Number of times the current key was pressed in the **current profile**.<br>Assign **0 to reset**. |
-| **`$_LOOP_SIZE`**                                                           | RO    | Used by the `LOOP` command.<br>Do not modify.                                                     |
-| **`$_NEEDS_EPILOGUE`**                                                      | RO    | Internal use only. Do not modify.                                                              |
-|**`$_RTC_IS_VALID`**<br>**`$_RTC_YEAR`**<br>**`$_RTC_MONTH`**<br>**`$_RTC_DAY`**<br>**`$_RTC_HOUR`**<br>**`$_RTC_MINUTE`**<br>**`$_RTC_SECOND`**<br>**`$_RTC_WDAY`**<br>**`$_RTC_YDAY`**|RO|See [Real-time Clock](#real-time-clock-rtc)|
-|**`$_RTC_UTC_OFFSET`**|RW|See [Real-time Clock](#real-time-clock-rtc)|
-|**`$_STR_PRINT_FORMAT`**<br>**`$_STR_PRINT_PADDING`**<br>|RW|See [Advanced Printing](#advanced-printing)|
+| **`_RANDOM_MIN`**<br>**`_RANDOM_MAX`**<br>**`_RANDOM_INT`**              | RW    | See [Randomisation](#randomisation)                                       |
+| **`_TIME_S`**<br>**`_TIME_MS`**                                           | RO    | Elapsed time since power-on, in **seconds** or **milliseconds**.                               |
+| **`_READKEY`**<br>**`_BLOCKING_READKEY`**                                 | RO    | See [Reading Inputs](#reading-inputs)                                      |
+| **`_IS_NUMLOCK_ON`**<br>**`_IS_CAPSLOCK_ON`**<br>**`_IS_SCROLLLOCK_ON`** | RO    | Returns **1 if LED is on**, **0 otherwise**.                                                     |
+| **`_DEFAULTDELAY`**<br>**`_DEFAULTCHARDELAY`**<br>**`_CHARJITTER`**      | RW    | Aliases.                               |
+| **`_ALLOW_ABORT`**<br>**`_DONT_REPEAT`**                                  | RW    | **1 to enable**, **0 to disable**.                                      |
+| **`_THIS_KEYID`**                                                          | RO    | Returns the [Key ID](#key-id) for the **current script**     |
+| **`_DP_MODEL`**                                                            | RO    | Device model. Returns:<br>`1` for duckyPad (2020)<br>`2` for duckyPad Pro (2024)                              |
+| **`_KEYPRESS_COUNT`**                                                      | RW    | Number of times the current key was pressed in the **current profile**.<br>Assign **0 to reset**. |
+| **`_LOOP_SIZE`**                                                           | RO    | Used by the `LOOP` command.<br>Do not modify.                                                     |
+| **`_NEEDS_EPILOGUE`**                                                      | RO    | Internal use only. Do not modify.                                                              |
+|**`_RTC_IS_VALID`**<br>**`_RTC_YEAR`**<br>**`_RTC_MONTH`**<br>**`_RTC_DAY`**<br>**`_RTC_HOUR`**<br>**`_RTC_MINUTE`**<br>**`_RTC_SECOND`**<br>**`_RTC_WDAY`**<br>**`_RTC_YDAY`**|RO|See [Real-time Clock](#real-time-clock-rtc)|
+|**`_RTC_UTC_OFFSET`**|RW|See [Real-time Clock](#real-time-clock-rtc)|
+|**`_STR_PRINT_FORMAT`**<br>**`_STR_PRINT_PADDING`**<br>|RW|See [Advanced Printing](#advanced-printing)|
+|**`_UNSIGNED_MATH`**|RW|Set to 1 to treat variables as **unsigned numbers** using **unsigned math**|
+|**`_SW_BITFIELD`**|RO|Bit position corresponds to key ID.<br>1 = Pressed, 0 = released.|
+
 
 -------
 [⬆️⬆️⬆️⬆️⬆️⬆️ Back to Top ⬆️⬆️⬆️⬆️⬆️⬆️](#list-of-commands)

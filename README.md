@@ -337,9 +337,9 @@ Please feel free to [open an issue](https://github.com/dekuNukem/duckypad-pro/is
 
 ## Disclaimers
 
-* duckyPad has been in active development since 2017. However, it is not designed or certified for safety-critical applications. Use at your own risk.
+* duckyPad has been in active development since 2017 and every effort has been made to ensure its reliability. However, it is **NOT** designed or certified for safety-critical applications. Use at your own risk.
 
-* Scripts are stored as plain text on the SD card. Keep in mind before including sensitive information.
+* Scripts are stored as **plain text** on the SD card. Keep in mind before including sensitive information.
 
 * duckyScript appears to be a trademark of [Hak5 LLC](https://docs.hak5.org/hak5-usb-rubber-ducky/duckyscript-tm-quick-reference). The duckyPad project is not affiliated with, or endorsed by Hak5 LLC.
 
@@ -353,7 +353,7 @@ Please feel free to [open an issue](https://github.com/dekuNukem/duckypad-pro/is
 
 [Kit Assembly Guide](./doc/kit_assembly.md)
 
-[Using duckyScript](./doc/duckyscript_info.md)
+[Writing duckyScript](./doc/duckyscript_info.md)
 
 [duckyScript VM](./doc/bytecode_vm.md)
 
