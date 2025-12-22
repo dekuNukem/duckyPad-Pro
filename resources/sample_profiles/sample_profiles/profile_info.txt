@@ -1,0 +1,12 @@
+1 Welcome
+2 Discord
+3 Firefox
+4 Chrome
+5 Photoshop
+6 OBS
+7 Twitch
+8 WASD
+9 Numpad
+10 MS Teams
+11 Autohotkey
+12 duckyScript
