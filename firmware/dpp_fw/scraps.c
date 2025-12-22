@@ -1,4 +1,60 @@
 
+uint8_t load_persistent_state(void)
+{
+  return 1;
+  // CLEAR_TEMP_BUF();
+  // snprintf(temp_buf, TEMP_BUFSIZE, "/sdcard/profile_%s/state_dpp.sps", all_profile_info[current_profile_number].pf_name);
+  // FILE *file = fopen(temp_buf, "rb");
+  // if(file == NULL)
+  //   return 1;
+  // memset(sps_bin_buf, 0, SPS_BIN_SIZE);
+  // fread(sps_bin_buf, 1, SPS_BIN_SIZE, file);
+  // fclose(file);
+  // memcpy(all_profile_info[current_profile_number].keypress_count, sps_bin_buf, MAX_TOTAL_SW_COUNT);
+
+  // for (uint8_t i = 0; i < NEOPIXEL_COUNT; ++i)
+  // {
+  //   uint8_t r_addr = i*3 + COLOR_START_ADDR;
+  //   uint8_t red = sps_bin_buf[r_addr];
+  //   uint8_t green = sps_bin_buf[r_addr+1];
+  //   uint8_t blue = sps_bin_buf[r_addr+2];
+  //   if(strlen(all_profile_info[current_profile_number].sw_name_firstline[i]))
+  //     set_pixel_3color_update_buffer(i, red, green, blue);
+  // }
+  // return 0;
+}
+
+void save_persistent_state(uint8_t epilogue_value, uint8_t swid)
+{
+  memset(sps_bin_buf, 0, SPS_BIN_SIZE);
+  memcpy(sps_bin_buf, all_profile_info[current_profile_number].keypress_count, MAX_TOTAL_SW_COUNT);
+  for (uint8_t i = 0; i < NEOPIXEL_COUNT; i++)
+  {
+    uint8_t r_addr = i*3 + COLOR_START_ADDR;
+    uint8_t g_addr = r_addr + 1;
+    uint8_t b_addr = g_addr + 1;
+    uint8_t red, green, blue;
+    get_current_color(i, &red, &green, &blue);
+    // if not asking to save color state, save the current key color with assigned switch color, instead of keydown color
+    if((epilogue_value & EPILOGUE_SAVE_COLOR_STATE) == 0 && i == swid)
+    {
+      red = all_profile_info[current_profile_number].sw_color_default[i][0];
+      green = all_profile_info[current_profile_number].sw_color_default[i][1];
+      blue = all_profile_info[current_profile_number].sw_color_default[i][2];
+    }
+    sps_bin_buf[r_addr] = red;
+    sps_bin_buf[g_addr] = green;
+    sps_bin_buf[b_addr] = blue;
+  }
+  
+  CLEAR_TEMP_BUF();
+  sprintf(temp_buf, "/sdcard/profile_%s/state_dpp.sps", all_profile_info[current_profile_number].pf_name);
+
+  FILE *file = fopen(temp_buf, "wb");
+  fwrite(sps_bin_buf, 1, SPS_BIN_SIZE, file);
+  fclose(file);
+}
+
 void parse_swcf(void)
 {
   uint32_t red, green, blue;

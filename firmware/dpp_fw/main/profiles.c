@@ -54,10 +54,10 @@ uint8_t load_settings(dp_global_settings* dps)
 
   // remove incompatible files from old duckyPad
   CLEAR_TEMP_BUF();
-  sprintf(temp_buf, "/sdcard/dp_settings.txt");
+  snprintf(temp_buf, TEMP_BUFSIZE, "/sdcard/dp_settings.txt");
   remove(temp_buf);
   CLEAR_TEMP_BUF();
-  sprintf(temp_buf, "/sdcard/dp_stats.txt");
+  snprintf(temp_buf, TEMP_BUFSIZE, "/sdcard/dp_stats.txt");
   remove(temp_buf);
 
   memset(dps, 0, sizeof(*dps));
@@ -168,7 +168,7 @@ void load_profile_info(void)
       continue;
     strip_newline(this_pf_name, PROFILE_NAME_MAX_LEN);
     memset(filename_buf, 0, FILENAME_BUFSIZE);
-    sprintf(filename_buf, "/sdcard/profile_%s/config.txt", this_pf_name);
+    snprintf(filename_buf, FILENAME_BUFSIZE, "/sdcard/profile_%s/config.txt", this_pf_name);
     if(access(filename_buf, F_OK) != 0)
       continue;
     all_profile_info[this_pf_number].is_loaded = 1;
@@ -293,7 +293,7 @@ void load_profile_config(profile_info* this_profile)
   if(this_profile == NULL || this_profile->is_loaded == 0)
     return;
   memset(filename_buf, 0, FILENAME_BUFSIZE);
-  sprintf(filename_buf, "%s/profile_%s/config.txt", SD_MOUNT_POINT, this_profile->pf_name);
+  snprintf(filename_buf, FILENAME_BUFSIZE, "%s/profile_%s/config.txt", SD_MOUNT_POINT, this_profile->pf_name);
 
   FILE *sd_file = fopen(filename_buf, "r");
   if(sd_file == NULL)
@@ -428,7 +428,7 @@ uint8_t load_keymap_by_name(char* km_name)
   if(km_name == NULL)
     return 1;
   CLEAR_TEMP_BUF();
-  sprintf(temp_buf, "/sdcard/keymaps/%s", km_name);
+  snprintf(temp_buf, TEMP_BUFSIZE, "/sdcard/keymaps/%s", km_name);
   FILE *sd_file = fopen(temp_buf, "r");
   if(sd_file == NULL)
     return ERROR_KEYMAP_NOT_FOUND;
@@ -544,42 +544,57 @@ void generate_msc_flag_file(void)
   fclose(mff);
 }
 
-#define COLOR_START_ADDR MAX_TOTAL_SW_COUNT
+#define SPS_COLOR_START_ADDR (SPS_HEADER_SIZE + MAX_TOTAL_SW_COUNT)
+#define SPS_PROTOCOL_VERSION 1
+#define SPS_HEADER_SIZE 4
 #define SPS_BIN_SIZE 256
 uint8_t sps_bin_buf[SPS_BIN_SIZE];
 
-void save_persistent_state(uint8_t epilogue_value, uint8_t swid)
+/*
+  Persistent state file:
+  Byte 0: D
+  Byte 1: P
+  Byte 2: SPS Version
+  Byte 3: LED state start address
+  Byte 4+: Keypress count for LOOP command
+  LED state: starts at addr indicated on byte 3 
+
+  LED state: 4 bytes per chunk
+  Byte 0: has_user_assigned_color
+  Byte 1: Red
+  Byte 2: Green
+  Byte 3: Blue
+*/
+
+void save_persistent_state(void)
 {
   memset(sps_bin_buf, 0, SPS_BIN_SIZE);
-  memcpy(sps_bin_buf, all_profile_info[current_profile_number].keypress_count, MAX_TOTAL_SW_COUNT);
-  for (uint8_t i = 0; i < NEOPIXEL_COUNT; i++)
+  sps_bin_buf[0] = 'D';
+  sps_bin_buf[1] = 'P';
+  sps_bin_buf[2] = SPS_PROTOCOL_VERSION;
+  sps_bin_buf[3] = SPS_COLOR_START_ADDR;
+  memcpy(sps_bin_buf+SPS_HEADER_SIZE, all_profile_info[current_profile_number].keypress_count, MAX_TOTAL_SW_COUNT);
+  for (uint16_t i = 0; i < NEOPIXEL_COUNT; i++)
   {
-    uint8_t r_addr = i*3 + COLOR_START_ADDR;
-    uint8_t g_addr = r_addr + 1;
-    uint8_t b_addr = g_addr + 1;
-    uint8_t red, green, blue;
-    get_current_color(i, &red, &green, &blue);
-    // if not asking to save color state, save the current key color with assigned switch color, instead of keydown color
-    if((epilogue_value & EPILOGUE_SAVE_COLOR_STATE) == 0 && i == swid)
-    {
-      red = all_profile_info[current_profile_number].sw_color_default[i][0];
-      green = all_profile_info[current_profile_number].sw_color_default[i][1];
-      blue = all_profile_info[current_profile_number].sw_color_default[i][2];
-    }
-    sps_bin_buf[r_addr] = red;
-    sps_bin_buf[g_addr] = green;
-    sps_bin_buf[b_addr] = blue;
+    uint16_t has_user_assigned_color_addr = i*4 + SPS_COLOR_START_ADDR;
+    uint16_t r_addr = has_user_assigned_color_addr + 1;
+    uint16_t g_addr = r_addr + 1;
+    uint16_t b_addr = g_addr + 1;
+    uint8_t has_user_assigned_color = all_profile_info[current_profile_number].has_user_assigned_keycolor[i];
+    if(has_user_assigned_color == 0)
+      continue;
+    if(b_addr >= SPS_BIN_SIZE)
+      break;
+    sps_bin_buf[has_user_assigned_color_addr] = has_user_assigned_color;
+    sps_bin_buf[r_addr] = all_profile_info[current_profile_number].sw_color_user_assigned[i][RED];
+    sps_bin_buf[g_addr] = all_profile_info[current_profile_number].sw_color_user_assigned[i][GREEN];
+    sps_bin_buf[b_addr] = all_profile_info[current_profile_number].sw_color_user_assigned[i][BLUE];
   }
-  
-  // remove sps file for old duckyPad
   CLEAR_TEMP_BUF();
-  sprintf(temp_buf, "/sdcard/profile_%s/state.sps", all_profile_info[current_profile_number].pf_name);
-  remove(temp_buf);
-
-  CLEAR_TEMP_BUF();
-  sprintf(temp_buf, "/sdcard/profile_%s/state_dpp.sps", all_profile_info[current_profile_number].pf_name);
-
+  snprintf(temp_buf, TEMP_BUFSIZE, "/sdcard/profile_%s/state_dpp.sps", all_profile_info[current_profile_number].pf_name);
   FILE *file = fopen(temp_buf, "wb");
+  if(file == NULL)
+    return;
   fwrite(sps_bin_buf, 1, SPS_BIN_SIZE, file);
   fclose(file);
 }
@@ -587,23 +602,39 @@ void save_persistent_state(uint8_t epilogue_value, uint8_t swid)
 uint8_t load_persistent_state(void)
 {
   CLEAR_TEMP_BUF();
-  sprintf(temp_buf, "/sdcard/profile_%s/state_dpp.sps", all_profile_info[current_profile_number].pf_name);
-  FILE *file = fopen(temp_buf, "rb");
-  if(file == NULL)
-    return 1;
-  memset(sps_bin_buf, 0, SPS_BIN_SIZE);
-  fread(sps_bin_buf, 1, SPS_BIN_SIZE, file);
-  fclose(file);
-  memcpy(all_profile_info[current_profile_number].keypress_count, sps_bin_buf, MAX_TOTAL_SW_COUNT);
+  snprintf(temp_buf, TEMP_BUFSIZE, "/sdcard/profile_%s/state_dpp.sps", all_profile_info[current_profile_number].pf_name);
 
-  for (uint8_t i = 0; i < NEOPIXEL_COUNT; ++i)
+  FILE *file = fopen(temp_buf, "rb");
+  if (file == NULL)
+    return 1;
+  
+  memset(sps_bin_buf, 0, SPS_BIN_SIZE);
+  size_t read_bytes = fread(sps_bin_buf, 1, SPS_BIN_SIZE, file);
+  fclose(file);
+
+  if (read_bytes < SPS_HEADER_SIZE)
+    return 2;
+  if (sps_bin_buf[0] != 'D' || sps_bin_buf[1] != 'P')
+    return 3;
+  if(sps_bin_buf[2] != SPS_PROTOCOL_VERSION)
+    return 4;
+
+  uint8_t color_start_addr = sps_bin_buf[3];
+  memcpy(all_profile_info[current_profile_number].keypress_count, sps_bin_buf + SPS_HEADER_SIZE, MAX_TOTAL_SW_COUNT);
+  memset(all_profile_info[current_profile_number].has_user_assigned_keycolor, 0, MECH_OBSW_COUNT);
+
+  for (uint8_t i = 0; i < NEOPIXEL_COUNT; i++)
   {
-    uint8_t r_addr = i*3 + COLOR_START_ADDR;
-    uint8_t red = sps_bin_buf[r_addr];
-    uint8_t green = sps_bin_buf[r_addr+1];
-    uint8_t blue = sps_bin_buf[r_addr+2];
-    if(strlen(all_profile_info[current_profile_number].sw_name_firstline[i]))
-      set_pixel_3color_update_buffer(i, red, green, blue);
+    uint16_t has_user_assigned_color_addr = i * 4 + color_start_addr;
+    if (has_user_assigned_color_addr + 3 >= SPS_BIN_SIZE)
+      break;
+    uint8_t has_user_color = sps_bin_buf[has_user_assigned_color_addr];
+    if(has_user_color == 0)
+      continue;
+    all_profile_info[current_profile_number].has_user_assigned_keycolor[i] = has_user_color;
+    all_profile_info[current_profile_number].sw_color_user_assigned[i][RED]   = sps_bin_buf[has_user_assigned_color_addr + 1];
+    all_profile_info[current_profile_number].sw_color_user_assigned[i][GREEN] = sps_bin_buf[has_user_assigned_color_addr + 2];
+    all_profile_info[current_profile_number].sw_color_user_assigned[i][BLUE]  = sps_bin_buf[has_user_assigned_color_addr + 3];
   }
   return 0;
 }
@@ -613,7 +644,7 @@ void save_gv(void)
   memset(sps_bin_buf, 0, SPS_BIN_SIZE);
   memcpy(sps_bin_buf, pgv_buf, PGV_COUNT*sizeof(uint32_t));
   CLEAR_TEMP_BUF();
-  sprintf(temp_buf, "/sdcard/gv.sps");
+  snprintf(temp_buf, TEMP_BUFSIZE, "/sdcard/gv.sps");
   FILE *file = fopen(temp_buf, "wb");
   fwrite(sps_bin_buf, 1, SPS_BIN_SIZE, file);
   fclose(file);
@@ -622,7 +653,7 @@ void save_gv(void)
 void load_gv(void)
 {
   CLEAR_TEMP_BUF();
-  sprintf(temp_buf, "/sdcard/gv.sps");
+  snprintf(temp_buf, TEMP_BUFSIZE, "/sdcard/gv.sps");
   FILE *file = fopen(temp_buf, "rb");
   if(file == NULL)
     return;
@@ -654,7 +685,7 @@ uint8_t ensure_new_profile_format(void)
     memset(filename_buf, 0, FILENAME_BUFSIZE);
     strncpy(filename_buf, entry->d_name, FILENAME_BUFSIZE - 1);
     CLEAR_TEMP_BUF();
-    sprintf(temp_buf, "/sdcard/%s", filename_buf);
+    snprintf(temp_buf, TEMP_BUFSIZE, "/sdcard/%s", filename_buf);
     if(stat(temp_buf, &st) == -1)
       continue;
     if(!S_ISDIR(st.st_mode))
@@ -693,8 +724,8 @@ uint8_t ensure_new_profile_format(void)
       continue;
     CLEAR_TEMP_BUF();
     memset(filename_buf, 0, FILENAME_BUFSIZE);
-    sprintf(temp_buf, "/sdcard/profile%d_%s", i, all_profile_info[i].pf_name);
-    sprintf(filename_buf, "/sdcard/profile_%s", all_profile_info[i].pf_name);
+    snprintf(temp_buf, TEMP_BUFSIZE, "/sdcard/profile%d_%s", i, all_profile_info[i].pf_name);
+    snprintf(filename_buf, FILENAME_BUFSIZE, "/sdcard/profile_%s", all_profile_info[i].pf_name);
     printf("%s --> %s\n", temp_buf, filename_buf);
     rename(temp_buf, filename_buf);
   }

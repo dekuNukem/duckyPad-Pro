@@ -108,11 +108,11 @@ uint8_t run_once(uint8_t swid, char* dsb_path, uint8_t* to_increment)
   }
   if(this_exe.epilogue_actions & EPILOGUE_SAVE_LOOP_STATE)
   {
-    save_persistent_state(this_exe.epilogue_actions, swid);
+    save_persistent_state();
   }
   if(this_exe.epilogue_actions & EPILOGUE_SAVE_COLOR_STATE)
   {
-    save_persistent_state(this_exe.epilogue_actions, swid);
+    save_persistent_state();
     what_to_do = DSB_DONT_PLAY_KEYUP_ANIMATION_RETURN_IMMEDIATELY;
   }
   if(this_exe.epilogue_actions & EPILOGUE_NEED_OLED_RESTORE)
@@ -301,10 +301,10 @@ void process_keyevent(uint8_t swid, uint8_t event_type)
     return; // just in case lol
 
   memset(dsb_on_press_path_buf, 0, PATH_BUF_SIZE);
-  sprintf(dsb_on_press_path_buf, "/sdcard/profile_%s/key%d.dsb", all_profile_info[current_profile_number].pf_name, swid+1);
+  snprintf(dsb_on_press_path_buf, PATH_BUF_SIZE, "/sdcard/profile_%s/key%d.dsb", all_profile_info[current_profile_number].pf_name, swid+1);
 
   memset(dsb_on_release_path_buf, 0, PATH_BUF_SIZE);
-  sprintf(dsb_on_release_path_buf, "/sdcard/profile_%s/key%d-release.dsb", all_profile_info[current_profile_number].pf_name, swid+1);
+  snprintf(dsb_on_release_path_buf, PATH_BUF_SIZE, "/sdcard/profile_%s/key%d-release.dsb", all_profile_info[current_profile_number].pf_name, swid+1);
 
   if(event_type == SW_EVENT_SHORT_PRESS)
     onboard_offboard_switch_press(swid, dsb_on_press_path_buf, dsb_on_release_path_buf);
@@ -349,7 +349,7 @@ void wakeup_from_sleep_and_load_profile(uint8_t profile_to_load)
 void rotary_encoder_activity(uint8_t swid)
 {
   memset(dsb_on_press_path_buf, 0, PATH_BUF_SIZE);
-  sprintf(dsb_on_press_path_buf, "/sdcard/profile_%s/key%d.dsb", all_profile_info[current_profile_number].pf_name, swid+1);
+  snprintf(dsb_on_press_path_buf, PATH_BUF_SIZE, "/sdcard/profile_%s/key%d.dsb", all_profile_info[current_profile_number].pf_name, swid+1);
   if(access(dsb_on_press_path_buf, F_OK))
     return;
   all_profile_info[current_profile_number].keypress_count[swid]++;

@@ -72,7 +72,7 @@ uint8_t find_firmware_file(char* name_buf, uint32_t name_buf_size)
     if (ent->d_type == DT_REG && is_fw_filename(ent->d_name))
     {
       memset(name_buf, 0, name_buf_size);
-      sprintf(name_buf, "/sdcard/%s", ent->d_name);
+      snprintf(name_buf, name_buf_size, "/sdcard/%s", ent->d_name);
       return 1;
     }
   }
@@ -182,7 +182,7 @@ void fw_update_check(void)
   uint32_t crc32 = calculate_crc32(filename_buf);
   printf("CRC32: %lx\n", crc32);
   
-  sprintf(temp_buf, "%lx", crc32);
+  snprintf(temp_buf, TEMP_BUFSIZE, "%lx", crc32);
   if(strstr(filename_buf, temp_buf) == NULL)
   {
     neopixel_fill(128, 0, 0);
@@ -202,7 +202,7 @@ void fw_update_check(void)
   if(update_result)
   {
     CLEAR_TEMP_BUF();
-    sprintf(temp_buf, "Failed: %d", update_result);
+    snprintf(temp_buf, TEMP_BUFSIZE, "Failed: %d", update_result);
     oled_say(temp_buf);
   }
   else

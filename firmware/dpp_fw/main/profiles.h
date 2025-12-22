@@ -73,7 +73,7 @@ uint8_t save_settings(dp_global_settings* dps);
 uint8_t should_mount_usb_msc(void);
 void delete_msc_flag_file(void);
 void generate_msc_flag_file(void);
-void save_persistent_state(uint8_t epilogue_value, uint8_t swid);
+void save_persistent_state(void);
 uint8_t goto_profile_without_updating_rgb_LED(uint8_t profile_number);
 uint8_t load_persistent_state(void);
 void save_gv(void);

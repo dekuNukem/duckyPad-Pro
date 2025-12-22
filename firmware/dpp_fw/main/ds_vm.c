@@ -595,6 +595,8 @@ void memwrite_u32(uint16_t addr, uint32_t value)
     rand_min = value;
   else if (addr == _RANDOM_MAX)
     rand_max = value;
+  else if (addr == _LOOP_SIZE)
+    loop_size = value;
   else if (addr == _KEYPRESS_COUNT)
     all_profile_info[current_profile_number].keypress_count[current_key_id] = value;
   else if (addr == _EPILOGUE_ACTIONS)
@@ -754,7 +756,7 @@ char* make_str(uint16_t str_start_addr)
       continue;
     }
     memset(make_str_buf, 0, STR_BUF_SIZE);
-    sprintf(make_str_buf, "%c", this_char);
+    snprintf(make_str_buf, STR_BUF_SIZE, "%c", this_char);
     strcat(read_buffer, make_str_buf);
     curr_addr++;
   }

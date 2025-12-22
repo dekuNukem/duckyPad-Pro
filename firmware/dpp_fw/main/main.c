@@ -190,7 +190,7 @@ void app_main(void)
         oled_say("Booting...");
     }
     CLEAR_TEMP_BUF();
-    sprintf(temp_buf, "DP24_%02x%02x", esp_mac_addr[ESP_MAC_ADDR_SIZE-2], esp_mac_addr[ESP_MAC_ADDR_SIZE-1]);
+    snprintf(temp_buf, TEMP_BUFSIZE, "DP24_%02x%02x", esp_mac_addr[ESP_MAC_ADDR_SIZE-2], esp_mac_addr[ESP_MAC_ADDR_SIZE-1]);
     f_setlabel(temp_buf);
 
     led_animation_init();

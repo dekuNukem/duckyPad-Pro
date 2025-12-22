@@ -93,32 +93,32 @@ void draw_nosd(void)
     ssd1306_Fill(Black);
 
     memset(oled_line_buf, 0, OLED_LINE_BUF_SIZE);
-    sprintf(oled_line_buf, "duckyPad Pro");
+    snprintf(oled_line_buf, OLED_LINE_BUF_SIZE, "duckyPad Pro");
     ssd1306_SetCursor(center_line(strlen(oled_line_buf), 7, SSD1306_WIDTH), 10);
     ssd1306_WriteString(oled_line_buf, Font_7x10, White);
 
     memset(oled_line_buf, 0, OLED_LINE_BUF_SIZE);
-    sprintf(oled_line_buf, "FW V%d.%d.%d", fw_version_major, fw_version_minor, fw_version_patch);
+    snprintf(oled_line_buf, OLED_LINE_BUF_SIZE, "FW V%d.%d.%d", fw_version_major, fw_version_minor, fw_version_patch);
     ssd1306_SetCursor(center_line(strlen(oled_line_buf), 7, SSD1306_WIDTH), 25);
     ssd1306_WriteString(oled_line_buf, Font_7x10, White);
 
     memset(oled_line_buf, 0, OLED_LINE_BUF_SIZE);
-    sprintf(oled_line_buf, "Please Insert");
+    snprintf(oled_line_buf, OLED_LINE_BUF_SIZE, "Please Insert");
     ssd1306_SetCursor(center_line(strlen(oled_line_buf), 7, SSD1306_WIDTH), 55);
     ssd1306_WriteString(oled_line_buf, Font_7x10, White);
 
     memset(oled_line_buf, 0, OLED_LINE_BUF_SIZE);
-    sprintf(oled_line_buf, "SD card");
+    snprintf(oled_line_buf, OLED_LINE_BUF_SIZE, "SD card");
     ssd1306_SetCursor(center_line(strlen(oled_line_buf), 7, SSD1306_WIDTH), 67);
     ssd1306_WriteString(oled_line_buf, Font_7x10, White);
 
     memset(oled_line_buf, 0, OLED_LINE_BUF_SIZE);
-    sprintf(oled_line_buf, "Instructions:");
+    snprintf(oled_line_buf, OLED_LINE_BUF_SIZE, "Instructions:");
     ssd1306_SetCursor(center_line(strlen(oled_line_buf), 7, SSD1306_WIDTH), 100);
     ssd1306_WriteString(oled_line_buf, Font_7x10, White);
 
     memset(oled_line_buf, 0, OLED_LINE_BUF_SIZE);
-    sprintf(oled_line_buf, "duckyPad.com");
+    snprintf(oled_line_buf, OLED_LINE_BUF_SIZE, "duckyPad.com");
     ssd1306_SetCursor(center_line(strlen(oled_line_buf), 7, SSD1306_WIDTH), 112);
     ssd1306_WriteString(oled_line_buf, Font_7x10, White);
 
@@ -130,22 +130,22 @@ void draw_noprofile(void)
     ssd1306_Fill(Black);
 
     memset(oled_line_buf, 0, OLED_LINE_BUF_SIZE);
-    sprintf(oled_line_buf, "No Valid");
+    snprintf(oled_line_buf, OLED_LINE_BUF_SIZE, "No Valid");
     ssd1306_SetCursor(center_line(strlen(oled_line_buf), 7, SSD1306_WIDTH), 35);
     ssd1306_WriteString(oled_line_buf, Font_7x10, White);
 
     memset(oled_line_buf, 0, OLED_LINE_BUF_SIZE);
-    sprintf(oled_line_buf, "Profiles");
+    snprintf(oled_line_buf, OLED_LINE_BUF_SIZE, "Profiles");
     ssd1306_SetCursor(center_line(strlen(oled_line_buf), 7, SSD1306_WIDTH), 47);
     ssd1306_WriteString(oled_line_buf, Font_7x10, White);
 
     memset(oled_line_buf, 0, OLED_LINE_BUF_SIZE);
-    sprintf(oled_line_buf, "Instructions:");
+    snprintf(oled_line_buf, OLED_LINE_BUF_SIZE, "Instructions:");
     ssd1306_SetCursor(center_line(strlen(oled_line_buf), 7, SSD1306_WIDTH), 80);
     ssd1306_WriteString(oled_line_buf, Font_7x10, White);
 
     memset(oled_line_buf, 0, OLED_LINE_BUF_SIZE);
-    sprintf(oled_line_buf, "duckyPad.com");
+    snprintf(oled_line_buf, OLED_LINE_BUF_SIZE, "duckyPad.com");
     ssd1306_SetCursor(center_line(strlen(oled_line_buf), 7, SSD1306_WIDTH), 92);
     ssd1306_WriteString(oled_line_buf, Font_7x10, White);
 
@@ -285,7 +285,7 @@ void draw_profile_normal(profile_info* this_profile)
 {
   ssd1306_Fill(Black);
   memset(oled_line_buf, 0, OLED_LINE_BUF_SIZE);
-  sprintf(oled_line_buf, "%s", this_profile->pf_name);
+  snprintf(oled_line_buf, OLED_LINE_BUF_SIZE, "%s", this_profile->pf_name);
 	ssd1306_SetCursor(center_line(strlen(oled_line_buf), 7, SSD1306_WIDTH), 0);
 	ssd1306_WriteString(oled_line_buf, Font_7x10, White);
 	
@@ -320,7 +320,7 @@ void draw_profile_rotated(profile_info* this_profile)
 {
   ssd1306_Fill(Black);
   memset(oled_line_buf, 0, OLED_LINE_BUF_SIZE);
-  sprintf(oled_line_buf, "%s", this_profile->pf_name);
+  snprintf(oled_line_buf, OLED_LINE_BUF_SIZE, "%s", this_profile->pf_name);
 	ssd1306_SetCursor(center_line(strlen(oled_line_buf), 7, SSD1306_WIDTH), 0);
 	ssd1306_WriteString(oled_line_buf, Font_7x10, White);
 	
@@ -385,7 +385,7 @@ void draw_settings(dp_global_settings *dps)
   ssd1306_Fill(Black);
 
   memset(oled_line_buf, 0, OLED_LINE_BUF_SIZE);
-  sprintf(oled_line_buf, "Settings");
+  snprintf(oled_line_buf, OLED_LINE_BUF_SIZE, "Settings");
   ssd1306_SetCursor(center_line(strlen(oled_line_buf), 7, SSD1306_WIDTH), 0);
   ssd1306_WriteString(oled_line_buf, Font_7x10, White);
 
@@ -394,21 +394,21 @@ void draw_settings(dp_global_settings *dps)
 //------------------------------
 
   memset(oled_line_buf, 0, OLED_LINE_BUF_SIZE);
-  sprintf(oled_line_buf, "1-Brightness %d%%", brightness_index_to_percent_lookup[dps->brightness_index]);
+  snprintf(oled_line_buf, OLED_LINE_BUF_SIZE, "1-Brightness %d%%", brightness_index_to_percent_lookup[dps->brightness_index]);
   ssd1306_SetCursor(0, 14);
   ssd1306_WriteString(oled_line_buf, Font_7x10, White);
 
 //------------------------------
 
   memset(oled_line_buf, 0, OLED_LINE_BUF_SIZE);
-  sprintf(oled_line_buf, "2-Sleep: %s", sleep_index_to_string_lookup[dps->sleep_index]);
+  snprintf(oled_line_buf, OLED_LINE_BUF_SIZE, "2-Sleep: %s", sleep_index_to_string_lookup[dps->sleep_index]);
   ssd1306_SetCursor(0, 29);
   ssd1306_WriteString(oled_line_buf, Font_7x10, White);
 
 //------------------------------
 
   memset(oled_line_buf, 0, OLED_LINE_BUF_SIZE);
-  sprintf(oled_line_buf, "3-Keyboard Region");
+  snprintf(oled_line_buf, OLED_LINE_BUF_SIZE, "3-Keyboard Region");
   ssd1306_SetCursor(0, 45);
   ssd1306_WriteString(oled_line_buf, Font_7x10, White);
 
@@ -424,20 +424,20 @@ void draw_settings(dp_global_settings *dps)
 //------------------------------
 
   memset(oled_line_buf, 0, OLED_LINE_BUF_SIZE);
-  sprintf(oled_line_buf, "4-Use BT: %s", bt_mode_to_string_lookup[dps->bt_mode]);
+  snprintf(oled_line_buf, OLED_LINE_BUF_SIZE, "4-Use BT: %s", bt_mode_to_string_lookup[dps->bt_mode]);
   ssd1306_SetCursor(0, 73);
   ssd1306_WriteString(oled_line_buf, Font_7x10, White);
 
 //------------------------------
 
   memset(oled_line_buf, 0, OLED_LINE_BUF_SIZE);
-  sprintf(oled_line_buf, "5-BT Unpair All");
+  snprintf(oled_line_buf, OLED_LINE_BUF_SIZE, "5-BT Unpair All");
   ssd1306_SetCursor(0, 88);
   ssd1306_WriteString(oled_line_buf, Font_7x10, White);
 
 //------------------------------
   memset(oled_line_buf, 0, OLED_LINE_BUF_SIZE);
-  sprintf(oled_line_buf, "6-Mount USB");
+  snprintf(oled_line_buf, OLED_LINE_BUF_SIZE, "6-Mount USB");
   ssd1306_SetCursor(0, 102);
   ssd1306_WriteString(oled_line_buf, Font_7x10, White);
 //---------------
@@ -445,7 +445,7 @@ void draw_settings(dp_global_settings *dps)
   ssd1306_Line(0,115,128,115,White);
 
   memset(oled_line_buf, 0, OLED_LINE_BUF_SIZE);
-  sprintf(oled_line_buf, "FW V%d.%d.%d", fw_version_major, fw_version_minor, fw_version_patch);
+  snprintf(oled_line_buf, OLED_LINE_BUF_SIZE, "FW V%d.%d.%d", fw_version_major, fw_version_minor, fw_version_patch);
   ssd1306_SetCursor(center_line(strlen(oled_line_buf), 7, SSD1306_WIDTH), 118);
   ssd1306_WriteString(oled_line_buf, Font_7x10, White);
 
@@ -478,39 +478,39 @@ void draw_wrong_vmver()
   ssd1306_Fill(Black);
 
   memset(oled_line_buf, 0, OLED_LINE_BUF_SIZE);
-  sprintf(oled_line_buf, "Incompatible");
+  snprintf(oled_line_buf, OLED_LINE_BUF_SIZE, "Incompatible");
   ssd1306_SetCursor(center_line(strlen(oled_line_buf), 7, SSD1306_WIDTH), 0);
   ssd1306_WriteString(oled_line_buf, Font_7x10, White);
 
   memset(oled_line_buf, 0, OLED_LINE_BUF_SIZE);
-  sprintf(oled_line_buf, "Script File!");
+  snprintf(oled_line_buf, OLED_LINE_BUF_SIZE, "Script File!");
   ssd1306_SetCursor(center_line(strlen(oled_line_buf), 7, SSD1306_WIDTH), 15);
   ssd1306_WriteString(oled_line_buf, Font_7x10, White);
 
   ssd1306_Line(0,28,128,28,White);
 
   memset(oled_line_buf, 0, OLED_LINE_BUF_SIZE);
-  sprintf(oled_line_buf, "Update to latest");
+  snprintf(oled_line_buf, OLED_LINE_BUF_SIZE, "Update to latest");
   ssd1306_SetCursor(center_line(strlen(oled_line_buf), 7, SSD1306_WIDTH), 37);
   ssd1306_WriteString(oled_line_buf, Font_7x10, White);
 
   memset(oled_line_buf, 0, OLED_LINE_BUF_SIZE);
-  sprintf(oled_line_buf, "FW & PC App");
+  snprintf(oled_line_buf, OLED_LINE_BUF_SIZE, "FW & PC App");
   ssd1306_SetCursor(center_line(strlen(oled_line_buf), 7, SSD1306_WIDTH), 52);
   ssd1306_WriteString(oled_line_buf, Font_7x10, White);
 
   memset(oled_line_buf, 0, OLED_LINE_BUF_SIZE);
-  sprintf(oled_line_buf, "Load & Save to");
+  snprintf(oled_line_buf, OLED_LINE_BUF_SIZE, "Load & Save to");
   ssd1306_SetCursor(center_line(strlen(oled_line_buf), 7, SSD1306_WIDTH), 75);
   ssd1306_WriteString(oled_line_buf, Font_7x10, White);
 
   memset(oled_line_buf, 0, OLED_LINE_BUF_SIZE);
-  sprintf(oled_line_buf, "Refresh Files");
+  snprintf(oled_line_buf, OLED_LINE_BUF_SIZE, "Refresh Files");
   ssd1306_SetCursor(center_line(strlen(oled_line_buf), 7, SSD1306_WIDTH), 90);
   ssd1306_WriteString(oled_line_buf, Font_7x10, White);
 
   memset(oled_line_buf, 0, OLED_LINE_BUF_SIZE);
-  sprintf(oled_line_buf, "Press Any Key");
+  snprintf(oled_line_buf, OLED_LINE_BUF_SIZE, "Press Any Key");
   ssd1306_SetCursor(center_line(strlen(oled_line_buf), 7, SSD1306_WIDTH), 117);
   ssd1306_WriteString(oled_line_buf, Font_7x10, White);
 
@@ -530,7 +530,7 @@ void draw_exe_error(exe_context* ctx)
   ssd1306_Fill(Black);
 
   memset(oled_line_buf, 0, OLED_LINE_BUF_SIZE);
-  sprintf(oled_line_buf, "Runtime Error");
+  snprintf(oled_line_buf, OLED_LINE_BUF_SIZE, "Runtime Error");
   ssd1306_SetCursor(center_line(strlen(oled_line_buf), 7, SSD1306_WIDTH), 0);
   ssd1306_WriteString(oled_line_buf, Font_7x10, White);
 
@@ -539,17 +539,17 @@ void draw_exe_error(exe_context* ctx)
   const char *err_msg = exe_error_string(err_code);
 
   memset(oled_line_buf, 0, OLED_LINE_BUF_SIZE);
-  sprintf(oled_line_buf, "%s", err_msg);
+  snprintf(oled_line_buf, OLED_LINE_BUF_SIZE, "%s", err_msg);
   ssd1306_SetCursor(center_line(strlen(oled_line_buf), 7, SSD1306_WIDTH), 40);
   ssd1306_WriteString(oled_line_buf, Font_7x10, White);
 
   memset(oled_line_buf, 0, OLED_LINE_BUF_SIZE);
-  sprintf(oled_line_buf, "PC: 0x%04X / %d", err_pc, err_pc);
+  snprintf(oled_line_buf, OLED_LINE_BUF_SIZE, "PC: 0x%04X / %d", err_pc, err_pc);
   ssd1306_SetCursor(center_line(strlen(oled_line_buf), 7, SSD1306_WIDTH), 60);
   ssd1306_WriteString(oled_line_buf, Font_7x10, White);
 
   memset(oled_line_buf, 0, OLED_LINE_BUF_SIZE);
-  sprintf(oled_line_buf, "Press Any Key");
+  snprintf(oled_line_buf, OLED_LINE_BUF_SIZE, "Press Any Key");
   ssd1306_SetCursor(center_line(strlen(oled_line_buf), 7, SSD1306_WIDTH), 115);
   ssd1306_WriteString(oled_line_buf, Font_7x10, White);
 
@@ -561,17 +561,17 @@ void draw_msc_mode(void)
   ssd1306_Fill(Black);
 
   memset(oled_line_buf, 0, OLED_LINE_BUF_SIZE);
-  sprintf(oled_line_buf, "USB Storage Mode");
+  snprintf(oled_line_buf, OLED_LINE_BUF_SIZE, "USB Storage Mode");
   ssd1306_SetCursor(center_line(strlen(oled_line_buf), 7, SSD1306_WIDTH), 40);
   ssd1306_WriteString(oled_line_buf, Font_7x10, White);
 
   memset(oled_line_buf, 0, OLED_LINE_BUF_SIZE);
-  sprintf(oled_line_buf, "Long Press +/-");
+  snprintf(oled_line_buf, OLED_LINE_BUF_SIZE, "Long Press +/-");
   ssd1306_SetCursor(center_line(strlen(oled_line_buf), 7, SSD1306_WIDTH), 70);
   ssd1306_WriteString(oled_line_buf, Font_7x10, White);
 
   memset(oled_line_buf, 0, OLED_LINE_BUF_SIZE);
-  sprintf(oled_line_buf, "To Exit");
+  snprintf(oled_line_buf, OLED_LINE_BUF_SIZE, "To Exit");
   ssd1306_SetCursor(center_line(strlen(oled_line_buf), 7, SSD1306_WIDTH), 85);
   ssd1306_WriteString(oled_line_buf, Font_7x10, White);
 
@@ -602,24 +602,24 @@ void draw_fw_update_ask(char* fw_path_str)
   ssd1306_Fill(Black);
 
   memset(oled_line_buf, 0, OLED_LINE_BUF_SIZE);
-  sprintf(oled_line_buf, "Firmware Found");
+  snprintf(oled_line_buf, OLED_LINE_BUF_SIZE, "Firmware Found");
   ssd1306_SetCursor(center_line(strlen(oled_line_buf), 7, SSD1306_WIDTH), 0);
   ssd1306_WriteString(oled_line_buf, Font_7x10, White);
 
   ssd1306_Line(0,10,128,10,White);
 
   memset(oled_line_buf, 0, OLED_LINE_BUF_SIZE);
-  sprintf(oled_line_buf, "Current FW:");
+  snprintf(oled_line_buf, OLED_LINE_BUF_SIZE, "Current FW:");
   ssd1306_SetCursor(center_line(strlen(oled_line_buf), 7, SSD1306_WIDTH), 20);
   ssd1306_WriteString(oled_line_buf, Font_7x10, White);
 
   memset(oled_line_buf, 0, OLED_LINE_BUF_SIZE);
-  sprintf(oled_line_buf, "%d.%d.%d", fw_version_major, fw_version_minor, fw_version_patch);
+  snprintf(oled_line_buf, OLED_LINE_BUF_SIZE, "%d.%d.%d", fw_version_major, fw_version_minor, fw_version_patch);
   ssd1306_SetCursor(center_line(strlen(oled_line_buf), 7, SSD1306_WIDTH), 32);
   ssd1306_WriteString(oled_line_buf, Font_7x10, White);
 
   memset(oled_line_buf, 0, OLED_LINE_BUF_SIZE);
-  sprintf(oled_line_buf, "New FW:");
+  snprintf(oled_line_buf, OLED_LINE_BUF_SIZE, "New FW:");
   ssd1306_SetCursor(center_line(strlen(oled_line_buf), 7, SSD1306_WIDTH), 60);
   ssd1306_WriteString(oled_line_buf, Font_7x10, White);
 
@@ -628,12 +628,12 @@ void draw_fw_update_ask(char* fw_path_str)
   ssd1306_WriteString(oled_line_buf, Font_7x10, White);
 
   memset(oled_line_buf, 0, OLED_LINE_BUF_SIZE);
-  sprintf(oled_line_buf, "Press Any Key");
+  snprintf(oled_line_buf, OLED_LINE_BUF_SIZE, "Press Any Key");
   ssd1306_SetCursor(center_line(strlen(oled_line_buf), 7, SSD1306_WIDTH), 100);
   ssd1306_WriteString(oled_line_buf, Font_7x10, White);
 
   memset(oled_line_buf, 0, OLED_LINE_BUF_SIZE);
-  sprintf(oled_line_buf, "to Update");
+  snprintf(oled_line_buf, OLED_LINE_BUF_SIZE, "to Update");
   ssd1306_SetCursor(center_line(strlen(oled_line_buf), 7, SSD1306_WIDTH), 112);
   ssd1306_WriteString(oled_line_buf, Font_7x10, White);
   
@@ -646,22 +646,22 @@ void draw_fw_crc_error(char* fw_path_str)
   ssd1306_Fill(Black);
 
   memset(oled_line_buf, 0, OLED_LINE_BUF_SIZE);
-  sprintf(oled_line_buf, "FW File CRC ERROR:");
+  snprintf(oled_line_buf, OLED_LINE_BUF_SIZE, "FW File CRC ERROR:");
   ssd1306_SetCursor(center_line(strlen(oled_line_buf), 7, SSD1306_WIDTH), 20);
   ssd1306_WriteString(oled_line_buf, Font_7x10, White);
 
   get_clean_fw_name(fw_path_str, temp_buf, TEMP_BUFSIZE);
-  sprintf(oled_line_buf, "FW_%s.bin", temp_buf);
+  snprintf(oled_line_buf, OLED_LINE_BUF_SIZE, "FW_%.16s.bin", temp_buf);
   ssd1306_SetCursor(center_line(strlen(oled_line_buf), 7, SSD1306_WIDTH), 50);
   ssd1306_WriteString(oled_line_buf, Font_7x10, White);
 
   memset(oled_line_buf, 0, OLED_LINE_BUF_SIZE);
-  sprintf(oled_line_buf, "Press Any Key");
+  snprintf(oled_line_buf, OLED_LINE_BUF_SIZE, "Press Any Key");
   ssd1306_SetCursor(center_line(strlen(oled_line_buf), 7, SSD1306_WIDTH), 80);
   ssd1306_WriteString(oled_line_buf, Font_7x10, White);
 
   memset(oled_line_buf, 0, OLED_LINE_BUF_SIZE);
-  sprintf(oled_line_buf, "to Continue");
+  snprintf(oled_line_buf, OLED_LINE_BUF_SIZE, "to Continue");
   ssd1306_SetCursor(center_line(strlen(oled_line_buf), 7, SSD1306_WIDTH), 95);
   ssd1306_WriteString(oled_line_buf, Font_7x10, White);
   
@@ -769,17 +769,17 @@ void draw_bt_pin(uint32_t this_bt_pin)
   ssd1306_Fill(Black);
 
   memset(oled_line_buf, 0, OLED_LINE_BUF_SIZE);
-  sprintf(oled_line_buf, "Bluetooth PIN:");
+  snprintf(oled_line_buf, OLED_LINE_BUF_SIZE, "Bluetooth PIN:");
   ssd1306_SetCursor(center_line(strlen(oled_line_buf), 7, SSD1306_WIDTH), 20);
   ssd1306_WriteString(oled_line_buf, Font_7x10, White);
 
   memset(oled_line_buf, 0, OLED_LINE_BUF_SIZE);
-  sprintf(oled_line_buf, "%06ld", this_bt_pin);
+  snprintf(oled_line_buf, OLED_LINE_BUF_SIZE, "%06ld", this_bt_pin);
   ssd1306_SetCursor(center_line(strlen(oled_line_buf), 11, SSD1306_WIDTH), 50);
   ssd1306_WriteString(oled_line_buf, Font_11x18, White);
 
   CLEAR_TEMP_BUF();
-  sprintf(oled_line_buf, "Press Any Key");
+  snprintf(oled_line_buf, OLED_LINE_BUF_SIZE, "Press Any Key");
   ssd1306_SetCursor(center_line(strlen(oled_line_buf), 7, SSD1306_WIDTH), 100);
   ssd1306_WriteString(oled_line_buf, Font_7x10, White);
 
@@ -802,27 +802,27 @@ void draw_nvm_erase()
   ssd1306_Fill(Black);
 
   memset(oled_line_buf, 0, OLED_LINE_BUF_SIZE);
-  sprintf(oled_line_buf, "All BT pairings");
+  snprintf(oled_line_buf, OLED_LINE_BUF_SIZE, "All BT pairings");
   ssd1306_SetCursor(center_line(strlen(oled_line_buf), 7, SSD1306_WIDTH), 15);
   ssd1306_WriteString(oled_line_buf, Font_7x10, White);
 
   memset(oled_line_buf, 0, OLED_LINE_BUF_SIZE);
-  sprintf(oled_line_buf, "have been erased");
+  snprintf(oled_line_buf, OLED_LINE_BUF_SIZE, "have been erased");
   ssd1306_SetCursor(center_line(strlen(oled_line_buf), 7, SSD1306_WIDTH), 27);
   ssd1306_WriteString(oled_line_buf, Font_7x10, White);
 
   memset(oled_line_buf, 0, OLED_LINE_BUF_SIZE);
-  sprintf(oled_line_buf, "Remember to unpair");
+  snprintf(oled_line_buf, OLED_LINE_BUF_SIZE, "Remember to unpair");
   ssd1306_SetCursor(center_line(strlen(oled_line_buf), 7, SSD1306_WIDTH), 55);
   ssd1306_WriteString(oled_line_buf, Font_7x10, White);
 
   memset(oled_line_buf, 0, OLED_LINE_BUF_SIZE);
-  sprintf(oled_line_buf, "on PC side too");
+  snprintf(oled_line_buf, OLED_LINE_BUF_SIZE, "on PC side too");
   ssd1306_SetCursor(center_line(strlen(oled_line_buf), 7, SSD1306_WIDTH), 67);
   ssd1306_WriteString(oled_line_buf, Font_7x10, White);
 
   CLEAR_TEMP_BUF();
-  sprintf(oled_line_buf, "Press Any Key");
+  snprintf(oled_line_buf, OLED_LINE_BUF_SIZE, "Press Any Key");
   ssd1306_SetCursor(center_line(strlen(oled_line_buf), 7, SSD1306_WIDTH), 100);
   ssd1306_WriteString(oled_line_buf, Font_7x10, White);
 
@@ -834,12 +834,12 @@ void draw_no_usb_activity()
   ssd1306_Fill(Black);
 
   memset(oled_line_buf, 0, OLED_LINE_BUF_SIZE);
-  sprintf(oled_line_buf, "No USB Activity!");
+  snprintf(oled_line_buf, OLED_LINE_BUF_SIZE, "No USB Activity!");
   ssd1306_SetCursor(center_line(strlen(oled_line_buf), 7, SSD1306_WIDTH), 50);
   ssd1306_WriteString(oled_line_buf, Font_7x10, White);
 
   memset(oled_line_buf, 0, OLED_LINE_BUF_SIZE);
-  sprintf(oled_line_buf, "Using Bluetooth");
+  snprintf(oled_line_buf, OLED_LINE_BUF_SIZE, "Using Bluetooth");
   ssd1306_SetCursor(center_line(strlen(oled_line_buf), 7, SSD1306_WIDTH), 65);
   ssd1306_WriteString(oled_line_buf, Font_7x10, White);
 

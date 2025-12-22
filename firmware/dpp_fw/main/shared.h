@@ -28,7 +28,6 @@ void delay_ms(uint32_t amount);
 uint32_t bytes_to_uint32_big_endian(const uint8_t b[4]);
 uint8_t check_rtc_is_valid(void);
 void split_uint32_be(uint32_t value, uint8_t *msb, uint8_t *b1, uint8_t *b2, uint8_t *lsb);
-
 void get_local_time(int16_t offset_minutes, struct tm *out);
 
 #define MY_UINT32_MAX 0xffffffff
