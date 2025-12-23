@@ -1234,7 +1234,7 @@ void run_dsb(exe_context* ctx, uint8_t this_key_id, char* dsb_path, uint8_t is_c
   defaultdelay = DEFAULT_CMD_DELAY_MS;
   defaultchardelay = DEFAULT_CHAR_DELAY_MS;
   charjitter = 0;
-  rand_max = (MY_UINT32_MAX - 1);
+  rand_max = 65535;
   rand_min = 0;
   loop_size = 0;
   epilogue_ptr = &ctx->epilogue_actions;
