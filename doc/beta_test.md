@@ -21,7 +21,7 @@ Another big update with many under-the-hood improvements!
 * New **Logical NOT** operator `!`
 * New **reserved variables**
 	* `_SW_BITFIELD` to read status of **all buttons at once**
-	* `_UNSIGNED_MATH` to switch between **signed** and **unsigned** mode
+	* `_UNSIGNED_MATH` to switch between **arithmetic modes**
 
 ### Performance & Bugfixes
 
@@ -42,12 +42,12 @@ Download Here
 
 ### In a 32-bit World
 
-* `$` prefix is **no longer required** when working with variables
-	* **EXCEPT** when **printing them to a string**.
 * **All variable types** are now **32-bit wide**
 	* User-declared
 	* Persistent Globals
 	* Reserved Variables
+* `$` prefix is **no longer required** when working with variables
+	* **EXCEPT** when **printing them to a string**.
 * **Signed Mode** (Default)
 	* Can hold values between **−2,147,483,648 and 2,147,483,647**
 	* Suitable for general purpose calculations
@@ -86,7 +86,7 @@ print_addr() // call it
 
 #### 🆕 Arguments and Returns
 
-But now, you can also pass **up to 8** arguments into a function and specify an return value.
+But now, you can also pass **up to 8** arguments into a function and specify a return value.
 
 * **`0` is returned** without an explicit `RETURN` command.
 
