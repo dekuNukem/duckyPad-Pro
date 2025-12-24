@@ -50,7 +50,25 @@ The duckyScript **compiler and bytecode VM** has been completely revamped.
 * Update your duckyPad Pro by [following this guide](https://dekunukem.github.io/duckyPad-Pro/doc/fw_update.html)
 	* Use the file you just downloaded!
 
-## New features
+## New Features
+
+no $ no problem
+
+```
+VAR spam = 5
+VAR eggs = spam * 2
+```
+
+```
+function args example
+```
+
+```
+function return value and local variable example
+mention shadowing
+```
+
+
 
 ## Deep Dive
 
