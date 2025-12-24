@@ -8,17 +8,15 @@ Another big update with many under-the-hood improvements!
 
 ## What's New
 
-Quick overview, scroll down for more details.
-
 ### Revamped Scripting Engine
 
-* **32-Bit Arithmetic** across all variable types with **signed AND unsigned** modes.
+* Variables are now **32-bit wide**!
+* **32-Bit Arithmetic** with **signed AND unsigned** modes.
 * **Proper Function Calls** with arguments, local variables, return values, and nested/recursive calls.
 
 ### Syntax Shakeup
 
-* The `$` prefix is **no longer required** for variable declaration and operations.
-	* Except for printing
+* `$` prefix is **no longer required** for variables (except for printing)
 * **Inline comments** with `//` 
 * New **Logical NOT** operator `!`
 * New **reserved variables**
@@ -28,7 +26,7 @@ Quick overview, scroll down for more details.
 ### Performance & Bugfixes
 
 * **Faster Read/Write Speeds** in USB Storage Mode.
-* Fixed runtime-user-assigned switch colors not saving properly.
+* Fixed runtime-user-assigned LED colors not saving properly.
 
 ## Update Firmware
 
@@ -36,35 +34,112 @@ Quick overview, scroll down for more details.
 * Update your duckyPad Pro by [following this guide](https://dekunukem.github.io/duckyPad-Pro/doc/fw_update.html)
 	* Use the file you just downloaded!
 
-## New Features Guided Tour
+## Latest Configurator
+
+Download Here
+
+## Guided Tour
 
 ### In a 32-bit World
 
-no $ no problem
+* `$` prefix is **no longer required** when working with variables
+	* **EXCEPT** when **printing them to a string**.
+* **All variable types** are now **32-bit wide**
+	* User-declared
+	* Persistent Globals
+	* Reserved Variables
+* **Signed Mode** (Default)
+	* Can hold values between **−2,147,483,648 and 2,147,483,647**
+	* Suitable for general purpose calculations
+```
+VAR my_score = 100
+my_score = my_score - 500
+STRINGLN Current score is: $my_score
+```
+* **Unsigned Mode**
+	* Set `_UNSIGNED_MATH = 1`
+	* Range: **0 to 4,294,967,295**
+	* Suitable for large numbers or bitwise operations
+```
+_UNSIGNED_MATH = 1
+VAR large_val = 4000000000
+STRINGLN Large unsigned value: $large_val
+```
 
 ### Functions
 
-### Misc
+Functions have been expanded to support **arguments**, **return values**, **local variables**, and **recursive** calls.
+
+#### ↩️ Back to Basics
+
+As before, plain functions are handy for performing repetitive tasks.
 
 ```
-VAR spam = 5
-VAR eggs = spam * 2
+FUNCTION print_addr()
+    STRINGLN Shipping Address:
+    STRINGLN 123 Ducky Lane
+    STRINGLN Pond City, QU 12345
+END_FUNCTION
+
+print_addr() // call it
 ```
 
-```
-function args example
-```
+#### 🆕 Arguments and Returns
+
+But now, you can also pass **up to 8** arguments into a function and specify an return value.
+
+* **`0` is returned** without an explicit `RETURN` command.
 
 ```
-function return value and local variable example
-mention shadowing
+FUNCTION add_number(a, b)
+    RETURN a + b
+END_FUNCTION
+
+VAR total = add_number(10, 20)
+```
+
+#### 🆕 Variable Scoping
+
+Variables declared **outside functions** have **global scope**, they can be **accessed anywhere**.
+
+Variables declared **inside functions** now have **local scope**, they are only accessible **within the function**.
+
+If a local variable has the **same name** as a global variable, the **local var takes priority** within that function.
+
+```
+// Both global scope
+VAR x = 10
+VAR y = 20
+
+FUNCTION scope_demo()
+    VAR x = 5 // This x is local, will shadow the global x.
+    x = x + y
+    STRINGLN Local x is: $x
+    // should be 5 + 20 = 25
+END_FUNCTION
+```
+
+#### 🆕 Nested / Recursive Calls
+
+You can now:
+
+* Call other functions while inside a function
+* Or **call the same function again** while already in it!
+* Beware stack overflow. Ensure proper end conditions.
+
+```
+FUNCTION factorial(n)
+    IF n <= 1 THEN
+        RETURN 1
+    END_IF
+    RETURN n * factorial(n - 1)
+END_FUNCTION
+
+VAR fact = factorial(5)
 ```
 
 ## Deep(er) Dive
 
 duckStack VM page. completely revamped from ground up. instruction set and memory map. compiler example and C VM example. even from different languages or hand-write assembly.
-
-
-
 
 ## How'd it go?
