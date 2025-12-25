@@ -10,9 +10,9 @@ Another big update with many under-the-hood improvements!
 
 ### Revamped Scripting Engine
 
-* Variables are now **32-bit wide**!
+* Variables are now **32-bit wide**
 * **32-Bit Arithmetic** with **signed AND unsigned** modes.
-* **Proper Function Calls** with arguments, local variables, return values, and nested/recursive calls.
+* **Proper Function Calls** with arguments, local variables, return values, and recursion.
 
 ### Syntax Shakeup
 
@@ -30,13 +30,14 @@ Another big update with many under-the-hood improvements!
 
 ## Update Firmware
 
-* Click me to download the beta firmware
-* Update your duckyPad Pro by [following this guide](https://dekunukem.github.io/duckyPad-Pro/doc/fw_update.html)
+* [Click me to download beta firmware](../firmware/DPP_FW_3.0.0_5aca4781.bin)
+* [Follow this guide](https://dekunukem.github.io/duckyPad-Pro/doc/fw_update.html) to update
 	* Use the file you just downloaded!
 
-## Latest Configurator
+## Download Latest Apps
 
-Download Here
+* [Configurator](https://github.com/duckyPad/duckyPad-Configurator/releases/tag/4.0.0)
+* [Autoswitcher](https://github.com/duckyPad/duckyPad-Profile-Autoswitcher/releases/tag/1.1.1)
 
 ## Guided Tour
 
@@ -140,6 +141,31 @@ VAR fact = factorial(5)
 
 ## Deep(er) Dive
 
-duckStack VM page. completely revamped from ground up. instruction set and memory map. compiler example and C VM example. even from different languages or hand-write assembly.
+Did you know that the duckyScript you write is actually **compiled into a binary** and **executed on a virtual machine** on the duckyPad itself?
 
-## How'd it go?
+This update began as a simple excursion to add 32-bit math and proper function calls. Unsurprisingly it cascaded into a month-long rewrite of the entire compiler and VM. Key changes include:
+
+* duckyScript source is now **pre-processed into Python**
+	* So I can use its built-in AST and Symtable parsers
+	* This is faster and less error-prone than rolling my own from scratch
+* The VM now has a proper **memory map** and **stack layout**
+* With FP-based **calling convention** that supports args, locals, and recursion.
+* Instructions are now **variable-length** to reduce code size
+
+The VM is now more general-purpose than ever, and theoretically other languages can be compiled to run on it too instead of just duckyScript!
+
+**Want to learn more?** The VM now has its own repo, full details here:
+
+https://github.com/duckyPad/DuckStack
+
+## How'd It Go?
+
+Hopefully everything still works!
+
+With so many changes, do give it a good thrashing to see if you can find any bugs!
+
+If/when you do, let me know 😅!
+
+* [Discord](https://discord.gg/4sJCBx5)
+* Email: `dekuNukem` `gmail.com`
+* [Github Issue](https://github.com/dekuNukem/duckypad-pro/issues)
