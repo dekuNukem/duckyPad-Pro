@@ -30,7 +30,8 @@ Another big update with many under-the-hood improvements!
 
 ## Update Firmware
 
-* [Click me to download beta firmware](../firmware/DPP_FW_3.0.0_5aca4781.bin)
+* [Get Beta firmware](../firmware/DPP_FW_3.0.0_5aca4781.bin)
+	* Click `View Raw` to download
 * [Follow this guide](https://dekunukem.github.io/duckyPad-Pro/doc/fw_update.html) to update
 	* Use the file you just downloaded!
 
@@ -89,7 +90,7 @@ print_addr() // call it
 
 But now, you can also pass **up to 8** arguments into a function and specify a return value.
 
-* **`0` is returned** without an explicit `RETURN` command.
+* **`0` is returned** if no explicit `RETURN` command is found
 
 ```
 FUNCTION add_number(a, b)
