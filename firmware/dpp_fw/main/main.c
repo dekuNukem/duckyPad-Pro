@@ -144,6 +144,7 @@ Fixed user-defined key color saving
 3.0.1
 Dec 26 2025
 Added PEEK8, POKE8, and scratch memory area
+Added PUSH0 and DROP instruction
 
 */
 

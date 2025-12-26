@@ -47,7 +47,7 @@ uint8_t unsigned_math;
   print_C_opcode_def()
   IN dsvm_common.py
 */
-    
+
 #define OP_LEN_LOOKUP_SIZE 100
 uint8_t opcode_len_lookup[OP_LEN_LOOKUP_SIZE] = {
 1, // [0] NOP
@@ -64,8 +64,8 @@ uint8_t opcode_len_lookup[OP_LEN_LOOKUP_SIZE] = {
 1, // [11] HALT
 1, // [12] PEEK8
 1, // [13] POKE8
-255, // [14]
-255, // [15]
+1, // [14] PUSH0
+1, // [15] DROP
 255, // [16]
 255, // [17]
 255, // [18]
@@ -166,6 +166,8 @@ uint8_t opcode_len_lookup[OP_LEN_LOOKUP_SIZE] = {
 #define OP_HALT 11
 #define OP_PEEK8 12
 #define OP_POKE8 13
+#define OP_PUSH0 14
+#define OP_DROP 15
 #define OP_EQ 32
 #define OP_NOTEQ 33
 #define OP_LT 34
@@ -952,9 +954,17 @@ void execute_instruction(exe_context* exe)
   else if(opcode == OP_POKE8)
   {
     uint32_t target_value, target_addr;
-    stack_pop(&data_stack, &target_value);
     stack_pop(&data_stack, &target_addr);
+    stack_pop(&data_stack, &target_value);
     write_byte((uint16_t)target_addr, (uint8_t)target_value);
+  }
+  else if(opcode == OP_PUSH0)
+  {
+    stack_push(&data_stack, 0);
+  }
+  else if(opcode == OP_DROP)
+  {
+    stack_pop(&data_stack, NULL);
   }
   else if(opcode == OP_EQ)
   {
