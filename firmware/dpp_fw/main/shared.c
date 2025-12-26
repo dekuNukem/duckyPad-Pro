@@ -112,10 +112,11 @@ uint32_t calculate_crc32(const char *filename)
   return crc;
 }
 
-typedef struct binary_data_t {
-    uint32_t size;
-    uint32_t remaining_size;
-    void *data;
+typedef struct binary_data_t
+{
+  uint32_t size;
+  uint32_t remaining_size;
+  void *data;
 } binary_data_t;
 
 size_t fpread(void *buffer, size_t size, size_t nitems, size_t offset, FILE *fp) {
@@ -126,51 +127,51 @@ size_t fpread(void *buffer, size_t size, size_t nitems, size_t offset, FILE *fp)
 
 uint8_t update_firmware(const char* file_path)
 {
-    esp_ota_handle_t update_handle = 0;
-    const esp_partition_t *update_partition = esp_ota_get_next_update_partition(NULL);
-    esp_err_t err = esp_ota_begin(update_partition, OTA_SIZE_UNKNOWN, &update_handle);
-    ESP_LOGI(OTA_TAG, "esp_begin result = %d", err);
-    binary_data_t data;
-    FILE *file = fopen(file_path, "rb");
-    if(file == NULL)
-    {
-      ESP_LOGI(OTA_TAG, "UPDATE FILE NOT FOUND");
-      return 1;
-    }
-    fseek(file, 0, SEEK_END);
-    data.size = ftell(file);
-    data.remaining_size = data.size;
-    fseek(file, 0, SEEK_SET);
-    ESP_LOGI(OTA_TAG, "size %lu", data.size);
-    memset(bin_buf, 0, BIN_BUF_SIZE);
-    data.data = bin_buf;
-    while (data.remaining_size > 0)
-    {
-      size_t size = data.remaining_size <= BIN_BUF_SIZE ? data.remaining_size : BIN_BUF_SIZE;
-      fpread(data.data, size, 1, data.size - data.remaining_size, file);
-      err = esp_ota_write(update_handle, data.data, size);
-      if (data.remaining_size <= BIN_BUF_SIZE)
-        break;
-      data.remaining_size -= BIN_BUF_SIZE;
-    }
-    ESP_LOGI(OTA_TAG, "Ota result = %d", err);
-    err = esp_ota_end(update_handle);
-    if (err != ESP_OK)
-    {
-      ESP_LOGE(OTA_TAG, "esp_ota_end failed: %d!", err);
-      return 2;
-    }
+  esp_ota_handle_t update_handle = 0;
+  const esp_partition_t *update_partition = esp_ota_get_next_update_partition(NULL);
+  esp_err_t err = esp_ota_begin(update_partition, OTA_SIZE_UNKNOWN, &update_handle);
+  ESP_LOGI(OTA_TAG, "esp_begin result = %d", err);
+  binary_data_t data;
+  FILE *file = fopen(file_path, "rb");
+  if(file == NULL)
+  {
+    ESP_LOGI(OTA_TAG, "UPDATE FILE NOT FOUND");
+    return 1;
+  }
+  fseek(file, 0, SEEK_END);
+  data.size = ftell(file);
+  data.remaining_size = data.size;
+  fseek(file, 0, SEEK_SET);
+  ESP_LOGI(OTA_TAG, "size %lu", data.size);
+  memset(bin_buf, 0, BIN_BUF_SIZE);
+  data.data = bin_buf;
+  while (data.remaining_size > 0)
+  {
+    size_t size = data.remaining_size <= BIN_BUF_SIZE ? data.remaining_size : BIN_BUF_SIZE;
+    fpread(data.data, size, 1, data.size - data.remaining_size, file);
+    err = esp_ota_write(update_handle, data.data, size);
+    if (data.remaining_size <= BIN_BUF_SIZE)
+      break;
+    data.remaining_size -= BIN_BUF_SIZE;
+  }
+  ESP_LOGI(OTA_TAG, "Ota result = %d", err);
+  err = esp_ota_end(update_handle);
+  if (err != ESP_OK)
+  {
+    ESP_LOGE(OTA_TAG, "esp_ota_end failed: %d!", err);
+    return 2;
+  }
 
-    err = esp_ota_set_boot_partition(update_partition);
-    if (err != ESP_OK)
-    {
-      ESP_LOGE(OTA_TAG, "esp_ota_set_boot_partition failed: %d!", err);
-      return 3;
-    }
-    fclose(file);
-    unlink(file_path);
-    ESP_LOGI(OTA_TAG, "FW update success, rebooting!");
-    return 0;
+  err = esp_ota_set_boot_partition(update_partition);
+  if (err != ESP_OK)
+  {
+    ESP_LOGE(OTA_TAG, "esp_ota_set_boot_partition failed: %d!", err);
+    return 3;
+  }
+  fclose(file);
+  unlink(file_path);
+  ESP_LOGI(OTA_TAG, "FW update success, rebooting!");
+  return 0;
 }
 
 void fw_update_check(void)
