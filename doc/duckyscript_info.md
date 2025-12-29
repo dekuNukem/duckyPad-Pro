@@ -112,7 +112,7 @@ Much easier to lookup than going through this whole page.
 - [Constants](#constants)
 - [Variables](#variables)
     - [Persistent Global Variables](#persistent-global-variables)
-    - [Internal Reserved Variables](#internal-reserved-variables)
+    - [Reserved Variables](#internal-reserved-variables)
     - [Operators](#operators)
     - [Expressions](#expressions)
 - [Advanced Printing](#advanced-printing)
@@ -136,7 +136,7 @@ Much easier to lookup than going through this whole page.
 - [Miscellaneous](#miscellaneous)
     - [`DP_SLEEP`](#dp_sleep)
     - [`HALT`](#halt)
-- [Reserved Variables](#reserved-variables)
+- [Reserved Variables List](#reserved-variables-list)
 
 ## Comments
 
@@ -150,7 +150,7 @@ C-style comment. Anything after `//` is ignored.
 
 ### `REM`
 
-BASIC/DOS/Win style comment. Works the same way.
+BASIC/Win style comment. Works the same way.
 
 ```
 REM This is a comment
@@ -376,7 +376,7 @@ Move mouse cursor `X` pixels horizontally, and `Y` pixels vertically.
 
 * For `Y`, a positive number moves UP, negative number moves DOWN.
 
-* Set to 0 if no movement needed.
+* Set to 0 if no movement needed
 
 * **Disable mouse acceleration** for pixel-accurate results
 
@@ -560,14 +560,10 @@ VAR eggs = 10
 spam = 20
 ```
 
-* Variables are **signed 32-bit integers**.
-
+* Variables are **32-bit Integers**
 * Variables declared at top level have **global scope** and can be accessed **anywhere**.
-
 * Variables declared **inside a function** have **local scope** and is only accessible **within that function**.
-
     * **Shadowing:** Local variables take precedence over global variables with the same name.
-
     * **Naming**: Local variables cannot share names with function arguments.
 
 ### Persistent Global Variables
@@ -578,7 +574,7 @@ There are 32 pre-defined global variables that provides **non-volatile** data st
 * Available across **all profiles**
 * Persists over reboots
 
-### Internal Reserved Variables
+### Reserved Variables
 
 Some variables are **always available**. They all start with an underscore `_`.
 
@@ -589,7 +585,7 @@ VAR status = _IS_NUMLOCK_ON
 _RANDOM_MIN = 10
 ```
 
-[Click Me for Full list](#reserved-variables)
+[Click Me for Full list](#reserved-variables-list)
 
 ### Operators
 
@@ -1084,7 +1080,7 @@ Stop execution immediately
 -------
 [⬆️⬆️⬆️⬆️⬆️⬆️ Back to Top ⬆️⬆️⬆️⬆️⬆️⬆️](#list-of-commands)
 
-## Reserved Variables
+## Reserved Variables List
 
 There are a few **reserved variables** that are always available.
 
@@ -1108,7 +1104,6 @@ You can read or write (RW) to adjust settings. Some are read-only (RO).
 |**`_STR_PRINT_FORMAT`**<br>**`_STR_PRINT_PADDING`**<br>|RW|See [Advanced Printing](#advanced-printing)|
 |**`_UNSIGNED_MATH`**|RW|Set to 1 to treat variables as **unsigned numbers** using **unsigned math**|
 |**`_SW_BITFIELD`**|RO|Bit position corresponds to key ID.<br>1 = Pressed, 0 = released.|
-
 
 -------
 [⬆️⬆️⬆️⬆️⬆️⬆️ Back to Top ⬆️⬆️⬆️⬆️⬆️⬆️](#list-of-commands)
