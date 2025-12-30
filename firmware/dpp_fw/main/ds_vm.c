@@ -676,60 +676,68 @@ char read_buffer[READ_BUF_SIZE];
 #define FORMAT_SPEC_BUF_SIZE 16
 char format_spec_buf[FORMAT_SPEC_BUF_SIZE];
 
+#define MKSTR_BUF_SIZE 32
+char make_str_buf[MKSTR_BUF_SIZE];
+#define READ_BUF_SIZE (256 * 4)
+char read_buffer[READ_BUF_SIZE];
+#define FORMAT_SPEC_BUF_SIZE 16
+char format_spec_buf[FORMAT_SPEC_BUF_SIZE];
+
 char* make_str(uint16_t str_start_addr)
 {
   char* curr_char = (char*)(bin_buf + str_start_addr);
   memset(read_buffer, 0, READ_BUF_SIZE);
-  while (1)
-  {
-    uint8_t this_char = *curr_char;
-    if (this_char == 0)
-      break;
+  char* write_ptr = read_buffer;
+  const char* buffer_end = read_buffer + READ_BUF_SIZE - 1; // Leave room for null terminator
 
-    if (this_char == MAKESTR_VAR_BOUNDARY_IMM || this_char == MAKESTR_VAR_BOUNDARY_REL)
+  while (*curr_char != 0)
+  {
+    if (*curr_char == MAKESTR_VAR_BOUNDARY_IMM || *curr_char == MAKESTR_VAR_BOUNDARY_REL)
     {
-      uint8_t boundary_type = this_char;
-      
-      curr_char++; // now at addr LSB
+      uint8_t boundary_type = *curr_char;
+      curr_char++; // At LSB
       uint8_t* lsb = (uint8_t*)curr_char;
-      curr_char++; // now at addr MSB
-      curr_char++; // now at format specifier (if exist), or boundary byte
+      curr_char++; // At MSB
+      curr_char++; // At format specifier or closing boundary
       
+      // Handle Format Specifier
       memset(format_spec_buf, 0, FORMAT_SPEC_BUF_SIZE);
       if (*curr_char != boundary_type)
+      {
         curr_char = copy_format_specifier(curr_char, format_spec_buf, FORMAT_SPEC_BUF_SIZE, boundary_type);
-      if (curr_char == NULL)
-        longjmp(jmpbuf, EXE_STR_ERROR);
-      
-      curr_char++;
+        if (curr_char == NULL)
+          longjmp(jmpbuf, EXE_STR_ERROR);
+      }
+      curr_char++; // closing boundary
 
       uint16_t addr_val = make_uint16(lsb);
       uint32_t var_value = 0;
-
-      // Fetch the value based on the boundary type
       if (boundary_type == MAKESTR_VAR_BOUNDARY_IMM)
         var_value = memread_u32(addr_val);
       else
         stack_read_fp_rel(&data_stack, (int16_t)addr_val, &var_value);
-
       memset(make_str_buf, 0, MKSTR_BUF_SIZE);
       my_snprintf(format_spec_buf, var_value, make_str_buf, MKSTR_BUF_SIZE);
-      strcat(read_buffer, make_str_buf);
+      
+      size_t added_len = strlen(make_str_buf);
+      if (write_ptr + added_len >= buffer_end)
+          longjmp(jmpbuf, EXE_STR_ERROR);
+        
+      memcpy(write_ptr, make_str_buf, added_len);
+      write_ptr += added_len;
       continue;
     }
 
-    // Handle Literal Characters
-    uint32_t len = strlen(read_buffer);
-    if (len < READ_BUF_SIZE - 1)
-    {
-      read_buffer[len] = this_char;
-      read_buffer[len + 1] = '\0';
-    }
+    if (write_ptr >= buffer_end)
+      longjmp(jmpbuf, EXE_STR_ERROR);
+
+    *write_ptr++ = *curr_char;
     curr_char++;
   }
+
+  *write_ptr = '\0';
   return read_buffer;
 }
-
 
 #define RANDCHR_LOWER (1 << 0) // 1
 #define RANDCHR_UPPER (1 << 1) // 2
@@ -1327,9 +1335,15 @@ void execute_instruction(exe_context* exe)
     uint32_t this_value;
     stack_pop(&data_stack, &this_value);
     uint8_t char_type = this_value & 0xff;
-    uint8_t channels = (this_value >> 8) & 0xff;
+    uint8_t channels = this_value >> 16;
     char randc = get_random_char(char_type);
-    printf("OP_RANDCHR %x: %c\n", channels, randc);
+    // printf("OP_RANDCHR %x: %c\n", channels, randc);
+    memset(make_str_buf, 0, MKSTR_BUF_SIZE);
+    make_str_buf[0] = randc;
+    if(randc != 0 && (channels & 0x1))
+      kb_print(make_str_buf, defaultchardelay, charjitter);
+    if(randc != 0 && (channels & 0x2))
+      ssd1306_WriteString(make_str_buf, Font_7x10, White);
   }
   else if(opcode == OP_PUTS)
   {
@@ -1339,7 +1353,14 @@ void execute_instruction(exe_context* exe)
     uint16_t nchar = (this_value >> 16) & 0xfff;
     uint8_t channels = this_value >> 30;
     // printf("PUTS: Addr 0x%08x nchar: %d, channels: %d\n", str_addr, nchar, channels);
-    printf(">>>>> PUTS: %s\n", bin_buf + str_addr);
+    // printf(">>>>> PUTS: %s\n", bin_buf + str_addr);
+    make_str((uint16_t)str_addr);
+    if(nchar != 0 && nchar < READ_BUF_SIZE)
+      read_buffer[nchar] = 0;
+    if(channels & 0x1)
+      kb_print(read_buffer, defaultchardelay, charjitter);
+    if(channels & 0x2)
+      ssd1306_WriteString(read_buffer, Font_7x10, White);
   }
   else if(opcode == OP_PWMCTRL)
   {

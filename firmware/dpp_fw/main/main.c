@@ -148,7 +148,11 @@ Added PUSH0 and DROP instruction
 
 3.1.0
 Dec 30 2025
-
+RANDINT()
+PUTS()
+RANDCHR()
+Print format specifiers
+PWMCTL
 */
 
 uint8_t fw_version_major = 3;
