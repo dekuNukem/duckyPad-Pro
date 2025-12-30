@@ -29,7 +29,7 @@
 #define INTERAL_VAR_BYTE_WIDTH 4
 #define MEMORY_END 0xFFFF
 
-#define MAX_INSTRUCTION_LEN 3
+#define MAX_INSTRUCTION_LEN 5
 
 // ----------
 #define BIN_BUF_SIZE (SCRATCH_MEM_END_ADDRESS_INCLUSIVE+1)
@@ -58,6 +58,8 @@
 #define EXE_UNIMPLEMENTED (EXE_ERROR_CODE_START + 9)
 #define EXE_UNALIGNED_ACCESS (EXE_ERROR_CODE_START + 10)
 #define EXE_PROFILE_NOT_FOUND (EXE_ERROR_CODE_START + 11)
+#define EXE_STR_ERROR (EXE_ERROR_CODE_START + 12)
+
 
 #define _DEFAULTDELAY (INTERAL_VAR_START_ADDRESS + 0 * INTERAL_VAR_BYTE_WIDTH)
 #define _DEFAULTCHARDELAY (INTERAL_VAR_START_ADDRESS + 1 * INTERAL_VAR_BYTE_WIDTH)
@@ -89,13 +91,13 @@
 #define _RTC_SECOND (INTERAL_VAR_START_ADDRESS + 27 * INTERAL_VAR_BYTE_WIDTH)
 #define _RTC_WDAY (INTERAL_VAR_START_ADDRESS + 28 * INTERAL_VAR_BYTE_WIDTH)
 #define _RTC_YDAY (INTERAL_VAR_START_ADDRESS + 29 * INTERAL_VAR_BYTE_WIDTH)
-#define _STR_PRINT_FORMAT (INTERAL_VAR_START_ADDRESS + 30 * INTERAL_VAR_BYTE_WIDTH)
-#define _STR_PRINT_PADDING (INTERAL_VAR_START_ADDRESS + 31 * INTERAL_VAR_BYTE_WIDTH)
-#define _UNUSED (INTERAL_VAR_START_ADDRESS + 32 * INTERAL_VAR_BYTE_WIDTH)
-#define _UNSIGNED_MATH (INTERAL_VAR_START_ADDRESS + 33 * INTERAL_VAR_BYTE_WIDTH)
-#define _SW_BITFIELD (INTERAL_VAR_START_ADDRESS + 34 * INTERAL_VAR_BYTE_WIDTH)
+#define _UNSIGNED_MATH (INTERAL_VAR_START_ADDRESS + 30 * INTERAL_VAR_BYTE_WIDTH)
+#define _SW_BITFIELD (INTERAL_VAR_START_ADDRESS + 31 * INTERAL_VAR_BYTE_WIDTH)
 
 #define DUMMY_DATA_REPLACE_ME (42)
+
+#define MEM_END_ADDR 0xFFFF
+#define _UNUSED MEM_END_ADDR
 
 typedef struct
 {
@@ -109,20 +111,18 @@ typedef struct
 #define DEFAULT_CMD_DELAY_MS 20
 #define DEFAULT_CHAR_DELAY_MS 20
 
+#define EPILOGUE_SAVE_LOOP_STATE 0x1
+#define EPILOGUE_SAVE_COLOR_STATE 0x2
+#define EPILOGUE_NEED_OLED_RESTORE 0x4
+#define EPILOGUE_DONT_AUTO_REPEAT 0x8
+#define EPILOGUE_SAVE_PGV 0x10
+
 #define MAX(a, b) ((a) > (b) ? (a) : (b))
 
 extern uint8_t bin_buf[BIN_BUF_SIZE];
 extern uint8_t allow_abort;
 extern uint8_t kb_led_status;
 extern uint32_t pgv_buf[PGV_COUNT];
-
-extern uint8_t str_print_format;
-extern uint8_t str_print_padding;
-
-#define STR_PRINT_FORMAT_DEC_UNSIGNED    0
-#define STR_PRINT_FORMAT_DEC_SIGNED      1
-#define STR_PRINT_FORMAT_HEX_LOWER_CASE  2
-#define STR_PRINT_FORMAT_HEX_UPPER_CASE  3
 
 #define MAKESTR_VAR_BOUNDARY_IMM (0x1f)
 #define MAKESTR_VAR_BOUNDARY_REL (0x1e)
@@ -145,18 +145,18 @@ typedef uint32_t (*FUNC_PTR_UNARY)(uint32_t);
 
 void stack_print(my_stack* ms, char* comment);
 
-#define EPILOGUE_SAVE_LOOP_STATE 0x1
-#define EPILOGUE_SAVE_COLOR_STATE 0x2
-#define EPILOGUE_NEED_OLED_RESTORE 0x4
-#define EPILOGUE_DONT_AUTO_REPEAT 0x8
-#define EPILOGUE_SAVE_PGV 0x10
-
 #define DS_SET_BITS(variable, mask)   ((variable) |= (mask))
 #define DS_CLEAR_BITS(variable, mask) ((variable) &= ~(mask))
 
 #define PRINT_DEBUG 0
 
 void run_dsb(exe_context* er, uint8_t this_key_id, char* dsb_path, uint8_t is_cached, uint8_t* dsb_cache);
+
+
+uint32_t arc4random(void);
+uint32_t arc4random_uniform(uint32_t range);
+uint32_t random_uint32_between(uint32_t lower, uint32_t upper);
+int32_t random_int32_between(int32_t lower, int32_t upper);
 
 #endif
 

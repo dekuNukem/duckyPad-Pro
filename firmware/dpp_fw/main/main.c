@@ -4,7 +4,7 @@
 #include "freertos/task.h"
 #include "tinyusb.h"
 #include "class/hid/hid_device.h"
-
+#include "bootloader_random.h"
 #include "rotary_encoder.h"
 #include "input_task.h"
 #include "sd_task.h"
@@ -146,11 +146,14 @@ Dec 26 2025
 Added PEEK8, POKE8, and scratch memory area
 Added PUSH0 and DROP instruction
 
+3.1.0
+Dec 30 2025
+
 */
 
 uint8_t fw_version_major = 3;
-uint8_t fw_version_minor = 0;
-uint8_t fw_version_patch = 1;
+uint8_t fw_version_minor = 1;
+uint8_t fw_version_patch = 0;
 
 uint8_t dsvm_version = 2;
 
@@ -235,6 +238,7 @@ void app_main(void)
     if(dp_settings.bt_mode == BT_MODE_NEVER)
     {
         mount_hid_only();
+        bootloader_random_enable();
     }
     else if(dp_settings.bt_mode == BT_MODE_ALWAYS)
     {
@@ -243,10 +247,12 @@ void app_main(void)
     else
     {
         mount_hid_only();
-        if(wait_for_hid_connect(1500) == 0)
+        bootloader_random_enable();
+        if(wait_for_hid_connect(2000) == 0)
         {
             tinyusb_driver_uninstall();
             draw_no_usb_activity();
+            bootloader_random_disable();
             delay_ms(2000);
             my_bt_init();
         }
