@@ -3,7 +3,7 @@
 <eagle version="9.6.2">
 <drawing>
 <settings>
-<setting alwaysvectorfont="no"/>
+<setting alwaysvectorfont="yes"/>
 <setting keepoldvectorfont="yes"/>
 <setting verticaltext="up"/>
 </settings>
@@ -8400,7 +8400,7 @@ www.irf.com&lt;p&gt;
 <part name="GND39" library="supply1" library_urn="urn:adsk.eagle:library:371" deviceset="GND" device=""/>
 <part name="C28" library="clock" deviceset="CAP" device="0805" value="100nF"/>
 <part name="GND40" library="supply1" library_urn="urn:adsk.eagle:library:371" deviceset="GND" device=""/>
-<part name="U$19" library="SparkFun-Retired" deviceset="V_REG_TPS61040" device="SMD"/>
+<part name="U19" library="SparkFun-Retired" deviceset="V_REG_TPS61040" device="SMD"/>
 <part name="+3V32" library="supply1" library_urn="urn:adsk.eagle:library:371" deviceset="+3V3" device=""/>
 <part name="GND44" library="supply1" deviceset="GND" device=""/>
 <part name="C33" library="clock" deviceset="CAP" device="0805" value="4.7uF"/>
@@ -8504,7 +8504,7 @@ www.irf.com&lt;p&gt;
 <part name="JP1" library="SparkFun-Jumpers" deviceset="JUMPER-SMT_2_NO" device="_NO-SILK"/>
 <part name="GND65" library="supply1" deviceset="GND" device=""/>
 <part name="JP4" library="SparkFun-Jumpers" deviceset="JUMPER-SMT_2_NO" device="_NO-SILK"/>
-<part name="U$3" library="duckypad" deviceset="BUZZ40402" device=""/>
+<part name="BZ1" library="duckypad" deviceset="BUZZ40402" device=""/>
 <part name="GND41" library="supply1" deviceset="GND" device=""/>
 <part name="Q1" library="transistor-small-signal" library_urn="urn:adsk.eagle:library:401" deviceset="BSS123" device="" package3d_urn="urn:adsk.eagle:package:28738/2"/>
 <part name="+3V2" library="supply1" library_urn="urn:adsk.eagle:library:371" deviceset="+3V3" device=""/>
@@ -8985,7 +8985,7 @@ www.irf.com&lt;p&gt;
 <instance part="GND40" gate="1" x="508" y="-33.02" smashed="yes">
 <attribute name="VALUE" x="505.46" y="-35.56" size="1.778" layer="96"/>
 </instance>
-<instance part="U$19" gate="G$1" x="190.5" y="-284.48" smashed="yes">
+<instance part="U19" gate="G$1" x="190.5" y="-284.48" smashed="yes">
 <attribute name="NAME" x="185.42" y="-274.32" size="1.778" layer="95" rot="MR180"/>
 <attribute name="VALUE" x="185.42" y="-294.64" size="1.778" layer="96"/>
 </instance>
@@ -9360,7 +9360,7 @@ www.irf.com&lt;p&gt;
 <instance part="JP4" gate="G$1" x="342.9" y="-5.08" smashed="yes" rot="R90">
 <attribute name="NAME" x="340.36" y="-7.62" size="1.778" layer="95" font="vector" rot="R90"/>
 </instance>
-<instance part="U$3" gate="G$1" x="76.2" y="-228.6" smashed="yes" rot="MR270"/>
+<instance part="BZ1" gate="G$1" x="76.2" y="-228.6" smashed="yes" rot="MR270"/>
 <instance part="GND41" gate="1" x="76.2" y="-271.78" smashed="yes" rot="MR0">
 <attribute name="VALUE" x="78.74" y="-274.32" size="1.778" layer="96" rot="MR0"/>
 </instance>
@@ -9636,7 +9636,7 @@ www.irf.com&lt;p&gt;
 <wire x1="160.02" y1="-292.1" x2="160.02" y2="-297.18" width="0.1524" layer="91"/>
 </segment>
 <segment>
-<pinref part="U$19" gate="G$1" pin="GND"/>
+<pinref part="U19" gate="G$1" pin="GND"/>
 <pinref part="GND45" gate="1" pin="GND"/>
 <wire x1="203.2" y1="-284.48" x2="205.74" y2="-284.48" width="0.1524" layer="91"/>
 </segment>
@@ -10035,12 +10035,12 @@ www.irf.com&lt;p&gt;
 <wire x1="160.02" y1="-266.7" x2="160.02" y2="-284.48" width="0.1524" layer="91"/>
 <wire x1="160.02" y1="-266.7" x2="172.72" y2="-266.7" width="0.1524" layer="91"/>
 <junction x="160.02" y="-266.7"/>
-<pinref part="U$19" gate="G$1" pin="VIN"/>
+<pinref part="U19" gate="G$1" pin="VIN"/>
 <wire x1="172.72" y1="-266.7" x2="182.88" y2="-266.7" width="0.1524" layer="91"/>
 <wire x1="180.34" y1="-279.4" x2="172.72" y2="-279.4" width="0.1524" layer="91"/>
 <wire x1="172.72" y1="-279.4" x2="172.72" y2="-266.7" width="0.1524" layer="91"/>
 <junction x="172.72" y="-266.7"/>
-<pinref part="U$19" gate="G$1" pin="EN"/>
+<pinref part="U19" gate="G$1" pin="EN"/>
 <wire x1="180.34" y1="-289.56" x2="172.72" y2="-289.56" width="0.1524" layer="91"/>
 <wire x1="172.72" y1="-289.56" x2="172.72" y2="-279.4" width="0.1524" layer="91"/>
 <junction x="172.72" y="-279.4"/>
@@ -10095,7 +10095,7 @@ www.irf.com&lt;p&gt;
 </segment>
 <segment>
 <pinref part="+3V2" gate="G$1" pin="+3V3"/>
-<pinref part="U$3" gate="G$1" pin="PLUS"/>
+<pinref part="BZ1" gate="G$1" pin="PLUS"/>
 <wire x1="76.2" y1="-203.2" x2="76.2" y2="-213.36" width="0.1524" layer="91"/>
 <wire x1="76.2" y1="-213.36" x2="60.96" y2="-213.36" width="0.1524" layer="91"/>
 <wire x1="60.96" y1="-213.36" x2="60.96" y2="-226.06" width="0.1524" layer="91"/>
@@ -10381,7 +10381,7 @@ www.irf.com&lt;p&gt;
 <net name="N$36" class="0">
 <segment>
 <wire x1="195.58" y1="-266.7" x2="205.74" y2="-266.7" width="0.1524" layer="91"/>
-<pinref part="U$19" gate="G$1" pin="SW"/>
+<pinref part="U19" gate="G$1" pin="SW"/>
 <wire x1="203.2" y1="-279.4" x2="205.74" y2="-279.4" width="0.1524" layer="91"/>
 <wire x1="205.74" y1="-279.4" x2="205.74" y2="-266.7" width="0.1524" layer="91"/>
 <junction x="205.74" y="-266.7"/>
@@ -10394,7 +10394,7 @@ www.irf.com&lt;p&gt;
 </net>
 <net name="N$39" class="0">
 <segment>
-<pinref part="U$19" gate="G$1" pin="FB"/>
+<pinref part="U19" gate="G$1" pin="FB"/>
 <wire x1="203.2" y1="-289.56" x2="208.28" y2="-289.56" width="0.1524" layer="91"/>
 <wire x1="208.28" y1="-289.56" x2="208.28" y2="-284.48" width="0.1524" layer="91"/>
 <pinref part="C35" gate="G$1" pin="1"/>
@@ -11246,7 +11246,7 @@ www.irf.com&lt;p&gt;
 </net>
 <net name="N$37" class="0">
 <segment>
-<pinref part="U$3" gate="G$1" pin="MINUS"/>
+<pinref part="BZ1" gate="G$1" pin="MINUS"/>
 <pinref part="Q1" gate="G$1" pin="D"/>
 <wire x1="76.2" y1="-243.84" x2="76.2" y2="-251.46" width="0.1524" layer="91"/>
 <wire x1="76.2" y1="-243.84" x2="60.96" y2="-243.84" width="0.1524" layer="91"/>
