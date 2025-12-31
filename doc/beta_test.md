@@ -2,26 +2,60 @@
 
 Another big update with many under-the-hood improvements!
 
+Theme: Power user, language polish
+
+mostly for power users, even more powerful and flexible 
+
+if normal user, still recomneded to upgrade, new features, slightly faster.
+
 * Only for **[duckyPad Pro (2024)](https://dekunukem.github.io/duckyPad-Pro/README.html)** FOR NOW
 
-	* Will port to OG duckyPad around Feb/March 2026
+    * Will port to OG duckyPad around Feb/March 2026
 
 ## What's New
 
-### Revamped Scripting Engine
+### Scripting Engine Revamp
 
 * Variables are now **32-bit wide**
 * **32-Bit Arithmetic** with **signed AND unsigned** modes.
-* **Proper Function Calls** with arguments, local variables, return values, and recursion.
+* **Proper Function Calls** with arguments, locals, return values, and recursion.
 
 ### Syntax Shakeup
 
-* `$` prefix is **no longer required** for variables (except for printing)
+* `$` prefix is **no longer required** for variables
+    * Except when printing
+* `THEN` **no longer required** in `IF` statements
 * **Inline comments** with `//` 
 * New **Logical NOT** operator `!`
-* New **reserved variables**
-	* `_SW_BITFIELD` to read status of **all buttons at once**
-	* `_UNSIGNED_MATH` to switch between **arithmetic modes**
+* New **Augmented Assignment** Operators 
+    * `+=`, `-=`, `*=` etc.
+* Shorter keywords for function declarations
+    * `FUN` and `END_FUN`
+
+### Numeric Format Specifiers
+
+* Optional C-like **format specifiers** when **printing variables**
+    * `%x`, `%d`, etc
+
+### "Random Letter" Commands 
+
+```
+RANDOM_LOWERCASE_LETTER     RANDOM_NUMBER
+RANDOM_UPPERCASE_LETTER     RANDOM_SPECIAL
+RANDOM_LETTER               RANDOM_CHAR
+```
+### New Reserved Variables
+
+* `_SW_BITFIELD` to read status of **all buttons at once**
+* `_UNSIGNED_MATH` to switch between **arithmetic modes**
+
+### Built-in Functions
+
+Provided for low-level tinkering and rudimentary string operations.
+
+* `PEEK8()` / `POKE8()`
+* `RANDINT()` / `RANDCHR()`
+* `PUTS()`
 
 ### Performance & Bugfixes
 
@@ -31,9 +65,9 @@ Another big update with many under-the-hood improvements!
 ## Update Firmware
 
 * [Get Beta firmware](../firmware/DPP_FW_3.0.0_5aca4781.bin)
-	* Click `View Raw` to download
+    * Click `View Raw` to download
 * [Follow this guide](https://dekunukem.github.io/duckyPad-Pro/doc/fw_update.html) to update
-	* Use the file you just downloaded!
+    * Use the file you just downloaded!
 
 ## Download Latest Apps
 
@@ -42,35 +76,58 @@ Another big update with many under-the-hood improvements!
 
 ## Guided Tour
 
+### Syntax Shakeup
+
+* `$` prefix is **no longer required** when working with variables
+    * **EXCEPT** when **printing to a string**.
+* New **Augmented Assignment** Operators 
+    * `+=`, `-=`, `*=` etc.
+    * Available for all **2-operand operators**
+    * `x += 1` same as `x = x + 1`, etc.
+```
+VAR foo = 100
+foo += 5
+STRING Value is: $foo
+```
+* New **Logical NOT** operator `!`
+    * Evaluates to 1 is expression is 0.
+    * Evaluates to 0 is expression is **Non-Zero**
+* `THEN` is **no longer required** in `IF` statements
+* Write **inline comments** with `//`
+```
+IF !foo 
+    DELAY 100 // only if foo is 0
+END_IF
+```
+
+### Numeric Format Specifiers
+
+You can now add **format specifiers** when **printing variables** in order to adjust **print format** and **padding**.
+
+* Without specifier, variable are printed as **signed decimal** number
+    * `VAR foo = 255`
+    * `STRING Value is $foo, bye!`
+    * Prints: `Value is 255, bye!`
+* Add the specifier **immediately after the variable name**
+    * `STRING Value is: $foo%x, bye!`
+    * Prints: `Value is ff, bye!`
+
 ### In a 32-bit World
 
 * **All variable types** are now **32-bit wide**
-	* User-declared
-	* Persistent Globals
-	* Reserved Variables
-* `$` prefix is **no longer required** when working with variables
-	* **EXCEPT** when **printing them to a string**.
 * **Signed Mode** (Default)
-	* Can hold values between **−2,147,483,648 and 2,147,483,647**
-	* Suitable for general purpose calculations
-```
-VAR my_score = 100
-my_score = my_score - 500
-STRINGLN Current score is: $my_score
-```
+    * Can hold values between **−2,147,483,648 and 2,147,483,647**
+    * Suitable for **general purpose** calculations
 * **Unsigned Mode**
-	* Set `_UNSIGNED_MATH = 1`
-	* Range: **0 to 4,294,967,295**
-	* Suitable for large numbers or bitwise operations
-```
-_UNSIGNED_MATH = 1
-VAR large_val = 4000000000
-STRINGLN Large unsigned value: $large_val
-```
+    * Set `_UNSIGNED_MATH = 1`
+    * Range: **0 to 4,294,967,295**
+    * Suitable for **large numbers** or **bitwise operations**
 
-### Functions
+### Proper Function Calls
 
-Functions have been expanded to support **arguments**, **return values**, **local variables**, and **recursive** calls.
+Functions now support **arguments**, **return values**, **local variables**, and **recursive** calls.
+
+Making them much more powerful and versatile.
 
 #### ↩️ Back to Basics
 
@@ -78,7 +135,6 @@ As before, plain functions are handy for performing repetitive tasks.
 
 ```
 FUNCTION print_addr()
-    STRINGLN Shipping Address:
     STRINGLN 123 Ducky Lane
     STRINGLN Pond City, QU 12345
 END_FUNCTION
@@ -88,9 +144,7 @@ print_addr() // call it
 
 #### 🆕 Arguments and Returns
 
-But now, you can also pass **up to 8** arguments into a function and specify a return value.
-
-* **`0` is returned** if no explicit `RETURN` command is found
+But now, you can also pass **up to 8 arguments** into a function and specify a **return value**.
 
 ```
 FUNCTION add_number(a, b)
@@ -115,23 +169,21 @@ VAR y = 20
 
 FUNCTION scope_demo()
     VAR x = 5 // This x is local, will shadow the global x.
-    x = x + y
+    x = x + y // should be 5 + 20 = 25
     STRINGLN Local x is: $x
-    // should be 5 + 20 = 25
 END_FUNCTION
 ```
 
 #### 🆕 Nested / Recursive Calls
 
-You can now:
+You can now also:
 
 * Call other functions while inside a function
 * Or **call the same function again** while already in it!
-* Beware stack overflow. Ensure proper end conditions.
 
 ```
 FUNCTION factorial(n)
-    IF n <= 1 THEN
+    IF n <= 1
         RETURN 1
     END_IF
     RETURN n * factorial(n - 1)
@@ -147,8 +199,8 @@ Did you know that the duckyScript you write is actually **compiled into a binary
 This update began as a simple excursion to add 32-bit math and proper function calls. Unsurprisingly it cascaded into a month-long rewrite of the entire compiler and VM. Key changes include:
 
 * duckyScript source is now **pre-processed into Python**
-	* So I can use its built-in AST and Symtable parsers
-	* This is faster and less error-prone than rolling my own from scratch
+    * So I can use its built-in AST and Symtable parsers
+    * This is faster and less error-prone than rolling my own from scratch
 * The VM now has a proper **memory map** and **stack layout**
 * With FP-based **calling convention** that supports args, locals, and recursion.
 * Instructions are now **variable-length** to reduce code size
