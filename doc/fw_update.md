@@ -158,19 +158,19 @@ Initial Public Release
 
 [Main page](../README.md)
 
-[Getting Started Guide](getting_started.md)
+[User Manual / Getting Started](getting_started.md)
 
 [Kit Assembly Guide](kit_assembly.md)
 
-[Using duckyScript](duckyscript_info.md)
+[Writing duckyScript](duckyscript_info.md)
 
-[duckyScript VM](bytecode_vm.md)
+[duckStack Bytecode VM](https://github.com/duckyPad/DuckStack/blob/master/README.md)
+
+[Firmware Update](fw_update.md)
 
 [Tinkering Guide](tinkering_guide.md)
 
 [Troubleshooting](troubleshooting.md)
-
-[Firmware Update](fw_update.md)
 
 ## Questions or Comments?
 

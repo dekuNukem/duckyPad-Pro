@@ -109,13 +109,18 @@ Much easier to lookup than going through this whole page.
     - [`SWC_RESET n`](#swc_reset-n)
 - [Constants](#constants)
 - [Variables](#variables)
+    - [Math Modes](#math-modes)
     - [Persistent Global Variables](#persistent-global-variables)
-    - [Reserved Variables](#internal-reserved-variables)
-    - [Operators](#operators)
-    - [Expressions](#expressions)
+    - [Reserved Variables](#reserved-variables)
+- [Operators](#operators)
+    - [Mathematics](#mathematics)
+    - [Comparison](#comparison)
+    - [Logical](#logical)
+    - [Bitwise](#bitwise)
+    - [Augmented Assignments](#augmented-assignments)
 - [Advanced Printing](#advanced-printing)
-    - [Print Format](#print-format)
-    - [Leading Zeros](#leading-zeros)
+    - [Format Specifiers](#format-specifiers)
+    - [Numerical Padding](#numerical-padding)
 - [Real-time Clock (RTC)](#real-time-clock-rtc)
     - [Setting RTC](#setting-rtc)
     - [Reading RTC](#reading-rtc)
@@ -125,12 +130,24 @@ Much easier to lookup than going through this whole page.
     - [`CONTINUE`](#continue)
     - [Infinite Loop](#infinite-loop)
 - [Functions](#functions)
+    - [Plain Functions](#plain-functions)
+    - [Arguments and Returns](#arguments-and-returns)
+    - [Variable Scoping](#variable-scoping)
+    - [Nested / Recursive Calls](#nested--recursive-calls)
+- [Built-in Functions](#built-in-functions)
+    - [`PEEK8(addr)`](#peek8-addr)
+    - [`POKE8(addr, value)`](#poke8-addr-value)
+    - [`RANDCHR(value)`](#randchr-value)
+    - [`RANDINT(lower, upper)`](#randint-lower-upper)
+    - [`PUTS(value)`](#puts-value)
 - [Reading Inputs](#reading-inputs)
     - [Blocking Read](#blocking-read)
     - [Non-Blocking Read](#non-blocking-read)
     - [Switch Status Bitfield](#switch-status-bitfield)
     - [Key ID](#key-id)
-- [Randomisation](#randomisation)
+- [Randomization](#randomization)
+    - [Random Number](#random-number)
+    - [Random Character](#random-character)
 - [Miscellaneous](#miscellaneous)
     - [`DP_SLEEP`](#dp_sleep)
     - [`HALT`](#halt)
@@ -912,7 +929,7 @@ VAR i = 0
 WHILE i < 5
     i = i + 1
 
-    IF i == 3 THEN
+    IF i == 3
         CONTINUE
     END_IF
 
@@ -1075,11 +1092,7 @@ VAR value = RANDINT(0, 1000)
 
 ## Reading Inputs
 
-You can read the status of:
-
-* Built-in Switches
-* Rotary Encoders
-* Expansion Module Switches
+You can **read the status of switches / encoders** to perform actions.
 
 ### Blocking Read
 
@@ -1101,9 +1114,30 @@ END_IF
 
 ```
 
+### Non-Blocking Read
+
+Read `_READKEY`, **returns immediately**.
+
+Returns 0 if no key is pressed. `Key ID` otherwise.
+
+Check this **in a loop** to perform work even when no key is pressed.
+
+```
+VAR this_key = 0
+
+WHILE TRUE
+    this_key = _READKEY
+    IF this_key == 1
+        // handling button press
+    END_IF
+
+    // otherwise do work here
+END_WHILE
+```
+
 ### Switch Status Bitfield
 
-Read `_SW_BITFIELD`, returns immediately.
+Read `_SW_BITFIELD`, **returns immediately**.
 
 Each bit position stores the status of the corresponding key.
 
@@ -1112,28 +1146,6 @@ Each bit position stores the status of the corresponding key.
 If that bit is 1, the key is currently pressed.
 
 You can use bitmasks to check multiple keys at once.
-
-
-### Non-Blocking Read
-
-Read reserved variable `_READKEY`, returns immediately.
-
-Returns 0 if no key is pressed. Key ID otherwise.
-
-Check this in a loop to perform work even when no key is pressed.
-
-```
-VAR this_key = 0
-
-WHILE TRUE
-    this_key = _READKEY
-    IF this_key == 1 THEN
-        // handling button press
-    END_IF
-
-    // otherwise do work here
-END_WHILE
-```
 
 ### Key ID
 
@@ -1256,19 +1268,19 @@ You can read or write (RW) to adjust settings. Some are read-only (RO).
 
 [Main page](../README.md)
 
-[Getting Started Guide](getting_started.md)
+[User Manual / Getting Started](getting_started.md)
 
 [Kit Assembly Guide](kit_assembly.md)
 
-[Using duckyScript](duckyscript_info.md)
+[Writing duckyScript](duckyscript_info.md)
 
-[duckyScript VM](bytecode_vm.md)
+[duckStack Bytecode VM](https://github.com/duckyPad/DuckStack/blob/master/README.md)
+
+[Firmware Update](fw_update.md)
 
 [Tinkering Guide](tinkering_guide.md)
 
 [Troubleshooting](troubleshooting.md)
-
-[Firmware Update](fw_update.md)
 
 ## Questions or Comments?
 

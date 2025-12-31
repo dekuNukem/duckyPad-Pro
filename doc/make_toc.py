@@ -1,5 +1,7 @@
 import sys
 
+sys.stdout.reconfigure(errors='ignore')
+
 if len(sys.argv) <= 1:
 	print(__file__, 'text_file')
 	exit()

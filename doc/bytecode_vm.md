@@ -2,219 +2,38 @@
 
 [Get duckyPad Pro](https://www.tindie.com/products/37399/) | [Official Discord](https://discord.gg/4sJCBx5) | [Getting Started](./getting_started.md) | [Table of Contents](#table-of-contents)
 
-----
+-----
 
-Details of duckyPad duckyScript 3 (**DPDS3**) instruction set, compiler, and binary format.
+## ⚠️⚠️⚠️⚠️⚠️⚠
 
-This is NOT the official implementation, which appears to be close-source.
+### duckyScript Bytecode VM has **moved to its own repo!**
 
-I designed everything here myself from scratch.
+👇 👇 👇 👇 👇 👇 👇 👇 👇 👇 👇 👇 👇 👇 👇 👇
 
-## Background
+CLICK BELOW
 
-In duckyScript 1, it's sufficient to simply parse line-by-line, as each line is independent.
+https://github.com/duckyPad/DuckStack/blob/master/README.md
 
-duckyScript 3 introduced variables, `IF` statements, `WHILE` loops, and function calls.
+☝️ ☝️ ☝️ ☝️ ☝️ ☝️ ☝️ ☝️ ☝️ ☝️ ☝️ ☝️ ☝️ ☝️ ☝️ ☝️
 
-Being much more complex, it makes sense to compile the script into bytecode and execute it on a virtual machine instead.
-
-## Virtual Stack Machine
-
-DPDS3 VM is a simple **16-bit stack machine** with **two stacks** and a **Program Counter (PC)**.
-
-* PC points to the current instruction being executed.
-
-* **Arithmetic Stack**: Used to perform calculations and store arguments.
-
-* **Call Stack**: Keeps track of function calls.
-
-Compiled binary is loaded into memory, and PC starts executing from 0x0.
-
-## Instruction Set
-
-Each DPDS3 instruction has a **fixed-length** of **three bytes**.
-
-* First byte (Byte 0) is **Opcode**, specifying the action this instruction perform.
-
-* Second and third byte (Byte 1 and 2) provides optional data.
-
-* They are treated as one uint16_t or two uint8_t depending on the instruction.
-
-## Compiler
-
-The DPDS3 compiler takes a text file and outputs a executable binary file.
-
-The binary file should have extension `.dsb` (duckyScript binary).
-
-Normally this is taken care of in the configurator. But you can also try it out on its own:
-
-* [Download the latest source code](https://github.com/duckyPad/duckyPad-Configurator/releases/latest)
-
-* Unzip, and run with Python 3: `python3 make_bytecode.py input output`
-
-Let's say you have a simple script in `sample_script.txt`:
-
-```
-DEFINE TEN 10
-VAR $spam = TEN*7+3
-DELAY $spam
-```
-
-Compile with `python3 make_bytecode.py sample_script.txt output.dsb`
-
-Compiled binary is written to `output.dsb`, along with some extra info:
-
-```
---------- Program Listing After Preprocessing: ---------
-1    VAR $spam = 10*7+3
-2    DELAY $spam
-
---------- Assembly Listing, Unresolved ---------
-
-PUSHC     10    0xa           ;VAR $spam = 10*7+3
-PUSHC     7     0x7           ;VAR $spam = 10*7+3
-MULT                          ;VAR $spam = 10*7+3
-PUSHC     3     0x3           ;VAR $spam = 10*7+3
-ADD                           ;VAR $spam = 10*7+3
-POP       spam                ;VAR $spam = 10*7+3
-PUSHI     spam                ;DELAY $spam
-DELAY                         ;DELAY $spam
-HALT
-
---------- Assembly Listing, Resolved ---------
-
-0    PUSHC     10    0xa           ;VAR $spam = 10*7+3
-3    PUSHC     7     0x7           ;VAR $spam = 10*7+3
-6    MULT                          ;VAR $spam = 10*7+3
-9    PUSHC     3     0x3           ;VAR $spam = 10*7+3
-12   ADD                           ;VAR $spam = 10*7+3
-15   POP       0     0x0           ;VAR $spam = 10*7+3
-18   PUSHI     0     0x0           ;DELAY $spam
-21   DELAY                         ;DELAY $spam
-24   HALT
-
-
-
---------- Bytecode ---------
-0x01 0x0a 0x00 0x01 0x07 0x00 0x11 0x00 0x00
-0x01 0x03 0x00 0x0f 0x00 0x00 0x03 0x00 0x00
-0x02 0x00 0x00 0x1b 0x00 0x00 0x08 0x00 0x00
-
-
-Binary Size: 27 Bytes
-
-```
-
-## Binary Executable
-
-When a key is pressed, the corresponding `.dsb` file is loaded into `bin_buf` in [ds_vm.c](https://github.com/dekuNukem/duckyPad-Pro/blob/master/firmware/dpp_fw/main/ds_vm.c). Execution occurs inside `run_dsb()` with `execute_instruction()`.
-
-Zero-terminated strings are stored at the end of the binary file.
-
-Variables are stored in `var_buf`. Up to 64 variables can be declared. 
-
-## CPU Instructions
-
-All reference to **"stack"** refers to **Arithmetic Stack**. Unless noted otherwise.
-
-|   Opcode<br>Name  | Byte 0<br>Decimal | Byte 0<br>Hex |                                                                                        Comment                                                                                       |   Byte 1  |   Byte 2  |
-|:-------:|:---:|:----:|:------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------:|:---------:|:---------:|
-|   NOP   |  0  |  0x0 |                                                                                      Do nothing                                                                                      |           |           |
-|  PUSHC  |  1  |  0x1 |                                                                               Push a constant on stack                                                                               | CONST_LSB | CONST_MSB |
-|  PUSHI  |  2  |  0x2 |                                                                              Push value at ADDR on stack                                                                             |  ADDR_LSB |  ADDR_MSB |
-|   POP   |  3  |  0x3 |                                                                     Pop one item off top of stack<br>Write it to ADDR                                                                    |  ADDR_LSB |  ADDR_MSB |
-|   BRZ   |  4  |  0x4 |                                                              Pop one item off top of stack<br>If value is zero, jump to ADDR                                                             |  ADDR_LSB |  ADDR_MSB |
-|   JMP   |  5  |  0x5 |                                                                                  Unconditional Jump                                                                                  |  ADDR_LSB |  ADDR_MSB |
-|   CALL  |  6  |  0x6 |                                                              Jump to Subroutine<br>Push the **next instruction** (PC+3) to **call stack**<br>Then jump to ADDR                                                             |  ADDR_LSB |  ADDR_MSB |
-|   RET   |  7  |  0x7 |                                                        Return from Subroutine<br>Pop one item off **call stack**<br>Set PC to its value                                                       |           |           |
-|   HALT  |  8  |  0x8 |                                                                                    Stop execution                                                                                    |           |           |
-|   VMVER  |  255  |  0xFF|     VM Version Check<br>Abort if mismath         ||   VM VER        |
-
-
-## Binary Operator Instructions
-
-Binary as in **involving two operands**.
-
-All instructions here:
-
-* Pop TWO items off arithmetic stack
-
-* First item is left-hand-side, second item is right-hand-side.
-
-* Perform operation
-
-* Push result back on stack.
-
-|   Opcode<br>Name  | Byte 0<br>Decimal | Byte 0<br>Hex |                                                                                        Comment                                                                                       |
-|:-------:|:---:|:----:|:------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------:|
-|    EQ   |  9  |  0x9 |                                                                                         Equal                                                                                        |
-|  NOTEQ  |  10 |  0xa |                                                                                       Not equal                                                                                      |
-|    LT   |  11 |  0xb |                                                                                       Less than                                                                                      |
-|   LTE   |  12 |  0xc |                                                                                  Less than or equal                                                                                  |
-|    GT   |  13 |  0xd |                                                                                     Greater than                                                                                     |
-|   GTE   |  14 |  0xe |                                                                                 Greater than or equal                                                                                |
-|   ADD   |  15 |  0xf |                                                                                          Add                                                                                         |
-|   SUB   |  16 | 0x10 |                                                                                       Subtract                                                                                       |
-|   MULT  |  17 | 0x11 |                                                                                       Multiply                                                                                       |
-|   DIV   |  18 | 0x12 |                                                                                   Integer division                                                                                   |
-|   MOD   |  19 | 0x13 |                                                                                       Modulus                                                                                       |
-|   POW   |  20 | 0x14 |                                                                                       Power of                                                                                       |
-|  LSHIFT |  21 | 0x15 |                                                                                  Logical left shift                                                                                  |
-|  RSHIFT |  22 | 0x16 |                                                                                  Logical right shift                                                                                 |
-|  BITOR  |  23 | 0x17 |                                                                                      Bitwise OR                                                                                      |
-|  BITAND |  24 | 0x18 |                                                                                      Bitwise AND                                                                                     |
-| LOGIAND |  25 | 0x19 |                                                                                      Logical AND                                                                                     |
-|  LOGIOR |  26 | 0x1a |                                                                                      Logical OR                                                                                      |
-| BITXOR | 51 | 0x33 | Bitwise XOR |
-
-## duckyScript Command Instructions
-
-All reference to **"stack"** refers to **Arithmetic Stack**. Unless noted otherwise.
-
-|   Opcode<br>Name  | Byte 0<br>Decimal | Byte 0<br>Hex |                                                                                        Comment                                                                                       |   Byte 1  |   Byte 2  |
-|:-------:|:---:|:----:|:------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------:|:---------:|:---------:|
-|  DELAY  |  27 | 0x1b |                                                             Pop one item off top of stack<br>Delay the amount in milliseconds                                                            |           |           |
-|   KUP   |  28 | 0x1c |                                                                                      **Release Key**<br>Pop ONE item<br>Upper byte: KEYTYPE<br>Lower byte: KEYCODE                             |    |    |
-|  KDOWN  |  29 | 0x1d |                                                                                       **Press Key**<br>Pop ONE item<br>Upper byte: KEYTYPE<br>Lower byte: KEYCODE                             |    |    |
-|   MSCL  |  30 | 0x1e |                                                                                     **Mouse Scroll**<br>Pop ONE item<br>Scroll number of lines                                           |    |           |
-|   MMOV  |  31 | 0x1f |                                                                                      **Mouse Move**<br>Pop TWO items<br>Move X and Y                                                  |          |          |
-|   SWCF  |  32 | 0x20 |                                         **Switch Color Fill**<br>Pop THREE items<br>Red, Green, Blue<br>Set ALL LED color to the RGB value                                         |           |           |
-|   SWCC  |  33 | 0x21 |                         **Switch Color Change**<br>Pop FOUR items<br>N, Red, Green, Blue<br>Set N-th switch to the RGB value<br>If N is 0, set current switch.                         |           |           |
-|   SWCR  |  34 | 0x22 | **Switch Color Reset**<br>Pop one item off top of stack<br>If value is 0, reset color of current key<br>If value is between 1 and 20, reset color of that key<br>If value is 99, reset color of all keys |           |           |
-|   STR   |  35 | 0x23 |                                                                          Print zero-terminated string at ADDR                                                                         |  ADDR_LSB |  ADDR_MSB |
-|  STRLN  |  36 | 0x24 |                                                                          Same as above, presses ENTER at end                                                                         |  ADDR_LSB   |   ADDR_MSB   |
-|   ----  |  37 | 0x25 |                                                                                     Deprecated<br>Do not use                                                                                     |    |    |
-|   OLC   |  38 | 0x26 |                                                      **OLED_CURSOR**<br>Pop TWO items<br>X and Y<br>                                                  |           |           |
-|   OLP   |  39 | 0x27 |                                                                      Print zero-terminated string at ADDR to OLED                                                                     |  ADDR_LSB |  ADDR_MSB |
-|   OLU   |  40 | 0x28 |                                                                                      **OLED_UPDATE**                                                                                     |           |           |
-|   OLB   |  41 | 0x29 |                                                                                      **OLED_CLEAR**                                                                                      |           |           |
-|   OLR   |  42 | 0x2a |                                                                                     **OLED_RESTORE**                                                                                     |           |           |
-|   BCLR  |  43 | 0x2b |                                                                              Clear switch event queue                                                                             |           |           |
-|  PREVP  |  44 | 0x2c |                                                                                   Previous profile                                                                                   |           |           |
-|  NEXTP  |  45 | 0x2d |                                                                                     Next profile                                                                                     |           |           |
-|  GOTOP  |  46 | 0x2e |                                                               Pop one item<br>Go to profile of its value                                                               |           |           |
-|  SLEEP  |  47 | 0x2f |                                                                       Put duckyPad to sleep<br>Terminates execution                                                                      |           |           |
-| OLED_LINE|48|0x30|OLED Draw Line<br>Pop FOUR items<br>`x1, y1, x2, y2`<br>Draw single-pixel line inbetween |||
-| OLED_RECT|49|0x31|OLED Draw Rectangle<br>Pop FIVE items<br>`fill, x1, y1, x2, y2`<br>Draw rectangle between two points<br>Fill if `fill` is non-zero|||
-| OLED_CIRC|50|0x32|OLED Draw Circle<br>Pop FOUR items<br>`fill, radius, x, y`<br>Draw circle with `radius` at `(x,y)`<br>Fill if `fill` is non-zero|||
-
+-----
 ## Table of Contents
 
 [Main page](../README.md)
 
-[Getting Started Guide](getting_started.md)
+[User Manual / Getting Started](getting_started.md)
 
 [Kit Assembly Guide](kit_assembly.md)
 
-[Using duckyScript](duckyscript_info.md)
+[Writing duckyScript](duckyscript_info.md)
 
-[duckyScript VM](bytecode_vm.md)
+[duckStack Bytecode VM](https://github.com/duckyPad/DuckStack/blob/master/README.md)
+
+[Firmware Update](fw_update.md)
 
 [Tinkering Guide](tinkering_guide.md)
 
 [Troubleshooting](troubleshooting.md)
-
-[Firmware Update](fw_update.md)
 
 ## Questions or Comments?
 

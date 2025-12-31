@@ -13,8 +13,6 @@ Hi there! Here you can get:
 	* Switches & Keycaps
 	* and more!
 
-
-
 |duckyPad Pro (2024)|duckyPad (2020)|
 |:--:|:--:|
 |![alt](../resources/photos/sq.jpeg)|![alt](../resources/photos/og.jpeg)|
