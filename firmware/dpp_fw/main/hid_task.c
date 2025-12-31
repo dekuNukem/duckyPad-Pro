@@ -113,17 +113,23 @@ const uint8_t hid_report_descriptor[] =
   0x85, 0x03,        //   Report ID (3)
   0x09, 0x01,        //   Usage (Pointer)
   0xA1, 0x00,        //   Collection (Physical)
+  
+  // Buttons (1 to 3)
   0x05, 0x09,        //     Usage Page (Button)
-  0x19, 0x01,        //     Usage Minimum (0x01)
-  0x29, 0x03,        //     Usage Maximum (0x03)
+  0x19, 0x01,        //     Usage Minimum (1)
+  0x29, 0x03,        //     Usage Maximum (3)
   0x15, 0x00,        //     Logical Minimum (0)
   0x25, 0x01,        //     Logical Maximum (1)
   0x95, 0x03,        //     Report Count (3)
   0x75, 0x01,        //     Report Size (1)
-  0x81, 0x02,        //     Input (Data,Var,Abs,No Wrap,Linear,Preferred State,No Null Position)
+  0x81, 0x02,        //     Input (Data,Var,Abs)
+  
+  // Padding for buttons (5 bits to make 1 byte)
   0x95, 0x01,        //     Report Count (1)
   0x75, 0x05,        //     Report Size (5)
-  0x81, 0x01,        //     Input (Const,Array,Abs,No Wrap,Linear,Preferred State,No Null Position)
+  0x81, 0x03,        //     Input (Const,Var,Abs) 
+
+  // X, Y, and Vertical Wheel
   0x05, 0x01,        //     Usage Page (Generic Desktop Ctrls)
   0x09, 0x30,        //     Usage (X)
   0x09, 0x31,        //     Usage (Y)
@@ -132,9 +138,20 @@ const uint8_t hid_report_descriptor[] =
   0x25, 0x7F,        //     Logical Maximum (127)
   0x75, 0x08,        //     Report Size (8)
   0x95, 0x03,        //     Report Count (3)
-  0x81, 0x06,        //     Input (Data,Var,Rel,No Wrap,Linear,Preferred State,No Null Position)
-  0xC0,              //   End Collection
-  0xC0,              // End Collection
+  0x81, 0x06,        //     Input (Data,Var,Rel)
+
+  // Horizontal Wheel (AC Pan)
+  0x05, 0x0C,        //     Usage Page (Consumer)
+  0x0A, 0x38, 0x02,  //     Usage (AC Pan)
+  0x15, 0x81,        //     Logical Minimum (-127)
+  0x25, 0x7F,        //     Logical Maximum (127)
+  0x75, 0x08,        //     Report Size (8)
+  0x95, 0x01,        //     Report Count (1)
+  0x81, 0x06,        //     Input (Data,Var,Rel)
+
+  0xC0,              //   End Collection (Physical)
+  0xC0,              // End Collection (Application)
+  
   // Report ID 4: Custom HID communication pipe
   0x05, 0x01,                    // USAGE_PAGE (counted buffer?)
   0x09, 0x3A,                    // USAGE (I forgot what this is)

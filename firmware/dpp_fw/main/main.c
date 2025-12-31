@@ -148,11 +148,13 @@ Added PUSH0 and DROP instruction
 
 3.1.0
 Dec 30 2025
+the whole jan 2026 update
 RANDINT()
 PUTS()
 RANDCHR()
 Print format specifiers
 PWMCTL
+horizontal mouse scroll
 */
 
 uint8_t fw_version_major = 3;
