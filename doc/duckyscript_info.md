@@ -67,8 +67,6 @@ Much easier to lookup than going through this whole page.
 
 ## List of Commands
 
-
-
 - [Comments](#comments)
     - [`//`](#)
     - [`REM`](#rem)
@@ -150,7 +148,7 @@ C-style comment. Anything after `//` is ignored.
 
 ### `REM`
 
-BASIC/Win style comment. Works the same way.
+BASIC/Win style comment.
 
 ```
 REM This is a comment
@@ -187,7 +185,7 @@ STRING Hello world!
 
 Type out everything inside as-is.
 
-Also presses **enter key** at the end of each line.
+Also presses **enter key** at the **end of each line**.
 
 ```
 STRINGLN_BLOCK
@@ -200,7 +198,7 @@ END_STRINGLN
 
 ### `STRING_BLOCK` and `END_STRING`
 
-Similar to above, but without new lines.
+Similar to above, but does **NOT** press enter on new lines.
 
 ### Printing Variables / Print Formatting
 
@@ -318,17 +316,15 @@ STRING cmd
 
 ### `DEFAULTDELAY`
 
-How long to wait between **`each input-generating command`**.
+How long to wait between **`each NON-LETTER keypresses`**.
 
 * Default: 20ms
 
 ```
 DEFAULTDELAY 50
-// Wait 50ms between each command below
+// Wait 50ms between pressing each key below
 
-ALT
-DOWN
-ENTER
+ALT DOWN ENTER
 ```
 
 ### `DEFAULTCHARDELAY`
@@ -336,7 +332,7 @@ ENTER
 How long to wait between **`each letter`** when **`typing text`**.
 
 * Default: 20ms
-    * To type faster, set to around 10.
+* To type faster, set to around 10.
 
 ```
 DEFAULTCHARDELAY 10
@@ -427,6 +423,8 @@ Jump to a profile by name. **Case sensitive!**
 
 This ends the current script execution.
 
+Works with [Advanced Printing](#advanced-printing).
+
 ```
 GOTO_PROFILE NumPad
 ```
@@ -454,11 +452,13 @@ Characters print from **top-left** corner.
 
 `OLED_PRINT hello world!` 
 
-Prints the message into display buffer at current cursor location.
+Print the message into display buffer at **current cursor location**.
+
+Works with [Advanced Printing](#advanced-printing).
 
 ### `OLED_CLEAR`
 
-Clears the display buffer.
+Clear the display buffer.
 
 ### `OLED_CIRCLE`
 
@@ -471,6 +471,7 @@ Clears the display buffer.
 ### `OLED_LINE`
 
 `OLED_LINE x1 y1 x2 y2`
+
 * `x1, y1`: Starting Point
 * `X2, y2`: Ending Point
 
@@ -486,7 +487,7 @@ Clears the display buffer.
 
 Actually update the OLED.
 
-You should use `OLED_CLEAR`, `OLED_CURSOR`, `OLED_PRINT`, etc, to set up the display, then use this to print it.
+You should use the other commands to set up the buffer, then call `OLED_UPDATE` to write to display.
 
 This is **much faster** than updating the whole screen for every change.
 
@@ -558,13 +559,25 @@ VAR eggs = 10
 
 // Assignment
 spam = 20
+eggs = spam*2
 ```
 
 * Variables are **32-bit Integers**
 * Variables declared at top level have **global scope** and can be accessed **anywhere**.
 * Variables declared **inside a function** have **local scope** and is only accessible **within that function**.
     * **Shadowing:** Local variables take precedence over global variables with the same name.
-    * **Naming**: Local variables cannot share names with function arguments.
+
+### Math Modes
+
+Write to `_UNSIGNED_MATH` to adjust **math mode**
+
+* **Signed Mode** (Default)
+    * Variables can hold values between **−2,147,483,648 and 2,147,483,647**
+    * Suitable for all **general purpose** calculations
+* **Unsigned Mode** (`_UNSIGNED_MATH = 1`)
+    * Range: **0 to 4,294,967,295**
+    * Suitable for **large numbers** or **bitwise operations**
+* Unsure? Stick with default **signed mode**
 
 ### Persistent Global Variables
 
@@ -582,21 +595,20 @@ You can read them to obtain information, or write to adjust settings.
 
 ```
 VAR status = _IS_NUMLOCK_ON
-_RANDOM_MIN = 10
+_CHARJITTER = 1
 ```
 
 [Click Me for Full list](#reserved-variables-list)
 
-### Operators
+## Operators
 
 You can perform operations on constants and variables.
 
 * 🚨 All ops are **SIGNED** BY DEFAULT
-    * Set `_UNSIGNED_MATH = 1` to switch to **unsigned** arithmetic mode
+    * Set `_UNSIGNED_MATH = 1` to switch to **unsigned** mode
+    * ⚠️ = Affected by current **Arithmetic Mode**
 
-⚠️ = Affected by current **Arithmetic Mode**
-
-#### Mathematics
+### Mathematics
 
 ```
 =       Assignment
@@ -615,7 +627,7 @@ spam = 2+3
 spam = eggs * 10
 ```
 
-#### Comparison
+### Comparison
 
 All comparisons evaluate to **either 0 or 1**.
 
@@ -628,15 +640,15 @@ All comparisons evaluate to **either 0 or 1**.
 <=        ⚠️Less than or equal   
 ```
 
-#### Logical 
+### Logical 
 
 | Operator |          Name         | Comment                                                |
 |:--------:|:---------------------:|--------------------------------------------------------|
 |    `&&`    |      Logical AND      | Evaluates to 1 if BOTH side are non-zero, otherwise 0. |
 |   `\|\|`   |       Logical OR      | Evaluates to 1 if ANY side is non-zero, otherwise 0.   |
-|    `!`    |      Logical NOT      | Evaluates to 1 expression is 0, vice versa. |
+|    `!`    |      Logical NOT      | **Single (Unary) Operand**<br>Evaluates to 1 if expression is 0<br>Evaluates to 0 if expression is **Non-Zero**|
 
-#### Bitwise
+### Bitwise
 
 ```
 &       Bitwise AND   
@@ -649,84 +661,84 @@ All comparisons evaluate to **either 0 or 1**.
             Unsigned Mode: Logical Shift (0-extend)
 ```
 
-### Expressions
+### Augmented Assignments
 
-You can use **constant, variable, or expressions** in commands.
-
-```
-VAR amount = 100
-DELAY amount*2+5
-```
+* E.g. `+=`, `-=`, `*=`, etc.
+* Available for all **2-operand operators**
+* `x += 1` same as `x = x + 1`, etc.
 
 -------
 [⬆️⬆️⬆️⬆️⬆️⬆️ Back to Top ⬆️⬆️⬆️⬆️⬆️⬆️](#list-of-commands)
 
 ## Advanced Printing
 
-You can print **the value of variables** when using `STRING`, `STRINGLN`, and `OLED_PRINT`:
-
-Add a **dollar symbol ($) before the variable name** to print it as number.
+You can print the **value of a variable** by adding a **dollar symbol ($) before its name**.
 
 ```
-STRING The value is: $spam
+VAR foo = -10
+STRING Value is $foo
+// Prints: Value is -10
 ```
 
-### Print Format
+* Works with `STRING`, `STRINGLN`, `OLED_PRINT`, and `GOTO_PROFILE`.
 
-Write to `_STR_PRINT_FORMAT` to adjust **how numbers are printed**.
+### Format Specifiers
 
-|Value|Format|Example|
-|:---:|:---:|:---:|
-|0|Decimal Unsigned (default)|`65409`|
-|1|Decimal Signed|`-127`|
-|2|Hexadecimal Lower Case|`ff81`|
-|3|Hexadecimal Upper Case|`FF81`|
+You can use **Optional C-Style Format Specifiers** to adjust **print format** and **padding**.
+
+To add a specifier: **Immediately after the variable name**, type `%`, then a **data-type indicator letter**.
+
+* `%d` to print variable as **Signed Decimal**
+    * **DEFAULT**, same as no specifier.
+* `%u` to print variable as **Unsigned Decimal**
+* `%x` to print variable as **Lowercase Hexadecimal**
+* `%X` to print variable as **Uppercase Hexadecimal**
 
 ```
-VAR foo = 65409
+VAR $foo = -10
 
-_STR_PRINT_FORMAT = 0
-STRINGLN The value is: $foo
-
-_STR_PRINT_FORMAT = 1
-STRINGLN The value is: $foo
-
-_STR_PRINT_FORMAT = 2
-STRINGLN The value is: $foo
-
-_STR_PRINT_FORMAT = 3
-STRINGLN The value is: $foo
+STRING Value is: $foo%d
+STRING Value is: $foo%u
+STRING Value is: $foo%x
+STRING Value is: $foo%X
 ```
 
 ```
-The value is: 65409
-The value is: -127
-The value is: ff81
-The value is: FF81
+Value is: -10
+Value is: 4294967286
+Value is: fffffff6
+Value is: FFFFFFF6
 ```
 
-### Leading Zeros
+### Numerical Padding
 
-Write to `_STR_PRINT_PADDING` to adjust **padding**.
-
-* **Leading zeros** are added if the variable has fewer digits.
-
-* Set to 0 for no padding.
-
-* Works with all print formats.
-
+* To pad with **SPACE**
+    * Add a **width number** just **after `%`** and **before the letter**
+    * The output will be **at least that** wide
+    * Any extra space are padded with **space characters**
 ```
-_STR_PRINT_PADDING = 2
-
-VAR year = 2025
-VAR month = 8
-VAR day = 5
-STRING Date is: $year-$month-$day
+VAR $foo = 5
+STRING I have $foo%10d apples!
+```
+```
+I have          5 apples!
 ```
 
+* To pad with **LEADING-ZERO**
+    * Right **after `%`**, add a `0`, then width number, then the letter.
+    * The output will be **at least that** wide
+    * Any extra space are padded with `0`
+* Useful for printing **dates** and **hex numbers**
 ```
-Date is: 2025-08-05
+VAR $foo = 5
+STRING I have $foo%010d apples!
 ```
+```
+I have 0000000005 apples!
+```
+
+-------
+[⬆️⬆️⬆️⬆️⬆️⬆️ Back to Top ⬆️⬆️⬆️⬆️⬆️⬆️](#list-of-commands)
 
 ## Real-time Clock (RTC)
 
@@ -739,25 +751,24 @@ On cold-boot, duckyPad doesn't know what time it is.
 It must be set once, after which it will keep time **as long as it is powered-on**.
 
 * RTC is **automatically set** when using the [Autoswitcher](https://github.com/duckyPad/duckyPad-Profile-Autoswitcher)
-
     * A **clock icon** appears when RTC is valid
 
-    ![Alt text](../resources/photos/app/rtc.png)
+![Alt text](../resources/photos/app/rtc.png)
 
 * You can also set it manually
-
     * [HID Commands](https://github.com/duckyPad/duckyPad-Profile-Autoswitcher/blob/master/HID_details.md)
-
     * [Sample Script](https://github.com/duckyPad/duckyPad-Profile-Autoswitcher/blob/master/hid_example/ex3_set_rtc.py)
 
 ### Reading RTC
 
 #### Validity Check
 
-First, read `_RTC_IS_VALID`. **Do not proceed** if value is 0.
+**ALWAYS check** `_RTC_IS_VALID` **first**!
+
+* **Do not proceed** if value is 0.
 
 ```
-IF _RTC_IS_VALID == 0 THEN
+IF _RTC_IS_VALID == 0
     // RTC is uninitialised, do not proceed.
     HALT
 END_IF
@@ -770,14 +781,12 @@ The RTC always runs in **UTC**.
 Local time is obtained by adding an **UTC Offset in `MINUTES`**
 
 * It is **set automatically** to your **local timezone** when using the [Autoswitcher](https://github.com/duckyPad/duckyPad-Profile-Autoswitcher).
-
 * You can check (and manually adjust) the offset by reading/writing `_RTC_UTC_OFFSET` variable
-
     * Can be positive, 0, or negative.
 
 #### Time and Date
 
-With valid RTC and correct UTC offset, you can now read from the variables below:
+With **valid RTC** and **correct UTC offset**, you can now read from the variables below:
 
 | Name      | Comment                | Range |
 | ------------- | -------------------------- | --------------- |
@@ -793,21 +802,25 @@ With valid RTC and correct UTC offset, you can now read from the variables below
 #### Example Usage
 
 ```
-_STR_PRINT_PADDING = 2
-STRINGLN _RTC_YEAR-_RTC_MONTH-_RTC_DAY _RTC_HOUR:_RTC_MINUTE:_RTC_SECOND
+STRING $_RTC_YEAR%04d-$_RTC_MONTH%02d-$_RTC_DAY%02d $_RTC_HOUR%02d:$_RTC_MINUTE%02d:$_RTC_SECOND%02d
 ```
 
 ```
 2025-09-18 09:07:23
 ```
+See [Advanced Printing](#advanced-printing) for formatting tips.
+
+-------
+[⬆️⬆️⬆️⬆️⬆️⬆️ Back to Top ⬆️⬆️⬆️⬆️⬆️⬆️](#list-of-commands)
+
 ## Conditional Statements
 
-`IF` statement is used to conditionally execute code.
+`IF` statements can be used to **conditionally execute code**.
 
-At simplest, it involves `IF`, `THEN`, and `END_IF`:
+At simplest, it involves `IF` and `END_IF`:
 
 ```
-IF expression THEN
+IF expression
     code to execute
 END_IF
 ```
@@ -820,19 +833,19 @@ Indent doesn't matter, feel free to add them for a cleaner look.
 
 You can use `ELSE IF` and `ELSE` for additional checks.
 
-If the first `IF` evaluate to 0, `ELSE IF`s are checked and executed if condition is met.
+If the first `IF` evaluate to 0, `ELSE IF`s are checked.
 
 If none of the conditions are met, then code inside `ELSE` is executed.
 
 ```
-VAR spam = 5
+VAR temp = 25
 
-IF spam == 0 THEN
-    STRING spam is zero!
-ELSE IF spam == 1 THEN
-    STRING spam is one!
+IF temp > 30
+    STRING It's very hot!
+ELSE IF temp > 18
+    STRING It's a pleasant day.
 ELSE
-    STRING spam is none of those!
+    STRING It's quite chilly!
 END_IF
 ```
 
@@ -841,7 +854,7 @@ END_IF
 
 ## Loops
 
-You can use `WHILE` loops to repeat instructions until a certain condition is met.
+You can use `WHILE` statement to **repeat actions** until a **certain condition is met**.
 
 Syntax:
 
@@ -851,7 +864,7 @@ WHILE expression
 END_WHILE
 ```
 
-If `expression` evaluates to zero, the code is skipped. Otherwise the code inside is repeated.
+* If `expression` evaluates to **non-zero**, code inside is repeated. Otherwise, the code is skipped.
 
 This simple example loops 3 times.
 
@@ -875,11 +888,11 @@ Use `LBREAK` to **exit a loop** immediately.
 
 ```
 VAR i = 0
-WHILE TRUE
+WHILE 1
     STRINGLN Counter is $i!
     i = i + 1
 
-    IF i == 3 THEN
+    IF i == 3
         LBREAK
     END_IF
 END_WHILE
@@ -925,20 +938,137 @@ To exit an infinite loop, you can [check button status](#reading-inputs), or tur
 
 ## Functions
 
-Syntax:
+A function is a **block of organized code** that you can call to **performs a task**.
+
+It makes your script **more modular** and **easier to maintain** compared to copy-pasting code multiple times.
+
+### Plain Functions
+
+* Declare a function with `FUN name()` and `END_FUN`
+* Put the code you want to execute inside
+* Call it with `name()`
+* Code inside are executed
 
 ```
-FUNCTION func_name(arg1, arg2...)
-    code
-    ...
-    RETURN
-END_FUNCTION
+FUN print_addr()
+    STRINGLN 123 Ducky Lane
+    STRINGLN Pond City, QU 12345
+END_FUN
+
+print_addr() // call it
 ```
 
-* Up to 8 arguments
-* Use **`RETURN`** to exit a function early
-* Variables declared inside function have local scope
-* 0 is returned without an explicit `RETURN` statement
+### Arguments and Returns
+
+You can also pass **up to 8 arguments** into a function and specify a **return value**.
+
+* Ideal for performing calculations
+
+```
+FUN add_number(a, b)
+    RETURN a + b
+END_FUN
+
+VAR total = add_number(10, 20)
+```
+
+### Variable Scoping
+
+Variables declared **outside functions** have **global scope**, they can be **accessed anywhere**.
+
+Variables declared **inside functions** have **local scope**, they are only accessible **within that function**.
+
+If a local variable has the **same name** as a global variable, the **local var takes priority** within that function.
+
+```
+// Both global scope
+VAR x = 10
+VAR y = 20
+
+FUN scope_demo()
+    VAR x = 5 // This x is local, will shadow the global x.
+    x = x + y // should be 5 + 20 = 25
+    STRINGLN Local x is: $x
+END_FUN
+```
+
+### Nested / Recursive Calls
+
+You can also:
+
+* Call other functions from inside a function
+* Including **calling itself**!
+
+```
+FUN factorial(n)
+    IF n <= 1
+        RETURN 1
+    END_IF
+    RETURN n * factorial(n - 1)
+END_FUN
+
+VAR fact = factorial(5)
+```
+
+-------
+[⬆️⬆️⬆️⬆️⬆️⬆️ Back to Top ⬆️⬆️⬆️⬆️⬆️⬆️](#list-of-commands)
+
+## Built-in Functions
+
+A few built-in functions are available. They are intended for **low-level tinkering**.
+
+You may want to get familiar with [VM's memory map](https://github.com/duckyPad/DuckStack)
+
+### `PEEK8(addr)`
+
+Read and return **one byte** at memory address
+
+`VAR value = PEEK8(0xfa00)`
+
+### `POKE8(addr, value)`
+
+Write `value` to memory address
+
+`POKE8(0xfa00, 5)`
+
+* Yes this allows self-modifying code
+* No you shouldn't do it 😉
+
+### `RANDCHR(value)`
+
+Generate a **random character**.
+
+* `value` is checked as a bitfield:
+    * `Bit 0`: Letter Lowercase (A-Z)
+    * `Bit 1`: Letter Uppercase (a-z)
+    * `Bit 2`: Digits (0-9)
+    * `Bit 3`: Symbols (\!\"\#\$\%\&\'\(\)\*\+\,\-\.\/\:\;\<\=\>\?\@\[\\\]\^\_\`\{\|\})
+    * `Bit 16`: Type via Keyboard
+    * `Bit 17`: Write to Screen Buffer
+* For `Bit 0-3`, if any bit is `1`, its pool of characters will be included for random selection.
+* If `Bit 16` is 1, it will type the character via keyboard.
+* If `Bit 17` is 1, it will print the character to screen buffer
+    * Don't forget to use `OLED_UPDATE` to actually refresh the screen.
+
+### `RANDINT(lower, upper)`
+
+Returns a random number between `lower` and `upper` **INCLUSIVE**.
+
+```
+VAR value = RANDINT(0, 1000)
+```
+
+### `PUTS(value)`
+
+**Print string** at memory address.
+
+* `value` contains:
+    * `Bit 0-15`: Address
+    * `Bit 16-23`: `n`
+    * `Bit 30`: Type via Keyboard
+    * `Bit 31`: Write to Screen Buffer
+* If `n = 0`, print until zero-termination.
+    * Else, print max `n` characters.
 
 -------
 [⬆️⬆️⬆️⬆️⬆️⬆️ Back to Top ⬆️⬆️⬆️⬆️⬆️⬆️](#list-of-commands)
@@ -963,13 +1093,26 @@ It will block until a key is pressed.
 VAR this_key = _BLOCKING_READKEY
 // Waits here until a key is pressed
 
-IF this_key == 1 THEN
+IF this_key == 1
     // do something here
-ELSE IF this_key == 2 THEN
+ELSE IF this_key == 2
     // do something else
 END_IF
 
 ```
+
+### Switch Status Bitfield
+
+Read `_SW_BITFIELD`, returns immediately.
+
+Each bit position stores the status of the corresponding key.
+
+* E.g. `bit 1` = `key ID 1`, `bit 13` = `key ID 13`, etc.
+
+If that bit is 1, the key is currently pressed.
+
+You can use bitmasks to check multiple keys at once.
+
 
 ### Non-Blocking Read
 
@@ -991,18 +1134,6 @@ WHILE TRUE
     // otherwise do work here
 END_WHILE
 ```
-
-### Switch Status Bitfield
-
-Read reserved variable `_SW_BITFIELD`, returns immediately.
-
-Each bit position stores the status of the corresponding key.
-
-E.g. bit 1 = key ID 1, bit 13 = key ID 13, etc.
-
-If that bit is 1, the key is held down.
-
-You can use bitmasks to check multiple keys at once.
 
 ### Key ID
 
@@ -1046,19 +1177,33 @@ duckyPad (2020):
 -------
 [⬆️⬆️⬆️⬆️⬆️⬆️ Back to Top ⬆️⬆️⬆️⬆️⬆️⬆️](#list-of-commands)
 
-## Randomisation
+## Randomization
 
-Read from `_RANDOM_INT` to get a random number.
+### Random Number
 
-By default, it is between 0 and 65535.
-
-You can change the upper and lower bounds (**inclusive**) by writing to `_RANDOM_MAX` and `_RANDOM_MIN`.
+Call `RANDINT(lower, upper)` for a random number between `lower` and `upper` **INCLUSIVE**.
 
 ```
-_RANDOM_MIN = 0
-_RANDOM_MAX = 100
-STRINGLN Random number: _RANDOM_INT
+VAR value = RANDINT(0, 1000)
 ```
+
+### Random Character
+
+Use one of below to **type a random character**:
+
+```
+RANDOM_LOWERCASE_LETTER     RANDOM_NUMBER
+RANDOM_UPPERCASE_LETTER     RANDOM_SPECIAL
+RANDOM_LETTER               RANDOM_CHAR
+```
+
+```
+RANDOM_NUMBER
+REPEAT 7
+// types 8 random numbers
+```
+
+For more granular control, see `RANDCHR()` in [Built-in Functions](#built-in-functions).
 
 -------
 [⬆️⬆️⬆️⬆️⬆️⬆️ Back to Top ⬆️⬆️⬆️⬆️⬆️⬆️](#list-of-commands)
@@ -1082,27 +1227,26 @@ Stop execution immediately
 
 ## Reserved Variables List
 
-There are a few **reserved variables** that are always available.
+There are some **reserved variables** that are always available.
 
 You can read or write (RW) to adjust settings. Some are read-only (RO).
 
 | Name                                                                 | Access | Description                                                                                    |
-| --------------------------------------------------------------------------- | ----- | ---------------------------------------------------------------------------------------------- |
-| **`_RANDOM_MIN`**<br>**`_RANDOM_MAX`**<br>**`_RANDOM_INT`**              | RW    | See [Randomisation](#randomisation)                                       |
-| **`_TIME_S`**<br>**`_TIME_MS`**                                           | RO    | Elapsed time since power-on, in **seconds** or **milliseconds**.                               |
-| **`_READKEY`**<br>**`_BLOCKING_READKEY`**                                 | RO    | See [Reading Inputs](#reading-inputs)                                      |
-| **`_IS_NUMLOCK_ON`**<br>**`_IS_CAPSLOCK_ON`**<br>**`_IS_SCROLLLOCK_ON`** | RO    | Returns **1 if LED is on**, **0 otherwise**.                                                     |
-| **`_DEFAULTDELAY`**<br>**`_DEFAULTCHARDELAY`**<br>**`_CHARJITTER`**      | RW    | Aliases.                               |
-| **`_ALLOW_ABORT`**<br>**`_DONT_REPEAT`**                                  | RW    | **1 to enable**, **0 to disable**.                                      |
+| --------------------------------------------------------------------------- | :-----: |:----:|
+| **`_TIME_S`**<br>**`_TIME_MS`**                                           | RO    | Elapsed time since power-on|
+| **`_READKEY`**<br>**`_BLOCKING_READKEY`**                                 | RO    | See [Reading Inputs](#reading-inputs)|
+| **`_IS_NUMLOCK_ON`**<br>**`_IS_CAPSLOCK_ON`**<br>**`_IS_SCROLLLOCK_ON`** | RO    | Returns **1 if LED is on**, **0 otherwise**.<br>Certain OS may not have all LEDs|
+| **`_DEFAULTDELAY`**<br>**`_DEFAULTCHARDELAY`**<br>**`_CHARJITTER`**      | RW    | Aliases.|
+| **`_ALLOW_ABORT`**<br>**`_DONT_REPEAT`**                                  | RW    | Write `1` to enable<br>`0` to disable.                                      |
 | **`_THIS_KEYID`**                                                          | RO    | Returns the [Key ID](#key-id) for the **current script**     |
 | **`_DP_MODEL`**                                                            | RO    | Device model. Returns:<br>`1` for duckyPad (2020)<br>`2` for duckyPad Pro (2024)                              |
-| **`_KEYPRESS_COUNT`**                                                      | RW    | Number of times the current key was pressed in the **current profile**.<br>Assign **0 to reset**. |
-| **`_LOOP_SIZE`**                                                           | RO    | Used by the `LOOP` command.<br>Do not modify.                                                     |
-| **`_NEEDS_EPILOGUE`**                                                      | RO    | Internal use only. Do not modify.                                                              |
+| **`_KEYPRESS_COUNT`**                                                      | RW    | How many times **current key**<br>has been pressed<br>in the **current profile**.<br>Assign **0 to reset**. |
+| **`_LOOP_SIZE`**                                                           | RO    | Used by `LOOP` command.<br>Do not modify.                                                     |
+| **`_NEEDS_EPILOGUE`**                                                      | RO    | Internal use only.<br>Do not modify.                                                              |
 |**`_RTC_IS_VALID`**<br>**`_RTC_YEAR`**<br>**`_RTC_MONTH`**<br>**`_RTC_DAY`**<br>**`_RTC_HOUR`**<br>**`_RTC_MINUTE`**<br>**`_RTC_SECOND`**<br>**`_RTC_WDAY`**<br>**`_RTC_YDAY`**|RO|See [Real-time Clock](#real-time-clock-rtc)|
 |**`_RTC_UTC_OFFSET`**|RW|See [Real-time Clock](#real-time-clock-rtc)|
 |**`_STR_PRINT_FORMAT`**<br>**`_STR_PRINT_PADDING`**<br>|RW|See [Advanced Printing](#advanced-printing)|
-|**`_UNSIGNED_MATH`**|RW|Set to 1 to treat variables as **unsigned numbers** using **unsigned math**|
+|**`_UNSIGNED_MATH`**|RW|Set to `1` to treat variables as<br>**unsigned numbers** using **unsigned math**|
 |**`_SW_BITFIELD`**|RO|Bit position corresponds to key ID.<br>1 = Pressed, 0 = released.|
 
 -------

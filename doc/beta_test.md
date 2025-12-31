@@ -1,66 +1,28 @@
-# duckyPad Feature Update: Jan 2026
+# duckyPad "Power User" Update: Jan 2026 [BETA TEST]
 
-Another big update with many under-the-hood improvements!
+Happy new year! Here's another **major update** that makes your duckyPad even more powerful!
 
-Theme: Power user, language polish
+This update focuses mainly on **power users**, and vastly expands duckyScript's capabilities.
 
-mostly for power users, even more powerful and flexible 
+But of course, everyone will benefit from the new features and improved performance.
 
-if normal user, still recomneded to upgrade, new features, slightly faster.
+**Highlights:**
 
+* 32-bit Overhaul
+* Streamlined Syntax
+* New Commands
+* Proper Function Calls
+* Print Format Specifiers
+* Bug Fixes
+
+----
 * Only for **[duckyPad Pro (2024)](https://dekunukem.github.io/duckyPad-Pro/README.html)** FOR NOW
-
     * Will port to OG duckyPad around Feb/March 2026
+----
 
-## What's New
+## Changelog Archive
 
-### Scripting Engine Revamp
-
-* Variables are now **32-bit wide**
-* **32-Bit Arithmetic** with **signed AND unsigned** modes.
-* **Proper Function Calls** with arguments, locals, return values, and recursion.
-
-### Syntax Shakeup
-
-* `$` prefix is **no longer required** for variables
-    * Except when printing
-* `THEN` **no longer required** in `IF` statements
-* **Inline comments** with `//` 
-* New **Logical NOT** operator `!`
-* New **Augmented Assignment** Operators 
-    * `+=`, `-=`, `*=` etc.
-* Shorter keywords for function declarations
-    * `FUN` and `END_FUN`
-
-### Numeric Format Specifiers
-
-* Optional C-like **format specifiers** when **printing variables**
-    * `%x`, `%d`, etc
-
-### "Random Letter" Commands 
-
-```
-RANDOM_LOWERCASE_LETTER     RANDOM_NUMBER
-RANDOM_UPPERCASE_LETTER     RANDOM_SPECIAL
-RANDOM_LETTER               RANDOM_CHAR
-```
-### New Reserved Variables
-
-* `_SW_BITFIELD` to read status of **all buttons at once**
-* `_UNSIGNED_MATH` to switch between **arithmetic modes**
-
-### Built-in Functions
-
-Provided for low-level tinkering and rudimentary string operations.
-
-* `PEEK8()` / `POKE8()`
-* `RANDINT()` / `RANDCHR()`
-* `PUTS()`
-
-### Performance & Bugfixes
-
-* **Faster Read/Write Speeds** in USB Storage Mode.
-* Fixed runtime-user-assigned LED colors not saving properly.
+Looking for older update notes? [Click me](./update_notes)
 
 ## Update Firmware
 
@@ -74,12 +36,20 @@ Provided for low-level tinkering and rudimentary string operations.
 * [Configurator](https://github.com/duckyPad/duckyPad-Configurator/releases/tag/4.0.0)
 * [Autoswitcher](https://github.com/duckyPad/duckyPad-Profile-Autoswitcher/releases/tag/1.1.1)
 
-## Guided Tour
+## Do Your Worst!
 
-### Syntax Shakeup
+There are tons of new features, so scroll down, take a look, try them out, and give it a good thrashing!
+
+Bugs are expected, let me know if you run into any!
+
+* [Discord](https://discord.gg/4sJCBx5)
+* Email: `dekuNukem` `gmail.com`
+* [Github Issue](https://github.com/dekuNukem/duckypad-pro/issues)
+
+## Syntax Shakeup
 
 * `$` prefix is **no longer required** when working with variables
-    * **EXCEPT** when **printing to a string**.
+    * **EXCEPT** when **printing**
 * New **Augmented Assignment** Operators 
     * `+=`, `-=`, `*=` etc.
     * Available for all **2-operand operators**
@@ -90,8 +60,8 @@ foo += 5
 STRING Value is: $foo
 ```
 * New **Logical NOT** operator `!`
-    * Evaluates to 1 is expression is 0.
-    * Evaluates to 0 is expression is **Non-Zero**
+    * Evaluates to 1 if expression is 0.
+    * Evaluates to 0 if expression is **Non-Zero**
 * `THEN` is **no longer required** in `IF` statements
 * Write **inline comments** with `//`
 ```
@@ -100,61 +70,122 @@ IF !foo
 END_IF
 ```
 
-### Numeric Format Specifiers
-
-You can now add **format specifiers** when **printing variables** in order to adjust **print format** and **padding**.
-
-* Without specifier, variable are printed as **signed decimal** number
-    * `VAR foo = 255`
-    * `STRING Value is $foo, bye!`
-    * Prints: `Value is 255, bye!`
-* Add the specifier **immediately after the variable name**
-    * `STRING Value is: $foo%x, bye!`
-    * Prints: `Value is ff, bye!`
-
-### In a 32-bit World
+## In a 32-bit World
 
 * **All variable types** are now **32-bit wide**
+* Adjustable **Math Mode** by writing to `_UNSIGNED_MATH`
 * **Signed Mode** (Default)
     * Can hold values between **−2,147,483,648 and 2,147,483,647**
-    * Suitable for **general purpose** calculations
+    * Suitable for all **general purpose** calculations
 * **Unsigned Mode**
-    * Set `_UNSIGNED_MATH = 1`
     * Range: **0 to 4,294,967,295**
     * Suitable for **large numbers** or **bitwise operations**
 
-### Proper Function Calls
+## Print Format Specifiers
 
-Functions now support **arguments**, **return values**, **local variables**, and **recursive** calls.
+**C-Style Format Specifiers** are now supported when **printing variables**!
 
-Making them much more powerful and versatile.
+Use it to adjust **print format** and **padding**.
 
-#### ↩️ Back to Basics
+* Without specifier, variable are printed as **signed decimal** number
+```
+VAR foo = -10
+STRING Value is $foo
+// Prints: Value is -10
+```
+
+To add a specifier: **Immediately after the variable name**, type `%`, then a **data-type indicator letter**.
+
+* `%d` to print variable as **Signed Decimal**
+* `%u` to print variable as **Unsigned Decimal**
+* `%x` to print variable as **Lowercase Hexadecimal**
+* `%X` to print variable as **Uppercase Hexadecimal**
+
+```
+VAR $foo = -10
+
+STRING Value is: $foo%d
+STRING Value is: $foo%u
+STRING Value is: $foo%x
+STRING Value is: $foo%X
+```
+
+```
+Value is: -10
+Value is: 4294967286
+Value is: fffffff6
+Value is: FFFFFFF6
+```
+
+## Numerical Padding
+
+* To pad with **SPACE**
+    * Add a **width number** just **after `%`** and **before the letter**
+    * The output will be **at least that** wide
+    * Any extra space are padded with **space characters**
+```
+VAR $foo = 5
+STRING I have $foo%10d apples!
+```
+```
+I have          5 apples!
+```
+
+* To pad with **LEADING-ZERO**
+    * Right **after `%`**, add a `0`, then width number, then the letter.
+    * The output will be **at least that** wide
+    * Any extra space are padded with `0`
+* Useful for printing **dates** and **hex numbers**
+```
+VAR $foo = 5
+STRING I have $foo%010d apples!
+```
+```
+I have 0000000005 apples!
+```
+
+------
+
+⚠️ This method replaces `_STR_PRINT_FORMAT` and `_STR_PRINT_PADDING`, which have been removed.
+
+-----
+
+## Proper Function Calls
+
+Functions now support **arguments**, **return values**, **local variables**, and **recursive** calls, making them much more powerful and versatile.
+
+### FUN FUN FUN
+
+You can now use `FUN` and `END_FUN` to declare functions.
+
+Old `FUNCTION` and `END_FUNCTION` still works of course.
+
+### Back to Basics
 
 As before, plain functions are handy for performing repetitive tasks.
 
 ```
-FUNCTION print_addr()
+FUN print_addr()
     STRINGLN 123 Ducky Lane
     STRINGLN Pond City, QU 12345
-END_FUNCTION
+END_FUN
 
 print_addr() // call it
 ```
 
-#### 🆕 Arguments and Returns
+### Arguments and Returns
 
 But now, you can also pass **up to 8 arguments** into a function and specify a **return value**.
 
 ```
-FUNCTION add_number(a, b)
+FUN add_number(a, b)
     RETURN a + b
-END_FUNCTION
+END_FUN
 
 VAR total = add_number(10, 20)
 ```
 
-#### 🆕 Variable Scoping
+### Variable Scoping
 
 Variables declared **outside functions** have **global scope**, they can be **accessed anywhere**.
 
@@ -167,45 +198,131 @@ If a local variable has the **same name** as a global variable, the **local var 
 VAR x = 10
 VAR y = 20
 
-FUNCTION scope_demo()
+FUN scope_demo()
     VAR x = 5 // This x is local, will shadow the global x.
     x = x + y // should be 5 + 20 = 25
     STRINGLN Local x is: $x
-END_FUNCTION
+END_FUN
 ```
 
-#### 🆕 Nested / Recursive Calls
+### Nested / Recursive Calls
 
 You can now also:
 
 * Call other functions while inside a function
-* Or **call the same function again** while already in it!
+* Including **calling itself**!
 
 ```
-FUNCTION factorial(n)
+FUN factorial(n)
     IF n <= 1
         RETURN 1
     END_IF
     RETURN n * factorial(n - 1)
-END_FUNCTION
+END_FUN
 
 VAR fact = factorial(5)
 ```
 
+## Built-in Functions
+
+A few built-in functions have been added.
+
+They are intended for **low-level tinkering** and are completely optional.
+
+You may want to get familiar with [VM's memory map](https://github.com/duckyPad/DuckStack)
+
+### `PEEK8(addr)`
+
+Read and return **one byte** at memory address
+
+`VAR value = PEEK8(0xfa00)`
+
+### `POKE8(addr, value)`
+
+Write `value` to memory address
+
+`POKE8(0xfa00, 5)`
+
+* Yes this allows self-modifying code
+* No you shouldn't do it 😉
+
+### `RANDCHR(value)`
+
+Generate a **random character**.
+
+* `value` is checked as a bitfield:
+    * `Bit 0`: Letter Lowercase (A-Z)
+    * `Bit 1`: Letter Uppercase (a-z)
+    * `Bit 2`: Digits (0-9)
+    * `Bit 3`: Symbols (\!\"\#\$\%\&\'\(\)\*\+\,\-\.\/\:\;\<\=\>\?\@\[\\\]\^\_\`\{\|\})
+    * `Bit 16`: Type via Keyboard
+    * `Bit 17`: Write to Screen Buffer
+* For `Bit 0-3`, if any bit is `1`, its pool of characters will be included for random selection.
+* If `Bit 16` is 1, it will type the character via keyboard.
+* If `Bit 17` is 1, it will print the character to screen buffer
+    * Don't forget to use `OLED_UPDATE` to actually refresh the screen.
+
+### `RANDINT(lower, upper)`
+
+Returns a random number between `lower` and `upper` **INCLUSIVE**.
+
+```
+VAR value = RANDINT(0, 1000)
+```
+
+### `PUTS(value)`
+
+**Print string** at memory address.
+
+* `value` contains:
+    * `Bit 0-15`: Address
+    * `Bit 16-23`: `n`
+    * `Bit 30`: Type via Keyboard
+    * `Bit 31`: Write to Screen Buffer
+* If `n = 0`, print until zero-termination.
+    * Else, print max `n` characters.
+
+## "Random Letter" Commands 
+
+Types a random letter. Added from [official duckyScript specs](https://docs.hak5.org/hak5-usb-rubber-ducky/duckyscript-quick-reference/).
+
+```
+RANDOM_LOWERCASE_LETTER     RANDOM_NUMBER
+RANDOM_UPPERCASE_LETTER     RANDOM_SPECIAL
+RANDOM_LETTER               RANDOM_CHAR
+```
+```
+RANDOM_NUMBER
+REPEAT 7
+// types 8 random numbers
+```
+
+For more granular control, see `RANDCHR()` built-in function.
+
+## New Reserved Variables
+
+* `_SW_BITFIELD` to read status of **all buttons at once**
+* `_UNSIGNED_MATH` to switch between **arithmetic modes**
+
+## Performance & Bugfixes
+
+* **Faster Read/Write Speeds** in USB Storage Mode.
+* Fixed runtime-user-assigned LED colors not saving properly.
+
 ## Deep(er) Dive
 
-Did you know that the duckyScript you write is actually **compiled into a binary** and **executed on a virtual machine** on the duckyPad itself?
+Did you know the duckyScript you write is actually **compiled into a binary** and **executed on a virtual machine** on the duckyPad itself?
 
 This update began as a simple excursion to add 32-bit math and proper function calls. Unsurprisingly it cascaded into a month-long rewrite of the entire compiler and VM. Key changes include:
 
-* duckyScript source is now **pre-processed into Python**
+* duckyScript is now **pre-processed into Python**
     * So I can use its built-in AST and Symtable parsers
     * This is faster and less error-prone than rolling my own from scratch
 * The VM now has a proper **memory map** and **stack layout**
-* With FP-based **calling convention** that supports args, locals, and recursion.
+    * With FP-based **calling convention** to support proper function calls
 * Instructions are now **variable-length** to reduce code size
 
-The VM is now more general-purpose than ever, and theoretically other languages can be compiled to run on it too instead of just duckyScript!
+The VM is now more general-purpose than ever, and theoretically other languages can be compiled for it too instead of just duckyScript!
 
 **Want to learn more?** The VM now has its own repo, full details here:
 
@@ -213,11 +330,7 @@ https://github.com/duckyPad/DuckStack
 
 ## How'd It Go?
 
-Hopefully everything still works!
-
-With so many changes, do give it a good thrashing to see if you can find any bugs!
-
-If/when you do, let me know 😅!
+Let me know if you run into any bugs or have comments / suggestions.
 
 * [Discord](https://discord.gg/4sJCBx5)
 * Email: `dekuNukem` `gmail.com`
