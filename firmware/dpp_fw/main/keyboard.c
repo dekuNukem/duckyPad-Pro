@@ -356,7 +356,8 @@ void mouse_press(my_key* this_key)
   else if(this_key->type == KEY_TYPE_MOUSE_WHEEL)
   {
     // 4: vertial scroll, 5: horizontal scroll
-    kb_buf[5] = this_key->code;
+    kb_buf[4] = this_key->code;
+    kb_buf[5] = this_key->code2;
   }
   USBD_CUSTOM_HID_SendReport(kb_buf);
   memset(kb_buf, 0, DP_HID_MSG_SIZE);

@@ -1,4 +1,21 @@
+  // stack_print(&data_stack, "AFTER BINOP");
+  // stack_print(&data_stack, "AFTER UNAOP");
+    // stack_print(&data_stack, "AFTER PUSHC");
+    // stack_print(&data_stack, "AFTER PUSHI");
+    // stack_print(&data_stack, "AFTER PUSHR");
+    // stack_print(&data_stack, "AFTER POPI");
+    // stack_print(&data_stack, "AFTER POPR");
+    // stack_print(&data_stack, "After ALLOC");
+    // stack_print(&data_stack, "CALL");
+    // stack_print(&data_stack, "RET");
+    // stack_print(&data_stack, "UNWIND DONE");
+    // printf("OP_RANDCHR %x: %c\n", channels, randc);
+    // printf("PUTS: Addr 0x%08x nchar: %d, channels: %d\n", str_addr, nchar, channels);
+    // printf(">>>>> PUTS: %s\n", bin_buf + str_addr);
+  
 
+  if(PRINT_DEBUG)
+    printf("\n--------------------\nPC: %04d    Opcode: %02d    Payload: %04lx\n", curr_pc, opcode, payload);
 
 void stack_print(my_stack* ms, char* comment)
 {

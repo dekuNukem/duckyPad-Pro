@@ -469,6 +469,7 @@ static const char* exe_error_string(uint8_t err_code)
     case EXE_UNIMPLEMENTED:            return "Unimplemented";
     case EXE_UNALIGNED_ACCESS:         return "Unaligned Read";
     case EXE_PROFILE_NOT_FOUND:        return "Profile Not Found";
+    case EXE_STR_ERROR:                return "String Overflow";
     default:                           return "Unknown Error";
   }
 }
