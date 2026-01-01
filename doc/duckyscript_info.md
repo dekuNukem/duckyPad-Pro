@@ -328,7 +328,7 @@ Useful for **waiting for UI to catch up**.
 
 ```
 WINDOWS r
-DELAY 1000 // wait 1000ms, or 1 second
+DELAY 1000 // 1000ms = 1 second
 STRING cmd
 ```
 
@@ -339,7 +339,7 @@ How long to wait between each **`NON-LETTER input actions`**.
 * Default: 20ms
 * Applies to:
     * `MOUSE_MOVE` and `MOUSE_SCROLL`
-    * `KEYDOWN` and `KEYUP` (including standalone combo keys)
+    * `KEYDOWN` and `KEYUP` (including combo keys)
     * Pressing ENTER at end of `STRINGLN`
 
 ```
@@ -403,6 +403,7 @@ Scroll mouse wheel **Horizontal** `h` lines, and **Vertical** `v` lines.
 
 * `h`: Positive scrolls RIGHT, negative scrolls LEFT.
 * `v`: Positive scrolls UP, negative scrolls DOWN.
+* Set to 0 for no scroll
 
 -------
 [⬆️⬆️⬆️⬆️⬆️⬆️ Back to Top ⬆️⬆️⬆️⬆️⬆️⬆️](#list-of-commands)
@@ -1095,7 +1096,7 @@ Send a **raw HID message**
 |`addr`|1|Usage ID|
 |`addr+1`|Modifier<br>Bitfield|`Bit 0`: Left Control<br>`Bit 1`: Left Shift<br>`Bit 2`: Left Alt<br>`Bit 3`: Left GUI (Win/Cmd)<br>`Bit 4`: Right Control<br>`Bit 5`: Right Shift<br>`Bit 6`: Right Alt (AltGr)<br>`Bit 7`: Right GUI (Win/Cmd)|
 |`addr+2`|0|Reserved|
-|`addr+3`<br>-<br>`addr+8`|HID KB Scan Code|[See list](https://gist.github.com/MightyPork/6da26e382a7ad91b5496ee55fdc73db2)<br>Max 6 keys at once (6KRO)<br>Write `0` for released / unused|
+|`addr+3`<br>-<br>`addr+8`|HID Keyboard<br>Scan Code|[See list](https://gist.github.com/MightyPork/6da26e382a7ad91b5496ee55fdc73db2)<br>Max 6 keys at once (6KRO)<br>Write `0` for released / unused|
 
 #### Media Keys
 
@@ -1134,7 +1135,7 @@ It will block until a key is pressed.
 
 ```
 VAR this_key = _BLOCKING_READKEY
-// Waits here until a key is pressed
+// Blocks here until a key is pressed
 
 IF this_key == 1
     // do something here
@@ -1153,10 +1154,8 @@ Returns 0 if no key is pressed. `Key ID` otherwise.
 Check this **in a loop** to perform work even when no key is pressed.
 
 ```
-VAR this_key = 0
-
 WHILE TRUE
-    this_key = _READKEY
+    VAR this_key = _READKEY
     IF this_key == 1
         // handling button press
     END_IF
@@ -1175,7 +1174,7 @@ Each bit position stores the status of the corresponding key.
 
 If that bit is 1, the key is currently pressed.
 
-You can use bitmasks to check multiple keys at once.
+You can use bitmasks to **check multiple keys at once**.
 
 ### Key ID
 
@@ -1276,20 +1275,18 @@ You can read or write (RW) to adjust settings. Some are read-only (RO).
 | Name                                                                 | Access | Description                                                                                    |
 | --------------------------------------------------------------------------- | :-----: |:----:|
 | **`_TIME_S`**<br>**`_TIME_MS`**                                           | RO    | Elapsed time since power-on|
-| **`_READKEY`**<br>**`_BLOCKING_READKEY`**                                 | RO    | See [Reading Inputs](#reading-inputs)|
+| **`_READKEY`**<br>**`_BLOCKING_READKEY`**<br>**`_SW_BITFIELD`**                | RO    | See [Reading Inputs](#reading-inputs)|
 | **`_IS_NUMLOCK_ON`**<br>**`_IS_CAPSLOCK_ON`**<br>**`_IS_SCROLLLOCK_ON`** | RO    | Returns **1 if LED is on**, **0 otherwise**.<br>Certain OS may not have all LEDs|
-| **`_DEFAULTDELAY`**<br>**`_DEFAULTCHARDELAY`**<br>**`_CHARJITTER`**      | RW    | Aliases.|
+| **`_DEFAULTDELAY`**<br>**`_DEFAULTCHARDELAY`**<br>**`_CHARJITTER`**      | RW    | Aliases|
 | **`_ALLOW_ABORT`**<br>**`_DONT_REPEAT`**                                  | RW    | Write `1` to enable<br>`0` to disable.                                      |
 | **`_THIS_KEYID`**                                                          | RO    | Returns the [Key ID](#key-id) for the **current script**     |
 | **`_DP_MODEL`**                                                            | RO    | Device model. Returns:<br>`1` for duckyPad (2020)<br>`2` for duckyPad Pro (2024)                              |
-| **`_KEYPRESS_COUNT`**                                                      | RW    | How many times **current key**<br>has been pressed<br>in the **current profile**.<br>Assign **0 to reset**. |
-| **`_LOOP_SIZE`**                                                           | RO    | Used by `LOOP` command.<br>Do not modify.                                                     |
-| **`_NEEDS_EPILOGUE`**                                                      | RO    | Internal use only.<br>Do not modify.                                                              |
+| **`_KEYPRESS_COUNT`**                                                      | RW    | How many times **current key**<br>has been pressed in the **current profile**<br>Assign **0 to reset** |
+| **`_LOOP_SIZE`**                                                           | RO    | Used by `LOOP` command.<br>Do not modify                                                     |
+| **`_NEEDS_EPILOGUE`**                                                      | RO    | Internal use only<br>Do not modify                                                              |
 |**`_RTC_IS_VALID`**<br>**`_RTC_YEAR`**<br>**`_RTC_MONTH`**<br>**`_RTC_DAY`**<br>**`_RTC_HOUR`**<br>**`_RTC_MINUTE`**<br>**`_RTC_SECOND`**<br>**`_RTC_WDAY`**<br>**`_RTC_YDAY`**|RO|See [Real-time Clock](#real-time-clock-rtc)|
 |**`_RTC_UTC_OFFSET`**|RW|See [Real-time Clock](#real-time-clock-rtc)|
-|**`_STR_PRINT_FORMAT`**<br>**`_STR_PRINT_PADDING`**<br>|RW|See [Advanced Printing](#advanced-printing)|
 |**`_UNSIGNED_MATH`**|RW|Set to `1` to treat variables as<br>**unsigned numbers** using **unsigned math**|
-|**`_SW_BITFIELD`**|RO|Bit position corresponds to key ID.<br>1 = Pressed, 0 = released.|
 
 -------
 [⬆️⬆️⬆️⬆️⬆️⬆️ Back to Top ⬆️⬆️⬆️⬆️⬆️⬆️](#list-of-commands)
