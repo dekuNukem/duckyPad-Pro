@@ -75,10 +75,10 @@ Much easier to lookup than going through this whole page.
     - [`STRING` and `STRINGLN`](#string-and-stringln)
     - [`STRINGLN_BLOCK` and `END_STRINGLN`](#stringln_block-and-end_stringln)
     - [`STRING_BLOCK` and `END_STRING`](#string_block-and-end_string)
-    - [Printing Variables / Print Formatting](#printing-variables--print-formatting)
+    - [Printing Variables / Print Formatting](#printing-variables-print-formatting)
 - [Pressing Keys](#pressing-keys)
     - [Special Keys](#special-keys)
-    - [`KEYDOWN` / `KEYUP`](#keydown--keyup)
+    - [`KEYDOWN` / `KEYUP`](#keydown-keyup)
     - [`REPEAT`](#repeat)
 - [Timing](#timing)
     - [`DELAY n`](#delay-n)
@@ -91,7 +91,7 @@ Much easier to lookup than going through this whole page.
     - [`MOUSE_SCROLL h v`](#mouse_scroll-h-v)
 - [Multiple Actions](#multiple-actions)
 - [Profile Switching](#profile-switching)
-    - [`PREV_PROFILE` / `NEXT_PROFILE`](#prev_profile--next_profile)
+    - [`PREV_PROFILE` / `NEXT_PROFILE`](#prev_profile-next_profile)
     - [`GOTO_PROFILE`](#goto_profile)
     - [Autoswitcher](#autoswitcher)
 - [OLED](#oled)
@@ -133,13 +133,14 @@ Much easier to lookup than going through this whole page.
     - [Plain Functions](#plain-functions)
     - [Arguments and Returns](#arguments-and-returns)
     - [Variable Scoping](#variable-scoping)
-    - [Nested / Recursive Calls](#nested--recursive-calls)
+    - [Nested / Recursive Calls](#nested-recursive-calls)
 - [Built-in Functions](#built-in-functions)
-    - [`PEEK8(addr)`](#peek8-addr)
-    - [`POKE8(addr, value)`](#poke8-addr-value)
-    - [`RANDCHR(value)`](#randchr-value)
-    - [`RANDINT(lower, upper)`](#randint-lower-upper)
-    - [`PUTS(value)`](#puts-value)
+    - [`PEEK8(addr)`](#peek8addr)
+    - [`POKE8(addr, value)`](#poke8addr-value)
+    - [`RANDCHR(value)`](#randchrvalue)
+    - [`RANDINT(lower, upper)`](#randintlower-upper)
+    - [`PUTS(value)`](#putsvalue)
+    - [`HIDTX(addr)`](#hidtxaddr)
 - [Reading Inputs](#reading-inputs)
     - [Blocking Read](#blocking-read)
     - [Non-Blocking Read](#non-blocking-read)
@@ -1078,14 +1079,14 @@ VAR value = RANDINT(0, 1000)
 * If `n = 0`, print until zero-termination.
     * Else, print max `n` characters.
 
-### `HIDRTX(addr)`
+### `HIDTX(addr)`
 
 Send a **raw HID message**
 
 * Pick an address `addr` in **scratch memory area**
 * Use `POKE8()` to write a **9 bytes packet** starting from `addr`
     * Follow the format below
-* Call `HIDRTX(addr)` to send the HID message
+* Call `HIDTX(addr)` to send the HID message
 
 #### Keyboard
 

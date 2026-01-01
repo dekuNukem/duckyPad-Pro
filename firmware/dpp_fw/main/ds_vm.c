@@ -139,7 +139,7 @@ uint8_t opcode_len_lookup[OP_LEN_LOOKUP_SIZE] = {
 1, // [86] RANDCHR
 1, // [87] PUTS
 1, // [88] PWMCTRL
-1, // [89] HIDRTX
+1, // [89] HIDTX
 255, // [90]
 255, // [91]
 255, // [92]
@@ -220,7 +220,7 @@ uint8_t opcode_len_lookup[OP_LEN_LOOKUP_SIZE] = {
 #define OP_RANDCHR 86
 #define OP_PUTS 87
 #define OP_PWMCTRL 88
-#define OP_HIDRTX 89
+#define OP_HIDTX 89
 #define OP_VMVER 255
 // ---------------------------
 
@@ -1357,11 +1357,11 @@ void execute_instruction(exe_context* exe)
     stack_pop(&data_stack, &this_value);
     ESP_LOGI(TAG, "OP_PWMCTRL: %08lx\n", this_value);
   }
-  else if(opcode == OP_HIDRTX)
+  else if(opcode == OP_HIDTX)
   {
     uint32_t addr;
     stack_pop(&data_stack, &addr);
-    if(addr + HIDRTX_PACKET_SIZE >= SCRATCH_MEM_END_ADDRESS_INCLUSIVE)
+    if(addr + HIDTX_PACKET_SIZE >= SCRATCH_MEM_END_ADDRESS_INCLUSIVE)
       longjmp(jmpbuf, EXE_ILLEGAL_ADDR);
     USBD_CUSTOM_HID_SendReport(bin_buf+addr);
   }

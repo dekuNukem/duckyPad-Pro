@@ -1,55 +1,60 @@
 import sys
+import re
 
 sys.stdout.reconfigure(errors='ignore')
 
-if len(sys.argv) <= 1:
-	print(__file__, 'text_file')
-	exit()
+def slugify(text):
+    """Generates a GitHub-compatible anchor slug."""
+    # Lowercase the text
+    slug = text.lower()
+    # Remove all characters that are NOT alphanumeric, whitespace, hyphens, or underscores
+    slug = re.sub(r'[^\w\s-]', '', slug)
+    # Replace whitespace (spaces, tabs, etc.) with a single hyphen
+    slug = re.sub(r'\s+', '-', slug)
+    # Remove leading and trailing hyphens
+    return slug.strip('-')
 
-depth = 3
-while 1:
-	try:
-		depth = int(input("how many levels? (1 to 4, default 3): "))
-	except Exception as e:
-		depth = 3
-		break
-	if 1 <= depth <= 4:
-		break
+def main():
+    if len(sys.argv) <= 1:
+        print(f"Usage: python {sys.argv[0]} <markdown_file>")
+        return
 
-placeholder = '$%'
-		
-def make_section(text):
-	level = text.split(' ')[0].count('#')
-	if level > depth:
-		return
-	text = text.lstrip("#").replace('\r', '').replace('\n', '').strip()
-	link = text.lower().replace('.', '')
-	result = ''
-	for letter in link:
-		if letter.isalnum() or letter == '_':
-			result += letter
-		elif letter == '/':
-			result += placeholder
-		elif letter == '\'':
-			continue
-		else:
-			result += '-'
-	while '--' in result:
-		result = result.replace('--', '-')
-	result = result.strip('-')
-	result = result.replace(placeholder, '')
-	print('    '*(level-2) + f'- [{text}](#{result})')
+    # User input for depth
+    try:
+        depth_input = input("How many levels? (1 to 4, default 3): ")
+        depth = int(depth_input) if depth_input.strip() else 3
+    except ValueError:
+        depth = 3
 
-text_file = open(sys.argv[1], encoding="utf8")
+    print("\n## Table of Contents\n")
 
-print("## Table of Contents\n")
+    try:
+        with open(sys.argv[1], 'r', encoding="utf8") as f:
+            for line in f:
+                # Ignore lines that aren't headers or are the TOC header itself
+                if not line.startswith('#') or 'table of content' in line.lower():
+                    continue
 
-for line in text_file:
-	if 'table of content' in line.lower():
-		continue
-	if line.startswith("# "):
-		continue
-	if line.startswith("#"):
-		make_section(line)
+                # Parse header level and text
+                match = re.match(r'^(#+)\s+(.*)', line)
+                if not match:
+                    continue
+                
+                hashes, title = match.groups()
+                level = len(hashes)
 
-text_file.close()
+                # Skip H1 (#) and levels deeper than user choice
+                if level == 1 or level > depth:
+                    continue
+
+                # Generate slug and format list item
+                # level-2 ensures that ## starts with 0 indentation
+                indent = '    ' * (level - 2)
+                anchor = slugify(title)
+                print(f"{indent}- [{title.strip()}](#{anchor})")
+                
+    except FileNotFoundError:
+        print(f"Error: File '{sys.argv[1]}' not found.")
+
+if __name__ == "__main__":
+    main()
