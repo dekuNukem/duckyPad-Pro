@@ -237,21 +237,20 @@ void hid_send_bluetooth(uint8_t* usb_hid_buf)
     }
 }
 
-#define USB_HID_BUF_SIZE 8
-uint8_t esp_hid_buf[USB_HID_BUF_SIZE];
+uint8_t esp_hid_buf[DP_HID_MSG_SIZE];
 void hid_send_usb(uint8_t* usb_hid_buf)
 {
     uint8_t hid_usage_type = usb_hid_buf[0];
-    memset(esp_hid_buf, 0, USB_HID_BUF_SIZE);
+    memset(esp_hid_buf, 0, DP_HID_MSG_SIZE);
     if(hid_usage_type == HID_USAGE_ID_KEYBOARD)
     {
-        memcpy(esp_hid_buf, usb_hid_buf, BT_HID_BUF_SIZE);
+        memcpy(esp_hid_buf, usb_hid_buf, DP_HID_MSG_SIZE);
         esp_hid_buf[0] = usb_hid_buf[1]; // modifier
         esp_hid_buf[1] = 0; // reserved
     }
     else if(hid_usage_type == HID_USAGE_ID_MOUSE)
     {
-        memcpy(esp_hid_buf, usb_hid_buf+1, BT_HID_BUF_SIZE-1);
+        memcpy(esp_hid_buf, usb_hid_buf+1, DP_HID_MSG_SIZE-1);
     }
     else if(hid_usage_type == HID_USAGE_ID_MEDIA_KEY)
     {
