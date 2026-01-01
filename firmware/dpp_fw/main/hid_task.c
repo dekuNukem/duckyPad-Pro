@@ -99,8 +99,7 @@ const uint8_t hid_report_descriptor[] =
   0x15, 0x00,                    //   Logical Minimum (0)
   0x25, 0x01,                    //   Logical Maximum (1)
   0x75, 0x01,                    //   Report Size (1)
-  0x95, 0x10,                    //   Report Count (16) <-- Expanded to 16 bits (2 bytes)
-  // Byte 1
+  0x95, 0x08,                    //   Report Count (8)
   0x09, 0xB5,                    //   Usage (Scan Next Track)
   0x09, 0xB6,                    //   Usage (Scan Previous Track)
   0x09, 0xB7,                    //   Usage (Stop)
@@ -109,18 +108,9 @@ const uint8_t hid_report_descriptor[] =
   0x09, 0xE2,                    //   Usage (Mute)
   0x09, 0xE9,                    //   Usage (Volume Increment)
   0x09, 0xEA,                    //   Usage (Volume Decrement)
-  // Byte 2 (New Keys)
-  0x09, 0x22, 0x02,              //   Usage (AC Back / Browser Back)
-  0x09, 0x24, 0x02,              //   Usage (AC Forward / Browser Forward)
-  0x09, 0x23, 0x02,              //   Usage (AC Home)
-  0x09, 0x21, 0x02,              //   Usage (AC Search)
-  0x09, 0x83, 0x01,              //   Usage (AL Consumer Control Configuration / Settings)
-  0x09, 0x94, 0x01,              //   Usage (AL Local Machine Browser / My Computer)
-  0x09, 0x92, 0x01,              //   Usage (AL Calculator)
-  0x09, 0xAE, 0x01,              //   Usage (AL Keyboard Layout)
   0x81, 0x02,                    //   Input (Data, Var, Abs)
   0xC0,                          // End Collection
-  
+
   // --- Report ID 3: Mouse ---
   0x05, 0x01,                    // Usage Page (Generic Desktop Ctrls)
   0x09, 0x02,                    // Usage (Mouse)

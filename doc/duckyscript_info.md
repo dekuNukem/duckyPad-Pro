@@ -1078,6 +1078,44 @@ VAR value = RANDINT(0, 1000)
 * If `n = 0`, print until zero-termination.
     * Else, print max `n` characters.
 
+### `HIDRTX(addr)`
+
+Send a **raw HID message**
+
+* Pick an address `addr` in **scratch memory area**
+* Use `POKE8()` to write a **9 bytes packet** starting from `addr`
+    * Follow the format below
+* Call `HIDRTX(addr)` to send the HID message
+
+#### Keyboard
+
+|Byte|Value|Description|
+|:-------:|:----------:|:---------:|
+|`addr`|1|Usage ID|
+|`addr+1`|Modifier<br>Bitfield|`Bit 0`: Left Control<br>`Bit 1`: Left Shift<br>`Bit 2`: Left Alt<br>`Bit 3`: Left GUI (Win/Cmd)<br>`Bit 4`: Right Control<br>`Bit 5`: Right Shift<br>`Bit 6`: Right Alt (AltGr)<br>`Bit 7`: Right GUI (Win/Cmd)|
+|`addr+2`|0|Reserved|
+|`addr+3`<br>-<br>`addr+8`|HID KB Scan Code|[See list](https://gist.github.com/MightyPork/6da26e382a7ad91b5496ee55fdc73db2)<br>Max 6 keys at once (6KRO)<br>Write `0` for released / unused|
+
+#### Media Keys
+
+|Byte|Value|Description|
+|:-------:|:----------:|:---------:|
+|`addr`|2|Usage ID|
+|`addr+1`|Key Status<br>Bitfield|`Bit 0`: Next Track<br>`Bit 1`: Previous Track<br>`Bit 2`: Stop<br>`Bit 3`: Eject<br>`Bit 4`: Play / Pause<br>`Bit 5`: Mute<br>`Bit 6`: Volume Up<br>`Bit 7`: Volume Down|
+|`addr+2`<br>-<br>`addr+8`|0|0|
+
+#### Mouse
+
+|Byte|Value|Description|
+|:-------:|:----------:|:---------:|
+|`addr`|3|Usage ID|
+|`addr+1`|Buttons<br>Status<br>Bitfield|`Bit 0`: Left<br>`Bit 1`: Right<br>`Bit 2`: Middle<br>`Bit 3`: Backward<br>`Bit 4`: Forward|
+|`addr+2`|X Movement|-127 - 127|
+|`addr+3`|Y Movement|-127 - 127|
+|`addr+4`|Vertical<br>Scroll|-127 - 127|
+|`addr+5`|Horizontal<br>Scroll|-127 - 127|
+|`addr+6`<br>-<br>`addr+8`|0|0|
+
 -------
 [⬆️⬆️⬆️⬆️⬆️⬆️ Back to Top ⬆️⬆️⬆️⬆️⬆️⬆️](#list-of-commands)
 
