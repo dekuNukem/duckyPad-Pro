@@ -88,7 +88,8 @@ Much easier to lookup than going through this whole page.
 - [Mouse](#mouse)
     - [Mouse Buttons](#mouse-buttons)
     - [`MOUSE_MOVE X Y`](#mouse_move-x-y)
-    - [`MOUSE_WHEEL X`](#mouse_wheel-x)
+    - [`MOUSE_SCROLL n`](#mouse_scroll-n)
+    - [`MOUSE_HSCROLL n`](#mouse_hscroll-n)
 - [Multiple Actions](#multiple-actions)
 - [Profile Switching](#profile-switching)
     - [`PREV_PROFILE` / `NEXT_PROFILE`](#prev_profile--next_profile)
@@ -393,11 +394,17 @@ Move mouse cursor `X` pixels horizontally, and `Y` pixels vertically.
 
 * **Disable mouse acceleration** for pixel-accurate results
 
-### `MOUSE_WHEEL X`
+### `MOUSE_SCROLL n`
 
-Scroll mouse wheel `X` lines.
+Scroll mouse wheel **Vertical** `n` lines
 
 * A positive number scrolls UP, negative number scrolls DOWN.
+
+### `MOUSE_HSCROLL n`
+
+Scroll mouse wheel **Horizontal** `n` lines
+
+* A positive number scrolls RIGHT, negative number scrolls LEFT.
 
 -------
 [⬆️⬆️⬆️⬆️⬆️⬆️ Back to Top ⬆️⬆️⬆️⬆️⬆️⬆️](#list-of-commands)
