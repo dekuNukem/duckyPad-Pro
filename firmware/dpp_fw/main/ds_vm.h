@@ -108,7 +108,7 @@ typedef struct
   uint8_t epilogue_actions;
 } exe_context;
 
-#define DEFAULT_CMD_DELAY_MS 20
+#define DEFAULT_NONCHAR_DELAY_MS 20
 #define DEFAULT_CHAR_DELAY_MS 20
 
 #define EPILOGUE_SAVE_LOOP_STATE 0x1
@@ -149,10 +149,6 @@ void stack_print(my_stack* ms, char* comment);
 #define DS_CLEAR_BITS(variable, mask) ((variable) &= ~(mask))
 
 void run_dsb(exe_context* er, uint8_t this_key_id, char* dsb_path, uint8_t is_cached, uint8_t* dsb_cache);
-
-
-uint32_t arc4random(void);
-uint32_t arc4random_uniform(uint32_t range);
 uint32_t random_uint32_between(uint32_t lower, uint32_t upper);
 int32_t random_int32_between(int32_t lower, int32_t upper);
 

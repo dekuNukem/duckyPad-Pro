@@ -1213,8 +1213,8 @@ void execute_instruction(exe_context* exe)
     	press_key(0x28, 0x03); // ENTER key
     	delay_ms(defaultdelay);
     	release_key(0x28, 0x03);
-    	delay_ms(defaultdelay);
     }
+    delay_ms(defaultdelay);
   }
   else if(opcode == OP_OLED_CUSR)
   {
@@ -1343,11 +1343,14 @@ void execute_instruction(exe_context* exe)
     uint8_t channels = this_value >> 30;
     make_str((uint16_t)str_addr);
     if(nchar != 0 && nchar < READ_BUF_SIZE)
-      read_buffer[nchar] = 0;
-    if(channels & 0x1)
-      kb_print(read_buffer, defaultchardelay, charjitter);
+      read_buffer[nchar] = 0; 
     if(channels & 0x2)
       ssd1306_WriteString(read_buffer, Font_7x10, White);
+    if(channels & 0x1)
+    {
+      kb_print(read_buffer, defaultchardelay, charjitter);
+      delay_ms(defaultdelay);
+    }
   }
   else if(opcode == OP_PWMCTRL)
   {
@@ -1384,7 +1387,7 @@ void run_dsb(exe_context* ctx, uint8_t this_key_id, char* dsb_path, uint8_t is_c
   uint16_t data_stack_size_bytes = STACK_BASE_ADDR - this_dsb_size - STACK_MOAT_BYTES;
   stack_init(&data_stack, bin_buf, STACK_BASE_ADDR, data_stack_size_bytes);
 
-  defaultdelay = DEFAULT_CMD_DELAY_MS;
+  defaultdelay = DEFAULT_NONCHAR_DELAY_MS;
   defaultchardelay = DEFAULT_CHAR_DELAY_MS;
   charjitter = 0;
   rand_max = 65535;
