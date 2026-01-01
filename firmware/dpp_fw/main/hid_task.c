@@ -204,7 +204,7 @@ void tud_hid_set_report_cb(uint8_t instance, uint8_t report_id, hid_report_type_
       handle_hid_command(buffer, bufsize);
 }
 
-#define BT_HID_BUF_SIZE 6
+#define BT_HID_BUF_SIZE 8
 uint8_t bt_hid_buf[BT_HID_BUF_SIZE];
 
 void hid_send_bluetooth(uint8_t* usb_hid_buf)
@@ -219,6 +219,8 @@ void hid_send_bluetooth(uint8_t* usb_hid_buf)
         bt_hid_buf[3] = usb_hid_buf[3];
         bt_hid_buf[4] = usb_hid_buf[4];
         bt_hid_buf[5] = usb_hid_buf[5];
+        bt_hid_buf[6] = usb_hid_buf[6];
+        bt_hid_buf[7] = usb_hid_buf[7];
         ble_kb_send(bt_hid_buf);
     }
     else if(hid_usage_type == HID_USAGE_ID_MOUSE)
@@ -227,6 +229,7 @@ void hid_send_bluetooth(uint8_t* usb_hid_buf)
         bt_hid_buf[1] = usb_hid_buf[2];
         bt_hid_buf[2] = usb_hid_buf[3];
         bt_hid_buf[3] = usb_hid_buf[4];
+        bt_hid_buf[5] = usb_hid_buf[5];
         ble_mouse_send(bt_hid_buf);
     }
     else if(hid_usage_type == HID_USAGE_ID_MEDIA_KEY)

@@ -44,30 +44,35 @@ typedef struct
 } local_param_t;
 
 static local_param_t s_ble_hid_param = {0};
-
 const unsigned char hid_descriptor_map[] = {
-    // Report ID 1: Keyboard
+    // Report ID 1: Keyboard (6KRO)
     0x05, 0x01,        // Usage Page (Generic Desktop Ctrls)
     0x09, 0x06,        // Usage (Keyboard)
     0xA1, 0x01,        // Collection (Application)
     0x85, 0x01,        //   Report ID (1)
     0x05, 0x07,        //   Usage Page (Kbrd/Keypad)
-    0x75, 0x01,        //   Report Size (1)
-    0x95, 0x08,        //   Report Count (8)
-    0x19, 0xE0,        //   Usage Minimum (0xE0)
+    0x19, 0xE0,        //   Usage Minimum (0xE0) - Modifiers
     0x29, 0xE7,        //   Usage Maximum (0xE7)
     0x15, 0x00,        //   Logical Minimum (0)
     0x25, 0x01,        //   Logical Maximum (1)
-    0x81, 0x02,        //   Input (Data,Var,Abs,No Wrap,Linear,Preferred State,No Null Position)
-    0x95, 0x06,        //   Report Count (3)
+    0x75, 0x01,        //   Report Size (1)
+    0x95, 0x08,        //   Report Count (8 bits)
+    0x81, 0x02,        //   Input (Data,Var,Abs) - Modifier Byte
+    
+    0x95, 0x01,        //   Report Count (1)
+    0x75, 0x08,        //   Report Size (8)
+    0x81, 0x01,        //   Input (Const,Array,Abs) - Reserved Byte (Padding)
+    
+    0x95, 0x06,        //   Report Count (6) - 6KRO
     0x75, 0x08,        //   Report Size (8)
     0x15, 0x00,        //   Logical Minimum (0)
-    0x25, 0x94,        //   Logical Maximum (0x94) originally 65, 73 supports F13 - F24, 94 for japanese and korean language keys
+    0x25, 0x94,        //   Logical Maximum (0x94)
     0x05, 0x07,        //   Usage Page (Kbrd/Keypad)
     0x19, 0x00,        //   Usage Minimum (0x00)
-    0x29, 0x94,        //   Usage Maximum (0x94) originally 65, 73 supports F13 - F24
-    0x81, 0x00,        //   Input (Data,Array,Abs,No Wrap,Linear,Preferred State,No Null Position)
+    0x29, 0x94,        //   Usage Maximum (0x94)
+    0x81, 0x00,        //   Input (Data,Array,Abs) - Key Arrays
     0xC0,              // End Collection
+
     // Report ID 2: Media Keys
     0x05, 0x0C,        // Usage Page (Consumer)
     0x09, 0x01,        // Usage (Consumer Control)
@@ -86,9 +91,10 @@ const unsigned char hid_descriptor_map[] = {
     0x09, 0xE2,        //   Usage (Mute)
     0x09, 0xE9,        //   Usage (Volume Increment)
     0x09, 0xEA,        //   Usage (Volume Decrement)
-    0x81, 0x02,        //   Input (Data,Var,Abs,No Wrap,Linear,Preferred State,No Null Position)
-    0xC0,               // End Collection
-    // Report ID 3: Mouse
+    0x81, 0x02,        //   Input (Data,Var,Abs)
+    0xC0,              // End Collection
+
+    // Report ID 3: Mouse with Horizontal Scroll
     0x05, 0x01,        // Usage Page (Generic Desktop Ctrls)
     0x09, 0x02,        // Usage (Mouse)
     0xA1, 0x01,        // Collection (Application)
@@ -102,32 +108,28 @@ const unsigned char hid_descriptor_map[] = {
     0x25, 0x01,        //     Logical Maximum (1)
     0x95, 0x03,        //     Report Count (3)
     0x75, 0x01,        //     Report Size (1)
-    0x81, 0x02,        //     Input (Data,Var,Abs,No Wrap,Linear,Preferred State,No Null Position)
+    0x81, 0x02,        //     Input (Data,Var,Abs) - 3 Buttons
     0x95, 0x01,        //     Report Count (1)
     0x75, 0x05,        //     Report Size (5)
-    0x81, 0x01,        //     Input (Const,Array,Abs,No Wrap,Linear,Preferred State,No Null Position)
+    0x81, 0x03,        //     Input (Const,Var,Abs) - Padding
     0x05, 0x01,        //     Usage Page (Generic Desktop Ctrls)
     0x09, 0x30,        //     Usage (X)
     0x09, 0x31,        //     Usage (Y)
-    0x09, 0x38,        //     Usage (Wheel)
+    0x09, 0x38,        //     Usage (Wheel - Vertical)
     0x15, 0x81,        //     Logical Minimum (-127)
     0x25, 0x7F,        //     Logical Maximum (127)
     0x75, 0x08,        //     Report Size (8)
     0x95, 0x03,        //     Report Count (3)
-    0x81, 0x06,        //     Input (Data,Var,Rel,No Wrap,Linear,Preferred State,No Null Position)
+    0x81, 0x06,        //     Input (Data,Var,Rel)
+    0x05, 0x0C,        //     Usage Page (Consumer)
+    0x0A, 0x38, 0x02,  //     Usage (AC Pan - Horizontal Scroll)
+    0x15, 0x81,        //     Logical Minimum (-127)
+    0x25, 0x7F,        //     Logical Maximum (127)
+    0x75, 0x08,        //     Report Size (8)
+    0x95, 0x01,        //     Report Count (1)
+    0x81, 0x06,        //     Input (Data,Var,Rel)
     0xC0,              //   End Collection
-    0x09, 0x3C,        //   Usage (Motion Wakeup)
-    0x05, 0xFF,        //   Usage Page (Reserved 0xFF)
-    0x09, 0x01,        //   Usage (0x01)
-    0x15, 0x00,        //   Logical Minimum (0)
-    0x25, 0x01,        //   Logical Maximum (1)
-    0x75, 0x01,        //   Report Size (1)
-    0x95, 0x02,        //   Report Count (2)
-    0xB1, 0x22,        //   Feature (Data,Var,Abs,No Wrap,Linear,No Preferred State,No Null Position,Non-volatile)
-    0x75, 0x06,        //   Report Size (6)
-    0x95, 0x01,        //   Report Count (1)
-    0xB1, 0x01,        //   Feature (Const,Array,Abs,No Wrap,Linear,Preferred State,No Null Position,Non-volatile)
-    0xC0,              // End Collection
+    0xC0               // End Collection
 };
 
 static esp_hid_raw_report_map_t ble_report_maps[] = {
@@ -158,17 +160,19 @@ void ble_hid_task_shut_down(void)
     ;
 }
 
-#define HID_RPT_ID_CC_IN        1   // Consumer Control input report ID
-#define HID_CC_IN_RPT_LEN       7   // Consumer Control input report Len
+#define HID_RPT_ID_KBD_IN        1   // KB input report ID
+#define HID_KBD_IN_RPT_LEN       8   // KB input report Len
 
 void ble_kb_send(uint8_t* hid_buf)
 {
-    esp_hidd_dev_input_set(s_ble_hid_param.hid_dev, 0, HID_RPT_ID_CC_IN, hid_buf, HID_CC_IN_RPT_LEN);
+    esp_hidd_dev_input_set(s_ble_hid_param.hid_dev, 0, HID_RPT_ID_KBD_IN, hid_buf, HID_KBD_IN_RPT_LEN);
 }
+
+#define BT_HID_MOUSE_BUF_SIZE 5
 
 void ble_mouse_send(uint8_t* hid_buf)
 {
-    esp_hidd_dev_input_set(s_ble_hid_param.hid_dev, 0, 3, hid_buf, 4);
+    esp_hidd_dev_input_set(s_ble_hid_param.hid_dev, 0, 3, hid_buf, BT_HID_MOUSE_BUF_SIZE);
 }
 
 void ble_mk_send(uint8_t* hid_buf)
