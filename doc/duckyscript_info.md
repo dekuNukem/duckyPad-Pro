@@ -81,15 +81,14 @@ Much easier to lookup than going through this whole page.
     - [`KEYDOWN` / `KEYUP`](#keydown--keyup)
     - [`REPEAT`](#repeat)
 - [Timing](#timing)
-    - [`DELAY`](#delay)
-    - [`DEFAULTDELAY`](#defaultdelay)
-    - [`DEFAULTCHARDELAY`](#defaultchardelay)
+    - [`DELAY n`](#delay-n)
+    - [`DEFAULTDELAY n`](#defaultdelay-n)
+    - [`DEFAULTCHARDELAY n`](#defaultchardelay-n)
     - [`CHARJITTER n`](#charjitter-n)
 - [Mouse](#mouse)
     - [Mouse Buttons](#mouse-buttons)
-    - [`MOUSE_MOVE X Y`](#mouse_move-x-y)
-    - [`MOUSE_SCROLL n`](#mouse_scroll-n)
-    - [`MOUSE_HSCROLL n`](#mouse_hscroll-n)
+    - [`MOUSE_MOVE x y`](#mouse_move-x-y)
+    - [`MOUSE_SCROLL h v`](#mouse_scroll-h-v)
 - [Multiple Actions](#multiple-actions)
 - [Profile Switching](#profile-switching)
     - [`PREV_PROFILE` / `NEXT_PROFILE`](#prev_profile--next_profile)
@@ -99,9 +98,9 @@ Much easier to lookup than going through this whole page.
     - [`OLED_CURSOR x y`](#oled_cursor-x-y)
     - [`OLED_PRINT`](#oled_print)
     - [`OLED_CLEAR`](#oled_clear)
-    - [`OLED_CIRCLE`](#oled_circle)
-    - [`OLED_LINE`](#oled_line)
-    - [`OLED_RECT`](#oled_rect)
+    - [`OLED_CIRCLE x y radius fill`](#oled_circle-x-y-radius-fill)
+    - [`OLED_LINE x1 y1 x2 y2`](#oled_line-x1-y1-x2-y2)
+    - [`OLED_RECT x1 y1 x2 y2 fill`](#oled_rect-x1-y1-x2-y2-fill)
     - [`OLED_UPDATE`](#oled_update)
     - [`OLED_RESTORE`](#oled_restore)
 - [Per-Key RGB](#per-key-rgb)
@@ -320,42 +319,48 @@ REPEAT 10
 
 ## Timing
 
-### `DELAY`
+### `DELAY n`
 
-Creates a pause (in milliseconds) in execution.
+Pause execution for `n` **milliseconds**.
 
 Useful for **waiting for UI to catch up**.
 
 ```
 WINDOWS r
-DELAY 1000 // wait 1000 milliseconds, or 1 second
+DELAY 1000 // wait 1000ms, or 1 second
 STRING cmd
 ```
 
-### `DEFAULTDELAY`
+### `DEFAULTDELAY n`
 
-How long to wait between **`each NON-LETTER keypresses`**.
+How long to wait between each **`NON-LETTER input actions`**.
 
 * Default: 20ms
+* Applies to:
+    * `MOUSE_MOVE` and `MOUSE_SCROLL`
+    * `KEYDOWN` and `KEYUP` (including standalone combo keys)
+    * Pressing ENTER at end of `STRINGLN`
 
 ```
 DEFAULTDELAY 50
-// Wait 50ms between pressing each key below
-
-ALT DOWN ENTER
+    // Waits 50ms between pressing each key
+CTRL ALT DELETE
 ```
 
-### `DEFAULTCHARDELAY`
+### `DEFAULTCHARDELAY n`
 
 How long to wait between **`each letter`** when **`typing text`**.
 
 * Default: 20ms
-* To type faster, set to around 10.
+    * To type faster, set to around 10.
+* Applies to:
+    * `STRING` and `STRINGLN`
+    * `RANDCHR()`
+    * `PUTS()`
 
 ```
 DEFAULTCHARDELAY 10
-// Wait 10ms between each letter 
-
+    // Waits 10ms between each letter 
 STRING Hello World!
 ```
 
@@ -363,9 +368,12 @@ STRING Hello World!
 
 Adds an **additional** random delay between 0 and `n` milliseconds after `each key stroke`.
 
-Can make typing more human-like.
-
-* Set to 0 to disable.
+* Can make typing more human-like
+* Set to 0 to disable
+* Applies to:
+    * `STRING` and `STRINGLN`
+    * `RANDCHR()`
+    * `PUTS()`
 
 -------
 [⬆️⬆️⬆️⬆️⬆️⬆️ Back to Top ⬆️⬆️⬆️⬆️⬆️⬆️](#list-of-commands)
@@ -375,36 +383,25 @@ Can make typing more human-like.
 ### Mouse Buttons
 
 * `LMOUSE`: Click LEFT mouse button
-
 * `RMOUSE`: Click RIGHT mouse button
-
 * `MMOUSE`: Click MIDDLE mouse button
-
 * Can be used with `KEYDOWN` / `KEYUP` commands.
 
-### `MOUSE_MOVE X Y`
+### `MOUSE_MOVE x y`
 
-Move mouse cursor `X` pixels horizontally, and `Y` pixels vertically.
+Move mouse cursor `x` pixels horizontally, and `y` pixels vertically.
 
-* For `X`, a positive number moves RIGHT, negative number moves LEFT.
-
-* For `Y`, a positive number moves UP, negative number moves DOWN.
-
+* `x`: Positive moves RIGHT, negative moves LEFT.
+* `y`: Positive moves UP, negative moves DOWN.
 * Set to 0 if no movement needed
+* **Disable mouse acceleration** for **pixel-accurate** results
 
-* **Disable mouse acceleration** for pixel-accurate results
+### `MOUSE_SCROLL h v`
 
-### `MOUSE_SCROLL n`
+Scroll mouse wheel **Horizontal** `h` lines, and **Vertical** `v` lines.
 
-Scroll mouse wheel **Vertical** `n` lines
-
-* A positive number scrolls UP, negative number scrolls DOWN.
-
-### `MOUSE_HSCROLL n`
-
-Scroll mouse wheel **Horizontal** `n` lines
-
-* A positive number scrolls RIGHT, negative number scrolls LEFT.
+* `h`: Positive scrolls RIGHT, negative scrolls LEFT.
+* `v`: Positive scrolls UP, negative scrolls DOWN.
 
 -------
 [⬆️⬆️⬆️⬆️⬆️⬆️ Back to Top ⬆️⬆️⬆️⬆️⬆️⬆️](#list-of-commands)
@@ -427,9 +424,7 @@ STRINGLN third action
 ```
 
 * When pressed, a counter increments, and the script at the corresponding loop is executed.
-
 * Keep the code inside simple!
-
 * For more complex needs, see [Loops](#loops) section below.
 
 -------
@@ -484,27 +479,21 @@ Works with [Advanced Printing](#advanced-printing).
 
 Clear the display buffer.
 
-### `OLED_CIRCLE`
+### `OLED_CIRCLE x y radius fill`
 
-`OLED_CIRCLE x y radius fill`
-
-* `x y`: Origin coordinate
+* `x y`: Origin
 * `radius`: In Pixels
 * `fill`: 0 or 1
 
-### `OLED_LINE`
+### `OLED_LINE x1 y1 x2 y2`
 
-`OLED_LINE x1 y1 x2 y2`
+* `x1, y1`: Start Point
+* `X2, y2`: End Point
 
-* `x1, y1`: Starting Point
-* `X2, y2`: Ending Point
+### `OLED_RECT x1 y1 x2 y2 fill`
 
-### `OLED_RECT`
-
-`OLED_RECT x1 y1 x2 y2 fill`
-
-* `x1, y1`: Starting Corner
-* `X2, y2`: Ending Corner
+* `x1, y1`: Start Corner
+* `X2, y2`: End Corner
 * `fill`: 0 or 1
 
 ### `OLED_UPDATE`
@@ -519,7 +508,7 @@ This is **much faster** than updating the whole screen for every change.
 
 Restore the default profile/key name display.
 
-`OLED_UPDATE` **NOT NEEDED**.
+* `OLED_UPDATE` **NOT NEEDED**.
 
 -------
 [⬆️⬆️⬆️⬆️⬆️⬆️ Back to Top ⬆️⬆️⬆️⬆️⬆️⬆️](#list-of-commands)
@@ -559,9 +548,7 @@ Set `n` to 99 for all keys.
 
 You can use `DEFINE` to, well, define a constant.
 
-It can be either **integer** or **string**.
-
-The content is **replaced AS-IS** during preprocessing, very much like `#define` in C.
+The content is **replaced AS-IS** during preprocessing, similar to `#define` in C.
 
 ```
 DEFINE MY_EMAIL example@gmail.com
@@ -880,8 +867,6 @@ END_IF
 
 You can use `WHILE` statement to **repeat actions** until a **certain condition is met**.
 
-Syntax:
-
 ```
 WHILE expression
     code to repeat
@@ -962,7 +947,7 @@ To exit an infinite loop, you can [check button status](#reading-inputs), or tur
 
 ## Functions
 
-A function is a **block of organized code** that you can call to **performs a task**.
+A function is a **block of organized code** that you can call to **perform a task**.
 
 It makes your script **more modular** and **easier to maintain** compared to copy-pasting code multiple times.
 
