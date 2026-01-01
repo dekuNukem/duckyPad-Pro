@@ -1032,16 +1032,15 @@ You may want to get familiar with [VM's memory map](https://github.com/duckyPad/
 
 Read and return **one byte** at memory address
 
-`VAR value = PEEK8(0xfa00)`
+* `VAR value = PEEK8(0xfa00)`
+* Address <= End of scratch memory (`0xfaff`)
 
 ### `POKE8(addr, value)`
 
 Write `value` to memory address
 
-`POKE8(0xfa00, 5)`
-
-* Yes this allows self-modifying code
-* No you shouldn't do it 😉
+* `POKE8(0xfa00, 5)`
+* Address <= End of scratch memory (`0xfaff`)
 
 ### `RANDCHR(value)`
 
