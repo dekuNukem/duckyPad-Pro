@@ -10,9 +10,10 @@ But of course, everyone will benefit from the new features and improved performa
 
 * 32-bit Overhaul
 * Streamlined Syntax
-* New Commands
 * Proper Function Calls
 * Print Format Specifiers
+* Horizontal Mouse Scrolling
+* New Commands
 * Bug Fixes
 
 ----
@@ -38,7 +39,11 @@ Looking for older update notes? [Click me](./update_notes)
 
 ## Do Your Worst!
 
-There are tons of new features, so scroll down, take a look, try them out, and give it a good thrashing!
+* Update FW and download latest apps.
+* **Load & save** your duckyPad Pro in latest configurator to refresh the files
+* See if your **existing scripts** still work!
+* If so, scroll down, take a look at the new features and try them out.
+    * Give it a good thrashing, do your worst!
 
 Bugs are expected, let me know if you run into any!
 
@@ -80,6 +85,7 @@ END_IF
 * **Unsigned Mode**
     * Range: **0 to 4,294,967,295**
     * Suitable for **large numbers** or **bitwise operations**
+* **Stick to signed mode** if unsure
 
 ## Print Format Specifiers
 
@@ -304,9 +310,19 @@ For more granular control, see `RANDCHR()` built-in function.
 * `_SW_BITFIELD` to read status of **all buttons at once**
 * `_UNSIGNED_MATH` to switch between **arithmetic modes**
 
+## Horizontal Mouse Scrolling
+
+* `MOUSE_SCROLL h v`
+
+Scroll mouse wheel **Horizontal** `h` lines, and **Vertical** `v` lines.
+
+* `h`: Positive scrolls RIGHT, negative scrolls LEFT.
+* `v`: Positive scrolls UP, negative scrolls DOWN.
+
 ## Performance & Bugfixes
 
 * **Faster Read/Write Speeds** in USB Storage Mode.
+* Adjusted HID buffer to support `6KRO`
 * Fixed runtime-user-assigned LED colors not saving properly.
 
 ## Deep(er) Dive
