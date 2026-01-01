@@ -152,5 +152,7 @@ void run_dsb(exe_context* er, uint8_t this_key_id, char* dsb_path, uint8_t is_ca
 uint32_t random_uint32_between(uint32_t lower, uint32_t upper);
 int32_t random_int32_between(int32_t lower, int32_t upper);
 
+#define HIDRTX_PACKET_SIZE 9
+
 #endif
 
