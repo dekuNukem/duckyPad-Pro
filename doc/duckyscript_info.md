@@ -35,7 +35,7 @@ ENTER
 
 ---------
 
-At full potential, duckyScript is much closer to a **general-purpose language**.
+At **full potential**, duckyScript is much closer to a **general-purpose language**.
 
 You can:
 
@@ -367,7 +367,7 @@ STRING Hello World!
 
 ### `CHARJITTER n`
 
-Adds an **additional** random delay between 0 and `n` milliseconds after `each key stroke`.
+Adds an **`additional`** random delay between 0 and `n` milliseconds after **`each letter`** when **`typing text`**.
 
 * Can make typing more human-like
 * Set to 0 to disable
@@ -383,9 +383,11 @@ Adds an **additional** random delay between 0 and `n` milliseconds after `each k
 
 ### Mouse Buttons
 
-* `LMOUSE`: Click LEFT mouse button
-* `RMOUSE`: Click RIGHT mouse button
-* `MMOUSE`: Click MIDDLE mouse button
+* `LMOUSE`: Click `LEFT` mouse button
+* `RMOUSE`: Click `RIGHT` mouse button
+* `MMOUSE`: Click `MIDDLE` mouse button
+* `FMOUSE`: Click `FORWARD` mouse side-button
+* `BMOUSE`: Click `BACKWARD` mouse side-button
 * Can be used with `KEYDOWN` / `KEYUP` commands.
 
 ### `MOUSE_MOVE x y`
@@ -578,7 +580,6 @@ eggs = spam*2
 * Variables are **32-bit Integers**
 * Variables declared at top level have **global scope** and can be accessed **anywhere**.
 * Variables declared **inside a function** have **local scope** and is only accessible **within that function**.
-    * **Shadowing:** Local variables take precedence over global variables with the same name.
 
 ### Math Modes
 
@@ -608,10 +609,10 @@ You can read them to obtain information, or write to adjust settings.
 
 ```
 VAR status = _IS_NUMLOCK_ON
-_CHARJITTER = 1
+_CHARJITTER = 10
 ```
 
-[Click Me for Full list](#reserved-variables-list)
+[Click me for full list](#reserved-variables-list)
 
 ## Operators
 
@@ -619,7 +620,7 @@ You can perform operations on constants and variables.
 
 * 🚨 All ops are **SIGNED** BY DEFAULT
     * Set `_UNSIGNED_MATH = 1` to switch to **unsigned** mode
-    * ⚠️ = Affected by current **Arithmetic Mode**
+    * ⚠️ = Affected by current **Math Mode**
 
 ### Mathematics
 
@@ -690,7 +691,9 @@ You can print the **value of a variable** by adding a **dollar symbol ($) before
 ```
 VAR foo = -10
 STRING Value is $foo
-// Prints: Value is -10
+```
+```
+Value is -10
 ```
 
 * Works with `STRING`, `STRINGLN`, `OLED_PRINT`, and `GOTO_PROFILE`.
@@ -848,7 +851,7 @@ You can use `ELSE IF` and `ELSE` for additional checks.
 
 If the first `IF` evaluate to 0, `ELSE IF`s are checked.
 
-If none of the conditions are met, then code inside `ELSE` is executed.
+If none of the conditions are met, code inside `ELSE` is executed.
 
 ```
 VAR temp = 25
@@ -989,7 +992,7 @@ Variables declared **outside functions** have **global scope**, they can be **ac
 
 Variables declared **inside functions** have **local scope**, they are only accessible **within that function**.
 
-If a local variable has the **same name** as a global variable, the **local var takes priority** within that function.
+* If a local variable has the **same name** as a global variable, the **local var takes priority** within that function.
 
 ```
 // Both global scope
@@ -998,9 +1001,12 @@ VAR y = 20
 
 FUN scope_demo()
     VAR x = 5 // This x is local, will shadow the global x.
-    x = x + y // should be 5 + 20 = 25
+    x = x + y
     STRINGLN Local x is: $x
 END_FUN
+```
+```
+Local x is: 25
 ```
 
 ### Nested / Recursive Calls
@@ -1028,7 +1034,7 @@ VAR fact = factorial(5)
 
 A few built-in functions are available. They are intended for **low-level tinkering**.
 
-You may want to get familiar with [VM's memory map](https://github.com/duckyPad/DuckStack)
+You might want to get familiar with [VM's memory map](https://duckypad.github.io/DuckStack/)
 
 ### `PEEK8(addr)`
 
@@ -1039,7 +1045,7 @@ Read and return **one byte** at memory address
 
 ### `POKE8(addr, value)`
 
-Write `value` to memory address
+Write **one byte** to memory address
 
 * `POKE8(0xfa00, 5)`
 * Address <= End of scratch memory (`0xfaff`)
@@ -1085,9 +1091,12 @@ VAR value = RANDINT(0, 1000)
 Send a **raw HID message**
 
 * Pick an address `addr` in **scratch memory area**
-* Use `POKE8()` to write a **9 bytes packet** starting from `addr`
+* Use `POKE8()` to write **9 bytes** starting from `addr`
     * Follow the format below
 * Call `HIDTX(addr)` to send the HID message
+* Include a short delay (10-20ms) to allow computer to register the input
+* Don't forget to **release the key** after pressing it
+    * Set `Byte 1-8` to 0 to release
 
 #### Keyboard
 
@@ -1253,7 +1262,7 @@ For more granular control, see `RANDCHR()` in [Built-in Functions](#built-in-fun
 
 ### `DP_SLEEP`
 
-Make duckyPad go to sleep.
+Make duckyPad go to sleep. Terminates execution.
 
 Backlight and screen are turned off.
 
