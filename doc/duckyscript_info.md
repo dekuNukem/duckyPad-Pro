@@ -22,7 +22,7 @@ Ideal for key combos:
 
 --------
 
-Once familiar, you can write **longer multi-line** scripts for more complex actions.
+Once familiar, you can write longer **multi-line scripts** for more complex actions.
 
 **Open Webpage:**
 
@@ -61,7 +61,7 @@ Of course, people at the [Official Discord](https://discord.gg/4sJCBx5) are alwa
 
 ## 👉👉 duckyScript Cheatsheet 👈👈
 
-[Click me to download](https://github.com/dekuNukem/duckyPad-Pro/blob/master/doc/duckyscript_cheatsheet.pdf?raw=1) a copy of the quick reference guide!
+[Click me to download a PDF](https://github.com/dekuNukem/duckyPad-Pro/blob/master/doc/duckyscript_cheatsheet.pdf?raw=1) of the **quick reference guide**!
 
 Much easier to lookup than going through this whole page.
 
@@ -152,6 +152,7 @@ Much easier to lookup than going through this whole page.
 - [Miscellaneous](#miscellaneous)
     - [`DP_SLEEP`](#dp_sleep)
     - [`HALT`](#halt)
+    - [`BCLR`](#bclr)
 - [Reserved Variables List](#reserved-variables-list)
 
 ## Comments
@@ -700,7 +701,7 @@ Value is -10
 
 ### Format Specifiers
 
-You can use **Optional C-Style Format Specifiers** to adjust **print format** and **padding**.
+You can use **optional C-Style Format Specifiers** to adjust **print format** and **padding**.
 
 To add a specifier: **Immediately after the variable name**, type `%`, then a **data-type indicator letter**.
 
@@ -711,7 +712,7 @@ To add a specifier: **Immediately after the variable name**, type `%`, then a **
 * `%X` to print variable as **Uppercase Hexadecimal**
 
 ```
-VAR $foo = -10
+VAR foo = -10
 
 STRING Value is: $foo%d
 STRING Value is: $foo%u
@@ -733,7 +734,7 @@ Value is: FFFFFFF6
     * The output will be **at least that** wide
     * Any extra space are padded with **space characters**
 ```
-VAR $foo = 5
+VAR foo = 5
 STRING I have $foo%10d apples!
 ```
 ```
@@ -746,7 +747,7 @@ I have          5 apples!
     * Any extra space are padded with `0`
 * Useful for printing **dates** and **hex numbers**
 ```
-VAR $foo = 5
+VAR foo = 5
 STRING I have $foo%010d apples!
 ```
 ```
@@ -954,7 +955,7 @@ To exit an infinite loop, you can [check button status](#reading-inputs), or tur
 
 A function is a **block of organized code** that you can call to **perform a task**.
 
-It makes your script **more modular** and **easier to maintain** compared to copy-pasting code multiple times.
+It makes your script **more modular** and **easier to maintain** compared to copy-pasting same code multiple times.
 
 ### Plain Functions
 
@@ -1271,6 +1272,13 @@ Press any key to wake up.
 ### `HALT`
 
 Stop execution immediately
+
+### `BCLR`
+
+Clears the internal keypress event queue. Can be used:
+
+* **At end of a long script**: Prevents "buffered" presses from triggering it again.
+* **Before reading button status**: Ensures **new presses** are returned instead of old ones in the queue.
 
 -------
 [⬆️⬆️⬆️⬆️⬆️⬆️ Back to Top ⬆️⬆️⬆️⬆️⬆️⬆️](#list-of-commands)
