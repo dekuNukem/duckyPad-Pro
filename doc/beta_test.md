@@ -253,8 +253,8 @@ To use them, add `USE_STDLIB` in your code.
 ```
 USE_STDLIB
 
-STRINGLN Press Key 1 to continue...
-WAITKEY(1)
+STRINGLN Press Key 3 to continue...
+WAITKEY(3)
 
 VAR score_1 = 100
 VAR score_2 = 500
@@ -267,7 +267,10 @@ STRINGLN The high score is: $high_score
 
 You can now also **create your own header** for custom helper functions and more.
 
-Add `USE_UH` to your script include them.
+* Click `Edit Headers` Button
+* Write code
+* Add `USE_UH` to your script to include them
+    * The header is added to your source code **AS-IS** during preprocessing
 
 ## Built-in Functions
 

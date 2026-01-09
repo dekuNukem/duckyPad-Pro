@@ -1031,6 +1031,42 @@ VAR fact = factorial(5)
 -------
 [⬆️⬆️⬆️⬆️⬆️⬆️ Back to Top ⬆️⬆️⬆️⬆️⬆️⬆️](#list-of-commands)
 
+## duckyPad Standard Library
+
+The **DPDS StdLib** provides handy helper functions to simplify duckyScript coding.
+
+To use them, add `USE_STDLIB` in your code.
+
+[More Info / Contribute](https://github.com/duckyPad/DPDS-Standard-Library/blob/master/README.md)
+
+```
+USE_STDLIB
+
+STRINGLN Press Key 3 to continue...
+WAITKEY(3)
+
+VAR score_1 = 100
+VAR score_2 = 500
+VAR high_score = MAX(score_1, score_2)
+
+STRINGLN The high score is: $high_score
+```
+
+-------
+[⬆️⬆️⬆️⬆️⬆️⬆️ Back to Top ⬆️⬆️⬆️⬆️⬆️⬆️](#list-of-commands)
+
+## User Headers
+
+You can also **create your own header** for custom helper functions and more.
+
+* Click `Edit Headers` Button
+* Write code
+* Add `USE_UH` to your script to include them
+    * The header is added to your source code **AS-IS** during preprocessing
+
+-------
+[⬆️⬆️⬆️⬆️⬆️⬆️ Back to Top ⬆️⬆️⬆️⬆️⬆️⬆️](#list-of-commands)
+
 ## Built-in Functions
 
 A few built-in functions are available. They are intended for **low-level tinkering**.
