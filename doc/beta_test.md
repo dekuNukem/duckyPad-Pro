@@ -58,6 +58,8 @@ Bugs are expected, let me know if you run into any!
 - [Print Format Specifiers](#print-format-specifiers)
 - [Numerical Padding](#numerical-padding)
 - [Proper Function Calls](#proper-function-calls)
+- [duckyPad Standard Library](#duckypad-standard-library)
+- [User Headers](#user-headers)
 - [Built-in Functions](#built-in-functions)
 - ["Random Letter" Commands](#random-letter-commands)
 - [New Reserved Variables](#new-reserved-variables)

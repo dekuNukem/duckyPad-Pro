@@ -134,6 +134,8 @@ Much easier to lookup than going through this whole page.
     - [Arguments and Returns](#arguments-and-returns)
     - [Variable Scoping](#variable-scoping)
     - [Nested / Recursive Calls](#nested-recursive-calls)
+- [duckyPad Standard Library](#duckypad-standard-library)
+- [User Headers](#user-headers)
 - [Built-in Functions](#built-in-functions)
     - [`PEEK8(addr)`](#peek8addr)
     - [`POKE8(addr, value)`](#poke8addr-value)
