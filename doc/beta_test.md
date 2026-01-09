@@ -9,12 +9,12 @@ But of course, everyone will benefit from the new features and improved performa
 **Highlights:**
 
 * **32-bit** Overhaul
-* Streamlined Syntax
 * Proper **Function Calls**
 * **Print Format** Specifiers
+* **User-defined Headers** and **StdLib**
 * **Horizontal** Mouse Scrolling
-* New Commands
-* Bug Fixes
+* Streamlined Syntax
+* New Commands & Bug Fixes
 
 ----
 * Only for **[duckyPad Pro (2024)](https://dekunukem.github.io/duckyPad-Pro/README.html)** FOR NOW
@@ -71,18 +71,14 @@ Bugs are expected, let me know if you run into any!
     * **EXCEPT** when **printing**
 * New **Augmented Assignment** Operators 
     * `+=`, `-=`, `*=` etc.
-    * Available for all **2-operand operators**
-    * `x += 1` same as `x = x + 1`, etc.
 ```
 VAR foo = 100
 foo += 5
 STRING Value is: $foo
 ```
 * New **Logical NOT** operator `!`
-    * Evaluates to 1 if expression is 0.
-    * Evaluates to 0 if expression is **Non-Zero**
 * `THEN` is **no longer required** in `IF` statements
-* Write **inline comments** with `//`
+* **Inline comments** with `//`
 ```
 IF !foo 
     DELAY 100 // only if foo is 0
@@ -95,7 +91,7 @@ END_IF
 * Adjustable **Math Mode** by writing to `_UNSIGNED_MATH`
 * **Signed Mode** (Default)
     * Can hold values between **−2,147,483,648 and 2,147,483,647**
-    * Suitable for all **general purpose** calculations
+    * Suitable for **all general purpose** calculations
 * **Unsigned Mode**
     * Range: **0 to 4,294,967,295**
     * Suitable for **large numbers** or **bitwise operations**
@@ -233,10 +229,7 @@ Local x is: 25
 
 ### Nested / Recursive Calls
 
-You can now also:
-
-* Call other functions while inside a function
-    * Including **calling itself**!
+Now possible!
 
 ```
 FUN factorial(n)
@@ -248,6 +241,33 @@ END_FUN
 
 VAR fact = factorial(5)
 ```
+
+## duckyPad Standard Library
+
+With much more powerful function calls, a set of **handy helper functions** are provided as a **StdLib**.
+
+To use them, add `USE_STDLIB` in your code.
+
+[More Info / Contribute](https://github.com/duckyPad/DPDS-Standard-Library/blob/master/README.md)
+
+```
+USE_STDLIB
+
+STRINGLN Press Key 1 to continue...
+WAITKEY(1)
+
+VAR score_1 = 100
+VAR score_2 = 500
+VAR high_score = MAX(score_1, score_2)
+
+STRINGLN The high score is: $high_score
+```
+
+## User Headers
+
+You can now also **create your own header** for custom helper functions and more.
+
+Add `USE_UH` to your script include them.
 
 ## Built-in Functions
 
@@ -316,6 +336,7 @@ Scroll mouse wheel **Horizontal** `h` lines, and **Vertical** `v` lines.
     * Including in Bluetooth mode
 * Randomization now uses **Hardware RNG**
 * Fixed runtime-user-assigned LED colors not saving properly.
+* Compiler Optimization to reduce code size.
 
 ## Deep(er) Dive
 
