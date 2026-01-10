@@ -51,32 +51,37 @@ contexts:
         1: variable.function.duckyscript
 
   string_commands:
-    - match: '\b(STRINGLN|STRING)\b'
+    # Added OLED_PRINT and GOTO_PROFILE here so they handle string parsing
+    - match: '\b(STRINGLN|STRING|OLED_PRINT|OLED_CPRINT|GOTO_PROFILE)\b'
       scope: keyword.control.command.duckyscript
       push: string_line
 
   string_line:
     - meta_scope: string.unquoted.duckyscript
+    # Match Variable ($foo) + Optional Format Specifier (%05d)
+    - match: '(\$)({{variable_name}})((?:%(?:0?\d+)?[duxX])?)'
+      captures:
+        1: punctuation.definition.variable.duckyscript
+        2: variable.other.duckyscript
+        3: constant.other.placeholder.duckyscript
     - match: '$'
       pop: true
 
   block_strings:
-    # Changed scope to keyword so the start tag is colored as a command
     - match: '\b(STRINGLN_BLOCK|STRING_BLOCK)\b'
       scope: keyword.control.command.duckyscript
       push:
-        # Changed scope to keyword so the end tag is colored as a command
         - match: '\b(END_STRINGLN|END_STRING)\b'
           scope: keyword.control.command.duckyscript
           pop: true
-        # The content remains a pure string
         - match: .+
           scope: string.quoted.other.block.content.duckyscript
 
   commands:
-    - match: '\b(DELAY|DEFAULTDELAY|DEFAULTCHARDELAY|CHARJITTER|REPEAT|KEYDOWN|KEYUP|MOUSE_MOVE|MOUSE_SCROLL|OLED_CURSOR|OLED_PRINT|OLED_CLEAR|OLED_CIRCLE|OLED_LINE|OLED_RECT|OLED_UPDATE|OLED_RESTORE|SWC_SET|SWC_FILL|SWC_RESET|GOTO_PROFILE|PREV_PROFILE|NEXT_PROFILE|DP_SLEEP|HALT|BCLR|DEFINE|VAR|LBREAK|CONTINUE|RANDOM_LOWERCASE_LETTER|RANDOM_UPPERCASE_LETTER|RANDOM_LETTER|RANDOM_NUMBER|RANDOM_SPECIAL|RANDOM_CHAR)\b'
+    # Removed OLED_PRINT and GOTO_PROFILE from here (moved to string_commands)
+    - match: '\b(DELAY|DEFAULTDELAY|DEFAULTCHARDELAY|CHARJITTER|REPEAT|KEYDOWN|KEYUP|MOUSE_MOVE|MOUSE_SCROLL|OLED_CURSOR|OLED_CLEAR|OLED_CIRCLE|OLED_LINE|OLED_RECT|OLED_UPDATE|OLED_RESTORE|SWC_SET|SWC_FILL|SWC_RESET|PREV_PROFILE|NEXT_PROFILE|DP_SLEEP|HALT|BCLR|DEFINE|VAR|LBREAK|CONTINUE|RANDOM_LOWERCASE_LETTER|RANDOM_UPPERCASE_LETTER|RANDOM_LETTER|RANDOM_NUMBER|RANDOM_SPECIAL|RANDOM_CHAR)\b'
       scope: keyword.control.command.duckyscript
-    
+     
     - match: '\b(LMOUSE|RMOUSE|MMOUSE|FMOUSE|BMOUSE)\b'
       scope: constant.language.mouse.duckyscript
 
