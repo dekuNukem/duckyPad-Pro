@@ -1,0 +1,110 @@
+%YAML 1.2
+---
+name: duckyPad-duckyScript
+file_extensions:
+  - txt
+  - dks
+scope: source.duckyscript
+
+variables:
+  variable_name: '\b[a-zA-Z_][a-zA-Z0-9_]*\b'
+  hex_number: '\b0x[0-9a-fA-F]+\b'
+  decimal_number: '\b\d+\b'
+
+contexts:
+  main:
+    - include: comments
+    - include: functions
+    - include: string_commands
+    - include: commands
+    - include: keywords
+    - include: block_strings
+    - include: variables
+    - include: operators
+    - include: numbers
+
+  comments:
+    - match: '//.*$'
+      scope: comment.line.double-slash.duckyscript
+    - match: '\b(REM)\b.*$'
+      scope: comment.line.rem.duckyscript
+    - match: '\bREM_BLOCK\b'
+      scope: comment.block.duckyscript
+      push:
+        - match: '\bEND_REM\b'
+          scope: comment.block.duckyscript
+          pop: true
+        - match: .+
+          scope: comment.block.content.duckyscript
+
+  functions:
+    - match: '\b(FUN)\s+([a-zA-Z_][a-zA-Z0-9_]*)'
+      captures:
+        1: storage.type.function.duckyscript
+        2: entity.name.function.duckyscript
+    - match: '\b(END_FUN)\b'
+      scope: storage.type.function.duckyscript
+    - match: '\b(PEEK8|POKE8|RANDCHR|RANDINT|PUTS|HIDTX|WAITKEY|MAX|MIN)\b'
+      scope: support.function.builtin.duckyscript
+    - match: '([a-zA-Z_][a-zA-Z0-9_]*)\s*\('
+      captures:
+        1: variable.function.duckyscript
+
+  string_commands:
+    - match: '\b(STRINGLN|STRING)\b'
+      scope: keyword.control.command.duckyscript
+      push: string_line
+
+  string_line:
+    - meta_scope: string.unquoted.duckyscript
+    - match: '$'
+      pop: true
+
+  block_strings:
+    # Changed scope to keyword so the start tag is colored as a command
+    - match: '\b(STRINGLN_BLOCK|STRING_BLOCK)\b'
+      scope: keyword.control.command.duckyscript
+      push:
+        # Changed scope to keyword so the end tag is colored as a command
+        - match: '\b(END_STRINGLN|END_STRING)\b'
+          scope: keyword.control.command.duckyscript
+          pop: true
+        # The content remains a pure string
+        - match: .+
+          scope: string.quoted.other.block.content.duckyscript
+
+  commands:
+    - match: '\b(DELAY|DEFAULTDELAY|DEFAULTCHARDELAY|CHARJITTER|REPEAT|KEYDOWN|KEYUP|MOUSE_MOVE|MOUSE_SCROLL|OLED_CURSOR|OLED_PRINT|OLED_CLEAR|OLED_CIRCLE|OLED_LINE|OLED_RECT|OLED_UPDATE|OLED_RESTORE|SWC_SET|SWC_FILL|SWC_RESET|GOTO_PROFILE|PREV_PROFILE|NEXT_PROFILE|DP_SLEEP|HALT|BCLR|DEFINE|VAR|LBREAK|CONTINUE|RANDOM_LOWERCASE_LETTER|RANDOM_UPPERCASE_LETTER|RANDOM_LETTER|RANDOM_NUMBER|RANDOM_SPECIAL|RANDOM_CHAR)\b'
+      scope: keyword.control.command.duckyscript
+    
+    - match: '\b(LMOUSE|RMOUSE|MMOUSE|FMOUSE|BMOUSE)\b'
+      scope: constant.language.mouse.duckyscript
+
+    - match: '\b(CTRL|RCTRL|SHIFT|RSHIFT|ALT|RALT|WINDOWS|RWINDOWS|COMMAND|RCOMMAND|OPTION|ROPTION|ESC|ENTER|UP|DOWN|LEFT|RIGHT|SPACE|BACKSPACE|TAB|CAPSLOCK|PRINTSCREEN|SCROLLLOCK|PAUSE|BREAK|INSERT|HOME|PAGEUP|PAGEDOWN|DELETE|END|MENU|POWER|F([1-9]|1[0-9]|2[0-4])|NUMLOCK|KP_SLASH|KP_ASTERISK|KP_MINUS|KP_PLUS|KP_ENTER|KP_[0-9]|KP_DOT|KP_EQUAL|ZENKAKUHANKAKU|HENKAN|MUHENKAN|KATAKANAHIRAGANA)\b'
+      scope: constant.language.key.duckyscript
+
+  keywords:
+    - match: '\b(IF|ELSE IF|ELSE|END_IF|WHILE|END_WHILE|LOOP[0-9]+:?|RETURN)\b'
+      scope: keyword.control.flow.duckyscript
+    - match: '\b(USE_STDLIB|USE_UH)\b'
+      scope: keyword.control.import.duckyscript
+
+  variables:
+    - match: '\b(VAR)\b'
+      scope: storage.type.variable.duckyscript
+    - match: '\$([a-zA-Z_][a-zA-Z0-9_]*)'
+      scope: variable.other.interpolation.duckyscript
+    - match: '\b(_[A-Z0-9_]+)\b'
+      scope: support.variable.reserved.duckyscript
+    - match: '{{variable_name}}'
+      scope: variable.other.duckyscript
+
+  operators:
+    - match: '(\+|\-|\*|/|%|\*\*|==|!=|>|<|>=|<=|&&|\|\||!|&|\||\^|~|<<|>>|=)'
+      scope: keyword.operator.duckyscript
+
+  numbers:
+    - match: '{{hex_number}}'
+      scope: constant.numeric.hex.duckyscript
+    - match: '{{decimal_number}}'
+      scope: constant.numeric.decimal.duckyscript

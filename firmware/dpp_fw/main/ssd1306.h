@@ -63,6 +63,7 @@ void ssd1306_Polyline(const SSD1306_VERTEX *par_vertex, uint16_t par_size, SSD13
 void ssd1306_DrawRectangle(uint8_t x1, uint8_t y1, uint8_t x2, uint8_t y2, SSD1306_COLOR color);
 void ssd1306_FillRectangle(uint8_t x1, uint8_t y1, uint8_t x2, uint8_t y2, SSD1306_COLOR color);
 void ssd1306_DrawBitmap(uint8_t x, uint8_t y, const unsigned char* bitmap, uint8_t w, uint8_t h, SSD1306_COLOR color);
+void ssd1306_GetCursor(uint8_t *x, uint8_t *y);
 
 /**
  * @brief Sets the contrast of the display.
@@ -111,7 +112,6 @@ SSD1306_Error_t ssd1306_FillBuffer(uint8_t* buf, uint32_t len);
 #define OLED_CMD_SET_CHARGE_PUMP        0x8D    // follow with 0x14
 
 #define SSD1306_SETCONTRAST 0x81
-
 
 #define SSD1306_NO_ROTATION 0
 #define SSD1306_ROTATE_CW90 1

@@ -1228,10 +1228,22 @@ void execute_instruction(exe_context* exe)
   }
   else if(opcode == OP_OLED_PRNT)
   {
-    uint32_t this_value;
-    stack_pop(&data_stack, &this_value);
-    char* str_buf = make_str((uint16_t)this_value);
-    ssd1306_WriteString(str_buf, Font_7x10, White);
+    uint32_t opts, addr;
+    stack_pop(&data_stack, &opts);
+    stack_pop(&data_stack, &addr);
+    char* str_buf = make_str((uint16_t)addr);
+    if(opts & 0x1)
+    {
+      uint8_t oldx, oldy;
+      ssd1306_GetCursor(&oldx, &oldy);
+      ssd1306_SetCursor(center_line(strlen(str_buf), 7, SSD1306_WIDTH), oldy);
+      ssd1306_WriteString(str_buf, Font_7x10, White);
+      ssd1306_SetCursor(oldx, oldy);
+    }
+    else
+    {
+      ssd1306_WriteString(str_buf, Font_7x10, White);
+    }
   }
   else if(opcode == OP_OLED_UPDE)
   {

@@ -34,6 +34,7 @@ void draw_nvm_erase();
 void draw_no_usb_activity();
 void update_kbled_icon(uint8_t this_led_state);
 void draw_kbled_icon(uint8_t this_led_state, uint8_t update_screen);
+uint8_t center_line(uint8_t line_len, uint8_t char_width_pixels, uint8_t oled_width_pixels);
 
 #define ONE_MINUTE_IN_MS (60*1000)
 #define ONE_HOUR_IN_MS (60*ONE_MINUTE_IN_MS)

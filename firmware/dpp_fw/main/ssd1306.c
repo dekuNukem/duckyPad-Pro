@@ -264,9 +264,19 @@ char ssd1306_WriteString(char* str, FontDef Font, SSD1306_COLOR color) {
 }
 
 /* Position the cursor */
-void ssd1306_SetCursor(uint8_t x, uint8_t y) {
+void ssd1306_SetCursor(uint8_t x, uint8_t y)
+{
     SSD1306.CurrentX = x;
     SSD1306.CurrentY = y;
+}
+
+// Retrieve the current cursor position
+void ssd1306_GetCursor(uint8_t *x, uint8_t *y)
+{
+    if(x)
+        *x = SSD1306.CurrentX;
+    if(y)
+        *y = SSD1306.CurrentY;
 }
 
 /* Draw line by Bresenhem's algorithm */
