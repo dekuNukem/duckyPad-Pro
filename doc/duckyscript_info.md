@@ -474,6 +474,8 @@ Set where to print on screen.
 
 Characters are **7 pixels wide, 10 pixels tall.**
 
+Max **18 Characters Per Line**.
+
 Characters print from **top-left** corner.
 
 ### `OLED_PRINT`
