@@ -1,10 +1,8 @@
 # [BETA TEST] duckyPad "Power User" Update: Jan 2026
 
-Happy new year! Here's another **major update** that makes your duckyPad even more powerful!
+Happy New Year! Please enjoy a **major update** that makes your duckyPad even more powerful!
 
-This update focuses mainly on **advanced features** for **power users**, and significantly expands duckyScript's capabilities.
-
-But of course, everyone will benefit from the new features and improved performance!
+This update features a complete **scripting engine overhaul**, adds many **long-requested features**, and significantly expands **duckyScript's capabilities**, making it even more **general-purpose and versatile** than ever before.
 
 **Highlights:**
 
@@ -14,7 +12,7 @@ But of course, everyone will benefit from the new features and improved performa
 * **User-defined Headers** and **StdLib**
 * **Horizontal** Mouse Scrolling
 * Streamlined Syntax
-* New Commands & Bug Fixes
+* **New Commands** & Bug Fixes
 
 ----
 * Only for **[duckyPad Pro (2024)](https://dekunukem.github.io/duckyPad-Pro/README.html)** FOR NOW
@@ -63,7 +61,7 @@ Bugs are expected, let me know if you run into any!
 - [Built-in Functions](#built-in-functions)
 - ["Random Letter" Commands](#random-letter-commands)
 - [New Reserved Variables](#new-reserved-variables)
-- [New Mouse Commands](#new-mouse-commands)
+- [New Commands](#new-commands)
 - [Performance & Bugfixes](#performance--bugfixes)
 - [Deep(er) Dive](#deeper-dive)
 
@@ -153,7 +151,7 @@ I have          5 apples!
 ```
 
 * To pad with **LEADING-ZERO**
-    * Right **after `%`**, add a `0`, then width number, then the letter.
+    * Right **after `%`**, add a `0`, then **width number**, then the letter.
     * The output will be **at least that** wide
     * Any extra space are padded with `0`
 * Useful for printing **dates** and **hex numbers**
@@ -196,7 +194,7 @@ print_addr() // call it
 
 ### Arguments and Returns
 
-But now, you can also pass **up to 8 arguments** into a function and specify a **return value**.
+But now, you can also **pass arguments** into a function and specify a **return value**.
 
 ```
 FUN add_number(a, b)
@@ -276,32 +274,25 @@ You can now also **create your own header** for custom helper functions and more
 
 ## Built-in Functions
 
-A few built-in functions have been added.
+A few **built-in functions** have been added.
 
-They are intended for **low-level tinkering** and are completely optional.
+They are **always available**, and are intended for **low-level tinkering**.
 
 * [See main doc](duckyscript_info.md#built-in-functions) for details
 
-**`PEEK8(addr)`**
-
-**`POKE8(addr, value)`**
-
-**`RANDCHR(value)`**
-
-**`RANDINT(lower, upper)`**
-
-**`PUTS(value)`**
-
-**`HIDTX(addr)`**
-
+```
+PEEK8(addr)         RANDINT(lower, upper)
+POKE8(addr, value)  PUTS(value)
+RANDCHR(value)      HIDTX(addr)
+```
 ## "Random Letter" Commands 
 
-Types a random letter. Added from [official duckyScript specs](https://docs.hak5.org/hak5-usb-rubber-ducky/duckyscript-quick-reference/).
+**Types a random letter**. Added from [official duckyScript specs](https://docs.hak5.org/hak5-usb-rubber-ducky/duckyscript-quick-reference/).
 
 ```
-RANDOM_LOWERCASE_LETTER     RANDOM_NUMBER
-RANDOM_UPPERCASE_LETTER     RANDOM_SPECIAL
-RANDOM_LETTER               RANDOM_CHAR
+RANDOM_LOWERCASE_LETTER    RANDOM_NUMBER
+RANDOM_UPPERCASE_LETTER    RANDOM_SPECIAL
+RANDOM_LETTER              RANDOM_CHAR
 ```
 ```
 RANDOM_NUMBER
@@ -316,7 +307,7 @@ For more granular control, use `RANDCHR()` built-in function.
 * `_SW_BITFIELD` to read status of **all buttons at once**
 * `_UNSIGNED_MATH` to switch between **arithmetic modes**
 
-## New Mouse Commands
+## New Commands
 
 ### Mouse Side Buttons
 
@@ -334,14 +325,19 @@ Scroll mouse wheel **Horizontal** `h` lines, and **Vertical** `v` lines.
 * `v`: Positive scrolls UP, negative scrolls DOWN.
 * Set `0` for no scroll
 
+### OLED Center-Aligned Print
+
+* `OLED_CPRINT hello world!`
+
+Prints message **Center-Aligned** on the current Y cursor position.
+
 ## Performance & Bugfixes
 
 * **Faster Read/Write Speeds** in USB Storage Mode.
-* Adjusted HID buffer to support `6KRO`
-    * Including in Bluetooth mode
+* Adjusted HID Descriptor to support `6KRO`
 * Randomization now uses **Hardware RNG**
 * Fixed runtime-user-assigned LED colors not saving properly.
-* Compiler Optimization to reduce code size.
+* Compiler optimizations to reduce code size.
 
 ## Deep(er) Dive
 

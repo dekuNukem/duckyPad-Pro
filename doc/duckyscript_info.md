@@ -97,6 +97,7 @@ Much easier to lookup than going through this whole page.
 - [OLED](#oled)
     - [`OLED_CURSOR x y`](#oled_cursor-x-y)
     - [`OLED_PRINT`](#oled_print)
+    - [`OLED_CPRINT`](#oled_cprint)
     - [`OLED_CLEAR`](#oled_clear)
     - [`OLED_CIRCLE x y radius fill`](#oled_circle-x-y-radius-fill)
     - [`OLED_LINE x1 y1 x2 y2`](#oled_line-x1-y1-x2-y2)
@@ -482,6 +483,10 @@ Print the message into display buffer at **current cursor location**.
 
 Works with [Advanced Printing](#advanced-printing).
 
+### `OLED_CPRINT`
+
+Same as `OLED_PRINT`, but prints message **center-aligned**.
+
 ### `OLED_CLEAR`
 
 Clear the display buffer.
@@ -699,7 +704,7 @@ STRING Value is $foo
 Value is -10
 ```
 
-* Works with `STRING`, `STRINGLN`, `OLED_PRINT`, and `GOTO_PROFILE`.
+* Works with `STRING`, `STRINGLN`, `OLED_PRINT`, `OLED_CPRINT` and `GOTO_PROFILE`.
 
 ### Format Specifiers
 
@@ -744,7 +749,7 @@ I have          5 apples!
 ```
 
 * To pad with **LEADING-ZERO**
-    * Right **after `%`**, add a `0`, then width number, then the letter.
+    * Right **after `%`**, add a `0`, then **width number**, then the letter.
     * The output will be **at least that** wide
     * Any extra space are padded with `0`
 * Useful for printing **dates** and **hex numbers**
@@ -977,7 +982,7 @@ print_addr() // call it
 
 ### Arguments and Returns
 
-You can also pass **up to 8 arguments** into a function and specify a **return value**.
+You can also **pass arguments** into a function and specify a **return value**.
 
 * Ideal for performing calculations
 
