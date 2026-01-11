@@ -268,10 +268,11 @@ List of Special Keys:
   SHIFT / RSHIFT       |     MK_VOLUP                 
   ALT / RALT           |     MK_VOLDOWN               
   WINDOWS / RWINDOWS   |     MK_MUTE                  
-  COMMAND / RCOMMAND   |     MK_PREV                  
-  OPTION / ROPTION     |     MK_NEXT                  
-  ESC                  |     MK_PP (play/pause)       
-  ENTER                |     MK_STOP                  
+  GUI                  |     MK_PREV
+  COMMAND / RCOMMAND   |     MK_NEXT              
+  OPTION / ROPTION     |     MK_PP (play/pause)                         
+  ESC                  |     MK_STOP
+  ENTER                |     
   UP/DOWN/LEFT/RIGHT   |                              
   SPACE                |     (numpad keys)            
   BACKSPACE            |     NUMLOCK                  
