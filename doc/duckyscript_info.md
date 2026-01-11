@@ -168,14 +168,6 @@ C-style comment. Anything after `//` is ignored.
 // This is a comment
 ```
 
-### `REM`
-
-BASIC/Win style comment.
-
-```
-REM This is a comment
-```
-
 ### `REM_BLOCK` and `END_REM`
 
 Comment block. Everything in-between is ignored.
