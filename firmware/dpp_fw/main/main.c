@@ -155,10 +155,16 @@ RANDCHR()
 Print format specifiers
 PWMCTL
 horizontal mouse scroll
+
+3.2.0
+Jan 11 2026
+New OLED_PRINT instruction
+Cleanup before public beta
+
 */
 
 uint8_t fw_version_major = 3;
-uint8_t fw_version_minor = 1;
+uint8_t fw_version_minor = 2;
 uint8_t fw_version_patch = 0;
 
 uint8_t dsvm_version = 2;

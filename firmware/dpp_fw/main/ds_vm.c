@@ -460,7 +460,7 @@ uint8_t readkey_blocking_1_indexed(void)
   clear_sw_re_queue();
   while(1)
   {
-    delay_ms(10);
+    delay_ms(1);
     if(xQueueReceive(rotary_encoder_event_queue, &re_event, 0))
       return re_event_to_swid(&re_event)+1;
     if(xQueueReceive(switch_event_queue, &sw_event, 0) && sw_event.type == SW_EVENT_SHORT_PRESS)
