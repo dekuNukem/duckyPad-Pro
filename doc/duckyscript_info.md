@@ -1107,12 +1107,13 @@ Generate a **random character**.
 * If `Bit 17` is 1, it will print the character to screen buffer
     * Don't forget to use `OLED_UPDATE` to actually refresh the screen.
 
-### `RANDINT(lower, upper)`
+### `RANDINT(lower, upper)` / `RANDUINT(lower, upper)`
 
-Returns a random number between `lower` and `upper` **INCLUSIVE**.
+Returns a **Signed/Unsigned** random number between `lower` and `upper` **INCLUSIVE**.
 
 ```
-VAR value = RANDINT(0, 1000)
+VAR value = RANDINT(-100, 100)
+VAR value = RANDUINT(3000000000, 4000000000)
 ```
 
 ### `PUTS(value)`
