@@ -110,7 +110,6 @@ Much easier to lookup than going through this whole page.
     - [`SWC_RESET n`](#swc_reset-n)
 - [Constants](#constants)
 - [Variables](#variables)
-    - [Math Modes](#math-modes)
     - [Persistent Global Variables](#persistent-global-variables)
     - [Reserved Variables](#reserved-variables)
 - [Operators](#operators)
@@ -1318,7 +1317,8 @@ You can read or write (RW) to adjust settings. Some are read-only (RO).
 | --------------------------------------------------------------------------- | :-----: |:----:|
 | **`_TIME_S`**<br>**`_TIME_MS`**        | RO    | Elapsed time since power-on|
 | **`_READKEY`**<br>**`_BLOCKING_READKEY`**<br>**`_SW_BITFIELD`**                | RO    | See [Reading Inputs](#reading-inputs)|
-| **`_IS_NUMLOCK_ON`**<br>**`_IS_CAPSLOCK_ON`**<br>**`_IS_SCROLLLOCK_ON`** | RO    | Returns **1 if LED is on**, **0 otherwise**.<br>Certain OS may not have all LEDs|
+| **`_KBLED_BITFIELD`** | RO    |Keyboard LED Status<br>`Bit 0`: Num Lock<br>`Bit 1`: Caps Lock<br>`Bit 2`: Scroll Lock<br>Bit is 1 if LED is on.<br>Certain OS may not have all LEDs|
+| **`_IS_NUMLOCK_ON`**<br>**`_IS_CAPSLOCK_ON`**<br>**`_IS_SCROLLLOCK_ON`** | RO    | Aliases|
 | **`_DEFAULTDELAY`**<br>**`_DEFAULTCHARDELAY`**<br>**`_CHARJITTER`**      | RW    | Aliases|
 | **`_ALLOW_ABORT`**<br>**`_DONT_REPEAT`**                                  | RW    | Write `1` to enable<br>`0` to disable.   |
 | **`_THIS_KEYID`**                       | RO    | Returns the [Key ID](#key-id) for the **current script**     |
