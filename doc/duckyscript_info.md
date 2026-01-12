@@ -580,21 +580,10 @@ spam = 20
 eggs = spam*2
 ```
 
-* Variables are **32-bit Integers**
+* Variables are **SIGNED 32-bit Integers**
+    * Can hold values between **−2,147,483,648 and 2,147,483,647**
 * Variables declared at top level have **global scope** and can be accessed **anywhere**.
 * Variables declared **inside a function** have **local scope** and is only accessible **within that function**.
-
-### Math Modes
-
-Write to `_UNSIGNED_MATH` to adjust **math mode**
-
-* **Signed Mode** (Default)
-    * Variables can hold values between **−2,147,483,648 and 2,147,483,647**
-    * Suitable for all **general purpose** calculations
-* **Unsigned Mode** (`_UNSIGNED_MATH = 1`)
-    * Range: **0 to 4,294,967,295**
-    * Suitable for **large numbers** or **bitwise operations**
-* Unsure? Stick with default **signed mode**
 
 ### Persistent Global Variables
 
@@ -621,10 +610,6 @@ _CHARJITTER = 10
 
 You can perform operations on constants and variables.
 
-* 🚨 All ops are **SIGNED** BY DEFAULT
-    * Set `_UNSIGNED_MATH = 1` to switch to **unsigned** mode
-    * ⚠️ = Affected by current **Math Mode**
-
 ### Mathematics
 
 ```
@@ -632,8 +617,8 @@ You can perform operations on constants and variables.
 +       Add       
 -       Subtract  
 *       Multiply  
-/       ⚠️ Integer Division
-%       ⚠️ Modulus   
+/       SIGNED Integer Division
+%       SIGNED Modulus   
 **      Exponent
 ```
 
@@ -651,10 +636,10 @@ All comparisons evaluate to **either 0 or 1**.
 ```
 ==        Equal                  
 !=        Not equal              
->         ⚠️Greater than           
-<         ⚠️Less than              
->=        ⚠️Greater than or equal  
-<=        ⚠️Less than or equal   
+>         SIGNED Greater than           
+<         SIGNED Less than              
+>=        SIGNED Greater than or equal  
+<=        SIGNED Less than or equal   
 ```
 
 ### Logical 
@@ -673,9 +658,7 @@ All comparisons evaluate to **either 0 or 1**.
 ^       Bitwise XOR
 ~       Bitwise NOT
 <<      Left Shift    
->>      ⚠️Right Shift
-            Signed Mode: Arithmetic Shift (sign-extend)
-            Unsigned Mode: Logical Shift (0-extend)
+>>      Arithmetic Right Shift (sign-extend)
 ```
 
 ### Augmented Assignments
@@ -683,6 +666,10 @@ All comparisons evaluate to **either 0 or 1**.
 * E.g. `+=`, `-=`, `*=`, etc.
 * Available for all **2-operand operators**
 * `x += 1` same as `x = x + 1`, etc.
+
+### UNSIGNED Operators
+
+Explicit **unsigned** functions
 
 -------
 [⬆️⬆️⬆️⬆️⬆️⬆️ Back to Top ⬆️⬆️⬆️⬆️⬆️⬆️](#list-of-commands)
@@ -1329,19 +1316,18 @@ You can read or write (RW) to adjust settings. Some are read-only (RO).
 
 | Name                                                                 | Access | Description                                                                                    |
 | --------------------------------------------------------------------------- | :-----: |:----:|
-| **`_TIME_S`**<br>**`_TIME_MS`**                                           | RO    | Elapsed time since power-on|
+| **`_TIME_S`**<br>**`_TIME_MS`**        | RO    | Elapsed time since power-on|
 | **`_READKEY`**<br>**`_BLOCKING_READKEY`**<br>**`_SW_BITFIELD`**                | RO    | See [Reading Inputs](#reading-inputs)|
 | **`_IS_NUMLOCK_ON`**<br>**`_IS_CAPSLOCK_ON`**<br>**`_IS_SCROLLLOCK_ON`** | RO    | Returns **1 if LED is on**, **0 otherwise**.<br>Certain OS may not have all LEDs|
 | **`_DEFAULTDELAY`**<br>**`_DEFAULTCHARDELAY`**<br>**`_CHARJITTER`**      | RW    | Aliases|
-| **`_ALLOW_ABORT`**<br>**`_DONT_REPEAT`**                                  | RW    | Write `1` to enable<br>`0` to disable.                                      |
-| **`_THIS_KEYID`**                                                          | RO    | Returns the [Key ID](#key-id) for the **current script**     |
-| **`_DP_MODEL`**                                                            | RO    | Device model. Returns:<br>`1` for duckyPad (2020)<br>`2` for duckyPad Pro (2024)                              |
-| **`_KEYPRESS_COUNT`**                                                      | RW    | How many times **current key**<br>has been pressed in the **current profile**<br>Assign **0 to reset** |
-| **`_LOOP_SIZE`**                                                           | RO    | Used by `LOOP` command.<br>Do not modify                                                     |
-| **`_NEEDS_EPILOGUE`**                                                      | RO    | Internal use only<br>Do not modify                                                              |
+| **`_ALLOW_ABORT`**<br>**`_DONT_REPEAT`**                                  | RW    | Write `1` to enable<br>`0` to disable.   |
+| **`_THIS_KEYID`**                       | RO    | Returns the [Key ID](#key-id) for the **current script**     |
+| **`_DP_MODEL`**                         | RO    | Device model. Returns:<br>`1` for duckyPad (2020)<br>`2` for duckyPad Pro (2024)                              |
+| **`_KEYPRESS_COUNT`**                   | RW    | How many times **current key**<br>has been pressed in the **current profile**<br>Assign **0 to reset** |
+| **`_LOOP_SIZE`**                        | RO    | Used by `LOOP` command.<br>Do not modify                  |
+| **`_NEEDS_EPILOGUE`**                   | RO    | Internal use only<br>Do not modify                           |
 |**`_RTC_IS_VALID`**<br>**`_RTC_YEAR`**<br>**`_RTC_MONTH`**<br>**`_RTC_DAY`**<br>**`_RTC_HOUR`**<br>**`_RTC_MINUTE`**<br>**`_RTC_SECOND`**<br>**`_RTC_WDAY`**<br>**`_RTC_YDAY`**|RO|See [Real-time Clock](#real-time-clock-rtc)|
 |**`_RTC_UTC_OFFSET`**|RW|See [Real-time Clock](#real-time-clock-rtc)|
-|**`_UNSIGNED_MATH`**|RW|Set to `1` to treat variables as<br>**unsigned numbers** using **unsigned math**|
 
 -------
 [⬆️⬆️⬆️⬆️⬆️⬆️ Back to Top ⬆️⬆️⬆️⬆️⬆️⬆️](#list-of-commands)
