@@ -609,6 +609,8 @@ _CHARJITTER = 10
 
 You can perform operations on constants and variables.
 
+All ops are **Signed** by default. Use explicit [**unsigned calls**](#unsigned-operators) to treat variables as unsigned.
+
 ### Mathematics
 
 ```
@@ -668,7 +670,17 @@ All comparisons evaluate to **either 0 or 1**.
 
 ### UNSIGNED Operators
 
-Explicit **unsigned** functions
+Call built-in functions below to perform **unsigned** operations on variables.
+
+```
+ULT(lhs, rhs)    Unsigned Less Than
+ULTE(lhs, rhs)   Unsigned Less Than or Equal
+UGT(lhs, rhs)    Unsigned Greater Than
+UGTE(lhs, rhs)   Unsigned Greater Than or Equal
+UDIV(val, n)     Unsigned Division (val / n)
+UMOD(val, n)     Unsigned Modulo (val % n)
+LSR(val, n)      Logical Right Shift (Zero-Extend)
+```
 
 -------
 [⬆️⬆️⬆️⬆️⬆️⬆️ Back to Top ⬆️⬆️⬆️⬆️⬆️⬆️](#list-of-commands)
@@ -1061,19 +1073,23 @@ A few built-in functions are available. They are intended for **low-level tinker
 
 You might want to get familiar with [VM's memory map](https://duckypad.github.io/DuckStack/)
 
-### `PEEK8(addr)`
+All multi-byte values are **little-endian**
 
-Read and return **one byte** at memory address
+### `PEEK8(addr)` / `PEEK16(addr)` / `PEEK32(addr)`
+ 
+Read **SIGNED** value at memory address.
 
-* `VAR value = PEEK8(0xfa00)`
-* Address <= End of scratch memory (`0xfaff`)
+* High bits are **SIGN-extended**
 
-### `POKE8(addr, value)`
+### `PEEKU8(addr)` / `PEEKU16(addr)` / `PEEKU32(addr)`
+ 
+Read **UNSIGNED** value at memory address.
 
-Write **one byte** to memory address
+* High bits are **ZERO-extended**
 
-* `POKE8(0xfa00, 5)`
-* Address <= End of scratch memory (`0xfaff`)
+### `POKE8(addr)` / `POKE16(addr)` / `POKE32(addr)`
+ 
+Write value at memory address.
 
 ### `RANDCHR(value)`
 
