@@ -1081,7 +1081,7 @@ Read **SIGNED** value at memory address.
 
 * High bits are **SIGN-extended**
 
-### `PEEKU8(addr)` / `PEEKU16(addr)` / `PEEKU32(addr)`
+### `PEEKU8(addr)` / `PEEKU16(addr)`
  
 Read **UNSIGNED** value at memory address.
 
