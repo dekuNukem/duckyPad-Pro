@@ -11,8 +11,7 @@ This update features a complete **scripting engine overhaul**, adds many **long-
 * **Print Format** Specifiers
 * **User-defined Headers** and **StdLib**
 * **Horizontal** Mouse Scrolling
-* Streamlined Syntax
-* **Syntax Highlighter** for **VS Code and Sublime Text**
+* Streamlined Syntax & **Syntax Highlighter**
 * **New Commands** & Bug Fixes
 
 ----
@@ -59,12 +58,10 @@ Bugs are expected, let me know if you run into any!
 - [Proper Function Calls](#proper-function-calls)
 - [duckyPad Standard Library](#duckypad-standard-library)
 - [User Headers](#user-headers)
+- [Syntax Highlighter](#syntax-highlighter)
 - [Built-in Functions](#built-in-functions)
-- ["Random Letter" Commands](#random-letter-commands)
-- [New Reserved Variables](#new-reserved-variables)
 - [New Commands](#new-commands)
-- [Performance & Bugfixes](#performance--bugfixes)
-- [Deep(er) Dive](#deeper-dive)
+- [Performance & Bugfixes](#performance-bugfixes)
 
 ## Syntax Shakeup
 
@@ -91,7 +88,7 @@ END_IF
 * **All variable types** are now **Signed 32-bit Integers**
     * Can hold value between **−2,147,483,648 and 2,147,483,647**
 * All operators are **signed** by default
-    * Explicit **unsigned** operators are provided
+    * [Explicit **unsigned** operators](https://github.com/dekuNukem/duckyPad-Pro/blob/dsvm2/doc/duckyscript_info.md#unsigned-operators) are available
 
 ## Print Format Specifiers
 
@@ -252,9 +249,7 @@ USE_STDLIB
 STRINGLN Press Key 3 to continue...
 WAITKEY(3)
 
-VAR score_1 = 100
-VAR score_2 = 500
-VAR high_score = MAX(score_1, score_2)
+VAR high_score = MAX(100, 500)
 
 STRINGLN The high score is: $high_score
 ```
@@ -270,38 +265,25 @@ You can now also **create your own header** for custom helper functions and more
 
 ## Built-in Functions
 
-A few **built-in functions** have been added.
+Some **built-in functions** have been added.
 
-They are **always available**, and are intended for **low-level tinkering**.
+They are **always available**, intended for **low-level tinkering**.
 
 * [See main doc](duckyscript_info.md#built-in-functions) for details
 
 ```
-PEEK8(addr)         RANDINT(lower, upper)
-POKE8(addr, value)  PUTS(value)
-RANDCHR(value)      HIDTX(addr)
-```
-## "Random Letter" Commands 
-
-**Types a random letter**. Added from [official duckyScript specs](https://docs.hak5.org/hak5-usb-rubber-ducky/duckyscript-quick-reference/).
-
-```
-RANDOM_LOWERCASE_LETTER    RANDOM_NUMBER
-RANDOM_UPPERCASE_LETTER    RANDOM_SPECIAL
-RANDOM_LETTER              RANDOM_CHAR
-```
-```
-RANDOM_NUMBER
-REPEAT 7
-// types 8 random numbers
+PUTS()     RANDINT()
+RANDCHR()  HIDTX()
+RANDUINT()
 ```
 
-For more granular control, use `RANDCHR()` built-in function.
+1024 Bytes of **user scratch memory** is available with `PEEK()` and `POKE()` commands.
 
-## New Reserved Variables
+## Syntax Highlighter
 
-* `_SW_BITFIELD` to read status of **all buttons at once**
-* `_KBLED_BITFIELD`: Holds keyboard LED status
+[Now available for **VS Code** and **Sublime Text**](https://github.com/duckyPad/duckyScript-Syntax-Highlighter/blob/master/README.md)
+
+* Recommended for writing longer and more complex scripts.
 
 ## New Commands
 
@@ -326,6 +308,28 @@ Scroll mouse wheel **Horizontal** `h` lines, and **Vertical** `v` lines.
 * `OLED_CPRINT hello world!`
 
 Prints message **Center-Aligned** on the current Y cursor position.
+
+### "Random Letter" Commands 
+
+**Types a random letter**. Added from [official duckyScript specs](https://docs.hak5.org/hak5-usb-rubber-ducky/duckyscript-quick-reference/).
+
+```
+RANDOM_LOWERCASE_LETTER    RANDOM_NUMBER
+RANDOM_UPPERCASE_LETTER    RANDOM_SPECIAL
+RANDOM_LETTER              RANDOM_CHAR
+```
+```
+RANDOM_NUMBER
+REPEAT 7
+// types 8 random numbers
+```
+
+For more granular control, use `RANDCHR()` built-in function.
+
+### New Reserved Variables
+
+* `_SW_BITFIELD`: Read status of **all buttons at once**
+* `_KBLED_BITFIELD`: Holds keyboard LED status
 
 ## Performance & Bugfixes
 
