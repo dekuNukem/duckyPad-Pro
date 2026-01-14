@@ -12,6 +12,7 @@ This update features a complete **scripting engine overhaul**, adds many **long-
 * **User-defined Headers** and **StdLib**
 * **Horizontal** Mouse Scrolling
 * Streamlined Syntax
+* **Syntax Highlighter** for **VS Code and Sublime Text**
 * **New Commands** & Bug Fixes
 
 ----
@@ -87,15 +88,10 @@ END_IF
 
 ## In a 32-bit World
 
-* **All variable types** are now **32-bit wide**
-* Adjustable **Math Mode** by writing to `_UNSIGNED_MATH`
-* **Signed Mode** (Default)
-    * Can hold values between **−2,147,483,648 and 2,147,483,647**
-    * Suitable for **all general purpose** calculations
-* **Unsigned Mode**
-    * Range: **0 to 4,294,967,295**
-    * Suitable for **large numbers** or **bitwise operations**
-* **Stick to signed mode** if unsure
+* **All variable types** are now **Signed 32-bit Integers**
+    * Can hold value between **−2,147,483,648 and 2,147,483,647**
+* All operators are **signed** by default
+    * Explicit **unsigned** operators are provided
 
 ## Print Format Specifiers
 
@@ -305,7 +301,7 @@ For more granular control, use `RANDCHR()` built-in function.
 ## New Reserved Variables
 
 * `_SW_BITFIELD` to read status of **all buttons at once**
-* `_UNSIGNED_MATH` to switch between **arithmetic modes**
+* `_KBLED_BITFIELD`: Holds keyboard LED status
 
 ## New Commands
 
