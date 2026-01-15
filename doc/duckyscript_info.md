@@ -17,7 +17,6 @@ In the **simplest form**, you just tell it what key to press!
 Ideal for key combos:
 
 * New Tab: `CONTROL t`
-
 * Task Manager: `CONTROL SHIFT ESC`
 
 --------
@@ -229,7 +228,6 @@ WINDOWS SHIFT s
 ------
 
 * Type the key name **as-is** in **`ALL CAPS`**.
-
 * Keys are pressed in sequence from **left-to-right**, then released **right-to-left**.
 
 ------
