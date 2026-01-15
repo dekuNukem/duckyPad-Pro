@@ -24,7 +24,10 @@
 
 static const char *TAG = "DSVM";
 
-uint8_t bin_buf[BIN_BUF_SIZE] __attribute__((aligned(4)));
+uint8_t bin_buf[BIN_BUF_SIZE] __attribute__((aligned(4))); // 0x0000 to 0xf7ff
+uint8_t pgv_buf[PGV_BUF_SIZE] __attribute__((aligned(4))); // 0xfc00 to 0xfdff
+uint8_t memIO_buf[MEMIO_BUF_SIZE] __attribute__((aligned(4))); // 0xff00 to 0xffff
+
 uint32_t defaultdelay;
 uint32_t defaultchardelay;
 uint32_t charjitter;
@@ -34,7 +37,6 @@ uint8_t* epilogue_ptr;
 uint8_t allow_abort;
 uint8_t kb_led_status;
 uint8_t disable_autorepeat;
-uint32_t pgv_buf[PGV_COUNT];
 static jmp_buf jmpbuf;
 uint8_t current_key_id = 127;
 
@@ -399,31 +401,68 @@ void unaryop(FUNC_PTR_UNARY una_func)
   stack_push(&data_stack, una_func(value));
 }
 
-uint8_t get_gv_index(uint16_t addr)
+
+void write_bytes_safe(uint32_t vm_addr, const void* src, size_t size)
 {
-  uint8_t gv_index = (addr - PGV_START_ADDRESS) / PGV_BYTE_WIDTH;
-  if(gv_index >= PGV_COUNT)
-    longjmp(jmpbuf, EXE_ILLEGAL_ADDR);
-  return gv_index;
+  if (vm_addr <= SCRATCH_MEM_END_ADDRESS_INCLUSIVE)
+  {
+    if (vm_addr + size > BIN_BUF_SIZE)
+      longjmp(jmpbuf, EXE_ILLEGAL_ADDR);
+    memcpy(&bin_buf[vm_addr], src, size);
+    return;
+  }
+
+  if (vm_addr >= PGV_START_ADDRESS && vm_addr <= PGV_END_ADDRESS_INCLUSIVE)
+  {
+    uint32_t offset = vm_addr - PGV_START_ADDRESS;
+    if (offset + size > PGV_BUF_SIZE)
+      longjmp(jmpbuf, EXE_ILLEGAL_ADDR);
+    memcpy(&pgv_buf[offset], src, size);
+    DS_SET_BITS(*epilogue_ptr, EPILOGUE_SAVE_PGV);
+    return;
+  }
+
+  if (vm_addr >= MEMIO_START_ADDRESS && vm_addr <= MEMIO_END_ADDRESS_INCLUSIVE)
+  {
+    uint32_t offset = vm_addr - MEMIO_START_ADDRESS;
+    if (offset + size > MEMIO_BUF_SIZE)
+      longjmp(jmpbuf, EXE_ILLEGAL_ADDR);
+    memcpy(&memIO_buf[offset], src, size);
+    return;
+  }
+
+  longjmp(jmpbuf, EXE_ILLEGAL_ADDR);
 }
 
-uint8_t is_pgv(uint16_t addr)
+void read_bytes_safe(uint32_t vm_addr, void* dest, size_t size)
 {
-  return addr >= PGV_START_ADDRESS && addr <= PGV_END_ADDRESS_INCLUSIVE;
-}
+  if (vm_addr <= SCRATCH_MEM_END_ADDRESS_INCLUSIVE)
+  {
+    if (vm_addr + size > BIN_BUF_SIZE)
+      longjmp(jmpbuf, EXE_ILLEGAL_ADDR);
+    memcpy(dest, &bin_buf[vm_addr], size);
+    return;
+  }
 
-void write_bytes_safe(uint32_t addr, const void* src, size_t size)
-{
-  if (addr + size > BIN_BUF_SIZE)
-    longjmp(jmpbuf, EXE_ILLEGAL_ADDR);
-  memcpy(&bin_buf[addr], src, size);
-}
+  if (vm_addr >= PGV_START_ADDRESS && vm_addr <= PGV_END_ADDRESS_INCLUSIVE)
+  {
+    uint32_t offset = vm_addr - PGV_START_ADDRESS;
+    if (offset + size > PGV_BUF_SIZE)
+      longjmp(jmpbuf, EXE_ILLEGAL_ADDR);
+    memcpy(dest, &pgv_buf[offset], size);
+    return;
+  }
 
-void read_bytes_safe(uint32_t addr, void* dest, size_t size)
-{
-  if (addr + size > BIN_BUF_SIZE)
-    longjmp(jmpbuf, EXE_ILLEGAL_ADDR);
-  memcpy(dest, &bin_buf[addr], size);
+  if (vm_addr >= MEMIO_START_ADDRESS && vm_addr <= MEMIO_END_ADDRESS_INCLUSIVE)
+  {
+    uint32_t offset = vm_addr - MEMIO_START_ADDRESS;
+    if (offset + size > MEMIO_BUF_SIZE)
+      longjmp(jmpbuf, EXE_ILLEGAL_ADDR);
+    memcpy(dest, &memIO_buf[offset], size);
+    return;
+  }
+
+  longjmp(jmpbuf, EXE_ILLEGAL_ADDR);
 }
 
 uint8_t readkey_nonblocking_1_indexed(void)
@@ -474,96 +513,85 @@ uint16_t get_rtc_data(uint16_t addr)
   return 0;
 }
 
-uint32_t memread_u32(uint16_t addr)
+uint32_t memread_u32(uint16_t vm_addr)
 {
-  if (addr <= USER_VAR_END_ADDRESS_INCLUSIVE)
-  {
-    uint32_t result;
-    read_bytes_safe(addr, &result, sizeof(uint32_t));
-    return result;
-  }
-  if (is_pgv(addr))
-    return pgv_buf[get_gv_index(addr)];
-  if (addr == _DEFAULTDELAY)
+  if (vm_addr == _DEFAULTDELAY)
 	  return defaultdelay;
-  if (addr == _DEFAULTCHARDELAY)
+  if (vm_addr == _DEFAULTCHARDELAY)
     return defaultchardelay;
-  if (addr == _CHARJITTER)
+  if (vm_addr == _CHARJITTER)
     return charjitter;
-  if (addr == _RANDOM_MIN)
+  if (vm_addr == _RANDOM_MIN)
     return rand_min;
-  if (addr == _RANDOM_MAX)
+  if (vm_addr == _RANDOM_MAX)
     return rand_max;
-  if (addr == _RANDOM_INT)
+  if (vm_addr == _RANDOM_INT)
     return (uint32_t)random_int32_between((int32_t)rand_min, (int32_t)rand_max);
-  if (addr == _TIME_MS)
+  if (vm_addr == _TIME_MS)
     return millis();
-  if (addr == _READKEY)
+  if (vm_addr == _READKEY)
     return readkey_nonblocking_1_indexed();
-  if (addr == _LOOP_SIZE)
+  if (vm_addr == _LOOP_SIZE)
     return loop_size;
-  if (addr == _KEYPRESS_COUNT)
+  if (vm_addr == _KEYPRESS_COUNT)
     return all_profile_info[current_profile_number].keypress_count[current_key_id];
-  if (addr == _EPILOGUE_ACTIONS)
+  if (vm_addr == _EPILOGUE_ACTIONS)
     return *epilogue_ptr;
-  if (addr == _TIME_S)
+  if (vm_addr == _TIME_S)
     return millis()/1000;
-  if (addr == _ALLOW_ABORT)
+  if (vm_addr == _ALLOW_ABORT)
     return allow_abort;
-  if (addr == _BLOCKING_READKEY)
+  if (vm_addr == _BLOCKING_READKEY)
     return readkey_blocking_1_indexed();
-  if (addr == _KBLED_BITFIELD)
+  if (vm_addr == _KBLED_BITFIELD)
     return kb_led_status;
-  if (addr == _DONT_REPEAT)
+  if (vm_addr == _DONT_REPEAT)
     return disable_autorepeat;
-  if (addr == _THIS_KEYID)
+  if (vm_addr == _THIS_KEYID)
     return current_key_id;
-  if (addr == _DP_MODEL)
+  if (vm_addr == _DP_MODEL)
     return 2;
-  if (addr == _RTC_IS_VALID)
+  if (vm_addr == _RTC_IS_VALID)
     return is_rtc_valid;
-  if (addr == _RTC_UTC_OFFSET)
+  if (vm_addr == _RTC_UTC_OFFSET)
     return utc_offset_minutes;
-  if (addr >= _RTC_YEAR && addr <= _RTC_YDAY)
-    return get_rtc_data(addr);
-  if (addr == _UNUSED)
+  if (vm_addr >= _RTC_YEAR && vm_addr <= _RTC_YDAY)
+    return get_rtc_data(vm_addr);
+  if (vm_addr == _UNUSED)
     return 0;
-  if (addr == _SW_BITFIELD)
+  if (vm_addr == _SW_BITFIELD)
     return get_sw_state_bitfield();
-  longjmp(jmpbuf, EXE_ILLEGAL_ADDR);
+  uint32_t value;
+  read_bytes_safe(vm_addr, &value, sizeof(value));
+  return value;
 }
 
-void memwrite_u32(uint16_t addr, uint32_t value)
+void memwrite_u32(uint16_t vm_addr, uint32_t value)
 {
-  if (addr <= USER_VAR_END_ADDRESS_INCLUSIVE)
-    write_bytes_safe(addr, &value, sizeof(uint32_t));
-  else if (is_pgv(addr))
-  {
-    pgv_buf[get_gv_index(addr)] = value;
-    DS_SET_BITS(*epilogue_ptr, EPILOGUE_SAVE_PGV);
-  }
-  else if (addr == _DEFAULTDELAY)
+  if (vm_addr == _DEFAULTDELAY)
 	  defaultdelay = value;
-  else if (addr == _DEFAULTCHARDELAY)
+  else if (vm_addr == _DEFAULTCHARDELAY)
     defaultchardelay = value;
-  else if (addr == _CHARJITTER)
+  else if (vm_addr == _CHARJITTER)
     charjitter = value;
-  else if (addr == _RANDOM_MIN)
+  else if (vm_addr == _RANDOM_MIN)
     rand_min = value;
-  else if (addr == _RANDOM_MAX)
+  else if (vm_addr == _RANDOM_MAX)
     rand_max = value;
-  else if (addr == _LOOP_SIZE)
+  else if (vm_addr == _LOOP_SIZE)
     loop_size = value;
-  else if (addr == _KEYPRESS_COUNT)
+  else if (vm_addr == _KEYPRESS_COUNT)
     all_profile_info[current_profile_number].keypress_count[current_key_id] = value;
-  else if (addr == _EPILOGUE_ACTIONS)
+  else if (vm_addr == _EPILOGUE_ACTIONS)
     *epilogue_ptr = value;
-  else if (addr == _ALLOW_ABORT)
+  else if (vm_addr == _ALLOW_ABORT)
     allow_abort = value;
-  else if (addr == _DONT_REPEAT)
+  else if (vm_addr == _DONT_REPEAT)
     disable_autorepeat = value;
-  else if (addr == _RTC_UTC_OFFSET)
+  else if (vm_addr == _RTC_UTC_OFFSET)
     utc_offset_minutes = value;
+  else
+    write_bytes_safe(vm_addr, &value, sizeof(value));
 }
 
 uint8_t load_dsb(char* dsb_path, uint32_t* dsb_size)
@@ -1433,7 +1461,7 @@ void execute_instruction(exe_context* exe)
   }
   else
   {
-    ESP_LOGE(TAG, "Unimplemented opcode: %d\n", opcode);
+    // ESP_LOGE(TAG, "Unimplemented opcode: %d\n", opcode);
     longjmp(jmpbuf, EXE_ILLEGAL_INSTRUCTION);
   }
 }
@@ -1456,6 +1484,7 @@ void run_dsb(exe_context* ctx, uint8_t this_key_id, char* dsb_path, uint8_t is_c
       return;
     }
   }
+  memset(memIO_buf, 0, MEMIO_BUF_SIZE);
 
   uint16_t data_stack_size_bytes = STACK_BASE_ADDR - this_dsb_size - STACK_MOAT_BYTES;
   stack_init(&data_stack, bin_buf, STACK_BASE_ADDR, data_stack_size_bytes);

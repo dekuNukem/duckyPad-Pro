@@ -161,16 +161,17 @@ Jan 11 2026
 New OLED_PRINT instruction
 Cleanup before public beta
 
-3.3.0
+3.3.1
 Jan 15 2026
 Added PEEK and POKE instructions
 Added explict unsigned instructions
 Cleaned up reserved variables
+Memory-mapped IO
 */
 
 uint8_t fw_version_major = 3;
 uint8_t fw_version_minor = 3;
-uint8_t fw_version_patch = 0;
+uint8_t fw_version_patch = 1;
 
 uint8_t dsvm_version = 2;
 

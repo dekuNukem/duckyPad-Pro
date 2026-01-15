@@ -24,11 +24,18 @@
 #define PGV_COUNT 32
 #define PGV_BYTE_WIDTH 4
 #define PGV_END_ADDRESS_INCLUSIVE (PGV_START_ADDRESS + PGV_BYTE_WIDTH * PGV_COUNT - 1)
+#define PGV_BUF_SIZE (PGV_END_ADDRESS_INCLUSIVE - PGV_START_ADDRESS + BUF_PADDING)
 
 #define INTERAL_VAR_START_ADDRESS 0xFE00
 #define INTERAL_VAR_BYTE_WIDTH 4
+#define INTERAL_VAR_END_ADDRESS_INCLUSIVE 0xFEFF
 
 #define MEM_END_ADDR 0xFFFF
+
+#define MEMIO_START_ADDRESS 0xFF00
+#define MEMIO_END_ADDRESS_INCLUSIVE MEM_END_ADDR
+#define MEMIO_BUF_SIZE 256
+
 #define MAX_INSTRUCTION_LEN 5
 
 // ----------
@@ -115,10 +122,10 @@ typedef struct
 
 #define MAX(a, b) ((a) > (b) ? (a) : (b))
 
-extern uint8_t bin_buf[BIN_BUF_SIZE];
+extern uint8_t bin_buf[BIN_BUF_SIZE] __attribute__((aligned(4)));
 extern uint8_t allow_abort;
 extern uint8_t kb_led_status;
-extern uint32_t pgv_buf[PGV_COUNT];
+extern uint8_t pgv_buf[PGV_BUF_SIZE] __attribute__((aligned(4)));
 
 #define MAKESTR_VAR_BOUNDARY_IMM (0x1f)
 #define MAKESTR_VAR_BOUNDARY_REL (0x1e)

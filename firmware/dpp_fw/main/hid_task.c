@@ -465,15 +465,15 @@ void handle_hid_command(const uint8_t* hid_rx_buf, uint8_t rx_buf_size)
     */
     if(command_type == HID_COMMAND_DUMP_GV)
     {
-        for (size_t i=2; i < HID_TX_BUF_SIZE; i+=2)
-        {
-            uint8_t this_gv = (i-2)/2;
-            if(this_gv >= PGV_COUNT)
-                continue;
-            uint8_t* upper_byte = &hid_tx_buf[i];
-            uint8_t* lower_byte = &hid_tx_buf[i+1];
-            split_uint16(pgv_buf[this_gv], upper_byte, lower_byte);
-        }
+        // for (size_t i=2; i < HID_TX_BUF_SIZE; i+=2)
+        // {
+        //     uint8_t this_gv = (i-2)/2;
+        //     if(this_gv >= PGV_COUNT)
+        //         continue;
+        //     uint8_t* upper_byte = &hid_tx_buf[i];
+        //     uint8_t* lower_byte = &hid_tx_buf[i+1];
+        //     split_uint16(pgv_buf[this_gv], upper_byte, lower_byte);
+        // }
         send_hid_cmd_response(hid_tx_buf);
         return;
     }
@@ -497,16 +497,16 @@ void handle_hid_command(const uint8_t* hid_rx_buf, uint8_t rx_buf_size)
     */
     else if(command_type == HID_COMMAND_WRITE_GV)
     {
-        for (size_t i = 2; i < HID_TX_BUF_SIZE; i+=3)
-        {
-            if((hid_rx_buf[i] & 0x80) == 0)
-                continue;
-            uint8_t this_gv_index = hid_rx_buf[i] & 0x7f;
-            if(this_gv_index >= PGV_COUNT)
-                continue;
-            pgv_buf[this_gv_index] = combine_uint16(hid_rx_buf[i+1], hid_rx_buf[i+2]);
-            needs_gv_save = 1;
-        }
+        // for (size_t i = 2; i < HID_TX_BUF_SIZE; i+=3)
+        // {
+        //     if((hid_rx_buf[i] & 0x80) == 0)
+        //         continue;
+        //     uint8_t this_gv_index = hid_rx_buf[i] & 0x7f;
+        //     if(this_gv_index >= PGV_COUNT)
+        //         continue;
+        //     pgv_buf[this_gv_index] = combine_uint16(hid_rx_buf[i+1], hid_rx_buf[i+2]);
+        //     needs_gv_save = 1;
+        // }
         send_hid_cmd_response(hid_tx_buf);
         return;
     }
