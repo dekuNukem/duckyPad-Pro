@@ -795,6 +795,15 @@ uint8_t delayms_check_abort(uint32_t amount)
   return 0;
 }
 
+void oled_centre_print_preserve_cursor(char* text_buf)
+{
+  uint8_t oldx, oldy;
+  ssd1306_GetCursor(&oldx, &oldy);
+  ssd1306_SetCursor(center_line(strlen(text_buf), 7, SSD1306_WIDTH), oldy);
+  ssd1306_WriteString(text_buf, Font_7x10, White);
+  ssd1306_SetCursor(oldx, oldy);
+}
+
 void parse_swcf(void)
 {
   uint32_t red, green, blue;
@@ -1305,17 +1314,9 @@ void execute_instruction(exe_context* exe)
     stack_pop(&data_stack, &addr);
     char* str_buf = make_str((uint16_t)addr);
     if(opts & 0x1)
-    {
-      uint8_t oldx, oldy;
-      ssd1306_GetCursor(&oldx, &oldy);
-      ssd1306_SetCursor(center_line(strlen(str_buf), 7, SSD1306_WIDTH), oldy);
-      ssd1306_WriteString(str_buf, Font_7x10, White);
-      ssd1306_SetCursor(oldx, oldy);
-    }
+      oled_centre_print_preserve_cursor(str_buf);
     else
-    {
       ssd1306_WriteString(str_buf, Font_7x10, White);
-    }
   }
   else if(opcode == OP_OLED_UPDE)
   {
@@ -1411,14 +1412,13 @@ void execute_instruction(exe_context* exe)
     uint32_t this_value;
     stack_pop(&data_stack, &this_value);
     uint8_t char_type = this_value & 0xff;
-    uint8_t channels = this_value >> 16;
     char randc = get_random_char(char_type);
     memset(make_str_buf, 0, MKSTR_BUF_SIZE);
     make_str_buf[0] = randc;
-    if(randc != 0 && (channels & 0x1))
-      kb_print(make_str_buf, defaultchardelay, charjitter);
-    if(randc != 0 && (channels & 0x2))
+    if(randc != 0 && (this_value & 0x200))
       ssd1306_WriteString(make_str_buf, Font_7x10, White);
+    if(randc != 0 && (this_value & 0x100))
+      kb_print(make_str_buf, defaultchardelay, charjitter);
   }
   else if(opcode == OP_PUTS)
   {
@@ -1426,14 +1426,15 @@ void execute_instruction(exe_context* exe)
     stack_pop(&data_stack, &this_value);
     uint16_t str_addr = this_value & 0xffff;
     uint16_t nchar = (this_value >> 16) & 0xfff;
-    uint8_t channels = this_value >> 30;
     make_str((uint16_t)str_addr);
     if(nchar != 0 && nchar < READ_BUF_SIZE)
       read_buffer[nchar] = 0; 
-    if(channels & 0x1)
-      kb_print(read_buffer, defaultchardelay, charjitter);
-    if(channels & 0x2)
+    if(this_value & 0x20000000)
       ssd1306_WriteString(read_buffer, Font_7x10, White);
+    if(this_value & 0x40000000)
+      oled_centre_print_preserve_cursor(read_buffer);
+    if(this_value & 0x80000000)
+      kb_print(read_buffer, defaultchardelay, charjitter);
   }
   else if(opcode == OP_HIDTX)
   {

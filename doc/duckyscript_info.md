@@ -1082,11 +1082,11 @@ Generate a **random character**.
     * `Bit 1`: Letter Uppercase (a-z)
     * `Bit 2`: Digits (0-9)
     * `Bit 3`: Symbols (\!\"\#\$\%\&\'\(\)\*\+\,\-\.\/\:\;\<\=\>\?\@\[\\\]\^\_\`\{\|\})
-    * `Bit 16`: Type via Keyboard
-    * `Bit 17`: Write to Screen Buffer
+    * `Bit 8`: Type via Keyboard
+    * `Bit 9`: Print to OLED at current cursor position
 * For `Bit 0-3`, if any bit is `1`, its pool of characters will be included for random selection.
-* If `Bit 16` is 1, it will type the character via keyboard.
-* If `Bit 17` is 1, it will print the character to screen buffer
+* If `Bit 8` is 1, it will type the character via keyboard.
+* If `Bit 9` is 1, it will print the character to screen buffer
     * Don't forget to use `OLED_UPDATE` to actually refresh the screen.
 
 ### `RANDINT(lower, upper)` / `RANDUINT(lower, upper)`
@@ -1105,8 +1105,9 @@ VAR value = RANDUINT(3000000000, 4000000000)
 * `value` contains:
     * `Bit 0-15`: Address
     * `Bit 16-23`: `n`
-    * `Bit 30`: Type via Keyboard
-    * `Bit 31`: Write to Screen Buffer
+    * `Bit 29`: Print to OLED at current cursor position
+    * `Bit 30`: Print to OLED center-aligned
+    * `Bit 31`: Type via Keyboard
 * If `n = 0`, print until zero-termination.
     * Else, print max `n` characters.
 
