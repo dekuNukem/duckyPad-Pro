@@ -331,6 +331,10 @@ For more granular control, use `RANDCHR()` built-in function.
 * `_SW_BITFIELD`: Read status of **all buttons at once**
 * `_KBLED_BITFIELD`: Holds keyboard LED status
 
+### `PASS` Command
+
+Does nothing, can be used as placeholder for empty statement.
+
 ## Performance & Bugfixes
 
 * **Faster Read/Write Speeds** in USB Storage Mode.
