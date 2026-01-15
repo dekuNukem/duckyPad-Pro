@@ -4,9 +4,9 @@
 
 #include <stdint.h>
 #include <string.h>
-
 #include <input_task.h>
 
+#define BUF_PADDING 8
 #define EXE_BIN_START_ADDRESS 0x0
 #define STACK_BASE_ADDR 0xEFFF
 #define STACK_MOAT_BYTES 16
@@ -32,9 +32,7 @@
 #define MAX_INSTRUCTION_LEN 5
 
 // ----------
-// for when user tries PEEK32 on the last byte
-#define BIN_BUF_OVERFLOW 8
-#define BIN_BUF_SIZE (SCRATCH_MEM_END_ADDRESS_INCLUSIVE+BIN_BUF_OVERFLOW)
+#define BIN_BUF_SIZE (SCRATCH_MEM_END_ADDRESS_INCLUSIVE+BUF_PADDING)
 // ----------
 
 #define EXE_OK 0

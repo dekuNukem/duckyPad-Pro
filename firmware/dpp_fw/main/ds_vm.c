@@ -37,7 +37,6 @@ uint8_t disable_autorepeat;
 uint32_t pgv_buf[PGV_COUNT];
 static jmp_buf jmpbuf;
 uint8_t current_key_id = 127;
-uint8_t unsigned_math;
 
 // ---------------------------
 
@@ -299,20 +298,6 @@ uint32_t stack_peek(my_stack* ms)
   memcpy(&value, host_addr, sizeof(uint32_t));
   
   return value;
-}
-
-uint8_t read_byte(uint16_t addr)
-{
-  if(addr >= BIN_BUF_SIZE)
-    longjmp(jmpbuf, EXE_ILLEGAL_ADDR);
-  return bin_buf[addr];
-}
-
-void write_byte(uint16_t addr, uint8_t value)
-{
-  if(addr >= BIN_BUF_SIZE)
-    longjmp(jmpbuf, EXE_ILLEGAL_ADDR);
-  bin_buf[addr] = value;
 }
 
 void stack_write_fp_rel(my_stack* ms, int16_t offset, uint32_t value)
@@ -914,7 +899,9 @@ void clamp_uint(uint32_t* value, uint32_t upper_limit)
 void execute_instruction(exe_context* exe)
 {
   uint16_t curr_pc = exe->this_pc;
-  uint8_t opcode = read_byte(curr_pc);
+  uint32_t opcode = 0;
+  read_bytes_safe(curr_pc, &opcode, 1);
+  opcode &= 0xff;
   uint8_t instruction_size_bytes = inst_size_lookup(opcode);
   uint32_t payload = 0;
   exe->next_pc += instruction_size_bytes;
