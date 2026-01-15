@@ -1303,6 +1303,10 @@ Clears the internal keypress event queue. Can be used:
 * **At end of a long script**: Prevents "buffered" presses from triggering it again.
 * **Before reading button status**: Ensures **new presses** are returned instead of old ones in the queue.
 
+### `PASS`
+
+Does nothing. Can be used as **placeholders** or empty statements.
+
 -------
 [⬆️⬆️⬆️⬆️⬆️⬆️ Back to Top ⬆️⬆️⬆️⬆️⬆️⬆️](#list-of-commands)
 
