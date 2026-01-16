@@ -1033,9 +1033,7 @@ USE_STDLIB
 STRINGLN Press Key 3 to continue...
 WAITKEY(3)
 
-VAR score_1 = 100
-VAR score_2 = 500
-VAR high_score = MAX(score_1, score_2)
+VAR high_score = MAX(100, 500)
 
 STRINGLN The high score is: $high_score
 ```
