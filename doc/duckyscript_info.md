@@ -547,12 +547,20 @@ STRING My email is MY_EMAIL!
 
 ## Variables
 
-You can declare a variable using `VAR` command:
+You can declare a variable using `VAR` command, and assign values to it.
+
+Assignment can be:
+
+* Decimal: Normal numbers
+* Hexadecimal: Starts with `0x`
+* Character: **A single character** inside **single or double quote**
+    * Will be converted to its 8-bit ASCII value
 
 ```
 // Declaration
-VAR spam = 0
-VAR eggs = 10
+VAR spam = 42
+VAR eggs = 0xff
+VAR foo = 'a'
 
 // Assignment
 spam = 20
@@ -1067,9 +1075,13 @@ Read **UNSIGNED** value at memory address.
 
 * High bits are **ZERO-extended**
 
-### `POKE8(addr)` / `POKE16(addr)` / `POKE32(addr)`
+### `POKE8(addr, val)` / `POKE16(addr, val)` / `POKE32(addr, val)`
  
 Write value at memory address.
+
+* `val` can be numbers or characters
+    * `POKE8(0xf400, 'c')`
+    * `POKE32(0xf410, 0xabcd)`
 
 ### `RANDCHR(value)`
 
