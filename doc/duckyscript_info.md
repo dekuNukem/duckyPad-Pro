@@ -95,9 +95,9 @@ Much easier to lookup than going through this whole page.
     - [`OLED_PRINT`](#oled_print)
     - [`OLED_CPRINT`](#oled_cprint)
     - [`OLED_CLEAR`](#oled_clear)
-    - [`OLED_CIRCLE`](#oled_circle-x-y-radius-fill)
+    - [`OLED_CIRCLE`](#oled_circle-x-y-radius-options)
     - [`OLED_LINE`](#oled_line-x1-y1-x2-y2)
-    - [`OLED_RECT`](#oled_rect-x1-y1-x2-y2-fill)
+    - [`OLED_RECT`](#oled_rect-x1-y1-x2-y2-options)
     - [`OLED_UPDATE`](#oled_update)
     - [`OLED_RESTORE`](#oled_restore)
 - [Per-Key RGB](#per-key-rgb)
@@ -465,22 +465,30 @@ Same as `OLED_PRINT`, but prints message **center-aligned**.
 
 Clear the display buffer.
 
-### `OLED_CIRCLE x y radius fill`
+### `OLED_CIRCLE x y radius options`
 
 * `x y`: Origin
 * `radius`: In Pixels
-* `fill`: 0 or 1
+* `options`:
+    * `0`: White, outline.
+    * `1`: White, filled.
+    * `2`: Black, outline.
+    * `3`: Black, filled.
 
 ### `OLED_LINE x1 y1 x2 y2`
 
 * `x1, y1`: Start Point
 * `X2, y2`: End Point
 
-### `OLED_RECT x1 y1 x2 y2 fill`
+### `OLED_RECT x1 y1 x2 y2 options`
 
 * `x1, y1`: Start Corner
 * `X2, y2`: End Corner
-* `fill`: 0 or 1
+* `options`:
+    * `0`: White, outline.
+    * `1`: White, filled.
+    * `2`: Black, outline.
+    * `3`: Black, filled.
 
 ### `OLED_UPDATE`
 

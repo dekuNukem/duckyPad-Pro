@@ -1363,35 +1363,41 @@ void execute_instruction(exe_context* exe)
   }
   else if(opcode == OP_OLED_RECT)
   {
-    uint32_t x1,y1,x2,y2,fill;
+    uint32_t x1,y1,x2,y2,options;
     stack_pop(&data_stack, &x1);
     stack_pop(&data_stack, &y1);
     stack_pop(&data_stack, &x2);
     stack_pop(&data_stack, &y2);
-    stack_pop(&data_stack, &fill);
+    stack_pop(&data_stack, &options);
     clamp_uint(&x1, SSD1306_WIDTH);
     clamp_uint(&x2, SSD1306_WIDTH);
     clamp_uint(&y1, SSD1306_HEIGHT);
     clamp_uint(&y2, SSD1306_HEIGHT);
-    if(fill)
-      ssd1306_FillRectangle(x1,y1,x2,y2,White);
+    SSD1306_COLOR draw_color = White;
+    if(options & 0x2)
+      draw_color = Black;
+    if(options & 0x1)
+      ssd1306_FillRectangle(x1,y1,x2,y2,draw_color);
     else
-      ssd1306_DrawRectangle(x1,y1,x2,y2,White);
+      ssd1306_DrawRectangle(x1,y1,x2,y2,draw_color);
   }
   else if(opcode == OP_OLED_CIRC)
   {
-    uint32_t x,y,radius,fill;
+    uint32_t x,y,radius,options;
     stack_pop(&data_stack, &x);
     stack_pop(&data_stack, &y);
     stack_pop(&data_stack, &radius);
-    stack_pop(&data_stack, &fill);
+    stack_pop(&data_stack, &options);
     clamp_uint(&x, SSD1306_WIDTH);
     clamp_uint(&y, SSD1306_HEIGHT);
     clamp_uint(&radius, SSD1306_HEIGHT/2);
-    if(fill)
-      ssd1306_FillCircle(x,y,radius,White);
+    SSD1306_COLOR draw_color = White;
+    if(options & 0x2)
+      draw_color = Black;
+    if(options & 0x1)
+      ssd1306_FillCircle(x,y,radius,draw_color);
     else
-      ssd1306_DrawCircle(x,y,radius,White);
+      ssd1306_DrawCircle(x,y,radius,draw_color);
   }
   else if(opcode == OP_BCLR)
   {

@@ -331,6 +331,10 @@ For more granular control, use `RANDCHR()` built-in function.
 * `_SW_BITFIELD`: Read status of **all buttons at once**
 * `_KBLED_BITFIELD`: Holds keyboard LED status
 
+### OLED Shape Colour
+
+[`OLED_CIRCLE` and `OLED_RECT`](duckyscript_info.md#oled_circle-x-y-radius-options) now supports drawing in color **black**.
+
 ### `PASS` Command
 
 Does nothing, can be used as placeholder for empty statement.

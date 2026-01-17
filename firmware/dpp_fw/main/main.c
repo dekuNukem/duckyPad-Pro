@@ -167,6 +167,7 @@ Added PEEK and POKE instructions
 Added explict unsigned instructions
 Cleaned up reserved variables
 Memory-mapped IO
+OLED shape draw color options
 */
 
 uint8_t fw_version_major = 3;
