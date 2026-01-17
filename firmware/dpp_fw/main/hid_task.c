@@ -715,14 +715,15 @@ void handle_hid_command(const uint8_t* hid_rx_buf, uint8_t rx_buf_size)
     */
     else if(command_type == HID_COMMAND_SET_RTC)
     {
-        send_hid_cmd_response(hid_tx_buf);
         uint32_t unix_ts;
-        memcpy(&unix_ts, &hid_tx_buf[2], sizeof(unix_ts));
+        memcpy(&unix_ts, &hid_rx_buf[2], sizeof(unix_ts));
+        // printf("unix_ts: 0x%08lx, %ld\n", unix_ts, unix_ts);
         struct timeval tv = {0};
         tv.tv_sec = unix_ts;
         settimeofday(&tv, NULL);
         memcpy(&utc_offset_minutes, &hid_tx_buf[6], sizeof(utc_offset_minutes));
         is_rtc_valid = 1;
+        send_hid_cmd_response(hid_tx_buf);
     }
     else // invalid HID command
     {
