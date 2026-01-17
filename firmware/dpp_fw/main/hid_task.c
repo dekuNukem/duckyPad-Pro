@@ -418,27 +418,7 @@ uint8_t parse_hid_goto_profile(uint8_t* this_buf)
     return 255;
 }
 
-void split_uint16(uint16_t input, uint8_t* high_byte, uint8_t* low_byte)
-{
-    if (high_byte == NULL || low_byte == NULL)
-        return;
-    *high_byte = (input >> 8) & 0xFF;
-    *low_byte = input & 0xFF;
-}
-
-void split_int16(int16_t input, uint8_t* high_byte, uint8_t* low_byte)
-{
-    if (high_byte == NULL || low_byte == NULL)
-        return;
-    uint16_t raw = (uint16_t)input;
-    *high_byte = (raw >> 8) & 0xFF;
-    *low_byte  = raw & 0xFF;
-}
-
-uint16_t combine_uint16(uint8_t high_byte, uint8_t low_byte)
-{
-    return ((uint16_t)high_byte << 8) | low_byte;
-}
+#define DUMP_PGV_MAX_COPY_SIZE 60
 
 void handle_hid_command(const uint8_t* hid_rx_buf, uint8_t rx_buf_size)
 {
@@ -449,31 +429,27 @@ void handle_hid_command(const uint8_t* hid_rx_buf, uint8_t rx_buf_size)
     hid_tx_buf[1] = HID_RESPONSE_OK;
 
     /*
-        DUMP GV
+        DUMP PGV
         -----------
         PC to duckyPad:
         [0]   reserved
-        [1]   Command: Dump GV
+        [1]   Command: Dump PGV
+        [2]   PGV Index
         -----------
         duckyPad to PC
         [0]   reserved
         [1]   0 = OK
-        [2-3] GV0
-        [4-5] GV1
-        .....
-        [62-63] GV30
+        [2-63] Memory Content
     */
     if(command_type == HID_COMMAND_DUMP_GV)
     {
-        // for (size_t i=2; i < HID_TX_BUF_SIZE; i+=2)
-        // {
-        //     uint8_t this_gv = (i-2)/2;
-        //     if(this_gv >= PGV_COUNT)
-        //         continue;
-        //     uint8_t* upper_byte = &hid_tx_buf[i];
-        //     uint8_t* lower_byte = &hid_tx_buf[i+1];
-        //     split_uint16(pgv_buf[this_gv], upper_byte, lower_byte);
-        // }
+        uint16_t pgv_byte_idx_start = hid_rx_buf[2] * sizeof(uint32_t);
+        // printf("pgv_byte_idx_start: 0x%04X\n", pgv_byte_idx_start);
+        uint16_t bytes_to_copy = DUMP_PGV_MAX_COPY_SIZE;
+        while(pgv_byte_idx_start + bytes_to_copy >= PGV_BUF_SIZE && bytes_to_copy != 0)
+            bytes_to_copy--;
+        // printf("bytes_to_copy: 0x%04X\n", bytes_to_copy);
+        memcpy(hid_tx_buf+2, pgv_buf+pgv_byte_idx_start, bytes_to_copy);
         send_hid_cmd_response(hid_tx_buf);
         return;
     }
@@ -485,10 +461,12 @@ void handle_hid_command(const uint8_t* hid_rx_buf, uint8_t rx_buf_size)
         [1]   Command: Write GV
 
         [2] 127 + GV index (0 indexed)
-        [3] Upper Byte
-        [4] Lower Byte
+        [3] LSB
+        [4] B1
+        [5] B2
+        [6] MSB
 
-        [5-7] next chunk (if needed)
+        [7-11] next chunk (if needed)
         etc
         -----------
         duckyPad to PC
@@ -497,16 +475,16 @@ void handle_hid_command(const uint8_t* hid_rx_buf, uint8_t rx_buf_size)
     */
     else if(command_type == HID_COMMAND_WRITE_GV)
     {
-        // for (size_t i = 2; i < HID_TX_BUF_SIZE; i+=3)
-        // {
-        //     if((hid_rx_buf[i] & 0x80) == 0)
-        //         continue;
-        //     uint8_t this_gv_index = hid_rx_buf[i] & 0x7f;
-        //     if(this_gv_index >= PGV_COUNT)
-        //         continue;
-        //     pgv_buf[this_gv_index] = combine_uint16(hid_rx_buf[i+1], hid_rx_buf[i+2]);
-        //     needs_gv_save = 1;
-        // }
+        for (size_t i = 2; i < HID_TX_BUF_SIZE; i+=5)
+        {
+            if((hid_rx_buf[i] & 0x80) == 0)
+                continue;
+            uint8_t this_gv_index = hid_rx_buf[i] & 0x7f;
+            if(this_gv_index >= PGV_COUNT)
+                continue;
+            memcpy(&pgv_buf[this_gv_index*PGV_BYTE_WIDTH], &hid_rx_buf[i+1], PGV_BYTE_WIDTH);
+            needs_gv_save = 1;
+        }
         send_hid_cmd_response(hid_tx_buf);
         return;
     }
@@ -558,8 +536,9 @@ void handle_hid_command(const uint8_t* hid_rx_buf, uint8_t rx_buf_size)
         hid_tx_buf[10] = current_profile_number;
         hid_tx_buf[11] = is_sleeping;
         hid_tx_buf[12] = is_rtc_valid;
-        split_int16(utc_offset_minutes, &hid_tx_buf[13], &hid_tx_buf[14]);
-        split_uint32_be((uint32_t)time(NULL), &hid_tx_buf[15], &hid_tx_buf[16], &hid_tx_buf[17], &hid_tx_buf[18]);
+        memcpy(hid_tx_buf+13, &utc_offset_minutes, sizeof(utc_offset_minutes));
+        uint32_t current_time = (uint32_t)time(NULL);
+        memcpy(hid_tx_buf+15, &current_time, sizeof(current_time));
         send_hid_cmd_response(hid_tx_buf);
     }
     /*
@@ -737,10 +716,12 @@ void handle_hid_command(const uint8_t* hid_rx_buf, uint8_t rx_buf_size)
     else if(command_type == HID_COMMAND_SET_RTC)
     {
         send_hid_cmd_response(hid_tx_buf);
+        uint32_t unix_ts;
+        memcpy(&unix_ts, &hid_tx_buf[2], sizeof(unix_ts));
         struct timeval tv = {0};
-        tv.tv_sec = bytes_to_uint32_big_endian(hid_rx_buf+2);
+        tv.tv_sec = unix_ts;
         settimeofday(&tv, NULL);
-        utc_offset_minutes = combine_uint16(hid_rx_buf[6], hid_rx_buf[7]);
+        memcpy(&utc_offset_minutes, &hid_tx_buf[6], sizeof(utc_offset_minutes));
         is_rtc_valid = 1;
     }
     else // invalid HID command
