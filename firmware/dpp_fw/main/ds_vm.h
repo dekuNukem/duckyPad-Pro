@@ -37,6 +37,7 @@
 #define MEMIO_BUF_SIZE 256
 
 #define MAX_INSTRUCTION_LEN 5
+#define HIDTX_PACKET_SIZE 9
 
 // ----------
 #define BIN_BUF_SIZE (SCRATCH_MEM_END_ADDRESS_INCLUSIVE+BUF_PADDING)
@@ -96,11 +97,9 @@
 #define _RTC_WDAY (INTERAL_VAR_START_ADDRESS + 26 * INTERAL_VAR_BYTE_WIDTH)
 #define _RTC_YDAY (INTERAL_VAR_START_ADDRESS + 27 * INTERAL_VAR_BYTE_WIDTH)
 #define _SW_BITFIELD (INTERAL_VAR_START_ADDRESS + 28 * INTERAL_VAR_BYTE_WIDTH)
-
-#define DUMMY_DATA_REPLACE_ME (42)
-
-#define MEM_END_ADDR 0xFFFF
 #define _UNUSED MEM_END_ADDR
+
+
 
 typedef struct
 {
@@ -120,7 +119,7 @@ typedef struct
 #define EPILOGUE_DONT_AUTO_REPEAT 0x8
 #define EPILOGUE_SAVE_PGV 0x10
 
-#define MAX(a, b) ((a) > (b) ? (a) : (b))
+#define MYMAX(a, b) ((a) > (b) ? (a) : (b))
 
 extern uint8_t bin_buf[BIN_BUF_SIZE] __attribute__((aligned(4)));
 extern uint8_t allow_abort;
@@ -146,16 +145,12 @@ typedef struct
 typedef uint32_t (*FUNC_PTR_BINOP)(uint32_t, uint32_t);
 typedef uint32_t (*FUNC_PTR_UNARY)(uint32_t);
 
-void stack_print(my_stack* ms, char* comment);
-
 #define DS_SET_BITS(variable, mask)   ((variable) |= (mask))
 #define DS_CLEAR_BITS(variable, mask) ((variable) &= ~(mask))
 
 void run_dsb(exe_context* er, uint8_t this_key_id, char* dsb_path, uint8_t is_cached, uint8_t* dsb_cache);
 uint32_t random_uint32_between(uint32_t lower, uint32_t upper);
 int32_t random_int32_between(int32_t lower, int32_t upper);
-
-#define HIDTX_PACKET_SIZE 9
 
 #endif
 
