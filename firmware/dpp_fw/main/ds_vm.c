@@ -436,7 +436,7 @@ void read_bytes_safe(uint32_t vm_addr, void* dest, size_t size)
 {
   if (vm_addr <= SCRATCH_MEM_END_ADDRESS_INCLUSIVE)
   {
-    if (vm_addr + size > BIN_BUF_SIZE)
+    if (vm_addr + size >= BIN_BUF_SIZE)
       longjmp(jmpbuf, EXE_ILLEGAL_ADDR);
     memcpy(dest, &bin_buf[vm_addr], size);
     return;
@@ -445,7 +445,7 @@ void read_bytes_safe(uint32_t vm_addr, void* dest, size_t size)
   if (vm_addr >= PGV_START_ADDRESS && vm_addr <= PGV_END_ADDRESS_INCLUSIVE)
   {
     uint32_t offset = vm_addr - PGV_START_ADDRESS;
-    if (offset + size > PGV_BUF_SIZE)
+    if (offset + size >= PGV_BUF_SIZE)
       longjmp(jmpbuf, EXE_ILLEGAL_ADDR);
     memcpy(dest, &pgv_buf[offset], size);
     return;
@@ -454,7 +454,7 @@ void read_bytes_safe(uint32_t vm_addr, void* dest, size_t size)
   if (vm_addr >= MEMIO_START_ADDRESS && vm_addr <= MEMIO_END_ADDRESS_INCLUSIVE)
   {
     uint32_t offset = vm_addr - MEMIO_START_ADDRESS;
-    if (offset + size > MEMIO_BUF_SIZE)
+    if (offset + size >= MEMIO_BUF_SIZE)
       longjmp(jmpbuf, EXE_ILLEGAL_ADDR);
     memcpy(dest, &memIO_buf[offset], size);
     return;

@@ -99,8 +99,6 @@
 #define _SW_BITFIELD (INTERAL_VAR_START_ADDRESS + 28 * INTERAL_VAR_BYTE_WIDTH)
 #define _UNUSED MEM_END_ADDR
 
-
-
 typedef struct
 {
   uint8_t result;
