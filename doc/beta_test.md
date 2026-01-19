@@ -358,14 +358,12 @@ Glad you made it this far!
 
 Please enjoy a **flappy bird clone** featuring many of the new features in this update!
 
-![flappy duck screenshot](../resources/photos/flappy.png)
-
 * Function calls with **arguments**, **return values** and **local vars**
 * Struct-like object management in scratch memory
 * Cleaner Syntax & Update OLED commands
 * Hardware RNG
 
----
+![flappy duck screenshot](../resources/photos/flappy.png)
 
 * [Click me for source code](https://raw.githubusercontent.com/dekuNukem/duckyPad-Pro/refs/heads/dsvm2/resources/flappyduck.txt)
 * **Copy & paste content AS-IS** into the script textbox
