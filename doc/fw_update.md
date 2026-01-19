@@ -28,13 +28,11 @@
 ## Drag-and-Drop Update
 
 * Long-press `+/-` Button
-
 * Select **Mount USB**
 
 ![Alt text](../resources/photos/tinker/mount.png)
 
 * A USB drive should show up
-
 * Drag the file **AS-IS** into the drive
 
 ![Alt text](../resources/photos/tinker/drag.png)
@@ -44,15 +42,12 @@
 ![Alt text](../resources/photos/tinker/eject.png)
 
 * **Long-press** `+/-` button again
-
 * duckyPad should reboot and find the new file
 
 ![Alt text](../resources/photos/tinker/update.png)
 
 * Press any key to start. Might take a few seconds.
-
 * It will reboot and be ready to use!
-
 * Verify new FW version in settings menu.
 
 ![Alt text](../resources/photos/tinker/newver.png)

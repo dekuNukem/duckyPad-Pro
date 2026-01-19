@@ -1,4 +1,4 @@
-# [BETA TEST] duckyPad "Power User" Update: Jan 2026
+# [BETA TEST] duckyPad "Turing Complete" Update: Jan 2026
 
 Happy New Year! Please enjoy a **major update** that makes your duckyPad even more powerful!
 
@@ -16,34 +16,38 @@ This update features a complete **scripting engine overhaul**, adds many **long-
 
 ----
 * Only for **[duckyPad Pro (2024)](https://dekunukem.github.io/duckyPad-Pro/README.html)** FOR NOW
-    * Will port to OG duckyPad around Feb/March 2026
+    * Porting to **original duckyPad (2020)** is underway
+    * Likely ready **Feb 2026**
 ----
 
 ## Changelog Archive
 
 Looking for older update notes? [Click me](./update_notes)
 
-## Update Firmware
+## Try It Out!
 
-* [Get Beta firmware](../firmware/DPP_FW_3.0.0_5aca4781.bin)
+Follow the steps below:
+
+### Update Firmware
+
+* [Get Beta firmware](../firmware/DPP_FW_3.3.1_431bc23f.bin)
     * Click `View Raw` to download
 * [Follow this guide](https://dekunukem.github.io/duckyPad-Pro/doc/fw_update.html) to update
-    * Use the file you just downloaded!
+    * Use the file **you just downloaded**
 
-## Download Latest Apps
+### Download Latest Apps
 
 * [Configurator](https://github.com/duckyPad/duckyPad-Configurator/releases/tag/4.0.0)
 * [Autoswitcher](https://github.com/duckyPad/duckyPad-Profile-Autoswitcher/releases/tag/1.1.1)
 
-## Do Your Worst!
+### Do Your Worst!
 
-* Update FW and download latest apps.
-* ⚠️ **Load & save** your duckyPad Pro in latest configurator to **refresh the files**
+* ⚠️ **Load & save** with latest configurator to **refresh the files**
 * See if your **existing scripts** still work!
-* If so, scroll down, take a look at the new features and try them out.
+* If so, scroll down, **read about the new features** and try them out.
     * Give it a good thrashing
 
-Bugs are expected, let me know if you run into any!
+🐞 Bugs are expected, let me know if you run into any!
 
 * [Discord](https://discord.gg/4sJCBx5)
 * Email: `dekuNukem` `gmail.com`
@@ -307,6 +311,10 @@ Scroll mouse wheel **Horizontal** `h` lines, and **Vertical** `v` lines.
 
 * `OLED_CPRINT hello world!`
 
+### OLED Shape Drawing
+
+[`OLED_CIRCLE` and `OLED_RECT`](duckyscript_info.md#oled_circle-x-y-radius-options) now supports drawing in color **black**.
+
 Prints message **Center-Aligned** on the current Y cursor position.
 
 ### "Random Letter" Commands 
@@ -331,13 +339,9 @@ For more granular control, use `RANDCHR()` built-in function.
 * `_SW_BITFIELD`: Read status of **all buttons at once**
 * `_KBLED_BITFIELD`: Holds keyboard LED status
 
-### OLED Shape Colour
-
-[`OLED_CIRCLE` and `OLED_RECT`](duckyscript_info.md#oled_circle-x-y-radius-options) now supports drawing in color **black**.
-
 ### `PASS` Command
 
-Does nothing, can be used as placeholder for empty statement.
+Does nothing, can be used as empty statement block.
 
 ## Performance & Bugfixes
 
@@ -347,24 +351,33 @@ Does nothing, can be used as placeholder for empty statement.
 * Fixed runtime-user-assigned LED colors not saving properly.
 * Compiler optimizations to reduce code size.
 
-## Deep(er) Dive
+## Flappy Duck
 
-Did you know the duckyScript you write is actually **compiled into a binary** and **executed on a virtual machine** on the duckyPad itself?
+Glad you made it this far!
 
-This update began as a simple excursion to add 32-bit math and proper function calls. Unsurprisingly it cascaded into a month-long rewrite of the entire compiler and VM. Key changes include:
+Please enjoy a **flappy bird clone** featuring many of the new features in this update!
 
-* duckyScript is now **pre-processed into Python**
-    * So I can use its built-in AST and Symtable parsers
-    * This is faster and less error-prone than rolling my own from scratch
-* The VM now has a proper **memory map** and **stack layout**
-    * With FP-based **calling convention** to support proper function calls
-* Instructions are now **variable-length** with mild optimizations to reduce code size
+![flappy duck screenshot](../resources/flappyduck.txt)
 
-The VM is now more general-purpose than ever, and theoretically other languages can be compiled for it too instead of just duckyScript!
+* Function calls with **arguments**, **return values** and **local vars**
+* Struct-like object management in scratch memory
+* Cleaner Syntax & Update OLED commands
+* Hardware RNG
+---
+* [Click me for source code](../resources/flappyduck.txt)
+* **Copy & paste content AS-IS** into the script textbox
 
-**Want to learn more?** The VM now has its own repo, full details here:
+## Additional Reading
 
-https://github.com/duckyPad/DuckStack
+* [duckStack VM](https://github.com/duckyPad/DuckStack)
+    * duckyScript compiler and Bytecode VM
+* [duckyPad StdLib](https://github.com/duckyPad/DPDS-Standard-Library)
+    * Useful Helper Functions
+* [duckyScript Syntax Highligher](https://github.com/duckyPad/duckyScript-Syntax-Highlighter)
+    * For **VS Code** and **Sublime Text**
+* [Profile Autoswitcher](https://github.com/duckyPad/duckyPad-Profile-Autoswitcher)
+    * Including [HID Command Protocol](https://github.com/duckyPad/duckyPad-Profile-Autoswitcher/blob/master/HID_details.md)
+* [Configurator](https://github.com/duckyPad/duckyPad-Configurator)
 
 ## How'd It Go?
 
