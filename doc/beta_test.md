@@ -30,15 +30,15 @@ Follow the steps below:
 
 ### Update Firmware
 
-* [Get Beta firmware](../firmware/DPP_FW_3.3.1_431bc23f.bin)
+* [Get Beta firmware](../firmware/DPP_FW_3.3.1_9168c3e8.bin)
     * Click `View Raw` to download
 * [Follow this guide](https://dekunukem.github.io/duckyPad-Pro/doc/fw_update.html) to update
     * Use the file **you just downloaded**
 
 ### Download Latest Apps
 
-* [Configurator](https://github.com/duckyPad/duckyPad-Configurator/releases/tag/4.0.0)
-* [Autoswitcher](https://github.com/duckyPad/duckyPad-Profile-Autoswitcher/releases/tag/1.1.1)
+* [Configurator](https://github.com/duckyPad/duckyPad-Configurator/releases/tag/4.0.1)
+* [Autoswitcher](https://github.com/duckyPad/duckyPad-Profile-Autoswitcher/releases/tag/1.2.0)
 
 ### Do Your Worst!
 
@@ -66,6 +66,7 @@ Follow the steps below:
 - [Built-in Functions](#built-in-functions)
 - [New Commands](#new-commands)
 - [Performance & Bugfixes](#performance-bugfixes)
+- [Flappy Duck](#flappy-duck)
 
 ## Syntax Shakeup
 
@@ -363,7 +364,9 @@ Please enjoy a **flappy bird clone** featuring many of the new features in this 
 * Struct-like object management in scratch memory
 * Cleaner Syntax & Update OLED commands
 * Hardware RNG
+
 ---
+
 * [Click me for source code](../resources/flappyduck.txt)
 * **Copy & paste content AS-IS** into the script textbox
 

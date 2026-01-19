@@ -734,10 +734,10 @@ void handle_hid_command(const uint8_t* hid_rx_buf, uint8_t rx_buf_size)
 
 uint8_t wait_for_hid_connect(uint32_t how_long_ms)
 {
-    uint32_t start_ts = pdTICKS_TO_MS(xTaskGetTickCount());
+    uint32_t start_ts = millis();
     while(1)
     {
-        if(pdTICKS_TO_MS(xTaskGetTickCount()) - start_ts > how_long_ms)
+        if(millis() - start_ts > how_long_ms)
             return 0;
         if(is_usb_hid_connected)
             return 1;

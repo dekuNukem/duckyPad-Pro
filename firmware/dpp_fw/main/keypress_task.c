@@ -173,12 +173,12 @@ void onboard_offboard_switch_press(uint8_t swid, char* press_path, char* release
     goto handle_obsw_keydown_end;
   //--------------
 
-  uint32_t hold_start = pdTICKS_TO_MS(xTaskGetTickCount());
+  uint32_t hold_start = millis();
   while(1)
   {
     if(poll_sw_state(swid, 1) == 0)
       goto handle_obsw_keydown_end;
-    if(pdTICKS_TO_MS(xTaskGetTickCount())- hold_start > 500)
+    if(millis()- hold_start > 500)
       break;
   }
   while(1)
@@ -279,7 +279,6 @@ char dsb_on_release_path_buf[PATH_BUF_SIZE];
 
 void process_keyevent(uint8_t swid, uint8_t event_type)
 {
-  oled_brightness = OLED_CONTRAST_BRIGHT;
   if(swid == SW_PLUS && event_type == SW_EVENT_RELEASE)
   {
     goto_next_profile();
@@ -329,7 +328,9 @@ void start_sleeping(void)
 
 void update_last_keypress(void)
 {
-  last_keypress = pdTICKS_TO_MS(xTaskGetTickCount());
+  oled_brightness = OLED_CONTRAST_BRIGHT;
+  ssd1306_SetContrast(OLED_CONTRAST_BRIGHT);
+  last_keypress = millis();
 }
 
 void wakeup_from_sleep_no_load(void)
@@ -337,7 +338,6 @@ void wakeup_from_sleep_no_load(void)
   update_last_keypress();
   delay_ms(20);
   is_sleeping = 0;
-  oled_brightness = OLED_CONTRAST_BRIGHT;
 }
 
 void wakeup_from_sleep_and_load_profile(uint8_t profile_to_load)
@@ -364,7 +364,6 @@ void handle_rotary_encoder_event(rotary_encoder_event_t* this_re_event)
     wakeup_from_sleep_and_load_profile(current_profile_number);
     return;
   }
-  oled_brightness = OLED_CONTRAST_BRIGHT;
   uint8_t swid = re_event_to_swid(this_re_event);
   if(swid == 0)
     return;
@@ -389,10 +388,11 @@ void handle_sw_event(switch_event_t* this_sw_event)
     wakeup_from_sleep_and_load_profile(current_profile_number);
     return;
   }
-  uint32_t ke_start = pdTICKS_TO_MS(xTaskGetTickCount());
+  uint32_t ke_start = millis();
   process_keyevent(this_sw_event->id, this_sw_event->type);
-  uint32_t execution_duration = pdTICKS_TO_MS(xTaskGetTickCount()) - ke_start;
+  uint32_t execution_duration = millis() - ke_start;
   // printf("took %ldms\n", execution_duration);
+  update_last_keypress();
   if(execution_duration > 500)
     clear_sw_re_queue();
 }

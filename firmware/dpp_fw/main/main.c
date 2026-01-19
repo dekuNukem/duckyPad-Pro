@@ -168,6 +168,7 @@ Added explict unsigned instructions
 Cleaned up reserved variables
 Memory-mapped IO
 OLED shape draw color options
+improved OLED dimming logic
 */
 
 uint8_t fw_version_major = 3;
@@ -287,17 +288,12 @@ void app_main(void)
     {
         led_animation_handler();
         ssd1306_SetContrast(oled_brightness);
-
-        uint32_t ms_since_last_keypress = pdTICKS_TO_MS(xTaskGetTickCount()) - last_keypress;
-
         delay_ms(ANIMATION_FREQ_MS);
-
         if(is_busy)
             continue;
-
+        uint32_t ms_since_last_keypress = millis() - last_keypress;
         if(ms_since_last_keypress > sleep_after_ms_index_to_time_lookup[dp_settings.sleep_index])
             start_sleeping();
-
         if(ms_since_last_keypress > OLED_DIM_AFTER_MS)
             oled_brightness = OLED_CONTRAST_DIM;
     }
