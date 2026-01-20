@@ -89,7 +89,7 @@ duckyScript is a no-brainer for **power users** with more demanding scripting ne
 
 * **duckyScript** is a language for automating inputs
 
-	* At simplest, you just tell it what key to press!
+	* At simplest, you just tell it **what key to press!**
 
 * Such as **key combos** of your favorite app
 
@@ -189,7 +189,7 @@ END_WHILE
 
 * From **simple shortcuts** to **full-blown programs**, duckyScript can easily achieve what was impossible on QMK/VIA.
 
-* Each macro can type over **60,000 characters**
+* Each macro can contain over **60,000 characters**
 
 * Store over **3700 macros** in total
 
