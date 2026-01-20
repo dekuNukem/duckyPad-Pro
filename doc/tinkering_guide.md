@@ -122,7 +122,7 @@ Please feel free to [open an issue](https://github.com/dekuNukem/duckypad-pro/is
 
 [Writing duckyScript](duckyscript_info.md)
 
-[duckStack Bytecode VM](https://github.com/duckyPad/DuckStack/blob/master/README.md)
+[duckStack VM](https://duckypad.github.io/DuckStack/)
 
 [Firmware Update](fw_update.md)
 

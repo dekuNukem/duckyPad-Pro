@@ -834,7 +834,7 @@ Once again, a big thank-you to all 846 backers that for the interest and support
 
 [Using duckyScript](duckyscript_info.md)
 
-[duckyScript VM](bytecode_vm.md)
+[duckStack VM](https://duckypad.github.io/DuckStack/)
 
 [Tinkering Guide](tinkering_guide.md)
 

@@ -10,9 +10,9 @@
 
 👇 👇 👇 👇 👇 👇 👇 👇 👇 👇 👇 👇 👇 👇 👇 👇
 
-CLICK BELOW
+**CLICK BELOW**
 
-https://github.com/duckyPad/DuckStack/blob/master/README.md
+https://github.com/duckyPad/DuckStack
 
 ☝️ ☝️ ☝️ ☝️ ☝️ ☝️ ☝️ ☝️ ☝️ ☝️ ☝️ ☝️ ☝️ ☝️ ☝️ ☝️
 
@@ -27,7 +27,7 @@ https://github.com/duckyPad/DuckStack/blob/master/README.md
 
 [Writing duckyScript](duckyscript_info.md)
 
-[duckStack Bytecode VM](https://github.com/duckyPad/DuckStack/blob/master/README.md)
+[duckStack VM](https://duckypad.github.io/DuckStack/)
 
 [Firmware Update](fw_update.md)
 

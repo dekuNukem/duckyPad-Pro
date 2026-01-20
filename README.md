@@ -8,6 +8,8 @@ duckyPad Pro is a 20-key **mechanical macropad** for power users who demand **ad
 
 ![alt_text](resources/photos/title.jpeg)
 
+Using a [turing-complete scripting language](./doc/duckyscript_info.md), you can automate **any keyboard/mouse input** you want, from **simple combos** to **full-blown programs**.
+
 Built on 4 years of feedback from the [original duckyPad](https://github.com/dekuNukem/duckyPad), **duckyPad Pro** combines long-requested upgrades with a no-nonsense design, aiming simply to be the **most capable** macropad today.
 
 ## Get One
@@ -15,10 +17,6 @@ Built on 4 years of feedback from the [original duckyPad](https://github.com/dek
 duckyPad Pro has been [successfully funded on Kickstarter](https://www.kickstarter.com/projects/dekunukem/duckypad-pro-advanced-macro-scripting-beyond-qmk-via) with more than $100K raised!
 
 * Now available [on my Tindie Store!](https://www.tindie.com/products/37399/)
-
-## Video
-
-[<img src="resources/photos/youtube.png">](https://www.youtube.com/watch?v=uzL-kk1gB_Y)
 
 ## Highlights
 
@@ -36,7 +34,7 @@ But also features **unlike any other**:
 	* **64 profiles**, 3712 macros.
 * **OLED** screen
 * **Bluetooth**
-* Real-time Clock
+* Real-time Clock (RTC)
 * **[Expansion Modules](https://github.com/dekuNukem/duckyPad-expansion-modules)** for external switches / foot pedals
 * [Profile Auto-switching](https://github.com/dekuNukem/duckyPad-profile-autoswitcher) based on **active window**.
 * microSD storage
@@ -47,7 +45,7 @@ But also features **unlike any other**:
 
 ## duckyScript vs QMK/VIA
 
-duckyPad Pro runs **duckyScript**, originally designed for [USB Rubber Ducky](https://shop.hak5.org/products/usb-rubber-ducky-deluxe).
+duckyPad Pro runs **duckyScript**, originally designed for the [USB Rubber Ducky](https://shop.hak5.org/products/usb-rubber-ducky-deluxe).
 
 Compared to QMK/VIA, you get:
 
@@ -55,13 +53,15 @@ Compared to QMK/VIA, you get:
 	* [Entire Bee Movie](resources/beemovie.txt) in one macro? Sure thing!
 	* Over 3700 macros total
 
-* **Advanced Interactive Scripting**
-	* Variables, conditions, loops, functions, etc.
+* **Turing-Complete Scripting**
+	* Variables, conditions, loops, functions, and more.
+	* Executed on [32-bit Bytecode VM](https://duckypad.github.io/DuckStack/)
+	* With **Scratch** and **Non-volatile Memory**
+
+* **Advanced Interactions**
 	* Reading Buttons
 	* Print to OLED screen
 	* Change RGB Color
-	* Fine timing control
-	* Randomization
 	* How about a fully functional [Pong game?](resources/photos/pong.gif) [[code]](resources/pong.txt)
 
 * **SD Card Storage**
@@ -69,9 +69,9 @@ Compared to QMK/VIA, you get:
 	* No sketchy drivers or apps
 	* No recompiling
 
-While QMK/VIA are great for regular keyboards, they are rather hopeless at even the basics of input automations.
+While QMK/VIA are great for regular keyboards, they are rather limited at input automations.
 
-duckyScript is a no-brainer for power users with more demanding scripting needs.
+duckyScript is a no-brainer for **power users** with more demanding scripting needs.
 
 ## How It Works / Showcase
 
@@ -87,11 +87,11 @@ duckyScript is a no-brainer for power users with more demanding scripting needs.
 
 ### Easy Start
 
-* **duckyScript** is a simple language for automating inputs
+* **duckyScript** is a language for automating inputs
 
-* You basically tell it what key to press!
+	* At simplest, you just tell it what key to press!
 
-* Start simple by **mapping shortcuts** of your favourite app
+* Such as **key combos** of your favorite app
 
 **Browsing**
 
@@ -100,12 +100,6 @@ Zoom In: `CTRL +`
 Next Tab: `CTRL SHIFT TAB`
 
 ![alt_text](resources/photos/firefox.gif)
-
-**OBS**
-
-Switch Scenes: `F13` `F14` `F15` `F16` 
-
-![alt_text](resources/photos/obs.gif)
 
 ### Up a Notch
 
@@ -137,13 +131,14 @@ END_WHILE
 
 ![alt_text](resources/photos/jig.gif)
 
-### Even Further
+### Full Potential
 
-* Explore the full potential with **advanced interactive scripting**
-* Read Buttons
-* Write to OLED screen
-* Change RGB colors
-* Conditions and Loops
+* Going all-out, duckyScript is a **Turing-Complete** **general-purpose** language.
+* You can use it to:
+	* Read Buttons
+	* Write to OLED screen
+	* Change RGB colors
+	* Perform operations with **32-bit variables**, **conditions**, **loops**, **function call**s, and more!
 * Write ultra-specific macros for your exact needs
 
 ```
@@ -152,9 +147,9 @@ RGB_SET 1 128 0 255
 OLED_PRINT You are in a maze
 OLED_PRINT of twisty little passages
 
-VAR $choice = $_READKEY
+VAR choice = _READKEY
 
-IF $choice == 1 THEN
+IF choice == 1
     OLED_CURSOR 0 10
     OLED_PRINT It is a dead end.
     OLED_PRINT Something moves
@@ -168,9 +163,7 @@ Or how about a fully working [Pong game?](resources/pong.txt)
 
 ```
 WHILE TRUE
-    $active_key = $_READKEY
-    update_paddle_pos()
-    update_ball_pos()
+    active_key = _READKEY
     OLED_CLEAR
     draw_paddle()
     draw_court()
@@ -182,32 +175,31 @@ END_WHILE
 
 ![alt_text](resources/photos/pong.gif)
 
-### Hackerman!
+### Hackerman
 
-* Of course, by automating keystrokes, you can take over an entire computer with the push of a button!
+* Of course, by automating HID inputs, you can take over an entire computer with the push of a button!
 
 ![alt_text](resources/photos/badusb.gif)
 
-* This is known as [BadUSB attack](https://arstechnica.com/information-technology/2014/07/this-thumbdrive-hacks-computers-badusb-exploit-makes-devices-turn-evil/), which was the original purpose of [USB Rubber Ducky](https://shop.hak5.org/products/usb-rubber-ducky-deluxe).
+* This is known as [BadUSB attack](https://arstechnica.com/information-technology/2014/07/this-thumbdrive-hacks-computers-badusb-exploit-makes-devices-turn-evil/), and was the original purpose of [USB Rubber Ducky](https://shop.hak5.org/products/usb-rubber-ducky-deluxe).
 
 ---------
 
 ### Nothing Like It
 
-* From **simple shortcuts** to **full-blown programs**, duckyScript can easily achieve what is impossible on QMK/VIA!
+* From **simple shortcuts** to **full-blown programs**, duckyScript can easily achieve what was impossible on QMK/VIA.
 
 * Each macro can type over **60,000 characters**
 
 * Store over **3700 macros** in total
 
-* Executed on custom [virtual stack machine](./doc/bytecode_vm.md)
+* Executed on custom [virtual stack machine](https://duckypad.github.io/DuckStack/)
 
 ## Bluetooth
 
 duckyPad Pro also works as a **Bluetooth Keyboard & Mouse** (with a catch!)
 
 * Bluetooth 5.0
-
 * Built-in Antenna for both BT and Wi-Fi
 
 ![alt_text](resources/photos/bt.jpeg)
@@ -220,7 +212,7 @@ duckyPad Pro also works as a **Bluetooth Keyboard & Mouse** (with a catch!)
 
 Yes I know it's a bit silly having BT without internal battery! However, it would involve more complex case design, additional components, and international shipping of rechargeable batteries.
 
-All of which would inflate the cost way beyond just getting an off-the-shelf battery pack.
+All of which would inflate the cost way beyond just using an off-the-shelf battery pack.
 
 As this is a one-person project, I prefer to keep things simple.
 
@@ -231,9 +223,7 @@ duckyPad Pro also supports optional [expansion modules](https://github.com/dekuN
 ![alt_text](resources/photos/expdpp.jpeg)
 
 * Wire up your own **switches / buttons / foot pedals**
-
 * **8 channels** per module
-
 * **Daisy-chain** up to 32 channels
 
 ![alt_text](resources/photos/exp.gif)
@@ -259,7 +249,6 @@ Switching to ESP32 also allows **much simpler setup for tinkering:**
 
 * Separate script for **on press** and **on release**
 * **Abort execution** with any key
-* **Unlimited** `EMUK` Keypresses
 * Read `NUMLOCK` / `CAPSLOCK` / `SCROLLLOCK` status
 * Switch profile by name (instead of number)
 * Configurable screen orientation
@@ -273,7 +262,7 @@ Switching to ESP32 also allows **much simpler setup for tinkering:**
 
 ## duckyPad Configurator
 
-Use the open-source configurator to set up your duckyPad Pro.
+[Use the open-source configurator](https://github.com/duckyPad/duckyPad-Configurator) to set up your duckyPad Pro.
 
 * Windows | Mac | Linux
 * No account / subscription needed
@@ -284,7 +273,6 @@ Use the open-source configurator to set up your duckyPad Pro.
 ## Profile Auto-switching
 
 * [Automatically jump to the appropriate profile](https://github.com/dekuNukem/duckyPad-profile-autoswitcher)
-
 * Based on **current active window**
 
 ![alt_text](resources/photos/autoswitch.gif)
@@ -323,7 +311,7 @@ duckyPad Pro has **20 Mechanical Switches** in **4x5 Grid.**
 
 ## Interested?
 
-Get one [on my Tindie store!](https://www.tindie.com/products/37399/)
+Available [on my Tindie store!](https://www.tindie.com/products/37399/)
 
 Join our [Official Discord](https://discord.gg/4sJCBx5) for discussions and updates!
 
@@ -337,13 +325,13 @@ Please feel free to [open an issue](https://github.com/dekuNukem/duckypad-pro/is
 
 ## Disclaimers
 
-* duckyPad has been in active development since 2017 and every effort has been made to ensure its reliability. However, it is **NOT** designed or certified for safety-critical applications. Use at your own risk.
+* duckyPad has been in active development since 2017, and every effort has been made to ensure its reliability. However, it is **NOT** designed or certified for safety-critical applications. Use at your own risk.
 
 * Scripts are stored as **plain text** on the SD card. Keep in mind before including sensitive information.
 
 * duckyScript appears to be a trademark of [Hak5 LLC](https://docs.hak5.org/hak5-usb-rubber-ducky/duckyscript-tm-quick-reference). The duckyPad project is not affiliated with, or endorsed by Hak5 LLC.
 
-* The duckyScript [compiler and virtual machine](./doc/bytecode_vm.md) used in this project are independently developed from scratch.
+* The duckyScript [compiler and virtual machine](https://duckypad.github.io/DuckStack/) used in this project are independently developed from scratch.
 
 ## Table of Contents
 
@@ -355,7 +343,7 @@ Please feel free to [open an issue](https://github.com/dekuNukem/duckypad-pro/is
 
 [Writing duckyScript](./doc/duckyscript_info.md)
 
-[duckyScript VM](./doc/bytecode_vm.md)
+[duckStack VM](https://duckypad.github.io/DuckStack/)
 
 [Tinkering Guide](./doc/tinkering_guide.md)
 

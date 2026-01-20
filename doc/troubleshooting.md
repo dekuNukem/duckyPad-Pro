@@ -162,7 +162,7 @@ Make sure `NUMLOCK` is on.
 
 [Writing duckyScript](duckyscript_info.md)
 
-[duckStack Bytecode VM](https://github.com/duckyPad/DuckStack/blob/master/README.md)
+[duckStack VM](https://duckypad.github.io/DuckStack/)
 
 [Firmware Update](fw_update.md)
 
