@@ -23,7 +23,7 @@ duckyPad Pro has been [successfully funded on Kickstarter](https://www.kickstart
 duckyPad Pro has all the basics:
 
 * Hot-Swap
-* Rotary Encoders
+* Rotary Encoders (**Tactile or Smooth**)
 * Per-key RGB
 * 100% **Open-source**
 

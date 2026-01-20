@@ -64,6 +64,12 @@ Of course, people at the [Official Discord](https://discord.gg/4sJCBx5) are alwa
 
 Much easier to lookup than going through this whole page.
 
+## Syntax Highlighter
+
+[Available for VS Code and Sublime Text](https://github.com/duckyPad/duckyScript-Syntax-Highlighter/blob/master/README.md)
+
+Recommended for longer and more complex scripts, write there and copy it back.
+
 ## List of Commands
 - [Comments](#comments)
     - [`//`](#)

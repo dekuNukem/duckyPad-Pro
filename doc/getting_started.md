@@ -183,17 +183,17 @@ Some ideas:
 * Undo/Redo
 * Brush Size
 
-### External Switches
-
-You can also wire up your own **Buttons / Switches / Foot pedals** using the optional **Expansion Module**.
-
-[Click me for details](https://github.com/dekuNukem/duckyPad-expansion-modules)
-
 ### Profile Auto-Switching
 
 duckyPad can **switch profiles automatically** based on **current active window**.
 
 [Click me for details](https://github.com/dekuNukem/duckyPad-profile-autoswitcher)
+
+### External Switches
+
+You can also wire up your own **Buttons / Switches / Foot pedals** using the optional **Expansion Module**.
+
+[Click me for details](https://github.com/dekuNukem/duckyPad-expansion-modules)
 
 ### Careful with Passwords!
 
