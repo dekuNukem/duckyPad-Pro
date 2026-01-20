@@ -225,14 +225,14 @@ uint8_t settings_menu(void)
     else if(sw_event.id == MSW_2)
     {
       CLEAR_TEMP_BUF();
-      if(get_next_keymap(dp_settings.current_kb_layout, temp_buf))
+      if(get_next_keymap(dp_settings.current_kb_layout, temp_buf, TEMP_BUFSIZE))
       {
         memset(dp_settings.current_kb_layout, 0, FILENAME_BUFSIZE);
-        get_first_keymap(dp_settings.current_kb_layout);
+        get_first_keymap(dp_settings.current_kb_layout, FILENAME_BUFSIZE);
       }
       else
       {
-        strcpy(dp_settings.current_kb_layout, temp_buf);
+        strncpy(dp_settings.current_kb_layout, temp_buf, FILENAME_BUFSIZE);
       }
       draw_settings(&dp_settings);
       load_keymap_by_name(dp_settings.current_kb_layout);

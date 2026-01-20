@@ -415,7 +415,7 @@ void draw_settings(dp_global_settings *dps)
   memset(oled_line_buf, 0, OLED_LINE_BUF_SIZE);
   if(strlen(dps->current_kb_layout) >= 9)
   {
-    strcpy(oled_line_buf, dps->current_kb_layout+5);
+    strncpy(oled_line_buf, dps->current_kb_layout+5, OLED_LINE_BUF_SIZE);
     oled_line_buf[strlen(oled_line_buf)-4] = 0; // don't print .txt extension
   }
   ssd1306_SetCursor(center_line(strlen(oled_line_buf), 7, SSD1306_WIDTH), 57);

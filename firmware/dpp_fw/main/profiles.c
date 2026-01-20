@@ -93,7 +93,7 @@ uint8_t load_settings(dp_global_settings* dps)
       dps->brightness_index = BRIGHTNESS_LEVEL_SIZE - 1;
     if(strncmp(temp_buf, config_keyboard_layout, strlen(config_keyboard_layout)) == 0)
     {
-      strcpy(dps->current_kb_layout, temp_buf + strlen(config_keyboard_layout));
+      strncpy(dps->current_kb_layout, temp_buf + strlen(config_keyboard_layout), FILENAME_BUFSIZE);
       strip_newline(dps->current_kb_layout, FILENAME_BUFSIZE);
     }
   }
@@ -455,7 +455,7 @@ uint8_t load_keymap_by_name(char* km_name)
   return 0;
 }
 
-uint8_t get_next_keymap(const char* current_keymap_filename, char* next_keymap_filename)
+uint8_t get_next_keymap(const char* current_keymap_filename, char* next_keymap_filename, uint32_t bufsize)
 {
   struct dirent *dir;
   DIR *d = opendir("/sdcard/keymaps");
@@ -470,7 +470,7 @@ uint8_t get_next_keymap(const char* current_keymap_filename, char* next_keymap_f
       continue;
     if(found)
     {
-      strcpy(next_keymap_filename, dir->d_name);
+      strncpy(next_keymap_filename, dir->d_name, bufsize);
       closedir(d);
       return 0;
     }
@@ -481,7 +481,7 @@ uint8_t get_next_keymap(const char* current_keymap_filename, char* next_keymap_f
   return ERROR_KEYMAP_NOT_FOUND;
 }
 
-uint8_t get_first_keymap(char* keymap_filename)
+uint8_t get_first_keymap(char* keymap_filename, uint32_t bufsize)
 {
   struct dirent *dir;
   DIR *d = opendir("/sdcard/keymaps");
@@ -493,7 +493,7 @@ uint8_t get_first_keymap(char* keymap_filename)
       continue;
     if(!(strncmp(dir->d_name, "dpkm_", 5) == 0 && strstr(dir->d_name, ".txt") != NULL))
       continue;
-    strcpy(keymap_filename, dir->d_name);
+    strncpy(keymap_filename, dir->d_name, bufsize);
     closedir(d);
     return 0;
   }
