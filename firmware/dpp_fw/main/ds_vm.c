@@ -764,7 +764,7 @@ char get_random_char(uint8_t bitmask)
   uint32_t pool_size = strlen(randchar_pool);
   if (pool_size == 0)
     return 0;
-  return randchar_pool[rand() % pool_size];
+  return randchar_pool[my_randu32() % pool_size];
 }
 
 uint32_t my_randu32(void)
@@ -1388,7 +1388,7 @@ void execute_instruction(exe_context* exe)
     stack_pop(&data_stack, &options);
     clamp_uint(&x, SSD1306_WIDTH);
     clamp_uint(&y, SSD1306_HEIGHT);
-    clamp_uint(&radius, SSD1306_HEIGHT/2);
+    clamp_uint(&radius, SSD1306_HEIGHT);
     SSD1306_COLOR draw_color = White;
     if(options & 0x2)
       draw_color = Black;

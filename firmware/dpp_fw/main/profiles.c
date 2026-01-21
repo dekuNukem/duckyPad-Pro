@@ -542,9 +542,9 @@ void generate_msc_flag_file(void)
   fclose(mff);
 }
 
-#define SPS_COLOR_START_ADDR (SPS_HEADER_SIZE + MAX_TOTAL_SW_COUNT)
 #define SPS_PROTOCOL_VERSION 1
 #define SPS_HEADER_SIZE 4
+#define SPS_COLOR_START_ADDR (SPS_HEADER_SIZE + MAX_TOTAL_SW_COUNT)
 #define SPS_BIN_SIZE 256
 uint8_t sps_bin_buf[SPS_BIN_SIZE];
 
