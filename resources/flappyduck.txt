@@ -17,9 +17,8 @@ DEFINE WALL_THICKNESS_PIXELS 6
 DEFINE WALL_START_POS_X 150
 DEFINE DEFAULT_WALL_SPACING 40
 DEFINE WALL_RESET_THRESHOLD_SCALED (-1 * WALL_THICKNESS_PIXELS * SCALE_FACTOR)
-DEFINE WALL_SPACING_VARIANCE_PIXELS 3
 DEFINE DEFAULT_WALL_GAP_SIZE 40
-DEFINE DEFAULT_WALL_Y (OLED_HEIGHT/2) // does this work
+DEFINE DEFAULT_WALL_Y (OLED_HEIGHT/2) // does this work yes it does! i was testing if inline comments work in DEFINE btw
 
 DEFINE WALL_GAP_SIZE_MIN 38
 DEFINE WALL_GAP_SIZE_MAX 53
@@ -38,11 +37,6 @@ DEFINE WALL_4_OBJ_ADDR (WALL_3_OBJ_ADDR + WALL_OBJ_SIZE)
 
 VAR wall_scroll_speed_scaled = 15
 VAR score = 0
-
-FUN debug_reset()
-    bird_y_scaled = BIRD_START_Y * SCALE_FACTOR
-    bird_velocity_y = 0
-END_FUN
 
 FUN wall_init()
     POKE16(WALL_1_OBJ_ADDR+WALL_OBJ_OFFSET_X_POS_SCALED, WALL_START_POS_X*SCALE_FACTOR+DEFAULT_WALL_SPACING*SCALE_FACTOR*0)
@@ -70,7 +64,7 @@ FUN draw_wall(wall_obj_addr)
     
     // Bounds checking to prevent drawing off-screen (which might wrap or error)
     IF left_edge_pos >= 0
-        pass
+        PASS
     ELSE IF left_edge_pos >= -WALL_THICKNESS_PIXELS
         left_edge_pos = 0
     ELSE
@@ -78,7 +72,7 @@ FUN draw_wall(wall_obj_addr)
     END_IF
     
     IF right_edge_pos < OLED_WIDTH
-        pass
+        PASS
     ELSE IF right_edge_pos < OLED_WIDTH + WALL_THICKNESS_PIXELS
         right_edge_pos = OLED_WIDTH-1
     ELSE
@@ -95,7 +89,6 @@ FUN move_wall(wall_obj_addr)
     IF wall_x_scaled <= WALL_RESET_THRESHOLD_SCALED
         POKE16(wall_obj_addr+WALL_OBJ_OFFSET_GAP_Y_POS, RANDINT(WALL_GAP_Y_LOWER_POS_MIN, WALL_GAP_Y_LOWER_POS_MAX))
         POKE16(wall_obj_addr+WALL_OBJ_OFFSET_GAP_SIZE, RANDINT(WALL_GAP_SIZE_MIN, WALL_GAP_SIZE_MAX))
-        // wall_x_scaled = (WALL_START_POS_X + RANDINT(-WALL_SPACING_VARIANCE_PIXELS, WALL_SPACING_VARIANCE_PIXELS)) * SCALE_FACTOR
         wall_x_scaled = WALL_START_POS_X * SCALE_FACTOR
         score += 1
         IF score % 4 == 0
