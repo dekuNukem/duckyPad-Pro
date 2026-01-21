@@ -83,9 +83,9 @@ uint8_t run_once(uint8_t swid, char* dsb_path, uint8_t* to_increment)
   exe_ctx_init(&this_exe);
 
   uint8_t is_press = strstr(dsb_path, key_release_file_string) == NULL;
-  uint8_t is_cached = dsbc_search(current_profile_number, swid, is_press, dsvm_cached_data);
+  uint8_t* dsb_cached_bin = dsbc_search(current_profile_number, swid, is_press);
 
-  run_dsb(&this_exe, swid, dsb_path, is_cached, dsvm_cached_data);
+  run_dsb(&this_exe, swid, dsb_path, dsb_cached_bin);
   // printf("---\nexecution finished:\nresult: %d\ndata: %d\nepilogue: 0x%x\n---\n", this_exe.result, this_exe.data, this_exe.epilogue_actions);
   if(to_increment != NULL)
     *to_increment = *to_increment + 1;

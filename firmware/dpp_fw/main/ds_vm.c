@@ -1470,14 +1470,14 @@ void execute_instruction(exe_context* exe)
   }
 }
 
-void run_dsb(exe_context* ctx, uint8_t this_key_id, char* dsb_path, uint8_t is_cached, uint8_t* dsb_cache)
+void run_dsb(exe_context* ctx, uint8_t this_key_id, char* dsb_path, uint8_t* dsb_cache_buf)
 {
   uint32_t this_dsb_size = DSB_CACHE_BYTE_SIZE;
   current_key_id = this_key_id;
-  if(is_cached)
+  if(dsb_cache_buf != NULL)
   {
     memset(bin_buf, 0, BIN_BUF_SIZE);
-    memcpy(bin_buf, dsb_cache, DSB_CACHE_BYTE_SIZE);
+    memcpy(bin_buf, dsb_cache_buf, DSB_CACHE_BYTE_SIZE);
   }
   else
   {
@@ -1521,7 +1521,7 @@ void run_dsb(exe_context* ctx, uint8_t this_key_id, char* dsb_path, uint8_t is_c
   }
   disable_autorepeat ? DS_SET_BITS(*epilogue_ptr, EPILOGUE_DONT_AUTO_REPEAT) : DS_CLEAR_BITS(*epilogue_ptr, EPILOGUE_DONT_AUTO_REPEAT);
 
-  if(is_cached == 0 && this_dsb_size <= DSB_CACHE_BYTE_SIZE)
+  if(dsb_cache_buf == NULL && this_dsb_size <= DSB_CACHE_BYTE_SIZE)
   {
     uint8_t is_press = strstr(dsb_path, key_release_file_string) == NULL;
     dsbc_add(current_profile_number, this_key_id, is_press, millis(), bin_buf, this_dsb_size);
