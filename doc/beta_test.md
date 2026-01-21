@@ -227,7 +227,7 @@ Local x is: 25
 
 ### Nested / Recursive Calls
 
-Now possible!
+You can now also call the **same function within itself**!
 
 ```
 FUN factorial(n)
@@ -310,13 +310,13 @@ Scroll mouse wheel **Horizontal** `h` lines, and **Vertical** `v` lines.
 
 ### OLED Center-Aligned Print
 
+Prints message **Center-Aligned** on the current Y cursor position.
+
 * `OLED_CPRINT hello world!`
 
 ### OLED Shape Drawing
 
 [`OLED_CIRCLE` and `OLED_RECT`](duckyscript_info.md#oled_circle-x-y-radius-options) now supports drawing in color **black**.
-
-Prints message **Center-Aligned** on the current Y cursor position.
 
 ### "Random Letter" Commands 
 
@@ -356,11 +356,11 @@ Does nothing, can be used as empty statement block.
 
 Glad you made it this far!
 
-Please enjoy a **flappy bird clone** featuring many of the new features in this update!
+Please enjoy a **flappy bird clone** showcasing many of the new features in this update!
 
 * Function calls with **arguments**, **return values** and **local vars**
 * Struct-like object management in scratch memory
-* Cleaner Syntax & Update OLED commands
+* Cleaner Syntax & New OLED commands
 * Hardware RNG
 
 ![flappy duck screenshot](../resources/photos/flappy.png)
