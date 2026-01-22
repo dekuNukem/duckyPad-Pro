@@ -8,7 +8,7 @@ duckyPad Pro is a 20-key **mechanical macropad** for power users who demand **ad
 
 ![alt_text](resources/photos/title.jpeg)
 
-Using a [turing-complete scripting language](./doc/duckyscript_info.md), you can automate **any keyboard/mouse input** you want, from **simple combos** to **full-blown programs**.
+Using a [Turing-complete scripting language](https://dekunukem.github.io/duckyPad-Pro/doc/duckyscript_info.html) with **massive on-board storage**, it can automate **any keyboard/mouse input** you want, from **simple combos** to **full-blown programs**.
 
 ## Get One
 
