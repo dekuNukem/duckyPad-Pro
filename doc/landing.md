@@ -2,7 +2,7 @@
 
 duckyPad is a line of **mechanical macropads** for power users demanding **advanced macro scripting** beyond the shackles of QMK/VIA.
 
-Using a [turing-complete scripting language](./doc/duckyscript_info.md), it can automate **any keyboard/mouse input** you want, from **simple combos** to **full-blown programs**.
+Using a [Turing-complete scripting language](./doc/duckyscript_info.md) with **massive on-board storage**, it can automate **any keyboard/mouse input** you want, from **simple combos** to **full-blown programs**.
 
 |duckyPad Pro (2024)|duckyPad (2020)|
 |:--:|:--:|
@@ -13,11 +13,12 @@ Using a [turing-complete scripting language](./doc/duckyscript_info.md), it can 
 
 # Highlights
 
-duckyPad runs **duckyScript**, originally designed for [USB Rubber Ducky](https://shop.hak5.org/products/usb-rubber-ducky-deluxe) to perform [BadUSB attacks.](https://arstechnica.com/information-technology/2014/07/this-thumbdrive-hacks-computers-badusb-exploit-makes-devices-turn-evil/)
+duckyPad runs **duckyScript**, originally designed for [USB Rubber Ducky](https://shop.hak5.org/products/usb-rubber-ducky-deluxe).
 
 Compared to QMK/VIA, you get:
 
 * **Much Longer Macros**
+	* Type over **60,000 characters** per macro
 	* [Entire Bee Movie](../resources/beemovie.txt) in one macro? Sure thing!
 
 * **Turing-Complete Scripting**
@@ -26,7 +27,7 @@ Compared to QMK/VIA, you get:
 	* Read Buttons / Print to OLED / Set RGB
 	* How about a fully functional [Pong game?](../resources/photos/pong.gif) [[code]](../resources/pong.txt)
 
-* **SD Card Storage**
+* On-board **SD Card Storage**
 	* Fast Config / Backup / Deployment
 	* No Recompiling
 
@@ -39,7 +40,7 @@ Compared to QMK/VIA, you get:
 
 From **simple shortcuts** to **full-blown programs**, duckyPad can easily achieve what was impossible on QMK/VIA.
 
-It is a no-brainer for power users with more demanding scripting needs.
+duckyPad aims to be the **most capable macropad today**, and is a no-brainer for power users with more demanding scripting needs.
 
 # Comparisons
 

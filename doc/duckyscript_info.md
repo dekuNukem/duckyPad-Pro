@@ -409,9 +409,10 @@ LOOP2:
 STRINGLN third action
 ```
 
+* Start from `LOOP0`
 * When pressed, a counter increments, and the script at the corresponding loop is executed.
 * Keep the code inside simple!
-* For more complex needs, see [Loops](#loops) section below.
+    * For more complex needs, see [`WHILE` Loops](#loops) section below.
 
 -------
 [⬆️⬆️⬆️⬆️⬆️⬆️ Back to Top ⬆️⬆️⬆️⬆️⬆️⬆️](#list-of-commands)

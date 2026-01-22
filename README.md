@@ -10,8 +10,6 @@ duckyPad Pro is a 20-key **mechanical macropad** for power users who demand **ad
 
 Using a [turing-complete scripting language](./doc/duckyscript_info.md), you can automate **any keyboard/mouse input** you want, from **simple combos** to **full-blown programs**.
 
-Built on 4 years of feedback from the [original duckyPad](https://github.com/dekuNukem/duckyPad), **duckyPad Pro** combines long-requested upgrades with a no-nonsense design, aiming simply to be the **most capable** macropad today.
-
 ## Get One
 
 duckyPad Pro has been [successfully funded on Kickstarter](https://www.kickstarter.com/projects/dekunukem/duckypad-pro-advanced-macro-scripting-beyond-qmk-via) with more than $100K raised!
@@ -177,7 +175,7 @@ END_WHILE
 
 ### Hackerman
 
-* Of course, by automating HID inputs, you can take over an entire computer with the push of a button!
+* Of course, by automating inputs, you can take over an entire computer with the push of a button!
 
 ![alt_text](resources/photos/badusb.gif)
 
