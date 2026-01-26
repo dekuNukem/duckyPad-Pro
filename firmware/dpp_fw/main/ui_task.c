@@ -311,7 +311,7 @@ void draw_profile_normal(profile_info* this_profile)
   ssd1306_Line(96,10,96,127,White);
 
   draw_status_icon(0, 0, 0);
-  draw_kbled_icon(kb_led_status, 0);
+  draw_kbled_icon(1, 0);
 
   ssd1306_UpdateScreen();
 }
@@ -360,7 +360,7 @@ void draw_profile_rotated(profile_info* this_profile)
   ssd1306_Line(102,10,102,127,White);
 
   draw_status_icon(0, 0, 0);
-  draw_kbled_icon(kb_led_status, 0);
+  draw_kbled_icon(1, 0);
 
   ssd1306_UpdateScreen();
 }
@@ -733,32 +733,47 @@ void update_status_icon()
   last_icon_stat = this_icon_stat;
 }
 
-void draw_kbled_icon(uint8_t this_led_state, uint8_t update_screen)
+/*
+  Bit 0: Numlock
+  Bit 1: Capslock
+  Bit 2: Scroll Lock
+  Bit 7: is_usb_connected
+*/
+uint8_t last_led_state = 255;
+void draw_kbled_icon(uint8_t force_redraw, uint8_t refresh_screen)
 {
+  uint8_t this_state = kb_led_status;
+  if(is_usb_hid_connected)
+    this_state |= 0x80;
+  else
+    this_state &= 0x7f;
+
+  if(force_redraw == 0 && this_state == last_led_state)
+    return;
+
   SSD1306_COLOR color;
   // numlock
-  color = (this_led_state & 0x1) ? White : Black;
+  color = (kb_led_status & 0x1) ? White : Black;
   ssd1306_FillCircle(118, 4, 1, color);
   // caps lock
-  color = (this_led_state & 0x2) ? White : Black;
+  color = (kb_led_status & 0x2) ? White : Black;
   ssd1306_FillCircle(122, 4, 1, color);
   // scroll lock
-  color = (this_led_state & 0x4) ? White : Black;
+  color = (kb_led_status & 0x4) ? White : Black;
   ssd1306_FillCircle(126, 4, 1, color);
-  ssd1306_Line(117, 0, 119, 0, White);
-  ssd1306_Line(121, 0, 123, 0, White);
-  ssd1306_Line(125, 0, 127, 0, White);
-  if(update_screen)
+  if(this_state & 0x80)
+  {
+    ssd1306_Line(117, 0, 119, 0, White);
+    ssd1306_Line(121, 0, 123, 0, White);
+    ssd1306_Line(125, 0, 127, 0, White);
+  }
+  else
+  {
+    ssd1306_FillRectangle(117, 0, 127, 9, Black);
+  }
+  if(refresh_screen)
     ssd1306_UpdateScreen();
-}
-
-uint8_t last_led_state = 255;
-void update_kbled_icon(uint8_t this_led_state)
-{
-  if(this_led_state == last_led_state)
-    return;
-  draw_kbled_icon(this_led_state, 1);
-  last_led_state = this_led_state;
+  last_led_state = this_state;
 }
 
 uint32_t last_bt_pin;

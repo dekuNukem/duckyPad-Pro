@@ -181,9 +181,13 @@ const uint8_t hid_report_descriptor[] =
 
 uint8_t const *tud_hid_descriptor_report_cb(uint8_t instance)
 {
-    is_usb_hid_connected = 1;
     return hid_report_descriptor;
 }
+
+void tud_mount_cb(void) { is_usb_hid_connected = 1; }
+void tud_umount_cb(void) { is_usb_hid_connected = 0; }
+void tud_suspend_cb(bool remote_wakeup_en) { is_usb_hid_connected = 0; }
+void tud_resume_cb(void) { is_usb_hid_connected = 1; }
 
 uint16_t tud_hid_get_report_cb(uint8_t instance, uint8_t report_id, hid_report_type_t report_type, uint8_t* buffer, uint16_t reqlen)
 {

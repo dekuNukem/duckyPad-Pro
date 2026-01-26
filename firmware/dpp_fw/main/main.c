@@ -169,11 +169,17 @@ Cleaned up reserved variables
 Memory-mapped IO
 OLED shape draw color options
 improved OLED dimming logic
+
+3.3.2
+Jan 26 2026
+Better USB connect/disconnect detection
+Only draws LED status when connected
+Optimised OLED shape drawing routine
 */
 
 uint8_t fw_version_major = 3;
 uint8_t fw_version_minor = 3;
-uint8_t fw_version_patch = 1;
+uint8_t fw_version_patch = 2;
 
 uint8_t dsvm_version = 2;
 

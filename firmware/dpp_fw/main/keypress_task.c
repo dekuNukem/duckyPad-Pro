@@ -425,7 +425,7 @@ void keypress_task(void *dummy)
     if(is_sleeping == 0)
     {
       update_status_icon();
-      update_kbled_icon(kb_led_status);
+      draw_kbled_icon(0, 1);
     }
     
     draw_bt_pin(bt_pin_code);
