@@ -18,7 +18,7 @@ DEFINE WALL_START_POS_X 150
 DEFINE DEFAULT_WALL_SPACING 40
 DEFINE WALL_RESET_THRESHOLD_SCALED (-1 * WALL_THICKNESS_PIXELS * SCALE_FACTOR)
 DEFINE DEFAULT_WALL_GAP_SIZE 40
-DEFINE DEFAULT_WALL_Y (OLED_HEIGHT/2) // does this work yes it does! i was testing if inline comments work in DEFINE btw
+DEFINE DEFAULT_WALL_Y (OLED_HEIGHT/2)
 
 DEFINE WALL_GAP_SIZE_MIN 38
 DEFINE WALL_GAP_SIZE_MAX 53
@@ -159,7 +159,7 @@ FUN bird_update()
     OLED_CIRCLE BIRD_START_X bird_draw_y BIRD_RADIUS 1
 
     // collision detection, floor and ceiling
-    IF (bird_draw_y <= (BIRD_RADIUS*2)) || (bird_draw_y >= OLED_HEIGHT)
+    IF (bird_draw_y <= 0) || (bird_draw_y >= OLED_HEIGHT)
         game_over()
     END_IF
 
