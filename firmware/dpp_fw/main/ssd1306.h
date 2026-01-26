@@ -9,15 +9,6 @@
 #define __SSD1306_H__
 
 #include <stddef.h>
-
-#ifdef SSD1306_X_OFFSET
-#define SSD1306_X_OFFSET_LOWER (SSD1306_X_OFFSET & 0x0F)
-#define SSD1306_X_OFFSET_UPPER ((SSD1306_X_OFFSET >> 4) & 0x07)
-#else
-#define SSD1306_X_OFFSET_LOWER 0
-#define SSD1306_X_OFFSET_UPPER 0
-#endif
-
 #include "ssd1306_fonts.h"
 
 #ifndef SSD1306_BUFFER_SIZE
@@ -72,8 +63,6 @@ void ssd1306_GetCursor(uint8_t *x, uint8_t *y);
  * @note RESET = 7Fh.
  */
 void ssd1306_SetContrast(const uint8_t value);
-
-SSD1306_Error_t ssd1306_FillBuffer(uint8_t* buf, uint32_t len);
 
 // Control byte
 #define OLED_CONTROL_BYTE_CMD_SINGLE    0x80

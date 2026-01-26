@@ -42,16 +42,6 @@ static uint8_t SSD1306_Buffer[SSD1306_BUFFER_SIZE];
 // Screen object
 static SSD1306_t SSD1306;
 
-/* Fills the Screenbuffer with values from a given buffer of a fixed length */
-SSD1306_Error_t ssd1306_FillBuffer(uint8_t* buf, uint32_t len) {
-    SSD1306_Error_t ret = SSD1306_ERR;
-    if (len <= SSD1306_BUFFER_SIZE) {
-        memcpy(SSD1306_Buffer,buf,len);
-        ret = SSD1306_OK;
-    }
-    return ret;
-}
-
 /* Initialize the oled screen */
 void ssd1306_init(void) {
     // Init OLED
@@ -137,13 +127,9 @@ void ssd1306_init(void) {
     SSD1306.CurrentY = 0;
 }
 
-/* Fill the whole screen with the given color */
-void ssd1306_Fill(SSD1306_COLOR color) {
-    uint32_t i;
-
-    for(i = 0; i < sizeof(SSD1306_Buffer); i++) {
-        SSD1306_Buffer[i] = (color == Black) ? 0x00 : 0xFF;
-    }
+void ssd1306_Fill(SSD1306_COLOR color)
+{
+    memset(SSD1306_Buffer, (color == Black) ? 0x00 : 0xFF, sizeof(SSD1306_Buffer));
 }
 
 /* Write the screenbuffer with changed to the screen */
@@ -459,21 +445,35 @@ void ssd1306_DrawCircle(uint8_t par_x,uint8_t par_y,uint8_t par_r,SSD1306_COLOR 
     return;
 }
 
-/* Draw filled circle. Pixel positions calculated using Bresenham's algorithm */
-void ssd1306_FillCircle(uint8_t par_x,uint8_t par_y,uint8_t par_r,SSD1306_COLOR par_color) {
+void ssd1306_FillCircle(uint8_t par_x, uint8_t par_y, uint8_t par_r, SSD1306_COLOR par_color) {
     int32_t x = -par_r;
     int32_t y = 0;
     int32_t err = 2 - 2 * par_r;
     int32_t e2;
 
-    if (par_x >= SSD1306_WIDTH || par_y >= SSD1306_HEIGHT) {
-        return;
-    }
-
     do {
-        for (uint8_t _y = (par_y + y); _y >= (par_y - y); _y--) {
-            for (uint8_t _x = (par_x - x); _x >= (par_x + x); _x--) {
-                ssd1306_DrawPixel(_x, _y, par_color);
+        int x_left = par_x + x;
+        int x_right = par_x - x;
+        
+        // Clip X bounds
+        if (x_left < 0) x_left = 0;
+        if (x_right >= SSD1306_WIDTH) x_right = SSD1306_WIDTH - 1;
+
+        // We need to draw two lines: one at upper Y, one at lower Y
+        int y_upper = par_y - y;
+        int y_lower = par_y + y;
+
+        // Draw Upper Line
+        if (y_upper >= 0 && y_upper < SSD1306_HEIGHT) {
+            for (int i = x_left; i <= x_right; i++) {
+                ssd1306_DrawPixel(i, y_upper, par_color);
+            }
+        }
+        
+        // Draw Lower Line (only if distinct from upper)
+        if (y_lower >= 0 && y_lower < SSD1306_HEIGHT && y_lower != y_upper) {
+            for (int i = x_left; i <= x_right; i++) {
+                ssd1306_DrawPixel(i, y_lower, par_color);
             }
         }
 
@@ -481,18 +481,13 @@ void ssd1306_FillCircle(uint8_t par_x,uint8_t par_y,uint8_t par_r,SSD1306_COLOR 
         if (e2 <= y) {
             y++;
             err = err + (y * 2 + 1);
-            if (-x == y && e2 <= x) {
-                e2 = 0;
-            }
+            if (-x == y && e2 <= x) e2 = 0;
         }
-
         if (e2 > x) {
             x++;
             err = err + (x * 2 + 1);
         }
     } while (x <= 0);
-
-    return;
 }
 
 /* Draw a rectangle */
@@ -505,19 +500,39 @@ void ssd1306_DrawRectangle(uint8_t x1, uint8_t y1, uint8_t x2, uint8_t y2, SSD13
     return;
 }
 
-/* Draw a filled rectangle */
 void ssd1306_FillRectangle(uint8_t x1, uint8_t y1, uint8_t x2, uint8_t y2, SSD1306_COLOR color) {
-    uint8_t x_start = ((x1<=x2) ? x1 : x2);
-    uint8_t x_end   = ((x1<=x2) ? x2 : x1);
-    uint8_t y_start = ((y1<=y2) ? y1 : y2);
-    uint8_t y_end   = ((y1<=y2) ? y2 : y1);
+    // 1. Sort coordinates
+    if (x1 > x2) { uint8_t t = x1; x1 = x2; x2 = t; }
+    if (y1 > y2) { uint8_t t = y1; y1 = y2; y2 = t; }
 
-    for (uint8_t y= y_start; (y<= y_end)&&(y<SSD1306_HEIGHT); y++) {
-        for (uint8_t x= x_start; (x<= x_end)&&(x<SSD1306_WIDTH); x++) {
-            ssd1306_DrawPixel(x, y, color);
+    // 2. Clip to screen bounds
+    if (x2 >= SSD1306_WIDTH) x2 = SSD1306_WIDTH - 1;
+    if (y2 >= SSD1306_HEIGHT) y2 = SSD1306_HEIGHT - 1;
+
+    // 3. Iterate over the pages (vertical byte blocks) involved
+    for (uint8_t page = 0; page < (SSD1306_HEIGHT / 8); page++) {
+        uint8_t page_y_start = page * 8;
+        uint8_t page_y_end = page_y_start + 7;
+
+        // Skip pages that don't intersect the rectangle
+        if (y1 > page_y_end || y2 < page_y_start) continue;
+
+        // Calculate the bitmask for this page (0xFF means full vertical coverage)
+        uint8_t start_bit = (y1 > page_y_start) ? (y1 % 8) : 0;
+        uint8_t end_bit   = (y2 < page_y_end)   ? (y2 % 8) : 7;
+        
+        uint8_t mask = 0;
+        for (uint8_t i = start_bit; i <= end_bit; i++) mask |= (1 << i);
+
+        // Apply the mask to the column range
+        uint32_t buffer_offset = page * SSD1306_WIDTH;
+        for (int x = x1; x <= x2; x++) {
+            if (color == White)
+                SSD1306_Buffer[buffer_offset + x] |= mask;
+            else
+                SSD1306_Buffer[buffer_offset + x] &= ~mask;
         }
     }
-    return;
 }
 
 /* Draw a bitmap */

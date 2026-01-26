@@ -721,7 +721,7 @@ void handle_hid_command(const uint8_t* hid_rx_buf, uint8_t rx_buf_size)
         struct timeval tv = {0};
         tv.tv_sec = unix_ts;
         settimeofday(&tv, NULL);
-        memcpy(&utc_offset_minutes, &hid_tx_buf[6], sizeof(utc_offset_minutes));
+        memcpy(&utc_offset_minutes, &hid_rx_buf[6], sizeof(utc_offset_minutes));
         is_rtc_valid = 1;
         send_hid_cmd_response(hid_tx_buf);
     }
