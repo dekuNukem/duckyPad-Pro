@@ -15,10 +15,6 @@ This update features a complete **scripting engine overhaul**, adds many **long-
 * **New Commands** & Bug Fixes
 
 ----
-* Only for **[duckyPad Pro (2024)](https://dekunukem.github.io/duckyPad-Pro/README.html)** FOR NOW
-    * Porting to **original duckyPad (2020)** is underway
-    * Likely ready **Feb 2026**
-----
 
 ## Changelog Archive
 
@@ -28,17 +24,22 @@ Looking for older update notes? [Click me](./update_notes)
 
 Follow the steps below:
 
-### Update Firmware
+### Update Firmware: duckyPad Pro (2024)
 
-* [Get Beta firmware](../firmware/DPP_FW_3.3.1_9168c3e8.bin)
-    * Click `View Raw` to download
+* [Get Beta Firmware (v3.3.2)](https://github.com/dekuNukem/duckyPad-Pro/raw/refs/heads/dsvm2/firmware/DPP_FW_3.3.2_f377ce53.bin)
 * [Follow this guide](https://dekunukem.github.io/duckyPad-Pro/doc/fw_update.html) to update
     * Use the file **you just downloaded**
 
-### Download Latest Apps
+### 🆕 Update Firmware: duckyPad (2020)
 
-* [Configurator](https://github.com/duckyPad/duckyPad-Configurator/releases/tag/4.0.1)
-* [Autoswitcher](https://github.com/duckyPad/duckyPad-Profile-Autoswitcher/releases/tag/1.2.0)
+* [Get Beta Firmware (v3.0.2)](https://github.com/dekuNukem/duckyPad/raw/refs/heads/dsvm2/firmware/beta_v3.0.2.dfu)
+* [Follow this guide](https://dekunukem.github.io/duckyPad/firmware_updates_and_version_history.html) to update
+    * Use the file **you just downloaded**
+
+### 🆕 Download Latest Apps
+
+* [Configurator](https://github.com/duckyPad/duckyPad-Configurator/releases/tag/4.0.2)
+* [Autoswitcher](https://github.com/duckyPad/duckyPad-Profile-Autoswitcher/releases/tag/1.2.1)
 
 ### Do Your Worst!
 
@@ -349,8 +350,9 @@ Does nothing, can be used as empty statement block.
 * **Faster Read/Write Speeds** in USB Storage Mode.
 * Adjusted HID Descriptor to support `6KRO`
 * Randomization now uses **Hardware RNG**
-* Fixed runtime-user-assigned LED colors not saving properly.
 * Compiler optimizations to reduce code size.
+* Only draws keyboard LED indicator if USB is connected
+* Fixed runtime-user-assigned LED colors not saving properly.
 
 ## Flappy Duck
 
