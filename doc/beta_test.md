@@ -16,7 +16,7 @@ This update features a complete **scripting engine overhaul**, adds many **long-
 
 ## Changelog Archive
 
-[Click me for **older update notes**](./update_notes)
+[Click me for **older update notes**](https://github.com/dekuNukem/duckyPad-Pro/tree/master/doc/update_notess)
 
 ## Update Firmware
 
