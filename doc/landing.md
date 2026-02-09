@@ -2,7 +2,7 @@
 
 duckyPad is a line of **mechanical macropads** for power users demanding **advanced macro scripting** beyond the shackles of QMK/VIA.
 
-Using a [Turing-complete scripting language](./doc/duckyscript_info.md) with **massive on-board storage**, it can automate **any keyboard/mouse input** you want, from **simple combos** to **full-blown programs**.
+Using a [Turing-complete scripting language](./duckyscript_info.md) with **massive on-board storage**, it can automate **any keyboard/mouse input** you want, from **simple combos** to **full-blown programs**.
 
 |duckyPad Pro (2024)|duckyPad (2020)|
 |:--:|:--:|
