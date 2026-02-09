@@ -49,7 +49,7 @@ duckyPad aims to be the **most capable macropad today**, and is a no-brainer for
 |Hot-Swap Switches|20|15||
 |Rotary Encoders|✅|❌|2 Encoders<br>Tactile or Smooth|
 |Bluetooth|✅|❌||
-|[Expansion Module](github.com/dekuNukem/duckyPad-expansion-modules)|✅|❌|Wire up your own<br>Switches / Buttons / Foot Pedals|
+|[Expansion Module](https://github.com/dekuNukem/duckyPad-expansion-modules)|✅|❌|Wire up your own<br>Switches / Buttons / Foot Pedals|
 |Screen Rotation|✅|❌|Portrait / Landscape|
 |Capacity|64 Profiles<br>3712 Macros|32 Profiles<br>480 Macros||
 |OLED|1.5"<br>128 x 128|1.3"<br>128 x 64|Shows Key Name<br>User Controllable|
