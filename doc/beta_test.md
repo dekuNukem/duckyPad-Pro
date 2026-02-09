@@ -1,4 +1,4 @@
-# [BETA TEST] duckyPad "Turing Complete" Update: Jan 2026
+# duckyPad "Turing Complete" Mega-Update: Feb 2026
 
 Happy New Year! Please enjoy a **major update** that makes your duckyPad even more powerful!
 
@@ -14,45 +14,32 @@ This update features a complete **scripting engine overhaul**, adds many **long-
 * Streamlined Syntax & **Syntax Highlighter**
 * **New Commands** & Bug Fixes
 
-----
-
 ## Changelog Archive
 
-Looking for older update notes? [Click me](./update_notes)
+[Click me for **older update notes**](./update_notes)
 
-## Try It Out!
+## Update Firmware
 
-Follow the steps below:
+Click & follow guides below:
 
-### Update Firmware: duckyPad Pro (2024)
+* [duckyPad Pro (2024)](https://dekunukem.github.io/duckyPad-Pro/doc/fw_update.html)
+* [duckyPad (2020)](https://dekunukem.github.io/duckyPad/firmware_updates_and_version_history.html)
 
-* [Get Beta Firmware (v3.3.2)](https://github.com/dekuNukem/duckyPad-Pro/raw/refs/heads/dsvm2/firmware/DPP_FW_3.3.2_f377ce53.bin)
-* [Follow this guide](https://dekunukem.github.io/duckyPad-Pro/doc/fw_update.html) to update
-    * Use the file **you just downloaded**
-
-### 🆕 Update Firmware: duckyPad (2020)
-
-* [Get Beta Firmware (v3.0.2)](https://github.com/dekuNukem/duckyPad/raw/refs/heads/dsvm2/firmware/beta_v3.0.2.dfu)
-* [Follow this guide](https://dekunukem.github.io/duckyPad/firmware_updates_and_version_history.html) to update
-    * Use the file **you just downloaded**
-
-### 🆕 Download Latest Apps
+## Download Latest Apps
 
 * [Configurator](https://github.com/duckyPad/duckyPad-Configurator/releases/tag/4.0.2)
 * [Autoswitcher](https://github.com/duckyPad/duckyPad-Profile-Autoswitcher/releases/tag/1.2.1)
 
-### Do Your Worst!
+## Try It Out!
 
 * ⚠️ **Load & save** with latest configurator to **refresh the files**
 * See if your **existing scripts** still work!
 * If so, scroll down, **read about the new features** and try them out.
     * Give it a good thrashing
-
-🐞 Bugs are expected, let me know if you run into any!
-
-* [Discord](https://discord.gg/4sJCBx5)
-* Email: `dekuNukem` `gmail.com`
-* [Github Issue](https://github.com/dekuNukem/duckypad-pro/issues)
+* 🐞 Let me know if you run into any bugs!
+    * [Discord](https://discord.gg/4sJCBx5)
+    * Email: `dekuNukem` `gmail.com`
+    * [Github Issue](https://github.com/dekuNukem/duckypad-pro/issues)
 
 ## Table of Contents
 
@@ -94,7 +81,7 @@ END_IF
 * **All variable types** are now **Signed 32-bit Integers**
     * Can hold value between **−2,147,483,648 and 2,147,483,647**
 * All operators are **signed** by default
-    * [Explicit **unsigned** operators](https://github.com/dekuNukem/duckyPad-Pro/blob/dsvm2/doc/duckyscript_info.md#unsigned-operators) are available
+    * [Explicit **unsigned** operators](https://github.com/dekuNukem/duckyPad-Pro/blob/master/doc/duckyscript_info.md#unsigned-operators) are available
 
 ## Print Format Specifiers
 
@@ -367,11 +354,12 @@ Please enjoy a **flappy bird clone** showcasing many of the new features in this
 
 ![flappy duck screenshot](../resources/photos/flappy.png)
 
-* [Click me for source code](https://raw.githubusercontent.com/dekuNukem/duckyPad-Pro/refs/heads/dsvm2/resources/flappyduck.txt)
+* [Click me for source code](https://raw.githubusercontent.com/dekuNukem/duckyPad-Pro/refs/heads/master/resources/flappyduck.txt)
 * **Copy & paste content AS-IS** into the script textbox
 
 ## Additional Reading
 
+* [Full duckyScript Doc](https://dekunukem.github.io/duckyPad-Pro/doc/duckyscript_info.html)
 * [duckStack VM](https://github.com/duckyPad/DuckStack)
     * duckyScript compiler and Bytecode VM
 * [duckyPad StdLib](https://github.com/duckyPad/DPDS-Standard-Library)

@@ -6,24 +6,25 @@
 
 ## Latest Firmware
 
-### 2.4.3
+### 3.3.3
 
-16 Dec 2025
+9 Feb 2026
 
-🆕 **1000Hz** Polling Rate!
-
-* 🐇 Much faster typing speed
-* To try it out, put `DEFAULTCHARDELAY 10` at top of script.
-	* `5` even faster, `1` might be too fast
+* 🆕 **"Turing Complete" Mega-update**
+	* **32-bit** Overhaul
+	* Proper **Function Calls**
+	* **Print Format** Specifiers
+	* **Horizontal** Mouse Scrolling
+	* **New Commands**, Bug Fixes, and much more!
+* 👉 [**Full Details & Changelog**](https://dekunukem.github.io/duckyPad-Pro/doc/beta_test.html)
 
 👇👇👇👇👇👇👇👇👇👇
 
-[Download Here](https://github.com/dekuNukem/duckyPad-Pro/raw/master/firmware/DPP_FW_2.4.3_edf3b9f7.bin)
+* [Download Firmware](https://github.com/dekuNukem/duckyPad-Pro/raw/master/firmware/DPP_FW_3.3.3_d788ea98.bin)
+
+* Also the [Latest Configurator](https://github.com/duckyPad/duckyPad-Configurator/releases/latest) and [Autoswitcher](https://github.com/duckyPad/duckyPad-Profile-Autoswitcher/releases/latest)
 
 ☝️☝️☝️☝️☝️☝️☝️☝️☝️☝️☝️
-
-👉 [More info about recent new features](https://dekunukem.github.io/duckyPad-Pro/doc/beta_test.html)
-
 
 ## Drag-and-Drop Update
 
@@ -53,6 +54,16 @@
 ![Alt text](../resources/photos/tinker/newver.png)
 
 ## Version History
+
+### 2.4.3
+
+16 Dec 2025
+
+🆕 **1000Hz** Polling Rate!
+
+* 🐇 Much faster typing speed
+* To try it out, put `DEFAULTCHARDELAY 10` at top of script.
+	* `5` even faster, `1` might be too fast
 
 ### 2.4.2
 
