@@ -246,7 +246,6 @@ void USBD_CUSTOM_HID_SendReport(uint8_t* usb_hid_buf)
 
 // ---------------- USB MSC --------------------
 
-// #define USB_PID   0xd11c
 #define USB_PID   (0xd11c+1)
 #define USB_VID   0x0483
 #define USB_BCD   0x0200
