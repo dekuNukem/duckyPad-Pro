@@ -4,9 +4,8 @@
 4 Chrome
 5 Photoshop
 6 OBS
-7 Twitch
-8 WASD
-9 Numpad
-10 MS Teams
-11 Autohotkey
-12 duckyScript
+7 WASD
+8 Numpad
+9 MS Teams
+10 Autohotkey
+11 duckyScript
