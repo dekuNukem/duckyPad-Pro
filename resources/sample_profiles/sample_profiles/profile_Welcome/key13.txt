@@ -1,3 +1,5 @@
+DEFAULTCHARDELAY 15
+
 SWC_FILL 0 128 0
 OLED_CLEAR
 OLED_CURSOR 0 40
@@ -13,6 +15,9 @@ OLED_PRINT Typing...
 OLED_UPDATE
 
 STRINGLN_BLOCK
-duckyScript also supports Variables, Conditional Statements, Loops, Functions, and more. Making it closer to a general-purpose language.
+duckyScript also supports Variables, Conditional Statements, Loops, Functions, and more.
+
+At full potential, it is much closer to a general-purpose language.
+
 END_STRINGLN
 SWC_RESET 99

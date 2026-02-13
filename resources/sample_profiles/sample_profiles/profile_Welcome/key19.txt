@@ -1,57 +1,183 @@
-VAR $fun_arg = 0
-FUNCTION increase()
-    IF $fun_arg < 127 THEN
-        $fun_arg = $fun_arg + 1
+// Physics scaling: 10 = 1.0 pixel, 15 = 1.5 pixels, etc.
+DEFINE SCALE 10 
+
+DEFINE BALL_RADIUS 2
+DEFINE PADDLE_WIDTH 3
+DEFINE PADDLE_HEIGHT 30
+DEFINE BALL_PADDLE_TOUCH_POINT_X ((BALL_RADIUS+PADDLE_WIDTH)*SCALE)
+DEFINE PADDLE_MOVEMENT_STEP 6
+
+DEFINE RE_CW 24
+DEFINE RE_CCW 25
+
+DEFINE OLED_HEIGHT 128
+DEFINE OLED_WIDTH 128
+DEFINE PADDLE_MIN_Y (PADDLE_HEIGHT/2)
+DEFINE PADDLE_MAX_Y (OLED_HEIGHT - PADDLE_MIN_Y)
+
+// --- Global Variables ---
+// Positions are SCALED (Pixel * SCALE)
+VAR ball_x = 640
+VAR ball_y = 640
+
+// Velocity is SCALED
+VAR vel_x = 30
+VAR vel_y = 20
+
+VAR paddle_pos_y = 64
+VAR score = 0
+
+// --- Functions ---
+
+FUN draw_court()
+    // Top, Right, Bottom walls
+    OLED_LINE 0 0 127 0
+    OLED_LINE 127 0 127 127
+    OLED_LINE 0 127 127 127
+END_FUN
+
+FUN draw_paddle()
+    VAR p_top = paddle_pos_y - (PADDLE_HEIGHT/2)
+    VAR p_bot = paddle_pos_y + (PADDLE_HEIGHT/2)
+    
+    // x1, y1, x2, y2, filled(1)
+    OLED_RECT 0 p_top PADDLE_WIDTH p_bot 1
+END_FUN
+
+FUN draw_ball()
+    // Descale coordinates for drawing
+    VAR d_x = ball_x / SCALE
+    VAR d_y = ball_y / SCALE
+    
+    OLED_CIRCLE d_x d_y BALL_RADIUS 1
+END_FUN
+
+FUN game_over()
+    SWC_FILL 255 0 0
+    
+    OLED_CURSOR 0 40
+    OLED_CPRINT GAME OVER
+    
+    OLED_CURSOR 0 60
+    OLED_CPRINT Score: $score
+
+    OLED_CURSOR 0 100
+    OLED_CPRINT Press Any Key
+    
+    OLED_UPDATE
+    
+    WHILE TRUE
+        IF $_BLOCKING_READKEY <= 20 THEN
+            SWC_RESET 99
+            HALT
+        END_IF
+    END_WHILE
+END_FUN
+
+FUN update_paddle()
+    VAR key = _READKEY
+    
+    // Rotary logic
+    IF key == RE_CCW
+        paddle_pos_y = paddle_pos_y + PADDLE_MOVEMENT_STEP
+    ELSE IF key == RE_CW
+        paddle_pos_y = paddle_pos_y - PADDLE_MOVEMENT_STEP
     END_IF
-END_FUNCTION
-
-FUNCTION decrease()
-    IF $fun_arg > 0 THEN
-        $fun_arg = $fun_arg - 1
+    
+    // Bounds checking
+    IF paddle_pos_y > PADDLE_MAX_Y
+        paddle_pos_y = PADDLE_MAX_Y
     END_IF
-END_FUNCTION
+    IF paddle_pos_y < PADDLE_MIN_Y
+        paddle_pos_y = PADDLE_MIN_Y
+    END_IF
+END_FUN
 
-VAR $currX = 0
-VAR $currY = 0
+FUN increase_difficulty()
+    // Increase X speed by 0.3 pixels (3 scaled units)
+    // Maintain direction
+    IF vel_x > 0
+        vel_x = vel_x + 3
+    ELSE
+        vel_x = vel_x - 3
+    END_IF
+    
+    // Randomize Y speed slightly for chaos
+    // Add random integer between -5 and 5
+    VAR jitter = RANDINT(-5, 5)
+    vel_y = vel_y + jitter
+END_FUN
 
-DEFINE RE_UPPER_CW 21
-DEFINE RE_UPPER_CCW 22
-DEFINE RE_UPPER_PUSH 23
+FUN physics_step()
+    // Apply velocity
+    ball_x = ball_x + vel_x
+    ball_y = ball_y + vel_y
+    
+    // --- Wall Collisions (Top/Bottom/Right) ---
+    
+    // Right Wall (127 * 10 = 1270)
+    IF ball_x >= 1250
+        ball_x = 1250
+        vel_x = vel_x * -1
+    END_IF
+    
+    // Bottom Wall
+    IF ball_y >= 1250
+        ball_y = 1250
+        vel_y = vel_y * -1
+        // Add ricochet angle randomness
+        vel_x = vel_x + RANDINT(-3, 3) 
+    END_IF
+    
+    // Top Wall
+    IF ball_y <= 20
+        ball_y = 20
+        vel_y = vel_y * -1
+        // Add ricochet angle randomness
+        vel_x = vel_x + RANDINT(-3, 3)
+    END_IF
+    
+    // --- Paddle Collision (Left Side) ---
+    
+    // Check if ball is at paddle X plane
+    IF ball_x <= BALL_PADDLE_TOUCH_POINT_X
+        // Descale Y for comparison
+        VAR ball_pixel_y = ball_y / SCALE
 
-DEFINE RE_LOWER_CW 24
-DEFINE RE_LOWER_CCW 25
-DEFINE RE_LOWER_PUSH 26
+        VAR p_top = paddle_pos_y - (PADDLE_HEIGHT/2)
+        VAR p_bot = paddle_pos_y + (PADDLE_HEIGHT/2)
+        
+        IF ball_pixel_y >= p_top && ball_pixel_y <= p_bot
+            // HIT!
+            ball_x = BALL_PADDLE_TOUCH_POINT_X
+            vel_x = vel_x * -1
+            score = score + 1
+            
+            SWC_FILL $_RANDOM_INT%255 $_RANDOM_INT%255 $_RANDOM_INT%255
+            
+            increase_difficulty()
+        ELSE IF ball_x <= 0
+            // MISS!
+            game_over()
+        END_IF
+    END_IF
+    
+END_FUN
 
-SWC_FILL 64 64 64
-OLED_CLEAR
-OLED_UPDATE
+// --- Main Execution ---
+
+SWC_FILL 0 255 0
 
 WHILE 1
-    
-    OLED_LINE $currX 127-$currY $currX 127-$currY 
+    update_paddle()
+    physics_step()
+
+    OLED_CLEAR
+    draw_court()
+    draw_paddle()
+    draw_ball()
     OLED_UPDATE
-
-    VAR $this_key = $_BLOCKING_READKEY
-
-    IF $this_key == RE_UPPER_CW THEN
-        $fun_arg = $currX
-        increase()
-        $currX = $fun_arg
-    ELSE IF $this_key == RE_UPPER_CCW THEN
-        $fun_arg = $currX
-        decrease()
-        $currX = $fun_arg
-    ELSE IF $this_key == RE_LOWER_CW THEN
-        $fun_arg = $currY
-        increase()
-        $currY = $fun_arg
-    ELSE IF $this_key == RE_LOWER_CCW THEN
-        $fun_arg = $currY
-        decrease()
-        $currY = $fun_arg
-    ELSE
-	SWC_RESET 99
-        HALT
-    END_IF
     
+    // Frame delay
+    DELAY 20
 END_WHILE

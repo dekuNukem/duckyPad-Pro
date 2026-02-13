@@ -1,7 +1,7 @@
 z1 STR
 x1 LN
 z2 STRLN
-x2 BLOK
+x2 BLOCK
 z3 STR
 z4 DELAY
 z5 RGB

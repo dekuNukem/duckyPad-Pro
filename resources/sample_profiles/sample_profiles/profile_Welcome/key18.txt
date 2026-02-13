@@ -1,25 +1,85 @@
+
+FUN print_bitfield(val, y)
+    // Bit 30: Print to OLED at certer-aligned (0x40000000)
+    VAR addr = 0xF400
+    VAR puts_cfg = 0x40000000 | addr
+
+    // --- LINE 1: Top 16 Bits (Bits 31 down to 16) ---
+    VAR i = 0
+    WHILE i < 16
+        // Calculate bit position: 31, 30... down to 16
+        VAR bit_pos = 31 - i
+        
+        // Extract bit value (0 or 1)
+        VAR bit_val = (val >> bit_pos) & 1
+        
+        // Convert to ASCII (48 is '0', 49 is '1')
+        VAR ascii_val = 48 + bit_val
+        
+        // Write byte to scratch memory
+        POKE8(addr + i, ascii_val)
+        
+        i = i + 1
+    END_WHILE
+
+    // Add Null Terminator (\0) at the end of the string
+    POKE8(addr + 16, 0)
+
+    // Set Cursor and Print Line 1
+    OLED_CURSOR 0 y
+    PUTS(puts_cfg)
+
+    // --- LINE 2: Bottom 16 Bits (Bits 15 down to 0) ---
+    i = 0
+    WHILE i < 16
+        // Calculate bit position: 15, 14... down to 0
+        bit_pos = 15 - i
+        
+        bit_val = (val >> bit_pos) & 1
+        ascii_val = 48 + bit_val
+        
+        POKE8(addr + i, ascii_val)
+        
+        i = i + 1
+    END_WHILE
+
+    // Add Null Terminator
+    POKE8(addr + 16, 0)
+
+    // Set Cursor (y + 15) and Print Line 2
+    VAR y2 = y + 15
+    OLED_CURSOR 0 y2
+    PUTS(puts_cfg)
+END_FUN
+
+
 SWC_FILL 128 128 128
 
 OLED_CLEAR
-OLED_CURSOR 20 10
-OLED_PRINT Press a key
-OLED_CURSOR 30 25
-OLED_PRINT To test
-OLED_CURSOR 10 110
-OLED_PRINT Press + to quit
+OLED_CURSOR 0 0
+OLED_CPRINT Press a key
+OLED_CURSOR 0 15
+OLED_CPRINT To test
+OLED_CURSOR 0 110
+OLED_CPRINT Press + to quit
 OLED_UPDATE
 
 WHILE 1
-    OLED_CURSOR 10 70
+    OLED_CURSOR 0 40
     VAR $this_key = $_READKEY
-    IF $this_key == 28 THEN
-	SWC_RESET 99
+
+    IF $this_key == 28
+        SWC_RESET 99
         HALT
-    ELSE IF $this_key != 0 THEN
-        OLED_PRINT Key $this_key Pressed!
+    ELSE IF $this_key != 0
+        OLED_CPRINT Key $this_key Pressed!
     ELSE
-        OLED_PRINT                       
+        OLED_CPRINT                       
     END_IF
+
+    print_bitfield(_SW_BITFIELD, 70)
+
     OLED_UPDATE
     DELAY 30
 END_WHILE
+

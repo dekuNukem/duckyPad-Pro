@@ -1,4 +1,4 @@
-DEFAULTCHARDELAY 25
+DEFAULTCHARDELAY 15
 DEFAULTDELAY 25
 
 DEFINE PLUS_BUTTON 28
@@ -32,9 +32,9 @@ VAR $is_win = $_BLOCKING_READKEY == PLUS_BUTTON
 IF $is_win THEN
     SWC_FILL 0 128 0
     WINDOWS R
-    DELAY 750
+    DELAY 1000
     STRINGLN notepad
-    DELAY 750
+    DELAY 1000
 ELSE
     OLED_CLEAR
     OLED_CURSOR 0 50
@@ -66,7 +66,7 @@ duckyPad uses duckyScript. It's very powerful but can get pretty complex.
 
 Let's start simple!
 
-This row has a few shortcuts. Easy to write but still very useful.
+This row has a few shortcuts. Easy to write but very useful.
 
 Try out EACH ROW to see what duckyPad can do!
 
