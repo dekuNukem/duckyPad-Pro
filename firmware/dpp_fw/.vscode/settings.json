@@ -78,5 +78,6 @@
     "diskio_impl.h": "c",
     "time.h": "c",
     "stdio.h": "c"
-  }
+  },
+  "idf.currentSetup": "C:\\Users\\allen\\esp\\v5.3\\esp-idf"
 }

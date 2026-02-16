@@ -1225,9 +1225,14 @@ END_WHILE
 
 Read `_SW_BITFIELD`, **returns immediately**.
 
-Each bit position stores the status of the corresponding key.
+Each **bit position** `b` stores the status of **KeyID** **`b+1`**.
 
-* E.g. `bit 1` = `key ID 1`, `bit 13` = `key ID 13`, etc.
+|Bit #|Key ID|
+|:-:|:-:|
+|0|1|
+|1|2|
+|...|...|
+|31|32|
 
 If that bit is 1, the key is currently pressed.
 
