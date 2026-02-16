@@ -247,6 +247,7 @@ EJECT</text>
 <text x="70.343" y="92.315" size="3" layer="26" rot="MR0" align="center-left">OFF</text>
 <text x="97.185" y="30.343" size="2.54" layer="26" rot="MR270" align="center-left">Exp</text>
 <text x="101.685" y="18.843" size="2.1844" layer="26" rot="MR270" align="center-left">GPIO</text>
+<text x="106.185" y="81.343" size="2.1844" layer="26" rot="MR270" align="center-left">RESET</text>
 </plain>
 <libraries>
 <library name="duckypad">
