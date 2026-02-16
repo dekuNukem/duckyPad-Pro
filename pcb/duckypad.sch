@@ -6730,68 +6730,6 @@ You are welcome to use this library for commercial purposes. For attribution, we
 </deviceset>
 </devicesets>
 </library>
-<library name="3pos_slide_switch">
-<packages>
-<package name="342_SWICH_FOOT">
-<smd name="P$1" x="-2.05" y="-0.825" dx="1.4" dy="1.15" layer="1" thermals="no"/>
-<smd name="P$2" x="-2.05" y="0.825" dx="1.4" dy="1.15" layer="1" thermals="no"/>
-<smd name="P$3" x="2.05" y="0.825" dx="1.4" dy="1.15" layer="1" thermals="no"/>
-<smd name="P$4" x="2.05" y="-0.825" dx="1.4" dy="1.15" layer="1" thermals="no"/>
-</package>
-<package name="342_SWICH_FOOT_HOLE">
-<smd name="P$1" x="-2.05" y="-0.825" dx="1.4" dy="1.15" layer="1" thermals="no"/>
-<smd name="P$2" x="-2.05" y="0.825" dx="1.4" dy="1.15" layer="1" thermals="no"/>
-<smd name="P$3" x="2.05" y="0.825" dx="1.4" dy="1.15" layer="1" thermals="no"/>
-<smd name="P$4" x="2.05" y="-0.825" dx="1.4" dy="1.15" layer="1" thermals="no"/>
-<hole x="0" y="0.9" drill="0.7"/>
-<hole x="0" y="-0.9" drill="0.7"/>
-</package>
-</packages>
-<symbols>
-<symbol name="342_SWITCH_SYM">
-<wire x1="-7.62" y1="7.62" x2="10.16" y2="7.62" width="0.254" layer="94"/>
-<wire x1="10.16" y1="7.62" x2="10.16" y2="-5.08" width="0.254" layer="94"/>
-<wire x1="10.16" y1="-5.08" x2="-10.16" y2="-5.08" width="0.254" layer="94"/>
-<wire x1="-10.16" y1="-5.08" x2="-10.16" y2="7.62" width="0.254" layer="94"/>
-<wire x1="-10.16" y1="7.62" x2="-7.62" y2="7.62" width="0.254" layer="94"/>
-<pin name="2" x="-15.24" y="5.08" length="middle"/>
-<pin name="1" x="-15.24" y="-2.54" length="middle"/>
-<pin name="3" x="15.24" y="5.08" length="middle" rot="R180"/>
-<pin name="4" x="15.24" y="-2.54" length="middle" rot="R180"/>
-</symbol>
-</symbols>
-<devicesets>
-<deviceset name="324_SW">
-<gates>
-<gate name="G$1" symbol="342_SWITCH_SYM" x="-33.02" y="0"/>
-</gates>
-<devices>
-<device name="" package="342_SWICH_FOOT">
-<connects>
-<connect gate="G$1" pin="1" pad="P$1"/>
-<connect gate="G$1" pin="2" pad="P$2"/>
-<connect gate="G$1" pin="3" pad="P$3"/>
-<connect gate="G$1" pin="4" pad="P$4"/>
-</connects>
-<technologies>
-<technology name=""/>
-</technologies>
-</device>
-<device name="324_SWITCH_FOOT_HOLE" package="342_SWICH_FOOT_HOLE">
-<connects>
-<connect gate="G$1" pin="1" pad="P$1"/>
-<connect gate="G$1" pin="2" pad="P$2"/>
-<connect gate="G$1" pin="3" pad="P$3"/>
-<connect gate="G$1" pin="4" pad="P$4"/>
-</connects>
-<technologies>
-<technology name=""/>
-</technologies>
-</device>
-</devices>
-</deviceset>
-</devicesets>
-</library>
 <library name="SparkFun-PowerSymbols">
 <description>&lt;h3&gt;SparkFun Power Symbols&lt;/h3&gt;
 This library contains power, ground, and voltage-supply symbols.
@@ -7025,6 +6963,36 @@ by exp-lbrs.ulp</description>
 <wire x1="0" y1="-2" x2="0" y2="1" width="0.1524" layer="21"/>
 <smd name="MINUS" x="4" y="0" dx="2.4" dy="2" layer="1" rot="R90"/>
 </package>
+<package name="SIDEPUSH">
+<smd name="P$1" x="-1.7" y="0" dx="1" dy="0.5" layer="1" roundness="25" rot="R90" thermals="no"/>
+<smd name="P$2" x="1.7" y="0" dx="1" dy="0.5" layer="1" roundness="25" rot="R90" thermals="no"/>
+<pad name="GND1" x="-2.175" y="1.6" drill="0.5" diameter="0.8" shape="long" rot="R90" thermals="no"/>
+<pad name="GND2" x="2.175" y="1.6" drill="0.5" diameter="0.8" shape="long" rot="R90" thermals="no"/>
+<polygon width="0.1" layer="46">
+<vertex x="-2.43" y="1.85"/>
+<vertex x="-2.43" y="1.35" curve="90"/>
+<vertex x="-2.18" y="1.1" curve="90"/>
+<vertex x="-1.93" y="1.35"/>
+<vertex x="-1.93" y="1.85" curve="90"/>
+<vertex x="-2.18" y="2.1" curve="90"/>
+</polygon>
+<polygon width="0.1" layer="46">
+<vertex x="1.93" y="1.85"/>
+<vertex x="1.93" y="1.35" curve="90"/>
+<vertex x="2.18" y="1.1" curve="90"/>
+<vertex x="2.43" y="1.35"/>
+<vertex x="2.43" y="1.85" curve="90"/>
+<vertex x="2.18" y="2.1" curve="90"/>
+</polygon>
+</package>
+<package name="3POS_SLIDE_SWITCH_342_SWICH_FOOT_HOLE">
+<smd name="P$1" x="-2.05" y="-0.825" dx="1.4" dy="1.15" layer="1" thermals="no"/>
+<smd name="P$2" x="-2.05" y="0.825" dx="1.4" dy="1.15" layer="1" thermals="no"/>
+<smd name="P$3" x="2.05" y="0.825" dx="1.4" dy="1.15" layer="1" thermals="no"/>
+<smd name="P$4" x="2.05" y="-0.825" dx="1.4" dy="1.15" layer="1" thermals="no"/>
+<hole x="0" y="0.9" drill="0.7"/>
+<hole x="0" y="-0.9" drill="0.7"/>
+</package>
 </packages>
 <symbols>
 <symbol name="M2_SCREW_SYM">
@@ -7153,6 +7121,18 @@ by exp-lbrs.ulp</description>
 <wire x1="-10.16" y1="-5.08" x2="-10.16" y2="5.08" width="0.1524" layer="94"/>
 <pin name="PLUS" x="-15.24" y="0" length="middle"/>
 <pin name="MINUS" x="15.24" y="0" length="middle" rot="R180"/>
+</symbol>
+<symbol name="3POS_SLIDE_SWITCH_342_SWITCH_SYM">
+<wire x1="-10.16" y1="7.62" x2="10.16" y2="7.62" width="0.254" layer="94"/>
+<wire x1="10.16" y1="7.62" x2="10.16" y2="-5.08" width="0.254" layer="94"/>
+<wire x1="10.16" y1="-5.08" x2="-10.16" y2="-5.08" width="0.254" layer="94"/>
+<wire x1="-10.16" y1="-5.08" x2="-10.16" y2="7.62" width="0.254" layer="94"/>
+<pin name="1" x="-15.24" y="-2.54" length="middle"/>
+<pin name="2" x="-15.24" y="5.08" length="middle"/>
+<pin name="3" x="15.24" y="5.08" length="middle" rot="R180"/>
+<pin name="4" x="15.24" y="-2.54" length="middle" rot="R180"/>
+<text x="-5.08" y="-2.54" size="1.778" layer="94">G</text>
+<text x="5.08" y="-2.54" size="1.778" layer="94">G</text>
 </symbol>
 </symbols>
 <devicesets>
@@ -7308,6 +7288,35 @@ by exp-lbrs.ulp</description>
 <connects>
 <connect gate="G$1" pin="MINUS" pad="MINUS"/>
 <connect gate="G$1" pin="PLUS" pad="PLUS"/>
+</connects>
+<technologies>
+<technology name=""/>
+</technologies>
+</device>
+</devices>
+</deviceset>
+<deviceset name="3POS_SLIDE_SWITCH_324_SW">
+<gates>
+<gate name="G$1" symbol="3POS_SLIDE_SWITCH_342_SWITCH_SYM" x="-33.02" y="0"/>
+</gates>
+<devices>
+<device name="324_SWITCH_FOOT_HOLE" package="3POS_SLIDE_SWITCH_342_SWICH_FOOT_HOLE">
+<connects>
+<connect gate="G$1" pin="1" pad="P$1"/>
+<connect gate="G$1" pin="2" pad="P$2"/>
+<connect gate="G$1" pin="3" pad="P$3"/>
+<connect gate="G$1" pin="4" pad="P$4"/>
+</connects>
+<technologies>
+<technology name=""/>
+</technologies>
+</device>
+<device name="" package="SIDEPUSH">
+<connects>
+<connect gate="G$1" pin="1" pad="GND1"/>
+<connect gate="G$1" pin="2" pad="P$2"/>
+<connect gate="G$1" pin="3" pad="P$1"/>
+<connect gate="G$1" pin="4" pad="GND2"/>
 </connects>
 <technologies>
 <technology name=""/>
@@ -8386,7 +8395,7 @@ www.irf.com&lt;p&gt;
 <part name="R2" library="joyAnalog" deviceset="RESISTOR" device="0805-RES" value="62K"/>
 <part name="C4" library="clock" deviceset="CAP" device="0805" value="100nF"/>
 <part name="GND32" library="clock" deviceset="GND" device=""/>
-<part name="SW3" library="3pos_slide_switch" deviceset="324_SW" device="324_SWITCH_FOOT_HOLE" value="324_SW324_SWITCH_FOOT_HOLE"/>
+<part name="SW3" library="duckypad" deviceset="3POS_SLIDE_SWITCH_324_SW" device="" value="3POS_SLIDE_SWITCH_324_SW"/>
 <part name="GND33" library="clock" deviceset="GND" device=""/>
 <part name="GND34" library="clock" deviceset="GND" device=""/>
 <part name="GND35" library="supply1" deviceset="GND" device=""/>
@@ -8467,7 +8476,6 @@ www.irf.com&lt;p&gt;
 <part name="R17" library="joyAnalog" deviceset="RESISTOR" device="0805-RES" value="5K1"/>
 <part name="GND62" library="supply1" library_urn="urn:adsk.eagle:library:371" deviceset="GND" device=""/>
 <part name="D1" library="duckypad" deviceset="ADAFRUIT_CHANGED_DIODE" device="SOD-123" value="1N4148"/>
-<part name="SW4" library="3pos_slide_switch" deviceset="324_SW" device="324_SWITCH_FOOT_HOLE" value="324_SW324_SWITCH_FOOT_HOLE"/>
 <part name="D2" library="duckypad" deviceset="ADAFRUIT_CHANGED_DIODE" device="SOD-123" value="1N4148"/>
 <part name="D3" library="duckypad" deviceset="ADAFRUIT_CHANGED_DIODE" device="SOD-123" value="1N4148"/>
 <part name="D4" library="duckypad" deviceset="ADAFRUIT_CHANGED_DIODE" device="SOD-123" value="1N4148"/>
@@ -8489,7 +8497,6 @@ www.irf.com&lt;p&gt;
 <part name="D20" library="duckypad" deviceset="ADAFRUIT_CHANGED_DIODE" device="SOD-123" value="1N4148"/>
 <part name="D21" library="duckypad" deviceset="ADAFRUIT_CHANGED_DIODE" device="SOD-123" value="1N4148"/>
 <part name="GND1" library="supply1" library_urn="urn:adsk.eagle:library:371" deviceset="GND" device=""/>
-<part name="GND54" library="clock" deviceset="GND" device=""/>
 <part name="GND61" library="supply1" library_urn="urn:adsk.eagle:library:371" deviceset="GND" device=""/>
 <part name="GND63" library="supply1" library_urn="urn:adsk.eagle:library:371" deviceset="GND" device=""/>
 <part name="X2" library="adafruit_changed" deviceset="ANTENNA_U.FL" device=""/>
@@ -8940,7 +8947,7 @@ www.irf.com&lt;p&gt;
 <instance part="GND32" gate="1" x="325.12" y="-25.4" smashed="yes">
 <attribute name="VALUE" x="322.58" y="-27.94" size="1.778" layer="96"/>
 </instance>
-<instance part="SW3" gate="G$1" x="299.72" y="-15.24" smashed="yes"/>
+<instance part="SW3" gate="G$1" x="302.26" y="-5.08" smashed="yes" rot="R180"/>
 <instance part="GND33" gate="1" x="279.4" y="-20.32" smashed="yes">
 <attribute name="VALUE" x="276.86" y="-22.86" size="1.778" layer="96"/>
 </instance>
@@ -9229,7 +9236,6 @@ www.irf.com&lt;p&gt;
 <attribute name="NAME" x="208.28" y="-248.92" size="1.27" layer="95"/>
 <attribute name="VALUE" x="208.28" y="-255.27" size="1.27" layer="96"/>
 </instance>
-<instance part="SW4" gate="G$1" x="396.24" y="15.24" smashed="yes"/>
 <instance part="D2" gate="G$1" x="2.54" y="25.4" smashed="yes" rot="R270">
 <attribute name="NAME" x="5.08" y="27.94" size="1.27" layer="95" rot="R270"/>
 <attribute name="VALUE" x="-1.27" y="27.94" size="1.27" layer="96" rot="R270"/>
@@ -9312,9 +9318,6 @@ www.irf.com&lt;p&gt;
 </instance>
 <instance part="GND1" gate="1" x="330.2" y="-269.24" smashed="yes">
 <attribute name="VALUE" x="327.66" y="-271.78" size="1.778" layer="96"/>
-</instance>
-<instance part="GND54" gate="1" x="419.1" y="10.16" smashed="yes">
-<attribute name="VALUE" x="416.56" y="7.62" size="1.778" layer="96"/>
 </instance>
 <instance part="GND61" gate="1" x="474.98" y="-149.86" smashed="yes">
 <attribute name="VALUE" x="472.44" y="-152.4" size="1.778" layer="96"/>
@@ -9594,14 +9597,6 @@ www.irf.com&lt;p&gt;
 <wire x1="325.12" y1="-22.86" x2="325.12" y2="-20.32" width="0.1524" layer="91"/>
 </segment>
 <segment>
-<pinref part="GND33" gate="1" pin="GND"/>
-<pinref part="SW3" gate="G$1" pin="1"/>
-<wire x1="279.4" y1="-17.78" x2="284.48" y2="-17.78" width="0.1524" layer="91"/>
-<pinref part="SW3" gate="G$1" pin="4"/>
-<wire x1="284.48" y1="-17.78" x2="314.96" y2="-17.78" width="0.1524" layer="91"/>
-<junction x="284.48" y="-17.78"/>
-</segment>
-<segment>
 <pinref part="X1" gate="G$1" pin="GND@1"/>
 <pinref part="GND34" gate="1" pin="GND"/>
 <wire x1="274.32" y1="-43.18" x2="271.78" y2="-43.18" width="0.1524" layer="91"/>
@@ -9767,14 +9762,6 @@ www.irf.com&lt;p&gt;
 <wire x1="297.18" y1="-266.7" x2="330.2" y2="-266.7" width="0.1524" layer="91"/>
 </segment>
 <segment>
-<pinref part="GND54" gate="1" pin="GND"/>
-<pinref part="SW4" gate="G$1" pin="4"/>
-<wire x1="419.1" y1="12.7" x2="411.48" y2="12.7" width="0.1524" layer="91"/>
-<pinref part="SW4" gate="G$1" pin="1"/>
-<wire x1="411.48" y1="12.7" x2="381" y2="12.7" width="0.1524" layer="91"/>
-<junction x="411.48" y="12.7"/>
-</segment>
-<segment>
 <pinref part="SW1" gate="G$1" pin="P"/>
 <pinref part="SW1" gate="G$1" pin="P1"/>
 <wire x1="469.9" y1="-144.78" x2="469.9" y2="-147.32" width="0.1524" layer="91"/>
@@ -9832,6 +9819,18 @@ www.irf.com&lt;p&gt;
 <segment>
 <pinref part="R19" gate="G$1" pin="1"/>
 <pinref part="GND67" gate="1" pin="GND"/>
+</segment>
+<segment>
+<pinref part="GND33" gate="1" pin="GND"/>
+<wire x1="279.4" y1="-17.78" x2="279.4" y2="-10.16" width="0.1524" layer="91"/>
+<pinref part="SW3" gate="G$1" pin="3"/>
+<wire x1="279.4" y1="-10.16" x2="287.02" y2="-10.16" width="0.1524" layer="91"/>
+<pinref part="SW3" gate="G$1" pin="4"/>
+<wire x1="279.4" y1="-10.16" x2="279.4" y2="-2.54" width="0.1524" layer="91"/>
+<wire x1="279.4" y1="-2.54" x2="287.02" y2="-2.54" width="0.1524" layer="91"/>
+<junction x="279.4" y="-10.16"/>
+<pinref part="SW3" gate="G$1" pin="1"/>
+<wire x1="317.5" y1="-2.54" x2="287.02" y2="-2.54" width="0.1524" layer="91"/>
 </segment>
 </net>
 <net name="+3V3" class="0">
@@ -10424,9 +10423,6 @@ www.irf.com&lt;p&gt;
 </net>
 <net name="RESET" class="0">
 <segment>
-<pinref part="SW3" gate="G$1" pin="2"/>
-<pinref part="SW3" gate="G$1" pin="3"/>
-<wire x1="284.48" y1="-10.16" x2="314.96" y2="-10.16" width="0.1524" layer="91"/>
 <pinref part="R2" gate="G$1" pin="2"/>
 <pinref part="C4" gate="G$1" pin="1"/>
 <wire x1="325.12" y1="-7.62" x2="325.12" y2="-10.16" width="0.1524" layer="91"/>
@@ -10436,10 +10432,10 @@ www.irf.com&lt;p&gt;
 <wire x1="342.9" y1="-30.48" x2="342.9" y2="-10.16" width="0.1524" layer="91"/>
 <wire x1="342.9" y1="-10.16" x2="325.12" y2="-10.16" width="0.1524" layer="91"/>
 <junction x="325.12" y="-10.16"/>
-<wire x1="314.96" y1="-10.16" x2="325.12" y2="-10.16" width="0.1524" layer="91"/>
-<junction x="314.96" y="-10.16"/>
 <pinref part="JP4" gate="G$1" pin="1"/>
 <junction x="342.9" y="-10.16"/>
+<pinref part="SW3" gate="G$1" pin="2"/>
+<wire x1="317.5" y1="-10.16" x2="325.12" y2="-10.16" width="0.1524" layer="91"/>
 </segment>
 </net>
 <net name="N$38" class="0">
@@ -11087,17 +11083,9 @@ www.irf.com&lt;p&gt;
 </net>
 <net name="N$28" class="0">
 <segment>
-<pinref part="SW4" gate="G$1" pin="3"/>
-<pinref part="SW4" gate="G$1" pin="2"/>
-<wire x1="411.48" y1="20.32" x2="381" y2="20.32" width="0.1524" layer="91"/>
-<wire x1="381" y1="20.32" x2="378.46" y2="20.32" width="0.1524" layer="91"/>
-<junction x="381" y="20.32"/>
 <pinref part="U3" gate="G$1" pin="GPIO0"/>
 <pinref part="SW22" gate="G$2" pin="1"/>
 <wire x1="398.78" y1="-30.48" x2="419.1" y2="-30.48" width="0.1524" layer="91"/>
-<wire x1="378.46" y1="20.32" x2="378.46" y2="-30.48" width="0.1524" layer="91"/>
-<wire x1="378.46" y1="-30.48" x2="398.78" y2="-30.48" width="0.1524" layer="91"/>
-<junction x="398.78" y="-30.48"/>
 </segment>
 </net>
 <net name="N$30" class="0">

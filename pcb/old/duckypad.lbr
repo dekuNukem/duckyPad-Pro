@@ -20,7 +20,7 @@
 <layer number="10" name="Route10" color="29" fill="1" visible="no" active="yes"/>
 <layer number="11" name="Route11" color="30" fill="1" visible="no" active="yes"/>
 <layer number="12" name="Route12" color="20" fill="1" visible="no" active="yes"/>
-<layer number="13" name="Route13" color="21" fill="1" visible="no" active="yes"/>
+<layer number="13" name="Route13" color="21" fill="1" visible="yes" active="yes"/>
 <layer number="14" name="Route14" color="22" fill="1" visible="no" active="yes"/>
 <layer number="15" name="Route15" color="23" fill="1" visible="no" active="yes"/>
 <layer number="16" name="Bottom" color="1" fill="1" visible="yes" active="yes"/>
@@ -749,6 +749,28 @@ EC12E series with push-on switch</description>
 <wire x1="6.95" y1="6.95" x2="6.95" y2="-6.95" width="0" layer="20"/>
 <wire x1="6.95" y1="-6.95" x2="-6.95" y2="-6.95" width="0" layer="20"/>
 </package>
+<package name="SIDEPUSH">
+<smd name="P$1" x="-1.7" y="0" dx="1" dy="0.5" layer="1" roundness="25" rot="R90" thermals="no"/>
+<smd name="P$2" x="1.7" y="0" dx="1" dy="0.5" layer="1" roundness="25" rot="R90" thermals="no"/>
+<pad name="GND1" x="-2.175" y="1.6" drill="0.5" diameter="0.8" shape="long" rot="R90" thermals="no"/>
+<pad name="GND2" x="2.175" y="1.6" drill="0.5" diameter="0.8" shape="long" rot="R90" thermals="no"/>
+<polygon width="0.1" layer="46">
+<vertex x="-2.43" y="1.85"/>
+<vertex x="-2.43" y="1.35" curve="90"/>
+<vertex x="-2.18" y="1.1" curve="90"/>
+<vertex x="-1.93" y="1.35"/>
+<vertex x="-1.93" y="1.85" curve="90"/>
+<vertex x="-2.18" y="2.1" curve="90"/>
+</polygon>
+<polygon width="0.1" layer="46">
+<vertex x="1.93" y="1.85"/>
+<vertex x="1.93" y="1.35" curve="90"/>
+<vertex x="2.18" y="1.1" curve="90"/>
+<vertex x="2.43" y="1.35"/>
+<vertex x="2.43" y="1.85" curve="90"/>
+<vertex x="2.18" y="2.1" curve="90"/>
+</polygon>
+</package>
 </packages>
 <symbols>
 <symbol name="3POS_SLIDE_SWITCH_342_SWITCH_SYM">
@@ -760,6 +782,8 @@ EC12E series with push-on switch</description>
 <pin name="2" x="-15.24" y="5.08" length="middle"/>
 <pin name="3" x="15.24" y="5.08" length="middle" rot="R180"/>
 <pin name="4" x="15.24" y="-2.54" length="middle" rot="R180"/>
+<text x="-5.08" y="-2.54" size="1.778" layer="94">G</text>
+<text x="5.08" y="-2.54" size="1.778" layer="94">G</text>
 </symbol>
 <symbol name="DISCRETE_L">
 <wire x1="-2.54" y1="0" x2="-1.27" y2="0" width="0.254" layer="94" curve="-180"/>
@@ -1262,6 +1286,17 @@ EC12E series with push-on switch</description>
 <connect gate="G$1" pin="2" pad="P$2"/>
 <connect gate="G$1" pin="3" pad="P$3"/>
 <connect gate="G$1" pin="4" pad="P$4"/>
+</connects>
+<technologies>
+<technology name=""/>
+</technologies>
+</device>
+<device name="" package="SIDEPUSH">
+<connects>
+<connect gate="G$1" pin="1" pad="GND1"/>
+<connect gate="G$1" pin="2" pad="P$2"/>
+<connect gate="G$1" pin="3" pad="P$1"/>
+<connect gate="G$1" pin="4" pad="GND2"/>
 </connects>
 <technologies>
 <technology name=""/>
