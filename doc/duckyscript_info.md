@@ -1225,7 +1225,7 @@ END_WHILE
 
 Read `_SW_BITFIELD`, **returns immediately**.
 
-Each **bit position** `b` stores the status of **KeyID** **`b+1`**.
+Each **bit position** stores the status of a key.
 
 |Bit #|Key ID|
 |:-:|:-:|
