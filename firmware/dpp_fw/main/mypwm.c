@@ -32,7 +32,7 @@ void example_ledc_init(void)
     .channel        = LEDC_CHANNEL,
     .timer_sel      = LEDC_TIMER,
     .gpio_num       = LEDC_OUTPUT_IO,
-    .duty           = 0, // Set duty to 0%
+    .duty           = LEDC_DUTY_DEFAULT, // Set duty to 0%
     .hpoint         = 0,
   };
   ESP_ERROR_CHECK(ledc_channel_config(&ledc_channel));
@@ -42,6 +42,6 @@ void example_ledc_init(void)
 void my_pwm_test(void)
 {
   example_ledc_init();
-  ESP_ERROR_CHECK(ledc_set_duty(LEDC_MODE, LEDC_CHANNEL, LEDC_DUTY));
-  ESP_ERROR_CHECK(ledc_update_duty(LEDC_MODE, LEDC_CHANNEL));
+  // ESP_ERROR_CHECK(ledc_set_duty(LEDC_MODE, LEDC_CHANNEL, LEDC_DUTY));
+  // ESP_ERROR_CHECK(ledc_update_duty(LEDC_MODE, LEDC_CHANNEL));
 }

@@ -181,11 +181,14 @@ Feb 9 2026
 Disabled PWM output
 Public release
 
+3.3.4
+Mar 11 2026
+Adjusted PWM default level to reduce power consumption
 */
 
 uint8_t fw_version_major = 3;
 uint8_t fw_version_minor = 3;
-uint8_t fw_version_patch = 3;
+uint8_t fw_version_patch = 4;
 
 uint8_t dsvm_version = 2;
 

@@ -6,23 +6,17 @@
 
 ## Latest Firmware
 
-### 3.3.3
+### 3.3.4
 
-9 Feb 2026
+11 Mar 2026
 
+* 🐞 Fixed PWM default level to reduce power consumption
 * 🆕 **"Turing Complete" Mega-update**
-	* **32-bit** Overhaul
-	* Proper **Function Calls**
-	* **Print Format** Specifiers
-	* **Horizontal** Mouse Scrolling
-	* **New Commands**, Bug Fixes, and much more!
 * 👉 [**Full Details & Changelog**](https://dekunukem.github.io/duckyPad-Pro/doc/beta_test.html)
 
 👇👇👇👇👇👇👇👇👇👇
 
-* [Download Firmware](https://github.com/dekuNukem/duckyPad-Pro/raw/master/firmware/DPP_FW_3.3.3_d788ea98.bin)
-
-* Also the [Latest Configurator](https://github.com/duckyPad/duckyPad-Configurator/releases/latest) and [Autoswitcher](https://github.com/duckyPad/duckyPad-Profile-Autoswitcher/releases/latest)
+* [Download Firmware](https://github.com/dekuNukem/duckyPad-Pro/raw/master/firmware/DPP_FW_3.3.4_bc407dad.bin)
 
 ☝️☝️☝️☝️☝️☝️☝️☝️☝️☝️☝️
 
@@ -54,6 +48,18 @@
 ![Alt text](../resources/photos/tinker/newver.png)
 
 ## Version History
+
+### 3.3.3
+
+9 Feb 2026
+
+* 🆕 **"Turing Complete" Mega-update**
+	* **32-bit** Overhaul
+	* Proper **Function Calls**
+	* **Print Format** Specifiers
+	* **Horizontal** Mouse Scrolling
+	* **New Commands**, Bug Fixes, and much more!
+* 👉 [**Full Details & Changelog**](https://dekunukem.github.io/duckyPad-Pro/doc/beta_test.html)
 
 ### 2.4.3
 
