@@ -10,9 +10,9 @@
 
 11 Mar 2026
 
-* 🐞 Fixed PWM default level to reduce power consumption
+* 🐞 Fixed a bug that may cause increased power consumption
 * 🆕 **"Turing Complete" Mega-update**
-* 👉 [**Full Details & Changelog**](https://dekunukem.github.io/duckyPad-Pro/doc/beta_test.html)
+	* 👉 [**Full Details & Changelog**](https://dekunukem.github.io/duckyPad-Pro/doc/beta_test.html)
 
 👇👇👇👇👇👇👇👇👇👇
 
