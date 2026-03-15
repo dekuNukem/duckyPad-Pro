@@ -1437,7 +1437,13 @@ void execute_instruction(exe_context* exe)
     if(randc != 0 && (this_value & 0x200))
       ssd1306_WriteString(make_str_buf, Font_7x10, White);
     if(randc != 0 && (this_value & 0x100))
-      kb_print(make_str_buf, defaultchardelay, charjitter);
+    {
+      if(kb_print(make_str_buf, defaultchardelay, charjitter))
+      {
+        exe->result = EXE_ABORTED;
+        return;
+      }
+    }
   }
   else if(opcode == OP_PUTS)
   {
@@ -1453,7 +1459,13 @@ void execute_instruction(exe_context* exe)
     if(this_value & 0x40000000)
       oled_centre_print_preserve_cursor(read_buffer);
     if(this_value & 0x80000000)
-      kb_print(read_buffer, defaultchardelay, charjitter);
+    {
+      if(kb_print(read_buffer, defaultchardelay, charjitter))
+      {
+        exe->result = EXE_ABORTED;
+        return;
+      }
+    }
   }
   else if(opcode == OP_HIDTX)
   {
@@ -1510,6 +1522,7 @@ void run_dsb(exe_context* ctx, uint8_t this_key_id, char* dsb_path, uint8_t* dsb
     ctx->result = panic_code;
     return;
   }
+
   while(1)
   {
     execute_instruction(ctx);
@@ -1518,7 +1531,13 @@ void run_dsb(exe_context* ctx, uint8_t this_key_id, char* dsb_path, uint8_t* dsb
       break;
     if(ctx->this_pc > this_dsb_size)
       break;
+    if(allow_abort && sw_queue_has_keydown_event())
+    {
+      ctx->result = EXE_ABORTED;
+      break;
+    }
   }
+
   disable_autorepeat ? DS_SET_BITS(*epilogue_ptr, EPILOGUE_DONT_AUTO_REPEAT) : DS_CLEAR_BITS(*epilogue_ptr, EPILOGUE_DONT_AUTO_REPEAT);
 
   if(dsb_cache_buf == NULL && this_dsb_size <= DSB_CACHE_BYTE_SIZE)

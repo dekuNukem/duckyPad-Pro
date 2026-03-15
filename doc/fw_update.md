@@ -6,17 +6,17 @@
 
 ## Latest Firmware
 
-### 3.3.4
+### 3.3.5
 
-11 Mar 2026
+15 Mar 2026
 
-* 🐞 Fixed a bug that may cause increased power consumption
+* 🐞 Increased Anykey-to-Abort check frequency 
 * 🆕 **"Turing Complete" Mega-update**
 	* 👉 [**Full Details & Changelog**](https://dekunukem.github.io/duckyPad-Pro/doc/beta_test.html)
 
 👇👇👇👇👇👇👇👇👇👇
 
-* [Download Firmware](https://github.com/dekuNukem/duckyPad-Pro/raw/master/firmware/DPP_FW_3.3.4_bc407dad.bin)
+* [Download Firmware](https://github.com/dekuNukem/duckyPad-Pro/raw/master/firmware/DPP_FW_3.3.5_7e717835.bin)
 
 ☝️☝️☝️☝️☝️☝️☝️☝️☝️☝️☝️
 
@@ -48,6 +48,12 @@
 ![Alt text](../resources/photos/tinker/newver.png)
 
 ## Version History
+
+### 3.3.4
+
+11 Mar 2026
+
+* 🐞 Fixed a bug that may cause increased power consumption
 
 ### 3.3.3
 

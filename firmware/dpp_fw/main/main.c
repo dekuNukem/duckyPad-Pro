@@ -184,11 +184,15 @@ Public release
 3.3.4
 Mar 11 2026
 Adjusted PWM default level to reduce power consumption
+
+3.3.5
+Mar 15 2026
+Increased Anykey-to-Abort check frequency
 */
 
 uint8_t fw_version_major = 3;
 uint8_t fw_version_minor = 3;
-uint8_t fw_version_patch = 4;
+uint8_t fw_version_patch = 5;
 
 uint8_t dsvm_version = 2;
 
