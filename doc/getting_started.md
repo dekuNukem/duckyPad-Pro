@@ -287,27 +287,32 @@ In this case, the duckyScript would be `CONTROL ALT D`.
 
 ### Launching Apps on macOS
 
-Go to `System Preferences` -> `Keyboard` -> `Shortcuts` -> `App Shortcuts`:
+Easiest way: Invoke Spotlight and type the application name.
 
-Press `+` button, select app, assign a hotkey, and set up duckyPad accordingly:
+```
+COMMAND SPACE
+DELAY 500
+STRING firefox
+ENTER
+```
 
-![Alt text](../resources/photos/app/mac_sc.png)
+You can also use third-party softwares such as [BetterTouchTool](https://folivora.ai).
 
 ### Advanced Scripting with Autohotkey
 
 You can use the free and open-source [Autohotkey](https://www.autohotkey.com) for even more advanced scripting needs.
 
-duckyPad can press a simple combo like `WIN + F1`, which triggers autohotkey to execute a more complex script on your PC.
+duckyPad can press a simple combo like `WIN + F1`, which triggers Autohotkey to execute a more complex script on your PC.
 
-* Download and install [autohotkey](https://www.autohotkey.com)
+* Download and install [Autohotkey](https://www.autohotkey.com)
 
-* Download and save [this sample autohotkey script](../resources/duckypad_pro_autohotkey_script.ahk) as an `.ahk` file.
+* Download and save the [sample Autohotkey script](../resources/duckypad_pro_autohotkey_script.ahk) as an `.ahk` file.
 
 * Activate the script by right clicking and select `Run Script`.
 
 ![Alt text](../resources/photos/app/ahk_run.png)
 
-* Switch to `autohotkey` profile, press a key.
+* Switch to `Autohotkey` profile, press a key.
 
 * Corresponding message box will appear.
 
@@ -315,7 +320,7 @@ duckyPad can press a simple combo like `WIN + F1`, which triggers autohotkey to 
 
 * Write your own AHK script!
 
-Check out the [official tutorials](https://www.autohotkey.com/docs_1.0/Tutorial.htm), and how to [launch AHK on startup](https://www.autohotkey.com/docs/FAQ.htm#Startup).
+Check out the [official tutorials](https://www.autohotkey.com/docs/v2/howto/Install.htm), and how to [launch AHK on startup](https://www.autohotkey.com/docs/FAQ.htm#Startup).
 
 For macOS, you can try [bettertouchtool](https://folivora.ai).
 
