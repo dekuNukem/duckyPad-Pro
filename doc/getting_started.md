@@ -322,8 +322,6 @@ duckyPad can press a simple combo like `WIN + F1`, which triggers Autohotkey to 
 
 Check out the [official tutorials](https://www.autohotkey.com/docs/v2/howto/Install.htm), and how to [launch AHK on startup](https://www.autohotkey.com/docs/FAQ.htm#Startup).
 
-For macOS, you can try [bettertouchtool](https://folivora.ai).
-
 ## I'm Having Issues!
 
 Please take a look at the [Common issues / Troubleshooting](troubleshooting.md) guide.
