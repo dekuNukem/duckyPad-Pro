@@ -10,7 +10,7 @@
 
 15 Mar 2026
 
-* 🐞 Increased Anykey-to-Abort check frequency 
+* 🐞 Increased Anykey-to-Abort Check Frequency 
 * 🆕 **"Turing Complete" Mega-update**
 	* 👉 [**Full Details & Changelog**](https://dekunukem.github.io/duckyPad-Pro/doc/beta_test.html)
 
