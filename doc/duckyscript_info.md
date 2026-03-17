@@ -64,6 +64,14 @@ Of course, people at the [Official Discord](https://discord.gg/4sJCBx5) are alwa
 
 Much easier to lookup than going through this whole page.
 
+## Doc for AI
+
+You can also ask AI to write / explain duckyScript for you.
+
+* [Download this file](https://raw.githubusercontent.com/dekuNukem/duckyPad-Pro/refs/heads/master/doc/duckyscript_for_ai.md) (Right click -> Save As)
+    * Include as attachment (or paste content) in chat
+* AI can make mistakes. Always double check!
+
 ## Syntax Highlighter
 
 [Available for VS Code and Sublime Text](https://github.com/duckyPad/duckyScript-Syntax-Highlighter/blob/master/README.md)
