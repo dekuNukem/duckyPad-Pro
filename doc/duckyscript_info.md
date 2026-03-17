@@ -52,7 +52,7 @@ There are quite a few commands, and it can be a bit daunting.
 
 The **first few sections** (from `Comments` to `Mouse`) is more than enough to get started.
 
-You can skim through the rest once familiar with the basics.
+You can skim the rest once familiar with the basics.
 
 Also **playing with sample profiles** is a good way to get a feel of duckyScript.
 
@@ -64,7 +64,7 @@ Of course, people at the [Official Discord](https://discord.gg/4sJCBx5) are alwa
 
 Much easier to lookup than going through this whole page.
 
-## Doc for AI
+## 🤖 Doc for AI 🤖
 
 You can also ask AI to write / explain duckyScript for you.
 
@@ -316,9 +316,11 @@ Pause execution for `n` **milliseconds**.
 
 Useful for **waiting for UI to catch up**.
 
+* 1 second = 1000 ms
+
 ```
 WINDOWS r
-DELAY 1000 // 1000ms = 1 second
+DELAY 1000
 STRING cmd
 ```
 
@@ -328,14 +330,13 @@ How long to wait between each **`NON-LETTER input actions`**.
 
 * Default: 20ms
 * Applies to:
-    * `MOUSE_MOVE` and `MOUSE_SCROLL`
     * `KEYDOWN` and `KEYUP` (including combo keys)
+    * `MOUSE_MOVE` and `MOUSE_SCROLL`
     * Pressing ENTER at end of `STRINGLN`
 
 ```
 DEFAULTDELAY 50
-    // Waits 50ms between pressing each key
-CTRL ALT DELETE
+CTRL ALT DELETE // Waits 50ms between pressing each key
 ```
 
 ### `DEFAULTCHARDELAY n`
@@ -351,8 +352,7 @@ How long to wait between **`each letter`** when **`typing text`**.
 
 ```
 DEFAULTCHARDELAY 10
-    // Waits 10ms between each letter 
-STRING Hello World!
+STRING Hello World! // Waits 10ms between each letter
 ```
 
 ### `CHARJITTER n`
