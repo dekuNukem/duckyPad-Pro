@@ -1156,7 +1156,6 @@ You can read or write (RW) to adjust settings. Some are read-only (RO).
 |**`_RTC_UTC_OFFSET`**|RW|See [Real-time Clock](#real-time-clock-rtc)|
 
 -----------------
-
 # DuckStack Bytecode Virtual Machine
 
 DuckStack is a simple **stack-based bytecode VM** for executing compiled **duckyScript** binaries.
@@ -1177,7 +1176,6 @@ Addressing is **16-bit**, executable 64KB max.
     * Points to **the next free stack slot**
 * Frame Pointer (FP)
     * Points to current function base frame
-
 ### Memory Map
 
 |Address|Purpose|Size|Comment|`PEEK` and<br>`POKE`-able|
@@ -1191,9 +1189,10 @@ Addressing is **16-bit**, executable 64KB max.
 
 * Binary executable is loaded at `0x0`
 * Stack grows from `0xEFFF` towards **smaller address**
-    * Each item **4 bytes long**
-    * In actual implementation, SP can be **4-byte aligned** for better performance.
+    * Each stack item **4 bytes long**
+    * SP can be **4-byte aligned** for better performance.
 * Smaller executable allows larger stack, vise versa.
+* Over/underflow are checked before every push/pop.
 
 ## Instruction Set
 
@@ -1229,9 +1228,9 @@ Addressing is **16-bit**, executable 64KB max.
 |`DROP`|1|`14`/`0xe` |Discard **ONE** item off TOS|None|
 |`DUP`|1|`15`/`0xf` |**Duplicate the item** on TOS|None|
 |`RANDINT`|1|`16`/`0x10` |Pop **TWO** item off TOS<br>First `Upper`, then `Lower`.<br>Push a **SIGNED** random number inbetween (**inclusive**) on TOS|None|
-|`RANDUINT`|1|`17`/`0x10` |Pop **TWO** item off TOS<br>First `Upper`, then `Lower`.<br>Push an **UNSIGNED** random number inbetween (**inclusive**) on TOS|None|
-|`PUSHC32`|5|`18`/`0x11` |Push **32-bit** constant on stack|4 Bytes<br>`CONST_LSB`<br>`CONST_B1`<br>`CONST_B2`<br>`CONST_MSB`|
-|`PUSHC8`|2|`19`/`0x12` |Push **unsigned 8-bit (0-255)** constant on stack<br>For negative numbers, push abs then use `USUB`.|1 Byte|
+|`RANDUINT`|1|`17`/`0x11` |Pop **TWO** item off TOS<br>First `Upper`, then `Lower`.<br>Push an **UNSIGNED** random number inbetween (**inclusive**) on TOS|None|
+|`PUSHC32`|5|`18`/`0x12` |Push **32-bit** constant on stack|4 Bytes<br>`CONST_LSB`<br>`CONST_B1`<br>`CONST_B2`<br>`CONST_MSB`|
+|`PUSHC8`|2|`19`/`0x13` |Push **unsigned 8-bit (0-255)** constant on stack<br>For negative numbers, push abs then use `USUB`.|1 Byte|
 |`VMVER`|3|`255`/`0xff`| VM Version Check<br>Abort if mismatch |2 Bytes:<br>`VM_VER`<br>`Reserved`|
 
 ### Memory Access
@@ -1348,7 +1347,7 @@ Binary as in **involving two operands**.
 |`SLEEP`|`85`/`0x55`| **Sleep**<br>Put duckyPad to sleep<br>Terminates execution|
 |`RANDCHR`|`86`/`0x56`| **Random Character**<br>Pop **ONE** item as bitmask.<br>Bit 0: Letter Lowercase<br>Bit 1: Letter Uppercase<br>Bit 2: Digits<br>Bit 3: Symbols<br>Bit 8: Type via Keyboard<br>Bit 9: OLED Print-at-cursor|
 |`PUTS`|`87`/`0x57` |**Print String**<br>Pop **ONE** item off TOS<br>------<br>Bit 0-15: `ADDR`<br>Bit 16-23: `n`<br>Bit 29: OLED Print-at-cursor<br>Bit 30: OLED Print-Center-Aligned<br>Bit 31: Type via Keyboard<br>Print string starting from `ADDR`<br>------<br>If `n=0`, print until zero-termination.<br>Else, print max `n` chars (or until `\0`).<br>|
-|`HIDTX`|`88`/`0x59`| Pop **ONE** item off TOS as `ADDR`<br>Read **9 bytes** from `ADDR`<br>Construct & send raw HID message<br>[See `HIDTX()` in duckyScript doc](https://github.com/dekuNukem/duckyPad-Pro/blob/master/doc/duckyscript_info.md#hidtxaddr)|
+|`HIDTX`|`88`/`0x58`| Pop **ONE** item off TOS as `ADDR`<br>Read **9 bytes** from `ADDR`<br>Construct & send raw HID message<br>[See `HIDTX()` in duckyScript doc](https://github.com/dekuNukem/duckyPad-Pro/blob/master/doc/duckyscript_info.md#hidtxaddr)|
 
 ## String Encoding
 
@@ -1441,7 +1440,7 @@ When calling a function: **`foo(a, b, c)`**
 Caller then executes `CALL` instruction, which:
 
 * Constructs a 32b value `frame_info`
-    * Top 16b: `current_FP`
+    * Top 16b: `return_FP`
     * Bottom 16b: `return_address`
 * Pushes `frame_info` to TOS
 * Sets **FP** to TOS
@@ -1517,3 +1516,4 @@ At end of a function, `return_value` is on TOS.
 ||`return_val`|
 ||...|
 |`FP ->`|Base (`EFFF`)|
+
