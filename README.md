@@ -16,6 +16,8 @@ duckyPad Pro has been [successfully funded on Kickstarter](https://www.kickstart
 
 * Now available [on my Tindie Store!](https://www.tindie.com/products/37399/)
 
+No drivers needed. Works anywhere.
+
 ## Highlights
 
 duckyPad Pro has all the basics:
@@ -27,7 +29,7 @@ duckyPad Pro has all the basics:
 
 But also features **unlike any other**:
 
-* Custom **[duckyScript](doc/duckyscript_info.md)** engine, **NOT QMK/VIA**.
+* Custom **[duckyScript](https://dekunukem.github.io/duckyPad-Pro/doc/duckyscript_info.html)** engine, **NOT QMK/VIA**.
 * **Longer and more complex** macros
 	* **64 profiles**, 3712 macros.
 * **OLED** screen
@@ -67,7 +69,7 @@ Compared to QMK/VIA, you get:
 	* No sketchy drivers or apps
 	* No recompiling
 
-While QMK/VIA are great for regular keyboards, they are rather limited at input automations.
+While QMK/VIA are great for regular keyboards, they are limited at input automations.
 
 duckyScript is a no-brainer for **power users** with more demanding scripting needs.
 

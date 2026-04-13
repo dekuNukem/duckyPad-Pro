@@ -2,7 +2,9 @@
 
 duckyPad is a line of **mechanical macropads** for power users demanding **advanced macro scripting** beyond the shackles of QMK/VIA.
 
-Using a [Turing-complete scripting language](./duckyscript_info.md) with **massive on-board storage**, it can automate **any keyboard/mouse input** you want, from **simple combos** to **full-blown programs**.
+Using a [Turing-complete scripting language](https://dekunukem.github.io/duckyPad-Pro/doc/duckyscript_info.html) with **massive on-board storage**, it can automate **any keyboard/mouse input** you want, from **simple combos** to **full-blown programs**.
+
+No drivers needed. Works anywhere.
 
 |duckyPad Pro (2024)|duckyPad (2020)|
 |:--:|:--:|
@@ -21,11 +23,11 @@ Compared to QMK/VIA, you get:
 	* Type over **60,000 characters** per macro
 	* [Entire Bee Movie](../resources/beemovie.txt) in one macro? Sure thing!
 
-* **Turing-Complete Scripting**
-	* Variables, conditions, loops, functions, and more.
+* **Turing-Complete Interactive Scripting**
+	* Variables, Conditions, Loops, Functions, and more.
+		* Read Buttons / Print to OLED / Set RGB / Real-time Clock
 	* Executed on [32-bit Bytecode VM](https://duckypad.github.io/DuckStack/)
-	* Read Buttons / Print to OLED / Set RGB
-	* How about a fully functional [Pong game?](../resources/photos/pong.gif) [[code]](../resources/pong.txt)
+		* How about a fully functional [Pong game?](../resources/photos/pong.gif) [[code]](../resources/pong.txt)
 
 * On-board **SD Card Storage**
 	* Fast Config / Backup / Deployment
@@ -58,7 +60,7 @@ duckyPad aims to be the **most capable macropad today**, and is a no-brainer for
 |SD Card<br>Storage|✅|✅|Fast Backup / Duplication / Deploy<br>No recompile needed|
 |Real-time Clock|✅|✅|Aware of<br>current date and time|
 |[Automatic](https://github.com/duckyPad/duckyPad-Profile-Autoswitcher)<br>[Profile Switching](https://github.com/duckyPad/duckyPad-Profile-Autoswitcher)|✅|✅|Based on Active Window|
-|100%<br>Open-Source|✅|✅|MIT License<br>No Proprietary Apps<br>No Subscription<br>Works Anywhere|
+|100%<br>Open-Source|✅|✅|MIT License<br>No Proprietary Apps<br>No Subscription|
 |USB-C|✅|✅||
 
 # Questions or Comments?
