@@ -9,7 +9,7 @@ No drivers needed. Works anywhere.
 |duckyPad Pro (2024)|duckyPad (2020)|
 |:--:|:--:|
 |![alt](../resources/photos/sq.jpeg)|![alt](../resources/photos/og.jpeg)|
-|[Purchase Link](https://www.tindie.com/products/37399/)|[Purchase Link](https://www.tindie.com/products/21984/)|
+|[Purchase Link](https://lectronz.com/products/duckypad-pro-macro-scripting-beyond-qmk-via/)|[Purchase Link](https://www.tindie.com/products/21984/)|
 |[User Manual](getting_started.md)|[User Manual](https://dekunukem.github.io/duckyPad/getting_started.html)|
 |[Accessories & Upgrades](https://www.tindie.com/products/dekunukem/duckypad-pro-accessories/)|[Accessories & Upgrades](https://www.tindie.com/products/dekunukem/duckypad-accessories/)|
 

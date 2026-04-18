@@ -1,6 +1,6 @@
 # duckyPad Pro: Advanced Macro Scripting Beyond QMK/VIA
 
-[Get duckyPad Pro](https://www.tindie.com/products/37399/) | [Official Discord](https://discord.gg/4sJCBx5) | [Getting Started](./doc/getting_started.md) | [Table of Contents](#table-of-contents)
+[Get duckyPad Pro](https://lectronz.com/products/duckypad-pro-macro-scripting-beyond-qmk-via) | [Official Discord](https://discord.gg/4sJCBx5) | [Getting Started](./doc/getting_started.md) | [Table of Contents](#table-of-contents)
 
 -----------
 
@@ -14,7 +14,7 @@ Using a [Turing-complete scripting language](https://dekunukem.github.io/duckyPa
 
 duckyPad Pro has been [successfully funded on Kickstarter](https://www.kickstarter.com/projects/dekunukem/duckypad-pro-advanced-macro-scripting-beyond-qmk-via) with more than $100K raised!
 
-* Now available [on my Tindie Store!](https://www.tindie.com/products/37399/)
+* Now available [on my Store!](https://lectronz.com/products/duckypad-pro-macro-scripting-beyond-qmk-via)
 
 No drivers needed. Works anywhere.
 
@@ -311,7 +311,7 @@ duckyPad Pro has **20 Mechanical Switches** in **4x5 Grid.**
 
 ## Interested?
 
-Available [on my Tindie store!](https://www.tindie.com/products/37399/)
+Available [on my store!](https://lectronz.com/products/duckypad-pro-macro-scripting-beyond-qmk-via)
 
 Join our [Official Discord](https://discord.gg/4sJCBx5) for discussions and updates!
 
