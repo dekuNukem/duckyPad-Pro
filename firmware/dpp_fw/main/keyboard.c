@@ -396,6 +396,61 @@ void mouse_release_all(void)
   USBD_CUSTOM_HID_SendReport(kb_buf);
 }
 
+// Move the mouse by a relative delta. Any currently held buttons stay held.
+void mouse_move_relative(int8_t x, int8_t y)
+{
+  memset(kb_buf, 0, DP_HID_MSG_SIZE);
+  kb_buf[0] = HID_USAGE_ID_MOUSE;
+  kb_buf[1] = mouse_button_status;
+  kb_buf[2] = (uint8_t)x;
+  kb_buf[3] = (uint8_t)y;
+  USBD_CUSTOM_HID_SendReport(kb_buf);
+  memset(kb_buf, 0, DP_HID_MSG_SIZE);
+}
+
+// Move the mouse to an absolute screen position (0 to MOUSE_ABS_MAX on each axis).
+// Uses the dedicated absolute-pointer report (Report ID 6 / USB only).
+void mouse_move_absolute(uint16_t x, uint16_t y)
+{
+  if(x > MOUSE_ABS_MAX) x = MOUSE_ABS_MAX;
+  if(y > MOUSE_ABS_MAX) y = MOUSE_ABS_MAX;
+  memset(kb_buf, 0, DP_HID_MSG_SIZE);
+  kb_buf[0] = HID_USAGE_ID_MOUSE_ABS;
+  kb_buf[1] = mouse_button_status;
+  kb_buf[2] = x & 0xff;
+  kb_buf[3] = (x >> 8) & 0xff;
+  kb_buf[4] = y & 0xff;
+  kb_buf[5] = (y >> 8) & 0xff;
+  USBD_CUSTOM_HID_SendReport(kb_buf);
+  memset(kb_buf, 0, DP_HID_MSG_SIZE);
+}
+
+// Press (and hold) one or more mouse buttons. button_mask bit0=left, bit1=right,
+// bit2=middle, bit3=button4, bit4=button5.
+void mouse_button_press_mask(uint8_t button_mask)
+{
+  mouse_button_status |= button_mask;
+  memset(kb_buf, 0, DP_HID_MSG_SIZE);
+  kb_buf[0] = HID_USAGE_ID_MOUSE;
+  kb_buf[1] = mouse_button_status;
+  USBD_CUSTOM_HID_SendReport(kb_buf);
+  memset(kb_buf, 0, DP_HID_MSG_SIZE);
+}
+
+// Release one or more mouse buttons. A button_mask of 0 releases all buttons.
+void mouse_button_release_mask(uint8_t button_mask)
+{
+  if(button_mask == 0)
+    mouse_button_status = 0;
+  else
+    mouse_button_status &= ~button_mask;
+  memset(kb_buf, 0, DP_HID_MSG_SIZE);
+  kb_buf[0] = HID_USAGE_ID_MOUSE;
+  kb_buf[1] = mouse_button_status;
+  USBD_CUSTOM_HID_SendReport(kb_buf);
+  memset(kb_buf, 0, DP_HID_MSG_SIZE);
+}
+
 void action_press(my_key* this_key, uint8_t use_mod)
 {
   uint16_t duckcode;

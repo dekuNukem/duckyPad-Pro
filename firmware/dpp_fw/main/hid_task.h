@@ -19,6 +19,10 @@ void handle_hid_command(const uint8_t* hid_rx_buf, uint8_t rx_buf_size);
 #define HID_COMMAND_PREV_PROFILE           0x02
 #define HID_COMMAND_NEXT_PROFILE           0x03
 #define HID_COMMAND_SET_LED_SINGLE         0x04
+#define HID_COMMAND_MOUSE_MOVE_DELTA       0x05
+#define HID_COMMAND_MOUSE_MOVE_STATIC      0x06
+#define HID_COMMAND_MOUSE_CLICK            0x07
+#define HID_COMMAND_MOUSE_RELEASE          0x08
 #define HID_COMMAND_SW_RESET               0x14
 #define HID_COMMAND_SLEEP                  0x15
 #define HID_COMMAND_WAKEUP                 0x16
@@ -39,6 +43,9 @@ void handle_hid_command(const uint8_t* hid_rx_buf, uint8_t rx_buf_size);
 #define HID_USAGE_ID_MEDIA_KEY 2
 #define HID_USAGE_ID_MOUSE 3
 #define HID_USAGE_ID_NAMED_PIPE 4
+#define HID_USAGE_ID_MOUSE_ABS 6
+
+#define MOUSE_ABS_MAX 32767
 
 extern volatile uint8_t is_usb_hid_connected;
 uint8_t wait_for_hid_connect(uint32_t how_long_ms);

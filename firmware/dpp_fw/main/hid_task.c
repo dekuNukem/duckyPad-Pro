@@ -156,6 +156,41 @@ const uint8_t hid_report_descriptor[] =
   0xC0,                          //   End Collection (Physical)
   0xC0,                          // End Collection (Application)
 
+  // --- Report ID 6: Absolute Mouse (move-to-position) ---
+  0x05, 0x01,                    // Usage Page (Generic Desktop Ctrls)
+  0x09, 0x02,                    // Usage (Mouse)
+  0xA1, 0x01,                    // Collection (Application)
+  0x85, 0x06,                    //   Report ID (6)
+  0x09, 0x01,                    //   Usage (Pointer)
+  0xA1, 0x00,                    //   Collection (Physical)
+
+  // Mouse Buttons (1 to 5)
+  0x05, 0x09,                    //     Usage Page (Button)
+  0x19, 0x01,                    //     Usage Minimum (1)
+  0x29, 0x05,                    //     Usage Maximum (5)
+  0x15, 0x00,                    //     Logical Minimum (0)
+  0x25, 0x01,                    //     Logical Maximum (1)
+  0x95, 0x05,                    //     Report Count (5)
+  0x75, 0x01,                    //     Report Size (1)
+  0x81, 0x02,                    //     Input (Data, Var, Abs)
+
+  // Button Padding (3 bits to complete the byte)
+  0x95, 0x01,                    //     Report Count (1)
+  0x75, 0x03,                    //     Report Size (3)
+  0x81, 0x03,                    //     Input (Const, Var, Abs)
+
+  // Absolute X, Y (16-bit, 0 to 32767)
+  0x05, 0x01,                    //     Usage Page (Generic Desktop Ctrls)
+  0x09, 0x30,                    //     Usage (X)
+  0x09, 0x31,                    //     Usage (Y)
+  0x15, 0x00,                    //     Logical Minimum (0)
+  0x26, 0xFF, 0x7F,              //     Logical Maximum (32767)
+  0x75, 0x10,                    //     Report Size (16)
+  0x95, 0x02,                    //     Report Count (2)
+  0x81, 0x02,                    //     Input (Data, Var, Abs)
+  0xC0,                          //   End Collection (Physical)
+  0xC0,                          // End Collection (Application)
+
   // --- Report ID 4/5: Custom Communication ---
   0x05, 0x01,                    // Usage Page (Generic Desktop Ctrls)
   0x09, 0x3A,                    // Usage (Counted Buffer)
@@ -647,6 +682,79 @@ void handle_hid_command(const uint8_t* hid_rx_buf, uint8_t rx_buf_size)
     {
         set_pixel_3color_update_buffer(hid_rx_buf[2], hid_rx_buf[3], hid_rx_buf[4], hid_rx_buf[5]);
         neopixel_draw_current_buffer();
+        send_hid_cmd_response(hid_tx_buf);
+    }
+    /*
+        MOUSE MOVE DELTA (relative)
+        -----------
+        PC to duckyPad:
+        [0]   reserved
+        [1]   command
+        [2]   X delta, signed int8 (-127 to 127)
+        [3]   Y delta, signed int8 (-127 to 127)
+        -----------
+        duckyPad to PC
+        [0]   reserved
+        [1]   0 = OK
+    */
+    else if(command_type == HID_COMMAND_MOUSE_MOVE_DELTA)
+    {
+        mouse_move_relative((int8_t)hid_rx_buf[2], (int8_t)hid_rx_buf[3]);
+        send_hid_cmd_response(hid_tx_buf);
+    }
+    /*
+        MOUSE MOVE STATIC (absolute, move-to-position)
+        -----------
+        PC to duckyPad:
+        [0]   reserved
+        [1]   command
+        [2-3] X position, uint16 little-endian (0 to 32767)
+        [4-5] Y position, uint16 little-endian (0 to 32767)
+        -----------
+        duckyPad to PC
+        [0]   reserved
+        [1]   0 = OK
+    */
+    else if(command_type == HID_COMMAND_MOUSE_MOVE_STATIC)
+    {
+        uint16_t abs_x, abs_y;
+        memcpy(&abs_x, &hid_rx_buf[2], sizeof(abs_x));
+        memcpy(&abs_y, &hid_rx_buf[4], sizeof(abs_y));
+        mouse_move_absolute(abs_x, abs_y);
+        send_hid_cmd_response(hid_tx_buf);
+    }
+    /*
+        MOUSE CLICK (press button(s), held down)
+        -----------
+        PC to duckyPad:
+        [0]   reserved
+        [1]   command
+        [2]   button bitmask (bit0=left, bit1=right, bit2=middle, bit3=4, bit4=5)
+        -----------
+        duckyPad to PC
+        [0]   reserved
+        [1]   0 = OK
+    */
+    else if(command_type == HID_COMMAND_MOUSE_CLICK)
+    {
+        mouse_button_press_mask(hid_rx_buf[2]);
+        send_hid_cmd_response(hid_tx_buf);
+    }
+    /*
+        MOUSE RELEASE (lift button(s))
+        -----------
+        PC to duckyPad:
+        [0]   reserved
+        [1]   command
+        [2]   button bitmask to release (0 = release all)
+        -----------
+        duckyPad to PC
+        [0]   reserved
+        [1]   0 = OK
+    */
+    else if(command_type == HID_COMMAND_MOUSE_RELEASE)
+    {
+        mouse_button_release_mask(hid_rx_buf[2]);
         send_hid_cmd_response(hid_tx_buf);
     }
     /*
