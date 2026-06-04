@@ -192,7 +192,7 @@ Increased Anykey-to-Abort check frequency
 
 uint8_t fw_version_major = 3;
 uint8_t fw_version_minor = 3;
-uint8_t fw_version_patch = 5;
+uint8_t fw_version_patch = 6;
 
 uint8_t dsvm_version = 2;
 
