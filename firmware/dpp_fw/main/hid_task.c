@@ -259,6 +259,11 @@ void format_hid_report(const uint8_t* src, uint8_t usage_id)
     }
 }
 
+// Bounded wait for the single-buffered HID IN endpoint to drain. Kept short
+// because this can run inside the TinyUSB task (via the set-report callback),
+// where tud_task() cannot advance until we return.
+#define HID_SEND_READY_TIMEOUT_MS 4
+
 void USBD_CUSTOM_HID_SendReport(uint8_t* usb_hid_buf)
 {
     uint8_t usage_id = usb_hid_buf[0];
@@ -266,8 +271,14 @@ void USBD_CUSTOM_HID_SendReport(uint8_t* usb_hid_buf)
 
     if (is_usb_hid_connected)
     {
+        // The HID IN endpoint is single-buffered: calling tud_hid_report()
+        // while the previous report is still in flight silently drops it.
+        // Wait briefly for it to drain so back-to-back reports aren't lost.
+        uint32_t wait_start = millis();
+        while (!tud_hid_ready() && (millis() - wait_start) < HID_SEND_READY_TIMEOUT_MS)
+            delay_ms(1);
         tud_hid_report(usage_id, shared_hid_buf, DP_HID_MSG_SIZE);
-    } 
+    }
     else if (bluetooth_status == BT_CONNECTED)
     {
         switch (usage_id)
@@ -685,6 +696,14 @@ void handle_hid_command(const uint8_t* hid_rx_buf, uint8_t rx_buf_size)
         send_hid_cmd_response(hid_tx_buf);
     }
     /*
+        MOUSE COMMANDS (move delta / move static / click / release)
+
+        These are fire-and-forget: each emits a HID mouse report on the
+        shared, single-buffered IN endpoint, so we deliberately do NOT also
+        send a command-ack report. An ack would contend with the mouse report
+        on that one endpoint (one of the two would be dropped) and would stall
+        hosts that block waiting for a reply. Hosts must not expect a response.
+
         MOUSE MOVE DELTA (relative)
         -----------
         PC to duckyPad:
@@ -692,15 +711,10 @@ void handle_hid_command(const uint8_t* hid_rx_buf, uint8_t rx_buf_size)
         [1]   command
         [2]   X delta, signed int8 (-127 to 127)
         [3]   Y delta, signed int8 (-127 to 127)
-        -----------
-        duckyPad to PC
-        [0]   reserved
-        [1]   0 = OK
     */
     else if(command_type == HID_COMMAND_MOUSE_MOVE_DELTA)
     {
         mouse_move_relative((int8_t)hid_rx_buf[2], (int8_t)hid_rx_buf[3]);
-        send_hid_cmd_response(hid_tx_buf);
     }
     /*
         MOUSE MOVE STATIC (absolute, move-to-position)
@@ -710,10 +724,6 @@ void handle_hid_command(const uint8_t* hid_rx_buf, uint8_t rx_buf_size)
         [1]   command
         [2-3] X position, uint16 little-endian (0 to 32767)
         [4-5] Y position, uint16 little-endian (0 to 32767)
-        -----------
-        duckyPad to PC
-        [0]   reserved
-        [1]   0 = OK
     */
     else if(command_type == HID_COMMAND_MOUSE_MOVE_STATIC)
     {
@@ -721,7 +731,6 @@ void handle_hid_command(const uint8_t* hid_rx_buf, uint8_t rx_buf_size)
         memcpy(&abs_x, &hid_rx_buf[2], sizeof(abs_x));
         memcpy(&abs_y, &hid_rx_buf[4], sizeof(abs_y));
         mouse_move_absolute(abs_x, abs_y);
-        send_hid_cmd_response(hid_tx_buf);
     }
     /*
         MOUSE CLICK (press button(s), held down)
@@ -730,15 +739,10 @@ void handle_hid_command(const uint8_t* hid_rx_buf, uint8_t rx_buf_size)
         [0]   reserved
         [1]   command
         [2]   button bitmask (bit0=left, bit1=right, bit2=middle, bit3=4, bit4=5)
-        -----------
-        duckyPad to PC
-        [0]   reserved
-        [1]   0 = OK
     */
     else if(command_type == HID_COMMAND_MOUSE_CLICK)
     {
         mouse_button_press_mask(hid_rx_buf[2]);
-        send_hid_cmd_response(hid_tx_buf);
     }
     /*
         MOUSE RELEASE (lift button(s))
@@ -747,15 +751,10 @@ void handle_hid_command(const uint8_t* hid_rx_buf, uint8_t rx_buf_size)
         [0]   reserved
         [1]   command
         [2]   button bitmask to release (0 = release all)
-        -----------
-        duckyPad to PC
-        [0]   reserved
-        [1]   0 = OK
     */
     else if(command_type == HID_COMMAND_MOUSE_RELEASE)
     {
         mouse_button_release_mask(hid_rx_buf[2]);
-        send_hid_cmd_response(hid_tx_buf);
     }
     /*
         SOFTWARE RESET

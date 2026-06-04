@@ -11,6 +11,11 @@ Commands implemented (must match firmware hid_task.h):
     HID_COMMAND_MOUSE_CLICK       (0x07) -> press (and hold) button(s)
     HID_COMMAND_MOUSE_RELEASE     (0x08) -> release button(s)
 
+These commands are FIRE-AND-FORGET: the firmware does not send a response
+(an ack would contend with the mouse report on the single HID IN endpoint).
+So this client keeps the device handle open and never waits for a reply,
+which is what makes it fast enough for streaming / proxy use.
+
 Packet layout (PC -> duckyPad), 64 byte buffer:
     [0] HID Report ID, always 5
     [1] Sequence number (ignored by firmware)
@@ -26,7 +31,6 @@ import time
 import hid
 
 PC_TO_DUCKYPAD_HID_BUF_SIZE = 64
-DUCKYPAD_TO_PC_HID_BUF_SIZE = 64
 
 # command IDs, keep in sync with firmware/dpp_fw/main/hid_task.h
 HID_COMMAND_MOUSE_MOVE_DELTA = 0x05
@@ -44,7 +48,8 @@ MOUSE_BUTTON_5 = 1 << 4
 # absolute coordinate range understood by the firmware (Report ID 6)
 MOUSE_ABS_MAX = 32767
 
-h = hid.device()
+# persistent device handle, opened lazily and reused for every command
+_h = None
 
 
 def get_duckypad_path():
@@ -56,29 +61,34 @@ def get_duckypad_path():
 	return None
 
 
-# wait up to 0.5 seconds for response
-def hid_read():
-	read_start = time.time()
-	while time.time() - read_start <= 0.5:
-		result = h.read(DUCKYPAD_TO_PC_HID_BUF_SIZE)
-		if len(result) > 0:
-			return result
-		time.sleep(0.01)
-	return []
-
-
-def duckypad_hid_write(hid_buf_64b):
-	if len(hid_buf_64b) != PC_TO_DUCKYPAD_HID_BUF_SIZE:
-		raise ValueError('PC-to-duckyPad buffer wrong size, should be exactly 64 Bytes')
+def connect():
+	"""Open the duckyPad once and reuse the handle for all later writes."""
+	global _h
+	if _h is not None:
+		return _h
 	duckypad_path = get_duckypad_path()
 	if duckypad_path is None:
 		raise OSError('duckyPad Not Found!')
-	h.open_path(duckypad_path)
-	h.set_nonblocking(1)
-	h.write(hid_buf_64b)
-	result = hid_read()
-	h.close()
-	return result
+	dev = hid.device()
+	dev.open_path(duckypad_path)
+	dev.set_nonblocking(1)
+	_h = dev
+	return _h
+
+
+def close():
+	"""Close the persistent handle (e.g. on exit)."""
+	global _h
+	if _h is not None:
+		_h.close()
+		_h = None
+
+
+def _write(hid_buf_64b):
+	"""Fire-and-forget write: no enumerate, no open/close, no read wait."""
+	if len(hid_buf_64b) != PC_TO_DUCKYPAD_HID_BUF_SIZE:
+		raise ValueError('PC-to-duckyPad buffer wrong size, should be exactly 64 Bytes')
+	connect().write(hid_buf_64b)
 
 
 def _make_buf(command_type):
@@ -100,7 +110,7 @@ def mouse_move_delta(x, y):
 	buf = _make_buf(HID_COMMAND_MOUSE_MOVE_DELTA)
 	buf[3] = _to_int8(x)
 	buf[4] = _to_int8(y)
-	return duckypad_hid_write(buf)
+	_write(buf)
 
 
 def mouse_move_static(x, y):
@@ -116,41 +126,45 @@ def mouse_move_static(x, y):
 	buf[4] = (x >> 8) & 0xff
 	buf[5] = y & 0xff
 	buf[6] = (y >> 8) & 0xff
-	return duckypad_hid_write(buf)
+	_write(buf)
 
 
 def mouse_click(button_mask=MOUSE_BUTTON_LEFT):
 	"""Press (and hold) the given mouse button(s)."""
 	buf = _make_buf(HID_COMMAND_MOUSE_CLICK)
 	buf[3] = button_mask & 0xff
-	return duckypad_hid_write(buf)
+	_write(buf)
 
 
 def mouse_release(button_mask=0):
 	"""Release mouse button(s). A mask of 0 releases everything."""
 	buf = _make_buf(HID_COMMAND_MOUSE_RELEASE)
 	buf[3] = button_mask & 0xff
-	return duckypad_hid_write(buf)
+	_write(buf)
 
 
 def move_to_fraction(fx, fy):
 	"""Convenience: move to a fraction (0.0..1.0) of the screen."""
-	return mouse_move_static(int(fx * MOUSE_ABS_MAX), int(fy * MOUSE_ABS_MAX))
+	mouse_move_static(int(fx * MOUSE_ABS_MAX), int(fy * MOUSE_ABS_MAX))
 
 
 if __name__ == '__main__':
-	print("Moving mouse to the centre of the screen...")
-	move_to_fraction(0.5, 0.5)
-	time.sleep(0.5)
+	connect()
+	try:
+		print("Moving mouse to the centre of the screen...")
+		move_to_fraction(0.5, 0.5)
+		time.sleep(0.5)
 
-	print("Nudging right and down a little (relative)...")
-	for _ in range(20):
-		mouse_move_delta(5, 5)
-		time.sleep(0.02)
+		print("Nudging right and down a little (relative)...")
+		for _ in range(20):
+			mouse_move_delta(5, 5)
+			time.sleep(0.01)
 
-	print("Left click...")
-	mouse_click(MOUSE_BUTTON_LEFT)
-	time.sleep(0.1)
-	mouse_release(MOUSE_BUTTON_LEFT)
+		print("Left click...")
+		mouse_click(MOUSE_BUTTON_LEFT)
+		time.sleep(0.1)
+		mouse_release(MOUSE_BUTTON_LEFT)
 
-	print("Done.")
+		print("Done.")
+	finally:
+		close()
