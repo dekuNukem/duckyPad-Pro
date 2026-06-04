@@ -624,13 +624,10 @@ int32_t tud_msc_scsi_cb(uint8_t lun, uint8_t const scsi_cmd[16], void *buffer, u
     return ret;
 }
 
-// Invoked when device is unmounted
-void tud_umount_cb(void)
-{
-    if (tinyusb_msc_storage_mount(s_storage_handle->base_path) != ESP_OK) {
-        ESP_LOGW(TAG, "tud_umount_cb() mount Fails");
-    }
-}
+// Invoked when device is unmounted.
+// NOTE: tud_umount_cb is defined in main/hid_task.c instead, which both clears
+// the HID connection flag and remounts MSC storage (the work this stock
+// callback used to do). Keeping it here too would be a duplicate definition.
 
 // Invoked when device is mounted (configured)
 void tud_mount_cb(void)

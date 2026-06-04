@@ -220,7 +220,15 @@ uint8_t const *tud_hid_descriptor_report_cb(uint8_t instance)
     return hid_report_descriptor;
 }
 
-void tud_umount_cb(void) { is_usb_hid_connected = 0; }
+void tud_umount_cb(void)
+{
+    is_usb_hid_connected = 0;
+    // Also remount MSC storage to the device. This is the work esp_tinyusb's
+    // own tud_umount_cb used to do; we override that copy to avoid a duplicate
+    // definition, so it has to happen here. "/data" matches BASE_PATH / the
+    // configured MSC mount path.
+    tinyusb_msc_storage_mount("/data");
+}
 
 uint16_t tud_hid_get_report_cb(uint8_t instance, uint8_t report_id, hid_report_type_t report_type, uint8_t* buffer, uint16_t reqlen)
 {
