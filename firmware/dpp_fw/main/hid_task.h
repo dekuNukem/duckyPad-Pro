@@ -19,6 +19,8 @@ void handle_hid_command(const uint8_t* hid_rx_buf, uint8_t rx_buf_size);
 #define HID_COMMAND_PREV_PROFILE           0x02
 #define HID_COMMAND_NEXT_PROFILE           0x03
 #define HID_COMMAND_SET_LED_SINGLE         0x04
+#define HID_COMMAND_SET_LED_BULK           0x05
+#define HID_COMMAND_SET_OLED_TEXT          0x06
 #define HID_COMMAND_SW_RESET               0x14
 #define HID_COMMAND_SLEEP                  0x15
 #define HID_COMMAND_WAKEUP                 0x16

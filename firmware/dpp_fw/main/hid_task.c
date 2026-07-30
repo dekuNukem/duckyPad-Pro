@@ -39,7 +39,7 @@ volatile uint8_t is_rtc_valid;
 volatile uint8_t needs_gv_save;
 volatile uint8_t is_usb_hid_connected;
 
-#define TUSB_DESC_TOTAL_LEN      (TUD_CONFIG_DESC_LEN + CFG_TUD_HID * TUD_HID_DESC_LEN)
+#define TUSB_DESC_TOTAL_LEN      (TUD_CONFIG_DESC_LEN + TUD_HID_DESC_LEN + TUD_HID_INOUT_DESC_LEN)
 #define CUSTOM_HID_EPIN_SIZE 63
 #define USBD_CUSTOMHID_OUTREPORT_BUF_SIZE CUSTOM_HID_EPIN_SIZE
 const uint8_t hid_report_descriptor[] = 
@@ -179,9 +179,53 @@ const uint8_t hid_report_descriptor[] =
   0xC0                           // End Collection
 };
 
+/*
+  Vendor "raw HID" interface (QMK-style, usage page 0xFF60/usage 0x61).
+
+  Carries the same command channel as report ID 4/5 above, but on its OWN USB
+  interface with a real interrupt-OUT endpoint. Needed because macOS refuses
+  both non-root opens of, and control-transfer SetReport to, an interface
+  whose primary usage is Keyboard — making the RID-5 channel unusable there.
+  A vendor-usage interface is not claimed by the OS input stack: any process
+  can open it without root and hid_write() lands on the OUT endpoint.
+  Reports are a fixed 64 bytes with no report IDs; payload layout is identical
+  to the RID-4/5 channel ([0] reserved, [1] command/status, [2..] payload).
+*/
+#define VENDOR_HID_REPORT_SIZE 64
+const uint8_t vendor_hid_report_descriptor[] =
+{
+  0x06, 0x60, 0xFF,              // Usage Page (Vendor Defined 0xFF60)
+  0x09, 0x61,                    // Usage (0x61)
+  0xA1, 0x01,                    // Collection (Application)
+
+  0x09, 0x62,                    //   Usage (0x62, data in)
+  0x15, 0x00,                    //   Logical Minimum (0)
+  0x26, 0xFF, 0x00,              //   Logical Maximum (255)
+  0x95, VENDOR_HID_REPORT_SIZE,  //   Report Count (64)
+  0x75, 0x08,                    //   Report Size (8)
+  0x81, 0x02,                    //   Input (Data, Var, Abs)
+
+  0x09, 0x63,                    //   Usage (0x63, data out)
+  0x15, 0x00,                    //   Logical Minimum (0)
+  0x26, 0xFF, 0x00,              //   Logical Maximum (255)
+  0x95, VENDOR_HID_REPORT_SIZE,  //   Report Count (64)
+  0x75, 0x08,                    //   Report Size (8)
+  0x91, 0x02,                    //   Output (Data, Var, Abs)
+
+  0xC0                           // End Collection
+};
+
+// HID instance numbers follow declaration order in the configuration
+// descriptors below: the combined KB/mouse/consumer/RID-4-5 interface is
+// always declared first, the vendor command interface second.
+#define HID_INSTANCE_MAIN   0
+#define HID_INSTANCE_VENDOR 1
+
 uint8_t const *tud_hid_descriptor_report_cb(uint8_t instance)
 {
     is_usb_hid_connected = 1;
+    if(instance == HID_INSTANCE_VENDOR)
+        return vendor_hid_report_descriptor;
     return hid_report_descriptor;
 }
 
@@ -197,8 +241,23 @@ uint16_t tud_hid_get_report_cb(uint8_t instance, uint8_t report_id, hid_report_t
   return 0;
 }
 
+// Set while a command that arrived on the vendor interface is being handled,
+// so its response returns on the same interface. Callbacks for both instances
+// run serialized on the TinyUSB task, so a plain flag is race-free here.
+static volatile uint8_t hid_cmd_via_vendor = 0;
+
 void tud_hid_set_report_cb(uint8_t instance, uint8_t report_id, hid_report_type_t report_type, uint8_t const* buffer, uint16_t bufsize)
 {
+    // Vendor command interface: raw 64-byte report, no report IDs. Payload
+    // layout matches the legacy RID-5 channel, so it feeds the same parser.
+    if(instance == HID_INSTANCE_VENDOR)
+    {
+        hid_cmd_via_vendor = 1;
+        handle_hid_command(buffer, bufsize);
+        hid_cmd_via_vendor = 0;
+        return;
+    }
+
     // KB LED, 1 byte, numlock bit 0, caps lock bit 1, scroll lock bit 2
     if(report_id == 1)
       kb_led_status = buffer[0];
@@ -278,13 +337,19 @@ enum
 {
   ITF_NUM_MSC = 0,
   ITF_NUM_HID,
+  ITF_NUM_HID_VENDOR,
   ITF_NUM_TOTAL
 };
 
 #define EPNUM_MSC_OUT     0x03
 #define EPNUM_MSC_IN      0x83
 
-#define CONFIG_TOTAL_LEN    (TUD_CONFIG_DESC_LEN + TUD_MSC_DESC_LEN + CFG_TUD_HID * TUD_HID_DESC_LEN)
+// Vendor command interface endpoints — free in both configurations
+// (main HID uses 0x81 IN; MSC uses 0x03 OUT / 0x83 IN).
+#define EPNUM_VENDOR_OUT  0x02
+#define EPNUM_VENDOR_IN   0x82
+
+#define CONFIG_TOTAL_LEN    (TUD_CONFIG_DESC_LEN + TUD_MSC_DESC_LEN + TUD_HID_DESC_LEN + TUD_HID_INOUT_DESC_LEN)
 
 uint8_t const hid_msc_config_desc[] =
 {
@@ -292,7 +357,12 @@ uint8_t const hid_msc_config_desc[] =
     TUD_CONFIG_DESCRIPTOR(1, ITF_NUM_TOTAL, 0, CONFIG_TOTAL_LEN, 0x00, 100),
 
     // Interface number, string index, boot protocol, report descriptor len, EP In address, size & polling interval
+    // NOTE: HID instance numbers follow HID declaration order — main first
+    // (HID_INSTANCE_MAIN), vendor second (HID_INSTANCE_VENDOR).
     TUD_HID_DESCRIPTOR(ITF_NUM_HID, 4, false, sizeof(hid_report_descriptor), 0x81, 16, 1),
+
+    // Interface number, string index, boot protocol, report descriptor len, EP Out & In address, size & polling interval
+    TUD_HID_INOUT_DESCRIPTOR(ITF_NUM_HID_VENDOR, 4, HID_ITF_PROTOCOL_NONE, sizeof(vendor_hid_report_descriptor), EPNUM_VENDOR_OUT, EPNUM_VENDOR_IN, VENDOR_HID_REPORT_SIZE, 1),
 
     // Interface number, string index, EP Out & EP In address, EP size
     TUD_MSC_DESCRIPTOR(ITF_NUM_MSC, 5, EPNUM_MSC_OUT, EPNUM_MSC_IN, 64),
@@ -351,10 +421,13 @@ char* hid_string_descriptor[] = {
 
 static const uint8_t hid_only_config_desc[] = {
     // Configuration number, interface count, string index, total length, attribute, power in mA
-    TUD_CONFIG_DESCRIPTOR(1, 1, 0, TUSB_DESC_TOTAL_LEN, 0x00, 100),
+    TUD_CONFIG_DESCRIPTOR(1, 2, 0, TUSB_DESC_TOTAL_LEN, 0x00, 100),
 
     // Interface number, string index, boot protocol, report descriptor len, EP In address, size & polling interval
     TUD_HID_DESCRIPTOR(0, 4, false, sizeof(hid_report_descriptor), 0x81, 16, 1),
+
+    // Vendor command interface (HID_INSTANCE_VENDOR) — see vendor_hid_report_descriptor
+    TUD_HID_INOUT_DESCRIPTOR(1, 4, HID_ITF_PROTOCOL_NONE, sizeof(vendor_hid_report_descriptor), EPNUM_VENDOR_OUT, EPNUM_VENDOR_IN, VENDOR_HID_REPORT_SIZE, 1),
 };
 
 static tusb_desc_device_t hid_only_desc_device =
@@ -401,7 +474,10 @@ uint8_t hid_tx_buf[HID_TX_BUF_SIZE];
 
 void send_hid_cmd_response(uint8_t* hid_cmdbuf)
 {
-    tud_hid_report(HID_USAGE_ID_NAMED_PIPE, hid_cmdbuf, HID_TX_BUF_SIZE-1);
+    if(hid_cmd_via_vendor)
+        tud_hid_n_report(HID_INSTANCE_VENDOR, 0, hid_cmdbuf, VENDOR_HID_REPORT_SIZE);
+    else
+        tud_hid_report(HID_USAGE_ID_NAMED_PIPE, hid_cmdbuf, HID_TX_BUF_SIZE-1);
 }
 
 uint8_t parse_hid_goto_profile(uint8_t* this_buf)
@@ -647,6 +723,57 @@ void handle_hid_command(const uint8_t* hid_rx_buf, uint8_t rx_buf_size)
     {
         set_pixel_3color_update_buffer(hid_rx_buf[2], hid_rx_buf[3], hid_rx_buf[4], hid_rx_buf[5]);
         neopixel_draw_current_buffer();
+        send_hid_cmd_response(hid_tx_buf);
+    }
+    /*
+        SET LED BULK
+        -----------
+        PC to duckyPad:
+        [0] reserved
+        [1] command
+        [2 - 61] red, green, blue for each of the 20 keys, in key order
+        -----------
+        duckyPad to PC
+        [0]   reserved
+        [1]   0 = OK
+    */
+    else if(command_type == HID_COMMAND_SET_LED_BULK)
+    {
+        for(uint8_t i = 0; i < NEOPIXEL_COUNT; i++)
+            set_pixel_3color_update_buffer(i, hid_rx_buf[2+i*3], hid_rx_buf[3+i*3], hid_rx_buf[4+i*3]);
+        neopixel_draw_current_buffer();
+        send_hid_cmd_response(hid_tx_buf);
+    }
+    /*
+        SET OLED TEXT
+        -----------
+        PC to duckyPad:
+        [0] reserved
+        [1] command
+        [2] line number, 0 to 11 (Font_7x10, 10px line pitch, 18 chars fit)
+        [3 - 62] zero-terminated ASCII text; empty string clears the line
+        -----------
+        duckyPad to PC
+        [0]   reserved
+        [1]   0 = OK, 5 = invalid line number
+    */
+    else if(command_type == HID_COMMAND_SET_OLED_TEXT)
+    {
+        uint8_t line_num = hid_rx_buf[2];
+        if(line_num >= SSD1306_HEIGHT / 10)
+        {
+            hid_tx_buf[1] = HID_RESPONSE_INVALID_ARG;
+            send_hid_cmd_response(hid_tx_buf);
+            return;
+        }
+        char text_buf[19];
+        memset(text_buf, 0, sizeof(text_buf));
+        strncpy(text_buf, (const char*)hid_rx_buf + 3, sizeof(text_buf) - 1);
+        uint8_t line_y = line_num * 10;
+        ssd1306_FillRectangle(0, line_y, SSD1306_WIDTH - 1, line_y + 9, Black);
+        ssd1306_SetCursor(0, line_y);
+        ssd1306_WriteString(text_buf, Font_7x10, White);
+        ssd1306_UpdateScreen();
         send_hid_cmd_response(hid_tx_buf);
     }
     /*
