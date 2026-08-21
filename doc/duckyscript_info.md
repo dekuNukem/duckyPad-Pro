@@ -62,7 +62,7 @@ Of course, people at the [Official Discord](https://discord.gg/4sJCBx5) are alwa
 
 [Click me to download a PDF](https://github.com/dekuNukem/duckyPad-Pro/blob/master/doc/duckyscript_cheatsheet.pdf?raw=1) of the **quick reference guide**!
 
-Much easier to lookup than going through this whole page.
+* Much easier to read than going through this whole page.
 
 ## 🤖 Doc for AI 🤖
 
@@ -288,6 +288,7 @@ Can be used to input [Alt Codes](https://en.wikipedia.org/wiki/Alt_code) for spe
 
 ```
 // types out ¼
+
 KEYDOWN ALT
 KP_1
 KP_7
@@ -336,7 +337,7 @@ How long to wait between each **`NON-LETTER input actions`**.
 
 ```
 DEFAULTDELAY 50
-CTRL ALT DELETE // Waits 50ms between pressing each key
+CTRL ALT DELETE // Waits 50ms between pressing/releasing each key
 ```
 
 ### `DEFAULTCHARDELAY n`
@@ -420,7 +421,7 @@ STRINGLN third action
 * Start from `LOOP0`
 * When pressed, a counter increments, and the script at the corresponding loop is executed.
 * Keep the code inside simple!
-    * For more complex needs, see [`WHILE` Loops](#loops) section below.
+    * For more complex needs, see [`WHILE` Loops](#loops) below.
 
 -------
 [⬆️⬆️⬆️⬆️⬆️⬆️ Back to Top ⬆️⬆️⬆️⬆️⬆️⬆️](#list-of-commands)
@@ -433,7 +434,7 @@ Switch to the previous / next profile.
 
 ### `GOTO_PROFILE`
 
-Jump to a profile by name. **Case sensitive!**
+Jump to a profile **by name**. **Case sensitive!**
 
 This ends the current script execution.
 
