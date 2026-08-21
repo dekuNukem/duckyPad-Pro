@@ -175,6 +175,16 @@ You can assign actions to Rotary Encoders just like any other key.
 
 Better to **keep it short** to feel more responsive.
 
+```
+DEFAULTDELAY 0
+DEFAULTCHARDELAY 0
+
+// Example: Next tab
+CONTROL TAB
+
+BCLR // clear any queued events
+```
+
 Some ideas:
 
 * Volume Up/Down

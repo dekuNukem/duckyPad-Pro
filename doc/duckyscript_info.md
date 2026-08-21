@@ -12,7 +12,7 @@ It was originally developed for [USB Rubber Ducky](https://shop.hak5.org/product
 
 ## Quick Examples
 
-In the **simplest form**, you just tell it what key to press!
+In the **simplest form**, you just tell it **what keys to press**!
 
 Ideal for key combos:
 
