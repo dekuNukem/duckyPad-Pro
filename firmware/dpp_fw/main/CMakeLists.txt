@@ -6,3 +6,4 @@ idf_component_register(
     REQUIRES "${requires}"
     )
 target_compile_options(${COMPONENT_LIB} PRIVATE "-Wno-error=maybe-uninitialized")
+target_sources(${COMPONENT_LIB} PRIVATE "profile_image.c")
