@@ -13,6 +13,7 @@
 #include "keypress_task.h"
 #include "ds_vm.h"
 #include "hid_task.h"
+#include "profile_image.h"
 
 static const char *TAG = "UI";
 spi_device_handle_t my_spi_handle;
@@ -281,6 +282,11 @@ void draw_cell_content_rotated(uint8_t cell_col, uint8_t cell_row, char* first_l
   }
 }
 
+static void profile_image_pixel(uint8_t x, uint8_t y, bool white)
+{
+  ssd1306_DrawPixel(x, y, white ? White : Black);
+}
+
 void draw_profile_normal(profile_info* this_profile)
 {
   ssd1306_Fill(Black);
@@ -310,6 +316,7 @@ void draw_profile_normal(profile_info* this_profile)
   ssd1306_Line(64,10,64,127,White);
   ssd1306_Line(96,10,96,127,White);
 
+  profile_image_draw("/sdcard", this_profile->pf_name, false, profile_image_pixel);
   draw_status_icon(0, 0, 0);
   draw_kbled_icon(1, 0);
 
@@ -359,6 +366,7 @@ void draw_profile_rotated(profile_info* this_profile)
   ssd1306_Line(76,10,76,127,White);
   ssd1306_Line(102,10,102,127,White);
 
+  profile_image_draw("/sdcard", this_profile->pf_name, true, profile_image_pixel);
   draw_status_icon(0, 0, 0);
   draw_kbled_icon(1, 0);
 
