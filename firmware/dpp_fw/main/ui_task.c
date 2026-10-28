@@ -14,7 +14,7 @@
 #include "ds_vm.h"
 #include "hid_task.h"
 
-static const char *TAG = "UI";
+// static const char *TAG = "UI";
 spi_device_handle_t my_spi_handle;
 gpio_config_t oled_dc_cofig;
 spi_bus_config_t buscfg;
@@ -415,8 +415,8 @@ void draw_settings(dp_global_settings *dps)
   memset(oled_line_buf, 0, OLED_LINE_BUF_SIZE);
   if(strlen(dps->current_kb_layout) >= 9)
   {
-    strncpy(oled_line_buf, dps->current_kb_layout+5, OLED_LINE_BUF_SIZE);
-    oled_line_buf[strlen(oled_line_buf)-4] = 0; // don't print .txt extension
+    strncpy(oled_line_buf, dps->current_kb_layout+5, OLED_LINE_BUF_SIZE - 1);
+    oled_line_buf[OLED_LINE_BUF_SIZE - 1] = '\0';
   }
   ssd1306_SetCursor(center_line(strlen(oled_line_buf), 7, SSD1306_WIDTH), 57);
   ssd1306_WriteString(oled_line_buf, Font_7x10, White);

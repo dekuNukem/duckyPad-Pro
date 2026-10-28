@@ -39,6 +39,16 @@ volatile uint8_t is_rtc_valid;
 volatile uint8_t needs_gv_save;
 volatile uint8_t is_usb_hid_connected;
 
+/* Writable serial-number buffer, formatted at runtime with the last four
+ * MAC address octets. Must live in DRAM (not a string literal, which is
+ * flash-mapped read-only) because sprintf writes into it. Shared by the
+ * MSC and HID-only descriptor arrays. */
+static char usb_serial_number_str[] = "DP24_00000000";
+
+/* Non-NULL only while MSC is mounted: doubles as the MSC-mode flag and
+ * the storage path. NULL in HID-only mode, where no MSC handle exists. */
+static const char *msc_base_path;
+
 #define TUSB_DESC_TOTAL_LEN      (TUD_CONFIG_DESC_LEN + CFG_TUD_HID * TUD_HID_DESC_LEN)
 #define CUSTOM_HID_EPIN_SIZE 63
 #define USBD_CUSTOMHID_OUTREPORT_BUF_SIZE CUSTOM_HID_EPIN_SIZE
@@ -185,7 +195,19 @@ uint8_t const *tud_hid_descriptor_report_cb(uint8_t instance)
     return hid_report_descriptor;
 }
 
-void tud_umount_cb(void) { is_usb_hid_connected = 0; }
+// Mirror of the component callbacks, guarded for HID-only mode
+void tud_umount_cb(void)
+{
+    if (msc_base_path != NULL)
+        tinyusb_msc_storage_mount((char *)msc_base_path);   // USB gone -> restore local FATFS
+    is_usb_hid_connected = 0;
+}
+
+void tud_mount_cb(void)
+{
+    if (msc_base_path != NULL)
+        tinyusb_msc_storage_unmount();                      // USB active -> release local FATFS
+}
 
 uint16_t tud_hid_get_report_cb(uint8_t instance, uint8_t report_id, hid_report_type_t report_type, uint8_t* buffer, uint16_t reqlen)
 {
@@ -304,7 +326,7 @@ char *msc_hid_string_desc[] =
     (char[]){0x09, 0x04},   // 0: is supported language is English (0x0409)
     "dekuNukem",            // 1: Manufacturer
     "duckyPad Pro",         // 2: Product
-    "DP24_00000000",                // 3: Serial number
+    usb_serial_number_str,  // 3: Serial number
     "duckyPad Pro HID",              // 4
     "duckyPad Pro MSC",                     // 5
 };
@@ -318,6 +340,7 @@ static void storage_mount_changed_cb(tinyusb_msc_event_t *event)
 
 void mount_usb_msc(void)
 {
+    msc_base_path = BASE_PATH;
     sprintf(msc_hid_string_desc[3], "DP24_%02X%02X%02X%02X", esp_mac_addr[ESP_MAC_ADDR_SIZE-4], esp_mac_addr[ESP_MAC_ADDR_SIZE-3], esp_mac_addr[ESP_MAC_ADDR_SIZE-2], esp_mac_addr[ESP_MAC_ADDR_SIZE-1]);
     const tinyusb_msc_sdmmc_config_t config_sdmmc = {
         .card = my_sd_card,
@@ -329,7 +352,7 @@ void mount_usb_msc(void)
     ESP_LOGI(TAG, "USB MSC initialization");
     const tinyusb_config_t tusb_cfg = {
         .device_descriptor = &msc_desc_device,
-        .string_descriptor = msc_hid_string_desc,
+        .string_descriptor = (const char **)msc_hid_string_desc,
         .string_descriptor_count = sizeof(msc_hid_string_desc) / sizeof(msc_hid_string_desc[0]),
         .external_phy = false,
         .configuration_descriptor = hid_msc_config_desc,
@@ -345,7 +368,7 @@ char* hid_string_descriptor[] = {
     (char[]){0x09, 0x04},   // 0: is supported language is English (0x0409)
     "dekuNukem",            // 1: Manufacturer
     "duckyPad Pro",         // 2: Product
-    "DP24_00000000",        // 3: Serial number
+    usb_serial_number_str,  // 3: Serial number
     "duckyPad Pro HID",     // 4
 };
 
@@ -386,7 +409,7 @@ void mount_hid_only(void)
     sprintf(hid_string_descriptor[3], "DP24_%02X%02X%02X%02X", esp_mac_addr[ESP_MAC_ADDR_SIZE-4], esp_mac_addr[ESP_MAC_ADDR_SIZE-3], esp_mac_addr[ESP_MAC_ADDR_SIZE-2], esp_mac_addr[ESP_MAC_ADDR_SIZE-1]);
     const tinyusb_config_t tusb_cfg = {
         .device_descriptor = &hid_only_desc_device,
-        .string_descriptor = hid_string_descriptor,
+        .string_descriptor = (const char **)hid_string_descriptor,
         .string_descriptor_count = sizeof(hid_string_descriptor) / sizeof(hid_string_descriptor[0]),
         .external_phy = false,
         .configuration_descriptor = hid_only_config_desc,

@@ -93,7 +93,9 @@ uint8_t load_settings(dp_global_settings* dps)
       dps->brightness_index = BRIGHTNESS_LEVEL_SIZE - 1;
     if(strncmp(temp_buf, config_keyboard_layout, strlen(config_keyboard_layout)) == 0)
     {
-      strncpy(dps->current_kb_layout, temp_buf + strlen(config_keyboard_layout), FILENAME_BUFSIZE);
+      const char *src = temp_buf + strlen(config_keyboard_layout);
+      strncpy(dps->current_kb_layout, src, FILENAME_BUFSIZE - 1);
+      dps->current_kb_layout[FILENAME_BUFSIZE - 1] = '\0';
       strip_newline(dps->current_kb_layout, FILENAME_BUFSIZE);
     }
   }
@@ -682,6 +684,7 @@ uint8_t ensure_new_profile_format(void)
   {
     memset(filename_buf, 0, FILENAME_BUFSIZE);
     strncpy(filename_buf, entry->d_name, FILENAME_BUFSIZE - 1);
+    filename_buf[FILENAME_BUFSIZE - 1] = '\0';
     CLEAR_TEMP_BUF();
     snprintf(temp_buf, TEMP_BUFSIZE, "/sdcard/%s", filename_buf);
     if(stat(temp_buf, &st) == -1)

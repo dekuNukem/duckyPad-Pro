@@ -8,6 +8,7 @@
 #include <stdint.h>
 #include <stdio.h>
 #include <string.h>
+#include <time.h>
 #include "esp_ota_ops.h"
 
 #define ESP_MAC_ADDR_SIZE 6

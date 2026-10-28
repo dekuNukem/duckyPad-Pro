@@ -1,5 +1,7 @@
 ## IDF Component Manager Manifest File
 dependencies:
   espressif/led_strip: "^2.5.3"
-  espressif/esp_tinyusb: "^1.1"
+  espressif/esp_tinyusb:
+    version: "^1.1"
+    override_path: "../components_local/espressif__esp_tinyusb"
   idf: "^5.0"

@@ -232,7 +232,8 @@ uint8_t settings_menu(void)
       }
       else
       {
-        strncpy(dp_settings.current_kb_layout, temp_buf, FILENAME_BUFSIZE);
+        strncpy(dp_settings.current_kb_layout, temp_buf, FILENAME_BUFSIZE - 1);
+        dp_settings.current_kb_layout[FILENAME_BUFSIZE - 1] = '\0';
       }
       draw_settings(&dp_settings);
       load_keymap_by_name(dp_settings.current_kb_layout);

@@ -175,7 +175,7 @@ void parse_expansion_data(uint8_t exp_data)
       .id = swid + EXP_BUTTON_START,
       .type = SW_EVENT_SHORT_PRESS,
     };
-    xQueueSend(switch_event_queue, &sw_event, NULL);
+    xQueueSend(switch_event_queue, &sw_event, 0);
     this_sw_state[sw_event.id] = 1;
   }
   else if(cmd_type == CMD_SW_RELEASED_BITMASK)
@@ -186,7 +186,7 @@ void parse_expansion_data(uint8_t exp_data)
       .id = swid + EXP_BUTTON_START,
       .type = SW_EVENT_RELEASE,
     };
-    xQueueSend(switch_event_queue, &sw_event, NULL);
+    xQueueSend(switch_event_queue, &sw_event, 0);
     this_sw_state[sw_event.id] = 0;
   }
   // printf("got data: %x\n", exp_data);
@@ -212,7 +212,7 @@ void kb_scan_task(void *dummy)
           .type = SW_EVENT_SHORT_PRESS,
         };
         last_press_ts[i] = millis();
-        xQueueSend(switch_event_queue, &sw_event, NULL);
+        xQueueSend(switch_event_queue, &sw_event, 0);
       }
       else if(this_sw_state[i] == 0 && last_sw_state[i] == 1)
       {
@@ -221,7 +221,7 @@ void kb_scan_task(void *dummy)
           .id = i,
           .type = SW_EVENT_RELEASE,
         };
-        xQueueSend(switch_event_queue, &sw_event, NULL);
+        xQueueSend(switch_event_queue, &sw_event, 0);
       }
       else if(this_sw_state[i] == 1 && last_press_ts[i] != MY_UINT32_MAX && millis() - last_press_ts[i] > 500)
       {
@@ -231,7 +231,7 @@ void kb_scan_task(void *dummy)
           .type = SW_EVENT_LONG_PRESS,
         };
         last_press_ts[i] = MY_UINT32_MAX;
-        xQueueSend(switch_event_queue, &sw_event, NULL);
+        xQueueSend(switch_event_queue, &sw_event, 0);
       }
     }
     

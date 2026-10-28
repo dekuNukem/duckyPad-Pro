@@ -1,4 +1,9 @@
 firmware/dpp_fw/build
+firmware/dpp_fw/dependencies.lock
+firmware/dpp_fw/components_local/espressif__esp_tinyusb/.component_hash
+firmware/dpp_fw/managed_components
+firmware/dpp_fw/sdkconfig
+firmware/dpp_fw/sdkconfig.old
 pc_software/sample_profiles
 pc_software/test.txt
 pc_software/out.dsb
